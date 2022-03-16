@@ -19,5 +19,44 @@
 *.tar.gz
 *.rar
 
+.*
+!.gitignore
+!.gitattributes
+!.editorconfig
+!.github
+!.gitlab-ci.yml
+
+# java files
+*.class
+!gradle-wrapper.jar
+
+# Maven Files
+target/
+dependency-reduced-pom.xml
+
+# IntelliJ IDEA Files
+*.iml
+!.idea
+.idea/dictionaries/
+.idea/libraries/
+.idea/compiler.xml
+.idea/jarRepositories.xml
+.idea/libraries-with-intellij-classes.xml
+.idea/modules.xml
+.idea/uiDesigner.xml
+.idea/gradle.xml
+.idea/CodeReadingMote.xml
+.idea/thriftCompiler.xml
+.idea/misc.xml
+
+# Ignore Gradle project-specific cache directory
+.gradle
+
+# Ignore Gradle build output directory
+build
+
+# Error log
+hs_err_*
+
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*

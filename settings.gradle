@@ -1,2 +1,3 @@
 rootProject.name = 'dingo-auto-tests'
+include 'dingo-testng'
 

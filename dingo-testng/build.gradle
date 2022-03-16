@@ -1,0 +1,60 @@
+/*
+ * Copyright 2021 DataCanvas
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+plugins {
+    id 'java'
+}
+
+group 'dingo.test'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    maven {
+        url = uri("https://maven.pkg.github.com/dingodb/dingo")
+        credentials {
+            username = "liwt@zetyun.com"
+            password = "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"
+        }
+    }
+}
+
+dependencies {
+    implementation 'io.dingodb:dingo-driver-client:0.3.0-SNAPSHOT'
+    // https://mvnrepository.com/artifact/com.sun.mail/jakarta.mail
+    implementation 'com.sun.mail:jakarta.mail:2.0.1'
+    implementation 'org.testng:testng:7.1.0'
+    implementation 'org.projectlombok:lombok:1.18.20'
+    // facilities
+    compileOnly 'org.projectlombok:lombok:1.18.20'
+    annotationProcessor 'org.projectlombok:lombok:1.18.20'
+    testCompileOnly 'org.projectlombok:lombok:1.18.20'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.20'
+    //intTestCompileOnly 'org.projectlombok:lombok:' + 'lombok'.v()
+    //intTestAnnotationProcessor 'org.projectlombok:lombok:' + 'lombok'.v()
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+}
+
+
+test {
+    useTestNG() {
+//        includeGroups("BVT")
+        suites(file('src/test/resources/testng/testng.xml'));
+    }
+
+    reports.html.enabled(false)
+}
