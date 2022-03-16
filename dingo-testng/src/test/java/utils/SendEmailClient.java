@@ -94,9 +94,9 @@ public class SendEmailClient {
     public void sendHTMLEmail(String htmlPath) throws MessagingException, IOException {
         MailObject mailObject = new MailObject();
         mailObject.setFrom("dingodb-ci@zetyun.com");
-        mailObject.setTo(new String[]{"liwt@zetyun.com"});
+//        mailObject.setTo(new String[]{"liwt@zetyun.com"});
         mailObject.setCc(new String[]{"liwt@zetyun.com"});
-//        mailObject.setTo(new String[]{"dingodb@zetyun.com"});
+        mailObject.setTo(new String[]{"dingodb@zetyun.com"});
         String str = "-yyyyMMddHHmmss";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(str);
         mailObject.setSubject("DingoDB每日测试报告" + simpleDateFormat.format(date));
