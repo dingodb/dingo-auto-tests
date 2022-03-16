@@ -16,6 +16,7 @@
 
 package io.dingodb.test;
 
+import io.dingodb.driver.client.DingoDriverClient;
 import io.dingodb.dailytest.DailyBVT;
 import listener.EmailableReporterListener;
 import org.testng.Assert;
