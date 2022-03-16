@@ -26,8 +26,8 @@ repositories {
     maven {
         url = uri("https://maven.pkg.github.com/dingodb/dingo")
         credentials {
-            username = "liwt@zetyun.com"
-            password = "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"
+            username = "jwcxs-m"
+            password = "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"
         }
     }
 }
