@@ -39,7 +39,7 @@ public class SendEmailClient {
         private String serverHost = "smtp.partner.outlook.cn";
         private int serverPort = 587;
         private String serverUsername = "dingodb-ci@zetyun.com";
-        private String serverPassword = "_P2ssw@rd";
+        
         private boolean useStarttls = true;
         private Session session;
 
