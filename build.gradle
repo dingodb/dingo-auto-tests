@@ -6,17 +6,6 @@ plugins {
 group 'dingo.test'
 version '1.0-SNAPSHOT'
 
-repositories {
-    mavenCentral()
-    maven {
-        url = uri("https://maven.pkg.github.com/dingodb/dingo")
-        credentials {
-            username = "liwt@zetyun.com"
-            password = "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"
-        }
-    }
-}
-
 dependencies {
     implementation 'org.codehaus.groovy:groovy-all:3.0.5'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
