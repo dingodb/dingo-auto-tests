@@ -38,7 +38,7 @@ public class SendEmailClient {
     public static class SendEmailClientBuilder {
         private String serverHost = "smtp.partner.outlook.cn";
         private int serverPort = 587;
-        private String serverUsername = "dingodb-ci@zetyun.com";
+        private String serverUsername = System.getenv("EMAILUSER");
         private String serverPassword = System.getenv("EMAILPASS");
         private boolean useStarttls = true;
         private Session session;
@@ -93,10 +93,9 @@ public class SendEmailClient {
 
     public void sendHTMLEmail(String htmlPath) throws MessagingException, IOException {
         MailObject mailObject = new MailObject();
-        mailObject.setFrom("dingodb-ci@zetyun.com");
-//        mailObject.setTo(new String[]{"liwt@zetyun.com"});
-        mailObject.setCc(new String[]{"liwt@zetyun.com"});
-        mailObject.setTo(new String[]{"dingodb@zetyun.com"});
+        mailObject.setFrom(System.getenv("EMAILFROM"));
+        mailObject.setCc(new String[]{System.getenv("EMAILCC")});
+        mailObject.setTo(new String[]{System.getenv("EMAILTO")});
         String str = "-yyyyMMddHHmmss";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(str);
         mailObject.setSubject("DingoDB每日测试报告" + simpleDateFormat.format(date));
