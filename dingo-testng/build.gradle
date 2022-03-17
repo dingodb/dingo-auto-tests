@@ -48,5 +48,5 @@ test {
         suites(file('src/test/resources/testng/testng.xml'));
     }
 
-    reports.html.enabled(false)
+//    reports.html.enabled = false
 }
