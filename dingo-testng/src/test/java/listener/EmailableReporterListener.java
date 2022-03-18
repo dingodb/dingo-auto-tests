@@ -82,25 +82,25 @@ public class EmailableReporterListener implements IReporter{
 //            return;
 //        }
 
-        if (! new File(".\\ReportOut\\" + dateNowStr).exists()) {
-            if (! new File(".\\ReportOut\\" + dateNowStr).mkdirs()) {
+        if (! new File("./ReportOut/" + dateNowStr).exists()) {
+            if (! new File("./ReportOut/" + dateNowStr).mkdirs()) {
                 throw new RuntimeException("创建测试报告目录失败！");
             }
             try {
-                writer = new PrintWriter(newBufferedWriter(new File(".\\ReportOut\\" + dateNowStr + "\\", fileName).toPath(), UTF_8));
+                writer = new PrintWriter(newBufferedWriter(new File("./ReportOut/" + dateNowStr + "/", fileName).toPath(), UTF_8));
             } catch (IOException e) {
                 throw new RuntimeException("创建测试报告文件失败！");
             }
         }
         else {
             try {
-                File file = new File(".\\ReportOut\\" + dateNowStr + "\\", fileName);
+                File file = new File("./ReportOut/" + dateNowStr + "/", fileName);
                 if (file.exists()) {
                     file.delete();
-                    writer = new PrintWriter(newBufferedWriter(new File(".\\ReportOut\\" + dateNowStr + "\\", fileName).toPath(), UTF_8));
+                    writer = new PrintWriter(newBufferedWriter(new File("./ReportOut/" + dateNowStr + "/", fileName).toPath(), UTF_8));
                 }
                 else {
-                    writer = new PrintWriter(newBufferedWriter(new File(".\\ReportOut\\" + dateNowStr + "\\", fileName).toPath(), UTF_8));
+                    writer = new PrintWriter(newBufferedWriter(new File("./ReportOut/" + dateNowStr + "/", fileName).toPath(), UTF_8));
                 }
             } catch (IOException e) {
                 throw new RuntimeException("创建测试报告文件失败！");
@@ -122,7 +122,7 @@ public class EmailableReporterListener implements IReporter{
         SendEmailClient sendEmailClient = new SendEmailClient.SendEmailClientBuilder().build();
         try {
             Thread.sleep(3000);
-            sendEmailClient.sendHTMLEmail(".\\ReportOut\\" + dateNowStr + "\\" + fileName);
+            sendEmailClient.sendHTMLEmail("./ReportOut/" + dateNowStr + "/" + fileName);
         } catch (InterruptedException | MessagingException | IOException | NullPointerException e) {
             e.printStackTrace();
         }
