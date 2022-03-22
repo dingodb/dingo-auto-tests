@@ -32,6 +32,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 @Listeners(EmailableReporterListener.class)
 public class TestBVT {
@@ -49,9 +50,15 @@ public class TestBVT {
     public List<String> getTableList() throws SQLException {
         List<String> tableList = new ArrayList<String>();
         DatabaseMetaData dmd = connection.getMetaData();
-        ResultSet rst = dmd.getTables(null, null, "%", null);
+        ResultSet resultSetSchema = dmd.getSchemas();
+        List<String> schemaList = new ArrayList<>();
+        while (resultSetSchema.next()) {
+            schemaList.add(resultSetSchema.getString(1));
+        }
+        //System.out.println(schemaList.get(0));
+        ResultSet rst = dmd.getTables(null, schemaList.get(0), "%", null);
         while (rst.next()) {
-            tableList.add(rst.getString("TABLE_NAME").toLowerCase());
+            tableList.add(rst.getString("TABLE_NAME").toUpperCase());
         }
         return tableList;
     }
@@ -60,7 +67,7 @@ public class TestBVT {
     public void test01TableCreate() throws Exception {
         DailyBVT testCreate = new DailyBVT();
         testCreate.createTable();
-        String expectedTableName = testCreate.getTableName().toLowerCase();
+        String expectedTableName = testCreate.getTableName().toUpperCase();
         List<String> afterCreateTableList = getTableList();
         Assert.assertTrue(afterCreateTableList.contains(expectedTableName));
     }
