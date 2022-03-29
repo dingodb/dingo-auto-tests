@@ -38,7 +38,7 @@ import java.util.Locale;
 public class TestBVT {
     private static final String defaultConnectIP = "172.20.3.26";
     private static final String JDBC_DRIVER = "io.dingodb.driver.client.DingoDriverClient";
-    private static final String connectUrl = "jdbc:dingo:thin:url=http://" + defaultConnectIP + ":8765";
+    private static final String connectUrl = "jdbc:dingo:thin:url=" + defaultConnectIP + ":8765";
     private static Connection connection;
 
     @BeforeClass(alwaysRun = true, groups = {"BVT"}, description = "连接数据库")

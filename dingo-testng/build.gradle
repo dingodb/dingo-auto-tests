@@ -23,12 +23,19 @@ version '3.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
+//    maven {
+//        url = uri("https://maven.pkg.github.com/dingodb/dingo")
+//        credentials {
+//            username = System.getenv("DRIVERUSER")
+//            password = System.getenv("DRIVERPASS")
+//        }
+//    }
 }
 
 dependencies {
-    //implementation 'io.dingodb:dingo-driver-client:0.3.0-SNAPSHOT'
+//    implementation 'io.dingodb:dingo-driver-client:0.3.0-SNAPSHOT'
     // https://mvnrepository.com/artifact/com.sun.mail/jakarta.mail
-    implementation files('../lib/dingo-driver-client-0.3.0-SNAPSHOT-all.jar')
+    implementation files('../lib/dingo-driver-client-0.3.0-SNAPSHOT.jar')
     implementation 'com.sun.mail:jakarta.mail:2.0.1'
     implementation 'org.testng:testng:7.1.0'
     implementation 'org.projectlombok:lombok:1.18.20'
