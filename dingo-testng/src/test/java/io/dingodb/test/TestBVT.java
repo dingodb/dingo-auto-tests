@@ -39,6 +39,7 @@ public class TestBVT {
     private static final String defaultConnectIP = "172.20.3.26";
     private static final String JDBC_DRIVER = "io.dingodb.driver.client.DingoDriverClient";
     private static final String connectUrl = "jdbc:dingo:thin:url=" + defaultConnectIP + ":8765";
+//    private static final String connectUrl = "jdbc:dingo:thin:url=172.20.3.26:8765";
     private static Connection connection;
 
     @BeforeClass(alwaysRun = true, groups = {"BVT"}, description = "连接数据库")
@@ -50,13 +51,14 @@ public class TestBVT {
     public List<String> getTableList() throws SQLException {
         List<String> tableList = new ArrayList<String>();
         DatabaseMetaData dmd = connection.getMetaData();
-        ResultSet resultSetSchema = dmd.getSchemas();
-        List<String> schemaList = new ArrayList<>();
-        while (resultSetSchema.next()) {
-            schemaList.add(resultSetSchema.getString(1));
-        }
-        //System.out.println(schemaList.get(0));
-        ResultSet rst = dmd.getTables(null, schemaList.get(0), "%", null);
+//        ResultSet resultSetSchema = dmd.getSchemas();
+//        List<String> schemaList = new ArrayList<>();
+//        while (resultSetSchema.next()) {
+//            schemaList.add(resultSetSchema.getString(1));
+//        }
+//        System.out.println(schemaList.get(0));
+//        ResultSet rst = dmd.getTables(null, schemaList.get(0), "%", null);
+        ResultSet rst = dmd.getTables(null, "DINGO", "%", null);
         while (rst.next()) {
             tableList.add(rst.getString("TABLE_NAME").toUpperCase());
         }
@@ -72,7 +74,7 @@ public class TestBVT {
         Assert.assertTrue(afterCreateTableList.contains(expectedTableName));
     }
 
-    @Test(priority = 1, groups = {"BVT"}, dependsOnMethods = {"test01TableCreate"},description = "验证插入数据成功")
+    @Test(priority = 1, groups = {"BVT"},dependsOnMethods = {"test01TableCreate"}, description = "验证插入数据成功")
     public void test02TableInsert() throws Exception {
         int expectedInsertCount = 1;
         DailyBVT testInsert = new DailyBVT();

@@ -35,7 +35,7 @@ repositories {
 dependencies {
 //    implementation 'io.dingodb:dingo-driver-client:0.3.0-SNAPSHOT'
     // https://mvnrepository.com/artifact/com.sun.mail/jakarta.mail
-    implementation files('../lib/dingo-driver-client-0.3.0-SNAPSHOT.jar')
+    implementation files('../lib/dingo-driver-client-0.3.0-SNAPSHOT-all.jar')
     implementation 'com.sun.mail:jakarta.mail:2.0.1'
     implementation 'org.testng:testng:7.1.0'
     implementation 'org.projectlombok:lombok:1.18.20'

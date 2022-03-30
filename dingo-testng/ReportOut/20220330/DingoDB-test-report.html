@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+<title>DingoDB每日BVT测试报告</title>
+<style type="text/css">table {margin-bottom:10px;border-collapse:collapse;empty-cells:show}th,td {border:1px solid #009;padding:.25em .5em}th {vertical-align:bottom}td {vertical-align:top}table a {font-weight:bold}.stripe td {background-color: #E6EBF9}.num {text-align:right}.passedodd td {background-color: #3F3}.passedeven td {background-color: #0A0}.skippedodd td,.atts {background-color: #FB1}.skippedeven td,.strip .atts {background-color: #FB1}.failedodd td,.attn {background-color: #E22}.failedeven td,.stripe .attn {background-color: #E22}.stacktrace {white-space:pre;font-family:monospace}.totop {font-size:85%;text-align:center;border-bottom:2px solid #000}.invisible {display:none}</style>
+</head>
+<body>
+<h1>DingoDB测试报告</h1>
+
+<h4>. 测试日期：2022-03-30 18:55:47</h4>
+<h4>. 测试节点IP：172.16.3.26</h4>
+<table>
+<tr><th>Test</th><th># Passed</th><th># Skipped</th><th># Retried</th><th># Failed</th><th>Time (ms)</th><th>Included Groups</th><th>Excluded Groups</th></tr>
+<tr><th colspan="8">DingoDBTest</th></tr>
+<tr><td><a href="#t0">BVTTest</a></td><td class="num">0</td><td class="num atts">5</td><td class="num">0</td><td class="num attn">1</td><td class="num">1,904</td><td>BVT</td><td></td></tr>
+<tr class="stripe"><td><a href="#t1">FuncTest</a></td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">1</td><td></td><td></td></tr>
+<tr><th>Total</th><th class="num">0</th><th class="num attn">5</th><th class="num">0</th><th class="num attn">1</th><th class="num">1,905</th><th colspan="2"></th></tr>
+</table>
+<table id='summary'><thead><tr><th>Class</th><th>Method</th><th>Start</th><th>Time (ms)</th></tr></thead><tbody><tr><th colspan="4">DingoDBTest</th></tr></tbody><tbody id="t0"><tr><th colspan="4">BVTTest &#8212; failed</th></tr><tr class="failedeven"><td rowspan="1">io.dingodb.test.TestBVT</td><td><a href="#m0">test01TableCreate</a></td><td rowspan="1">1648637747637</td><td rowspan="1">233</td></tr><tr><th colspan="4">BVTTest &#8212; skipped</th></tr><tr class="skippedeven"><td rowspan="5">io.dingodb.test.TestBVT</td><td><a href="#m1">test02TableInsert</a></td><td rowspan="1">1648637747874</td><td rowspan="1">0</td></tr><tr class="skippedeven"><td><a href="#m2">test03TableUpdate</a></td><td rowspan="1">1648637747875</td><td rowspan="1">0</td></tr><tr class="skippedeven"><td><a href="#m3">test04TableQuery</a></td><td rowspan="1">1648637747875</td><td rowspan="1">0</td></tr><tr class="skippedeven"><td><a href="#m4">test05TableDelete</a></td><td rowspan="1">1648637747876</td><td rowspan="1">0</td></tr><tr class="skippedeven"><td><a href="#m5">test06TableDrop</a></td><td rowspan="1">1648637747876</td><td rowspan="1">0</td></tr></tbody>
+<tbody id="t1"><tr><th colspan="4" class="invisible"/></tr></tbody>
+</table>
+<h2>BVTTest</h2><h3 id="m0">io.dingodb.test.TestBVT#test01TableCreate</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLException: java.lang.ClassCastException: org.apache.calcite.avatica.MetaImpl$MetaTable cannot be cast to java.util.Map
+	at org.apache.calcite.avatica.util.PositionedCursor$MapGetter.getObject(PositionedCursor.java:157)
+	at org.apache.calcite.avatica.util.AbstractCursor$AccessorImpl.getObject(AbstractCursor.java:357)
+	at org.apache.calcite.avatica.util.AbstractCursor$StringAccessor.getString(AbstractCursor.java:767)
+	at org.apache.calcite.avatica.AvaticaResultSet.getString(AvaticaResultSet.java:308)
+	at io.dingodb.test.TestBVT.getTableList(TestBVT.java:63)
+	at io.dingodb.test.TestBVT.test01TableCreate(TestBVT.java:73)
+	at java.util.ArrayList.forEach(ArrayList.java:1257)
+	at com.sun.proxy.$Proxy2.stop(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.lang.ClassCastException: org.apache.calcite.avatica.MetaImpl$MetaTable cannot be cast to java.util.Map
+	at org.apache.calcite.avatica.util.PositionedCursor$MapGetter.getObject(PositionedCursor.java:154)
+	... 58 more
+... Removed 48 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m1">io.dingodb.test.TestBVT#test02TableInsert</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.Throwable: Method TestBVT.test02TableInsert()[pri:1, instance:io.dingodb.test.TestBVT@25ded60e] depends on not successfully finished methods
+	at java.util.ArrayList.forEach(ArrayList.java:1257)
+	at com.sun.proxy.$Proxy2.stop(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+... Removed 39 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m2">io.dingodb.test.TestBVT#test03TableUpdate</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.Throwable: Method TestBVT.test03TableUpdate()[pri:2, instance:io.dingodb.test.TestBVT@25ded60e] depends on not successfully finished methods
+	at java.util.ArrayList.forEach(ArrayList.java:1257)
+	at com.sun.proxy.$Proxy2.stop(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+... Removed 39 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m3">io.dingodb.test.TestBVT#test04TableQuery</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.Throwable: Method TestBVT.test04TableQuery()[pri:3, instance:io.dingodb.test.TestBVT@25ded60e] depends on not successfully finished methods
+	at java.util.ArrayList.forEach(ArrayList.java:1257)
+	at com.sun.proxy.$Proxy2.stop(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+... Removed 39 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m4">io.dingodb.test.TestBVT#test05TableDelete</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.Throwable: Method TestBVT.test05TableDelete()[pri:4, instance:io.dingodb.test.TestBVT@25ded60e] depends on not successfully finished methods
+	at java.util.ArrayList.forEach(ArrayList.java:1257)
+	at com.sun.proxy.$Proxy2.stop(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+... Removed 39 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m5">io.dingodb.test.TestBVT#test06TableDrop</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.Throwable: Method TestBVT.test06TableDrop()[pri:5, instance:io.dingodb.test.TestBVT@25ded60e] depends on not successfully finished methods
+	at java.util.ArrayList.forEach(ArrayList.java:1257)
+	at com.sun.proxy.$Proxy2.stop(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+... Removed 39 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h2>FuncTest</h2></body>
+</html>
