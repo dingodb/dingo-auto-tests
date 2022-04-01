@@ -8,43 +8,86 @@
 <body>
 <h1>DingoDB测试报告</h1>
 
-<h4>. 测试日期：2022-04-01 16:25:51</h4>
+<h4>. 测试日期：2022-04-01 19:00:13</h4>
 <h4>. 测试节点IP：172.16.3.26</h4>
 <table>
 <tr><th>Test</th><th># Passed</th><th># Skipped</th><th># Retried</th><th># Failed</th><th>Time (ms)</th><th>Included Groups</th><th>Excluded Groups</th></tr>
 <tr><th colspan="8">DingoDBTest</th></tr>
-<tr><td><a href="#t0">BVTTest</a></td><td class="num">6</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">8,338</td><td>BVT</td><td></td></tr>
-<tr class="stripe"><td><a href="#t1">v2.0 FuncTest</a></td><td class="num">17</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">19,344</td><td></td><td></td></tr>
-<tr><td><a href="#t2">v3.0 StrFuncTest</a></td><td class="num">1</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">4,281</td><td></td><td></td></tr>
-<tr><th>Total</th><th class="num">24</th><th class="num">0</th><th class="num">0</th><th class="num">0</th><th class="num">31,963</th><th colspan="2"></th></tr>
+<tr><td><a href="#t0">BVTTest</a></td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">11</td><td>BVT</td><td></td></tr>
+<tr class="stripe"><td><a href="#t1">v0.2.0 FuncTest</a></td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">1</td><td></td><td></td></tr>
+<tr><td><a href="#t2">v0.3.0 StrFuncTest</a></td><td class="num">2</td><td class="num">0</td><td class="num">0</td><td class="num attn">4</td><td class="num">16,823</td><td></td><td></td></tr>
+<tr><th>Total</th><th class="num">2</th><th class="num">0</th><th class="num">0</th><th class="num attn">4</th><th class="num">16,835</th><th colspan="2"></th></tr>
 </table>
-<table id='summary'><thead><tr><th>Class</th><th>Method</th><th>Start</th><th>Time (ms)</th></tr></thead><tbody><tr><th colspan="4">DingoDBTest</th></tr></tbody><tbody id="t0"><tr><th colspan="4">BVTTest &#8212; passed</th></tr><tr class="passedeven"><td rowspan="6">io.dingodb.test.TestBVT</td><td><a href="#m0">test01TableCreate</a></td><td rowspan="1">1648801520998</td><td rowspan="1">254</td></tr><tr class="passedeven"><td><a href="#m1">test02TableInsert</a></td><td rowspan="1">1648801521256</td><td rowspan="1">1887</td></tr><tr class="passedeven"><td><a href="#m2">test03TableUpdate</a></td><td rowspan="1">1648801523143</td><td rowspan="1">1151</td></tr><tr class="passedeven"><td><a href="#m3">test04TableQuery</a></td><td rowspan="1">1648801524295</td><td rowspan="1">968</td></tr><tr class="passedeven"><td><a href="#m4">test05TableDelete</a></td><td rowspan="1">1648801525263</td><td rowspan="1">1144</td></tr><tr class="passedeven"><td><a href="#m5">test06TableDrop</a></td><td rowspan="1">1648801526408</td><td rowspan="1">997</td></tr></tbody>
-<tbody id="t1"><tr><th colspan="4">v2.0 FuncTest &#8212; passed</th></tr><tr class="passedeven"><td rowspan="17">io.dingodb.test.TestSQLFuncs</td><td><a href="#m6">test01MultiInsert</a></td><td rowspan="1">1648801527494</td><td rowspan="1">2028</td></tr><tr class="passedeven"><td><a href="#m7">test02CountFunc</a></td><td rowspan="1">1648801529523</td><td rowspan="1">939</td></tr><tr class="passedeven"><td><a href="#m8">test03DistinctNameFunc</a></td><td rowspan="1">1648801530463</td><td rowspan="1">250</td></tr><tr class="passedeven"><td><a href="#m9">test04DistinctAgeFunc</a></td><td rowspan="1">1648801530714</td><td rowspan="1">991</td></tr><tr class="passedeven"><td><a href="#m10">test05AvgFunc</a></td><td rowspan="1">1648801531706</td><td rowspan="1">980</td></tr><tr class="passedeven"><td><a href="#m11">test06SumFunc</a></td><td rowspan="1">1648801532687</td><td rowspan="1">935</td></tr><tr class="passedeven"><td><a href="#m12">test07MaxFunc</a></td><td rowspan="1">1648801533622</td><td rowspan="1">914</td></tr><tr class="passedeven"><td><a href="#m13">test08MinFunc</a></td><td rowspan="1">1648801534537</td><td rowspan="1">931</td></tr><tr class="passedeven"><td><a href="#m14">test09OrderAscFunc</a></td><td rowspan="1">1648801535469</td><td rowspan="1">292</td></tr><tr class="passedeven"><td><a href="#m15">test10OrderDescFunc</a></td><td rowspan="1">1648801535762</td><td rowspan="1">961</td></tr><tr class="passedeven"><td><a href="#m16">test11LimitFunc</a></td><td rowspan="1">1648801536724</td><td rowspan="1">981</td></tr><tr class="passedeven"><td><a href="#m17">test12OrderLimitTop1Func</a></td><td rowspan="1">1648801537706</td><td rowspan="1">948</td></tr><tr class="passedeven"><td><a href="#m18">test13OrderLimitOffsetFunc</a></td><td rowspan="1">1648801538655</td><td rowspan="1">905</td></tr><tr class="passedeven"><td><a href="#m19">test14GroupOrderFunc</a></td><td rowspan="1">1648801539560</td><td rowspan="1">1241</td></tr><tr class="passedeven"><td><a href="#m20">test15DeleteWithNameCondition</a></td><td rowspan="1">1648801540803</td><td rowspan="1">1814</td></tr><tr class="passedeven"><td><a href="#m21">test16QueryAllAfterDeleteWithNameCondition</a></td><td rowspan="1">1648801542617</td><td rowspan="1">968</td></tr><tr class="passedeven"><td><a href="#m22">test17CastFunc</a></td><td rowspan="1">1648801543586</td><td rowspan="1">1221</td></tr></tbody>
-<tbody id="t2"><tr><th colspan="4">v3.0 StrFuncTest &#8212; passed</th></tr><tr class="passedeven"><td rowspan="1">io.dingodb.test.TestStrFuncs</td><td><a href="#m23">test02ConcatStr</a></td><td rowspan="1">1648801548878</td><td rowspan="1">902</td></tr></tbody>
+<table id='summary'><thead><tr><th>Class</th><th>Method</th><th>Start</th><th>Time (ms)</th></tr></thead><tbody><tr><th colspan="4">DingoDBTest</th></tr></tbody><tbody id="t0"><tr><th colspan="4" class="invisible"/></tr></tbody>
+<tbody id="t1"><tr><th colspan="4" class="invisible"/></tr></tbody>
+<tbody id="t2"><tr><th colspan="4">v0.3.0 StrFuncTest &#8212; failed</th></tr><tr class="failedeven"><td rowspan="4">io.dingodb.test.TestStrFuncs</td><td><a href="#m0">test04LowerAndLcase</a></td><td rowspan="1">1648810802685</td><td rowspan="1">1972</td></tr><tr class="failedeven"><td><a href="#m1">test05UpperAndUcase</a></td><td rowspan="1">1648810804658</td><td rowspan="1">1112</td></tr><tr class="failedeven"><td><a href="#m2">test06LeftStr</a></td><td rowspan="1">1648810805771</td><td rowspan="1">5972</td></tr><tr class="failedeven"><td><a href="#m3">test07RightStr</a></td><td rowspan="1">1648810811744</td><td rowspan="1">171</td></tr><tr><th colspan="4">v0.3.0 StrFuncTest &#8212; passed</th></tr><tr class="passedeven"><td rowspan="2">io.dingodb.test.TestStrFuncs</td><td><a href="#m4">test01ConcatStr</a></td><td rowspan="1">1648810801582</td><td rowspan="1">803</td></tr><tr class="passedeven"><td><a href="#m5">test03LocateStr</a></td><td rowspan="1">1648810802390</td><td rowspan="1">294</td></tr></tbody>
 </table>
-<h2>BVTTest</h2><h3 id="m0">io.dingodb.test.TestBVT#test01TableCreate</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m1">io.dingodb.test.TestBVT#test02TableInsert</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m2">io.dingodb.test.TestBVT#test03TableUpdate</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m3">io.dingodb.test.TestBVT#test04TableQuery</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m4">io.dingodb.test.TestBVT#test05TableDelete</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m5">io.dingodb.test.TestBVT#test06TableDrop</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h2>v2.0 FuncTest</h2><h3 id="m6">io.dingodb.test.TestSQLFuncs#test01MultiInsert</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m7">io.dingodb.test.TestSQLFuncs#test02CountFunc</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m8">io.dingodb.test.TestSQLFuncs#test03DistinctNameFunc</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m9">io.dingodb.test.TestSQLFuncs#test04DistinctAgeFunc</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m10">io.dingodb.test.TestSQLFuncs#test05AvgFunc</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m11">io.dingodb.test.TestSQLFuncs#test06SumFunc</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m12">io.dingodb.test.TestSQLFuncs#test07MaxFunc</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m13">io.dingodb.test.TestSQLFuncs#test08MinFunc</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m14">io.dingodb.test.TestSQLFuncs#test09OrderAscFunc</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m15">io.dingodb.test.TestSQLFuncs#test10OrderDescFunc</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m16">io.dingodb.test.TestSQLFuncs#test11LimitFunc</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m17">io.dingodb.test.TestSQLFuncs#test12OrderLimitTop1Func</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m18">io.dingodb.test.TestSQLFuncs#test13OrderLimitOffsetFunc</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m19">io.dingodb.test.TestSQLFuncs#test14GroupOrderFunc</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m20">io.dingodb.test.TestSQLFuncs#test15DeleteWithNameCondition</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m21">io.dingodb.test.TestSQLFuncs#test16QueryAllAfterDeleteWithNameCondition</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m22">io.dingodb.test.TestSQLFuncs#test17CastFunc</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h2>v3.0 StrFuncTest</h2><h3 id="m23">io.dingodb.test.TestStrFuncs#test02ConcatStr</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h2>BVTTest</h2><h2>v0.2.0 FuncTest</h2><h2>v0.3.0 StrFuncTest</h2><h3 id="m0">io.dingodb.test.TestStrFuncs#test04LowerAndLcase</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.AssertionError: expected [true] but found [false]
+	at io.dingodb.test.TestStrFuncs.test04LowerAndLcase(TestStrFuncs.java:93)
+	at java.util.ArrayList.forEach(ArrayList.java:1257)
+	at com.sun.proxy.$Proxy2.stop(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+... Removed 52 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m1">io.dingodb.test.TestStrFuncs#test05UpperAndUcase</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.AssertionError: expected [true] but found [false]
+	at io.dingodb.test.TestStrFuncs.test05UpperAndUcase(TestStrFuncs.java:107)
+	at java.util.ArrayList.forEach(ArrayList.java:1257)
+	at com.sun.proxy.$Proxy2.stop(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+... Removed 52 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m2">io.dingodb.test.TestStrFuncs#test06LeftStr</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLException: Error while executing SQL &quot;select left(name,3) l3Name from strFuncTest20220401&quot;: Exec invoke api on remote server timeout, thread: [Test worker], message: [null].
+	at org.apache.calcite.avatica.Helper.createException(Helper.java:56)
+	at org.apache.calcite.avatica.Helper.createException(Helper.java:41)
+	at org.apache.calcite.avatica.AvaticaStatement.executeInternal(AvaticaStatement.java:163)
+	at org.apache.calcite.avatica.AvaticaStatement.executeQuery(AvaticaStatement.java:227)
+	at io.dingodb.dailytest.StrFuncs.leftFunc(StrFuncs.java:198)
+	at io.dingodb.test.TestStrFuncs.test06LeftStr(TestStrFuncs.java:119)
+	at java.util.ArrayList.forEach(ArrayList.java:1257)
+	at com.sun.proxy.$Proxy2.stop(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: io.dingodb.common.error.DingoException: Exec invoke api on remote server timeout, thread: [Test worker], message: [null].
+	at io.dingodb.common.error.DingoException.from(DingoException.java:107)
+	at io.dingodb.common.error.FormattingError.formatAsException(FormattingError.java:77)
+	at io.dingodb.common.error.FormattingError.throwFormatError(FormattingError.java:40)
+	at io.dingodb.net.netty.api.ApiProxy.invoke(ApiProxy.java:119)
+	at io.dingodb.net.netty.api.ApiProxy.invoke(ApiProxy.java:86)
+	at com.sun.proxy.$Proxy10.apply(Unknown Source)
+	at io.dingodb.driver.DingoRemoteService.apply(DingoRemoteService.java:50)
+	at org.apache.calcite.avatica.remote.RemoteMeta$14.call(RemoteMeta.java:310)
+	at org.apache.calcite.avatica.remote.RemoteMeta$14.call(RemoteMeta.java:307)
+	at org.apache.calcite.avatica.AvaticaConnection.invokeWithRetries(AvaticaConnection.java:792)
+	at org.apache.calcite.avatica.remote.RemoteMeta.fetch(RemoteMeta.java:306)
+	at org.apache.calcite.avatica.remote.DingoRemoteMeta.fetch(DingoRemoteMeta.java:21)
+	at org.apache.calcite.avatica.MetaImpl$FetchIterator.moveNext(MetaImpl.java:1592)
+	at org.apache.calcite.avatica.MetaImpl$FetchIterator.&lt;init&gt;(MetaImpl.java:1560)
+	at org.apache.calcite.avatica.MetaImpl$FetchIterator.&lt;init&gt;(MetaImpl.java:1543)
+	at org.apache.calcite.avatica.MetaImpl$FetchIterable.iterator(MetaImpl.java:1538)
+	at org.apache.calcite.avatica.MetaImpl.createCursor(MetaImpl.java:97)
+	at org.apache.calcite.avatica.AvaticaResultSet.execute(AvaticaResultSet.java:186)
+	at org.apache.calcite.avatica.AvaticaConnection$1.execute(AvaticaConnection.java:666)
+	at org.apache.calcite.avatica.remote.RemoteMeta$13.call(RemoteMeta.java:283)
+	at org.apache.calcite.avatica.remote.RemoteMeta$13.call(RemoteMeta.java:263)
+	at org.apache.calcite.avatica.AvaticaConnection.invokeWithRetries(AvaticaConnection.java:792)
+	at org.apache.calcite.avatica.remote.RemoteMeta.prepareAndExecute(RemoteMeta.java:262)
+	at org.apache.calcite.avatica.remote.DingoRemoteMeta.prepareAndExecute(DingoRemoteMeta.java:21)
+	at org.apache.calcite.avatica.AvaticaConnection.prepareAndExecuteInternal(AvaticaConnection.java:674)
+	at org.apache.calcite.avatica.AvaticaStatement.executeInternal(AvaticaStatement.java:156)
+	... 56 more
+... Removed 48 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m3">io.dingodb.test.TestStrFuncs#test07RightStr</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.AssertionError: expected [true] but found [false]
+	at io.dingodb.test.TestStrFuncs.test07RightStr(TestStrFuncs.java:135)
+	at java.util.ArrayList.forEach(ArrayList.java:1257)
+	at com.sun.proxy.$Proxy2.stop(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+... Removed 52 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m4">io.dingodb.test.TestStrFuncs#test01ConcatStr</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m5">io.dingodb.test.TestStrFuncs#test03LocateStr</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
 </body>
 </html>

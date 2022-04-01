@@ -49,7 +49,6 @@ public class TestSQLFuncs {
     @Test(groups = {"preFuncs"},description = "验证批量插入数据到创建的数据表中")
     public void test01MultiInsert() throws SQLException, ClassNotFoundException {
         int expectedMultiInsertCount = 9;
-//        SQLFuncs funcsTableMultiInsert = new SQLFuncs();
         int actualMultiInsertCount = funcObj.insertMultiValues();
         Assert.assertEquals(actualMultiInsertCount, expectedMultiInsertCount);
     }
@@ -57,7 +56,6 @@ public class TestSQLFuncs {
     @Test(dependsOnMethods = {"test01MultiInsert"}, groups = {"funcs"}, description = "验证表格数据统计")
     public void test02CountFunc() throws SQLException, ClassNotFoundException {
         int expectedCountRows = 9;
-//        SQLFuncs countFunc = new SQLFuncs();
         int actualCountRows = funcObj.countFunc();
         System.out.println("实际统计总数：" + actualCountRows);
 
@@ -72,7 +70,6 @@ public class TestSQLFuncs {
             expectedDistinctNameList.add(distinctNameArray[i]);
         }
         System.out.println("期望name列表：" + expectedDistinctNameList);
-//        SQLFuncs distinctName = new SQLFuncs();
         List<String> actualDistinctNameList = funcObj.distinctNameFunc();
         System.out.println("实际name列表：" + actualDistinctNameList);
 
@@ -87,7 +84,6 @@ public class TestSQLFuncs {
             expectedDistinctAgeList.add(distinctAgeArray[i]);
         }
         System.out.println("期望age列表：" + expectedDistinctAgeList);
-//        SQLFuncs distinctAge = new SQLFuncs();
         List<Integer> actualDistinctAgeList = funcObj.distinctAgeFunc();
         System.out.println("实际age列表：" + actualDistinctAgeList);
 
@@ -97,7 +93,6 @@ public class TestSQLFuncs {
     @Test(dependsOnMethods = {"test01MultiInsert"}, groups = {"funcs"}, description = "验证对年龄求平均结果正确")
     public void test05AvgFunc() throws SQLException, ClassNotFoundException {
         int expectedAvgAge = 25;
-//        SQLFuncs avgFunc = new SQLFuncs();
         int actualAvgAge = funcObj.avgAgeFunc();
         System.out.println("实际平均年龄：" + actualAvgAge);
 
@@ -107,7 +102,6 @@ public class TestSQLFuncs {
     @Test(dependsOnMethods = {"test01MultiInsert"}, groups = {"funcs"}, description = "验证对年龄求平均结果正确")
     public void test06SumFunc() throws SQLException, ClassNotFoundException {
         int expectedSumAge = 225;
-//        SQLFuncs sumFunc = new SQLFuncs();
         int actualSumAge = funcObj.sumAgeFunc();
         System.out.println("实际年龄总和：" + actualSumAge);
 
@@ -117,7 +111,6 @@ public class TestSQLFuncs {
     @Test(dependsOnMethods = {"test01MultiInsert"}, groups = {"funcs"}, description = "验证对年龄求最大值结果正确")
     public void test07MaxFunc() throws SQLException, ClassNotFoundException {
         int expectedMaxAge = 39;
-//        SQLFuncs maxFunc = new SQLFuncs();
         int actualMaxAge = funcObj.maxAgeFunc();
         System.out.println("实际最大年龄：" + actualMaxAge);
 
@@ -127,7 +120,6 @@ public class TestSQLFuncs {
     @Test(dependsOnMethods = {"test01MultiInsert"}, groups = {"funcs"}, description = "验证对年龄求最小值结果正确")
     public void test08MinFunc() throws SQLException, ClassNotFoundException {
         int expectedMinAge = 18;
-//        SQLFuncs minFunc = new SQLFuncs();
         int actualMinAge = funcObj.minAgeFunc();
         System.out.println("实际最小年龄：" + actualMinAge);
 
@@ -142,7 +134,6 @@ public class TestSQLFuncs {
             expectedOrderAscAgeList.add(orderAscAgeArray[i]);
         }
         System.out.println("期望age升序列表：" + expectedOrderAscAgeList);
-//        SQLFuncs orderAscAge = new SQLFuncs();
         List<Integer> actualOrderAscAgeList = funcObj.orderAscFunc();
         System.out.println("实际age升序列表：" + actualOrderAscAgeList);
 
@@ -157,7 +148,6 @@ public class TestSQLFuncs {
             expectedOrderDescAgeList.add(orderDescAgeArray[i]);
         }
         System.out.println("期望age降序列表：" + expectedOrderDescAgeList);
-//        SQLFuncs orderDescAge = new SQLFuncs();
         List<Integer> actualOrderDescAgeList = funcObj.orderDescFunc();
         System.out.println("实际age降序列表：" + actualOrderDescAgeList);
 
@@ -172,7 +162,6 @@ public class TestSQLFuncs {
             expectedLimitNameList.add(limitNameArray[i]);
         }
         System.out.println("期望数据输出：" + expectedLimitNameList);
-//        SQLFuncs limitFunc = new SQLFuncs();
         List<String> actualLimitList = funcObj.limitWithoutOrderAndOffsetFunc();
         System.out.println("实际数据输出：" + actualLimitList);
 
@@ -187,7 +176,6 @@ public class TestSQLFuncs {
             expectedOrderLimitAgeList.add(orderLimitAgeArray[i]);
         }
         System.out.println("期望数据输出：" + expectedOrderLimitAgeList);
-//        SQLFuncs orderLimitFunc = new SQLFuncs();
         List<Integer> actualOrderLimitList = funcObj.orderLimitWithoutOffsetFunc();
         System.out.println("实际数据输出：" + actualOrderLimitList);
 
@@ -202,7 +190,6 @@ public class TestSQLFuncs {
             expectedOrderLimitOffsetAgeList.add(orderLimitOffsetAgeArray[i]);
         }
         System.out.println("期望数据输出：" + expectedOrderLimitOffsetAgeList);
-//        SQLFuncs orderLimitOffsetFunc = new SQLFuncs();
         List<Integer> actualOrderLimitOffsetList = funcObj.orderLimitWithOffsetFunc();
         System.out.println("实际数据输出：" + actualOrderLimitOffsetList);
 
@@ -223,7 +210,6 @@ public class TestSQLFuncs {
         }
         System.out.println("期望分组后amount列表输出：" + expectedGroupAmountList);
         System.out.println("期望分组后name列表输出：" + expectedGroupNameList);
-//        SQLFuncs groupOrderFunc = new SQLFuncs();
         List<Double> actualGroupAmountList = funcObj.groupOrderAmountFunc();
         List<String> actualGroupNameList = funcObj.groupOrderNameFunc();
         System.out.println("实际分组后amount列表输出：" + actualGroupAmountList);
@@ -236,7 +222,6 @@ public class TestSQLFuncs {
     @Test(dependsOnGroups = {"funcs"}, description = "验证按指定姓名条件删除数据成功")
     public void test15DeleteWithNameCondition() throws SQLException, ClassNotFoundException {
         int expectedDeleteNameCount = 3;
-//        SQLFuncs deleteName = new SQLFuncs();
         int actualDeleteNameCount = funcObj.deleteWithNameCondition();
 
         Assert.assertEquals(actualDeleteNameCount, expectedDeleteNameCount);
@@ -250,7 +235,6 @@ public class TestSQLFuncs {
             expectedDeleteNameList.add(deleteNameArray[i]);
         }
         System.out.println("期望数据输出：" + expectedDeleteNameList);
-//        SQLFuncs queryAfterDelete = new SQLFuncs();
         List<String> actualDeleteNameList = funcObj.getNameListAfterDeleteName();
         System.out.println("实际数据输出：" + actualDeleteNameList);
 
@@ -260,7 +244,6 @@ public class TestSQLFuncs {
     @Test(groups = {"postFuncs"}, dependsOnMethods = {"test16QueryAllAfterDeleteWithNameCondition"}, description = "验证cast函数")
     public void test17CastFunc() throws SQLException, ClassNotFoundException {
         int expectedCastNum = 133;
-//        SQLFuncs castFunc = new SQLFuncs();
         int actualCastNum = funcObj.castFunc();
 
         Assert.assertEquals(actualCastNum, expectedCastNum);

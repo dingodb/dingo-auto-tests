@@ -67,7 +67,6 @@ public class StrFuncs {
                 + ")";
         statement.execute(createTableSQL);
         statement.close();
-        //connection.close();
     }
 
     // 插入数据
@@ -78,23 +77,22 @@ public class StrFuncs {
 
         String batInsertSql = "insert into " + strFuncTableName +
                 " values (1,'zhangsan',18,23.50,'beijing'),\n" +
-                "(2,'lisi',25,89,' beijing haidian '),\n" +
+                "(2,'lisi',25,895,' beijing haidian '),\n" +
                 "(3,'lisi3',55,123.123,'wuhan NO.1 Street'),\n" +
                 "(4,'HAHA',57,9.0762556,'CHANGping'),\n" +
-                "(5,'wJDs',1,1453.9999,'pingYang1'),\n" +
+                "(5,'awJDs',1,1453.9999,'pingYang1'),\n" +
                 "(6,'123',544,0,'543'),\n" +
                 "(7,'yamaha',76,2.30,'beijing changyang'),\n" +
                 "(8,'zhangsan',18,12.3,'shanghai'),\n" +
-                "(9,'oppo',76,109.325,'wuhan'),\n" +
+                "(9,'op ',76,109.325,'wuhan'),\n" +
                 "(10,'lisi',256,1234.456,'nanjing'),\n" +
-                "(11,'  ab c  d ',61,99.9999,'beijing chaoyang'),\n" +
+                "(11,'  aB c  dE ',61,99.9999,'beijing chaoyang'),\n" +
                 "(12,' abcdef',2,2345.000,'123'),\n" +
                 "(13,'HAHA',57,9.0762556,'CHANGping'),\n" +
-                "(14,'zhangsan',99,32,'chong qing '),\n" +
-                "(15,'1.5',18,0.1235,'hebei')";
+                "(14,'zhngsna',99,32,'chong qing '),\n" +
+                "(15,'1.5',18,0.1235,'http://WWW.baidu.com')";
         int insertRows = statement.executeUpdate(batInsertSql);
         statement.close();
-//        connection.close();
         return insertRows;
     }
 
@@ -111,10 +109,115 @@ public class StrFuncs {
             concatStr = concatRst.getString("cnaa");
         }
         statement.close();
-//        connection.close();
         return concatStr;
     }
 
+    //格式化保留小数位
+    public List<String> formatFunc() throws SQLException, ClassNotFoundException {
+        String strFuncTableName = getStrTableName();
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
 
+        String formatSQL = "select format(amount,2) famount from " + strFuncTableName;
+        ResultSet formatRst = statement.executeQuery(formatSQL);
+        List<String> formatList = new ArrayList<String>();
+        while (formatRst.next()){
+            formatList.add(formatRst.getString("famount"));
+        }
+        statement.close();
+        return formatList;
+    }
+
+    //查找字符串所在位置
+    public List<String> locateFunc() throws SQLException, ClassNotFoundException {
+        String strFuncTableName = getStrTableName();
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String locateSQL = "select locate('a',name) locName from " + strFuncTableName;
+        ResultSet locateRst = statement.executeQuery(locateSQL);
+        List<String> locateList = new ArrayList<String>();
+        while (locateRst.next()){
+            locateList.add(locateRst.getString("locName"));
+        }
+        statement.close();
+        return locateList;
+    }
+
+    //将字符串中的字母全部变为小写
+    public List<String> lowerFunc() throws SQLException, ClassNotFoundException {
+        String strFuncTableName = getStrTableName();
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String lowerSQL = "select lower(name) lowName from " + strFuncTableName;
+        ResultSet lowerRst = statement.executeQuery(lowerSQL);
+        List<String> lowerList = new ArrayList<String>();
+        while (lowerRst.next()){
+            lowerList.add(lowerRst.getString("lowName"));
+        }
+
+        String lcaseSQL = "select lcase(address) lcaAddress from " + strFuncTableName + " where id=15";
+        ResultSet lcaseRst = statement.executeQuery(lcaseSQL);
+        while (lcaseRst.next()){
+            lowerList.add(lcaseRst.getString("lcaAddress"));
+        }
+        statement.close();
+        return lowerList;
+    }
+
+    //将字符串中的字母全部变为大写
+    public List<String> upperFunc() throws SQLException, ClassNotFoundException {
+        String strFuncTableName = getStrTableName();
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String lowerSQL = "select upper(name) upName from " + strFuncTableName;
+        ResultSet upperRst = statement.executeQuery(lowerSQL);
+        List<String> upperList = new ArrayList<String>();
+        while (upperRst.next()){
+            upperList.add(upperRst.getString("upName"));
+        }
+
+        String ucaseSQL = "select ucase(address) ucaAddress from " + strFuncTableName + " where id=3";
+        ResultSet ucaseRst = statement.executeQuery(ucaseSQL);
+        while (ucaseRst.next()){
+            upperList.add(ucaseRst.getString("ucaAddress"));
+        }
+        statement.close();
+        return upperList;
+    }
+
+    //返回字符串左边指定个数的字符
+    public List<String> leftFunc() throws SQLException, ClassNotFoundException {
+        String strFuncTableName = getStrTableName();
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String leftSQL = "select left(name,3) l3name from " + strFuncTableName;
+        ResultSet leftRst = statement.executeQuery(leftSQL);
+        List<String> leftList = new ArrayList<String>();
+        while (leftRst.next()){
+            leftList.add(leftRst.getString("l3name"));
+        }
+        statement.close();
+        return leftList;
+    }
+
+    //返回字符串右边指定个数的字符
+    public List<String> rightFunc() throws SQLException, ClassNotFoundException {
+        String strFuncTableName = getStrTableName();
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String rightSQL = "select right(amount,3) r3amount from " + strFuncTableName;
+        ResultSet rightRst = statement.executeQuery(rightSQL);
+        List<String> rightList = new ArrayList<String>();
+        while (rightRst.next()){
+            rightList.add(rightRst.getString("r3amount"));
+        }
+        statement.close();
+        return rightList;
+    }
 
 }
