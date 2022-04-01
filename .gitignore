@@ -47,9 +47,22 @@ dependency-reduced-pom.xml
 .idea/CodeReadingMote.xml
 .idea/thriftCompiler.xml
 .idea/misc.xml
+.idea/checkstyle-idea.xml
+.idea/codeStyles/Project.xml
+.idea/codeStyles/codeStyleConfig.xml
+.idea/inspectionProfiles/profiles_settings.xml
 
 # Ignore Gradle project-specific cache directory
 .gradle
+.gradle/*
+.gradle/7.1/executionHistory/executionHistory.bin
+.gradle/7.1/executionHistory/executionHistory.lock
+.gradle/7.1/fileHashes/fileHashes.bin
+.gradle/7.1/fileHashes/fileHashes.lock
+.gradle/buildOutputCleanup/buildOutputCleanup.lock
+.gradle/checksums/checksums.lock
+.gradle/checksums/md5-checksums.bin
+.gradle/checksums/sha1-checksums.bin
 
 # Ignore Gradle build output directory
 build
