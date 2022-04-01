@@ -19,6 +19,7 @@ package io.dingodb.test;
 import io.dingodb.dailytest.SQLFuncs;
 import listener.EmailableReporterListener;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -26,37 +27,38 @@ import org.testng.annotations.Test;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 @Listeners(EmailableReporterListener.class)
 public class TestSQLFuncs {
-    private static final String defaultConnectIP = "172.20.3.26";
-    private static final String JDBC_DRIVER = "io.dingodb.driver.client.DingoDriverClient";
-    private static final String connectUrl = "jdbc:dingo:thin:url=" + defaultConnectIP + ":8765";
+//    private static final String defaultConnectIP = "172.20.3.26";
+//    private static final String JDBC_DRIVER = "io.dingodb.driver.client.DingoDriverClient";
+//    private static final String connectUrl = "jdbc:dingo:thin:url=" + defaultConnectIP + ":8765";
+
     private static Connection connection;
+    public static SQLFuncs funcObj = new SQLFuncs();
 
     @BeforeClass()
-    public void ConnectFuncDB() throws ClassNotFoundException, SQLException {
-        Class.forName(JDBC_DRIVER);
-        connection = DriverManager.getConnection(connectUrl);
-        SQLFuncs funcsTableCreate = new SQLFuncs();
-        funcsTableCreate.createFuncTable();
+    public static void ConnectDBAndCreateFuncTable() throws ClassNotFoundException, SQLException {
+        connection = SQLFuncs.connectDB();
+        funcObj.createFuncTable();
     }
 
     @Test(groups = {"preFuncs"},description = "验证批量插入数据到创建的数据表中")
     public void test01MultiInsert() throws SQLException, ClassNotFoundException {
         int expectedMultiInsertCount = 9;
-        SQLFuncs funcsTableMultiInsert = new SQLFuncs();
-        int actualMultiInsertCount = funcsTableMultiInsert.insertMultiValues();
+//        SQLFuncs funcsTableMultiInsert = new SQLFuncs();
+        int actualMultiInsertCount = funcObj.insertMultiValues();
         Assert.assertEquals(actualMultiInsertCount, expectedMultiInsertCount);
     }
 
     @Test(dependsOnMethods = {"test01MultiInsert"}, groups = {"funcs"}, description = "验证表格数据统计")
     public void test02CountFunc() throws SQLException, ClassNotFoundException {
         int expectedCountRows = 9;
-        SQLFuncs countFunc = new SQLFuncs();
-        int actualCountRows = countFunc.countFunc();
+//        SQLFuncs countFunc = new SQLFuncs();
+        int actualCountRows = funcObj.countFunc();
         System.out.println("实际统计总数：" + actualCountRows);
 
         Assert.assertEquals(actualCountRows, expectedCountRows);
@@ -70,8 +72,8 @@ public class TestSQLFuncs {
             expectedDistinctNameList.add(distinctNameArray[i]);
         }
         System.out.println("期望name列表：" + expectedDistinctNameList);
-        SQLFuncs distinctName = new SQLFuncs();
-        List<String> actualDistinctNameList = distinctName.distinctNameFunc();
+//        SQLFuncs distinctName = new SQLFuncs();
+        List<String> actualDistinctNameList = funcObj.distinctNameFunc();
         System.out.println("实际name列表：" + actualDistinctNameList);
 
         Assert.assertTrue(actualDistinctNameList.equals(expectedDistinctNameList));
@@ -85,8 +87,8 @@ public class TestSQLFuncs {
             expectedDistinctAgeList.add(distinctAgeArray[i]);
         }
         System.out.println("期望age列表：" + expectedDistinctAgeList);
-        SQLFuncs distinctAge = new SQLFuncs();
-        List<Integer> actualDistinctAgeList = distinctAge.distinctAgeFunc();
+//        SQLFuncs distinctAge = new SQLFuncs();
+        List<Integer> actualDistinctAgeList = funcObj.distinctAgeFunc();
         System.out.println("实际age列表：" + actualDistinctAgeList);
 
         Assert.assertTrue(actualDistinctAgeList.equals(expectedDistinctAgeList));
@@ -95,8 +97,8 @@ public class TestSQLFuncs {
     @Test(dependsOnMethods = {"test01MultiInsert"}, groups = {"funcs"}, description = "验证对年龄求平均结果正确")
     public void test05AvgFunc() throws SQLException, ClassNotFoundException {
         int expectedAvgAge = 25;
-        SQLFuncs avgFunc = new SQLFuncs();
-        int actualAvgAge = avgFunc.avgAgeFunc();
+//        SQLFuncs avgFunc = new SQLFuncs();
+        int actualAvgAge = funcObj.avgAgeFunc();
         System.out.println("实际平均年龄：" + actualAvgAge);
 
         Assert.assertEquals(actualAvgAge, expectedAvgAge);
@@ -105,8 +107,8 @@ public class TestSQLFuncs {
     @Test(dependsOnMethods = {"test01MultiInsert"}, groups = {"funcs"}, description = "验证对年龄求平均结果正确")
     public void test06SumFunc() throws SQLException, ClassNotFoundException {
         int expectedSumAge = 225;
-        SQLFuncs sumFunc = new SQLFuncs();
-        int actualSumAge = sumFunc.sumAgeFunc();
+//        SQLFuncs sumFunc = new SQLFuncs();
+        int actualSumAge = funcObj.sumAgeFunc();
         System.out.println("实际年龄总和：" + actualSumAge);
 
         Assert.assertEquals(actualSumAge, expectedSumAge);
@@ -115,8 +117,8 @@ public class TestSQLFuncs {
     @Test(dependsOnMethods = {"test01MultiInsert"}, groups = {"funcs"}, description = "验证对年龄求最大值结果正确")
     public void test07MaxFunc() throws SQLException, ClassNotFoundException {
         int expectedMaxAge = 39;
-        SQLFuncs maxFunc = new SQLFuncs();
-        int actualMaxAge = maxFunc.maxAgeFunc();
+//        SQLFuncs maxFunc = new SQLFuncs();
+        int actualMaxAge = funcObj.maxAgeFunc();
         System.out.println("实际最大年龄：" + actualMaxAge);
 
         Assert.assertEquals(actualMaxAge, expectedMaxAge);
@@ -125,8 +127,8 @@ public class TestSQLFuncs {
     @Test(dependsOnMethods = {"test01MultiInsert"}, groups = {"funcs"}, description = "验证对年龄求最小值结果正确")
     public void test08MinFunc() throws SQLException, ClassNotFoundException {
         int expectedMinAge = 18;
-        SQLFuncs minFunc = new SQLFuncs();
-        int actualMinAge = minFunc.minAgeFunc();
+//        SQLFuncs minFunc = new SQLFuncs();
+        int actualMinAge = funcObj.minAgeFunc();
         System.out.println("实际最小年龄：" + actualMinAge);
 
         Assert.assertEquals(actualMinAge, expectedMinAge);
@@ -140,8 +142,8 @@ public class TestSQLFuncs {
             expectedOrderAscAgeList.add(orderAscAgeArray[i]);
         }
         System.out.println("期望age升序列表：" + expectedOrderAscAgeList);
-        SQLFuncs orderAscAge = new SQLFuncs();
-        List<Integer> actualOrderAscAgeList = orderAscAge.orderAscFunc();
+//        SQLFuncs orderAscAge = new SQLFuncs();
+        List<Integer> actualOrderAscAgeList = funcObj.orderAscFunc();
         System.out.println("实际age升序列表：" + actualOrderAscAgeList);
 
         Assert.assertTrue(actualOrderAscAgeList.equals(expectedOrderAscAgeList));
@@ -155,8 +157,8 @@ public class TestSQLFuncs {
             expectedOrderDescAgeList.add(orderDescAgeArray[i]);
         }
         System.out.println("期望age降序列表：" + expectedOrderDescAgeList);
-        SQLFuncs orderDescAge = new SQLFuncs();
-        List<Integer> actualOrderDescAgeList = orderDescAge.orderDescFunc();
+//        SQLFuncs orderDescAge = new SQLFuncs();
+        List<Integer> actualOrderDescAgeList = funcObj.orderDescFunc();
         System.out.println("实际age降序列表：" + actualOrderDescAgeList);
 
         Assert.assertTrue(actualOrderDescAgeList.equals(expectedOrderDescAgeList));
@@ -170,8 +172,8 @@ public class TestSQLFuncs {
             expectedLimitNameList.add(limitNameArray[i]);
         }
         System.out.println("期望数据输出：" + expectedLimitNameList);
-        SQLFuncs limitFunc = new SQLFuncs();
-        List<String> actualLimitList = limitFunc.limitWithoutOrderAndOffsetFunc();
+//        SQLFuncs limitFunc = new SQLFuncs();
+        List<String> actualLimitList = funcObj.limitWithoutOrderAndOffsetFunc();
         System.out.println("实际数据输出：" + actualLimitList);
 
         Assert.assertTrue(actualLimitList.equals(expectedLimitNameList));
@@ -185,8 +187,8 @@ public class TestSQLFuncs {
             expectedOrderLimitAgeList.add(orderLimitAgeArray[i]);
         }
         System.out.println("期望数据输出：" + expectedOrderLimitAgeList);
-        SQLFuncs orderLimitFunc = new SQLFuncs();
-        List<Integer> actualOrderLimitList = orderLimitFunc.orderLimitWithoutOffsetFunc();
+//        SQLFuncs orderLimitFunc = new SQLFuncs();
+        List<Integer> actualOrderLimitList = funcObj.orderLimitWithoutOffsetFunc();
         System.out.println("实际数据输出：" + actualOrderLimitList);
 
         Assert.assertTrue(actualOrderLimitList.equals(expectedOrderLimitAgeList));
@@ -200,8 +202,8 @@ public class TestSQLFuncs {
             expectedOrderLimitOffsetAgeList.add(orderLimitOffsetAgeArray[i]);
         }
         System.out.println("期望数据输出：" + expectedOrderLimitOffsetAgeList);
-        SQLFuncs orderLimitOffsetFunc = new SQLFuncs();
-        List<Integer> actualOrderLimitOffsetList = orderLimitOffsetFunc.orderLimitWithOffsetFunc();
+//        SQLFuncs orderLimitOffsetFunc = new SQLFuncs();
+        List<Integer> actualOrderLimitOffsetList = funcObj.orderLimitWithOffsetFunc();
         System.out.println("实际数据输出：" + actualOrderLimitOffsetList);
 
         Assert.assertTrue(actualOrderLimitOffsetList.equals(expectedOrderLimitOffsetAgeList));
@@ -221,9 +223,9 @@ public class TestSQLFuncs {
         }
         System.out.println("期望分组后amount列表输出：" + expectedGroupAmountList);
         System.out.println("期望分组后name列表输出：" + expectedGroupNameList);
-        SQLFuncs groupOrderFunc = new SQLFuncs();
-        List<Double> actualGroupAmountList = groupOrderFunc.groupOrderAmountFunc();
-        List<String> actualGroupNameList = groupOrderFunc.groupOrderNameFunc();
+//        SQLFuncs groupOrderFunc = new SQLFuncs();
+        List<Double> actualGroupAmountList = funcObj.groupOrderAmountFunc();
+        List<String> actualGroupNameList = funcObj.groupOrderNameFunc();
         System.out.println("实际分组后amount列表输出：" + actualGroupAmountList);
         System.out.println("实际分组后namet列表输出：" + actualGroupNameList);
 
@@ -234,8 +236,8 @@ public class TestSQLFuncs {
     @Test(dependsOnGroups = {"funcs"}, description = "验证按指定姓名条件删除数据成功")
     public void test15DeleteWithNameCondition() throws SQLException, ClassNotFoundException {
         int expectedDeleteNameCount = 3;
-        SQLFuncs deleteName = new SQLFuncs();
-        int actualDeleteNameCount = deleteName.deleteWithNameCondition();
+//        SQLFuncs deleteName = new SQLFuncs();
+        int actualDeleteNameCount = funcObj.deleteWithNameCondition();
 
         Assert.assertEquals(actualDeleteNameCount, expectedDeleteNameCount);
     }
@@ -248,8 +250,8 @@ public class TestSQLFuncs {
             expectedDeleteNameList.add(deleteNameArray[i]);
         }
         System.out.println("期望数据输出：" + expectedDeleteNameList);
-        SQLFuncs queryAfterDelete = new SQLFuncs();
-        List<String> actualDeleteNameList = queryAfterDelete.getNameListAfterDeleteName();
+//        SQLFuncs queryAfterDelete = new SQLFuncs();
+        List<String> actualDeleteNameList = funcObj.getNameListAfterDeleteName();
         System.out.println("实际数据输出：" + actualDeleteNameList);
 
         Assert.assertTrue(actualDeleteNameList.equals(expectedDeleteNameList));
@@ -258,10 +260,20 @@ public class TestSQLFuncs {
     @Test(groups = {"postFuncs"}, dependsOnMethods = {"test16QueryAllAfterDeleteWithNameCondition"}, description = "验证cast函数")
     public void test17CastFunc() throws SQLException, ClassNotFoundException {
         int expectedCastNum = 133;
-        SQLFuncs castFunc = new SQLFuncs();
-        int actualCastNum = castFunc.castFunc();
+//        SQLFuncs castFunc = new SQLFuncs();
+        int actualCastNum = funcObj.castFunc();
 
         Assert.assertEquals(actualCastNum, expectedCastNum);
+    }
+
+    @AfterClass(description = "测试完成后删除数据和表格并关闭连接")
+    public void tearDownAll() throws SQLException {
+        String tableName = funcObj.getFuncTableName();
+        Statement tearDownStatement = connection.createStatement();
+        tearDownStatement.execute("delete from " + tableName);
+        tearDownStatement.execute("drop table " + tableName);
+        tearDownStatement.close();
+        connection.close();
     }
 
 }

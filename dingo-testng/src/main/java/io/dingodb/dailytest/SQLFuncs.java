@@ -16,6 +16,8 @@
 
 package io.dingodb.dailytest;
 
+import org.testng.annotations.AfterClass;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -31,15 +33,28 @@ public class SQLFuncs {
     private static final String JDBC_DRIVER = "io.dingodb.driver.client.DingoDriverClient";
     private static String connectUrl = "jdbc:dingo:thin:url=" + defaultConnectIP + ":8765";
 
-    private static Connection connection;
+    public static Connection connection;
 
-    public Connection connectDB() throws ClassNotFoundException, SQLException {
+//    static{
+//        try {
+//            Class.forName(JDBC_DRIVER);
+//        } catch (ClassNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//        try {
+//            connection = DriverManager.getConnection(connectUrl);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
+
+    public static Connection connectDB() throws ClassNotFoundException, SQLException {
         Class.forName(JDBC_DRIVER);
         connection = DriverManager.getConnection(connectUrl);
         return connection;
     }
 
-    public String getFuncTableName() {
+    public static String getFuncTableName() {
         final String funcTablePrefix = "funcTest";
         Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
@@ -62,7 +77,7 @@ public class SQLFuncs {
                 + ")";
         statement.execute(createFuncSQL);
         statement.close();
-        connection.close();
+//        connection.close();
     }
 
     public int insertMultiValues() throws ClassNotFoundException, SQLException {
@@ -82,7 +97,7 @@ public class SQLFuncs {
                 "(9, 'Cindy', 25, 3.5)";
         int insertMultiRowCount = statement.executeUpdate(batInsertSql);
         statement.close();
-        connection.close();
+//        connection.close();
         return insertMultiRowCount;
     }
 
@@ -99,7 +114,7 @@ public class SQLFuncs {
             distinctNameList.add(distinctNameRst.getString("name"));
         }
         statement.close();
-        connection.close();
+//        connection.close();
         return distinctNameList;
     }
 
@@ -116,7 +131,7 @@ public class SQLFuncs {
             distinctAgeList.add(distinctAgeRst.getInt("age"));
         }
         statement.close();
-        connection.close();
+//        connection.close();
         return distinctAgeList;
     }
 
@@ -133,7 +148,7 @@ public class SQLFuncs {
             avgAge = avgRst.getInt(1);
         }
         statement.close();
-        connection.close();
+//        connection.close();
         return avgAge;
     }
 
@@ -150,7 +165,7 @@ public class SQLFuncs {
             sumAge = sumRst.getInt(1);
         }
         statement.close();
-        connection.close();
+//        connection.close();
         return sumAge;
     }
 
@@ -167,7 +182,7 @@ public class SQLFuncs {
             maxAge = maxRst.getInt(1);
         }
         statement.close();
-        connection.close();
+//        connection.close();
         return maxAge;
     }
 
@@ -184,7 +199,7 @@ public class SQLFuncs {
             minAge = minRst.getInt(1);
         }
         statement.close();
-        connection.close();
+//        connection.close();
         return minAge;
     }
 
@@ -201,7 +216,7 @@ public class SQLFuncs {
             countRows = countRst.getInt("cnt");
         }
         statement.close();
-        connection.close();
+//        connection.close();
         return countRows;
     }
 
@@ -218,7 +233,7 @@ public class SQLFuncs {
             orderAscAgeList.add(orderAscRst.getInt("age"));
         }
         statement.close();
-        connection.close();
+//        connection.close();
         return orderAscAgeList;
     }
 
@@ -235,7 +250,7 @@ public class SQLFuncs {
             orderDescAgeList.add(orderDescRst.getInt("age"));
         }
         statement.close();
-        connection.close();
+//        connection.close();
         return orderDescAgeList;
     }
 
@@ -252,7 +267,7 @@ public class SQLFuncs {
             limitList.add(limitRst.getString("name"));
         }
         statement.close();
-        connection.close();
+//        connection.close();
         return limitList;
     }
 
@@ -269,7 +284,7 @@ public class SQLFuncs {
             orderLimitList.add(orderLimitRst.getInt("age"));
         }
         statement.close();
-        connection.close();
+//        connection.close();
         return orderLimitList;
     }
 
@@ -286,7 +301,7 @@ public class SQLFuncs {
             orderLimitOffsetList.add(orderLimitOffsetRst.getInt("age"));
         }
         statement.close();
-        connection.close();
+//        connection.close();
         return orderLimitOffsetList;
     }
 
@@ -303,7 +318,7 @@ public class SQLFuncs {
             groupOrderAmountList.add(groupOrderRst.getDouble("sa"));
         }
         statement.close();
-        connection.close();
+//        connection.close();
         return groupOrderAmountList;
     }
 
@@ -320,7 +335,7 @@ public class SQLFuncs {
             groupOrderNameList.add(groupOrderRst.getString("name"));
         }
         statement.close();
-        connection.close();
+//        connection.close();
         return groupOrderNameList;
     }
 
@@ -333,7 +348,7 @@ public class SQLFuncs {
         String deleteNameSql = "delete from " + funcTableName + " where name=" + "'Alice" + "'";
         int deleteCount = statement.executeUpdate(deleteNameSql);
         statement.close();
-        connection.close();
+//        connection.close();
         return deleteCount;
     }
 
@@ -350,7 +365,7 @@ public class SQLFuncs {
             afterDeleteNameList.add(allRst.getString("name"));
         }
         statement.close();
-        connection.close();
+//        connection.close();
         return afterDeleteNameList;
     }
 
@@ -370,7 +385,7 @@ public class SQLFuncs {
             afterCast += castNameRst.getInt("castnum");
         }
         statement.close();
-        connection.close();
+//        connection.close();
         return afterCast;
     }
 

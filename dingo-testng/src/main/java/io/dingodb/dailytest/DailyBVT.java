@@ -24,17 +24,29 @@ import java.util.Random;
 import java.util.Random;
 
 public class DailyBVT {
+
     private static final String defaultConnectIP = "172.20.3.26";
     private static final String JDBC_DRIVER = "io.dingodb.driver.client.DingoDriverClient";
     private static final String connectUrl = "jdbc:dingo:thin:url=" + defaultConnectIP + ":8765";
 //    private static final String connectUrl = "jdbc:dingo:thin:url=172.20.3.26:8765";
-
-    private static Connection connection;
+    public static Connection connection;
+//    static{
+//        try {
+//            Class.forName(JDBC_DRIVER);
+//        } catch (ClassNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//        try {
+//            connection = DriverManager.getConnection(connectUrl);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
     public String inName = "tomy";
     public String newName = "new1";
 
-    //创建连接方法，并返回连接对象
-    public Connection connectDingo() throws ClassNotFoundException, SQLException {
+    //创建连接方法
+    public static Connection connectDingo() throws ClassNotFoundException, SQLException {
         Class.forName(JDBC_DRIVER);
         connection = DriverManager.getConnection(connectUrl);
         return connection;
@@ -65,7 +77,7 @@ public class DailyBVT {
                 + ")";
         statement.execute(sql);
         statement.close();
-        connection.close();
+//        connection.close();
     }
 
     //插入单行数据
@@ -81,7 +93,7 @@ public class DailyBVT {
         String insertSql = "insert into " + tableName + " values (" + startID + ",'"  + inName + "'," + inAge + "," + amount + ")";
         int insertCount = statement.executeUpdate(insertSql);
         statement.close();
-        connection.close();
+//        connection.close();
         return insertCount;
     }
 
@@ -94,7 +106,7 @@ public class DailyBVT {
         String updateSql = "update " + tableName + " set name='" + newName + "' where name='" + inName + "'";
         int updateCount = statement.executeUpdate(updateSql);
         statement.close();
-        connection.close();
+//        connection.close();
         return updateCount;
     }
 
@@ -111,7 +123,7 @@ public class DailyBVT {
             queryName = querySet.getString(2);
         }
         statement.close();
-        connection.close();
+//        connection.close();
         return queryName;
     }
 
@@ -124,7 +136,7 @@ public class DailyBVT {
         String deleteSql = "delete from " + tableName;
         int deleteCount = statement.executeUpdate(deleteSql);
         statement.close();
-        connection.close();
+//        connection.close();
         return deleteCount;
     }
 
@@ -137,6 +149,6 @@ public class DailyBVT {
         String sql = "drop table " + tableName;
         statement.execute(sql);
         statement.close();
-        connection.close();
+//        connection.close();
     }
 }
