@@ -78,7 +78,7 @@ public class StrFuncs {
         String batInsertSql = "insert into " + strFuncTableName +
                 " values (1,'zhangsan',18,23.50,'beijing'),\n" +
                 "(2,'lisi',25,895,' beijing haidian '),\n" +
-                "(3,'lisi3',55,123.123,'wuhan NO.1 Street'),\n" +
+                "(3,'l3',55,123.123,'wuhan NO.1 Street'),\n" +
                 "(4,'HAHA',57,9.0762556,'CHANGping'),\n" +
                 "(5,'awJDs',1,1453.9999,'pingYang1'),\n" +
                 "(6,'123',544,0,'543'),\n" +
@@ -216,8 +216,144 @@ public class StrFuncs {
         while (rightRst.next()){
             rightList.add(rightRst.getString("r3amount"));
         }
+        ResultSet rightRst2 = statement.executeQuery("select right(name,3) r3name from " + strFuncTableName + " where id=3");
+        while (rightRst2.next()){
+            rightList.add(rightRst2.getString("r3name"));
+        }
         statement.close();
         return rightList;
+    }
+
+    //返回字符串重复指定次数的结果
+    public List<String> repeatFunc() throws SQLException, ClassNotFoundException {
+        String strFuncTableName = getStrTableName();
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String repeatSQL = "select repeat(address,3) reAddress from " + strFuncTableName + " where id>11";
+        ResultSet repeatRst = statement.executeQuery(repeatSQL);
+        List<String> repeatList = new ArrayList<String>();
+        while (repeatRst.next()){
+            repeatList.add(repeatRst.getString("reAddress"));
+        }
+        ResultSet repeatRst2 = statement.executeQuery("select repeat(age,3) reName from " + strFuncTableName + " where id=3");
+        while (repeatRst2.next()){
+            repeatList.add(repeatRst2.getString("reName"));
+        }
+        statement.close();
+        return repeatList;
+    }
+
+    //字符串替换
+    public List<String> replaceFunc() throws SQLException, ClassNotFoundException {
+        String strFuncTableName = getStrTableName();
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String replaceSQL = "select replace(address,'beijing','BJ') replAddress from " + strFuncTableName + " where id<7";
+        ResultSet replaceRst = statement.executeQuery(replaceSQL);
+        List<String> replaceList = new ArrayList<String>();
+        while (replaceRst.next()){
+            replaceList.add(replaceRst.getString("replAddress"));
+        }
+        statement.close();
+        return replaceList;
+    }
+
+    //去除字符串两端空格
+    public List<String> trimFunc() throws SQLException, ClassNotFoundException {
+        String strFuncTableName = getStrTableName();
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String trimSQL = "select trim(name) trName from " + strFuncTableName + " where id>8";
+        ResultSet trimRst = statement.executeQuery(trimSQL);
+        List<String> trimList = new ArrayList<String>();
+        while (trimRst.next()){
+            trimList.add(trimRst.getString("trName"));
+        }
+        statement.close();
+        return trimList;
+    }
+
+    //去除字符串左侧空格
+    public List<String> ltrimFunc() throws SQLException, ClassNotFoundException {
+        String strFuncTableName = getStrTableName();
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String ltrimSQL = "select ltrim(name) ltrName from " + strFuncTableName + " where id>8";
+        ResultSet ltrimRst = statement.executeQuery(ltrimSQL);
+        List<String> ltrimList = new ArrayList<String>();
+        while (ltrimRst.next()){
+            ltrimList.add(ltrimRst.getString("ltrName"));
+        }
+        statement.close();
+        return ltrimList;
+    }
+
+    //去除字符串右侧空格
+    public List<String> rtrimFunc() throws SQLException, ClassNotFoundException {
+        String strFuncTableName = getStrTableName();
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String rtrimSQL = "select rtrim(name) rtrName from " + strFuncTableName + " where id>8";
+        ResultSet rtrimRst = statement.executeQuery(rtrimSQL);
+        List<String> rtrimList = new ArrayList<String>();
+        while (rtrimRst.next()){
+            rtrimList.add(rtrimRst.getString("rtrName"));
+        }
+        statement.close();
+        return rtrimList;
+    }
+
+    //mid截取字符串
+    public List<String> midFunc() throws SQLException, ClassNotFoundException {
+        String strFuncTableName = getStrTableName();
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String midSQL = "select mid(name,2,3) midName from " + strFuncTableName;
+        ResultSet midRst = statement.executeQuery(midSQL);
+        List<String> midList = new ArrayList<String>();
+        while (midRst.next()){
+            midList.add(midRst.getString("midName"));
+        }
+        statement.close();
+        return midList;
+    }
+
+    //subString截取字符串
+    public List<String> subStringFunc() throws SQLException, ClassNotFoundException {
+        String strFuncTableName = getStrTableName();
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String subStringSQL = "select subString(address,1,11) subAddr from " + strFuncTableName;
+        ResultSet subStringRst = statement.executeQuery(subStringSQL);
+        List<String> subStringList = new ArrayList<String>();
+        while (subStringRst.next()){
+            subStringList.add(subStringRst.getString("subAddr"));
+        }
+        statement.close();
+        return subStringList;
+    }
+
+    //reverse反转字符串
+    public List<String> reverseFunc() throws SQLException, ClassNotFoundException {
+        String strFuncTableName = getStrTableName();
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String reverseSQL = "select reverse(address) revAddr from " + strFuncTableName + " where id>11";
+        ResultSet reverseRst = statement.executeQuery(reverseSQL);
+        List<String> reverseList = new ArrayList<String>();
+        while (reverseRst.next()){
+            reverseList.add(reverseRst.getString("revAddr"));
+        }
+        statement.close();
+        return reverseList;
     }
 
 }

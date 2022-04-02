@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+<title>DingoDB每日BVT测试报告</title>
+<style type="text/css">table {margin-bottom:10px;border-collapse:collapse;empty-cells:show}th,td {border:1px solid #009;padding:.25em .5em}th {vertical-align:bottom}td {vertical-align:top}table a {font-weight:bold}.stripe td {background-color: #E6EBF9}.num {text-align:right}.passedodd td {background-color: #3F3}.passedeven td {background-color: #0A0}.skippedodd td,.atts {background-color: #FB1}.skippedeven td,.strip .atts {background-color: #FB1}.failedodd td,.attn {background-color: #E22}.failedeven td,.stripe .attn {background-color: #E22}.stacktrace {white-space:pre;font-family:monospace}.totop {font-size:85%;text-align:center;border-bottom:2px solid #000}.invisible {display:none}</style>
+</head>
+<body>
+<h1>DingoDB测试报告</h1>
+
+<h4>. 测试日期：2022-04-02 15:36:48</h4>
+<h4>. 测试节点IP：172.16.3.26</h4>
+<table>
+<tr><th>Test</th><th># Passed</th><th># Skipped</th><th># Retried</th><th># Failed</th><th>Time (ms)</th><th>Included Groups</th><th>Excluded Groups</th></tr>
+<tr><th colspan="8">DingoDBTest</th></tr>
+<tr><td><a href="#t0">BVTTest</a></td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">13</td><td>BVT</td><td></td></tr>
+<tr class="stripe"><td><a href="#t1">v0.2.0 FuncTest</a></td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">1</td><td></td><td></td></tr>
+<tr><td><a href="#t2">v0.3.0 StrFuncTest</a></td><td class="num">12</td><td class="num">0</td><td class="num">0</td><td class="num attn">2</td><td class="num">20,674</td><td></td><td></td></tr>
+<tr><th>Total</th><th class="num">12</th><th class="num">0</th><th class="num">0</th><th class="num attn">2</th><th class="num">20,688</th><th colspan="2"></th></tr>
+</table>
+<table id='summary'><thead><tr><th>Class</th><th>Method</th><th>Start</th><th>Time (ms)</th></tr></thead><tbody><tr><th colspan="4">DingoDBTest</th></tr></tbody><tbody id="t0"><tr><th colspan="4" class="invisible"/></tr></tbody>
+<tbody id="t1"><tr><th colspan="4" class="invisible"/></tr></tbody>
+<tbody id="t2"><tr><th colspan="4">v0.3.0 StrFuncTest &#8212; failed</th></tr><tr class="failedeven"><td rowspan="2">io.dingodb.test.TestStrFuncs</td><td><a href="#m0">test08RepeatStr</a></td><td rowspan="1">1648885000504</td><td rowspan="1">1466</td></tr><tr class="failedeven"><td><a href="#m1">test15ReverseStr</a></td><td rowspan="1">1648885006056</td><td rowspan="1">979</td></tr><tr><th colspan="4">v0.3.0 StrFuncTest &#8212; passed</th></tr><tr class="passedeven"><td rowspan="12">io.dingodb.test.TestStrFuncs</td><td><a href="#m2">test01ConcatStr</a></td><td rowspan="1">1648884992692</td><td rowspan="1">766</td></tr><tr class="passedeven"><td><a href="#m3">test02FormatStr</a></td><td rowspan="1">1648884993463</td><td rowspan="1">402</td></tr><tr class="passedeven"><td><a href="#m4">test03LocateStr</a></td><td rowspan="1">1648884993867</td><td rowspan="1">959</td></tr><tr class="passedeven"><td><a href="#m5">test04LowerAndLcase</a></td><td rowspan="1">1648884994827</td><td rowspan="1">1926</td></tr><tr class="passedeven"><td><a href="#m6">test05UpperAndUcase</a></td><td rowspan="1">1648884996754</td><td rowspan="1">1208</td></tr><tr class="passedeven"><td><a href="#m7">test06LeftStr</a></td><td rowspan="1">1648884997962</td><td rowspan="1">1001</td></tr><tr class="passedeven"><td><a href="#m8">test07RightStr</a></td><td rowspan="1">1648884998964</td><td rowspan="1">1539</td></tr><tr class="passedeven"><td><a href="#m9">test09ReplaceStr</a></td><td rowspan="1">1648885001971</td><td rowspan="1">927</td></tr><tr class="passedeven"><td><a href="#m10">test10TrimStr</a></td><td rowspan="1">1648885002898</td><td rowspan="1">809</td></tr><tr class="passedeven"><td><a href="#m11">test11LtrimStr</a></td><td rowspan="1">1648885003707</td><td rowspan="1">769</td></tr><tr class="passedeven"><td><a href="#m12">test12RtrimStr</a></td><td rowspan="1">1648885004477</td><td rowspan="1">607</td></tr><tr class="passedeven"><td><a href="#m13">test13MidStr</a></td><td rowspan="1">1648885005085</td><td rowspan="1">971</td></tr></tbody>
+</table>
+<h2>BVTTest</h2><h2>v0.2.0 FuncTest</h2><h2>v0.3.0 StrFuncTest</h2><h3 id="m0">io.dingodb.test.TestStrFuncs#test08RepeatStr</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.AssertionError: expected [true] but found [false]
+	at io.dingodb.test.TestStrFuncs.test08RepeatStr(TestStrFuncs.java:154)
+	at java.util.ArrayList.forEach(ArrayList.java:1257)
+	at com.sun.proxy.$Proxy2.stop(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+... Removed 52 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m1">io.dingodb.test.TestStrFuncs#test15ReverseStr</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.AssertionError: expected [true] but found [false]
+	at io.dingodb.test.TestStrFuncs.test15ReverseStr(TestStrFuncs.java:253)
+	at java.util.ArrayList.forEach(ArrayList.java:1257)
+	at com.sun.proxy.$Proxy2.stop(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+... Removed 52 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m2">io.dingodb.test.TestStrFuncs#test01ConcatStr</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m3">io.dingodb.test.TestStrFuncs#test02FormatStr</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m4">io.dingodb.test.TestStrFuncs#test03LocateStr</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m5">io.dingodb.test.TestStrFuncs#test04LowerAndLcase</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m6">io.dingodb.test.TestStrFuncs#test05UpperAndUcase</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m7">io.dingodb.test.TestStrFuncs#test06LeftStr</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m8">io.dingodb.test.TestStrFuncs#test07RightStr</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m9">io.dingodb.test.TestStrFuncs#test09ReplaceStr</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m10">io.dingodb.test.TestStrFuncs#test10TrimStr</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m11">io.dingodb.test.TestStrFuncs#test11LtrimStr</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m12">io.dingodb.test.TestStrFuncs#test12RtrimStr</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m13">io.dingodb.test.TestStrFuncs#test13MidStr</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+</body>
+</html>
