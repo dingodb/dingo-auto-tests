@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+<title>DingoDB每日BVT测试报告</title>
+<style type="text/css">table {margin-bottom:10px;border-collapse:collapse;empty-cells:show}th,td {border:1px solid #009;padding:.25em .5em}th {vertical-align:bottom}td {vertical-align:top}table a {font-weight:bold}.stripe td {background-color: #E6EBF9}.num {text-align:right}.passedodd td {background-color: #3F3}.passedeven td {background-color: #0A0}.skippedodd td,.atts {background-color: #FB1}.skippedeven td,.strip .atts {background-color: #FB1}.failedodd td,.attn {background-color: #E22}.failedeven td,.stripe .attn {background-color: #E22}.stacktrace {white-space:pre;font-family:monospace}.totop {font-size:85%;text-align:center;border-bottom:2px solid #000}.invisible {display:none}</style>
+</head>
+<body>
+<h1>DingoDB测试报告</h1>
+
+<h4>. 测试日期：2022-04-12 18:22:36</h4>
+<h4>. 测试节点IP：172.16.3.26</h4>
+<table>
+<tr><th>Test</th><th># Passed</th><th># Skipped</th><th># Retried</th><th># Failed</th><th>Time (ms)</th><th>Included Groups</th><th>Excluded Groups</th></tr>
+<tr><th colspan="8">DingoDBTest</th></tr>
+<tr><td><a href="#t0">BVTTest</a></td><td class="num">6</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">9,655</td><td>BVT</td><td></td></tr>
+<tr class="stripe"><td><a href="#t1">v0.2.0 FuncTest</a></td><td class="num">17</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">21,091</td><td></td><td></td></tr>
+<tr><td><a href="#t2">v0.3.0 StrFuncTest</a></td><td class="num">14</td><td class="num">0</td><td class="num">0</td><td class="num attn">1</td><td class="num">20,190</td><td></td><td></td></tr>
+<tr><th>Total</th><th class="num">37</th><th class="num">0</th><th class="num">0</th><th class="num attn">1</th><th class="num">50,936</th><th colspan="2"></th></tr>
+</table>
+<table id='summary'><thead><tr><th>Class</th><th>Method</th><th>Start</th><th>Time (ms)</th></tr></thead><tbody><tr><th colspan="4">DingoDBTest</th></tr></tbody><tbody id="t0"><tr><th colspan="4">BVTTest &#8212; passed</th></tr><tr class="passedeven"><td rowspan="6">io.dingodb.test.TestBVT</td><td><a href="#m0">test01TableCreate</a></td><td rowspan="1">1649758907821</td><td rowspan="1">496</td></tr><tr class="passedeven"><td><a href="#m1">test02TableInsert</a></td><td rowspan="1">1649758908322</td><td rowspan="1">2096</td></tr><tr class="passedeven"><td><a href="#m2">test03TableUpdate</a></td><td rowspan="1">1649758910419</td><td rowspan="1">1585</td></tr><tr class="passedeven"><td><a href="#m3">test04TableQuery</a></td><td rowspan="1">1649758912005</td><td rowspan="1">960</td></tr><tr class="passedeven"><td><a href="#m4">test05TableDelete</a></td><td rowspan="1">1649758912966</td><td rowspan="1">1142</td></tr><tr class="passedeven"><td><a href="#m5">test06TableDrop</a></td><td rowspan="1">1649758914109</td><td rowspan="1">1002</td></tr></tbody>
+<tbody id="t1"><tr><th colspan="4">v0.2.0 FuncTest &#8212; passed</th></tr><tr class="passedeven"><td rowspan="17">io.dingodb.test.TestSQLFuncs</td><td><a href="#m6">test01MultiInsert</a></td><td rowspan="1">1649758915524</td><td rowspan="1">1682</td></tr><tr class="passedeven"><td><a href="#m7">test02CountFunc</a></td><td rowspan="1">1649758917207</td><td rowspan="1">967</td></tr><tr class="passedeven"><td><a href="#m8">test03DistinctNameFunc</a></td><td rowspan="1">1649758918175</td><td rowspan="1">1055</td></tr><tr class="passedeven"><td><a href="#m9">test04DistinctAgeFunc</a></td><td rowspan="1">1649758919230</td><td rowspan="1">916</td></tr><tr class="passedeven"><td><a href="#m10">test05AvgFunc</a></td><td rowspan="1">1649758920146</td><td rowspan="1">365</td></tr><tr class="passedeven"><td><a href="#m11">test06SumFunc</a></td><td rowspan="1">1649758920512</td><td rowspan="1">983</td></tr><tr class="passedeven"><td><a href="#m12">test07MaxFunc</a></td><td rowspan="1">1649758921496</td><td rowspan="1">838</td></tr><tr class="passedeven"><td><a href="#m13">test08MinFunc</a></td><td rowspan="1">1649758922335</td><td rowspan="1">982</td></tr><tr class="passedeven"><td><a href="#m14">test09OrderAscFunc</a></td><td rowspan="1">1649758923319</td><td rowspan="1">990</td></tr><tr class="passedeven"><td><a href="#m15">test10OrderDescFunc</a></td><td rowspan="1">1649758924309</td><td rowspan="1">988</td></tr><tr class="passedeven"><td><a href="#m16">test11LimitFunc</a></td><td rowspan="1">1649758925298</td><td rowspan="1">956</td></tr><tr class="passedeven"><td><a href="#m17">test12OrderLimitTop1Func</a></td><td rowspan="1">1649758926254</td><td rowspan="1">902</td></tr><tr class="passedeven"><td><a href="#m18">test13OrderLimitOffsetFunc</a></td><td rowspan="1">1649758927157</td><td rowspan="1">370</td></tr><tr class="passedeven"><td><a href="#m19">test14GroupOrderFunc</a></td><td rowspan="1">1649758927527</td><td rowspan="1">1838</td></tr><tr class="passedeven"><td><a href="#m20">test15DeleteWithNameCondition</a></td><td rowspan="1">1649758929366</td><td rowspan="1">1928</td></tr><tr class="passedeven"><td><a href="#m21">test16QueryAllAfterDeleteWithNameCondition</a></td><td rowspan="1">1649758931298</td><td rowspan="1">960</td></tr><tr class="passedeven"><td><a href="#m22">test17CastFunc</a></td><td rowspan="1">1649758932259</td><td rowspan="1">2118</td></tr></tbody>
+<tbody id="t2"><tr><th colspan="4">v0.3.0 StrFuncTest &#8212; failed</th></tr><tr class="failedeven"><td rowspan="1">io.dingodb.test.TestStrFuncs</td><td><a href="#m23">test13MidStr</a></td><td rowspan="1">1649758951654</td><td rowspan="1">820</td></tr><tr><th colspan="4">v0.3.0 StrFuncTest &#8212; passed</th></tr><tr class="passedeven"><td rowspan="14">io.dingodb.test.TestStrFuncs</td><td><a href="#m24">test01ConcatStr</a></td><td rowspan="1">1649758938296</td><td rowspan="1">979</td></tr><tr class="passedeven"><td><a href="#m25">test02FormatStr</a></td><td rowspan="1">1649758939276</td><td rowspan="1">981</td></tr><tr class="passedeven"><td><a href="#m26">test03LocateStr</a></td><td rowspan="1">1649758940257</td><td rowspan="1">979</td></tr><tr class="passedeven"><td><a href="#m27">test04LowerAndLcase</a></td><td rowspan="1">1649758941236</td><td rowspan="1">1126</td></tr><tr class="passedeven"><td><a href="#m28">test05UpperAndUcase</a></td><td rowspan="1">1649758942363</td><td rowspan="1">1960</td></tr><tr class="passedeven"><td><a href="#m29">test06LeftStr</a></td><td rowspan="1">1649758944323</td><td rowspan="1">1003</td></tr><tr class="passedeven"><td><a href="#m30">test07RightStr</a></td><td rowspan="1">1649758945326</td><td rowspan="1">1279</td></tr><tr class="passedeven"><td><a href="#m31">test08RepeatStr</a></td><td rowspan="1">1649758946605</td><td rowspan="1">1815</td></tr><tr class="passedeven"><td><a href="#m32">test09ReplaceStr</a></td><td rowspan="1">1649758948420</td><td rowspan="1">977</td></tr><tr class="passedeven"><td><a href="#m33">test10TrimStr</a></td><td rowspan="1">1649758949397</td><td rowspan="1">968</td></tr><tr class="passedeven"><td><a href="#m34">test11LtrimStr</a></td><td rowspan="1">1649758950366</td><td rowspan="1">932</td></tr><tr class="passedeven"><td><a href="#m35">test12RtrimStr</a></td><td rowspan="1">1649758951298</td><td rowspan="1">356</td></tr><tr class="passedeven"><td><a href="#m36">test14SubStringStr</a></td><td rowspan="1">1649758952475</td><td rowspan="1">999</td></tr><tr class="passedeven"><td><a href="#m37">test15ReverseStr</a></td><td rowspan="1">1649758953475</td><td rowspan="1">1000</td></tr></tbody>
+</table>
+<h2>BVTTest</h2><h3 id="m0">io.dingodb.test.TestBVT#test01TableCreate</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m1">io.dingodb.test.TestBVT#test02TableInsert</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m2">io.dingodb.test.TestBVT#test03TableUpdate</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m3">io.dingodb.test.TestBVT#test04TableQuery</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m4">io.dingodb.test.TestBVT#test05TableDelete</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m5">io.dingodb.test.TestBVT#test06TableDrop</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h2>v0.2.0 FuncTest</h2><h3 id="m6">io.dingodb.test.TestSQLFuncs#test01MultiInsert</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m7">io.dingodb.test.TestSQLFuncs#test02CountFunc</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m8">io.dingodb.test.TestSQLFuncs#test03DistinctNameFunc</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m9">io.dingodb.test.TestSQLFuncs#test04DistinctAgeFunc</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m10">io.dingodb.test.TestSQLFuncs#test05AvgFunc</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m11">io.dingodb.test.TestSQLFuncs#test06SumFunc</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m12">io.dingodb.test.TestSQLFuncs#test07MaxFunc</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m13">io.dingodb.test.TestSQLFuncs#test08MinFunc</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m14">io.dingodb.test.TestSQLFuncs#test09OrderAscFunc</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m15">io.dingodb.test.TestSQLFuncs#test10OrderDescFunc</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m16">io.dingodb.test.TestSQLFuncs#test11LimitFunc</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m17">io.dingodb.test.TestSQLFuncs#test12OrderLimitTop1Func</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m18">io.dingodb.test.TestSQLFuncs#test13OrderLimitOffsetFunc</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m19">io.dingodb.test.TestSQLFuncs#test14GroupOrderFunc</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m20">io.dingodb.test.TestSQLFuncs#test15DeleteWithNameCondition</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m21">io.dingodb.test.TestSQLFuncs#test16QueryAllAfterDeleteWithNameCondition</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m22">io.dingodb.test.TestSQLFuncs#test17CastFunc</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h2>v0.3.0 StrFuncTest</h2><h3 id="m23">io.dingodb.test.TestStrFuncs#test13MidStr</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLException: Error while executing SQL &quot;select mid(name,2,3) midName from strFuncTest20220412&quot;: Exec invoke api on remote server error, thread: [Test worker], message: [java.lang.NullPointerException].
+	at org.apache.calcite.avatica.Helper.createException(Helper.java:56)
+	at org.apache.calcite.avatica.Helper.createException(Helper.java:41)
+	at org.apache.calcite.avatica.AvaticaStatement.executeInternal(AvaticaStatement.java:163)
+	at org.apache.calcite.avatica.AvaticaStatement.executeQuery(AvaticaStatement.java:227)
+	at io.dingodb.dailytest.StrFuncs.midFunc(StrFuncs.java:318)
+	at io.dingodb.test.TestStrFuncs.test13MidStr(TestStrFuncs.java:222)
+	at java.util.ArrayList.forEach(ArrayList.java:1257)
+	at com.sun.proxy.$Proxy2.stop(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: io.dingodb.common.error.DingoException: Exec invoke api on remote server error, thread: [Test worker], message: [java.lang.NullPointerException].
+	at io.dingodb.common.error.DingoException.from(DingoException.java:107)
+	at io.dingodb.common.error.FormattingError.formatAsException(FormattingError.java:77)
+	at io.dingodb.common.error.FormattingError.throwFormatError(FormattingError.java:40)
+	at io.dingodb.net.netty.api.ApiProxy.invoke(ApiProxy.java:117)
+	at io.dingodb.net.netty.api.ApiProxy.invoke(ApiProxy.java:86)
+	at com.sun.proxy.$Proxy10.apply(Unknown Source)
+	at io.dingodb.driver.DingoRemoteService.apply(DingoRemoteService.java:50)
+	at org.apache.calcite.avatica.remote.RemoteMeta$14.call(RemoteMeta.java:310)
+	at org.apache.calcite.avatica.remote.RemoteMeta$14.call(RemoteMeta.java:307)
+	at org.apache.calcite.avatica.AvaticaConnection.invokeWithRetries(AvaticaConnection.java:792)
+	at org.apache.calcite.avatica.remote.RemoteMeta.fetch(RemoteMeta.java:306)
+	at org.apache.calcite.avatica.remote.DingoRemoteMeta.fetch(DingoRemoteMeta.java:21)
+	at org.apache.calcite.avatica.MetaImpl$FetchIterator.moveNext(MetaImpl.java:1592)
+	at org.apache.calcite.avatica.MetaImpl$FetchIterator.&lt;init&gt;(MetaImpl.java:1560)
+	at org.apache.calcite.avatica.MetaImpl$FetchIterator.&lt;init&gt;(MetaImpl.java:1543)
+	at org.apache.calcite.avatica.MetaImpl$FetchIterable.iterator(MetaImpl.java:1538)
+	at org.apache.calcite.avatica.MetaImpl.createCursor(MetaImpl.java:97)
+	at org.apache.calcite.avatica.AvaticaResultSet.execute(AvaticaResultSet.java:186)
+	at org.apache.calcite.avatica.AvaticaConnection$1.execute(AvaticaConnection.java:666)
+	at org.apache.calcite.avatica.remote.RemoteMeta$13.call(RemoteMeta.java:283)
+	at org.apache.calcite.avatica.remote.RemoteMeta$13.call(RemoteMeta.java:263)
+	at org.apache.calcite.avatica.AvaticaConnection.invokeWithRetries(AvaticaConnection.java:792)
+	at org.apache.calcite.avatica.remote.RemoteMeta.prepareAndExecute(RemoteMeta.java:262)
+	at org.apache.calcite.avatica.remote.DingoRemoteMeta.prepareAndExecute(DingoRemoteMeta.java:21)
+	at org.apache.calcite.avatica.AvaticaConnection.prepareAndExecuteInternal(AvaticaConnection.java:674)
+	at org.apache.calcite.avatica.AvaticaStatement.executeInternal(AvaticaStatement.java:156)
+	... 56 more
+... Removed 48 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m24">io.dingodb.test.TestStrFuncs#test01ConcatStr</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m25">io.dingodb.test.TestStrFuncs#test02FormatStr</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m26">io.dingodb.test.TestStrFuncs#test03LocateStr</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m27">io.dingodb.test.TestStrFuncs#test04LowerAndLcase</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m28">io.dingodb.test.TestStrFuncs#test05UpperAndUcase</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m29">io.dingodb.test.TestStrFuncs#test06LeftStr</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m30">io.dingodb.test.TestStrFuncs#test07RightStr</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m31">io.dingodb.test.TestStrFuncs#test08RepeatStr</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m32">io.dingodb.test.TestStrFuncs#test09ReplaceStr</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m33">io.dingodb.test.TestStrFuncs#test10TrimStr</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m34">io.dingodb.test.TestStrFuncs#test11LtrimStr</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m35">io.dingodb.test.TestStrFuncs#test12RtrimStr</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m36">io.dingodb.test.TestStrFuncs#test14SubStringStr</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m37">io.dingodb.test.TestStrFuncs#test15ReverseStr</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+</body>
+</html>

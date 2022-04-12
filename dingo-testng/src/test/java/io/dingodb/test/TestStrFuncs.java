@@ -224,7 +224,7 @@ public class TestStrFuncs {
         Assert.assertTrue(actualMidList.equals(expectedMidList));
     }
 
-    @Test(enabled = false, description = "验证subString截取指定长度字符串")
+    @Test(enabled = true, description = "验证subString截取指定长度字符串")
     public void test14SubStringStr() throws SQLException, ClassNotFoundException {
         List<String> expectedSubStringList = new ArrayList<>();
         String[] subStringArray = new String[]{"beijing"," beijing ha","wuhan NO.1 ","CHANGping","pingYang1","543",
