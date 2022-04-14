@@ -58,7 +58,8 @@ public class EmailableReporterListener implements IReporter{
     private final StringBuilder buffer = new StringBuilder();
 
     private String fileName = "DingoDB-test-report.html";
-    private String hostIP = "172.16.3.26";
+//    private String hostIP = "172.20.3.26";
+    private String hostIP = System.getenv("ConnectIP");;
 
     public void setFileName(String fileName) {
         this.fileName = fileName;
