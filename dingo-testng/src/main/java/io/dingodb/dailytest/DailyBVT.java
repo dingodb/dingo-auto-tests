@@ -21,7 +21,6 @@ import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
-import java.util.Random;
 
 public class DailyBVT {
 
@@ -98,17 +97,28 @@ public class DailyBVT {
         return insertCount;
     }
 
-    //更新单行数据
-    public int updateTableValues() throws ClassNotFoundException, SQLException {
+    //更新单行字符型数据
+    public int updateStringValues() throws ClassNotFoundException, SQLException {
         String tableName = getTableName();
         connection = connectDingo();
         Statement statement = connection.createStatement();
 
         String updateSql = "update " + tableName + " set name='" + newName + "' where name='" + inName + "'";
-        int updateCount = statement.executeUpdate(updateSql);
+        int updateStrCount = statement.executeUpdate(updateSql);
         statement.close();
-//        connection.close();
-        return updateCount;
+        return updateStrCount;
+    }
+
+    //更新单行整型数据
+    public int updateIntValues() throws ClassNotFoundException, SQLException {
+        String tableName = getTableName();
+        connection = connectDingo();
+        Statement statement = connection.createStatement();
+
+        String updateSql = "update " + tableName + " set age = age + 1";
+        int updateIntCount = statement.executeUpdate(updateSql);
+        statement.close();
+        return updateIntCount;
     }
 
     //更新后查询数据

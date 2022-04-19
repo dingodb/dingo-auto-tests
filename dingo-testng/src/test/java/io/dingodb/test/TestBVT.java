@@ -80,30 +80,37 @@ public class TestBVT {
         Assert.assertEquals(actualInsertCount, expectedInsertCount);
     }
 
-    @Test(priority = 2, groups = {"BVT"}, dependsOnMethods = {"test02TableInsert"},description = "验证更新数据成功")
-    public void test03TableUpdate() throws Exception {
+    @Test(priority = 2, groups = {"BVT"}, dependsOnMethods = {"test02TableInsert"},description = "验证更新字符串型数据成功")
+    public void test03StringUpdate() throws Exception {
         int expectedUpdateCount = 1;
-        int actualUpdateCount = bvtObj.updateTableValues();
+        int actualUpdateCount = bvtObj.updateStringValues();
         Assert.assertEquals(actualUpdateCount, expectedUpdateCount);
     }
 
-    @Test(priority = 3, groups = {"BVT"}, dependsOnMethods = {"test03TableUpdate"},description = "验证查询数据成功")
-    public void test04TableQuery() throws Exception {
+    @Test(priority = 3, groups = {"BVT"}, dependsOnMethods = {"test02TableInsert"},description = "验证更新整型数据成功")
+    public void test04IntUpdate() throws Exception {
+        int expectedUpdateCount = 1;
+        int actualUpdateCount = bvtObj.updateIntValues();
+        Assert.assertEquals(actualUpdateCount, expectedUpdateCount);
+    }
+
+    @Test(priority = 4, groups = {"BVT"}, dependsOnMethods = {"test03StringUpdate"},description = "验证查询数据成功")
+    public void test05TableQuery() throws Exception {
         String expectedQueryName = bvtObj.newName;
         System.out.println("----" + expectedQueryName + "-----");
         String actualQueryName = bvtObj.queryTable();
         Assert.assertEquals(actualQueryName, expectedQueryName);
     }
 
-    @Test(priority = 4, groups = {"BVT"}, dependsOnMethods = {"test04TableQuery"}, description = "验证清空表数据成功")
-    public void test05TableDelete() throws Exception {
+    @Test(priority = 5, groups = {"BVT"}, dependsOnMethods = {"test05TableQuery"}, description = "验证清空表数据成功")
+    public void test06TableDelete() throws Exception {
         int expectedDeleteCount = 1;
         int actualDeleteCount = bvtObj.deleteTableValues();
         Assert.assertEquals(actualDeleteCount, expectedDeleteCount);
     }
 
-    @Test(priority = 5, groups = {"BVT"}, dependsOnMethods = {"test05TableDelete"}, description = "验证删除表成功")
-    public void test06TableDrop() throws Exception {
+    @Test(priority = 6, groups = {"BVT"}, dependsOnMethods = {"test06TableDelete"}, description = "验证删除表成功")
+    public void test07TableDrop() throws Exception {
         bvtObj.dropTable();
         String expectedTableName = bvtObj.getTableName();
         List<String> afterDropTableList = getTableList();

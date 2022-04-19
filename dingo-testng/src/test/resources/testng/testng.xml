@@ -50,4 +50,11 @@
         </classes>
 
     </test>
+    <test name="v0.3.0 DateTimeTest">
+        <classes>
+            <class name="io.dingodb.test.TestDateTime"></class>
+        </classes>
+
+    </test>
+
 </suite>
