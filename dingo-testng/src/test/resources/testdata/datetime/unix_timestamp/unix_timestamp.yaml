@@ -1,0 +1,6 @@
+test1:
+  inputStr: "2022-04-20 14:24:26"
+  outputStr: "1650435866"
+test2:
+  inputStr: "2022-04-20"
+  outputStr: "1650384000"

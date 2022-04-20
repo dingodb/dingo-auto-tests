@@ -18,10 +18,13 @@ package io.dingodb.dailytest;
 
 import java.sql.*;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class DateTimeFuncs {
-    private static String defaultConnectIP = CommonArgs.getDefaultDingoClusterIP();
+    private static final String defaultConnectIP = "172.20.3.26";
+//    private static String defaultConnectIP = CommonArgs.getDefaultDingoClusterIP();
     private static final String JDBC_DRIVER = "io.dingodb.driver.client.DingoDriverClient";
     private static final String connectUrl = "jdbc:dingo:thin:url=" + defaultConnectIP + ":8765";
     public static Connection connection = null;
@@ -91,11 +94,11 @@ public class DateTimeFuncs {
         Statement statement = connection.createStatement();
         String nowSql = "select Now()";
         ResultSet nowRst = statement.executeQuery(nowSql);
-        String getNowString = null;
+        String nowString = null;
         while (nowRst.next()) {
-            getNowString = nowRst.getString(1);
+            nowString = nowRst.getString(1);
         }
-        return getNowString;
+        return nowString;
     }
 
     // 获取函数CurDate()返回值
@@ -103,10 +106,107 @@ public class DateTimeFuncs {
         Statement statement = connection.createStatement();
         String curDateSql = "select CurDate()";
         ResultSet curDateRst = statement.executeQuery(curDateSql);
-        String getCurDateString = null;
+        String curDateString = null;
         while (curDateRst.next()) {
-            getCurDateString = curDateRst.getString(1);
+            curDateString = curDateRst.getString(1);
         }
-        return getCurDateString;
+        return curDateString;
     }
+
+    // 获取函数Current_Date返回值
+    public String current_DateFunc() throws SQLException {
+        Statement statement = connection.createStatement();
+        String current_DateSql = "select Current_Date";
+        ResultSet current_DateRst = statement.executeQuery(current_DateSql);
+        String current_DateString = null;
+        while (current_DateRst.next()) {
+            current_DateString = current_DateRst.getString(1);
+        }
+        return current_DateString;
+    }
+
+    // 获取函数CurTime()返回值
+    public String curTimeFunc() throws SQLException {
+        Statement statement = connection.createStatement();
+        String curTimeSql = "select CurTime()";
+        ResultSet curTimeRst = statement.executeQuery(curTimeSql);
+        String curTimeString = null;
+        while (curTimeRst.next()) {
+            curTimeString = curTimeRst.getString(1);
+        }
+        return curTimeString;
+    }
+
+    // 获取函数CurTime()返回值
+    public String current_TimeFunc() throws SQLException {
+        Statement statement = connection.createStatement();
+        String current_TimeSql = "select Current_Time";
+        ResultSet current_TimeRst = statement.executeQuery(current_TimeSql);
+        String current_TimeString = null;
+        while (current_TimeRst.next()) {
+            current_TimeString = current_TimeRst.getString(1);
+        }
+        return current_TimeString;
+    }
+
+    // 获取函数Current_Timestamp返回值
+    public String current_TimeStampFunc() throws SQLException {
+        Statement statement = connection.createStatement();
+        String current_TimeStampSql = "select Current_TimeStamp";
+        ResultSet current_TimeStampRst = statement.executeQuery(current_TimeStampSql);
+        String current_TimeStampString = null;
+        while (current_TimeStampRst.next()) {
+            current_TimeStampString = current_TimeStampRst.getString(1);
+        }
+        return current_TimeStampString;
+    }
+
+    // 获取函数From_UnixTime返回值
+    public String from_UnixTimeFunc() throws SQLException {
+        Statement statement = connection.createStatement();
+        String from_UnixTimeSql = "select from_unixtime(1650435866)";
+        ResultSet from_UnixTimeRst = statement.executeQuery(from_UnixTimeSql);
+        String from_UnixTimeString = null;
+        while (from_UnixTimeRst.next()) {
+            from_UnixTimeString = from_UnixTimeRst.getString(1);
+        }
+        return from_UnixTimeString;
+    }
+
+    // 获取函数Unix_TimeStamp返回值
+    public String unix_TimeStampFunc(String inputStr) throws SQLException {
+        Statement statement = connection.createStatement();
+        String unix_TimeStampSql = "select unix_TimeStamp('" + inputStr + "')";
+        ResultSet unixTimeStampRst = statement.executeQuery(unix_TimeStampSql);
+        String unix_TimeStampStr  = null;
+        while (unixTimeStampRst.next()) {
+            unix_TimeStampStr = unixTimeStampRst.getString(1);
+        }
+        return unix_TimeStampStr;
+    }
+
+    // 获取函数Date_Format返回值
+    public String date_FormatFunc(String inputDate, String inputFormat) throws SQLException {
+        Statement statement = connection.createStatement();
+        String date_formatSql = "select date_format('" + inputDate + "','" + inputFormat + "')";
+        ResultSet date_formatRst = statement.executeQuery(date_formatSql);
+        String date_formatStr  = null;
+        while (date_formatRst.next()) {
+            date_formatStr = date_formatRst.getString(1);
+        }
+        return date_formatStr;
+    }
+
+    // 获取函数DateDiff返回值
+    public String dateDiffFunc(String Date1, String Date2) throws SQLException {
+        Statement statement = connection.createStatement();
+        String dateDiffSql = "select datediff('" + Date1 + "','" + Date2 + "')";
+        ResultSet dateDiffRst = statement.executeQuery(dateDiffSql);
+        String dateDiffStr  = null;
+        while (dateDiffRst.next()) {
+            dateDiffStr = dateDiffRst.getString(1);
+        }
+        return dateDiffStr;
+    }
+
 }

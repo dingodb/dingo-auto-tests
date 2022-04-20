@@ -1,0 +1,16 @@
+test1:
+  inputDate: "2022-04-20 14:24:26"
+  inputFormat: "%Y/%m/%d"
+  outputDate: "2022/04/20"
+test2:
+  inputDate: "2022/04/20 14:24:26"
+  inputFormat: "%Y-%m-%d"
+  outputDate: "2022-04-20"
+test3:
+  inputDate: "2022.04.20 14:24:26"
+  inputFormat: "%Y-%m-%d"
+  outputDate: "2022-04-20"
+test4:
+  inputDate: "20220420142426"
+  inputFormat: "%Y-%m-%d"
+  outputDate: "2022-04-20"

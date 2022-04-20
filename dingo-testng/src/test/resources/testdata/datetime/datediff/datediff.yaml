@@ -1,0 +1,28 @@
+test1:
+  inputDate1: "2022-04-13 23:59:59"
+  inputDate2: "2022-04-01 01:00:00"
+  outputDiff: "12"
+test2:
+  inputDate1: "2022-04-13 00:00:00"
+  inputDate2: "2022-04-01 23:59:59"
+  outputDiff: "12"
+test3:
+  inputDate1: "2022-04-01"
+  inputDate2: "2022-04-01 23:59:59"
+  outputDiff: "0"
+test4:
+  inputDate1: "2022-05-31"
+  inputDate2: "2022-05-31"
+  outputDiff: "0"
+test5:
+  inputDate1: "2021-04-01"
+  inputDate2: "2022-04-01"
+  outputDiff: "-365"
+test6:
+  inputDate1: "2022-03-31"
+  inputDate2: "2022-04-13"
+  outputDiff: "-13"
+test7:
+  inputDate1: "1999-01-01"
+  inputDate2: "2023-12-31"
+  outputDiff: "-9130"

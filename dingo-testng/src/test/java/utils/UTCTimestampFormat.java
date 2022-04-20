@@ -22,10 +22,10 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.TimeZone;
 
-public class UTCDateFormat {
-    private static DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-    public static String getUTCDateStr() {
-        StringBuffer UTCDateBuffer = new StringBuffer();
+public final class UTCTimestampFormat {
+    private static DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+    public static String getUTCTimestampStr() {
+        StringBuffer UTCTimestampBuffer = new StringBuffer();
         // 取得本地时间
         Calendar cal = Calendar.getInstance();
         // 取得时间偏移量
@@ -37,29 +37,31 @@ public class UTCDateFormat {
         int year = cal.get(Calendar.YEAR);
         int month =  cal.get(Calendar.MONTH) + 1;
         int day = cal.get(Calendar.DAY_OF_MONTH);
-//        int hour = cal.get(Calendar.HOUR_OF_DAY);
-//        int minute = cal.get(Calendar.MINUTE);
+        int hour = cal.get(Calendar.HOUR_OF_DAY);
+        int minute = cal.get(Calendar.MINUTE);
 
-        UTCDateBuffer.append(year).append("-").append(month).append("-").append(day);
+        UTCTimestampBuffer.append(year).append("-").append(month).append("-").append(day);
+        UTCTimestampBuffer.append(" ").append(hour).append(":").append(minute);
         try{
-            format.parse(UTCDateBuffer.toString());
-            return UTCDateBuffer.toString();
+            format.parse(UTCTimestampBuffer.toString());
+            return UTCTimestampBuffer.toString();
         } catch (ParseException e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    public static String formatUTCDate(String inputUTCDate){
+    public static String formatUTCTimestamp(String UTCTimestamp){
         java.util.Date UTCDate = null;
-        String UTCDateStr = null;
+        String UTCTimestampStr = null;
         try{
-            UTCDate = format.parse(inputUTCDate);
+            UTCDate = format.parse(UTCTimestamp);
             format.setTimeZone(TimeZone.getTimeZone("GMT+16"));
-            UTCDateStr = format.format(UTCDate);
+            UTCTimestampStr = format.format(UTCDate);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return UTCDateStr;
+        return UTCTimestampStr;
     }
+
 }
