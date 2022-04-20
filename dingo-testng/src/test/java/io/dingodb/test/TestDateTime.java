@@ -44,7 +44,6 @@ public class TestDateTime extends DateTimeFuncs {
         }
         System.out.println(schemaList.get(0));
         ResultSet rst = dmd.getTables(null, schemaList.get(0), "%", null);
-//        ResultSet rst = dmd.getTables(null, "DINGO", "%", null);
         while (rst.next()) {
             tableList.add(rst.getString("TABLE_NAME").toUpperCase());
         }

@@ -29,7 +29,7 @@ import java.util.List;
 
 public class StrFuncs {
 //    private static final String defaultConnectIP = "172.20.3.26";
-    private static final String defaultConnectIP = System.getenv("ConnectIP");
+    private static String defaultConnectIP = CommonArgs.getDefaultDingoClusterIP();
     private static final String JDBC_DRIVER = "io.dingodb.driver.client.DingoDriverClient";
     private static String connectUrl = "jdbc:dingo:thin:url=" + defaultConnectIP + ":8765";
 

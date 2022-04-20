@@ -33,10 +33,6 @@ import java.util.List;
 
 @Listeners(EmailableReporterListener.class)
 public class TestSQLFuncs {
-//    private static final String defaultConnectIP = "172.20.3.26";
-//    private static final String JDBC_DRIVER = "io.dingodb.driver.client.DingoDriverClient";
-//    private static final String connectUrl = "jdbc:dingo:thin:url=" + defaultConnectIP + ":8765";
-
     private static Connection connection;
     public static SQLFuncs funcObj = new SQLFuncs();
 

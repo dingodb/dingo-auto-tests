@@ -29,25 +29,11 @@ import java.util.Date;
 import java.util.List;
 
 public class SQLFuncs {
-//    private static final String defaultConnectIP = "172.20.3.26";
-    private static final String defaultConnectIP = System.getenv("ConnectIP");
+    private static String defaultConnectIP = CommonArgs.getDefaultDingoClusterIP();
     private static final String JDBC_DRIVER = "io.dingodb.driver.client.DingoDriverClient";
     private static String connectUrl = "jdbc:dingo:thin:url=" + defaultConnectIP + ":8765";
 
     public static Connection connection;
-
-//    static{
-//        try {
-//            Class.forName(JDBC_DRIVER);
-//        } catch (ClassNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//        try {
-//            connection = DriverManager.getConnection(connectUrl);
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
 
     public static Connection connectDB() throws ClassNotFoundException, SQLException {
         Class.forName(JDBC_DRIVER);
