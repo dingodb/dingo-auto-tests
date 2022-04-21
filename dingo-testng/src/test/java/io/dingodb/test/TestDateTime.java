@@ -15,6 +15,8 @@
  */
 
 package io.dingodb.test;
+import listener.EmailableReporterListener;
+import org.testng.annotations.Listeners;
 import utils.UTCTimeFormat;
 import utils.UTCTimestampFormat;
 import utils.UTCDateFormat;
@@ -34,7 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-
+@Listeners(EmailableReporterListener.class)
 public class TestDateTime extends YamlDataHelper{
     public static DateTimeFuncs dateTimeObj = new DateTimeFuncs();
 

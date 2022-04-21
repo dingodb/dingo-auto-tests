@@ -16,7 +16,7 @@
 
 package io.dingodb.test;
 
-//import listener.EmailableReporterListener;
+import listener.EmailableReporterListener;
 import io.dingodb.dailytest.StrFuncs;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -30,7 +30,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-//@Listeners(EmailableReporterListener.class)
+@Listeners(EmailableReporterListener.class)
 public class TestStrFuncs {
     private static Connection connection;
     public static StrFuncs strObj = new StrFuncs();
