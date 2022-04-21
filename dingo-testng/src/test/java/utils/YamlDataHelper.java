@@ -20,6 +20,7 @@ import org.testng.annotations.DataProvider;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.ArrayList;
@@ -27,10 +28,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class YamlDataHelper {
-    public static String unix_timestampFuncFile = "testdata/datetime/unix_timestamp/unix_timestamp.yaml";
-    public static String date_formatFuncFile = "testdata/datetime/date_format/date_format.yaml";
-    public static String datediffFuncFile = "testdata/datetime/datediff/datediff.yaml";
+public class YamlDataHelper{
+    public static IniReader iniReader;
+
+    static {
+        try {
+            iniReader = new IniReader("src/test/resources/ini/my.ini");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+//    public static String datediffFuncFile = "testdata/datetime/datediff/datediff.yaml";
 
     private static List<Map<String, String>> getYamlList(String yamlfile) {
         List<Map<String, String>> list = new ArrayList();
@@ -70,15 +79,15 @@ public class YamlDataHelper {
         List<Map<String, String>> yamlList = null;
         switch (method.getName()) {
             case "test10Unix_TimeStampFunc":{
-                yamlList = getYamlList(unix_timestampFuncFile);
+                yamlList = getYamlList(iniReader.getValue("DateTimeYaml", "unix_timestamp"));
                 break;
             }
             case "test11Date_FormatFunc":{
-                yamlList = getYamlList(date_formatFuncFile);
+                yamlList = getYamlList(iniReader.getValue("DateTimeYaml", "date_format"));
                 break;
             }
             case "test12DateDiffFunc":{
-                yamlList = getYamlList(datediffFuncFile);
+                yamlList = getYamlList(iniReader.getValue("DateTimeYaml", "datediff"));
                 break;
             }
         }

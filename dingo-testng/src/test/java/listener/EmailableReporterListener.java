@@ -29,6 +29,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.Set;
 
+import io.dingodb.dailytest.CommonArgs;
 import utils.SendEmailClient;
 import jakarta.mail.MessagingException;
 import org.testng.collections.Lists;
@@ -59,7 +60,8 @@ public class EmailableReporterListener implements IReporter{
 
     private String fileName = "DingoDB-test-report.html";
 //    private String hostIP = "172.20.3.26";
-    private String hostIP = System.getenv("ConnectIP");;
+//    private String hostIP = System.getenv("ConnectIP");
+    private String hostIP = CommonArgs.getDefaultDingoClusterIP();
 
     public void setFileName(String fileName) {
         this.fileName = fileName;
