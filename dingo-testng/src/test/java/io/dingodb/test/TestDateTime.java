@@ -123,7 +123,7 @@ public class TestDateTime extends YamlDataHelper{
         Assert.assertEquals(actualCurrent_DateWithBracketsStr, expectedUTCDate);
     }
 
-    @Test(priority = 6, enabled = false, description = "验证函数CurTime()返回结果正常")
+    @Test(priority = 6, enabled = true, description = "验证函数CurTime()返回结果正常")
     public void test07CurTimeFunc() throws SQLException {
         String currentUTCTime = UTCTimeFormat.getUTCTimeStr();
 //        System.out.println(currentUTCTime);
@@ -136,7 +136,7 @@ public class TestDateTime extends YamlDataHelper{
         Assert.assertEquals(actualCurTimeStr, expectedUTCTimeStr);
     }
 
-    @Test(priority = 7, enabled = false, description = "验证函数Current_Time返回结果正常")
+    @Test(priority = 7, enabled = true, description = "验证函数Current_Time返回结果正常")
     public void test08Current_TimeFunc() throws SQLException {
         String currentUTCTime = UTCTimeFormat.getUTCTimeStr();
 //        System.out.println(currentUTCTime);
@@ -150,7 +150,7 @@ public class TestDateTime extends YamlDataHelper{
         Assert.assertEquals(actualCurrent_TimeStr, expectedUTCTimeStr);
     }
 
-    @Test(priority = 8, enabled = false, description = "验证函数Current_Time()返回结果正常")
+    @Test(priority = 8, enabled = true, description = "验证函数Current_Time()返回结果正常")
     public void test09Current_TimeWithBracketsFunc() throws SQLException {
         String currentUTCTime = UTCTimeFormat.getUTCTimeStr();
 //        System.out.println(currentUTCTime);
@@ -164,7 +164,7 @@ public class TestDateTime extends YamlDataHelper{
         Assert.assertEquals(actualCurrent_TimeWithBracketsStr, expectedUTCTimeStr);
     }
 
-    @Test(priority = 9, enabled = false, description = "验证函数Current_TimeStamp返回结果正常")
+    @Test(priority = 9, enabled = true, description = "验证函数Current_TimeStamp返回结果正常")
     public void test10Current_TimeStampFunc() throws SQLException {
         String currentUTCTimeStamp = UTCTimestampFormat.getUTCTimestampStr();
 //        System.out.println(currentUTCTimeStamp);
@@ -178,7 +178,7 @@ public class TestDateTime extends YamlDataHelper{
         Assert.assertEquals(actualCurrent_TimeStampStr, expectedUTCTimeStampStr);
     }
 
-    @Test(priority = 10, enabled = false, description = "验证函数Current_TimeStamp()返回结果正常")
+    @Test(priority = 10, enabled = true, description = "验证函数Current_TimeStamp()返回结果正常")
     public void test11Current_TimeStampWithBracketsFunc() throws SQLException {
         String currentUTCTimeStamp = UTCTimestampFormat.getUTCTimestampStr();
 //        System.out.println(currentUTCTimeStamp);
@@ -221,7 +221,7 @@ public class TestDateTime extends YamlDataHelper{
         Assert.assertEquals(actualUnix_TimeStamp, expectedUnix_TimeStamp);
     }
 
-    @Test(priority = 12, enabled = false, description = "验证函数unix_TimeStamp空参时的返回结果正常")
+    @Test(priority = 12, enabled = true, description = "验证函数unix_TimeStamp空参时的返回结果正常")
     public void test13Unix_TimeStampNoAgrFunc() throws SQLException {
         String currentTimeStamp = String.valueOf(System.currentTimeMillis()/1000);
         System.out.println("Current Timestamp: " + currentTimeStamp);
