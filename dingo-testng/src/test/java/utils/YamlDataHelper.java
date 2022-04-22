@@ -39,8 +39,6 @@ public class YamlDataHelper{
         }
     }
 
-//    public static String datediffFuncFile = "testdata/datetime/datediff/datediff.yaml";
-
     private static List<Map<String, String>> getYamlList(String yamlfile) {
         List<Map<String, String>> list = new ArrayList();
         Map<String, Map<String, String>> map = readYamlUtil(yamlfile);
@@ -78,16 +76,28 @@ public class YamlDataHelper{
     public Object[][] yamlDataMethod(Method method) {
         List<Map<String, String>> yamlList = null;
         switch (method.getName()) {
-            case "test10Unix_TimeStampFunc":{
+            case "test12From_UnixTimeFunc_TimestampInput": {
+                yamlList = getYamlList(iniReader.getValue("DateTimeYaml", "from_unixtime"));
+                break;
+            }
+            case "test13Unix_TimeStampFunc": {
                 yamlList = getYamlList(iniReader.getValue("DateTimeYaml", "unix_timestamp"));
                 break;
             }
-            case "test11Date_FormatFunc":{
-                yamlList = getYamlList(iniReader.getValue("DateTimeYaml", "date_format"));
+            case "test14Date_FormatStrArgFunc": {
+                yamlList = getYamlList(iniReader.getValue("DateTimeYaml", "date_format_str"));
                 break;
             }
-            case "test12DateDiffFunc":{
-                yamlList = getYamlList(iniReader.getValue("DateTimeYaml", "datediff"));
+            case "test14Date_FormatNumArgFunc": {
+                yamlList = getYamlList(iniReader.getValue("DateTimeYaml", "date_format_num"));
+                break;
+            }
+            case "test15DateDiffStrArgFunc": {
+                yamlList = getYamlList(iniReader.getValue("DateTimeYaml", "datediff_str"));
+                break;
+            }
+            case "test15DateDiffNumArgFunc": {
+                yamlList = getYamlList(iniReader.getValue("DateTimeYaml", "datediff_num"));
                 break;
             }
         }

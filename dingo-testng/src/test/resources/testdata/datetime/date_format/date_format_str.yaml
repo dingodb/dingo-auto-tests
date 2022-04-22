@@ -1,0 +1,336 @@
+test1:
+  inputDate: "2022-04-20 14:24:26"
+  inputFormat: "%Y/%m/%d"
+  outputDate: "2022/04/20"
+test2:
+  inputDate: "2022/04/20 14:24:26"
+  inputFormat: "%Y-%m-%d"
+  outputDate: "2022-04-20"
+test3:
+  inputDate: "2022.04.20 14:24:26"
+  inputFormat: "%Y-%m-%d"
+  outputDate: "2022-04-20"
+test4:
+  inputDate: "20220420142426"
+  inputFormat: "%Y-%m-%d"
+  outputDate: "2022-04-20"
+test5:
+  inputDate: "2022/04/20 14:24:26"
+  inputFormat: "%m"
+  outputDate: "04"
+test6:
+  inputDate: "2022/04/20 14:24:26"
+  inputFormat: "%d"
+  outputDate: "20"
+test7:
+  inputDate: "2022/04/20 14:24:26"
+  inputFormat: "%H"
+  outputDate: "14"
+test8:
+  inputDate: "2022/04/20 14:24:26"
+  inputFormat: "%i"
+  outputDate: "24"
+test9:
+  inputDate: "2022/04/20 14:24:06"
+  inputFormat: "%S"
+  outputDate: "06"
+test10:
+  inputDate: "2022/04/20 14:24:00"
+  inputFormat: "%s"
+  outputDate: "00"
+testID1000760-01:
+  inputDate: "20220413103726"
+  inputFormat: "%H:%i:%S %m/%d/%Y"
+  outputDate: "10:37:26 04/13/2022"
+testID1000760-02:
+  inputDate: "2022-04-13 10:07:26"
+  inputFormat: "%H:%i:%S %m/%d/%Y"
+  outputDate: "10:07:26 04/13/2022"
+testID1000760-03:
+  inputDate: "2022/04/13 10:37:06"
+  inputFormat: "%H:%i:%S %m/%d/%Y"
+  outputDate: "10:37:06 04/13/2022"
+testID1000760-04:
+  inputDate: "2022.04.13 09:37:26"
+  inputFormat: "%H:%i:%S %m/%d/%Y"
+  outputDate: "09:37:26 04/13/2022"
+testID1000761-01:
+  inputDate: "20220413103726"
+  inputFormat: "%Y/%m/%d %H:%i:%S"
+  outputDate: "2022/04/13 10:37:26"
+testID1000761-02:
+  inputDate: "2022-04-13 10:37:06"
+  inputFormat: "%Y/%m/%d %H:%i:%S"
+  outputDate: "2022/04/13 10:37:06"
+testID1000761-03:
+  inputDate: "2022/04/13 10:07:26"
+  inputFormat: "%Y/%m/%d %H:%i:%S"
+  outputDate: "2022/04/13 10:07:26"
+testID1000761-04:
+  inputDate: "2022.04.13 09:37:26"
+  inputFormat: "%Y/%m/%d %H:%i:%S"
+  outputDate: "2022/04/13 09:37:26"
+testID1000762-01:
+  inputDate: "20220413103726"
+  inputFormat: "%Y-%m-%d %H.%i.%S"
+  outputDate: "2022-04-13 10.37.26"
+testID1000762-02:
+  inputDate: "2022-04-13 10:07:26"
+  inputFormat: "%Y-%m-%d %H.%i.%S"
+  outputDate: "2022-04-13 10.07.26"
+testID1000762-03:
+  inputDate: "2022/04/13 10:37:06"
+  inputFormat: "%Y-%m-%d %H.%i.%S"
+  outputDate: "2022-04-13 10.37.06"
+testID1000762-04:
+  inputDate: "2022.04.13 09:37:26"
+  inputFormat: "%Y-%m-%d %H.%i.%S"
+  outputDate: "2022-04-13 09.37.26"
+testID1000763-01:
+  inputDate: "20220413103726"
+  inputFormat: "Y-%m-%d %H:%i:%S"
+  outputDate: "2022-04-13 10:37:26"
+testID1000763-02:
+  inputDate: "2022-04-04 10:07:26"
+  inputFormat: "Y-%m-%d %H:%i:%S"
+  outputDate: "2022-04-04 10:07:26"
+testID1000763-03:
+  inputDate: "2022/04/13 10:37:06"
+  inputFormat: "Y-%m-%d %H:%i:%S"
+  outputDate: "2022-04-13 10:37:06"
+testID1000763-04:
+  inputDate: "2022.04.13 09:37:26"
+  inputFormat: "Y-%m-%d %H:%i:%S"
+  outputDate: "2022-04-13 09:37:26"
+testID1000764-01:
+  inputDate: "20220413103726"
+  inputFormat: "%Y-%m-%d"
+  outputDate: "2022-04-13"
+testID1000764-02:
+  inputDate: "2022-04-04 10:07:26"
+  inputFormat: "%Y-%m-%d"
+  outputDate: "2022-04-04"
+testID1000764-03:
+  inputDate: "2022/04/13 10:37:06"
+  inputFormat: "%Y-%m-%d"
+  outputDate: "2022-04-13"
+testID1000764-04:
+  inputDate: "2022.04.13 09:37:26"
+  inputFormat: "%Y-%m-%d"
+  outputDate: "2022-04-13"
+testID1000764-05:
+  inputDate: "20220413"
+  inputFormat: "%Y-%m-%d"
+  outputDate: "2022-04-13"
+testID1000764-06:
+  inputDate: "2022-04-04"
+  inputFormat: "%Y-%m-%d"
+  outputDate: "2022-04-04"
+testID1000764-07:
+  inputDate: "2022/04/13"
+  inputFormat: "%Y-%m-%d"
+  outputDate: "2022-04-13"
+testID1000764-08:
+  inputDate: "2022.04.13"
+  inputFormat: "%Y-%m-%d"
+  outputDate: "2022-04-13"
+testID1000765-01:
+  inputDate: "20220413103726"
+  inputFormat: "%H:%i:%S"
+  outputDate: "10:37:26"
+testID1000765-02:
+  inputDate: "2022-04-04 10:07:26"
+  inputFormat: "%H:%i:%S"
+  outputDate: "10:07:26"
+testID1000765-03:
+  inputDate: "2022/04/13 10:37:06"
+  inputFormat: "%H:%i:%S"
+  outputDate: "10:37:06"
+testID1000765-04:
+  inputDate: "2022.04.13 09:37:26"
+  inputFormat: "%H:%i:%S"
+  outputDate: "09:37:26"
+testID1000766-01:
+  inputDate: "20220413103726"
+  inputFormat: "%Y"
+  outputDate: "2022"
+testID1000766-02:
+  inputDate: "1999-04-04 10:07:26"
+  inputFormat: "%Y-%m-%d"
+  outputDate: "1999"
+testID1000766-03:
+  inputDate: "2000/04/13 10:37:06"
+  inputFormat: "%Y"
+  outputDate: "2000"
+testID1000766-04:
+  inputDate: "2020.04.13 09:37:26"
+  inputFormat: "%Y"
+  outputDate: "2020"
+testID1000766-05:
+  inputDate: "20210413"
+  inputFormat: "%Y"
+  outputDate: "2021"
+testID1000766-06:
+  inputDate: "1990-04-04"
+  inputFormat: "%Y"
+  outputDate: "1990"
+testID1000766-07:
+  inputDate: "1970/04/13"
+  inputFormat: "%Y"
+  outputDate: "1970"
+testID1000766-08:
+  inputDate: "1949.04.13"
+  inputFormat: "%Y"
+  outputDate: "1949"
+testID1000767-01:
+  inputDate: "20220413103726"
+  inputFormat: "%d - %H"
+  outputDate: "13 - 10"
+testID1000767-02:
+  inputDate: "2022-04-04 10:07:26"
+  inputFormat: "%d - %H"
+  outputDate: "04 - 10"
+testID1000767-03:
+  inputDate: "2022/04/13 10:37:06"
+  inputFormat: "%d - %H"
+  outputDate: "04 - 10"
+testID1000767-04:
+  inputDate: "2022.04.13 09:37:26"
+  inputFormat: "%d - %H"
+  outputDate: "13 - 09"
+testID1000768-01:
+  inputDate: "20220413103726"
+  inputFormat: "%Y/%m/%d"
+  outputDate: "2022/04/13"
+testID1000768-02:
+  inputDate: "2022-04-04 10:07:26"
+  inputFormat: "%Y/%m/%d"
+  outputDate: "2022/04/04"
+testID1000768-03:
+  inputDate: "2000/11/11 10:37:06"
+  inputFormat: "%Y/%m/%d"
+  outputDate: "2000/11/11"
+testID1000768-04:
+  inputDate: "1998.10.01 09:37:26"
+  inputFormat: "%Y/%m/%d"
+  outputDate: "1998/10/01"
+testID1000768-05:
+  inputDate: "20220413"
+  inputFormat: "%Y/%m/%d"
+  outputDate: "2022/04/13"
+testID1000768-06:
+  inputDate: "2022-04-04"
+  inputFormat: "%Y/%m/%d"
+  outputDate: "2022/04/04"
+testID1000768-07:
+  inputDate: "2000/11/11"
+  inputFormat: "%Y/%m/%d"
+  outputDate: "2000/11/11"
+testID1000768-08:
+  inputDate: "1998.10.01"
+  inputFormat: "%Y/%m/%d"
+  outputDate: "1998/10/01"
+testID1000769-01:
+  inputDate: "20220413103726"
+  inputFormat: "%Y.%m.%d"
+  outputDate: "2022.04.13"
+testID1000769-02:
+  inputDate: "2022-04-04 10:07:26"
+  inputFormat: "%Y.%m.%d"
+  outputDate: "2022.04.04"
+testID1000769-03:
+  inputDate: "2000/11/11 10:37:06"
+  inputFormat: "%Y.%m.%d"
+  outputDate: "2000.11.11"
+testID1000769-04:
+  inputDate: "1998.10.01 09:37:26"
+  inputFormat: "%Y.%m.%d"
+  outputDate: "1998.10.01"
+testID1000769-05:
+  inputDate: "20220413"
+  inputFormat: "%Y.%m.%d"
+  outputDate: "2022.04.13"
+testID1000769-06:
+  inputDate: "2022-04-04"
+  inputFormat: "%Y.%m.%d"
+  outputDate: "2022.04.04"
+testID1000769-07:
+  inputDate: "2000/11/11"
+  inputFormat: "%Y.%m.%d"
+  outputDate: "2000.11.11"
+testID1000769-08:
+  inputDate: "1998.10.01"
+  inputFormat: "%Y.%m.%d"
+  outputDate: "1998.10.01"
+testID1000770-01:
+  inputDate: "20220413103726"
+  inputFormat: "Year:%Y Month:%m Day:%d"
+  outputDate: "Year:2022 Month:04 Day:13"
+testID1000770-02:
+  inputDate: "2022-04-04 10:07:26"
+  inputFormat: "Year:%Y Month:%m Day:%d"
+  outputDate: "Year:2022 Month:04 Day:04"
+testID1000770-03:
+  inputDate: "2000/11/11 10:37:06"
+  inputFormat: "Year:%Y Month:%m Day:%d"
+  outputDate: "Year:2000 Month:11 Day:11"
+testID1000770-04:
+  inputDate: "1998.10.01 09:37:26"
+  inputFormat: "Year:%Y Month:%m Day:%d"
+  outputDate: "Year:1998 Month:10 Day:01"
+testID1000770-05:
+  inputDate: "20220413"
+  inputFormat: "Year:%Y Month:%m Day:%d"
+  outputDate: "Year:2022 Month:04 Day:13"
+testID1000770-06:
+  inputDate: "2022-04-04"
+  inputFormat: "Year:%Y Month:%m Day:%d"
+  outputDate: "Year:2022 Month:04 Day:04"
+testID1000770-07:
+  inputDate: "2000/11/11"
+  inputFormat: "Year:%Y Month:%m Day:%d"
+  outputDate: "Year:2000 Month:11 Day:11"
+testID1000770-08:
+  inputDate: "1998.10.01"
+  inputFormat: "Year:%Y Month:%m Day:%d"
+  outputDate: "Year:1998 Month:10 Day:01"
+testID1000770-09:
+  inputDate: "20220413103726"
+  inputFormat: "%m month and %d day of Year %Y, %H hour %i minutes and %S seconds"
+  outputDate: "04 month and 13 day of Year 2022, 10 hour 37 minutes and 26 seconds"
+testID1000770-10:
+  inputDate: "2022-04-04 10:07:26"
+  inputFormat: "%m month and %d day of Year %Y, %H hour %i minutes and %S seconds"
+  outputDate: "04 month and 04 day of Year 2022, 10 hour 07 minutes and 26 seconds"
+testID1000770-11:
+  inputDate: "2000/11/11 10:37:06"
+  inputFormat: "%m month and %d day of Year %Y, %H hour %i minutes and %S seconds"
+  outputDate: "11 month and 11 day of Year 2000, 10 hour 37 minutes and 06 seconds"
+testID1000770-12:
+  inputDate: "1998.10.01 09:37:26"
+  inputFormat: "%m month and %d day of Year %Y, %H hour %i minutes and %S seconds"
+  outputDate: "10 month and 01 day of Year 1998, 09 hour 37 minutes and 26 seconds"
+testID1000770-13:
+  inputDate: "2022-04-04 10:07:26"
+  inputFormat: "%Hh"
+  outputDate: "10h"
+testID1000771-01:
+  inputDate: "2022-04-04 10:17:26"
+  inputFormat: "%Ss"
+  outputDate: "26s"
+testID1000771-02:
+  inputDate: "2022/04/04 08:37:01"
+  inputFormat: "%Ss"
+  outputDate: "01s"
+testID1000771-03:
+  inputDate: "2022.04.04 00:07:59"
+  inputFormat: "%Ss"
+  outputDate: "59s"
+testID1000771-04:
+  inputDate: "20220404100700"
+  inputFormat: "%Ss"
+  outputDate: "00s"
+testID1000887:
+  inputDate: "2022-04-14"
+  inputFormat: "%H:%i:%S"
+  outputDate: "00:00:00"

@@ -125,6 +125,18 @@ public class DateTimeFuncs {
         return current_DateString;
     }
 
+    // 获取函数Current_Date()返回值
+    public String current_DateWithBracketsFunc() throws SQLException {
+        Statement statement = connection.createStatement();
+        String current_DateWithBracketsSql = "select Current_Date()";
+        ResultSet current_DateWithBracketsRst = statement.executeQuery(current_DateWithBracketsSql);
+        String current_DateWithBracketString = null;
+        while (current_DateWithBracketsRst.next()) {
+            current_DateWithBracketString = current_DateWithBracketsRst.getString(1);
+        }
+        return current_DateWithBracketString;
+    }
+
     // 获取函数CurTime()返回值
     public String curTimeFunc() throws SQLException {
         Statement statement = connection.createStatement();
@@ -137,7 +149,7 @@ public class DateTimeFuncs {
         return curTimeString;
     }
 
-    // 获取函数CurTime()返回值
+    // 获取函数current_Time返回值
     public String current_TimeFunc() throws SQLException {
         Statement statement = connection.createStatement();
         String current_TimeSql = "select Current_Time";
@@ -147,6 +159,18 @@ public class DateTimeFuncs {
             current_TimeString = current_TimeRst.getString(1);
         }
         return current_TimeString;
+    }
+
+    // 获取函数current_Time()返回值
+    public String current_TimeWithBracketsFunc() throws SQLException {
+        Statement statement = connection.createStatement();
+        String current_TimeWithBracketsSql = "select Current_Time()";
+        ResultSet current_TimeWithBracketsRst = statement.executeQuery(current_TimeWithBracketsSql);
+        String current_TimeWithBracketsString = null;
+        while (current_TimeWithBracketsRst.next()) {
+            current_TimeWithBracketsString = current_TimeWithBracketsRst.getString(1);
+        }
+        return current_TimeWithBracketsString;
     }
 
     // 获取函数Current_Timestamp返回值
@@ -161,16 +185,40 @@ public class DateTimeFuncs {
         return current_TimeStampString;
     }
 
-    // 获取函数From_UnixTime返回值
-    public String from_UnixTimeFunc() throws SQLException {
+    // 获取函数Current_Timestamp()返回值
+    public String current_TimeStampWithBracketsFunc() throws SQLException {
         Statement statement = connection.createStatement();
-        String from_UnixTimeSql = "select from_unixtime(1650435866)";
+        String current_TimeStampWithBracketsSql = "select Current_TimeStamp()";
+        ResultSet current_TimeStampWithBracketsRst = statement.executeQuery(current_TimeStampWithBracketsSql);
+        String current_TimeStampWithBracketsString = null;
+        while (current_TimeStampWithBracketsRst.next()) {
+            current_TimeStampWithBracketsString = current_TimeStampWithBracketsRst.getString(1);
+        }
+        return current_TimeStampWithBracketsString;
+    }
+
+    // 获取函数From_UnixTime参数为timestamp返回值
+    public String from_UnixTimeWithTimestampFunc(String inputTimestamp) throws SQLException {
+        Statement statement = connection.createStatement();
+        String from_UnixTimeSql = "select from_unixtime(" + inputTimestamp + ")";
         ResultSet from_UnixTimeRst = statement.executeQuery(from_UnixTimeSql);
         String from_UnixTimeString = null;
         while (from_UnixTimeRst.next()) {
             from_UnixTimeString = from_UnixTimeRst.getString(1);
         }
         return from_UnixTimeString;
+    }
+
+    // 获取函数From_UnixTime参数为数值字符串返回值
+    public String from_UnixTimeWithStringFunc() throws SQLException {
+        Statement statement = connection.createStatement();
+        String from_UnixTimeWithStringSql = "select from_unixtime('1649770110')";
+        ResultSet from_UnixTimeWithStringRst = statement.executeQuery(from_UnixTimeWithStringSql);
+        String from_UnixTimeWithStringStr = null;
+        while (from_UnixTimeWithStringRst.next()) {
+            from_UnixTimeWithStringStr = from_UnixTimeWithStringRst.getString(1);
+        }
+        return from_UnixTimeWithStringStr;
     }
 
     // 获取函数Unix_TimeStamp返回值
@@ -185,28 +233,64 @@ public class DateTimeFuncs {
         return unix_TimeStampStr;
     }
 
-    // 获取函数Date_Format返回值
-    public String date_FormatFunc(String inputDate, String inputFormat) throws SQLException {
+    // 获取函数Unix_TimeStamp参数为空时的返回值
+    public String unix_TimeStampNoArgFunc() throws SQLException {
         Statement statement = connection.createStatement();
-        String date_formatSql = "select date_format('" + inputDate + "','" + inputFormat + "')";
-        ResultSet date_formatRst = statement.executeQuery(date_formatSql);
-        String date_formatStr  = null;
-        while (date_formatRst.next()) {
-            date_formatStr = date_formatRst.getString(1);
+        String unix_TimeStampNoAgrSql = "select unix_TimeStamp()";
+        ResultSet unixTimeStampNoArgRst = statement.executeQuery(unix_TimeStampNoAgrSql);
+        String unix_TimeStampNoArgStr  = null;
+        while (unixTimeStampNoArgRst.next()) {
+            unix_TimeStampNoArgStr = unixTimeStampNoArgRst.getString(1);
         }
-        return date_formatStr;
+        return unix_TimeStampNoArgStr;
     }
 
-    // 获取函数DateDiff返回值
-    public String dateDiffFunc(String Date1, String Date2) throws SQLException {
+    // 获取函数Date_Format参数为字符串返回值
+    public String date_FormatStrArgFunc(String inputDate, String inputFormat) throws SQLException {
         Statement statement = connection.createStatement();
-        String dateDiffSql = "select datediff('" + Date1 + "','" + Date2 + "')";
-        ResultSet dateDiffRst = statement.executeQuery(dateDiffSql);
-        String dateDiffStr  = null;
-        while (dateDiffRst.next()) {
-            dateDiffStr = dateDiffRst.getString(1);
+        String date_formatSargSql = "select date_format('" + inputDate + "','" + inputFormat + "')";
+        ResultSet date_formatSargRst = statement.executeQuery(date_formatSargSql);
+        String date_formatSargStr  = null;
+        while (date_formatSargRst.next()) {
+            date_formatSargStr = date_formatSargRst.getString(1);
         }
-        return dateDiffStr;
+        return date_formatSargStr;
+    }
+
+    // 获取函数Date_Format参数为数字返回值
+    public String date_FormatNumArgFunc(String inputDate, String inputFormat) throws SQLException {
+        Statement statement = connection.createStatement();
+        String date_formatNargSql = "select date_format(" + inputDate + ",'" + inputFormat + "')";
+        ResultSet date_formatNargRst = statement.executeQuery(date_formatNargSql);
+        String date_formatNargStr  = null;
+        while (date_formatNargRst.next()) {
+            date_formatNargStr = date_formatNargRst.getString(1);
+        }
+        return date_formatNargStr;
+    }
+
+    // 获取函数DateDiff参数为字符串返回值
+    public String dateDiffStrArgFunc(String Date1, String Date2) throws SQLException {
+        Statement statement = connection.createStatement();
+        String dateDiffSargSql = "select datediff('" + Date1 + "','" + Date2 + "') as diffDate";
+        ResultSet dateDiffSargRst = statement.executeQuery(dateDiffSargSql);
+        String dateDiffSargStr  = null;
+        while (dateDiffSargRst.next()) {
+            dateDiffSargStr = dateDiffSargRst.getString(1);
+        }
+        return dateDiffSargStr;
+    }
+
+    // 获取函数DateDiff参数为数字返回值
+    public String dateDiffNumArgFunc(String Date1, String Date2) throws SQLException {
+        Statement statement = connection.createStatement();
+        String dateDiffNargSql = "select datediff(" + Date1 + "," + Date2 + ") as diffDate";
+        ResultSet dateDiffNargRst = statement.executeQuery(dateDiffNargSql);
+        String dateDiffNargStr  = null;
+        while (dateDiffNargRst.next()) {
+            dateDiffNargStr = dateDiffNargRst.getString(1);
+        }
+        return dateDiffNargStr;
     }
 
 }

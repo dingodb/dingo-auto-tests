@@ -1,6 +1,39 @@
-test1:
-  inputStr: "2022-04-20 14:24:26"
-  outputStr: "1650435866"
-test2:
-  inputStr: "2022-04-20"
-  outputStr: "1650384000"
+testID1000730:
+  inputDate: "2022-04-12"
+  outputTimestamp: "1649692800"
+testID1000731:
+  inputDate: "2022-4-04"
+  outputTimestamp: "1649001600"
+testID1000732:
+  inputDate: "2022-4-4"
+  outputTimestamp: "1649001600"
+testID1000733:
+  inputDate: "2022-04-4"
+  outputTimestamp: "1649001600"
+testID1000735:
+  inputDate: "2022.04.12"
+  outputTimestamp: "1649692800"
+testID1000736:
+  inputDate: "2022-04-12 17:14:43"
+  outputTimestamp: "1649754883"
+testID1000744:
+  inputDate: "20220412"
+  outputTimestamp: "1649692800"
+testID1000745:
+  inputDate: "20220412081359"
+  outputTimestamp: "1649722439"
+testID1000746:
+  inputDate: "2038-01-19 11:14:07"
+  outputTimestamp: "2147483647"
+testID1000747:
+  inputDate: "2038-01-19 11:14:09"
+  outputTimestamp: "2147483649"
+testID1000836:
+  inputDate: "2022/04/12 17:14:43"
+  outputTimestamp: "1649754883"
+testID1000837:
+  inputDate: "2022/04/12"
+  outputTimestamp: "1649692800"
+testID1000838:
+  inputDate: "2022.04.12 17:14:43"
+  outputTimestamp: "1649754883"

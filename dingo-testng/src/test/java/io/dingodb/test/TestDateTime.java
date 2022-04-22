@@ -79,13 +79,13 @@ public class TestDateTime extends YamlDataHelper{
     @Test(priority = 2, enabled = true, description = "验证函数Now()返回结果正常")
     public void test03NowFunc() throws SQLException {
         String currentUTCTimestamp = UTCTimestampFormat.getUTCTimestampStr();
-        System.out.println(currentUTCTimestamp);
+//        System.out.println(currentUTCTimestamp);
         String expectedUTCTimestampStr = UTCTimestampFormat.formatUTCTimestamp(currentUTCTimestamp);
-        System.out.println(expectedUTCTimestampStr);
+        System.out.println("Expected: " + expectedUTCTimestampStr);
         String nowTimestampStr = dateTimeObj.nowFunc();
-        System.out.println(nowTimestampStr);
+        System.out.println("Return: " + nowTimestampStr);
         String actualNowTimestampStr = nowTimestampStr.substring(0,16);
-        System.out.println(actualNowTimestampStr);
+        System.out.println("Actual:" + actualNowTimestampStr);
         Assert.assertEquals(nowTimestampStr.length(), 19);
         Assert.assertEquals(actualNowTimestampStr, expectedUTCTimestampStr);
     }
@@ -93,104 +93,181 @@ public class TestDateTime extends YamlDataHelper{
     @Test(priority = 3, enabled = true, description = "验证函数CurDate()返回结果正常")
     public void test04CurDateFunc() throws SQLException {
         String currentUTCDate = UTCDateFormat.getUTCDateStr();
-        System.out.println(currentUTCDate);
+//        System.out.println(currentUTCDate);
         String expectedUTCDate = UTCDateFormat.formatUTCDate(currentUTCDate);
-        System.out.println(expectedUTCDate);
+        System.out.println("Expected: " + expectedUTCDate);
         String actualCurDateStr = dateTimeObj.curDateFunc();
-        System.out.println(actualCurDateStr);
+        System.out.println("Actual:" + actualCurDateStr);
         Assert.assertEquals(actualCurDateStr, expectedUTCDate);
     }
 
     @Test(priority = 4, enabled = true, description = "验证函数Current_Date返回结果正常")
     public void test05Current_DateFunc() throws SQLException {
         String currentUTCDate = UTCDateFormat.getUTCDateStr();
-        System.out.println(currentUTCDate);
+//        System.out.println(currentUTCDate);
         String expectedUTCDate = UTCDateFormat.formatUTCDate(currentUTCDate);
-        System.out.println(expectedUTCDate);
+        System.out.println("Expected: " + expectedUTCDate);
         String actualCurrent_DateStr = dateTimeObj.current_DateFunc();
-        System.out.println(actualCurrent_DateStr);
+        System.out.println("Actual:" + actualCurrent_DateStr);
         Assert.assertEquals(actualCurrent_DateStr, expectedUTCDate);
     }
 
-    @Test(priority = 5, enabled = false, description = "验证函数CurTime()返回结果正常")
-    public void test06CurTimeFunc() throws SQLException {
+    @Test(priority = 5, enabled = true, description = "验证函数Current_Date()返回结果正常")
+    public void test06Current_DateWithBracketsFunc() throws SQLException {
+        String currentUTCDate = UTCDateFormat.getUTCDateStr();
+//        System.out.println(currentUTCDate);
+        String expectedUTCDate = UTCDateFormat.formatUTCDate(currentUTCDate);
+        System.out.println("Expected: " + expectedUTCDate);
+        String actualCurrent_DateWithBracketsStr = dateTimeObj.current_DateWithBracketsFunc();
+        System.out.println("Actual:" + actualCurrent_DateWithBracketsStr);
+        Assert.assertEquals(actualCurrent_DateWithBracketsStr, expectedUTCDate);
+    }
+
+    @Test(priority = 6, enabled = false, description = "验证函数CurTime()返回结果正常")
+    public void test07CurTimeFunc() throws SQLException {
         String currentUTCTime = UTCTimeFormat.getUTCTimeStr();
-        System.out.println(currentUTCTime);
+//        System.out.println(currentUTCTime);
         String expectedUTCTimeStr = UTCTimeFormat.formatUTCTime(currentUTCTime);
-        System.out.println(expectedUTCTimeStr);
+        System.out.println("Expected: " + expectedUTCTimeStr);
         String getCurTimeStr = dateTimeObj.curTimeFunc();
-        System.out.println(getCurTimeStr);
+        System.out.println("Actual:" + getCurTimeStr);
         String actualCurTimeStr = getCurTimeStr.substring(0, 5);
         Assert.assertEquals(getCurTimeStr.length(), 8);
         Assert.assertEquals(actualCurTimeStr, expectedUTCTimeStr);
     }
 
-    @Test(priority = 6, enabled = false, description = "验证函数Current_Time返回结果正常")
-    public void test07Current_TimeFunc() throws SQLException {
+    @Test(priority = 7, enabled = false, description = "验证函数Current_Time返回结果正常")
+    public void test08Current_TimeFunc() throws SQLException {
         String currentUTCTime = UTCTimeFormat.getUTCTimeStr();
-        System.out.println(currentUTCTime);
+//        System.out.println(currentUTCTime);
         String expectedUTCTimeStr = UTCTimeFormat.formatUTCTime(currentUTCTime);
-        System.out.println(expectedUTCTimeStr);
+        System.out.println("Expected: " + expectedUTCTimeStr);
         String getCurrent_TimeStr = dateTimeObj.current_TimeFunc();
-        System.out.println(getCurrent_TimeStr);
+        System.out.println("Return: " + getCurrent_TimeStr);
         String actualCurrent_TimeStr = getCurrent_TimeStr.substring(0, 5);
-        System.out.println(actualCurrent_TimeStr);
+        System.out.println("Actual:" + actualCurrent_TimeStr);
         Assert.assertEquals(getCurrent_TimeStr.length(),8);
         Assert.assertEquals(actualCurrent_TimeStr, expectedUTCTimeStr);
     }
 
-    @Test(priority = 7, enabled = false, description = "验证函数Current_TimeStamp返回结果正常")
-    public void test08Current_TimeStampFunc() throws SQLException {
+    @Test(priority = 8, enabled = false, description = "验证函数Current_Time()返回结果正常")
+    public void test09Current_TimeWithBracketsFunc() throws SQLException {
+        String currentUTCTime = UTCTimeFormat.getUTCTimeStr();
+//        System.out.println(currentUTCTime);
+        String expectedUTCTimeStr = UTCTimeFormat.formatUTCTime(currentUTCTime);
+        System.out.println("Expected: " + expectedUTCTimeStr);
+        String getCurrent_TimeWithBracketsStr = dateTimeObj.current_TimeWithBracketsFunc();
+        System.out.println("Return: " + getCurrent_TimeWithBracketsStr);
+        String actualCurrent_TimeWithBracketsStr = getCurrent_TimeWithBracketsStr.substring(0, 5);
+        System.out.println("Actual:" + actualCurrent_TimeWithBracketsStr);
+        Assert.assertEquals(getCurrent_TimeWithBracketsStr.length(),8);
+        Assert.assertEquals(actualCurrent_TimeWithBracketsStr, expectedUTCTimeStr);
+    }
+
+    @Test(priority = 9, enabled = false, description = "验证函数Current_TimeStamp返回结果正常")
+    public void test10Current_TimeStampFunc() throws SQLException {
         String currentUTCTimeStamp = UTCTimestampFormat.getUTCTimestampStr();
-        System.out.println(currentUTCTimeStamp);
+//        System.out.println(currentUTCTimeStamp);
         String expectedUTCTimeStampStr = UTCTimestampFormat.formatUTCTimestamp(currentUTCTimeStamp);
-        System.out.println(expectedUTCTimeStampStr);
+        System.out.println("Expected: " + expectedUTCTimeStampStr);
         String getCurrent_TimeStampStr = dateTimeObj.current_TimeStampFunc();
-        System.out.println(getCurrent_TimeStampStr);
+        System.out.println("Return: " + getCurrent_TimeStampStr);
         String actualCurrent_TimeStampStr = getCurrent_TimeStampStr.substring(0, 16);
-        System.out.println(actualCurrent_TimeStampStr);
+        System.out.println("Actual:" + actualCurrent_TimeStampStr);
         Assert.assertEquals(getCurrent_TimeStampStr.length(),19);
         Assert.assertEquals(actualCurrent_TimeStampStr, expectedUTCTimeStampStr);
     }
 
-    @Test(priority = 8, enabled = true, description = "验证函数from_UnixTime的返回结果正常")
-    public void test09From_UnixTimeFunc() throws SQLException {
-        String expectedFrom_UnitTimeStr = "2022-04-20 14:24:26";
-        System.out.println(expectedFrom_UnitTimeStr);
-        String actualFrom_UnixTimeReturn = dateTimeObj.from_UnixTimeFunc();
-        System.out.println(actualFrom_UnixTimeReturn);
+    @Test(priority = 10, enabled = false, description = "验证函数Current_TimeStamp()返回结果正常")
+    public void test11Current_TimeStampWithBracketsFunc() throws SQLException {
+        String currentUTCTimeStamp = UTCTimestampFormat.getUTCTimestampStr();
+//        System.out.println(currentUTCTimeStamp);
+        String expectedUTCTimeStampStr = UTCTimestampFormat.formatUTCTimestamp(currentUTCTimeStamp);
+        System.out.println("Expected: " + expectedUTCTimeStampStr);
+        String getCurrent_TimeStampWithBracketsStr = dateTimeObj.current_TimeStampWithBracketsFunc();
+        System.out.println("Return: " + getCurrent_TimeStampWithBracketsStr);
+        String actualCurrent_TimeStampWithBracketsStr = getCurrent_TimeStampWithBracketsStr.substring(0, 16);
+        System.out.println("Actual:" + actualCurrent_TimeStampWithBracketsStr);
+        Assert.assertEquals(getCurrent_TimeStampWithBracketsStr.length(),19);
+        Assert.assertEquals(actualCurrent_TimeStampWithBracketsStr, expectedUTCTimeStampStr);
+    }
+
+    @Test(priority = 11, enabled = true, dataProvider = "yamlDataMethod", description = "验证函数from_UnixTime的返回结果正常")
+    public void test12From_UnixTimeFunc_TimestampInput(Map<String, String> param) throws SQLException {
+        String expectedFrom_UnitTimeStr = param.get("outputDate");
+        System.out.println("Expected: " + expectedFrom_UnitTimeStr);
+        String actualFrom_UnixTimeReturn = dateTimeObj.from_UnixTimeWithTimestampFunc(param.get("inputTimestamp"));
+        System.out.println("Actual: " + actualFrom_UnixTimeReturn);
         Assert.assertEquals(actualFrom_UnixTimeReturn, expectedFrom_UnitTimeStr);
     }
 
-    @Test(priority = 9, enabled = true, dataProvider = "yamlDataMethod", description = "验证函数unix_TimeStamp的返回结果正常")
-    public void test10Unix_TimeStampFunc(Map<String, String> param) throws SQLException {
+    @Test(priority = 11, enabled = true, description = "验证函数from_UnixTime传入字符串数值的返回结果正常")
+    public void test12From_UnixTimeFunc_StringInput() throws SQLException {
+        String expectedFrom_UnitTimeWithStringParamStr = "2022-04-12 21:28:30";
+        System.out.println("Expected: " + expectedFrom_UnitTimeWithStringParamStr);
+        String actualFrom_UnixTimeWithStringParamReturn = dateTimeObj.from_UnixTimeWithStringFunc();
+        System.out.println("Actual: " + actualFrom_UnixTimeWithStringParamReturn);
+        Assert.assertEquals(actualFrom_UnixTimeWithStringParamReturn, expectedFrom_UnitTimeWithStringParamStr);
+    }
+
+    @Test(priority = 12, enabled = true, dataProvider = "yamlDataMethod", description = "验证函数unix_TimeStamp有参时的返回结果正常")
+    public void test13Unix_TimeStampFunc(Map<String, String> param) throws SQLException {
 //        System.out.println(param.get("inputStr"));
 //        System.out.println(param.get("outputStr"));
-        String actualUnix_TimeStamp = dateTimeObj.unix_TimeStampFunc(param.get("inputStr"));
-        System.out.println(actualUnix_TimeStamp);
-        String expectedUnix_TimeStamp = param.get("outputStr");
-        System.out.println(expectedUnix_TimeStamp);
+        String expectedUnix_TimeStamp = param.get("outputTimestamp");
+        System.out.println("Expected: " + expectedUnix_TimeStamp);
+        String actualUnix_TimeStamp = dateTimeObj.unix_TimeStampFunc(param.get("inputDate"));
+        System.out.println("Actual: " + actualUnix_TimeStamp);
         Assert.assertEquals(actualUnix_TimeStamp, expectedUnix_TimeStamp);
     }
 
-    @Test(priority = 10, enabled = true, dataProvider = "yamlDataMethod", description = "验证函数date_format的返回结果正常")
-    public void test11Date_FormatFunc(Map<String, String> param) throws SQLException {
-//        System.out.println(param.get("inputDate"));
-//        System.out.println(param.get("outputDate"));
-        String actualDate_FormatStr = dateTimeObj.date_FormatFunc(param.get("inputDate"), param.get("inputFormat"));
-        System.out.println(actualDate_FormatStr);
-        String expectedDate_FormatStr = param.get("outputDate");
-        System.out.println(expectedDate_FormatStr);
-        Assert.assertEquals(actualDate_FormatStr, expectedDate_FormatStr);
+    @Test(priority = 12, enabled = false, description = "验证函数unix_TimeStamp空参时的返回结果正常")
+    public void test13Unix_TimeStampNoAgrFunc() throws SQLException {
+        String currentTimeStamp = String.valueOf(System.currentTimeMillis()/1000);
+        System.out.println("Current Timestamp: " + currentTimeStamp);
+        String returnUnix_TimeStampWithoutArg = dateTimeObj.unix_TimeStampNoArgFunc();
+        System.out.println("Return Timestamp: " + returnUnix_TimeStampWithoutArg);
+        Assert.assertEquals(returnUnix_TimeStampWithoutArg.length(), 10);
+
+        int timeStampDiff = Integer.parseInt(returnUnix_TimeStampWithoutArg) - Integer.parseInt(currentTimeStamp);
+        Assert.assertTrue(timeStampDiff < 60);
     }
 
-    @Test(priority = 11, enabled = true, dataProvider = "yamlDataMethod", description = "验证函数datediff的返回结果正常")
-    public void test12DateDiffFunc(Map<String, String> param) throws SQLException {
-        String actualDateDiff = dateTimeObj.dateDiffFunc(param.get("inputDate1"), param.get("inputDate2"));
-        System.out.println(actualDateDiff);
-        String expectedDateDiff = param.get("outputDiff");
-        System.out.println(expectedDateDiff);
-        Assert.assertEquals(actualDateDiff, expectedDateDiff);
+    @Test(priority = 13, enabled = true, dataProvider = "yamlDataMethod", description = "验证函数date_format字符串参数的返回结果正常")
+    public void test14Date_FormatStrArgFunc(Map<String, String> param) throws SQLException {
+        String expectedDate_FormatSargStr = param.get("outputDate");
+        System.out.println("Expected: " + expectedDate_FormatSargStr);
+        String actualDate_FormatSargStr = dateTimeObj.date_FormatStrArgFunc(param.get("inputDate"), param.get("inputFormat"));
+        System.out.println("Actual: " + actualDate_FormatSargStr);
+
+        Assert.assertEquals(actualDate_FormatSargStr, expectedDate_FormatSargStr);
+    }
+
+    @Test(priority = 13, enabled = true, dataProvider = "yamlDataMethod", description = "验证函数date_format数字参数的返回结果正常")
+    public void test14Date_FormatNumArgFunc(Map<String, String> param) throws SQLException {
+        String expectedDate_FormatNargStr = param.get("outputDate");
+        System.out.println("Expected: " + expectedDate_FormatNargStr);
+        String actualDate_FormatNargStr = dateTimeObj.date_FormatNumArgFunc(param.get("inputDate"), param.get("inputFormat"));
+        System.out.println("Actual: " + actualDate_FormatNargStr);
+        Assert.assertEquals(actualDate_FormatNargStr, expectedDate_FormatNargStr);
+    }
+
+    @Test(priority = 14, enabled = true, dataProvider = "yamlDataMethod", description = "验证函数datediff字符串参数的返回结果正常")
+    public void test15DateDiffStrArgFunc(Map<String, String> param) throws SQLException {
+        String expectedDateStrArgDiff = param.get("outputDiff");
+        System.out.println("Expected: " + expectedDateStrArgDiff);
+        String actualDateStrArgDiff = dateTimeObj.dateDiffStrArgFunc(param.get("inputDate1"), param.get("inputDate2"));
+        System.out.println("Actual: " + actualDateStrArgDiff);
+        Assert.assertEquals(actualDateStrArgDiff, expectedDateStrArgDiff);
+    }
+
+    @Test(priority = 14, enabled = true, dataProvider = "yamlDataMethod", description = "验证函数datediff数字参数的返回结果正常")
+    public void test15DateDiffNumArgFunc(Map<String, String> param) throws SQLException {
+        String expectedDateNumArgDiff = param.get("outputDiff");
+        System.out.println("Expected: " + expectedDateNumArgDiff);
+        String actualDateNumArgDiff = dateTimeObj.dateDiffNumArgFunc(param.get("inputDate1"), param.get("inputDate2"));
+        System.out.println("Actual: " + actualDateNumArgDiff);
+        Assert.assertEquals(actualDateNumArgDiff, expectedDateNumArgDiff);
     }
 
 

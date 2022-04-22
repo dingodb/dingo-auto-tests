@@ -1,0 +1,16 @@
+testID1000821-01:
+  inputDate1: "20220413"
+  inputDate2: "20220531"
+  outputDiff: "-48"
+testID1000821-02:
+  inputDate1: "20211213"
+  inputDate2: "20200303"
+  outputDiff: "650"
+testID1000823-01:
+  inputDate1: "20220413235959"
+  inputDate2: "20220531120000"
+  outputDiff: "-48"
+testID1000823-02:
+  inputDate1: "20211213180901"
+  inputDate2: "20200303195950"
+  outputDiff: "650"

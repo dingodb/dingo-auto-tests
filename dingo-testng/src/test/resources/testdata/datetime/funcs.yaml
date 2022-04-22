@@ -1,0 +1,7 @@
+funcs:
+  now: "Now()"
+  curDate: "CurDate()"
+  current_Date: "Current_Date"
+  curTime: "CurTime()"
+  current_time: "Current_Time"
+  current_timestamp: "Current_Timestamp"
