@@ -100,6 +100,14 @@ public class YamlDataHelper{
                 yamlList = getYamlList(iniReader.getValue("DateTimeYaml", "datediff_num"));
                 break;
             }
+            case "test16VariousFormatDateInsert": {
+                yamlList = getYamlList(iniReader.getValue("DateTimeYaml", "insert_date"));
+                break;
+            }
+            case "test17FuncConcatStr": {
+                yamlList = getYamlList(iniReader.getValue("DateTimeYaml", "funcConcatStr"));
+                break;
+            }
         }
         Object[][] files = new Object[yamlList.size()][];
         for (int i = 0; i < yamlList.size(); i++) {

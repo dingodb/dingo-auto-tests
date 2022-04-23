@@ -45,10 +45,7 @@ public class StrFuncs {
     //生成测试表格名称并返回
     public static String getStrTableName() {
         final String funcTablePrefix = "strFuncTest";
-        Date date = new Date();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
-        String dateNowStr = simpleDateFormat.format(date);
-        String tableName = funcTablePrefix + dateNowStr;
+        String tableName = funcTablePrefix + CommonArgs.getCurDateStr();
         return tableName;
     }
 

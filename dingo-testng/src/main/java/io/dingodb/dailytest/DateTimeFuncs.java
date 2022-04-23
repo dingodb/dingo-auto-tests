@@ -42,14 +42,32 @@ public class DateTimeFuncs {
         }
     }
 
-    //生成测试表格名称并返回
+    //生成datetime的测试表格名称并返回
     public static String getDateTimeTableName() {
-        final String tablePrefix = "dateTimeFieldTest";
-        Date date = new Date();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
-        String dateNowStr = simpleDateFormat.format(date);
-        String tableName = tablePrefix + dateNowStr;
-        return tableName;
+        final String dateTimeTablePrefix = "dateTimeFieldTest";
+        String dateTimeTableName = dateTimeTablePrefix + CommonArgs.getCurDateStr();
+        return dateTimeTableName;
+    }
+
+    //生成date的测试表格名称并返回
+    public static String getDateTableName() {
+        final String datetablePrefix = "dateFieldTest";
+        String dateTableName = datetablePrefix + CommonArgs.getCurDateStr();
+        return dateTableName;
+    }
+
+    //生成time的测试表格名称并返回
+    public static String getTimeTableName() {
+        final String timeTablePrefix = "timeFieldTest";
+        String timeTableName = timeTablePrefix + CommonArgs.getCurDateStr();
+        return timeTableName;
+    }
+
+    //生成timestamp的测试表格名称并返回
+    public static String getTimestampTableName() {
+        final String timestampTablePrefix = "timestampFieldTest";
+        String timestampTableName = timestampTablePrefix + CommonArgs.getCurDateStr();
+        return timestampTableName;
     }
 
     //创建含有date,time和timestamp字段类型的表格
@@ -71,8 +89,8 @@ public class DateTimeFuncs {
         statement.close();
     }
 
-    // 插入数据
-    public int insertValues() throws ClassNotFoundException, SQLException {
+    // 插入DateTime数据
+    public int insertDateTimeValues() throws ClassNotFoundException, SQLException {
         String dateTimeTableName = getDateTimeTableName();
         Statement statement = connection.createStatement();
 
@@ -88,6 +106,127 @@ public class DateTimeFuncs {
         statement.close();
         return insertRows;
     }
+
+    //创建含有date字段类型的表格
+    public void createDateTable() throws Exception {
+        String dateTableName = getDateTableName();
+        Statement statement = connection.createStatement();
+        String sql = "create table " + dateTableName + "("
+                + "id int,"
+                + "name varchar(32) not null,"
+                + "age int,"
+                + "amount double,"
+                + "address varchar(255),"
+                + "birthday date,"
+                + "primary key(id)"
+                + ")";
+        statement.execute(sql);
+        statement.close();
+    }
+
+    // 插入date数据
+    public int insertDateValues() throws ClassNotFoundException, SQLException {
+        String dateTableName = getDateTableName();
+        Statement statement = connection.createStatement();
+
+        String batDateInsertSql = "insert into " + dateTableName +
+                " values (1,'zhangsan',18,23.50,'beijing','1998-4-6'),\n" +
+                "(2,'lisi',25,895,' beijing haidian ', '1988-2-05'),\n" +
+                "(3,'l3',55,123.123,'wuhan NO.1 Street', '2022-03-4'),\n" +
+                "(4,'HAHA',57,9.0762556,'CHANGping', '2020-11-11'),\n" +
+                "(5,'awJDs',1,1453.9999,'pingYang1', '2010-10-1'),\n" +
+                "(6,'123',544,0,'543', '1987-7-16'),\n" +
+                "(7,'yamaha',76,2.30,'beijing changyang', '1949-01-01')";
+        int insertRows = statement.executeUpdate(batDateInsertSql);
+        statement.close();
+        return insertRows;
+    }
+
+    // 插入其他格式date类型数据并返回查询出的日期
+    public String insertVariousFormatDateValues(String inputID, String inputDate) throws ClassNotFoundException, SQLException {
+        String dateTableName = getDateTableName();
+        Statement statement = connection.createStatement();
+
+        String batDateInsertSql = "insert into " + dateTableName +
+                " values (" + inputID + ",'zhangsan',18,23.50,'beijing','" + inputDate +  "')";
+        int insertRows = statement.executeUpdate(batDateInsertSql);
+        String selectInsertDateSql = "select birthday from " + dateTableName + " where id = " + inputID;
+        ResultSet findDateRst = statement.executeQuery(selectInsertDateSql);
+        String findDateStr = null;
+        while (findDateRst.next()) {
+            findDateStr = findDateRst.getString("birthday");
+        }
+        statement.close();
+        return findDateStr;
+    }
+
+    //创建含有time字段类型的表格
+    public void createTimeTable() throws Exception {
+        String timeTableName = getTimeTableName();
+        Statement statement = connection.createStatement();
+        String sql = "create table " + timeTableName + "("
+                + "id int,"
+                + "name varchar(32) not null,"
+                + "age int,"
+                + "amount double,"
+                + "address varchar(255),"
+                + "create_time time,"
+                + "primary key(id)"
+                + ")";
+        statement.execute(sql);
+        statement.close();
+    }
+
+    // 插入time数据
+    public int insertTimeValues() throws ClassNotFoundException, SQLException {
+        String timeTableName = getTimeTableName();
+        Statement statement = connection.createStatement();
+
+        String batTimeInsertSql = "insert into " + timeTableName +
+                " values (1, 'zhang san', 18, 1342.09,'beijing', '08:10:10'),\n" +
+                "(2, 'Hello', 7, 10.50,' beijing haidian ', '06:15:8'),\n" +
+                "(3,'l3',55,123.123,'wuhan NO.1 Street', '07:3:15'),\n" +
+                "(4,'HAHA',57,9.0762556,'CHANGping', '5:59:59'),\n" +
+                "(5,'awJDs',1,1453.9999,'pingYang1', '19:0:0'),\n" +
+                "(6,'123',544,0,'543', '23:59:59'),\n" +
+                "(7,'yamaha',76,2.30,'beijing changyang', '1:2:3'),\n" +
+                "(8,'bilibili', 93, 2345.2, 'Shahe Gaojiao1', '0:30:8'),\n" +
+                "(9,'guji', 3, 4, ' Heze No.20 ', '2:2:00'),\n" +
+                "(10,'XJ', 9, 0.1, '#87-2-31', '00:00:00')";
+        int insertRows = statement.executeUpdate(batTimeInsertSql);
+        statement.close();
+        return insertRows;
+    }
+
+    //创建含有timestamp字段类型的表格
+    public void createTimestampTable() throws Exception {
+        String timestampTableName = getTimestampTableName();
+        Statement statement = connection.createStatement();
+        String sql = "create table " + timestampTableName + "("
+                + "id int,"
+                + "name varchar(32) not null,"
+                + "age int,"
+                + "amount double,"
+                + "address varchar(255),"
+                + "upload_time timestamp,"
+                + "primary key(id)"
+                + ")";
+        statement.execute(sql);
+        statement.close();
+    }
+
+    // 插入timestamp数据
+    public int insertTimeStampValues() throws ClassNotFoundException, SQLException {
+        String timestampTableName = getTimestampTableName();
+        Statement statement = connection.createStatement();
+
+        String batTimeStampInsertSql = "insert into " + timestampTableName +
+                " values (1, 'zhang san', 18, 1342.09,'BeiJing', '2022-4-8 18:05:07')";
+        int insertRows = statement.executeUpdate(batTimeStampInsertSql);
+        statement.close();
+        return insertRows;
+    }
+
 
     // 获取函数Now()返回值
     public String nowFunc() throws SQLException {
@@ -291,6 +430,18 @@ public class DateTimeFuncs {
             dateDiffNargStr = dateDiffNargRst.getString(1);
         }
         return dateDiffNargStr;
+    }
+
+    // 获取字符串上下文返回格式
+    public String funcConcatStr(String inputFunc) throws SQLException {
+        Statement statement = connection.createStatement();
+        String funcConcatSql = "select 'test_'||" + inputFunc;
+        ResultSet funcConcatRst = statement.executeQuery(funcConcatSql);
+        String funcConcatStr  = null;
+        while (funcConcatRst.next()) {
+            funcConcatStr = funcConcatRst.getString(1);
+        }
+        return funcConcatStr;
     }
 
 }

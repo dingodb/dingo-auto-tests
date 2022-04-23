@@ -44,10 +44,7 @@ public class SQLFuncs {
 
     public static String getFuncTableName() {
         final String funcTablePrefix = "funcTest";
-        Date date = new Date();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
-        String dateNowStr = simpleDateFormat.format(date);
-        String funcTableName = funcTablePrefix + dateNowStr;
+        String funcTableName = funcTablePrefix + CommonArgs.getCurDateStr();
         return funcTableName;
     }
 

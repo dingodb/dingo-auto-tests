@@ -16,6 +16,9 @@
 
 package io.dingodb.dailytest;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class CommonArgs {
 
     public static String getDefaultDingoClusterIP() {
@@ -23,5 +26,11 @@ public class CommonArgs {
             return System.getenv("ConnectIP");
         }
         return  "172.20.3.26";
+    }
+    public static String getCurDateStr() {
+        Date date = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+        String dateNowStr = simpleDateFormat.format(date);
+        return dateNowStr;
     }
 }

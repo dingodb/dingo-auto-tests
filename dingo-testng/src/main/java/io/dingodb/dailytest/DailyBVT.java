@@ -42,10 +42,10 @@ public class DailyBVT {
     //获取表名方法，返回BVTTest + 当前日期的表名
     public String getTableName() {
         final String tablePrefix = "BVTTest";
-        Date date = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-        String dateNowStr = sdf.format(date);
-        String tableName = tablePrefix + dateNowStr;
+//        Date date = new Date();
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+//        String dateNowStr = sdf.format(date);
+        String tableName = tablePrefix + CommonArgs.getCurDateStr();
         return tableName;
     }
 

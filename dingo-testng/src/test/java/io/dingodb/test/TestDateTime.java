@@ -61,7 +61,7 @@ public class TestDateTime extends YamlDataHelper{
         Assert.assertNotNull(DateTimeFuncs.connection);
     }
 
-    @Test(priority = 0, description = "验证创建表成功后，获取表名成功")
+    @Test(priority = 0, description = "验证创建DateTime表成功后，获取表名成功")
     public void test01TableWithDateTimeFieldsCreate() throws Exception {
         dateTimeObj.createTable();
         String expectedTableName = dateTimeObj.getDateTimeTableName().toUpperCase();
@@ -69,11 +69,56 @@ public class TestDateTime extends YamlDataHelper{
         Assert.assertTrue(afterCreateTableList.contains(expectedTableName));
     }
 
-    @Test(priority = 1, enabled = true, dependsOnMethods = {"test01TableWithDateTimeFieldsCreate"}, description = "验证插入数据成功")
+    @Test(priority = 0, description = "验证创建date表成功后，获取表名成功")
+    public void test01TableWithDateFieldCreate() throws Exception {
+        dateTimeObj.createDateTable();
+        String expectedDateTableName = dateTimeObj.getDateTableName().toUpperCase();
+        List<String> afterCreateTableList = getTableList();
+        Assert.assertTrue(afterCreateTableList.contains(expectedDateTableName));
+    }
+
+    @Test(priority = 0, description = "验证创建time表成功后，获取表名成功")
+    public void test01TableWithTimeFieldCreate() throws Exception {
+        dateTimeObj.createTimeTable();
+        String expectedTimeTableName = dateTimeObj.getTimeTableName().toUpperCase();
+        List<String> afterCreateTableList = getTableList();
+        Assert.assertTrue(afterCreateTableList.contains(expectedTimeTableName));
+    }
+
+    @Test(priority = 0, description = "验证创建timestamp表成功后，获取表名成功")
+    public void test01TableWithTimestampFieldCreate() throws Exception {
+        dateTimeObj.createTimestampTable();
+        String expectedTimestampTableName = dateTimeObj.getTimestampTableName().toUpperCase();
+        List<String> afterCreateTableList = getTableList();
+        Assert.assertTrue(afterCreateTableList.contains(expectedTimestampTableName));
+    }
+
+    @Test(priority = 1, enabled = true, dependsOnMethods = {"test01TableWithDateTimeFieldsCreate"}, description = "验证插入DateTime各字段数据成功")
     public void test02DateTimeInsert() throws Exception {
         int expectedInsertCount = 7;
-        int actualInsertCount = dateTimeObj.insertValues();
+        int actualInsertCount = dateTimeObj.insertDateTimeValues();
         Assert.assertEquals(actualInsertCount, expectedInsertCount);
+    }
+
+    @Test(priority = 1, enabled = true, dependsOnMethods = {"test01TableWithDateFieldCreate"}, description = "验证插入Date字段数据成功")
+    public void test02DateInsert() throws Exception {
+        int expectedInsertDateCount = 7;
+        int actualInsertDateCount = dateTimeObj.insertDateValues();
+        Assert.assertEquals(actualInsertDateCount, expectedInsertDateCount);
+    }
+
+    @Test(priority = 1, enabled = true, dependsOnMethods = {"test01TableWithTimeFieldCreate"}, description = "验证插入Time字段数据成功")
+    public void test02TimeInsert() throws Exception {
+        int expectedInsertTimeCount = 10;
+        int actualInsertTimeCount = dateTimeObj.insertTimeValues();
+        Assert.assertEquals(actualInsertTimeCount, expectedInsertTimeCount);
+    }
+
+    @Test(priority = 1, enabled = true, dependsOnMethods = {"test01TableWithTimestampFieldCreate"}, description = "验证插入Timestamp字段数据成功")
+    public void test02TimestampInsert() throws Exception {
+        int expectedInsertTimestampCount = 1;
+        int actualInsertTimestampCount = dateTimeObj.insertTimeStampValues();
+        Assert.assertEquals(actualInsertTimestampCount, expectedInsertTimestampCount);
     }
 
     @Test(priority = 2, enabled = true, description = "验证函数Now()返回结果正常")
@@ -222,7 +267,7 @@ public class TestDateTime extends YamlDataHelper{
     }
 
     @Test(priority = 12, enabled = true, description = "验证函数unix_TimeStamp空参时的返回结果正常")
-    public void test13Unix_TimeStampNoAgrFunc() throws SQLException {
+    public void test13Unix_TimeStampNoArgFunc() throws SQLException {
         String currentTimeStamp = String.valueOf(System.currentTimeMillis()/1000);
         System.out.println("Current Timestamp: " + currentTimeStamp);
         String returnUnix_TimeStampWithoutArg = dateTimeObj.unix_TimeStampNoArgFunc();
@@ -270,13 +315,39 @@ public class TestDateTime extends YamlDataHelper{
         Assert.assertEquals(actualDateNumArgDiff, expectedDateNumArgDiff);
     }
 
+    @Test(priority = 15, enabled = true, dataProvider = "yamlDataMethod", description = "验证插入不同格式的日期成功")
+    public void test16VariousFormatDateInsert(Map<String, String> param) throws SQLException, ClassNotFoundException {
+        String expectedDateQuery = param.get("expectedDate");
+        System.out.println("Expected: " + expectedDateQuery);
+        String actualDateQuery = dateTimeObj.insertVariousFormatDateValues(param.get("insertID"), param.get("insertDate"));
+        System.out.println("Actual: " + actualDateQuery);
+        Assert.assertEquals(actualDateQuery, expectedDateQuery);
+    }
+
+    @Test(priority = 16, enabled = true, dataProvider = "yamlDataMethod", description = "验证函数和字符串上下文返回")
+    public void test17FuncConcatStr(Map<String, String> param) throws SQLException {
+        String actualFuncConcatStr = dateTimeObj.funcConcatStr(param.get("funcName"));
+        System.out.println("Actual: " + actualFuncConcatStr);
+        boolean matchResult = actualFuncConcatStr.matches(param.get("matchReg"));
+        Assert.assertTrue(matchResult);
+    }
+
 
     @AfterClass(alwaysRun = true, description = "测试完成后删除数据和表格并关闭连接")
     public void tearDownAll() throws SQLException {
-        String tableName = DateTimeFuncs.getDateTimeTableName();
+        String dateTimeTableName = DateTimeFuncs.getDateTimeTableName();
+        String dateTableName = DateTimeFuncs.getDateTableName();
+        String timeTableName = DateTimeFuncs.getTimeTableName();
+        String timestampTableName = DateTimeFuncs.getTimestampTableName();
         Statement tearDownStatement = DateTimeFuncs.connection.createStatement();
-        tearDownStatement.execute("delete from " + tableName);
-        tearDownStatement.execute("drop table " + tableName);
+        tearDownStatement.execute("delete from " + dateTimeTableName);
+        tearDownStatement.execute("delete from " + dateTableName);
+        tearDownStatement.execute("delete from " + timeTableName);
+        tearDownStatement.execute("delete from " + timestampTableName);
+        tearDownStatement.execute("drop table " + dateTimeTableName);
+        tearDownStatement.execute("drop table " + dateTableName);
+        tearDownStatement.execute("drop table " + timeTableName);
+        tearDownStatement.execute("drop table " + timestampTableName);
         tearDownStatement.close();
         DateTimeFuncs.connection.close();
     }
