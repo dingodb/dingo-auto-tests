@@ -17,6 +17,8 @@
 package io.dingodb.test;
 import listener.EmailableReporterListener;
 import org.testng.annotations.Listeners;
+import utils.GetDateDiff;
+import utils.GetZeroTimestampOfCurDate;
 import utils.UTCTimeFormat;
 import utils.UTCTimestampFormat;
 import utils.UTCDateFormat;
@@ -32,9 +34,11 @@ import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Listeners(EmailableReporterListener.class)
 public class TestDateTime extends YamlDataHelper{
@@ -267,7 +271,7 @@ public class TestDateTime extends YamlDataHelper{
     }
 
     @Test(priority = 12, enabled = true, description = "验证函数unix_TimeStamp空参时的返回结果正常")
-    public void test13Unix_TimeStampNoArgFunc() throws SQLException {
+    public void test13Unix_TimeStampNoArg() throws SQLException {
         String currentTimeStamp = String.valueOf(System.currentTimeMillis()/1000);
         System.out.println("Current Timestamp: " + currentTimeStamp);
         String returnUnix_TimeStampWithoutArg = dateTimeObj.unix_TimeStampNoArgFunc();
@@ -275,7 +279,54 @@ public class TestDateTime extends YamlDataHelper{
         Assert.assertEquals(returnUnix_TimeStampWithoutArg.length(), 10);
 
         int timeStampDiff = Integer.parseInt(returnUnix_TimeStampWithoutArg) - Integer.parseInt(currentTimeStamp);
-        Assert.assertTrue(timeStampDiff < 60);
+        Assert.assertTrue(Math.abs(timeStampDiff) < 60);
+    }
+
+    @Test(priority = 12, enabled = true, dataProvider = "yamlDataMethod", description = "验证函数unix_TimeStamp参数为日期函数时的返回结果正常")
+    public void test13Unix_TimeStampFuncArg(Map<String, String> param) throws SQLException {
+        Long currentTimeStamp = System.currentTimeMillis()/1000;
+        System.out.println("Current Timestamp: " + currentTimeStamp);
+        String returnUnix_TimeStampWithFuncArg = dateTimeObj.unix_TimeStampFuncArg(param.get("argFunc"));
+        System.out.println("Return Timestamp: " + returnUnix_TimeStampWithFuncArg);
+        Assert.assertEquals(returnUnix_TimeStampWithFuncArg.length(), 10);
+        if (param.get("argFunc").equals("Now()") || param.get("argFunc").equals("Current_TimeStamp()") ||
+                param.get("argFunc").equals("Current_TimeStamp")) {
+            int timeStampDiff = (int) (Integer.parseInt(returnUnix_TimeStampWithFuncArg) - currentTimeStamp);
+            Assert.assertTrue(Math.abs(timeStampDiff) < 60);
+        } else if (param.get("argFunc").equals("CurDate()") || param.get("argFunc").equals("Current_Date()") ||
+                param.get("argFunc").equals("Current_Date")) {
+            Long todayStartTime = GetZeroTimestampOfCurDate.getTodayStartTime();
+            System.out.println("CurDateStartTimeStamp: " + todayStartTime);
+            Assert.assertTrue(returnUnix_TimeStampWithFuncArg.equals(String.valueOf(todayStartTime)));
+        }
+    }
+
+    @Test(priority = 12, enabled = true, dependsOnMethods = {"test02DateTimeInsert"},description = "验证函数unix_TimeStamp在表格中使用时的返回结果正常")
+    public void test13Unix_TimeStampInTableDate() throws SQLException {
+        List<String> expectedQueryUTSBList = new ArrayList<>();
+        String[] ustbArray = new String[]{"891792000","570988800","1646323200","1605024000","1285862400","553363200","-662716800"};
+        for (int i=0; i < ustbArray.length; i++){
+            expectedQueryUTSBList.add(ustbArray[i]);
+        }
+        System.out.println("期望查询到的列表为：" + expectedQueryUTSBList);
+
+        List<String> actualQueryUTSBList = dateTimeObj.queryUnix_timestampDateInTable();
+        System.out.println("实际查询到的列表为：" + actualQueryUTSBList);
+        Assert.assertTrue(actualQueryUTSBList.equals(expectedQueryUTSBList));
+    }
+
+    @Test(priority = 12, enabled = true, dependsOnMethods = {"test02DateTimeInsert"}, description = "验证函数unix_TimeStamp在表格中使用时的返回结果正常")
+    public void test13Unix_TimeStampInTableTimestamp() throws SQLException {
+        List<String> expectedQueryUTSCList = new ArrayList<>();
+        String[] ustcArray = new String[]{"1649412307","951753600","920217599","1620100800","1285869722","-536528868","1669827723"};
+        for (int i=0; i < ustcArray.length; i++){
+            expectedQueryUTSCList.add(ustcArray[i]);
+        }
+        System.out.println("期望查询到的列表为：" + expectedQueryUTSCList);
+
+        List<String> actualQueryUTSCList = dateTimeObj.queryUnix_timestampTimeStampInTable();
+        System.out.println("实际查询到的列表为：" + actualQueryUTSCList);
+        Assert.assertTrue(actualQueryUTSCList.equals(expectedQueryUTSCList));
     }
 
     @Test(priority = 13, enabled = true, dataProvider = "yamlDataMethod", description = "验证函数date_format字符串参数的返回结果正常")
@@ -297,6 +348,44 @@ public class TestDateTime extends YamlDataHelper{
         Assert.assertEquals(actualDate_FormatNargStr, expectedDate_FormatNargStr);
     }
 
+    @Test(priority = 13, enabled = true, dataProvider = "yamlDataMethod", description = "验证函数date_format参数为函数的返回结果正常")
+    public void test14Date_FormatFuncArgFunc(Map<String, String> param) throws SQLException {
+        String actualDate_FormatFuncArgStr = dateTimeObj.date_FormatFuncArg(param.get("argFunc"), param.get("inputFormat"));
+        System.out.println("Actual: " + actualDate_FormatFuncArgStr);
+        boolean matchRst = actualDate_FormatFuncArgStr.matches(param.get("matchReg"));
+        Assert.assertTrue(matchRst);
+    }
+
+    @Test(priority = 13, enabled = true, dependsOnMethods = {"test02DateTimeInsert"}, description = "验证函数date_format在表格中使用时的返回结果正常")
+    public void test14Date_FormatTableDate() throws SQLException {
+        List<String> expectedQueryDFBList = new ArrayList<>();
+        String[] dfbArray = new String[]{"1998 year 04 month 06 day","1988 year 02 month 05 day","2022 year 03 month 04 day",
+                "2020 year 11 month 11 day","2010 year 10 month 01 day","1952 year 12 month 31 day","1949 year 01 month 01 day"};
+        for (int i=0; i < dfbArray.length; i++){
+            expectedQueryDFBList.add(dfbArray[i]);
+        }
+        System.out.println("期望查询到的列表为：" + expectedQueryDFBList);
+
+        List<String> actualQueryDFBList = dateTimeObj.queryDate_FormatDateInTable();
+        System.out.println("实际查询到的列表为：" + actualQueryDFBList);
+        Assert.assertTrue(actualQueryDFBList.equals(expectedQueryDFBList));
+    }
+
+    @Test(priority = 13, enabled = true, dependsOnMethods = {"test02DateTimeInsert"}, description = "验证函数date_format在表格中使用时的返回结果正常")
+    public void test14Date_FormatTableTimestamp() throws SQLException {
+        List<String> expectedQueryDFTSList = new ArrayList<>();
+        String[] dftsArray = new String[]{"2022/04/08 18.05.07","2000/02/29 00.00.00","1999/02/28 23.59.59",
+                "2021/05/04 12.00.00","2010/10/01 02.02.02","1952/12/31 12.12.12","2022/12/01 01.02.03"};
+        for (int i=0; i < dftsArray.length; i++){
+            expectedQueryDFTSList.add(dftsArray[i]);
+        }
+        System.out.println("期望查询到的列表为：" + expectedQueryDFTSList);
+
+        List<String> actualQueryDFTSList = dateTimeObj.queryDate_FormatTimestampInTable();
+        System.out.println("实际查询到的列表为：" + actualQueryDFTSList);
+        Assert.assertTrue(actualQueryDFTSList.equals(expectedQueryDFTSList));
+    }
+
     @Test(priority = 14, enabled = true, dataProvider = "yamlDataMethod", description = "验证函数datediff字符串参数的返回结果正常")
     public void test15DateDiffStrArgFunc(Map<String, String> param) throws SQLException {
         String expectedDateStrArgDiff = param.get("outputDiff");
@@ -315,13 +404,40 @@ public class TestDateTime extends YamlDataHelper{
         Assert.assertEquals(actualDateNumArgDiff, expectedDateNumArgDiff);
     }
 
-    @Test(priority = 15, enabled = true, dataProvider = "yamlDataMethod", description = "验证插入不同格式的日期成功")
+    @Test(priority = 14, enabled = true, dataProvider = "yamlDataMethod", description = "验证函数datediff参数1为函数的返回结果正常")
+    public void test15DateDiffFuncArg1Func(Map<String, String> param) throws SQLException, ParseException {
+        Long expectedDateFuncArg1Diff = GetDateDiff.getDiffDate(param.get("inputDate2"));
+        System.out.println("Expected: " + expectedDateFuncArg1Diff);
+        String actualDateFuncArg1Diff = dateTimeObj.dateDiffFuncArg1Func(param.get("argFunc"), param.get("inputDate2"));
+        System.out.println("Actual: " + actualDateFuncArg1Diff);
+        Assert.assertTrue(actualDateFuncArg1Diff.equals(String.valueOf(expectedDateFuncArg1Diff)));
+    }
+
+    @Test(priority = 14, enabled = true, dataProvider = "yamlDataMethod", description = "验证函数datediff参数2为函数的返回结果正常")
+    public void test15DateDiffFuncArg2Func(Map<String, String> param) throws SQLException, ParseException {
+        Long expectedDateFuncArg2Diff = -GetDateDiff.getDiffDate(param.get("inputDate2"));
+        System.out.println("Expected: " + expectedDateFuncArg2Diff);
+        String actualDateFuncArg2Diff = dateTimeObj.dateDiffFuncArg2Func(param.get("argFunc"), param.get("inputDate2"));
+        System.out.println("Actual: " + actualDateFuncArg2Diff);
+        Assert.assertTrue(actualDateFuncArg2Diff.equals(String.valueOf(expectedDateFuncArg2Diff)));
+    }
+
+    @Test(priority = 15, enabled = true, dependsOnMethods = {"test02DateInsert"}, dataProvider = "yamlDataMethod", description = "验证插入不同格式的日期成功")
     public void test16VariousFormatDateInsert(Map<String, String> param) throws SQLException, ClassNotFoundException {
         String expectedDateQuery = param.get("expectedDate");
         System.out.println("Expected: " + expectedDateQuery);
         String actualDateQuery = dateTimeObj.insertVariousFormatDateValues(param.get("insertID"), param.get("insertDate"));
         System.out.println("Actual: " + actualDateQuery);
         Assert.assertEquals(actualDateQuery, expectedDateQuery);
+    }
+
+    @Test(priority = 15, enabled = true, dependsOnMethods = {"test02TimeInsert"}, dataProvider = "yamlDataMethod", description = "验证插入不同格式的时间成功")
+    public void test16VariousFormatTimeInsert(Map<String, String> param) throws SQLException, ClassNotFoundException {
+        String expectedTimeQuery = param.get("expectedTime");
+        System.out.println("Expected: " + expectedTimeQuery);
+        String actualTimeQuery = dateTimeObj.insertVariousFormatTimeValues(param.get("insertID"), param.get("insertTime"));
+        System.out.println("Actual: " + actualTimeQuery);
+        Assert.assertEquals(actualTimeQuery, expectedTimeQuery);
     }
 
     @Test(priority = 16, enabled = true, dataProvider = "yamlDataMethod", description = "验证函数和字符串上下文返回")

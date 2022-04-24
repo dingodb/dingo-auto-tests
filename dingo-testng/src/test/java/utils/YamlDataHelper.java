@@ -84,12 +84,20 @@ public class YamlDataHelper{
                 yamlList = getYamlList(iniReader.getValue("DateTimeYaml", "unix_timestamp"));
                 break;
             }
+            case "test13Unix_TimeStampFuncArg": {
+                yamlList = getYamlList(iniReader.getValue("DateTimeYaml", "unix_timestamp_funcArg"));
+                break;
+            }
             case "test14Date_FormatStrArgFunc": {
                 yamlList = getYamlList(iniReader.getValue("DateTimeYaml", "date_format_str"));
                 break;
             }
             case "test14Date_FormatNumArgFunc": {
                 yamlList = getYamlList(iniReader.getValue("DateTimeYaml", "date_format_num"));
+                break;
+            }
+            case "test14Date_FormatFuncArgFunc": {
+                yamlList = getYamlList(iniReader.getValue("DateTimeYaml", "date_format_funcArg"));
                 break;
             }
             case "test15DateDiffStrArgFunc": {
@@ -100,8 +108,20 @@ public class YamlDataHelper{
                 yamlList = getYamlList(iniReader.getValue("DateTimeYaml", "datediff_num"));
                 break;
             }
+            case "test15DateDiffFuncArg1Func": {
+                yamlList = getYamlList(iniReader.getValue("DateTimeYaml", "datediff_funcArg"));
+                break;
+            }
+            case "test15DateDiffFuncArg2Func": {
+                yamlList = getYamlList(iniReader.getValue("DateTimeYaml", "datediff_funcArg"));
+                break;
+            }
             case "test16VariousFormatDateInsert": {
                 yamlList = getYamlList(iniReader.getValue("DateTimeYaml", "insert_date"));
+                break;
+            }
+            case "test16VariousFormatTimeInsert": {
+                yamlList = getYamlList(iniReader.getValue("DateTimeYaml", "insert_time"));
                 break;
             }
             case "test17FuncConcatStr": {

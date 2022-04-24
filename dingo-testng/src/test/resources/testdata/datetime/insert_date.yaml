@@ -1,12 +1,36 @@
-testID1000649-1:
+testID1000649-01:
   insertID: "8"
   insertDate: "2021/3/15"
   expectedDate: "2021-03-15"
-testID1000649-2:
+testID1000649-02:
   insertID: "9"
   insertDate: "1999/09/06"
   expectedDate: "1999-09-06"
-testID1000649-3:
+testID1000649-03:
   insertID: "10"
   insertDate: "2022/1/2"
   expectedDate: "2022-01-02"
+testID1000831-01:
+  insertID: "11"
+  insertDate: "2021.3.15"
+  expectedDate: "2021-03-15"
+testID1000831-02:
+  insertID: "12"
+  insertDate: "1999.09.06"
+  expectedDate: "1999-09-06"
+testID1000831-03:
+  insertID: "13"
+  insertDate: "2022.1.2"
+  expectedDate: "2022-01-02"
+testID1000832-01:
+  insertID: "14"
+  insertDate: "20100315"
+  expectedDate: "2010-03-15"
+testID1000832-02:
+  insertID: "15"
+  insertDate: "19990906"
+  expectedDate: "1999-09-06"
+testID1000832-03:
+  insertID: "16"
+  insertDate: "19491231"
+  expectedDate: "1949-12-31"

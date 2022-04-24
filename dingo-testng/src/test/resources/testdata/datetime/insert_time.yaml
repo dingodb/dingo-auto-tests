@@ -1,0 +1,12 @@
+testID1000834-01:
+  insertID: "11"
+  insertTime: "013015"
+  expectedTime: "01:30:15"
+testID1000834-02:
+  insertID: "12"
+  insertTime: "235959"
+  expectedTime: "23:59:59"
+testID1000834-03:
+  insertID: "13"
+  insertTime: "000000"
+  expectedTime: "00:00:00"

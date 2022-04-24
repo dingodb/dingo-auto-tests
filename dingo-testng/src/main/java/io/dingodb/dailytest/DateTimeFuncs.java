@@ -82,7 +82,7 @@ public class DateTimeFuncs {
                 + "address varchar(255),"
                 + "birthday date,"
                 + "createTime time,"
-                + "updateTime timestamp,"
+                + "update_Time timestamp,"
                 + "primary key(id)"
                 + ")";
         statement.execute(sql);
@@ -105,6 +105,66 @@ public class DateTimeFuncs {
         int insertRows = statement.executeUpdate(batInsertSql);
         statement.close();
         return insertRows;
+    }
+
+    //查询unix_timestamp在表格date字段使用的结果
+    public List<String> queryUnix_timestampDateInTable() throws SQLException {
+        String queryUTSBTable = getDateTimeTableName();
+        Statement statement = connection.createStatement();
+        String queryUTSBSql = "select name,Unix_TimeStamp(birthday) UTSB from " + queryUTSBTable + " where id<8";
+
+        ResultSet queryUTSBRst = statement.executeQuery(queryUTSBSql);
+        List<String> queryUTSBList = new ArrayList<String>();
+        while (queryUTSBRst.next()) {
+            queryUTSBList.add(queryUTSBRst.getString("UTSB"));
+        }
+        statement.close();
+        return queryUTSBList;
+    }
+
+    //查询unix_timestamp在表格timestamp字段使用的结果
+    public List<String> queryUnix_timestampTimeStampInTable() throws SQLException {
+        String queryUTSCTable = getDateTimeTableName();
+        Statement statement = connection.createStatement();
+        String queryUTSCSql = "select name,Unix_TimeStamp(update_Time) UTSC from " + queryUTSCTable + " where id<8";
+
+        ResultSet queryUTSCRst = statement.executeQuery(queryUTSCSql);
+        List<String> queryUTSCList = new ArrayList<String>();
+        while (queryUTSCRst.next()) {
+            queryUTSCList.add(queryUTSCRst.getString("UTSC"));
+        }
+        statement.close();
+        return queryUTSCList;
+    }
+
+    //查询date_format在表格date字段使用的结果
+    public List<String> queryDate_FormatDateInTable() throws SQLException {
+        String queryDFBTable = getDateTimeTableName();
+        Statement statement = connection.createStatement();
+        String queryDFBSql = "select name,date_format(birthday, '%Y year %m month %d day') birth_out from " + queryDFBTable + " where id<8";
+
+        ResultSet queryDFBRst = statement.executeQuery(queryDFBSql);
+        List<String> queryDFBList = new ArrayList<String>();
+        while (queryDFBRst.next()) {
+            queryDFBList.add(queryDFBRst.getString("birth_out"));
+        }
+        statement.close();
+        return queryDFBList;
+    }
+
+    //查询date_format在表格timestamp字段使用的结果
+    public List<String> queryDate_FormatTimestampInTable() throws SQLException {
+        String queryDFTSTable = getDateTimeTableName();
+        Statement statement = connection.createStatement();
+        String queryDFTSSql = "select name,date_format(update_Time, '%Y/%m/%d %H.%i.%s') ts_out from " + queryDFTSTable + " where id<8";
+
+        ResultSet queryDFTSRst = statement.executeQuery(queryDFTSSql);
+        List<String> queryDFTSList = new ArrayList<String>();
+        while (queryDFTSRst.next()) {
+            queryDFTSList.add(queryDFTSRst.getString("ts_out"));
+        }
+        statement.close();
+        return queryDFTSList;
     }
 
     //创建含有date字段类型的表格
@@ -147,11 +207,11 @@ public class DateTimeFuncs {
         String dateTableName = getDateTableName();
         Statement statement = connection.createStatement();
 
-        String batDateInsertSql = "insert into " + dateTableName +
+        String dateFormatInsertSql = "insert into " + dateTableName +
                 " values (" + inputID + ",'zhangsan',18,23.50,'beijing','" + inputDate +  "')";
-        int insertRows = statement.executeUpdate(batDateInsertSql);
-        String selectInsertDateSql = "select birthday from " + dateTableName + " where id = " + inputID;
-        ResultSet findDateRst = statement.executeQuery(selectInsertDateSql);
+        int insertRows = statement.executeUpdate(dateFormatInsertSql);
+        String queryInsertDateSql = "select birthday from " + dateTableName + " where id = " + inputID;
+        ResultSet findDateRst = statement.executeQuery(queryInsertDateSql);
         String findDateStr = null;
         while (findDateRst.next()) {
             findDateStr = findDateRst.getString("birthday");
@@ -196,6 +256,24 @@ public class DateTimeFuncs {
         int insertRows = statement.executeUpdate(batTimeInsertSql);
         statement.close();
         return insertRows;
+    }
+
+    // 插入其他格式time类型数据并返回查询出的时间
+    public String insertVariousFormatTimeValues(String inputID, String inputTime) throws ClassNotFoundException, SQLException {
+        String timeTableName = getTimeTableName();
+        Statement statement = connection.createStatement();
+
+        String timeFormatInsertSql = "insert into " + timeTableName +
+                " values (" + inputID + ",'zhangsan',35,23.50,'Bei Jing No.#12-03-01','" + inputTime +  "')";
+        int insertRows = statement.executeUpdate(timeFormatInsertSql);
+        String queryInsertTimeSql = "select create_time from " + timeTableName + " where id = " + inputID;
+        ResultSet findTimeRst = statement.executeQuery(queryInsertTimeSql);
+        String findTimeStr = null;
+        while (findTimeRst.next()) {
+            findTimeStr = findTimeRst.getString("create_time");
+        }
+        statement.close();
+        return findTimeStr;
     }
 
     //创建含有timestamp字段类型的表格
@@ -384,6 +462,18 @@ public class DateTimeFuncs {
         return unix_TimeStampNoArgStr;
     }
 
+    // 获取函数Unix_TimeStamp参数为日期函数时的返回值
+    public String unix_TimeStampFuncArg(String argFunc) throws SQLException {
+        Statement statement = connection.createStatement();
+        String unix_TimeStampFuncAgrSql = "select unix_TimeStamp(" + argFunc + ")";
+        ResultSet unixTimeStampFuncArgRst = statement.executeQuery(unix_TimeStampFuncAgrSql);
+        String unix_TimeStampFuncArgStr  = null;
+        while (unixTimeStampFuncArgRst.next()) {
+            unix_TimeStampFuncArgStr = unixTimeStampFuncArgRst.getString(1);
+        }
+        return unix_TimeStampFuncArgStr;
+    }
+
     // 获取函数Date_Format参数为字符串返回值
     public String date_FormatStrArgFunc(String inputDate, String inputFormat) throws SQLException {
         Statement statement = connection.createStatement();
@@ -408,6 +498,18 @@ public class DateTimeFuncs {
         return date_formatNargStr;
     }
 
+    // 获取函数Date_Format参数为时间日期函数的返回值
+    public String date_FormatFuncArg(String inputFunc, String inputFormat) throws SQLException {
+        Statement statement = connection.createStatement();
+        String date_formatFuncArgSql = "select date_format(" + inputFunc + ",'" + inputFormat + "')";
+        ResultSet date_formatFuncArgRst = statement.executeQuery(date_formatFuncArgSql);
+        String date_formatFuncArgStr  = null;
+        while (date_formatFuncArgRst.next()) {
+            date_formatFuncArgStr = date_formatFuncArgRst.getString(1);
+        }
+        return date_formatFuncArgStr;
+    }
+
     // 获取函数DateDiff参数为字符串返回值
     public String dateDiffStrArgFunc(String Date1, String Date2) throws SQLException {
         Statement statement = connection.createStatement();
@@ -430,6 +532,29 @@ public class DateTimeFuncs {
             dateDiffNargStr = dateDiffNargRst.getString(1);
         }
         return dateDiffNargStr;
+    }
+
+    // 获取函数DateDiff第一个参数为时间日期函数返回值
+    public String dateDiffFuncArg1Func(String funcArg, String Date2) throws SQLException {
+        Statement statement = connection.createStatement();
+        String dateDiffFarg1Sql = "select datediff(" + funcArg + ",'" + Date2 + "') as diffDate";
+        ResultSet dateDiffFarg1Rst = statement.executeQuery(dateDiffFarg1Sql);
+        String dateDiffFarg1Str  = null;
+        while (dateDiffFarg1Rst.next()) {
+            dateDiffFarg1Str = dateDiffFarg1Rst.getString(1);
+        }
+        return dateDiffFarg1Str;
+    }
+    // 获取函数DateDiff第二个参数为时间日期函数返回值
+    public String dateDiffFuncArg2Func(String funcArg, String Date2) throws SQLException {
+        Statement statement = connection.createStatement();
+        String dateDiffFarg2Sql = "select datediff('" + Date2 + "'," + funcArg + ") as diffDate";
+        ResultSet dateDiffFarg2Rst = statement.executeQuery(dateDiffFarg2Sql);
+        String dateDiffFarg2Str  = null;
+        while (dateDiffFarg2Rst.next()) {
+            dateDiffFarg2Str = dateDiffFarg2Rst.getString(1);
+        }
+        return dateDiffFarg2Str;
     }
 
     // 获取字符串上下文返回格式

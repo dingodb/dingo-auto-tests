@@ -6,6 +6,14 @@ testID1000813-02:
   inputDate1: "2022-04-13 00:00:00"
   inputDate2: "2022-04-01 23:59:59"
   outputDiff: "12"
+testID1000813-03:
+  inputDate1: "2022-04-12 23:59:59"
+  inputDate2: "2022-04-13 00:00:00"
+  outputDiff: "-1"
+testID1000813-04:
+  inputDate1: "2022-04-13 00:00:00"
+  inputDate2: "2022-04-12 23:59:59"
+  outputDiff: "1"
 testID1000814-01:
   inputDate1: "2022-04-13 23:59:59"
   inputDate2: "2022-04-01"

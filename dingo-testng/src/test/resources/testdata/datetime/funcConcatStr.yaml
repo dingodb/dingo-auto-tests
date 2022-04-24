@@ -4,25 +4,25 @@ testID1000656:
 testID1000671:
   funcName: "CurDate()"
   matchReg: "test_\\d{4}-\\d{2}-\\d{2}"
-testID1000682-1:
+testID1000682-01:
   funcName: "Current_Date()"
   matchReg: "test_\\d{4}-\\d{2}-\\d{2}"
-testID1000682-2:
+testID1000682-02:
   funcName: "Current_Date"
   matchReg: "test_\\d{4}-\\d{2}-\\d{2}"
 testID1000688:
   funcName: "CurTime()"
   matchReg: "test_\\d{2}:\\d{2}:\\d{2}"
-testID1000694-1:
+testID1000694-01:
   funcName: "Current_time()"
   matchReg: "test_\\d{2}:\\d{2}:\\d{2}"
-testID1000694-2:
+testID1000694-02:
   funcName: "Current_time"
   matchReg: "test_\\d{2}:\\d{2}:\\d{2}"
-testID1000703-1:
+testID1000703-01:
   funcName: "Current_TimeStamp()"
   matchReg: "test_\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}"
-testID1000703-2:
+testID1000703-02:
   funcName: "Current_TimeStamp"
   matchReg: "test_\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}"
 

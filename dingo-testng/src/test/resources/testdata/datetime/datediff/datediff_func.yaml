@@ -1,0 +1,15 @@
+testID1000828-01:
+  argFunc: "Now()"
+  inputDate2: "2022-01-01"
+testID1000828-02:
+  argFunc: "CurDate()"
+  inputDate2: "2021-12-13"
+testID1000828-03:
+  argFunc: "Current_Date()"
+  inputDate2: "1998-10-10"
+testID1000828-04:
+  argFunc: "Current_Timestamp()"
+  inputDate2: "2022-12-31"
+testID1000828-05:
+  argFunc: "Current_Timestamp"
+  inputDate2: "2000-01-01"
