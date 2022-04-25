@@ -23,8 +23,8 @@ import java.util.Calendar;
 import java.util.TimeZone;
 
 public class UTCDateFormat {
-    private static DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-    public static String getUTCDateStr() {
+    private DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+    public String getUTCDateStr() {
         StringBuffer UTCDateBuffer = new StringBuffer();
         // 取得本地时间
         Calendar cal = Calendar.getInstance();
@@ -50,7 +50,7 @@ public class UTCDateFormat {
         return null;
     }
 
-    public static String formatUTCDate(String inputUTCDate){
+    public String formatUTCDate(String inputUTCDate){
         java.util.Date UTCDate = null;
         String UTCDateStr = null;
         try{

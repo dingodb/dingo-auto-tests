@@ -10,3 +10,11 @@ testID1000759:
   argFunc: "CurTime()"
   inputFormat: "%H%i%S"
   matchReg: "\\d{6}"
+testID1001014-01:
+  argFunc: "from_unixtime(1650875058)"
+  inputFormat: "%Y/%m/%d %H:%i:%S"
+  matchReg: "\\d{4}/\\d{2}/\\d{2} \\d{2}:\\d{2}:\\d{2}"
+testID1001014-02:
+  argFunc: "from_unixtime(1650875058)"
+  inputFormat: "%Y/%m/%d"
+  matchReg: "\\d{4}/\\d{2}/\\d{2}"
