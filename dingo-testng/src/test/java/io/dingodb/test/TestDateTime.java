@@ -65,7 +65,7 @@ public class TestDateTime extends YamlDataHelper{
         Assert.assertNotNull(DateTimeFuncs.connection);
     }
 
-    @Test(priority = 0, enabled = false, description = "验证创建DateTime表成功后，获取表名成功")
+    @Test(priority = 0, enabled = true, description = "验证创建DateTime表成功后，获取表名成功")
     public void test01TableWithDateTimeFieldsCreate() throws Exception {
         dateTimeObj.createTable();
         String expectedTableName = dateTimeObj.getDateTimeTableName().toUpperCase();
@@ -73,7 +73,7 @@ public class TestDateTime extends YamlDataHelper{
         Assert.assertTrue(afterCreateTableList.contains(expectedTableName));
     }
 
-    @Test(priority = 0, enabled = false, description = "验证创建date表成功后，获取表名成功")
+    @Test(priority = 0, enabled = true, description = "验证创建date表成功后，获取表名成功")
     public void test01TableWithDateFieldCreate() throws Exception {
         dateTimeObj.createDateTable();
         String expectedDateTableName = dateTimeObj.getDateTableName().toUpperCase();
@@ -81,7 +81,7 @@ public class TestDateTime extends YamlDataHelper{
         Assert.assertTrue(afterCreateTableList.contains(expectedDateTableName));
     }
 
-    @Test(priority = 0, enabled = false, description = "验证创建time表成功后，获取表名成功")
+    @Test(priority = 0, enabled = true, description = "验证创建time表成功后，获取表名成功")
     public void test01TableWithTimeFieldCreate() throws Exception {
         dateTimeObj.createTimeTable();
         String expectedTimeTableName = dateTimeObj.getTimeTableName().toUpperCase();
@@ -89,7 +89,7 @@ public class TestDateTime extends YamlDataHelper{
         Assert.assertTrue(afterCreateTableList.contains(expectedTimeTableName));
     }
 
-    @Test(priority = 0, enabled = false, description = "验证创建timestamp表成功后，获取表名成功")
+    @Test(priority = 0, enabled = true, description = "验证创建timestamp表成功后，获取表名成功")
     public void test01TableWithTimestampFieldCreate() throws Exception {
         dateTimeObj.createTimestampTable();
         String expectedTimestampTableName = dateTimeObj.getTimestampTableName().toUpperCase();
@@ -97,28 +97,28 @@ public class TestDateTime extends YamlDataHelper{
         Assert.assertTrue(afterCreateTableList.contains(expectedTimestampTableName));
     }
 
-    @Test(priority = 1, enabled = false, dependsOnMethods = {"test01TableWithDateTimeFieldsCreate"}, description = "验证插入DateTime各字段数据成功")
+    @Test(priority = 1, enabled = true, dependsOnMethods = {"test01TableWithDateTimeFieldsCreate"}, description = "验证插入DateTime各字段数据成功")
     public void test02DateTimeInsert() throws Exception {
         int expectedInsertCount = 7;
         int actualInsertCount = dateTimeObj.insertDateTimeValues();
         Assert.assertEquals(actualInsertCount, expectedInsertCount);
     }
 
-    @Test(priority = 1, enabled = false, dependsOnMethods = {"test01TableWithDateFieldCreate"}, description = "验证插入Date字段数据成功")
+    @Test(priority = 1, enabled = true, dependsOnMethods = {"test01TableWithDateFieldCreate"}, description = "验证插入Date字段数据成功")
     public void test02DateInsert() throws Exception {
         int expectedInsertDateCount = 7;
         int actualInsertDateCount = dateTimeObj.insertDateValues();
         Assert.assertEquals(actualInsertDateCount, expectedInsertDateCount);
     }
 
-    @Test(priority = 1, enabled = false, dependsOnMethods = {"test01TableWithTimeFieldCreate"}, description = "验证插入Time字段数据成功")
+    @Test(priority = 1, enabled = true, dependsOnMethods = {"test01TableWithTimeFieldCreate"}, description = "验证插入Time字段数据成功")
     public void test02TimeInsert() throws Exception {
         int expectedInsertTimeCount = 10;
         int actualInsertTimeCount = dateTimeObj.insertTimeValues();
         Assert.assertEquals(actualInsertTimeCount, expectedInsertTimeCount);
     }
 
-    @Test(priority = 1, enabled = false, dependsOnMethods = {"test01TableWithTimestampFieldCreate"}, description = "验证插入Timestamp字段数据成功")
+    @Test(priority = 1, enabled = true, dependsOnMethods = {"test01TableWithTimestampFieldCreate"}, description = "验证插入Timestamp字段数据成功")
     public void test02TimestampInsert() throws Exception {
         int expectedInsertTimestampCount = 1;
         int actualInsertTimestampCount = dateTimeObj.insertTimeStampValues();
@@ -241,7 +241,7 @@ public class TestDateTime extends YamlDataHelper{
         Assert.assertEquals(actualCurrent_TimeStampWithBracketsStr, expectedUTCTimeStampStr);
     }
 
-    @Test(priority = 11, enabled = false, dataProvider = "yamlDataMethod", description = "验证函数from_UnixTime的返回结果正常")
+    @Test(priority = 11, enabled = true, dataProvider = "yamlDataMethod", description = "验证函数from_UnixTime的返回结果正常")
     public void test12From_UnixTimeFunc_TimestampInput(Map<String, String> param) throws SQLException {
         String expectedFrom_UnitTimeStr = param.get("outputDate");
         System.out.println("Expected: " + expectedFrom_UnitTimeStr);
@@ -250,7 +250,7 @@ public class TestDateTime extends YamlDataHelper{
         Assert.assertEquals(actualFrom_UnixTimeReturn, expectedFrom_UnitTimeStr);
     }
 
-    @Test(priority = 11, enabled = false, description = "验证函数from_UnixTime传入字符串数值的返回结果正常")
+    @Test(priority = 11, enabled = true, description = "验证函数from_UnixTime传入字符串数值的返回结果正常")
     public void test12From_UnixTimeFunc_StringInput() throws SQLException {
         String expectedFrom_UnitTimeWithStringParamStr = "2022-04-12 21:28:30";
         System.out.println("Expected: " + expectedFrom_UnitTimeWithStringParamStr);
@@ -259,7 +259,7 @@ public class TestDateTime extends YamlDataHelper{
         Assert.assertEquals(actualFrom_UnixTimeWithStringParamReturn, expectedFrom_UnitTimeWithStringParamStr);
     }
 
-    @Test(priority = 12, enabled = false, dataProvider = "yamlDataMethod", description = "验证函数unix_TimeStamp有参时的返回结果正常")
+    @Test(priority = 12, enabled = true, dataProvider = "yamlDataMethod", description = "验证函数unix_TimeStamp有参时的返回结果正常")
     public void test13Unix_TimeStampFunc(Map<String, String> param) throws SQLException {
 //        System.out.println(param.get("inputStr"));
 //        System.out.println(param.get("outputStr"));
@@ -270,7 +270,7 @@ public class TestDateTime extends YamlDataHelper{
         Assert.assertEquals(actualUnix_TimeStamp, expectedUnix_TimeStamp);
     }
 
-    @Test(priority = 12, enabled = false, description = "验证函数unix_TimeStamp空参时的返回结果正常")
+    @Test(priority = 12, enabled = true, description = "验证函数unix_TimeStamp空参时的返回结果正常")
     public void test13Unix_TimeStampNoArg() throws SQLException {
         String currentTimeStamp = String.valueOf(System.currentTimeMillis()/1000);
         System.out.println("Current Timestamp: " + currentTimeStamp);
@@ -282,7 +282,7 @@ public class TestDateTime extends YamlDataHelper{
         Assert.assertTrue(Math.abs(timeStampDiff) < 60);
     }
 
-    @Test(priority = 12, enabled = false, dataProvider = "yamlDataMethod", description = "验证函数unix_TimeStamp参数为日期函数时的返回结果正常")
+    @Test(priority = 12, enabled = true, dataProvider = "yamlDataMethod", description = "验证函数unix_TimeStamp参数为日期函数时的返回结果正常")
     public void test13Unix_TimeStampFuncArg(Map<String, String> param) throws SQLException {
         Long currentTimeStamp = System.currentTimeMillis()/1000;
         System.out.println("Current Timestamp: " + currentTimeStamp);
@@ -301,7 +301,7 @@ public class TestDateTime extends YamlDataHelper{
         }
     }
 
-    @Test(priority = 12, enabled = false, dependsOnMethods = {"test02DateTimeInsert"},description = "验证函数unix_TimeStamp在表格中使用时的返回结果正常")
+    @Test(priority = 12, enabled = true, dependsOnMethods = {"test02DateTimeInsert"},description = "验证函数unix_TimeStamp在表格中使用时的返回结果正常")
     public void test13Unix_TimeStampInTableDate() throws SQLException {
         List<String> expectedQueryUTSBList = new ArrayList<>();
         String[] ustbArray = new String[]{"891792000","570988800","1646323200","1605024000","1285862400","553363200","-662716800"};
@@ -315,7 +315,7 @@ public class TestDateTime extends YamlDataHelper{
         Assert.assertTrue(actualQueryUTSBList.equals(expectedQueryUTSBList));
     }
 
-    @Test(priority = 12, enabled = false, dependsOnMethods = {"test02DateTimeInsert"}, description = "验证函数unix_TimeStamp在表格中使用时的返回结果正常")
+    @Test(priority = 12, enabled = true, dependsOnMethods = {"test02DateTimeInsert"}, description = "验证函数unix_TimeStamp在表格中使用时的返回结果正常")
     public void test13Unix_TimeStampInTableTimestamp() throws SQLException {
         List<String> expectedQueryUTSCList = new ArrayList<>();
         String[] ustcArray = new String[]{"1649412307","951753600","920217599","1620100800","1285869722","-536528868","1669827723"};
@@ -329,7 +329,7 @@ public class TestDateTime extends YamlDataHelper{
         Assert.assertTrue(actualQueryUTSCList.equals(expectedQueryUTSCList));
     }
 
-    @Test(priority = 13, enabled = false, dataProvider = "yamlDataMethod", description = "验证函数date_format字符串参数的返回结果正常")
+    @Test(priority = 13, enabled = true, dataProvider = "yamlDataMethod", description = "验证函数date_format字符串参数的返回结果正常")
     public void test14Date_FormatStrArgFunc(Map<String, String> param) throws SQLException {
         String expectedDate_FormatSargStr = param.get("outputDate");
         System.out.println("Expected: " + expectedDate_FormatSargStr);
@@ -339,7 +339,7 @@ public class TestDateTime extends YamlDataHelper{
         Assert.assertEquals(actualDate_FormatSargStr, expectedDate_FormatSargStr);
     }
 
-    @Test(priority = 13, enabled = false, dataProvider = "yamlDataMethod", description = "验证函数date_format数字参数的返回结果正常")
+    @Test(priority = 13, enabled = true, dataProvider = "yamlDataMethod", description = "验证函数date_format数字参数的返回结果正常")
     public void test14Date_FormatNumArgFunc(Map<String, String> param) throws SQLException {
         String expectedDate_FormatNargStr = param.get("outputDate");
         System.out.println("Expected: " + expectedDate_FormatNargStr);
@@ -348,7 +348,7 @@ public class TestDateTime extends YamlDataHelper{
         Assert.assertEquals(actualDate_FormatNargStr, expectedDate_FormatNargStr);
     }
 
-    @Test(priority = 13, enabled = false, dataProvider = "yamlDataMethod", description = "验证函数date_format参数为函数的返回结果正常")
+    @Test(priority = 13, enabled = true, dataProvider = "yamlDataMethod", description = "验证函数date_format参数为函数的返回结果正常")
     public void test14Date_FormatFuncArgFunc(Map<String, String> param) throws SQLException {
         String actualDate_FormatFuncArgStr = dateTimeObj.date_FormatFuncArg(param.get("argFunc"), param.get("inputFormat"));
         System.out.println("Actual: " + actualDate_FormatFuncArgStr);
@@ -356,7 +356,7 @@ public class TestDateTime extends YamlDataHelper{
         Assert.assertTrue(matchRst);
     }
 
-    @Test(priority = 13, enabled = false, dependsOnMethods = {"test02DateTimeInsert"}, description = "验证函数date_format在表格中使用时的返回结果正常")
+    @Test(priority = 13, enabled = true, dependsOnMethods = {"test02DateTimeInsert"}, description = "验证函数date_format在表格中使用时的返回结果正常")
     public void test14Date_FormatTableDate() throws SQLException {
         List<String> expectedQueryDFBList = new ArrayList<>();
         String[] dfbArray = new String[]{"1998 year 04 month 06 day","1988 year 02 month 05 day","2022 year 03 month 04 day",
@@ -371,7 +371,7 @@ public class TestDateTime extends YamlDataHelper{
         Assert.assertTrue(actualQueryDFBList.equals(expectedQueryDFBList));
     }
 
-    @Test(priority = 13, enabled = false, dependsOnMethods = {"test02DateTimeInsert"}, description = "验证函数date_format在表格中使用时的返回结果正常")
+    @Test(priority = 13, enabled = true, dependsOnMethods = {"test02DateTimeInsert"}, description = "验证函数date_format在表格中使用时的返回结果正常")
     public void test14Date_FormatTableTimestamp() throws SQLException {
         List<String> expectedQueryDFTSList = new ArrayList<>();
         String[] dftsArray = new String[]{"2022/04/08 18.05.07","2000/02/29 00.00.00","1999/02/28 23.59.59",
@@ -386,7 +386,7 @@ public class TestDateTime extends YamlDataHelper{
         Assert.assertTrue(actualQueryDFTSList.equals(expectedQueryDFTSList));
     }
 
-    @Test(priority = 14, enabled = false, dataProvider = "yamlDataMethod", description = "验证函数datediff字符串参数的返回结果正常")
+    @Test(priority = 14, enabled = true, dataProvider = "yamlDataMethod", description = "验证函数datediff字符串参数的返回结果正常")
     public void test15DateDiffStrArgFunc(Map<String, String> param) throws SQLException {
         String expectedDateStrArgDiff = param.get("outputDiff");
         System.out.println("Expected: " + expectedDateStrArgDiff);
@@ -395,7 +395,7 @@ public class TestDateTime extends YamlDataHelper{
         Assert.assertEquals(actualDateStrArgDiff, expectedDateStrArgDiff);
     }
 
-    @Test(priority = 14, enabled = false, dataProvider = "yamlDataMethod", description = "验证函数datediff数字参数的返回结果正常")
+    @Test(priority = 14, enabled = true, dataProvider = "yamlDataMethod", description = "验证函数datediff数字参数的返回结果正常")
     public void test15DateDiffNumArgFunc(Map<String, String> param) throws SQLException {
         String expectedDateNumArgDiff = param.get("outputDiff");
         System.out.println("Expected: " + expectedDateNumArgDiff);
@@ -404,7 +404,7 @@ public class TestDateTime extends YamlDataHelper{
         Assert.assertEquals(actualDateNumArgDiff, expectedDateNumArgDiff);
     }
 
-    @Test(priority = 14, enabled = false, dataProvider = "yamlDataMethod", description = "验证函数datediff参数1为函数的返回结果正常")
+    @Test(priority = 14, enabled = true, dataProvider = "yamlDataMethod", description = "验证函数datediff参数1为函数的返回结果正常")
     public void test15DateDiffFuncArg1Func(Map<String, String> param) throws SQLException, ParseException {
         Long expectedDateFuncArg1Diff = GetDateDiff.getDiffDate(param.get("inputDate2"));
         System.out.println("Expected: " + expectedDateFuncArg1Diff);
@@ -413,7 +413,7 @@ public class TestDateTime extends YamlDataHelper{
         Assert.assertTrue(actualDateFuncArg1Diff.equals(String.valueOf(expectedDateFuncArg1Diff)));
     }
 
-    @Test(priority = 14, enabled = false, dataProvider = "yamlDataMethod", description = "验证函数datediff参数2为函数的返回结果正常")
+    @Test(priority = 14, enabled = true, dataProvider = "yamlDataMethod", description = "验证函数datediff参数2为函数的返回结果正常")
     public void test15DateDiffFuncArg2Func(Map<String, String> param) throws SQLException, ParseException {
         Long expectedDateFuncArg2Diff = -GetDateDiff.getDiffDate(param.get("inputDate2"));
         System.out.println("Expected: " + expectedDateFuncArg2Diff);
@@ -422,7 +422,7 @@ public class TestDateTime extends YamlDataHelper{
         Assert.assertTrue(actualDateFuncArg2Diff.equals(String.valueOf(expectedDateFuncArg2Diff)));
     }
 
-    @Test(priority = 15, enabled = false, dependsOnMethods = {"test02DateInsert"}, dataProvider = "yamlDataMethod", description = "验证插入不同格式的日期成功")
+    @Test(priority = 15, enabled = true, dependsOnMethods = {"test02DateInsert"}, dataProvider = "yamlDataMethod", description = "验证插入不同格式的日期成功")
     public void test16VariousFormatDateInsert(Map<String, String> param) throws SQLException, ClassNotFoundException {
         String expectedDateQuery = param.get("expectedDate");
         System.out.println("Expected: " + expectedDateQuery);
@@ -431,7 +431,7 @@ public class TestDateTime extends YamlDataHelper{
         Assert.assertEquals(actualDateQuery, expectedDateQuery);
     }
 
-    @Test(priority = 15, enabled = false, dependsOnMethods = {"test02TimeInsert"}, dataProvider = "yamlDataMethod", description = "验证插入不同格式的时间成功")
+    @Test(priority = 15, enabled = true, dependsOnMethods = {"test02TimeInsert"}, dataProvider = "yamlDataMethod", description = "验证插入不同格式的时间成功")
     public void test16VariousFormatTimeInsert(Map<String, String> param) throws SQLException, ClassNotFoundException {
         String expectedTimeQuery = param.get("expectedTime");
         System.out.println("Expected: " + expectedTimeQuery);
@@ -440,7 +440,7 @@ public class TestDateTime extends YamlDataHelper{
         Assert.assertEquals(actualTimeQuery, expectedTimeQuery);
     }
 
-    @Test(priority = 16, enabled = false, dataProvider = "yamlDataMethod", description = "验证函数和字符串上下文返回")
+    @Test(priority = 16, enabled = true, dataProvider = "yamlDataMethod", description = "验证函数和字符串上下文返回")
     public void test17FuncConcatStr(Map<String, String> param) throws SQLException {
         String actualFuncConcatStr = dateTimeObj.funcConcatStr(param.get("funcName"));
         System.out.println("Actual: " + actualFuncConcatStr);
@@ -449,7 +449,7 @@ public class TestDateTime extends YamlDataHelper{
     }
 
 
-    @AfterClass(alwaysRun = false, description = "测试完成后删除数据和表格并关闭连接")
+    @AfterClass(alwaysRun = true, description = "测试完成后删除数据和表格并关闭连接")
     public void tearDownAll() throws SQLException {
         String dateTimeTableName = DateTimeFuncs.getDateTimeTableName();
         String dateTableName = DateTimeFuncs.getDateTableName();

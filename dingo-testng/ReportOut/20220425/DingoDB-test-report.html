@@ -8,23 +8,23 @@
 <body>
 <h1>DingoDB测试报告</h1>
 
-<h4>. 测试日期：2022-04-25 14:22:35</h4>
+<h4>. 测试日期：2022-04-25 18:58:42</h4>
 <h4>. 测试节点IP：172.20.3.13</h4>
 <table>
 <tr><th>Test</th><th># Passed</th><th># Skipped</th><th># Retried</th><th># Failed</th><th>Time (ms)</th><th>Included Groups</th><th>Excluded Groups</th></tr>
 <tr><th colspan="8">DingoDBTest</th></tr>
-<tr><td><a href="#t0">BVTTest</a></td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">7</td><td>BVT</td><td></td></tr>
+<tr><td><a href="#t0">BVTTest</a></td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">8</td><td>BVT</td><td></td></tr>
 <tr class="stripe"><td><a href="#t1">v0.2.0 FuncTest</a></td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td></td><td></td></tr>
 <tr><td><a href="#t2">v0.3.0 StrFuncTest</a></td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">1</td><td></td><td></td></tr>
-<tr class="stripe"><td><a href="#t3">v0.3.0 DateTimeTest</a></td><td class="num">9</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">3,636</td><td></td><td></td></tr>
-<tr><th>Total</th><th class="num">9</th><th class="num">0</th><th class="num">0</th><th class="num">0</th><th class="num">3,644</th><th colspan="2"></th></tr>
+<tr class="stripe"><td><a href="#t3">v0.3.0 DateTimeTest</a></td><td class="num">0</td><td class="num atts">1</td><td class="num">0</td><td class="num">0</td><td class="num">30,299</td><td></td><td></td></tr>
+<tr><th>Total</th><th class="num">0</th><th class="num attn">1</th><th class="num">0</th><th class="num">0</th><th class="num">30,308</th><th colspan="2"></th></tr>
 </table>
 <table id='summary'><thead><tr><th>Class</th><th>Method</th><th>Start</th><th>Time (ms)</th></tr></thead><tbody><tr><th colspan="4">DingoDBTest</th></tr></tbody><tbody id="t0"><tr><th colspan="4" class="invisible"/></tr></tbody>
 <tbody id="t1"><tr><th colspan="4" class="invisible"/></tr></tbody>
 <tbody id="t2"><tr><th colspan="4" class="invisible"/></tr></tbody>
-<tbody id="t3"><tr><th colspan="4">v0.3.0 DateTimeTest &#8212; failed (configuration methods)</th></tr><tr class="failedeven"><td rowspan="1">io.dingodb.test.TestDateTime</td><td><a href="#m0">tearDownAll</a></td><td rowspan="1">1650867755596</td><td rowspan="1">202</td></tr><tr><th colspan="4">v0.3.0 DateTimeTest &#8212; passed</th></tr><tr class="passedeven"><td rowspan="9">io.dingodb.test.TestDateTime</td><td><a href="#m1">test03NowFunc</a></td><td rowspan="1">1650867752198</td><td rowspan="1">399</td></tr><tr class="passedeven"><td><a href="#m2">test04CurDateFunc</a></td><td rowspan="1">1650867752610</td><td rowspan="1">92</td></tr><tr class="passedeven"><td><a href="#m3">test05Current_DateFunc</a></td><td rowspan="1">1650867752703</td><td rowspan="1">601</td></tr><tr class="passedeven"><td><a href="#m4">test06Current_DateWithBracketsFunc</a></td><td rowspan="1">1650867753305</td><td rowspan="1">358</td></tr><tr class="passedeven"><td><a href="#m5">test07CurTimeFunc</a></td><td rowspan="1">1650867753664</td><td rowspan="1">480</td></tr><tr class="passedeven"><td><a href="#m6">test08Current_TimeFunc</a></td><td rowspan="1">1650867754145</td><td rowspan="1">227</td></tr><tr class="passedeven"><td><a href="#m7">test09Current_TimeWithBracketsFunc</a></td><td rowspan="1">1650867754373</td><td rowspan="1">340</td></tr><tr class="passedeven"><td><a href="#m8">test10Current_TimeStampFunc</a></td><td rowspan="1">1650867754714</td><td rowspan="1">556</td></tr><tr class="passedeven"><td><a href="#m9">test11Current_TimeStampWithBracketsFunc</a></td><td rowspan="1">1650867755272</td><td rowspan="1">322</td></tr></tbody>
+<tbody id="t3"><tr><th colspan="4">v0.3.0 DateTimeTest &#8212; failed (configuration methods)</th></tr><tr class="failedeven"><td rowspan="1">io.dingodb.test.TestDateTime</td><td><a href="#m0">tearDownAll</a></td><td rowspan="1">1650884292090</td><td rowspan="1">30197</td></tr><tr><th colspan="4">v0.3.0 DateTimeTest &#8212; skipped</th></tr><tr class="skippedeven"><td rowspan="1">io.dingodb.test.TestDateTime</td><td><a href="#m1">test14Date_FormatFuncArgFunc</a></td><td rowspan="1">1650884292087</td><td rowspan="1">0</td></tr></tbody>
 </table>
-<h2>BVTTest</h2><h2>v0.2.0 FuncTest</h2><h2>v0.3.0 StrFuncTest</h2><h2>v0.3.0 DateTimeTest</h2><h3 id="m0">io.dingodb.test.TestDateTime#tearDownAll</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLException: Error while executing SQL &quot;delete from dateTimeFieldTest20220425&quot;: Exec invoke remote api error, thread: [Netty-Connection-executor-thread-8], message: error code [1001], Error to distribute tasks..
+<h2>BVTTest</h2><h2>v0.2.0 FuncTest</h2><h2>v0.3.0 StrFuncTest</h2><h2>v0.3.0 DateTimeTest</h2><h3 id="m0">io.dingodb.test.TestDateTime#tearDownAll</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.sql.SQLException: Error while executing SQL &quot;delete from dateTimeFieldTest20220425&quot;: Exec invoke api on remote server timeout, thread: [Test worker], message: [null].
 	at org.apache.calcite.avatica.Helper.createException(Helper.java:56)
 	at org.apache.calcite.avatica.Helper.createException(Helper.java:41)
 	at org.apache.calcite.avatica.AvaticaStatement.executeInternal(AvaticaStatement.java:163)
@@ -35,26 +35,45 @@
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
 	at java.lang.Thread.run(Thread.java:748)
-Caused by: io.dingodb.common.error.DingoException: Exec invoke remote api error, thread: [Netty-Connection-executor-thread-8], message: error code [1001], Error to distribute tasks..
+Caused by: io.dingodb.common.error.DingoException: Exec invoke api on remote server timeout, thread: [Test worker], message: [null].
 	at io.dingodb.common.error.DingoException.from(DingoException.java:107)
 	at io.dingodb.common.error.FormattingError.formatAsException(FormattingError.java:77)
 	at io.dingodb.common.error.FormattingError.throwFormatError(FormattingError.java:40)
-	at io.dingodb.net.netty.api.ApiProxy.lambda$callHandler$0(ApiProxy.java:160)
-	at io.dingodb.net.netty.channel.impl.NetServiceConnectionSubChannel.run(NetServiceConnectionSubChannel.java:97)
-	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
-	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at io.dingodb.net.netty.api.ApiProxy.invoke(ApiProxy.java:111)
+	at io.dingodb.net.netty.api.ApiProxy.invoke(ApiProxy.java:87)
+	at com.sun.proxy.$Proxy11.apply(Unknown Source)
+	at io.dingodb.driver.DingoServiceImpl.apply(DingoServiceImpl.java:36)
+	at org.apache.calcite.avatica.remote.RemoteMeta$14.call(RemoteMeta.java:310)
+	at org.apache.calcite.avatica.remote.RemoteMeta$14.call(RemoteMeta.java:307)
+	at org.apache.calcite.avatica.AvaticaConnection.invokeWithRetries(AvaticaConnection.java:792)
+	at org.apache.calcite.avatica.remote.RemoteMeta.fetch(RemoteMeta.java:306)
+	at org.apache.calcite.avatica.remote.DingoRemoteMeta.fetch(DingoRemoteMeta.java:21)
+	at org.apache.calcite.avatica.MetaImpl$FetchIterator.moveNext(MetaImpl.java:1592)
+	at org.apache.calcite.avatica.MetaImpl$FetchIterator.&lt;init&gt;(MetaImpl.java:1560)
+	at org.apache.calcite.avatica.MetaImpl$FetchIterator.&lt;init&gt;(MetaImpl.java:1543)
+	at org.apache.calcite.avatica.MetaImpl$FetchIterable.iterator(MetaImpl.java:1538)
+	at org.apache.calcite.avatica.MetaImpl.createCursor(MetaImpl.java:97)
+	at org.apache.calcite.avatica.AvaticaResultSet.execute(AvaticaResultSet.java:186)
+	at org.apache.calcite.avatica.AvaticaConnection$1.execute(AvaticaConnection.java:666)
+	at org.apache.calcite.avatica.remote.RemoteMeta$13.call(RemoteMeta.java:283)
+	at org.apache.calcite.avatica.remote.RemoteMeta$13.call(RemoteMeta.java:263)
+	at org.apache.calcite.avatica.AvaticaConnection.invokeWithRetries(AvaticaConnection.java:792)
+	at org.apache.calcite.avatica.remote.RemoteMeta.prepareAndExecute(RemoteMeta.java:262)
+	at org.apache.calcite.avatica.remote.DingoRemoteMeta.prepareAndExecute(DingoRemoteMeta.java:21)
+	at org.apache.calcite.avatica.AvaticaConnection.prepareAndExecuteInternal(AvaticaConnection.java:674)
+	at org.apache.calcite.avatica.AvaticaStatement.executeInternal(AvaticaStatement.java:156)
+	... 53 more
+... Removed 46 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m1">io.dingodb.test.TestDateTime#test14Date_FormatFuncArgFunc</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.RuntimeException: java.lang.NullPointerException
+	at java.util.ArrayList.forEach(ArrayList.java:1257)
+	at com.sun.proxy.$Proxy2.stop(Unknown Source)
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	... 1 more
-... Removed 46 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m1">io.dingodb.test.TestDateTime#test03NowFunc</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m2">io.dingodb.test.TestDateTime#test04CurDateFunc</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m3">io.dingodb.test.TestDateTime#test05Current_DateFunc</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m4">io.dingodb.test.TestDateTime#test06Current_DateWithBracketsFunc</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m5">io.dingodb.test.TestDateTime#test07CurTimeFunc</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m6">io.dingodb.test.TestDateTime#test08Current_TimeFunc</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m7">io.dingodb.test.TestDateTime#test09Current_TimeWithBracketsFunc</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m8">io.dingodb.test.TestDateTime#test10Current_TimeStampFunc</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m9">io.dingodb.test.TestDateTime#test11Current_TimeStampWithBracketsFunc</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.lang.NullPointerException
+	at utils.YamlDataHelper.getYamlList(YamlDataHelper.java:45)
+	at utils.YamlDataHelper.yamlDataMethod(YamlDataHelper.java:100)
+	... 50 more
+... Removed 53 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
 </body>
 </html>
