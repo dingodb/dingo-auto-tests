@@ -88,19 +88,19 @@ testID1000762-04:
   outputDate: "2022-04-13 09.37.26"
 testID1000763-01:
   inputDate: "20220413103726"
-  inputFormat: "Y-%m-%d %H:%i:%S"
+  inputFormat: "%Y-%m-%d %H:%i:%S"
   outputDate: "2022-04-13 10:37:26"
 testID1000763-02:
   inputDate: "2022-04-04 10:07:26"
-  inputFormat: "Y-%m-%d %H:%i:%S"
+  inputFormat: "%Y-%m-%d %H:%i:%S"
   outputDate: "2022-04-04 10:07:26"
 testID1000763-03:
   inputDate: "2022/04/13 10:37:06"
-  inputFormat: "Y-%m-%d %H:%i:%S"
+  inputFormat: "%Y-%m-%d %H:%i:%S"
   outputDate: "2022-04-13 10:37:06"
 testID1000763-04:
   inputDate: "2022.04.13 09:37:26"
-  inputFormat: "Y-%m-%d %H:%i:%S"
+  inputFormat: "%Y-%m-%d %H:%i:%S"
   outputDate: "2022-04-13 09:37:26"
 testID1000764-01:
   inputDate: "20220413103726"
@@ -156,7 +156,7 @@ testID1000766-01:
   outputDate: "2022"
 testID1000766-02:
   inputDate: "1999-04-04 10:07:26"
-  inputFormat: "%Y-%m-%d"
+  inputFormat: "%Y"
   outputDate: "1999"
 testID1000766-03:
   inputDate: "2000/04/13 10:37:06"
@@ -191,9 +191,9 @@ testID1000767-02:
   inputFormat: "%d - %H"
   outputDate: "04 - 10"
 testID1000767-03:
-  inputDate: "2022/04/13 10:37:06"
+  inputDate: "2022/04/13 00:37:06"
   inputFormat: "%d - %H"
-  outputDate: "04 - 10"
+  outputDate: "13 - 00"
 testID1000767-04:
   inputDate: "2022.04.13 09:37:26"
   inputFormat: "%d - %H"
