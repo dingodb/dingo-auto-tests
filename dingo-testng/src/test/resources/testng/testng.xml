@@ -57,4 +57,11 @@
 
     </test>
 
+    <test name="v0.3.0 BooleanFieldTest">
+        <classes>
+            <class name="io.dingodb.test.TestBooleanField"></class>
+        </classes>
+
+    </test>
+
 </suite>
