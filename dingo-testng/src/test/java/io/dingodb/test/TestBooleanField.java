@@ -21,6 +21,7 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import utils.YamlDataHelper;
 
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
@@ -28,8 +29,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-public class TestBooleanField {
+public class TestBooleanField extends YamlDataHelper {
     public static BooleanField booleanObj = new BooleanField();
 
     public static List<String> getTableList() throws SQLException, ClassNotFoundException {
@@ -166,6 +168,26 @@ public class TestBooleanField {
         System.out.println("Actual List: " + actualNotFieldList);
 
         Assert.assertEquals(actualNotFieldList, expectedNotFieldList);
+    }
+
+    @Test(priority = 8, enabled = true, expectedExceptions = SQLException.class, dataProvider = "yamlDataMethod",
+            dependsOnMethods = {"test08NotFieldAsConditionQuery"}, description = "预期插入失败")
+    public void test09InsertStrValue(Map<String, String> param) throws SQLException {
+        String booleanTable = BooleanField.getBooleanTableName();
+        Statement statement = BooleanField.connection.createStatement();
+        String insertSql = "insert into " + booleanTable + " values (" + param.get("ID") + ",'vivo',20,456.7,'shanghai','" + param.get("booleanValue") + "')";
+        statement.execute(insertSql);
+        statement.close();
+    }
+
+    @Test(priority = 9, enabled = true, expectedExceptions = SQLException.class, dataProvider = "yamlDataMethod",
+            dependsOnMethods = {"test08NotFieldAsConditionQuery"}, description = "预期插入失败")
+    public void test10InsertWrongValue(Map<String, String> param) throws SQLException {
+        String booleanTable = BooleanField.getBooleanTableName();
+        Statement statement = BooleanField.connection.createStatement();
+        String insertSql = "insert into " + booleanTable + " values (" + param.get("ID") + ",'vivo',20,456.7,'shanghai'," + param.get("booleanValue") + ")";
+        statement.execute(insertSql);
+        statement.close();
     }
 
     @AfterClass (alwaysRun = true, description = "执行测试后删除数据，删除表")

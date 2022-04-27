@@ -1,0 +1,12 @@
+testID1000998-01:
+  ID: "21"
+  booleanValue: "true1"
+testID1000998-02:
+  ID: "22"
+  booleanValue: "isTrue"
+testID1000998-03:
+  ID: "23"
+  booleanValue: "isFalse"
+testID1000998-04:
+  ID: "24"
+  booleanValue: "False0"

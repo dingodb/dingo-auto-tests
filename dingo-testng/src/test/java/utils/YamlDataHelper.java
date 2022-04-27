@@ -128,6 +128,12 @@ public class YamlDataHelper{
                 yamlList = getYamlList(iniReader.getValue("DateTimeYaml", "funcConcatStr"));
                 break;
             }
+            case "test09InsertStrValue": {
+                yamlList = getYamlList(iniReader.getValue("BooleanField", "strValue"));
+            }
+            case "test10InsertWrongValue": {
+                yamlList = getYamlList(iniReader.getValue("BooleanField", "wrongValue"));
+            }
         }
         Object[][] files = new Object[yamlList.size()][];
         for (int i = 0; i < yamlList.size(); i++) {

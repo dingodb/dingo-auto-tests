@@ -224,6 +224,21 @@ public class TestStrFuncs {
         Assert.assertTrue(actualMidList.equals(expectedMidList));
     }
 
+    @Test(enabled = true, description = "验证mid截取字符串，无指定长度")
+    public void test13MidStrWithoutLengthArg() throws SQLException, ClassNotFoundException {
+        List<String> expectedMidWithoutLengthList = new ArrayList<>();
+        String[] midWithoutLengthArray = new String[]{"hangsan","isi","3","AHA","wJDs","23","amaha","hangsan","p ","isi"," aB c  dE ","abcdef","AHA","hngsna",".5"};
+        for (int i=0; i < midWithoutLengthArray.length; i++){
+            expectedMidWithoutLengthList.add(midWithoutLengthArray[i]);
+        }
+        System.out.println("期望输出列表为：" + expectedMidWithoutLengthList);
+
+        List<String> actualMidWithoutLengthList = strObj.midWithoutLengthArgFunc();
+        System.out.println("实际输出列表为：" + actualMidWithoutLengthList);
+        Assert.assertTrue(actualMidWithoutLengthList.equals(expectedMidWithoutLengthList));
+    }
+
+
     @Test(enabled = true, description = "验证subString截取指定长度字符串")
     public void test14SubStringStr() throws SQLException, ClassNotFoundException {
         List<String> expectedSubStringList = new ArrayList<>();

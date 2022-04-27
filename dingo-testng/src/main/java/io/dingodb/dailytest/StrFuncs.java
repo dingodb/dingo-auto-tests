@@ -322,6 +322,22 @@ public class StrFuncs {
         return midList;
     }
 
+    //mid截取字符串,忽略长度参数
+    public List<String> midWithoutLengthArgFunc() throws SQLException, ClassNotFoundException {
+        String strFuncTableName = getStrTableName();
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String midWithoutLengthArgSQL = "select mid(name,2) midName from " + strFuncTableName;
+        ResultSet midWithoutLengthArgRst = statement.executeQuery(midWithoutLengthArgSQL);
+        List<String> midWithoutLengthArgList = new ArrayList<String>();
+        while (midWithoutLengthArgRst.next()){
+            midWithoutLengthArgList.add(midWithoutLengthArgRst.getString("midName"));
+        }
+        statement.close();
+        return midWithoutLengthArgList;
+    }
+
     //subString截取字符串
     public List<String> subStringFunc() throws SQLException, ClassNotFoundException {
         String strFuncTableName = getStrTableName();

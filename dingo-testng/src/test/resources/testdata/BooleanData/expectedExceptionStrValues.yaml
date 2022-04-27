@@ -1,0 +1,15 @@
+testID1000997-01:
+  ID: "16"
+  booleanValue: "a"
+testID1000997-02:
+  ID: "17"
+  booleanValue: "A"
+testID1000997-03:
+  ID: "18"
+  booleanValue: "abc"
+testID1000997-04:
+  ID: "19"
+  booleanValue: "0"
+testID1000997-05:
+  ID: "20"
+  booleanValue: "1"
