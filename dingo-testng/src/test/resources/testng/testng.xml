@@ -31,7 +31,7 @@
             <class name="io.dingodb.test.TestBVT"></class>
         </classes>
     </test>
-    <test name="v0.2.0 FuncTest">
+    <test name="v0.2.0 funcTest">
 <!--        <groups>-->
 <!--            <run>-->
 <!--                &lt;!&ndash; name中的赋值需要填写的是我们在类中对test分组的名称 &ndash;&gt;-->
@@ -44,22 +44,28 @@
             <class name="io.dingodb.test.TestSQLFuncs"></class>
         </classes>
     </test>
-    <test name="v0.3.0 StrFuncTest">
+    <test name="v0.3.0 strFuncTest">
         <classes>
             <class name="io.dingodb.test.TestStrFuncs"></class>
         </classes>
 
     </test>
-    <test name="v0.3.0 DateTimeTest">
+    <test name="v0.3.0 dateTimeTest">
         <classes>
             <class name="io.dingodb.test.TestDateTime"></class>
         </classes>
 
     </test>
 
-    <test name="v0.3.0 BooleanFieldTest">
+    <test name="v0.3.0 booleanFieldTest">
         <classes>
             <class name="io.dingodb.test.TestBooleanField"></class>
+        </classes>
+
+    </test>
+    <test name="v0.3.0 tableInnerJoinTest">
+        <classes>
+            <class name="io.dingodb.test.TestTableInnerJoin"></class>
         </classes>
 
     </test>
