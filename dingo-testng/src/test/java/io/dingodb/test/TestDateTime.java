@@ -19,6 +19,7 @@ import listener.EmailableReporterListener;
 import org.testng.annotations.Listeners;
 import utils.GetDateDiff;
 import utils.GetZeroTimestampOfCurDate;
+import utils.JDK8DateTime;
 import utils.UTCTimeFormat;
 import utils.UTCTimestampFormat;
 import utils.UTCDateFormat;
@@ -127,9 +128,10 @@ public class TestDateTime extends YamlDataHelper{
 
     @Test(priority = 2, enabled = true, description = "验证函数Now()返回结果正常")
     public void test03NowFunc() throws SQLException {
-        UTCTimestampFormat utcNow = new UTCTimestampFormat();
-        String currentUTCTS = utcNow.getUTCTimestampStr();
-        String expectedNowStr = utcNow.formatUTCTimestamp(currentUTCTS);
+//        UTCTimestampFormat utcNow = new UTCTimestampFormat();
+//        String currentUTCTS = utcNow.getUTCTimestampStr();
+//        String expectedNowStr = utcNow.formatUTCTimestamp(currentUTCTS);
+        String expectedNowStr = JDK8DateTime.formatNow();
         System.out.println("Expected: " + expectedNowStr);
         String nowTimestampStr = dateTimeObj.nowFunc();
         System.out.println("Return: " + nowTimestampStr);
@@ -141,9 +143,10 @@ public class TestDateTime extends YamlDataHelper{
 
     @Test(priority = 3, enabled = true, description = "验证函数CurDate()返回结果正常")
     public void test04CurDateFunc() throws SQLException {
-        UTCDateFormat utcCurDate = new UTCDateFormat();
-        String curDateStr = utcCurDate.getUTCDateStr();
-        String expectedDateStr = utcCurDate.formatUTCDate(curDateStr);
+//        UTCDateFormat utcCurDate = new UTCDateFormat();
+//        String curDateStr = utcCurDate.getUTCDateStr();
+//        String expectedDateStr = utcCurDate.formatUTCDate(curDateStr);
+        String expectedDateStr = JDK8DateTime.formatCurDate();
         System.out.println("Expected: " + expectedDateStr);
         String actualCurDateStr = dateTimeObj.curDateFunc();
         System.out.println("Actual:" + actualCurDateStr);
@@ -152,9 +155,10 @@ public class TestDateTime extends YamlDataHelper{
 
     @Test(priority = 4, enabled = true, description = "验证函数Current_Date返回结果正常")
     public void test05Current_DateFunc() throws SQLException {
-        UTCDateFormat utcCurrentDate = new UTCDateFormat();
-        String currentDateStr = utcCurrentDate.getUTCDateStr();
-        String expectedCurrentDateStr = utcCurrentDate.formatUTCDate(currentDateStr);
+//        UTCDateFormat utcCurrentDate = new UTCDateFormat();
+//        String currentDateStr = utcCurrentDate.getUTCDateStr();
+//        String expectedCurrentDateStr = utcCurrentDate.formatUTCDate(currentDateStr);
+        String expectedCurrentDateStr = JDK8DateTime.formatCurDate();
         System.out.println("Expected: " + expectedCurrentDateStr);
         String actualCurrent_DateStr = dateTimeObj.current_DateFunc();
         System.out.println("Actual:" + actualCurrent_DateStr);
@@ -163,9 +167,10 @@ public class TestDateTime extends YamlDataHelper{
 
     @Test(priority = 5, enabled = true, description = "验证函数Current_Date()返回结果正常")
     public void test06Current_DateWithBracketsFunc() throws SQLException {
-        UTCDateFormat utcCurrentDateWB = new UTCDateFormat();
-        String currentDateWBStr = utcCurrentDateWB.getUTCDateStr();
-        String expectedCurrentDateWBStr = utcCurrentDateWB.formatUTCDate(currentDateWBStr);
+//        UTCDateFormat utcCurrentDateWB = new UTCDateFormat();
+//        String currentDateWBStr = utcCurrentDateWB.getUTCDateStr();
+//        String expectedCurrentDateWBStr = utcCurrentDateWB.formatUTCDate(currentDateWBStr);
+        String expectedCurrentDateWBStr = JDK8DateTime.formatCurDate();
         System.out.println("Expected: " + expectedCurrentDateWBStr);
         String actualCurrent_DateWithBracketsStr = dateTimeObj.current_DateWithBracketsFunc();
         System.out.println("Actual:" + actualCurrent_DateWithBracketsStr);
@@ -174,22 +179,25 @@ public class TestDateTime extends YamlDataHelper{
 
     @Test(priority = 6, enabled = true, description = "验证函数CurTime()返回结果正常")
     public void test07CurTimeFunc() throws SQLException {
-        UTCTimeFormat utcCurTime = new UTCTimeFormat();
-        String curTimeStr = utcCurTime.getUTCTimeStr();
-        String expectedCurTimeStr = utcCurTime.formatUTCTime(curTimeStr);
+//        UTCTimeFormat utcCurTime = new UTCTimeFormat();
+//        String curTimeStr = utcCurTime.getUTCTimeStr();
+//        String expectedCurTimeStr = utcCurTime.formatUTCTime(curTimeStr);
+        String expectedCurTimeStr = JDK8DateTime.formatCurTime();
         System.out.println("Expected: " + expectedCurTimeStr);
         String getCurTimeStr = dateTimeObj.curTimeFunc();
-        System.out.println("Actual:" + getCurTimeStr);
+        System.out.println("Return:" + getCurTimeStr);
         String actualCurTimeStr = getCurTimeStr.substring(0, 5);
+        System.out.println("Actual: " + actualCurTimeStr);
         Assert.assertEquals(getCurTimeStr.length(), 8);
         Assert.assertEquals(actualCurTimeStr, expectedCurTimeStr);
     }
 
     @Test(priority = 7, enabled = true, description = "验证函数Current_Time返回结果正常")
     public void test08Current_TimeFunc() throws SQLException {
-        UTCTimeFormat utcCurrentTime = new UTCTimeFormat();
-        String currentTimeStr = utcCurrentTime.getUTCTimeStr();
-        String expectedCurrentTimeStr = utcCurrentTime.formatUTCTime(currentTimeStr);
+//        UTCTimeFormat utcCurrentTime = new UTCTimeFormat();
+//        String currentTimeStr = utcCurrentTime.getUTCTimeStr();
+//        String expectedCurrentTimeStr = utcCurrentTime.formatUTCTime(currentTimeStr);
+        String expectedCurrentTimeStr = JDK8DateTime.formatCurTime();
         System.out.println("Expected: " + expectedCurrentTimeStr);
         String getCurrent_TimeStr = dateTimeObj.current_TimeFunc();
         System.out.println("Return: " + getCurrent_TimeStr);
@@ -201,9 +209,10 @@ public class TestDateTime extends YamlDataHelper{
 
     @Test(priority = 8, enabled = true, description = "验证函数Current_Time()返回结果正常")
     public void test09Current_TimeWithBracketsFunc() throws SQLException {
-        UTCTimeFormat utcCurrentTimeWB =new UTCTimeFormat();
-        String currentTimeWB = utcCurrentTimeWB.getUTCTimeStr();
-        String expectedCurrentTimeWBStr = utcCurrentTimeWB.formatUTCTime(currentTimeWB);
+//        UTCTimeFormat utcCurrentTimeWB =new UTCTimeFormat();
+//        String currentTimeWB = utcCurrentTimeWB.getUTCTimeStr();
+//        String expectedCurrentTimeWBStr = utcCurrentTimeWB.formatUTCTime(currentTimeWB);
+        String expectedCurrentTimeWBStr = JDK8DateTime.formatCurTime();
         System.out.println("Expected: " + expectedCurrentTimeWBStr);
         String getCurrent_TimeWithBracketsStr = dateTimeObj.current_TimeWithBracketsFunc();
         System.out.println("Return: " + getCurrent_TimeWithBracketsStr);
@@ -215,9 +224,10 @@ public class TestDateTime extends YamlDataHelper{
 
     @Test(priority = 9, enabled = true, description = "验证函数Current_TimeStamp返回结果正常")
     public void test10Current_TimeStampFunc() throws SQLException {
-        UTCTimestampFormat utcTimestamp = new UTCTimestampFormat();
-        String currentUTCTimeStamp = utcTimestamp.getUTCTimestampStr();
-        String expectedUTCTimeStampStr = utcTimestamp.formatUTCTimestamp(currentUTCTimeStamp);
+//        UTCTimestampFormat utcTimestamp = new UTCTimestampFormat();
+//        String currentUTCTimeStamp = utcTimestamp.getUTCTimestampStr();
+//        String expectedUTCTimeStampStr = utcTimestamp.formatUTCTimestamp(currentUTCTimeStamp);
+        String expectedUTCTimeStampStr = JDK8DateTime.formatNow();
         System.out.println("Expected: " + expectedUTCTimeStampStr);
         String getCurrent_TimeStampStr = dateTimeObj.current_TimeStampFunc();
         System.out.println("Return: " + getCurrent_TimeStampStr);
@@ -229,9 +239,10 @@ public class TestDateTime extends YamlDataHelper{
 
     @Test(priority = 10, enabled = true, description = "验证函数Current_TimeStamp()返回结果正常")
     public void test11Current_TimeStampWithBracketsFunc() throws SQLException {
-        UTCTimestampFormat utcTimestampWithBrackets = new UTCTimestampFormat();
-        String currentUTCTimeStamp = utcTimestampWithBrackets.getUTCTimestampStr();
-        String expectedUTCTimeStampStr = utcTimestampWithBrackets.formatUTCTimestamp(currentUTCTimeStamp);
+//        UTCTimestampFormat utcTimestampWithBrackets = new UTCTimestampFormat();
+//        String currentUTCTimeStamp = utcTimestampWithBrackets.getUTCTimestampStr();
+//        String expectedUTCTimeStampStr = utcTimestampWithBrackets.formatUTCTimestamp(currentUTCTimeStamp);
+        String expectedUTCTimeStampStr = JDK8DateTime.formatNow();
         System.out.println("Expected: " + expectedUTCTimeStampStr);
         String getCurrent_TimeStampWithBracketsStr = dateTimeObj.current_TimeStampWithBracketsFunc();
         System.out.println("Return: " + getCurrent_TimeStampWithBracketsStr);
