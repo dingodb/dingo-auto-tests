@@ -1,0 +1,13 @@
+(1,'zhangsan',18,23.50,'beijing'),
+(2,'lisi',null,89,' beijinghaidian '),
+(3,'lisi3',55,123.123,'wuhan NO.1 Street'),
+(4,'HAHA',57,9.0762556,'CHANGping'),
+(5,'wJDs',1,1453.9999,'pingYang1'),
+(6,'123',544,0,'543'),
+(7,'yamaha',76,2.30,'beijing changyang'),
+(8,'zhangsan',18,12.3,'shanghai'),
+(9,'oppo',76,109.325,'wuhan'),
+(10,'lisi',256,1234.456,'nanjing'),
+(11,' ab c d ',61,99.9999,'beijing chaoyang'),
+(12,' abcdef',2,2345.000,'123'),
+(13,'yamaha',null,23.4,'shanghai')

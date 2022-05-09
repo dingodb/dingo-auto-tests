@@ -63,7 +63,8 @@ public class TestBooleanField extends YamlDataHelper {
         Assert.assertTrue(actualTableList.contains(expectedTableName));
     }
 
-    @Test(priority = 1, enabled = true, dependsOnMethods = {"test01BooleanFieldTableCreate"}, description = "验证true型数据插入和查询成功")
+    @Test(priority = 1, enabled = true, dependsOnMethods = {"test01BooleanFieldTableCreate"},
+            description = "验证true型数据插入和查询成功")
     public void test02trueValuesInsertAndQuery() throws SQLException {
         int actualInsertRows = booleanObj.insertTrueValues();
         Assert.assertEquals(actualInsertRows, 4);
@@ -80,7 +81,8 @@ public class TestBooleanField extends YamlDataHelper {
         Assert.assertEquals(actualTrueList, expectedTrueList);
     }
 
-    @Test(priority = 2, enabled = true, dependsOnMethods = {"test02trueValuesInsertAndQuery"}, description = "验证false型数据插入和查询成功")
+    @Test(priority = 2, enabled = true, dependsOnMethods = {"test02trueValuesInsertAndQuery"},
+            description = "验证false型数据插入和查询成功")
     public void test03falseValuesInsertAndQuery() throws SQLException {
         int actualInsertRows = booleanObj.insertFalseValues();
         Assert.assertEquals(actualInsertRows, 4);
@@ -97,7 +99,8 @@ public class TestBooleanField extends YamlDataHelper {
         Assert.assertEquals(actualFalseList, expectedFalseList);
     }
 
-    @Test(priority = 3, enabled = true, dependsOnMethods = {"test03falseValuesInsertAndQuery"}, description = "验证布尔型数据插入和查询成功")
+    @Test(priority = 3, enabled = true, dependsOnMethods = {"test03falseValuesInsertAndQuery"},
+            description = "验证布尔型数据插入和查询成功")
     public void test04trueAndfalseValuesInsertAndQuery() throws SQLException {
         int actualInsertRows = booleanObj.insertTrueAndFalseValues();
         Assert.assertEquals(actualInsertRows, 7);
@@ -114,7 +117,8 @@ public class TestBooleanField extends YamlDataHelper {
         Assert.assertEquals(actualtrueAndfalseList, expectedtrueAndfalseList);
     }
 
-    @Test(priority = 4, enabled = true, dependsOnMethods = {"test04trueAndfalseValuesInsertAndQuery"}, description = "验证按true值查询")
+    @Test(priority = 4, enabled = true, dependsOnMethods = {"test04trueAndfalseValuesInsertAndQuery"},
+            description = "验证按true值查询")
     public void test05TrueValueQuery() throws SQLException {
         List<String> expectedTrueValueConditionList = new ArrayList<String>();
         String[] expectedNameArray = new String[] {"zhangsan","lisi","lisi3","HAHA","oppo"," ab c d ","YH","yamaha"};
@@ -128,7 +132,8 @@ public class TestBooleanField extends YamlDataHelper {
         Assert.assertEquals(actualtrueValueConditionList, expectedTrueValueConditionList);
     }
 
-    @Test(priority = 5, enabled = true, dependsOnMethods = {"test04trueAndfalseValuesInsertAndQuery"}, description = "验证按false值查询")
+    @Test(priority = 5, enabled = true, dependsOnMethods = {"test04trueAndfalseValuesInsertAndQuery"},
+            description = "验证按false值查询")
     public void test06FalseValueQuery() throws SQLException {
         List<Integer> expectedFalseValueConditionList = new ArrayList<Integer>();
         Integer[] expectedIDArray = new Integer[] {5, 6, 7, 8, 10, 12, 13};
@@ -142,7 +147,8 @@ public class TestBooleanField extends YamlDataHelper {
         Assert.assertEquals(actualfalseValueConditionList, expectedFalseValueConditionList);
     }
 
-    @Test(priority = 6, enabled = true, dependsOnMethods = {"test04trueAndfalseValuesInsertAndQuery"}, description = "验证按字段为真查询")
+    @Test(priority = 6, enabled = true, dependsOnMethods = {"test04trueAndfalseValuesInsertAndQuery"},
+            description = "验证按字段为真查询")
     public void test07FieldAsConditionQuery() throws SQLException {
         List<Boolean> expectedFieldList = new ArrayList<Boolean>();
         Boolean[] expectedFieldArray = new Boolean[] {true,true,true,true,true,true,true,true};
@@ -156,7 +162,8 @@ public class TestBooleanField extends YamlDataHelper {
         Assert.assertEquals(actualFieldList, expectedFieldList);
     }
 
-    @Test(priority = 7, enabled = true, dependsOnMethods = {"test04trueAndfalseValuesInsertAndQuery"}, description = "验证按字段为假查询")
+    @Test(priority = 7, enabled = true, dependsOnMethods = {"test04trueAndfalseValuesInsertAndQuery"},
+            description = "验证按字段为假查询")
     public void test08NotFieldAsConditionQuery() throws SQLException {
         List<Boolean> expectedNotFieldList = new ArrayList<Boolean>();
         Boolean[] expectedNotFieldArray = new Boolean[] {false,false,false,false,false,false,false};
@@ -170,24 +177,49 @@ public class TestBooleanField extends YamlDataHelper {
         Assert.assertEquals(actualNotFieldList, expectedNotFieldList);
     }
 
-    @Test(priority = 8, enabled = true, expectedExceptions = SQLException.class, dataProvider = "yamlDataMethod",
+    @Test(priority = 8, enabled = true, expectedExceptions = SQLException.class, dataProvider = "yamlBooleanMethod",
             dependsOnMethods = {"test08NotFieldAsConditionQuery"}, description = "预期插入失败")
     public void test09InsertStrValue(Map<String, String> param) throws SQLException {
         String booleanTable = BooleanField.getBooleanTableName();
         Statement statement = BooleanField.connection.createStatement();
-        String insertSql = "insert into " + booleanTable + " values (" + param.get("ID") + ",'vivo',20,456.7,'shanghai','" + param.get("booleanValue") + "')";
+        String insertSql = "insert into " + booleanTable + " values (" + param.get("ID") +
+                ",'vivo',20,456.7,'shanghai','" + param.get("booleanValue") + "')";
         statement.execute(insertSql);
         statement.close();
     }
 
-    @Test(priority = 9, enabled = true, expectedExceptions = SQLException.class, dataProvider = "yamlDataMethod",
-            dependsOnMethods = {"test08NotFieldAsConditionQuery"}, description = "预期插入失败")
+    @Test(priority = 9, enabled = true, expectedExceptions = SQLException.class, dataProvider = "yamlBooleanMethod",
+            dependsOnMethods = {"test09InsertStrValue"}, description = "预期插入失败")
     public void test10InsertWrongValue(Map<String, String> param) throws SQLException {
         String booleanTable = BooleanField.getBooleanTableName();
         Statement statement = BooleanField.connection.createStatement();
-        String insertSql = "insert into " + booleanTable + " values (" + param.get("ID") + ",'vivo',20,456.7,'shanghai'," + param.get("booleanValue") + ")";
+        String insertSql = "insert into " + booleanTable + " values (" + param.get("ID") +
+                ",'vivo',20,456.7,'shanghai'," + param.get("booleanValue") + ")";
         statement.execute(insertSql);
         statement.close();
+    }
+
+
+    @Test(priority = 10, enabled = true, dependsOnMethods = {"test04trueAndfalseValuesInsertAndQuery"},
+            description = "验证插入0，转换为False")
+    public void test11ZeroValueQuery() throws SQLException {
+        int actualInsertRows = booleanObj.insertZeroValues();
+        Assert.assertEquals(actualInsertRows, 1);
+        Boolean actualZeroValue = booleanObj.getZeroValues();
+        System.out.println("Actual: " + actualZeroValue);
+
+        Assert.assertFalse(actualZeroValue);
+    }
+
+    @Test(priority = 11, enabled = true, dependsOnMethods = {"test04trueAndfalseValuesInsertAndQuery"},
+            dataProvider = "yamlBooleanMethod", description = "验证插入正整数，转换为True")
+    public void test12IntegerValueQuery(Map<String, String> param) throws SQLException {
+        int actualInsertRows = booleanObj.insertPosIntegerValues(param.get("ID"), param.get("booleanValue"));
+        Assert.assertEquals(actualInsertRows, 1);
+        Boolean actualIntegerValue = booleanObj.getIntegerValues(param.get("ID"));
+        System.out.println("Actual: " + actualIntegerValue);
+
+        Assert.assertTrue(actualIntegerValue);
     }
 
     @AfterClass (alwaysRun = true, description = "执行测试后删除数据，删除表")

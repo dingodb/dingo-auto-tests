@@ -52,6 +52,7 @@ public class TestSQLFuncs {
     @Test(dependsOnMethods = {"test01MultiInsert"}, groups = {"funcs"}, description = "验证表格数据统计")
     public void test02CountFunc() throws SQLException, ClassNotFoundException {
         int expectedCountRows = 9;
+        System.out.println("Expected: " + expectedCountRows);
         int actualCountRows = funcObj.countFunc();
         System.out.println("实际统计总数：" + actualCountRows);
 

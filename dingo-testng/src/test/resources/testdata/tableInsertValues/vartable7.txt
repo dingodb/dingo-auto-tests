@@ -1,0 +1,4 @@
+(1,'oppo',76,109.325,'wuhan', True),
+(2,'lisi',256,1234.456,'nanjing', False),
+(3,' ab c d ',61,99.9999,'beijing chaoyang', true),
+(4,' abcdef',2,2345.000,'123', false)

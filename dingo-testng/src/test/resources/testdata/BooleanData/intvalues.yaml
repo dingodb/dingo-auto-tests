@@ -1,0 +1,18 @@
+testID1000993-01:
+  ID: "36"
+  booleanValue: "1"
+testID1000993-02:
+  ID: "37"
+  booleanValue: "2"
+testID1000993-03:
+  ID: "38"
+  booleanValue: "128"
+testID1000993-04:
+  ID: "39"
+  booleanValue: "255"
+testID1000993-05:
+  ID: "40"
+  booleanValue: "4294967295"
+testID1000993-06:
+  ID: "41"
+  booleanValue: "4294967296"

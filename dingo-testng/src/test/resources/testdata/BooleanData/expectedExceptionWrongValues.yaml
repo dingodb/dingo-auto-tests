@@ -1,12 +1,36 @@
 testID1000998-01:
-  ID: "21"
+  ID: "23"
   booleanValue: "true1"
 testID1000998-02:
-  ID: "22"
+  ID: "24"
   booleanValue: "isTrue"
 testID1000998-03:
-  ID: "23"
+  ID: "25"
   booleanValue: "isFalse"
 testID1000998-04:
-  ID: "24"
+  ID: "26"
   booleanValue: "False0"
+testID1000995-01:
+  ID: "27"
+  booleanValue: "-1"
+testID1000995-02:
+  ID: "28"
+  booleanValue: "-128"
+testID1000995-03:
+  ID: "29"
+  booleanValue: "-2.5"
+testID1000996-01:
+  ID: "30"
+  booleanValue: "1.4"
+testID1000996-02:
+  ID: "31"
+  booleanValue: "1.9"
+testID1000996-03:
+  ID: "32"
+  booleanValue: "0.5"
+testID1000996-04:
+  ID: "33"
+  booleanValue: "0.1"
+testID1000996-05:
+  ID: "34"
+  booleanValue: "0.0"

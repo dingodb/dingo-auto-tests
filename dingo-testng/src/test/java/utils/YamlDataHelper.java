@@ -128,17 +128,36 @@ public class YamlDataHelper{
                 yamlList = getYamlList(iniReader.getValue("DateTimeYaml", "funcConcatStr"));
                 break;
             }
-            case "test09InsertStrValue": {
-                yamlList = getYamlList(iniReader.getValue("BooleanField", "strValue"));
-            }
-            case "test10InsertWrongValue": {
-                yamlList = getYamlList(iniReader.getValue("BooleanField", "wrongValue"));
-            }
         }
         Object[][] files = new Object[yamlList.size()][];
         for (int i = 0; i < yamlList.size(); i++) {
             files[i] = new Object[]{yamlList.get(i)};
         }
         return files;
+    }
+
+    @DataProvider
+    public Object[][] yamlBooleanMethod(Method method) {
+        List<Map<String, String>> yamlBooleanList = null;
+        switch (method.getName()) {
+            case "test09InsertStrValue": {
+                yamlBooleanList = getYamlList(iniReader.getValue("BooleanField", "strValue"));
+                break;
+            }
+            case "test10InsertWrongValue": {
+                yamlBooleanList = getYamlList(iniReader.getValue("BooleanField", "wrongValue"));
+                break;
+            }
+            case "test12IntegerValueQuery": {
+                yamlBooleanList = getYamlList(iniReader.getValue("BooleanField", "intValue"));
+                break;
+            }
+        }
+        Object[][] files = new Object[yamlBooleanList.size()][];
+        for (int i = 0; i < yamlBooleanList.size(); i++) {
+            files[i] = new Object[]{yamlBooleanList.get(i)};
+        }
+        return files;
+
     }
 }

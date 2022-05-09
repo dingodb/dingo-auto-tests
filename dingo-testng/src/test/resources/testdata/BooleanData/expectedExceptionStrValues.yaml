@@ -13,3 +13,9 @@ testID1000997-04:
 testID1000997-05:
   ID: "20"
   booleanValue: "1"
+testID1000991-01:
+  ID: "21"
+  booleanValue: "True"
+testID1000991-02:
+  ID: "22"
+  booleanValue: "False"

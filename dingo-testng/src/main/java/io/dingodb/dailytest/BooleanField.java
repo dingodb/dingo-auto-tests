@@ -86,7 +86,7 @@ public class BooleanField {
         String booleanTableName = getBooleanTableName();
         Statement statement = connection.createStatement();
 
-        String queryTrueSql = "select * from " + booleanTableName;
+        String queryTrueSql = "select * from " + booleanTableName + " where id < 5";
         ResultSet queryTrueRst = statement.executeQuery(queryTrueSql);
         List<Boolean> trueList = new ArrayList<Boolean>();
         while (queryTrueRst.next()) {
@@ -118,7 +118,7 @@ public class BooleanField {
         String booleanTableName = getBooleanTableName();
         Statement statement = connection.createStatement();
 
-        String queryFalseSql = "select * from " + booleanTableName + " where id >4";
+        String queryFalseSql = "select * from " + booleanTableName + " where id >4 and id < 9";
         ResultSet queryFalseRst = statement.executeQuery(queryFalseSql);
         List<Boolean> falseList = new ArrayList<Boolean>();
         while (queryFalseRst.next()) {
@@ -153,7 +153,7 @@ public class BooleanField {
         String booleanTableName = getBooleanTableName();
         Statement statement = connection.createStatement();
 
-        String queryTrueAndFalseSql = "select * from " + booleanTableName + " where id > 8";
+        String queryTrueAndFalseSql = "select * from " + booleanTableName + " where id > 8 and id < 16";
         ResultSet queryTrueAndFalseRst = statement.executeQuery(queryTrueAndFalseSql);
         List<Boolean> trueAndfalseList = new ArrayList<Boolean>();
         while (queryTrueAndFalseRst.next()) {
@@ -221,6 +221,64 @@ public class BooleanField {
         }
         statement.close();
         return notFieldConditionList;
+    }
+
+    //插入0转换为false
+    public int insertZeroValues() throws SQLException {
+        String booleanTableName = getBooleanTableName();
+        Statement statement = connection.createStatement();
+
+        String insertZeroSql = "insert into " + booleanTableName + " values "
+                + "(35,'oppo',20,1.2,'wuhan', 0)";
+
+        int insertZeroRows = statement.executeUpdate(insertZeroSql);
+        statement.close();
+        return insertZeroRows;
+    }
+
+    // 查看0转换后数据
+    public Boolean getZeroValues() throws SQLException {
+        String booleanTableName = getBooleanTableName();
+        Statement statement = connection.createStatement();
+
+        String queryZeroSql = "select * from " + booleanTableName + " where id=35";
+        ResultSet queryZeroRst = statement.executeQuery(queryZeroSql);
+        Boolean zeroOut = null;
+        while (queryZeroRst.next()) {
+            zeroOut = queryZeroRst.getBoolean("is_delete");
+        }
+
+        statement.close();
+        return zeroOut;
+    }
+
+    //插入正整数转换为true
+    public int insertPosIntegerValues(String insertID, String insertIntegerValue) throws SQLException {
+        String booleanTableName = getBooleanTableName();
+        Statement statement = connection.createStatement();
+
+        String insertPosIntegerSql = "insert into " + booleanTableName + " values "
+                + "(" + insertID + ",'oppo',20,1.2,'wuhan'," + insertIntegerValue + ")";
+
+        int insertIntegerRows = statement.executeUpdate(insertPosIntegerSql);
+        statement.close();
+        return insertIntegerRows;
+    }
+
+    // 查看正整数转换后数据
+    public Boolean getIntegerValues(String insertID) throws SQLException {
+        String booleanTableName = getBooleanTableName();
+        Statement statement = connection.createStatement();
+
+        String queryIntegerSql = "select * from " + booleanTableName + " where id = " + insertID;
+        ResultSet queryIntegerRst = statement.executeQuery(queryIntegerSql);
+        Boolean integerOut = null;
+        while (queryIntegerRst.next()) {
+            integerOut = queryIntegerRst.getBoolean("is_delete");
+        }
+
+        statement.close();
+        return integerOut;
     }
 
 
