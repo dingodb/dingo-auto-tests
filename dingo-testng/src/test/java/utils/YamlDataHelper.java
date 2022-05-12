@@ -158,6 +158,26 @@ public class YamlDataHelper{
             files[i] = new Object[]{yamlBooleanList.get(i)};
         }
         return files;
+    }
 
+    @DataProvider
+    public Object[][] yamlStrFuncMethod(Method method) {
+        List<Map<String, String>> yamlStrFuncList = null;
+        switch (method.getName()) {
+            case "test16Char_LengthStr": {
+                yamlStrFuncList = getYamlList(iniReader.getValue("strFuncYaml", "char_length"));
+                break;
+            }
+            case "test17Char_LengthNonStr": {
+                yamlStrFuncList = getYamlList(iniReader.getValue("strFuncYaml", "char_lengthNonStr"));
+                break;
+            }
+
+        }
+        Object[][] files = new Object[yamlStrFuncList.size()][];
+        for (int i = 0; i < yamlStrFuncList.size(); i++) {
+            files[i] = new Object[]{yamlStrFuncList.get(i)};
+        }
+        return files;
     }
 }

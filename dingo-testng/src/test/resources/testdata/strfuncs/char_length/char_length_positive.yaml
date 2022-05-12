@@ -1,0 +1,39 @@
+testID1001135-01:
+  paramstr: "abcdefg"
+  outputlen: "7"
+testID1001135-02:
+  paramstr: "1234567890"
+  outputlen: "10"
+testID1001135-03:
+  paramstr: "abcd1234"
+  outputlen: "8"
+testID1001135-04:
+  paramstr: "abc_~!@#$%^&*()_+=-|][}{;:/.,?><10"
+  outputlen: "34"
+testID1001135-05:
+  paramstr: "0"
+  outputlen: "1"
+testID1001135-06:
+  paramstr: "0.500"
+  outputlen: "5"
+testID1001135-07:
+  paramstr: "05"
+  outputlen: "2"
+testID1001135-08:
+  paramstr: "2022/5/12 13:23:59"
+  outputlen: "18"
+testID1001135-09:
+  paramstr: "2022-05-12 00:00:00"
+  outputlen: "19"
+testID1001137-01:
+  paramstr: ""
+  outputlen: "0"
+testID1001140-01:
+  paramstr: "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890_~!@#$%^&*()_+=-|][}{;:/.,?><10 abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890_~!@#$%^&*()_+=-|][}{;:/.,?><10abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890_~!@#$%^&*()_+=-|][}{;:/.,?><10abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890_~!@#$%^&*()_+=-|][}{;:/.,?><10abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890_~!@#$%^&*()_+=-|][}{;:/.,?><10abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890_~!@#$%^&*()_+=-|][}{;:/.,?><10abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890_~!@#$%^&*()_+=-|][}{;:/.,?><10abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890_~!@#$%^&*()_+=-|][}{;:/.,?><10abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890_~!@#$%^&*()_+=-|][}{;:/.,?><10 abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890_~!@#$%^&*()_+=-|][}{;:/.,?><10abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890_~!@#$%^&*()_+=-|][}{;:/.,?><10abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890_~!@#$%^&*()_+=-|][}{;:/.,?><10abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890_~!@#$%^&*()_+=-|][}{;:/.,?><10abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890_~!@#$%^&*()_+=-|][}{;:/.,?><10abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890_~!@#$%^&*()_+=-|][}{;:/.,?><10abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890_~!@#$%^&*()_+=-|][}{;:/.,?><10abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890_~!@#$%^&*()_+=-|][}{;:/.,?><10<10 abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890_~!@#$%^&*()_+=-|][}{;:/.,?><10abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890_~!@#$%^&*()_+=-|][}{;:/.,?><10abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890_~!@#$%^&*()_+=-|][}{;:/.,?><10abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890_~!@#$%^&*()_+=-|][}{;:/.,?><10abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890_~!@#$%^&*()_+=-|][}{;:/.,?><10abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890_~!@#$%^&*()_+=-|][}{;:/.,?><10abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890_~!@#$%^&*()_+=-|][}{;:/.,?><10abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890_~!@#$%^&*()_+=-|][}{;:/.,?><10<10 abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890_~!@#$%^&*()_+=-|][}{;:/.,?><10abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890_~!@#$%^&*()_+=-|][}{;:/.,?><10abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890_~!@#$%^&*()_+=-|][}{;:/.,?><10abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890_~!@#$%^&*()_+=-|][}{;:/.,?><10abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890_~!@#$%^&*()_+=-|][}{;:/.,?><10abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890_~!@#$%^&*()_+=-|][}{;:/.,?><10abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890_~!@#$%^&*()_+=-|][}{;:/.,?><10abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890_~!@#$%^&*()_+=-|][}{;:/.,?><10"
+  outputlen: "3145"
+testID1001145-01:
+  paramstr: "  a  b "
+  outputlen: "7"
+testID1001145-02:
+  paramstr: "   "
+  outputlen: "3"

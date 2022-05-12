@@ -370,4 +370,99 @@ public class StrFuncs {
         return reverseList;
     }
 
+    // 获取字符串参数的字符长度
+    public int charlengthStr(String paramStr) throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+        String char_lengthSQL = "select char_length('" + paramStr + "')";
+        ResultSet char_lengthRst = statement.executeQuery(char_lengthSQL);
+        Integer lengthNum = null;
+
+        while(char_lengthRst.next()) {
+            lengthNum = char_lengthRst.getInt(1);
+        }
+
+        statement.close();
+        return lengthNum;
+    }
+
+    // 获取非字符串参数的字符长度
+    public int charlengthNonStr(String paramStr) throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+        String char_lengthSQL = "select char_length(" + paramStr + ")";
+        ResultSet char_lengthRst = statement.executeQuery(char_lengthSQL);
+        Integer lengthNum = null;
+
+        while(char_lengthRst.next()) {
+            lengthNum = char_lengthRst.getInt(1);
+        }
+
+        statement.close();
+        return lengthNum;
+    }
+    // 参数为null,char_length返回长度null
+    public Object charlengthNull() throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+        String char_lengthSQL = "select char_length(null)";
+        ResultSet char_lengthRst = statement.executeQuery(char_lengthSQL);
+        Object lengthNum = null;
+        while(char_lengthRst.next()) {
+            lengthNum = char_lengthRst.getObject(1);
+        }
+        statement.close();
+        return lengthNum;
+    }
+
+    // 参数为空char_length返回异常
+    public Integer charlengthBlankParam() throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+        String char_lengthSQL = "select char_length()";
+        ResultSet char_lengthRst = statement.executeQuery(char_lengthSQL);
+        Integer lengthNum = null;
+        while(char_lengthRst.next()) {
+            lengthNum = char_lengthRst.getInt(1);
+        }
+        statement.close();
+        return lengthNum;
+    }
+
+    // 表格中使用char_length
+    public List<List<Integer>> charlengthInTable() throws SQLException, ClassNotFoundException {
+        String strFuncTableName = getStrTableName();
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+        String char_lengthSQL = "select char_length(name) cln, char_length(address) cla, " +
+                "char_length(age),char_length(amount) from " + strFuncTableName;
+        ResultSet char_lengthRst = statement.executeQuery(char_lengthSQL);
+        List<List<Integer>> char_lengthInTableList = new ArrayList<List<Integer>>();
+        while(char_lengthRst.next()) {
+            List<Integer> char_lengthRowList = new ArrayList<Integer>();
+            char_lengthRowList.add(char_lengthRst.getInt(1));
+            char_lengthRowList.add(char_lengthRst.getInt(2));
+            char_lengthRowList.add(char_lengthRst.getInt(3));
+            char_lengthRowList.add(char_lengthRst.getInt(4));
+            char_lengthInTableList.add(char_lengthRowList);
+        }
+        statement.close();
+        return char_lengthInTableList;
+    }
+
+    // 字符串函数中使用char_length
+    public List<String> charlengthInStrFunc() throws SQLException, ClassNotFoundException {
+        String strFuncTableName = getStrTableName();
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+        String char_lengthSQL = "select mid(address,3,char_length(address)-2) msub from " + strFuncTableName;
+        ResultSet char_lengthInFuncRst = statement.executeQuery(char_lengthSQL);
+        List<String> char_lengthInStrFuncList = new ArrayList<String>();
+        while(char_lengthInFuncRst.next()) {
+            char_lengthInStrFuncList.add(char_lengthInFuncRst.getString("msub"));
+        }
+        statement.close();
+        return char_lengthInStrFuncList;
+    }
+
 }

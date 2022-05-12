@@ -23,15 +23,17 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+import utils.YamlDataHelper;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Listeners(EmailableReporterListener.class)
-public class TestStrFuncs {
+public class TestStrFuncs extends YamlDataHelper {
     private static Connection connection;
     public static StrFuncs strObj = new StrFuncs();
 
@@ -266,6 +268,75 @@ public class TestStrFuncs {
         List<String> actualReverseList = strObj.reverseFunc();
         System.out.println("实际输出列表为：" + actualReverseList);
         Assert.assertTrue(actualReverseList.equals(expectedReverseList));
+    }
+
+    @Test(enabled = true, dataProvider = "yamlStrFuncMethod", description = "验证获取字符串参数字符长度")
+    public void test16Char_LengthStr(Map<String, String> param) throws SQLException, ClassNotFoundException {
+        int expectedCharLength = Integer.valueOf(param.get("outputlen"));
+        System.out.println("Expected: " + expectedCharLength);
+        int actualCharLength = strObj.charlengthStr(param.get("paramstr"));
+        System.out.println("Actual: " + actualCharLength);
+
+        Assert.assertEquals(actualCharLength, expectedCharLength);
+    }
+
+    @Test(enabled = true, dataProvider = "yamlStrFuncMethod", description = "验证获取非字符串参数字符长度")
+    public void test17Char_LengthNonStr(Map<String, String> param) throws SQLException, ClassNotFoundException {
+        int expectedCharLength = Integer.valueOf(param.get("outputlen"));
+        System.out.println("Expected: " + expectedCharLength);
+        int actualCharLength = strObj.charlengthNonStr(param.get("paramstr"));
+        System.out.println("Actual: " + actualCharLength);
+
+        Assert.assertEquals(actualCharLength, expectedCharLength);
+    }
+
+    @Test(enabled = true, description = "验证参数为null返回null")
+    public void test18Char_LengthNull() throws SQLException, ClassNotFoundException {
+        Object actualCharLength = strObj.charlengthNull();
+        System.out.println("Actual: " + actualCharLength);
+
+        Assert.assertNull(actualCharLength);
+    }
+
+    @Test(enabled = true, expectedExceptions = SQLException.class, description = "验证参数为空，执行异常")
+    public void test19Char_LengthBlankParam() throws SQLException, ClassNotFoundException {
+        Integer actualCharLength = strObj.charlengthBlankParam();
+    }
+
+    @Test(enabled = true, description = "验证char_length函数在表格中使用")
+    public void test20Char_lengthInTable() throws SQLException, ClassNotFoundException {
+        Integer[][] charLengthArray = {{8,7,2,4},{4,17,2,5}, {2,17,2,7},{4,9,2,9},{5,9,1,9},{3,3,3,3},{6,17,2,3},
+                {8,8,2,4},{3,5,2,7},{4,7,3,8},{11,16,2,7},{7,3,1,6},{4,9,2,9},{7,11,2,4},{3,20,2,6}};
+        List<List<Integer>> expectedChar_LengthList = new ArrayList<List<Integer>>();
+        for(int i=0; i<charLengthArray.length; i++) {
+            List<Integer> columnList = new ArrayList<>();
+            for (int j=0; j<charLengthArray[i].length; j++) {
+                columnList.add(charLengthArray[i][j]);
+            }
+            expectedChar_LengthList.add(columnList);
+        }
+        System.out.println("Expected: " + expectedChar_LengthList);
+        List<List<Integer>> actualChar_LengthList = strObj.charlengthInTable();
+        System.out.println("Actual: " + actualChar_LengthList);
+
+        Assert.assertTrue(actualChar_LengthList.containsAll(expectedChar_LengthList));
+        Assert.assertTrue(expectedChar_LengthList.containsAll(actualChar_LengthList));
+    }
+
+    @Test(enabled = true, description = "验证char_length在其他字符串函数中使用")
+    public void test21Char_lengthInStrFunc() throws SQLException, ClassNotFoundException {
+        List<String> expectedChar_lengthList = new ArrayList<String>();
+        String[] char_lengthArray = new String[]{"ijing","eijing haidian ","han NO.1 Street","ANGping","ngYang1","3",
+                "ijing changyang","anghai","han","njing","ijing chaoyang","3","ANGping","ong qing ","tp://WWW.baidu.com",};
+        for (int i=0; i < char_lengthArray.length; i++){
+            expectedChar_lengthList.add(char_lengthArray[i]);
+        }
+        System.out.println("期望输出列表：" + expectedChar_lengthList);
+
+        List<String> actualChar_lengthInFuncList = strObj.charlengthInStrFunc();
+        System.out.println("实际输出列表：" + actualChar_lengthInFuncList);
+
+        Assert.assertTrue(actualChar_lengthInFuncList.equals(expectedChar_lengthList));
     }
 
 

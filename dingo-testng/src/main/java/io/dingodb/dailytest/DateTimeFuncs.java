@@ -316,6 +316,8 @@ public class DateTimeFuncs {
         while (nowRst.next()) {
             nowString = nowRst.getString(1);
         }
+
+        statement.close();
         return nowString;
     }
 
@@ -328,6 +330,8 @@ public class DateTimeFuncs {
         while (curDateRst.next()) {
             curDateString = curDateRst.getString(1);
         }
+
+        statement.close();
         return curDateString;
     }
 
@@ -340,6 +344,8 @@ public class DateTimeFuncs {
         while (current_DateRst.next()) {
             current_DateString = current_DateRst.getString(1);
         }
+
+        statement.close();
         return current_DateString;
     }
 
@@ -352,6 +358,8 @@ public class DateTimeFuncs {
         while (current_DateWithBracketsRst.next()) {
             current_DateWithBracketString = current_DateWithBracketsRst.getString(1);
         }
+
+        statement.close();
         return current_DateWithBracketString;
     }
 
@@ -364,6 +372,8 @@ public class DateTimeFuncs {
         while (curTimeRst.next()) {
             curTimeString = curTimeRst.getString(1);
         }
+
+        statement.close();
         return curTimeString;
     }
 
@@ -376,6 +386,8 @@ public class DateTimeFuncs {
         while (current_TimeRst.next()) {
             current_TimeString = current_TimeRst.getString(1);
         }
+
+        statement.close();
         return current_TimeString;
     }
 
@@ -388,6 +400,8 @@ public class DateTimeFuncs {
         while (current_TimeWithBracketsRst.next()) {
             current_TimeWithBracketsString = current_TimeWithBracketsRst.getString(1);
         }
+
+        statement.close();
         return current_TimeWithBracketsString;
     }
 
@@ -400,6 +414,8 @@ public class DateTimeFuncs {
         while (current_TimeStampRst.next()) {
             current_TimeStampString = current_TimeStampRst.getString(1);
         }
+
+        statement.close();
         return current_TimeStampString;
     }
 
@@ -412,6 +428,8 @@ public class DateTimeFuncs {
         while (current_TimeStampWithBracketsRst.next()) {
             current_TimeStampWithBracketsString = current_TimeStampWithBracketsRst.getString(1);
         }
+
+        statement.close();
         return current_TimeStampWithBracketsString;
     }
 
@@ -424,6 +442,8 @@ public class DateTimeFuncs {
         while (from_UnixTimeRst.next()) {
             from_UnixTimeString = from_UnixTimeRst.getString(1);
         }
+
+        statement.close();
         return from_UnixTimeString;
     }
 
@@ -436,6 +456,8 @@ public class DateTimeFuncs {
         while (from_UnixTimeWithStringRst.next()) {
             from_UnixTimeWithStringStr = from_UnixTimeWithStringRst.getString(1);
         }
+
+        statement.close();
         return from_UnixTimeWithStringStr;
     }
 
@@ -448,6 +470,8 @@ public class DateTimeFuncs {
         while (unixTimeStampRst.next()) {
             unix_TimeStampStr = unixTimeStampRst.getString(1);
         }
+
+        statement.close();
         return unix_TimeStampStr;
     }
 
@@ -460,6 +484,8 @@ public class DateTimeFuncs {
         while (unixTimeStampNoArgRst.next()) {
             unix_TimeStampNoArgStr = unixTimeStampNoArgRst.getString(1);
         }
+
+        statement.close();
         return unix_TimeStampNoArgStr;
     }
 
@@ -472,6 +498,8 @@ public class DateTimeFuncs {
         while (unixTimeStampFuncArgRst.next()) {
             unix_TimeStampFuncArgStr = unixTimeStampFuncArgRst.getString(1);
         }
+
+        statement.close();
         return unix_TimeStampFuncArgStr;
     }
 
@@ -484,6 +512,8 @@ public class DateTimeFuncs {
         while (date_formatSargRst.next()) {
             date_formatSargStr = date_formatSargRst.getString(1);
         }
+
+        statement.close();
         return date_formatSargStr;
     }
 
@@ -496,6 +526,8 @@ public class DateTimeFuncs {
         while (date_formatNargRst.next()) {
             date_formatNargStr = date_formatNargRst.getString(1);
         }
+
+        statement.close();
         return date_formatNargStr;
     }
 
@@ -508,6 +540,8 @@ public class DateTimeFuncs {
         while (date_formatFuncArgRst.next()) {
             date_formatFuncArgStr = date_formatFuncArgRst.getString(1);
         }
+
+        statement.close();
         return date_formatFuncArgStr;
     }
 
@@ -520,6 +554,8 @@ public class DateTimeFuncs {
         while (dateDiffSargRst.next()) {
             dateDiffSargStr = dateDiffSargRst.getString(1);
         }
+
+        statement.close();
         return dateDiffSargStr;
     }
 
@@ -532,6 +568,8 @@ public class DateTimeFuncs {
         while (dateDiffNargRst.next()) {
             dateDiffNargStr = dateDiffNargRst.getString(1);
         }
+
+        statement.close();
         return dateDiffNargStr;
     }
 
@@ -544,6 +582,8 @@ public class DateTimeFuncs {
         while (dateDiffFarg1Rst.next()) {
             dateDiffFarg1Str = dateDiffFarg1Rst.getString(1);
         }
+
+        statement.close();
         return dateDiffFarg1Str;
     }
     // 获取函数DateDiff第二个参数为时间日期函数返回值
@@ -555,6 +595,8 @@ public class DateTimeFuncs {
         while (dateDiffFarg2Rst.next()) {
             dateDiffFarg2Str = dateDiffFarg2Rst.getString(1);
         }
+
+        statement.close();
         return dateDiffFarg2Str;
     }
 
@@ -567,6 +609,8 @@ public class DateTimeFuncs {
         while (funcConcatRst.next()) {
             funcConcatStr = funcConcatRst.getString(1);
         }
+
+        statement.close();
         return funcConcatStr;
     }
 

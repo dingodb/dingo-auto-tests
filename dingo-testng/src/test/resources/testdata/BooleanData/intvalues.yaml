@@ -12,7 +12,22 @@ testID1000993-04:
   booleanValue: "255"
 testID1000993-05:
   ID: "40"
-  booleanValue: "4294967295"
+  booleanValue: "256"
 testID1000993-06:
   ID: "41"
+  booleanValue: "65535"
+testID1000993-07:
+  ID: "42"
+  booleanValue: "65536"
+testID1000993-08:
+  ID: "43"
+  booleanValue: "2147483647"
+testID1000993-09:
+  ID: "44"
+  booleanValue: "2147483648"
+testID1000993-10:
+  ID: "45"
+  booleanValue: "4294967295"
+testID1000993-11:
+  ID: "46"
   booleanValue: "4294967296"

@@ -141,6 +141,7 @@ public class TableInnerJoin {
             equalRowList.add(joinRst.getString(2));
             joinList.add(equalRowList);
         }
+        statement.close();
         return joinList;
     }
 
@@ -155,6 +156,7 @@ public class TableInnerJoin {
             equalRowAliasList.add(joinAliasRst.getString(2));
             joinAliasList.add(equalRowAliasList);
         }
+        statement.close();
         return joinAliasList;
     }
 
@@ -172,6 +174,7 @@ public class TableInnerJoin {
             equalRowWithTablePrefixList.add(joinWithTablePrefixRst.getString(4));
             joinWithTablePrefixList.add(equalRowWithTablePrefixList);
         }
+        statement.close();
         return joinWithTablePrefixList;
     }
 
@@ -186,6 +189,7 @@ public class TableInnerJoin {
             equalRowList.add(tableExchangeRst.getString(2));
             tableExchangeList.add(equalRowList);
         }
+        statement.close();
         return tableExchangeList;
     }
 
@@ -201,6 +205,7 @@ public class TableInnerJoin {
             equalRowList.add(innerJoinGroupRst.getString(2));
             innerJoinGroupList.add(equalRowList);
         }
+        groupStatement.close();
         return innerJoinGroupList;
     }
 
@@ -216,6 +221,7 @@ public class TableInnerJoin {
             equalRowList.add(innerJoinWhereRst.getString(2));
             innerJoinWhereList.add(equalRowList);
         }
+        whereStatement.close();
         return innerJoinWhereList;
     }
 
@@ -232,6 +238,7 @@ public class TableInnerJoin {
             equalRowList.add(joinGroupAndOrderRst.getString("department_name"));
             joinGroupAndOrderList.add(equalRowList);
         }
+        joinGroupAndOrderStatement.close();
         return joinGroupAndOrderList;
     }
 
@@ -247,6 +254,7 @@ public class TableInnerJoin {
             equalRowList.add(joinGroupAndOrderLimitRst.getString(2));
             joinGroupAndOrderLimitList.add(equalRowList);
         }
+        joinGroupAndOrderLimitStatement.close();
         return joinGroupAndOrderLimitList;
     }
 
@@ -261,6 +269,7 @@ public class TableInnerJoin {
             equalRowList.add(joinOmitInnerRst.getString(2));
             joinOmitInnerList.add(equalRowList);
         }
+        statement.close();
         return joinOmitInnerList;
     }
 
@@ -272,6 +281,7 @@ public class TableInnerJoin {
         while (joinNoSameDataRst.next()) {
             joinNoSameDataList.add(joinNoSameDataRst.getString(1));
         }
+        statement.close();
         return joinNoSameDataList;
     }
 
@@ -280,7 +290,6 @@ public class TableInnerJoin {
         String createSelfJoinsql = "create table mytest (id int, name varchar(20), manager_id int, primary key(id))";
         createSelfJoinstatement.execute(createSelfJoinsql);
         createSelfJoinstatement.close();
-
     }
 
     public void insertValuesToSelftJoinTable(String selfValues) throws SQLException {
@@ -301,6 +310,8 @@ public class TableInnerJoin {
             equalRowList.add(selfJoinRst.getString(2));
             selfJoinList.add(equalRowList);
         }
+
+        statement.close();
         return selfJoinList;
     }
 

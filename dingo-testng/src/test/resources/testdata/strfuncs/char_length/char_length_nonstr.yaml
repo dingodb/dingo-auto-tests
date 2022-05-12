@@ -1,0 +1,63 @@
+testID1001142-01:
+  paramstr: "1234567"
+  outputlen: "7"
+testID1001142-02:
+  paramstr: "0"
+  outputlen: "1"
+testID1001142-03:
+  paramstr: "-1"
+  outputlen: "2"
+testID1001142-04:
+  paramstr: "-123"
+  outputlen: "4"
+testID1001142-05:
+  paramstr: "01"
+  outputlen: "1"
+testID1001143-01:
+  paramstr: "123.4567"
+  outputlen: "8"
+testID1001143-02:
+  paramstr: "0.520"
+  outputlen: "5"
+testID1001143-03:
+  paramstr: "-1.5"
+  outputlen: "4"
+testID1001143-04:
+  paramstr: "-0.30"
+  outputlen: "5"
+testID1001143-05:
+  paramstr: "0.00"
+  outputlen: "4"
+testID1001144-01:
+  paramstr: "true"
+  outputlen: "4"
+testID1001144-02:
+  paramstr: "TRUE"
+  outputlen: "4"
+testID1001144-03:
+  paramstr: "True"
+  outputlen: "4"
+testID1001144-04:
+  paramstr: "false"
+  outputlen: "5"
+testID1001144-05:
+  paramstr: "FALSE"
+  outputlen: "5"
+testID1001144-06:
+  paramstr: "False"
+  outputlen: "5"
+testID1001149-01:
+  paramstr: "Now()"
+  outputlen: "19"
+testID1001149-02:
+  paramstr: "curTime()"
+  outputlen: "8"
+testID1001149-03:
+  paramstr: "curDate()"
+  outputlen: "10"
+testID1001149-04:
+  paramstr: "current_timestamp"
+  outputlen: "19"
+testID1001149-05:
+  paramstr: "unix_timestamp(Now())"
+  outputlen: "10"

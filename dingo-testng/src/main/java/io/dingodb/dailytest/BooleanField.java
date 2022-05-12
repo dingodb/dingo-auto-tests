@@ -280,6 +280,4 @@ public class BooleanField {
         statement.close();
         return integerOut;
     }
-
-
 }
