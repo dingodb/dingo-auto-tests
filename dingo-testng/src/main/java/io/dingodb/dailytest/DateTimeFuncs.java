@@ -271,7 +271,7 @@ public class DateTimeFuncs {
         ResultSet findTimeRst = statement.executeQuery(queryInsertTimeSql);
         String findTimeStr = null;
         while (findTimeRst.next()) {
-            findTimeStr = findTimeRst.getString("create_time");
+            findTimeStr = findTimeRst.getTime("create_time").toString();
         }
         statement.close();
         return findTimeStr;

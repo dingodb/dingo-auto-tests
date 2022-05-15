@@ -371,7 +371,7 @@ public class TestDateTime extends YamlDataHelper{
     public void test14Date_FormatTableDate() throws SQLException {
         List<String> expectedQueryDFBList = new ArrayList<>();
         String[] dfbArray = new String[]{"1998 year 04 month 06 day","1988 year 02 month 05 day","2022 year 03 month 04 day",
-                "2020 year 11 month 11 day","2010 year 10 month 01 day","1952 year 12 month 31 day","1949 year 01 month 01 day"};
+                "2020 year 11 month 11 day","2010 year 10 month 01 day","1987 year 07 month 16 day","1949 year 01 month 01 day"};
         for (int i=0; i < dfbArray.length; i++){
             expectedQueryDFBList.add(dfbArray[i]);
         }
