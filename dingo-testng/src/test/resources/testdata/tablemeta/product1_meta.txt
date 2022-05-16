@@ -1,0 +1,1 @@
+(id int, buyers int, price int, primary key(id))

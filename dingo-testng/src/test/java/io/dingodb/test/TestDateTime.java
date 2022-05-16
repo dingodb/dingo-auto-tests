@@ -15,21 +15,18 @@
  */
 
 package io.dingodb.test;
-import listener.EmailableReporterListener;
-import org.testng.annotations.Listeners;
-import utils.GetDateDiff;
-import utils.GetZeroTimestampOfCurDate;
-import utils.JDK8DateTime;
-import utils.UTCTimeFormat;
-import utils.UTCTimestampFormat;
-import utils.UTCDateFormat;
-import utils.YamlDataHelper;
 
 import io.dingodb.dailytest.DateTimeFuncs;
+import listener.EmailableReporterListener;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+import utils.GetDateDiff;
+import utils.GetZeroTimestampOfCurDate;
+import utils.JDK8DateTime;
+import utils.YamlDataHelper;
 
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
@@ -39,7 +36,6 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @Listeners(EmailableReporterListener.class)
 public class TestDateTime extends YamlDataHelper{

@@ -16,8 +16,8 @@
 
 package io.dingodb.test;
 
-import listener.EmailableReporterListener;
 import io.dingodb.dailytest.StrFuncs;
+import listener.EmailableReporterListener;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;

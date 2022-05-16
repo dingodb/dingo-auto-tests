@@ -67,7 +67,12 @@
         <classes>
             <class name="io.dingodb.test.TestTableInnerJoin"></class>
         </classes>
+    </test>
 
+    <test name="v0.3.0 tableOuterJoinTest">
+        <classes>
+            <class name="io.dingodb.test.TestTableOuterJoin"></class>
+        </classes>
     </test>
 
 </suite>
