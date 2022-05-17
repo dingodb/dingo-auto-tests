@@ -172,6 +172,90 @@ public class TestTableOuterJoin {
         return expectedList;
     }
 
+    public List<List> expectedCrossList1() {
+        String[][] dataArray = {{"1","zhangsan","100","100","class-1"},
+                {"1","zhangsan","100","101","class-2"}, {"1","zhangsan","100","103","class-3"},
+                {"2","lisi","101","100","class-1"}, {"2","lisi","101","101","class-2"},
+                {"2","lisi","101","103","class-3"}, {"3","wangwu","102","100","class-1"},
+                {"3","wangwu","102","101","class-2"}, {"3","wangwu","102","103","class-3"}};
+        List<List> expectedList = new ArrayList<List>();
+        for(int i=0; i<dataArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<dataArray[i].length; j++) {
+                columnList.add(dataArray[i][j]);
+            }
+            expectedList.add(columnList);
+        }
+        return expectedList;
+    }
+
+    public List<List> expectedCrossList2() {
+        String[][] dataArray = {{"1","zhangsan","100","100","class-1"}, {"2","lisi","101","101","class-2"}};
+        List<List> expectedList = new ArrayList<List>();
+        for(int i=0; i<dataArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<dataArray[i].length; j++) {
+                columnList.add(dataArray[i][j]);
+            }
+            expectedList.add(columnList);
+        }
+        return expectedList;
+    }
+
+    public List<List> expectedCrossList3() {
+        String[][] dataArray = {{"1","Zhangsan","1","Zhangsan"}, {"1","Zhangsan","3","Wang Wu"},
+                {"1","Zhangsan","5","Hello"},{"1","Zhangsan","6","NiNi"},
+                {"2","Lisi","1","Zhangsan"}, {"2","Lisi","3","Wang Wu"},
+                {"2","Lisi","5","Hello"},{"2","Lisi","6","NiNi"},
+                {"3","Wang Wu","1","Zhangsan"}, {"3","Wang Wu","3","Wang Wu"},
+                {"3","Wang Wu","5","Hello"},{"3","Wang Wu","6","NiNi"},
+                {"4","Tita","1","Zhangsan"}, {"4","Tita","3","Wang Wu"},
+                {"4","Tita","5","Hello"},{"4","Tita","6","NiNi"}};
+        List<List> expectedList = new ArrayList<List>();
+        for(int i=0; i<dataArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<dataArray[i].length; j++) {
+                columnList.add(dataArray[i][j]);
+            }
+            expectedList.add(columnList);
+        }
+        return expectedList;
+    }
+
+    public List<List> expectedCrossList4() {
+        String[][] dataArray = {{"1","zhangsan","class-1"},
+                {"1","zhangsan","class-2"}, {"1","zhangsan","class-3"},
+                {"2","lisi","class-1"}, {"2","lisi","class-2"},
+                {"2","lisi","class-3"}, {"3","wangwu","class-1"},
+                {"3","wangwu","class-2"}, {"3","wangwu","class-3"}};
+        List<List> expectedList = new ArrayList<List>();
+        for(int i=0; i<dataArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<dataArray[i].length; j++) {
+                columnList.add(dataArray[i][j]);
+            }
+            expectedList.add(columnList);
+        }
+        return expectedList;
+    }
+
+    public List<List> expectedCrossList5() {
+        String[][] dataArray = {{"1","zhangsan","100","100","class-1"},
+                {"2","lisi","101","100","class-1"}, {"3","wangwu","102","100","class-1"},
+                {"1","zhangsan","100","101","class-2"}, {"2","lisi","101","101","class-2"},
+                {"3","wangwu","102","101","class-2"}, {"1","zhangsan","100","103","class-3"},
+                {"2","lisi","101","103","class-3"}, {"3","wangwu","102","103","class-3"},};
+        List<List> expectedList = new ArrayList<List>();
+        for(int i=0; i<dataArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<dataArray[i].length; j++) {
+                columnList.add(dataArray[i][j]);
+            }
+            expectedList.add(columnList);
+        }
+        return expectedList;
+    }
+
     @BeforeClass(alwaysRun = true, description = "测试前连接数据库")
     public static void setUpAll() throws SQLException {
         Assert.assertNotNull(TableOuterJoin.connection);
@@ -327,6 +411,114 @@ public class TestTableOuterJoin {
         Boolean actualRowReturn = outerJoinObj.fullOuterJoinBothEmpty();
         System.out.println(actualRowReturn);
         Assert.assertFalse(actualRowReturn);
+    }
+
+    @Test(priority = 15, enabled = true, dependsOnMethods = {"test01FullOuterJoinAllData"},
+            description = "验证查询两表交叉连接的全部数据")
+    public void test16CrossJoinAllData() throws SQLException {
+        List<List> expectedList = expectedCrossList1();
+        System.out.println("Expected: " + expectedList);
+        List<List> actualListCrossAll = outerJoinObj.crossJoinAll();
+        System.out.println("Actual: " + actualListCrossAll);
+
+        Assert.assertTrue(actualListCrossAll.containsAll(expectedList));
+        Assert.assertTrue(expectedList.containsAll(actualListCrossAll));
+    }
+
+    @Test(priority = 16, enabled = true, dependsOnMethods = {"test01FullOuterJoinAllData"},
+            description = "验证使用逗号分隔做交叉连接")
+    public void test17CrossJoinCommaSeparate() throws SQLException {
+        List<List> expectedList = expectedCrossList1();
+        System.out.println("Expected: " + expectedList);
+        List<List> actualListCrossComma = outerJoinObj.crossJoinAllSeprateComma();
+        System.out.println("Actual: " + actualListCrossComma);
+
+        Assert.assertTrue(actualListCrossComma.containsAll(expectedList));
+        Assert.assertTrue(expectedList.containsAll(actualListCrossComma));
+    }
+
+    @Test(priority = 17, enabled = true, dependsOnMethods = {"test01FullOuterJoinAllData"},
+            expectedExceptions = SQLException.class, description = "验证交叉连接不允许使用连接条件")
+    public void test18CrossJoinExtraCondition() throws SQLException {
+        outerJoinObj.crossJoinExtraCondition();
+    }
+
+    @Test(priority = 18, enabled = true, dependsOnMethods = {"test01FullOuterJoinAllData"},
+            description = "验证连接后使用where条件过滤")
+    public void test19CrossJoinWhereCondition() throws SQLException {
+        List<List> expectedList = expectedCrossList2();
+        System.out.println("Expected: " + expectedList);
+        List<List> actualListWhereCondition = outerJoinObj.crossJoinWhereCondition();
+        System.out.println("Actual: " + actualListWhereCondition);
+
+        Assert.assertTrue(actualListWhereCondition.containsAll(expectedList));
+        Assert.assertTrue(expectedList.containsAll(actualListWhereCondition));
+    }
+
+    @Test(priority = 19, enabled = true, dependsOnMethods = {"test01FullOuterJoinAllData"},
+            description = "验证使用逗号分隔交叉连接后使用where条件过滤")
+    public void test20CrossJoinCommaWhereCondition() throws SQLException {
+        List<List> expectedList = expectedCrossList2();
+        System.out.println("Expected: " + expectedList);
+        List<List> actualListCommaWhereCondition = outerJoinObj.crossJoinCommaWhereCondition();
+        System.out.println("Actual: " + actualListCommaWhereCondition);
+
+        Assert.assertTrue(actualListCommaWhereCondition.containsAll(expectedList));
+        Assert.assertTrue(expectedList.containsAll(actualListCommaWhereCondition));
+    }
+
+    @Test(priority = 20, enabled = true, dependsOnMethods = {"test01FullOuterJoinAllData"},
+            description = "验证一表为空，交叉连接返回空，无异常")
+    public void test21CrossJoinOneEmpty() throws SQLException {
+        Boolean actualRowReturn = outerJoinObj.crossJoinOneEmpty();
+        System.out.println(actualRowReturn);
+        Assert.assertFalse(actualRowReturn);
+    }
+
+    @Test(priority = 21, enabled = true, dependsOnMethods = {"test06FullOuterJoinUsingKeyState"},
+            description = "验证使用*查询交叉连接全部数据")
+    public void test22CrossJoinStarQueryAll() throws SQLException {
+        List<List> expectedList = expectedCrossList3();
+        System.out.println("Expected: " + expectedList);
+        List<List> actualListStarQueryAll1 = outerJoinObj.crossJoinStarQueryAll1();
+        System.out.println("Actual: " + actualListStarQueryAll1);
+        Assert.assertTrue(actualListStarQueryAll1.containsAll(expectedList));
+        Assert.assertTrue(expectedList.containsAll(actualListStarQueryAll1));
+
+        List<List> actualListStarQueryAll2 = outerJoinObj.crossJoinStarQueryAll2();
+        System.out.println("Actual: " + actualListStarQueryAll2);
+        Assert.assertTrue(actualListStarQueryAll2.containsAll(expectedList));
+        Assert.assertTrue(expectedList.containsAll(actualListStarQueryAll2));
+    }
+
+    @Test(priority = 22, enabled = true, dependsOnMethods = {"test06FullOuterJoinUsingKeyState"},
+            expectedExceptions = SQLException.class, description = "验证交叉连查询相同id不使用表名修饰，预期失败")
+    public void test23CrossJoinSameFieldNoTablePrefix() throws SQLException {
+        outerJoinObj.crossJoinSameFieldNoTablePrefix();
+    }
+
+    @Test(priority = 23, enabled = true, dependsOnMethods = {"test01FullOuterJoinAllData"},
+            description = "验证查询两表独有字段不需使用表名修饰")
+    public void test24CrossJoinUniqueFieldNoTablePrefix() throws SQLException {
+        List<List> expectedList = expectedCrossList4();
+        System.out.println("Expected: " + expectedList);
+        List<List> actualListUniqueField = outerJoinObj.crossJoinUniqueFieldNoTablePrefix();
+        System.out.println("Actual: " + actualListUniqueField);
+
+        Assert.assertTrue(actualListUniqueField.containsAll(expectedList));
+        Assert.assertTrue(expectedList.containsAll(actualListUniqueField));
+    }
+
+    @Test(priority = 24, enabled = true, dependsOnMethods = {"test01FullOuterJoinAllData"},
+            description = "验证调换位置做交叉连接，笛卡尔积结果不同")
+    public void test25CrossJoinExchangeTable() throws SQLException {
+        List<List> expectedList = expectedCrossList5();
+        System.out.println("Expected: " + expectedList);
+        List<List> actualListExchangeTable = outerJoinObj.crossJoinExchangeTable();
+        System.out.println("Actual: " + actualListExchangeTable);
+
+        Assert.assertTrue(actualListExchangeTable.containsAll(expectedList));
+        Assert.assertTrue(expectedList.containsAll(actualListExchangeTable));
     }
 
 

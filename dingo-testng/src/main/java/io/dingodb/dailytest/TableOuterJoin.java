@@ -400,4 +400,179 @@ public class TableOuterJoin {
         return resultSet.next();
     }
 
+    public List<List> crossJoinAll() throws SQLException {
+        Statement statement = connection.createStatement();
+        String querySQL = "select student_tbl.*,class_tbl.* from student_tbl cross join class_tbl";
+        ResultSet resultSet = statement.executeQuery(querySQL);
+        List<List> queryList = new ArrayList<List>();
+
+        while(resultSet.next()) {
+            List rowList = new ArrayList ();
+            rowList.add(resultSet.getString(1));
+            rowList.add(resultSet.getString(2));
+            rowList.add(resultSet.getString(3));
+            rowList.add(resultSet.getString(4));
+            rowList.add(resultSet.getString(5));
+            queryList.add(rowList);
+        }
+        statement.close();
+        return queryList;
+    }
+
+    public List<List> crossJoinAllSeprateComma() throws SQLException {
+        Statement statement = connection.createStatement();
+        String querySQL = "select student_tbl.*,class_tbl.* from student_tbl,class_tbl";
+        ResultSet resultSet = statement.executeQuery(querySQL);
+        List<List> queryList = new ArrayList<List>();
+
+        while(resultSet.next()) {
+            List rowList = new ArrayList ();
+            rowList.add(resultSet.getString(1));
+            rowList.add(resultSet.getString(2));
+            rowList.add(resultSet.getString(3));
+            rowList.add(resultSet.getString(4));
+            rowList.add(resultSet.getString(5));
+            queryList.add(rowList);
+        }
+        statement.close();
+        return queryList;
+    }
+
+    public void crossJoinExtraCondition() throws SQLException {
+        Statement statement = connection.createStatement();
+        String querySQL = "select student_tbl.*,class_tbl.* from student_tbl " +
+                "cross join class_tbl on student_tbl.class_id=class_tbl.cid";
+        statement.executeQuery(querySQL);
+        statement.close();
+    }
+
+    public List<List> crossJoinWhereCondition() throws SQLException {
+        Statement statement = connection.createStatement();
+        String querySQL = "select student_tbl.*,class_tbl.* from student_tbl " +
+                "cross join class_tbl where student_tbl.class_id=class_tbl.cid";
+        ResultSet resultSet = statement.executeQuery(querySQL);
+        List<List> queryList = new ArrayList<List>();
+
+        while(resultSet.next()) {
+            List rowList = new ArrayList ();
+            rowList.add(resultSet.getString(1));
+            rowList.add(resultSet.getString(2));
+            rowList.add(resultSet.getString(3));
+            rowList.add(resultSet.getString(4));
+            rowList.add(resultSet.getString(5));
+            queryList.add(rowList);
+        }
+        statement.close();
+        return queryList;
+    }
+
+    public List<List> crossJoinCommaWhereCondition() throws SQLException {
+        Statement statement = connection.createStatement();
+        String querySQL = "select student_tbl.*,class_tbl.* from student_tbl,class_tbl where student_tbl.class_id=class_tbl.cid";
+        ResultSet resultSet = statement.executeQuery(querySQL);
+        List<List> queryList = new ArrayList<List>();
+
+        while(resultSet.next()) {
+            List rowList = new ArrayList ();
+            rowList.add(resultSet.getString(1));
+            rowList.add(resultSet.getString(2));
+            rowList.add(resultSet.getString(3));
+            rowList.add(resultSet.getString(4));
+            rowList.add(resultSet.getString(5));
+            queryList.add(rowList);
+        }
+        statement.close();
+        return queryList;
+    }
+
+    public Boolean crossJoinOneEmpty() throws SQLException {
+        Statement statement = connection.createStatement();
+        String querySQL = "select student_tbl.*,class_tbl1.* from student_tbl cross join class_tbl1";
+        ResultSet resultSet = statement.executeQuery(querySQL);
+
+//        statement.close();
+        return resultSet.next();
+    }
+
+    public List<List> crossJoinStarQueryAll1() throws SQLException {
+        Statement statement = connection.createStatement();
+        String querySQL = "select * from test1 cross join test2";
+        ResultSet resultSet = statement.executeQuery(querySQL);
+        List<List> queryList = new ArrayList<List>();
+
+        while(resultSet.next()) {
+            List rowList = new ArrayList ();
+            rowList.add(resultSet.getString(1));
+            rowList.add(resultSet.getString(2));
+            rowList.add(resultSet.getString(3));
+            rowList.add(resultSet.getString(4));
+            queryList.add(rowList);
+        }
+        statement.close();
+        return queryList;
+    }
+
+    public List<List> crossJoinStarQueryAll2() throws SQLException {
+        Statement statement = connection.createStatement();
+        String querySQL = "select * from test1,test2";
+        ResultSet resultSet = statement.executeQuery(querySQL);
+        List<List> queryList = new ArrayList<List>();
+
+        while(resultSet.next()) {
+            List rowList = new ArrayList ();
+            rowList.add(resultSet.getString(1));
+            rowList.add(resultSet.getString(2));
+            rowList.add(resultSet.getString(3));
+            rowList.add(resultSet.getString(4));
+            queryList.add(rowList);
+        }
+        statement.close();
+        return queryList;
+    }
+
+    public Boolean crossJoinSameFieldNoTablePrefix() throws SQLException {
+        Statement statement = connection.createStatement();
+        String querySQL = "select id from test1 cross join test2";
+        ResultSet resultSet = statement.executeQuery(querySQL);
+
+//        statement.close();
+        return resultSet.next();
+    }
+
+    public List<List> crossJoinUniqueFieldNoTablePrefix() throws SQLException {
+        Statement statement = connection.createStatement();
+        String querySQL = "select sid,name,cname from student_tbl cross join class_tbl";
+        ResultSet resultSet = statement.executeQuery(querySQL);
+        List<List> queryList = new ArrayList<List>();
+
+        while(resultSet.next()) {
+            List rowList = new ArrayList ();
+            rowList.add(resultSet.getString(1));
+            rowList.add(resultSet.getString(2));
+            rowList.add(resultSet.getString(3));
+            queryList.add(rowList);
+        }
+        statement.close();
+        return queryList;
+    }
+
+    public List<List> crossJoinExchangeTable() throws SQLException {
+        Statement statement = connection.createStatement();
+        String querySQL = "select s.*,c.* from class_tbl c cross join student_tbl s";
+        ResultSet resultSet = statement.executeQuery(querySQL);
+        List<List> queryList = new ArrayList<List>();
+
+        while(resultSet.next()) {
+            List rowList = new ArrayList ();
+            rowList.add(resultSet.getString(1));
+            rowList.add(resultSet.getString(2));
+            rowList.add(resultSet.getString(3));
+            rowList.add(resultSet.getString(4));
+            rowList.add(resultSet.getString(5));
+            queryList.add(rowList);
+        }
+        statement.close();
+        return queryList;
+    }
+
 }
