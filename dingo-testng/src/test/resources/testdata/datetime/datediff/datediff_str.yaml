@@ -38,6 +38,10 @@ testID1000815-04:
   inputDate1: "2020-03-01"
   inputDate2: "1989-12-01"
   outputDiff: "11048"
+testID1000815-05:
+  inputDate1: "2020-02-29"
+  inputDate2: "2000-02-29"
+  outputDiff: "7305"
 testID1000816-01:
   inputDate1: "2022-04-01"
   inputDate2: "2022-04-01 23:59:59"

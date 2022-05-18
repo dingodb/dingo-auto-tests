@@ -70,3 +70,7 @@ testID1000785:
   inputDate: "20220413103726"
   inputFormat: "%Ss"
   outputDate: "26s"
+testID1001262-04:
+  inputDate: "20101001010203"
+  inputFormat: "%H.%i.%s"
+  outputDate: "01.02.03"

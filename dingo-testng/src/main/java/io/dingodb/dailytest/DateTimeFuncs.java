@@ -16,10 +16,12 @@
 
 package io.dingodb.dailytest;
 
-import java.sql.*;
-import java.text.SimpleDateFormat;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class DateTimeFuncs {
@@ -106,6 +108,31 @@ public class DateTimeFuncs {
         int insertRows = statement.executeUpdate(batInsertSql);
         statement.close();
         return insertRows;
+    }
+
+    //创建表格使用函数为字段值
+    public String createTableUsingFunc(String insertType, String insertFunc, String insertID) throws SQLException {
+        Statement statement = connection.createStatement();
+        String funcCreateSql = "CREATE TABLE Orders" + insertID +
+                "(\n" +
+                "OrderId int NOT NULL,\n" +
+                "ProductName varchar(50) NOT NULL,\n" +
+                "OrderTime " + insertType + " NOT NULL DEFAULT " + insertFunc +
+                ",PRIMARY KEY (OrderId)\n" +
+                ")";
+        statement.execute(funcCreateSql);
+
+        String insertFuncSql = "insert into Orders" + insertID + "(OrderID,ProductName) values(" + insertID + ", 'Dingo DB')";
+        statement.executeUpdate(insertFuncSql);
+
+        String queryFuncSql = "select * from orders" + insertID + " where id = " + insertID;
+        ResultSet resultSet = statement.executeQuery(queryFuncSql);
+        String queryStr = null;
+        while(resultSet.next()) {
+            queryStr = resultSet.getString("OrderTime").toString();
+        }
+        statement.close();
+        return queryStr;
     }
 
     //查询unix_timestamp在表格date字段使用的结果
@@ -461,6 +488,23 @@ public class DateTimeFuncs {
         return from_UnixTimeWithStringStr;
     }
 
+    // From_UnixTime参数为普通字符串返回错误
+    public void from_UnixTimeNotNumStrFunc() throws SQLException {
+        Statement statement = connection.createStatement();
+        String from_UnixTimeNotNumStrSql = "select from_unixtime('1649abc')";
+        statement.executeQuery(from_UnixTimeNotNumStrSql);
+
+        statement.close();
+    }
+
+    // From_UnixTime参数为空返回错误
+    public void from_UnixTimeNoArg() throws SQLException {
+        Statement statement = connection.createStatement();
+        String from_UnixTimeNoArgSql = "select from_unixtime()";
+        statement.executeQuery(from_UnixTimeNoArgSql);
+        statement.close();
+    }
+
     // 获取函数Unix_TimeStamp返回值
     public String unix_TimeStampFunc(String inputStr) throws SQLException {
         Statement statement = connection.createStatement();
@@ -487,6 +531,20 @@ public class DateTimeFuncs {
 
         statement.close();
         return unix_TimeStampNoArgStr;
+    }
+
+    // 获取函数Unix_TimeStamp参数为数字时的返回值
+    public String unix_TimeStampNumArg(String inputNum) throws SQLException {
+        Statement statement = connection.createStatement();
+        String unix_TimeStampNumArgSql = "select unix_TimeStamp(" + inputNum + ")";
+        ResultSet unixTimeStampNumArgRst = statement.executeQuery(unix_TimeStampNumArgSql);
+        String unix_TimeStampNumArgStr  = null;
+        while (unixTimeStampNumArgRst.next()) {
+            unix_TimeStampNumArgStr = unixTimeStampNumArgRst.getString(1);
+        }
+
+        statement.close();
+        return unix_TimeStampNumArgStr;
     }
 
     // 获取函数Unix_TimeStamp参数为日期函数时的返回值
@@ -545,6 +603,104 @@ public class DateTimeFuncs {
         return date_formatFuncArgStr;
     }
 
+    // 获取函数Date_Format参数为Null的返回值
+    public String date_FormatNullArg() throws SQLException {
+        Statement statement = connection.createStatement();
+        String date_formatNullArgSql = "select date_format(Null,'%Y%m%d')";
+        ResultSet date_formatNullArgRst = statement.executeQuery(date_formatNullArgSql);
+        String date_formatNullArgStr  = null;
+        while (date_formatNullArgRst.next()) {
+            date_formatNullArgStr = date_formatNullArgRst.getString(1);
+        }
+
+        statement.close();
+        return date_formatNullArgStr;
+    }
+
+    // 获取函数Date_Format参数为空字符串的返回值
+    public String date_FormatEmptyArg() throws SQLException {
+        Statement statement = connection.createStatement();
+        String date_formatEmptyArgSql = "select date_format('','%Y%m%d')";
+        ResultSet date_formatEmptyArgRst = statement.executeQuery(date_formatEmptyArgSql);
+        String date_formatEmptyArgStr  = null;
+        while (date_formatEmptyArgRst.next()) {
+            date_formatEmptyArgStr = date_formatEmptyArgRst.getString(1);
+        }
+
+        statement.close();
+        return date_formatEmptyArgStr;
+    }
+
+    // 获取函数Date_Format缺少参数，返回错误
+    public void date_FormatMissingArg(String inputParam) throws SQLException {
+        Statement statement = connection.createStatement();
+        String date_formatMissingArgSql = "select date_format('" + inputParam + "')";
+        statement.executeQuery(date_formatMissingArgSql);
+    }
+
+    // 获取函数Time_Format参数为字符串返回值
+    public String time_FormatStrArgFunc(String inputTime, String inputFormat) throws SQLException {
+        Statement statement = connection.createStatement();
+        String time_formatSargSql = "select time_format('" + inputTime + "','" + inputFormat + "')";
+        ResultSet time_formatSargRst = statement.executeQuery(time_formatSargSql);
+        String time_formatSargStr  = null;
+        while (time_formatSargRst.next()) {
+            time_formatSargStr = time_formatSargRst.getString(1);
+        }
+
+        statement.close();
+        return time_formatSargStr;
+    }
+
+    // 获取函数Time_Format参数为数字返回值
+    public String time_FormatNumArgFunc(String inputTime, String inputFormat) throws SQLException {
+        Statement statement = connection.createStatement();
+        String time_formatNargSql = "select time_format(" + inputTime + ",'" + inputFormat + "')";
+        ResultSet time_formatNargRst = statement.executeQuery(time_formatNargSql);
+        String time_formatNargStr  = null;
+        while (time_formatNargRst.next()) {
+            time_formatNargStr = time_formatNargRst.getString(1);
+        }
+
+        statement.close();
+        return time_formatNargStr;
+    }
+
+    // 获取函数Time_Format缺少参数，返回错误
+    public void time_FormatMissingArg(String inputParam) throws SQLException {
+        Statement statement = connection.createStatement();
+        String time_formatMissingArgSql = "select time_format('" + inputParam + "')";
+        statement.executeQuery(time_formatMissingArgSql);
+    }
+
+    // 获取函数Time_Format参数为Null的返回值
+    public String time_FormatNullArg() throws SQLException {
+        Statement statement = connection.createStatement();
+        String time_formatNullArgSql = "select time_format(Null,'%H:%i:%S')";
+        ResultSet time_formatNullArgRst = statement.executeQuery(time_formatNullArgSql);
+        String time_formatNullArgStr  = null;
+        while (time_formatNullArgRst.next()) {
+            time_formatNullArgStr = time_formatNullArgRst.getString(1);
+        }
+
+        statement.close();
+        return time_formatNullArgStr;
+    }
+
+    // 获取函数Time_Format参数为空字符串的返回值
+    public String time_FormatEmptyArg() throws SQLException {
+        Statement statement = connection.createStatement();
+        String time_formatEmptyArgSql = "select time_format('','%H:%i:%S')";
+        ResultSet time_formatEmptyArgRst = statement.executeQuery(time_formatEmptyArgSql);
+        String time_formatEmptyArgStr  = null;
+        while (time_formatEmptyArgRst.next()) {
+            time_formatEmptyArgStr = time_formatEmptyArgRst.getString(1);
+        }
+
+        statement.close();
+        return time_formatEmptyArgStr;
+    }
+
     // 获取函数DateDiff参数为字符串返回值
     public String dateDiffStrArgFunc(String Date1, String Date2) throws SQLException {
         Statement statement = connection.createStatement();
@@ -600,6 +756,14 @@ public class DateTimeFuncs {
         return dateDiffFarg2Str;
     }
 
+    // 函数DateDiff参数数量不符合要求，执行失败
+    public void dateDiffWrongArgFunc(String datediffState) throws SQLException {
+        Statement statement = connection.createStatement();
+        String dateDiffWrongArgSql = datediffState;
+        statement.executeQuery(dateDiffWrongArgSql);
+
+    }
+
     // 获取字符串上下文返回格式
     public String funcConcatStr(String inputFunc) throws SQLException {
         Statement statement = connection.createStatement();
@@ -612,6 +776,39 @@ public class DateTimeFuncs {
 
         statement.close();
         return funcConcatStr;
+    }
+
+    // 插入非法date类型数据，不允许插入，返回错误信息
+    public void insertNegativeDate(String inputDate) throws ClassNotFoundException, SQLException {
+        String dateTableName = getDateTableName();
+        Statement statement = connection.createStatement();
+
+        String dateInsertSql = "insert into " + dateTableName +
+                " values " + inputDate;
+        statement.executeUpdate(dateInsertSql);
+        statement.close();
+    }
+
+    // 插入非法time类型数据，不允许插入，返回错误信息
+    public void insertNegativeTime(String inputTime) throws ClassNotFoundException, SQLException {
+        String timeTableName = getTimeTableName();
+        Statement statement = connection.createStatement();
+
+        String timeInsertSql = "insert into " + timeTableName +
+                " values " + inputTime;
+        statement.executeUpdate(timeInsertSql);
+        statement.close();
+    }
+
+    // 插入非法timestamp类型数据，不允许插入，返回错误信息
+    public void insertNegativeTimeStamp(String inputTimeStamp) throws ClassNotFoundException, SQLException {
+        String timestampTableName = getTimestampTableName();
+        Statement statement = connection.createStatement();
+
+        String timestampInsertSql = "insert into " + timestampTableName +
+                " values " + inputTimeStamp;
+        statement.executeUpdate(timestampInsertSql);
+        statement.close();
     }
 
 }

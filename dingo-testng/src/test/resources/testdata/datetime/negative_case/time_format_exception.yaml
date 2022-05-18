@@ -1,0 +1,60 @@
+testID1000800-01:
+  inputTime: "0413"
+  inputFormat: "%H-%i"
+testID1000800-02:
+  inputTime: "1013"
+  inputFormat: "%i:%S"
+testID1000800-03:
+  inputTime: "12225"
+  inputFormat: "%H:%i:%S"
+testID1000800-04:
+  inputTime: "1"
+  inputFormat: "%S"
+testID1000800-05:
+  inputTime: "1"
+  inputFormat: "%H"
+testID1000800-06:
+  inputTime: "1111111"
+  inputFormat: "%H:%i:%S"
+testID1000800-07:
+  inputTime: "0111011"
+  inputFormat: "%H:%i:%S"
+testID1000801-01:
+  inputTime: "240000"
+  inputFormat: "%H:%i:%S"
+testID1000801-02:
+  inputTime: "25:10:23"
+  inputFormat: "%H:%i:%S"
+testID1000802-01:
+  inputTime: "226000"
+  inputFormat: "%H:%i:%S"
+testID1000802-02:
+  inputTime: "08:01:60"
+  inputFormat: "%H:%i:%S"
+testID1000802-03:
+  inputTime: "101062"
+  inputFormat: "%H:%i:%S"
+testID1000802-04:
+  inputTime: "12:61:02"
+  inputFormat: "%H:%i:%S"
+testID1000802-05:
+  inputTime: "016060"
+  inputFormat: "%H:%i:%S"
+testID1000805-01:
+  inputTime: "10:11:12"
+  inputFormat: "%K %r %f"
+testID1000805-02:
+  inputTime: "10:11:12"
+  inputFormat: "%h:%I:%s"
+testID1000806-01:
+  inputTime: "10:11:12.873672"
+  inputFormat: "%H:%i:%S"
+testID1000806-02:
+  inputTime: "101112.299"
+  inputFormat: "%H:%i:%S"
+testID1000811:
+  inputTime: "2022/04/13"
+  inputFormat: "%H:%i:%S"
+testID1001255:
+  inputTime: "10:11:12"
+  inputFormat: ""

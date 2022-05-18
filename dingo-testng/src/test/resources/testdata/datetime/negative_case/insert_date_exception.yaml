@@ -1,0 +1,18 @@
+testID1000633-1:
+  insertDate: "(6331, 'zhang san', 18, 1342.09, 'beijing', '1998-4-31')"
+testID1000633-2:
+  insertDate: "(6332, 'Hello', 7, 10.50, 'guangzhou', '2022-2-29')"
+testID1000633-3:
+  insertDate: "(6333, 'fake',88,38, 'shanghai', '2021-12-32')"
+testID1000633-4:
+  insertDate: "(6334, 'www', 23, 23.43, 'La Sa', '2020-5--3')"
+testID1000642-1:
+  insertDate: "(6421, 'zhang san', 18, 1342.09, 'Wu Han', '1998-13-5')"
+testID1000642-2:
+  insertDate: "(6422, 'Hello', 7, 10.50, 'Street No.1', '2020-0-15')"
+testID1000644-1:
+  insertDate: "(6441, 'zhang san', 18, 1342.09, 'Heze', '19-1-5')"
+testID1000644-2:
+  insertDate: "(6442, 'Hello', 7, 10.50, 'TJ', '88-12-31')"
+testID1000833:
+  insertDate: "(833, 'Hello', 7, 10.50, 'TJ', '202112')"

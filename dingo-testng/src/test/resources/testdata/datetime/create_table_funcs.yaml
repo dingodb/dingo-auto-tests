@@ -1,0 +1,40 @@
+testIDID1000705:
+  insertType: "timestamp"
+  insertFunc: "Now()"
+  insertID: "705"
+testIDID1000673:
+  insertType: "date"
+  insertFunc: "CurDate()"
+  insertID: "673"
+testIDID1000684-1:
+  insertType: "date"
+  insertFunc: "Current_Date()"
+  insertID: "6841"
+testIDID1000684-2:
+  insertType: "date"
+  insertFunc: "Current_Date"
+  insertID: "6842"
+testIDID1000690:
+  insertType: "time"
+  insertFunc: "CurTime()"
+  insertID: "690"
+testIDID1000696-1:
+  insertType: "time"
+  insertFunc: "Current_Time()"
+  insertID: "6961"
+testIDID1000696-2:
+  insertType: "time"
+  insertFunc: "Current_Time"
+  insertID: "6962"
+testIDID1000704-1:
+  insertType: "timestamp"
+  insertFunc: "Current_TimeStamp()"
+  insertID: "7041"
+testIDID1000704-2:
+  insertType: "timestamp"
+  insertFunc: "Current_TimeStamp"
+  insertID: "7042"
+testIDID1000752:
+  insertType: "timestamp"
+  insertFunc: "Unix_TimeStamp(Now())"
+  insertID: "752"

@@ -334,3 +334,15 @@ testID1000887:
   inputDate: "2022-04-14"
   inputFormat: "%H:%i:%S"
   outputDate: "00:00:00"
+testID1001262-01:
+  inputDate: "2022/5/17 10:11:12"
+  inputFormat: "%Y-%m-%d %H:%i:%s"
+  outputDate: "2022-05-17 10:11:12"
+testID1001262-02:
+  inputDate: "2000-01-01 00:00:00"
+  inputFormat: "%ss"
+  outputDate: "00s"
+testID1001262-03:
+  inputDate: "19891231235959"
+  inputFormat: "%H hours %i minutes %s Seconds"
+  outputDate: "23 hours 59 minutes 59 Seconds"

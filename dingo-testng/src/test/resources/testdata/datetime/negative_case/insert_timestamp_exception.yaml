@@ -1,0 +1,14 @@
+testID1000648-1:
+  insertTimeStamp: "(6481, 'zhang san', 18, 1342.09, 'BJ', '2022-4-118:05:07')"
+testID1000648-2:
+  insertTimeStamp: "(6482, 'zhang san', 18, 1342.09, 'BJ', '2022-4-03-4:05:07')"
+testID1000648-3:
+  insertTimeStamp: "(6483, 'zhang san', 18, 1342.09, 'BJ', '2022-4-03:4:05:07')"
+testID1000648-4:
+  insertTimeStamp: "(6484, 'zhang san', 18, 1342.09, 'BJ', '2022-4-3-4-05-07')"
+testID1000648-5:
+  insertTimeStamp: "(6485, 'zhang san', 18, 1342.09, 'BJ', '2022-4-11 16-05-07')"
+testID1000648-6:
+  insertTimeStamp: "(6486, 'zhang san', 18, 1342.09, 'BJ', '202241 16:05:07')"
+testID1000648-7:
+  insertTimeStamp: "(6487, 'zhang san', 18, 1342.09, 'BJ', '2022-04-11 12345')"

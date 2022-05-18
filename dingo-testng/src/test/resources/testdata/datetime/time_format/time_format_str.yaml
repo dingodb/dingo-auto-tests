@@ -1,0 +1,80 @@
+testID1000794-01:
+  inputTime: "083026"
+  inputFormat: "%H:%i:%S"
+  outputTime: "08:30:26"
+testID1000794-02:
+  inputTime: "23:59:59"
+  inputFormat: "%H:%i:%S"
+  outputTime: "23:59:59"
+testID1000794-03:
+  inputTime: "000000"
+  inputFormat: "%H:%i:%S"
+  outputTime: "00:00:00"
+testID1000794-04:
+  inputTime: "12:00:00"
+  inputFormat: "%H:%i:%S"
+  outputTime: "12:00:00"
+testID1000795-01:
+  inputTime: "083026"
+  inputFormat: "%H.%i.%S"
+  outputTime: "08.30.26"
+testID1000795-02:
+  inputTime: "23:59:59"
+  inputFormat: "%H.%i.%S"
+  outputTime: "23.59.59"
+testID1000796-01:
+  inputTime: "083026"
+  inputFormat: "%H:%i"
+  outputTime: "08:30"
+testID1000796-02:
+  inputTime: "12:00:00"
+  inputFormat: "%H:%i"
+  outputTime: "12:00"
+testID1000797-01:
+  inputTime: "083026"
+  inputFormat: "%H"
+  outputTime: "08"
+testID1000797-02:
+  inputTime: "23:59:59"
+  inputFormat: "%H"
+  outputTime: "23"
+testID1000797-03:
+  inputTime: "00:00:00"
+  inputFormat: "%H"
+  outputTime: "00"
+testID1000798-01:
+  inputTime: "083026"
+  inputFormat: "%H hour %i minutes %S seconds"
+  outputTime: "08 hour 30 minutes 26 seconds"
+testID1000798-02:
+  inputTime: "23:30:26"
+  inputFormat: "%Hhour"
+  outputTime: "23hour"
+testID1000807-01:
+  inputTime: "23:59:59"
+  inputFormat: "%T"
+  outputTime: "23:59:59"
+testID1000807-02:
+  inputTime: "101112"
+  inputFormat: "%T"
+  outputTime: "10:11:12"
+testID1000807-03:
+  inputTime: "123450"
+  inputFormat: "%T"
+  outputTime: "12:34:50"
+testID1001261-01:
+  inputTime: "10:11:12"
+  inputFormat: "%H-%i-%s"
+  outputTime: "10-11-12"
+testID1001261-02:
+  inputTime: "00:00:00"
+  inputFormat: "%ss"
+  outputTime: "00s"
+testID1001261-03:
+  inputTime: "235959"
+  inputFormat: "%H hours %i minutes %s Seconds"
+  outputTime: "23 hours 59 minutes 59 Seconds"
+testID1001261-04:
+  inputTime: "010203"
+  inputFormat: "%H.%i.%s"
+  outputTime: "01.02.03"

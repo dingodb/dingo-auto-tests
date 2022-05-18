@@ -1,0 +1,32 @@
+testID1000799-01:
+  inputTime: "083026"
+  inputFormat: "%H:%i:%S"
+  outputTime: "08:30:26"
+testID1000799-02:
+  inputTime: "235959"
+  inputFormat: "%H:%i:%S'"
+  outputTime: "23:59:59"
+testID1000799-03:
+  inputTime: "120000"
+  inputFormat: "%H.%i.%S"
+  outputTime: "12.00.00"
+testID1000799-04:
+  inputTime: "180000"
+  inputFormat: "%H:%i'"
+  outputTime: "18:00"
+testID1000799-05:
+  inputTime: "001800"
+  inputFormat: "%i:%S"
+  outputTime: "18:00"
+testID1000799-06:
+  inputTime: "123456"
+  inputFormat: "%H"
+  outputTime: "12"
+testID1000799-07:
+  inputTime: "123456"
+  inputFormat: "%Sseconds"
+  outputTime: "56seconds"
+testID1001261-05:
+  inputTime: "010203"
+  inputFormat: "%H.%i.%s"
+  outputTime: "01.02.03"

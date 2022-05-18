@@ -1,0 +1,12 @@
+testID1000743-01:
+  inputDate: "-20220412"
+  outputTimestamp: "-20220412"
+testID1000743-02:
+  inputDate: "-20220412172830"
+  outputTimestamp: "-20220412172830"
+testID1001248:
+  inputDate: "20220412172630"
+  outputTimestamp: "20220412172630"
+testID1001249:
+  inputDate: "20220412"
+  outputTimestamp: "20220412"

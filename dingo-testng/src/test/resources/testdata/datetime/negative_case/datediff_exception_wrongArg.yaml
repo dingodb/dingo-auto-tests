@@ -1,0 +1,20 @@
+testID1000825-01:
+  datediffState: "select datediff('2022-04-13') as diffDate"
+testID1000825-02:
+  datediffState: "select datediff() as diffDate"
+testID1000825-03:
+  datediffState: "select datediff('2022-04-13','2022-05-01','2022-06-01') as diffDate"
+testID1000827-01:
+  datediffState: "select datediff('','') as diffDate"
+#testID1000827-02:
+#  datediffState: "select datediff(Null,Null) as diffDate"
+testID1000827-03:
+  datediffState: "select datediff('2022-04-13','') as diffDate"
+testID1000827-04:
+  datediffState: "select datediff('','2022-04-13') as diffDate"
+#testID1000827-05:
+#  datediffState: "select datediff('2022-04-13',Null) as diffDate"
+#testID1000827-06:
+#  datediffState: "select datediff(Null, '2022-04-13') as diffDate"
+testID1000829-01:
+  datediffState: "select datediff(CurTime(),'2022-01-01') as diffDate"

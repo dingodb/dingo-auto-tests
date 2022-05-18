@@ -1,0 +1,18 @@
+testID1000646-1:
+  insertTime: "(6461, 'zhang san', 18, 1342.09, 'BJ', '24:00:00')"
+testID1000647-1:
+  insertTime: "(6471, 'zhang san', 18, 1342.09, 'BJ', '4:00:62')"
+testID1000647-2:
+  insertTime: "(6472, 'zhang san', 18, 1342.09, 'BJ', '11:60:00')"
+testID1000647-3:
+  insertTime: "(6473, 'zhang san', 18, 1342.09, 'BJ', '23:61:30')"
+testID1000647-4:
+  insertTime: "(6474, 'zhang san', 18, 1342.09, 'BJ', '24:00:02')"
+testID1000647-15:
+  insertTime: "(6475, 'zhang san', 18, 1342.09, 'BJ', '25:10:10')"
+testID1000707-1:
+  insertTime: "(7071, 'zhang san', 18, 1342.09, 'BJ', '10-08-10')"
+testID1000707-2:
+  insertTime: "(7072, 'zhang san', 18, 1342.09, 'BJ', '04:59-00')"
+testID1000835:
+  insertTime: "(835, 'zhang san', 18, 1342.09, 'BJ', '12345')"

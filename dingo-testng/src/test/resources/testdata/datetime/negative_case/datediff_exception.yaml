@@ -1,0 +1,39 @@
+testID1000818-01:
+  inputDate1: "2020-03"
+  inputDate2: "1989-12-01"
+testID1000818-02:
+  inputDate1: "2022-04"
+  inputDate2: "2022-03"
+testID1000818-03:
+  inputDate1: "2022-04-13"
+  inputDate2: "2022-05"
+testID1000818-04:
+  inputDate1: "2022"
+  inputDate2: "2000"
+testID1000818-05:
+  inputDate1: "2022-04-13"
+  inputDate2: "2023"
+testID1000818-06:
+  inputDate1: "2022"
+  inputDate2: "2023-02-14"
+testID1000824-01:
+  inputDate1: "2022-04-31"
+  inputDate2: "2022-05-31"
+testID1000824-02:
+  inputDate1: "2021-11-13"
+  inputDate2: "2020-03-32"
+testID1000824-03:
+  inputDate1: "2022-13-01"
+  inputDate2: "2022-05-31"
+testID1000824-04:
+  inputDate1: "2021-11-13"
+  inputDate2: "2020-14-02"
+testID1000824-05:
+  inputDate1: "1999-02-29"
+  inputDate2: "2000-02-29"
+testID1000826-01:
+  inputDate1: "22-03-12"
+  inputDate2: "21-12-13"
+testID1000826-02:
+  inputDate1: "22:03:12"
+  inputDate2: "21:12:13"

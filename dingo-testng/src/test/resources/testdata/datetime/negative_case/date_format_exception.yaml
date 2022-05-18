@@ -1,0 +1,42 @@
+testID1000772-01:
+  inputDate: "04/13/2022 10:37:26"
+  inputFormat: "%Y-%m-%d %H:%i:%S"
+testID1000772-02:
+  inputDate: "13.04.2022 10.37.26"
+  inputFormat: "%Y-%m-%d %H:%i:%S"
+testID1000772-03:
+  inputDate: "04-13-2022 10.37.26"
+  inputFormat: "%Y/%m/%d %H:%i:%S"
+testID1000773-01:
+  inputDate: "04-13-2022"
+  inputFormat: "%Y/%m/%d"
+testID1000773-02:
+  inputDate: "13.04.2022"
+  inputFormat: "%d/%m/%Y"
+testID1000773-03:
+  inputDate: "04/13/2022"
+  inputFormat: "%m-%d-%Y"
+testID1000773-04:
+  inputDate: "04/13"
+  inputFormat: "%m-%d"
+testID1000773-05:
+  inputDate: "0413"
+  inputFormat: "%m-%d"
+testID1000786-01:
+  inputDate: "'2022-13-02"
+  inputFormat: "%Y/%m/%d"
+testID1000786-02:
+  inputDate: "2022-04-31"
+  inputFormat: "%Y/%m/%d"
+testID1000786-03:
+  inputDate: "2022/02/29"
+  inputFormat: "%Y-%m-%d"
+testID1000812:
+  inputDate: "14:49:59"
+  inputFormat: "%Y-%m-%d"
+testID1001256:
+  inputDate: "2022-05-17"
+  inputFormat: "%A%B%C"
+testID1001257:
+  inputDate: "2022-05-17"
+  inputFormat: ""
