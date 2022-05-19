@@ -1,0 +1,28 @@
+#testID1000755:
+#  argFunc: "Now()"
+#  inputFormat: "%H:%i:%S %m/%d/%Y"
+#  matchReg: "\\d{2}:\\d{2}:\\d{2} \\d{2}/\\d{2}/\\d{4}"
+#testID1000758:
+#  argFunc: "CurDate()"
+#  inputFormat: "%Y/%m/%d"
+#  matchReg: "\\d{4}/\\d{2}/\\d{2}"
+#testID1001014-01:
+#  argFunc: "from_unixtime(1650875058)"
+#  inputFormat: "%Y/%m/%d %H:%i:%S"
+#  matchReg: "\\d{4}/\\d{2}/\\d{2} \\d{2}:\\d{2}:\\d{2}"
+#testID1001014-02:
+#  argFunc: "from_unixtime(1650875058)"
+#  inputFormat: "%Y/%m/%d"
+#  matchReg: "\\d{4}/\\d{2}/\\d{2}"
+testID1000792:
+  argFunc: "CurTime()"
+  inputFormat: "%H%i%S"
+  matchReg: "\\d{6}"
+testID1001263-01:
+  argFunc: "Current_Time()"
+  inputFormat: "%H:%i:%S"
+  matchReg: "\\d{2}:\\d{2}:\\d{2}"
+testID1001263-02:
+  argFunc: "Current_Time"
+  inputFormat: "%H hour %i minutes %s seconds"
+  matchReg: "\\d{2} hour \\d{2} minutes \\d{2} seconds"

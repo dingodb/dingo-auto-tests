@@ -1,0 +1,12 @@
+testID1000793-01:
+  argFunc: "Now()"
+  inputFormat: "%H:%i:%S"
+testID1000793-02:
+  argFunc: "CurDate()"
+  inputFormat: "%H:%i:%S"
+testID1000793-03:
+  argFunc: "Current_Timestamp()"
+  inputFormat: "%H:%i:%S"
+testID1000793-04:
+  argFunc: "Current_Timestamp"
+  inputFormat: "%H:%i:%S"

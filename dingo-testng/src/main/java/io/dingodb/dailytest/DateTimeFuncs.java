@@ -125,11 +125,18 @@ public class DateTimeFuncs {
         String insertFuncSql = "insert into Orders" + insertID + "(OrderID,ProductName) values(" + insertID + ", 'Dingo DB')";
         statement.executeUpdate(insertFuncSql);
 
-        String queryFuncSql = "select * from orders" + insertID + " where id = " + insertID;
+        String queryFuncSql = "select * from Orders" + insertID + " where OrderId = " + insertID;
         ResultSet resultSet = statement.executeQuery(queryFuncSql);
         String queryStr = null;
-        while(resultSet.next()) {
-            queryStr = resultSet.getString("OrderTime").toString();
+        if (insertFunc.equals("CurTime()") || insertFunc.equals("Current_Time()") || insertFunc.equals("Current_Time")) {
+            while(resultSet.next()) {
+                queryStr = resultSet.getTime("OrderTime").toString();
+            }
+        }else{
+            while(resultSet.next()) {
+                queryStr = resultSet.getString("OrderTime");
+            }
+
         }
         statement.close();
         return queryStr;
@@ -284,6 +291,21 @@ public class DateTimeFuncs {
         int insertRows = statement.executeUpdate(batTimeInsertSql);
         statement.close();
         return insertRows;
+    }
+
+    //查询time_format在表格time字段使用的结果
+    public List<String> queryTime_FormatTimeInTable() throws SQLException {
+        String queryTFTTable = getTimeTableName();
+        Statement statement = connection.createStatement();
+        String queryTFTSql = "select name,time_format(create_time, '%H:%i:%S') time_out from " + queryTFTTable + " where id<11";
+
+        ResultSet queryTFTRst = statement.executeQuery(queryTFTSql);
+        List<String> queryTFList = new ArrayList<String>();
+        while (queryTFTRst.next()) {
+            queryTFList.add(queryTFTRst.getString("time_out"));
+        }
+        statement.close();
+        return queryTFList;
     }
 
     // 插入其他格式time类型数据并返回查询出的时间
@@ -666,6 +688,20 @@ public class DateTimeFuncs {
         return time_formatNargStr;
     }
 
+    // 获取函数Time_Format参数为时间日期函数的返回值
+    public String time_FormatFuncArg(String inputFunc, String inputFormat) throws SQLException {
+        Statement statement = connection.createStatement();
+        String time_formatFuncArgSql = "select time_format(" + inputFunc + ",'" + inputFormat + "')";
+        ResultSet time_formatFuncArgRst = statement.executeQuery(time_formatFuncArgSql);
+        String time_formatFuncArgStr  = null;
+        while (time_formatFuncArgRst.next()) {
+            time_formatFuncArgStr = time_formatFuncArgRst.getString(1);
+        }
+
+        statement.close();
+        return time_formatFuncArgStr;
+    }
+
     // 获取函数Time_Format缺少参数，返回错误
     public void time_FormatMissingArg(String inputParam) throws SQLException {
         Statement statement = connection.createStatement();
@@ -748,7 +784,7 @@ public class DateTimeFuncs {
         String dateDiffFarg2Sql = "select datediff('" + Date2 + "'," + funcArg + ") as diffDate";
         ResultSet dateDiffFarg2Rst = statement.executeQuery(dateDiffFarg2Sql);
         String dateDiffFarg2Str  = null;
-        while (dateDiffFarg2Rst.next()) {
+        while(dateDiffFarg2Rst.next()) {
             dateDiffFarg2Str = dateDiffFarg2Rst.getString(1);
         }
 
@@ -756,11 +792,17 @@ public class DateTimeFuncs {
         return dateDiffFarg2Str;
     }
 
-    // 函数DateDiff参数数量不符合要求，执行失败
-    public void dateDiffWrongArgFunc(String datediffState) throws SQLException {
+    // 函数DateDiff传入完整查询语句
+    public String dateDiffStateArg(String datediffState) throws SQLException {
         Statement statement = connection.createStatement();
         String dateDiffWrongArgSql = datediffState;
-        statement.executeQuery(dateDiffWrongArgSql);
+        ResultSet dateDiffStateRst = statement.executeQuery(dateDiffWrongArgSql);
+        String dateDiffStateStr = null;
+        while(dateDiffStateRst.next()) {
+            dateDiffStateStr = dateDiffStateRst.getString(1);
+        }
+        statement.close();
+        return dateDiffStateStr;
 
     }
 
@@ -810,5 +852,101 @@ public class DateTimeFuncs {
         statement.executeUpdate(timestampInsertSql);
         statement.close();
     }
+
+    //创建含有date,time和timestamp字段类型的表格,用于测试update语句
+    public void createUpdateTable() throws Exception {
+        Statement statement = connection.createStatement();
+        String sql = "create table uptesttable" + "("
+                + "id int,"
+                + "name varchar(32) not null,"
+                + "age int,"
+                + "amount double,"
+                + "address varchar(255),"
+                + "birthday date,"
+                + "createTime time,"
+                + "update_Time timestamp,"
+                + "is_delete boolean,"
+                + "primary key(id)"
+                + ")";
+        statement.execute(sql);
+        statement.close();
+    }
+
+    // 向Update表插入DateTime数据
+    public void insertValueToUpdateTestTable() throws ClassNotFoundException, SQLException {
+        Statement statement = connection.createStatement();
+
+        String insertSql = "insert into uptesttable " +
+                "values \n" +
+                "(1,'zhangsan',18,23.50,'beijing','1998-4-6', '08:10:10', '2022-4-8 18:05:07', true),\n" +
+                "(2,'lisi',25,895,' beijing haidian ', '1988-2-05', '06:15:8', '2000-02-29 00:00:00', true),\n" +
+                "(3,'l3',55,123.123,'wuhan NO.1 Street', '2022-03-4', '07:3:15', '1999-2-28 23:59:59', false),\n" +
+                "(4,'HAHA',57,9.0762556,'CHANGping', '2020-11-11', '5:59:59', '2021-05-04 12:00:00', false),\n" +
+                "(5,'awJDs',1,1453.9999,'pingYang1', '2010-10-1', '19:0:0', '2010-10-1 02:02:02', true),\n" +
+                "(6,'123',544,0,'543', '1987-7-16', '1:2:3', '1952-12-31 12:12:12', false),\n" +
+                "(7,'yamaha',76,2.30,'beijing changyang', '1949-01-01', '0:30:8', '2022-12-01 1:2:3', false)";
+        statement.executeUpdate(insertSql);
+        statement.close();
+    }
+
+    // 更新单行多字段
+    public List<List> updateSingleRow() throws Exception {
+        createUpdateTable();
+        insertValueToUpdateTestTable();
+        Statement statement = connection.createStatement();
+        String updateSql1 = "update uptesttable set name='new',age=33,amount=1111.111,address='new Addr'," +
+                "birthday='2022-05-19',createTime='18:33:00',update_time='1949-07-01 23:59:59',is_delete=true where id=7";
+        statement.executeUpdate(updateSql1);
+        String queryUpdateSql1 = "select * from uptesttable where id=7";
+        ResultSet queryUpdateRst = statement.executeQuery(queryUpdateSql1);
+        List<List> queryUpdateList1 = new ArrayList<List>();
+
+        while(queryUpdateRst.next()) {
+            List rowList = new ArrayList ();
+            rowList.add(queryUpdateRst.getString(1));
+            rowList.add(queryUpdateRst.getString(2));
+            rowList.add(queryUpdateRst.getString(3));
+            rowList.add(queryUpdateRst.getString(4));
+            rowList.add(queryUpdateRst.getString(5));
+            rowList.add(queryUpdateRst.getString(6));
+            rowList.add(queryUpdateRst.getTime(7).toString());
+            rowList.add(queryUpdateRst.getString(8));
+            rowList.add(queryUpdateRst.getString(9));
+
+            queryUpdateList1.add(rowList);
+        }
+        statement.close();
+        return queryUpdateList1;
+
+    }
+
+    // 更新全部多字段
+    public List<List> updateAllRow() throws Exception {
+        Statement statement = connection.createStatement();
+        String updateSql2 = "update uptesttable set age=100,amount=22.22,address='BJ'," +
+                "update_time='2022-10-01 10:08:06',is_delete=false";
+        statement.executeUpdate(updateSql2);
+        String queryUpdateSql2 = "select * from uptesttable";
+        ResultSet queryUpdateRst = statement.executeQuery(queryUpdateSql2);
+        List<List> queryUpdateList2 = new ArrayList<List>();
+
+        while(queryUpdateRst.next()) {
+            List rowList = new ArrayList ();
+            rowList.add(queryUpdateRst.getString(1));
+            rowList.add(queryUpdateRst.getString(2));
+            rowList.add(queryUpdateRst.getString(3));
+            rowList.add(queryUpdateRst.getString(4));
+            rowList.add(queryUpdateRst.getString(5));
+            rowList.add(queryUpdateRst.getString(6));
+            rowList.add(queryUpdateRst.getTime(7).toString());
+            rowList.add(queryUpdateRst.getString(8));
+            rowList.add(queryUpdateRst.getString(9));
+
+            queryUpdateList2.add(rowList);
+        }
+        statement.close();
+        return queryUpdateList2;
+    }
+
 
 }

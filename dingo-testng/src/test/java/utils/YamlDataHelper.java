@@ -112,6 +112,10 @@ public class YamlDataHelper{
                 yamlList = getYamlList(iniReader.getValue("DateTimeYaml", "time_format_num"));
                 break;
             }
+            case "test22Time_FormatArgFunc": {
+                yamlList = getYamlList(iniReader.getValue("DateTimeYaml", "time_format_funcArg"));
+                break;
+            }
             case "test15DateDiffStrArgFunc": {
                 yamlList = getYamlList(iniReader.getValue("DateTimeYaml", "datediff_str"));
                 break;
@@ -128,6 +132,10 @@ public class YamlDataHelper{
                 yamlList = getYamlList(iniReader.getValue("DateTimeYaml", "datediff_funcArg"));
                 break;
             }
+            case "test15DateDiffEmptyNullState": {
+                yamlList = getYamlList(iniReader.getValue("DateTimeYaml", "datediff_emptyNull"));
+                break;
+            }
             case "test16VariousFormatDateInsert": {
                 yamlList = getYamlList(iniReader.getValue("DateTimeYaml", "insert_date"));
                 break;
@@ -141,7 +149,7 @@ public class YamlDataHelper{
                 break;
             }
             case "test21InsertWithFunc": {
-                yamlList = getYamlList(iniReader.getValue("DateTimeYaml", "funcConcatStr"));
+                yamlList = getYamlList(iniReader.getValue("DateTimeYaml", "create_table_funcs"));
                 break;
             }
         }
@@ -233,15 +241,19 @@ public class YamlDataHelper{
                 yamlNegativeDateTimeList = getYamlList(iniReader.getValue("DateTimeNegativeYaml", "time_format_negative"));
                 break;
             }
+            case "test22Time_FormatNegativeArgFunc": {
+                yamlNegativeDateTimeList = getYamlList(iniReader.getValue("DateTimeNegativeYaml", "time_format_negative_funcArg"));
+                break;
+            }
             case "test22Time_FormatMissingArg": {
                 yamlNegativeDateTimeList = getYamlList(iniReader.getValue("DateTimeNegativeYaml", "time_format_negative_missingArg"));
                 break;
             }
-            case "test14DateDiffNegativeDate": {
+            case "test15DateDiffNegativeDate": {
                 yamlNegativeDateTimeList = getYamlList(iniReader.getValue("DateTimeNegativeYaml", "datediff_negative"));
                 break;
             }
-            case "test14DateDiffWrongArg": {
+            case "test15DateDiffWrongArg": {
                 yamlNegativeDateTimeList = getYamlList(iniReader.getValue("DateTimeNegativeYaml", "datediff_negatieve_wrongArg"));
                 break;
             }

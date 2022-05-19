@@ -94,28 +94,32 @@ public class TestDateTime extends YamlDataHelper{
         Assert.assertTrue(afterCreateTableList.contains(expectedTimestampTableName));
     }
 
-    @Test(priority = 1, enabled = true, dependsOnMethods = {"test01TableWithDateTimeFieldsCreate"}, description = "验证插入DateTime各字段数据成功")
+    @Test(priority = 1, enabled = true, dependsOnMethods = {"test01TableWithDateTimeFieldsCreate"},
+            description = "验证插入DateTime各字段数据成功")
     public void test02DateTimeInsert() throws Exception {
         int expectedInsertCount = 7;
         int actualInsertCount = dateTimeObj.insertDateTimeValues();
         Assert.assertEquals(actualInsertCount, expectedInsertCount);
     }
 
-    @Test(priority = 1, enabled = true, dependsOnMethods = {"test01TableWithDateFieldCreate"}, description = "验证插入Date字段数据成功")
+    @Test(priority = 1, enabled = true, dependsOnMethods = {"test01TableWithDateFieldCreate"},
+            description = "验证插入Date字段数据成功")
     public void test02DateInsert() throws Exception {
         int expectedInsertDateCount = 7;
         int actualInsertDateCount = dateTimeObj.insertDateValues();
         Assert.assertEquals(actualInsertDateCount, expectedInsertDateCount);
     }
 
-    @Test(priority = 1, enabled = true, dependsOnMethods = {"test01TableWithTimeFieldCreate"}, description = "验证插入Time字段数据成功")
+    @Test(priority = 1, enabled = true, dependsOnMethods = {"test01TableWithTimeFieldCreate"},
+            description = "验证插入Time字段数据成功")
     public void test02TimeInsert() throws Exception {
         int expectedInsertTimeCount = 10;
         int actualInsertTimeCount = dateTimeObj.insertTimeValues();
         Assert.assertEquals(actualInsertTimeCount, expectedInsertTimeCount);
     }
 
-    @Test(priority = 1, enabled = true, dependsOnMethods = {"test01TableWithTimestampFieldCreate"}, description = "验证插入Timestamp字段数据成功")
+    @Test(priority = 1, enabled = true, dependsOnMethods = {"test01TableWithTimestampFieldCreate"},
+            description = "验证插入Timestamp字段数据成功")
     public void test02TimestampInsert() throws Exception {
         int expectedInsertTimestampCount = 1;
         int actualInsertTimestampCount = dateTimeObj.insertTimeStampValues();
@@ -345,7 +349,8 @@ public class TestDateTime extends YamlDataHelper{
 
     }
 
-    @Test(priority = 12, enabled = true, dependsOnMethods = {"test02DateTimeInsert"},description = "验证函数unix_TimeStamp在表格中使用时的返回结果正常")
+    @Test(priority = 12, enabled = true, dependsOnMethods = {"test02DateTimeInsert"},
+            description = "验证函数unix_TimeStamp在表格中使用时的返回结果正常")
     public void test13Unix_TimeStampInTableDate() throws SQLException {
         List<String> expectedQueryUTSBList = new ArrayList<>();
         String[] ustbArray = new String[]{"891792000","570988800","1646323200","1605024000","1285862400","553363200","-662716800"};
@@ -494,14 +499,24 @@ public class TestDateTime extends YamlDataHelper{
 
     @Test(priority = 14, enabled = true, dataProvider = "yamlNegativeDateTimeMethod", expectedExceptions = SQLException.class,
             description = "验证函数datediff日期格式非法，预期异常")
-    public void test14DateDiffNegativeDate(Map<String, String> param) throws SQLException {
+    public void test15DateDiffNegativeDate(Map<String, String> param) throws SQLException {
         dateTimeObj.dateDiffStrArgFunc(param.get("inputDate1"), param.get("inputDate2"));
     }
 
     @Test(priority = 14, enabled = true, dataProvider = "yamlNegativeDateTimeMethod", expectedExceptions = SQLException.class,
             description = "验证函数datediff参数数量不正确，预期异常")
-    public void test14DateDiffWrongArg(Map<String, String> param) throws SQLException {
-        dateTimeObj.dateDiffWrongArgFunc(param.get("datediffState"));
+    public void test15DateDiffWrongArg(Map<String, String> param) throws SQLException {
+        dateTimeObj.dateDiffStateArg(param.get("datediffState"));
+    }
+
+    @Test(priority = 14, enabled = true, dataProvider = "yamlDataMethod",
+            description = "验证函数datediff参数有一个或两个为null或空字符串，预期输出null")
+    public void test15DateDiffEmptyNullState(Map<String, String> param) throws SQLException {
+        String expectedDateDiff = param.get("outputDiff");
+        System.out.println("Expected: " + expectedDateDiff);
+        String actualDateDiff = dateTimeObj.dateDiffStateArg(param.get("datediffState"));
+        System.out.println("Actual: " + actualDateDiff);
+        Assert.assertEquals(actualDateDiff, expectedDateDiff);
     }
 
     @Test(priority = 15, enabled = true, dependsOnMethods = {"test02DateInsert"}, dataProvider = "yamlDataMethod", description = "验证插入不同格式的日期成功")
@@ -549,7 +564,7 @@ public class TestDateTime extends YamlDataHelper{
         dateTimeObj.insertNegativeTimeStamp(param.get("insertTimeStamp"));
     }
 
-    @Test(priority = 20, enabled = false, dataProvider = "yamlDataMethod", description = "验证时间日期函数作为字段值插入表格")
+    @Test(priority = 20, enabled = true, dataProvider = "yamlDataMethod", description = "验证时间日期函数作为字段值插入表格")
     public void test21InsertWithFunc(Map<String, String> param) throws SQLException {
         if (param.get("insertFunc").equals("Now()") || param.get("insertFunc").equals("Current_TimeStamp()") || param.get("insertFunc").equals("Current_TimeStamp")) {
             String expectedNowStr = JDK8DateTime.formatNow();
@@ -571,11 +586,12 @@ public class TestDateTime extends YamlDataHelper{
             System.out.println("Actual: " + actualQueryCurTimeStr);
             Assert.assertEquals(actualQueryCurTimeStr.length(),8);
             Assert.assertEquals(actualQueryCurTimeStr.substring(0,5), expectedTimeStr);
-        } else if(param.get("insertFunc").equals("Unix_TimeStamp(Now())")) {
+        } else if(param.get("insertFunc").equals("Unix_TimeStamp()")) {
             String actualQueryTimestamp = dateTimeObj.createTableUsingFunc(param.get("insertType"), param.get("insertFunc"), param.get("insertID"));
             System.out.println("Actual: " + actualQueryTimestamp);
             Assert.assertEquals(actualQueryTimestamp.length(), 10);
             Long currentTimeStamp = System.currentTimeMillis()/1000;
+            System.out.println("Current: " + currentTimeStamp);
             int timeStampDiff = (int) (Integer.parseInt(actualQueryTimestamp) - currentTimeStamp);
             Assert.assertTrue(Math.abs(timeStampDiff) < 60);
         }
@@ -600,6 +616,20 @@ public class TestDateTime extends YamlDataHelper{
         Assert.assertEquals(actualTime_FormatNargStr, expectedTime_FormatNargStr);
     }
 
+    @Test(priority = 21, enabled = true, dataProvider = "yamlDataMethod", description = "验证函数time_format参数为函数的返回结果正常")
+    public void test22Time_FormatArgFunc(Map<String, String> param) throws SQLException {
+        String actualTime_FormatFuncArgStr = dateTimeObj.time_FormatFuncArg(param.get("argFunc"), param.get("inputFormat"));
+        System.out.println("Actual: " + actualTime_FormatFuncArgStr);
+        boolean matchRst = actualTime_FormatFuncArgStr.matches(param.get("matchReg"));
+        Assert.assertTrue(matchRst);
+    }
+
+    @Test(priority = 21, enabled = true, dataProvider = "yamlNegativeDateTimeMethod", expectedExceptions = SQLException.class,
+            description = "验证函数time_format参数为非时间函数，预期失败")
+    public void test22Time_FormatNegativeArgFunc(Map<String, String> param) throws SQLException {
+        dateTimeObj.time_FormatFuncArg(param.get("argFunc"), param.get("inputFormat"));
+    }
+
     @Test(priority = 21, enabled = true, dataProvider = "yamlNegativeDateTimeMethod", expectedExceptions = SQLException.class,
             description = "验证函数time_format时间格式非法，预期异常")
     public void test22Time_FormatNegativeTime(Map<String, String> param) throws SQLException {
@@ -612,19 +642,91 @@ public class TestDateTime extends YamlDataHelper{
         dateTimeObj.time_FormatMissingArg(param.get("inputParam"));
     }
 
-    @Test(priority = 13, enabled = true, description = "验证函数time_format参数为Null返回Null")
+    @Test(priority = 21, enabled = true, description = "验证函数time_format参数1为Null返回Null")
     public void test22Time_FormatNullArg() throws SQLException {
         String actualTime_FormatNullArgStr = dateTimeObj.time_FormatNullArg();
         System.out.println("Actual: " + actualTime_FormatNullArgStr);
         Assert.assertNull(actualTime_FormatNullArgStr);
     }
 
-    @Test(priority = 13, enabled = true, description = "验证函数time_format参数为空字符串返回Null")
+    @Test(priority = 21, enabled = true, description = "验证函数time_format参数1为空字符串返回Null")
     public void test22Time_FormatEmptyTimeArg() throws SQLException {
         String actualTime_FormatEmptyTimeArgStr = dateTimeObj.time_FormatEmptyArg();
         System.out.println("Actual: " + actualTime_FormatEmptyTimeArgStr);
         Assert.assertNull(actualTime_FormatEmptyTimeArgStr);
     }
+
+    @Test(priority = 21, enabled = true, dependsOnMethods = {"test02TimeInsert"},
+            description = "验证函数time_format在表格中使用时的返回结果正常")
+    public void test22Time_FormatTableTime() throws SQLException {
+        List<String> expectedQueryList = new ArrayList<>();
+        String[] formatOutArray = new String[]{"08:10:10","06:15:08","07:03:15","05:59:59","19:00:00","23:59:59",
+                "01:02:03","00:30:08","02:02:00","00:00:00"};
+        for (int i=0; i < formatOutArray.length; i++){
+            expectedQueryList.add(formatOutArray[i]);
+        }
+        System.out.println("期望查询到的列表为：" + expectedQueryList);
+
+        List<String> actualQueryList = dateTimeObj.queryTime_FormatTimeInTable();
+        System.out.println("实际查询到的列表为：" + actualQueryList);
+        Assert.assertTrue(actualQueryList.equals(expectedQueryList));
+    }
+
+    public List<List> expectedUpdateSingleRow() {
+        String[][] dataArray = {{"7","new","33","1111.111","new Addr","2022-05-19","18:33:00","1949-07-01 23:59:59","true"}};
+        List<List> expectedList = new ArrayList<List>();
+        for(int i=0; i<dataArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<dataArray[i].length; j++) {
+                columnList.add(dataArray[i][j]);
+            }
+            expectedList.add(columnList);
+        }
+        return expectedList;
+    }
+
+    public List<List> expectedUpdateAllRow() {
+        String[][] dataArray = {{"1","zhangsan","100","22.22","BJ","1998-04-06","08:10:10","2022-10-01 10:08:06","false"},
+                {"2","lisi","100","22.22","BJ","1988-02-05","06:15:08","2022-10-01 10:08:06","false"},
+                {"3","l3","100","22.22","BJ","2022-03-04","07:03:15","2022-10-01 10:08:06","false"},
+                {"4","HAHA","100","22.22","BJ","2020-11-11","05:59:59","2022-10-01 10:08:06","false"},
+                {"5","awJDs","100","22.22","BJ","2010-10-01","19:00:00","2022-10-01 10:08:06","false"},
+                {"6","123","100","22.22","BJ","1987-07-16","01:02:03","2022-10-01 10:08:06","false"},
+                {"7","new","100","22.22","BJ","2022-05-19","18:33:00","2022-10-01 10:08:06","false"}};
+        List<List> expectedList = new ArrayList<List>();
+        for(int i=0; i<dataArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<dataArray[i].length; j++) {
+                columnList.add(dataArray[i][j]);
+            }
+            expectedList.add(columnList);
+        }
+        return expectedList;
+    }
+
+    @Test(priority = 22, enabled = true, description = "验证更新单行多字段")
+    public void test23UpdateSingleRowMultiCol() throws Exception {
+        List<List> expectedList = expectedUpdateSingleRow();
+        System.out.println("Expected: " + expectedList);
+        List<List> actualUpdateList = dateTimeObj.updateSingleRow();
+        System.out.println("Actual: " + actualUpdateList);
+
+        Assert.assertTrue(actualUpdateList.containsAll(expectedList));
+        Assert.assertTrue(expectedList.containsAll(actualUpdateList));
+    }
+
+    @Test(priority = 22, enabled = true, dependsOnMethods = {"test23UpdateSingleRowMultiCol"},
+            description = "验证更新全部行多字段")
+    public void test23UpdateAllRows() throws Exception {
+        List<List> expectedList = expectedUpdateAllRow();
+        System.out.println("Expected: " + expectedList);
+        List<List> actualUpdateList = dateTimeObj.updateAllRow();
+        System.out.println("Actual: " + actualUpdateList);
+
+        Assert.assertTrue(actualUpdateList.containsAll(expectedList));
+        Assert.assertTrue(expectedList.containsAll(actualUpdateList));
+    }
+
 
 
     @AfterClass(alwaysRun = true, description = "测试完成后删除数据和表格并关闭连接")
@@ -642,6 +744,19 @@ public class TestDateTime extends YamlDataHelper{
         tearDownStatement.execute("drop table " + dateTableName);
         tearDownStatement.execute("drop table " + timeTableName);
         tearDownStatement.execute("drop table " + timestampTableName);
+        tearDownStatement.execute("drop table Orders705");
+        tearDownStatement.execute("drop table Orders673");
+        tearDownStatement.execute("drop table Orders6841");
+        tearDownStatement.execute("drop table Orders6842");
+        tearDownStatement.execute("drop table Orders690");
+        tearDownStatement.execute("drop table Orders6961");
+        tearDownStatement.execute("drop table Orders6962");
+        tearDownStatement.execute("drop table Orders7041");
+        tearDownStatement.execute("drop table Orders7042");
+        tearDownStatement.execute("drop table Orders752");
+//        tearDownStatement.execute("drop table Orders7522");
+        tearDownStatement.execute("delete from uptesttable");
+        tearDownStatement.execute("drop table uptesttable");
         tearDownStatement.close();
         DateTimeFuncs.connection.close();
     }
