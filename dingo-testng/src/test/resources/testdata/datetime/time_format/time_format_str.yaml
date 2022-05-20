@@ -78,3 +78,19 @@ testID1001261-04:
   inputTime: "010203"
   inputFormat: "%H.%i.%s"
   outputTime: "01.02.03"
+testID1000805-01:
+  inputTime: "10:11:12"
+  inputFormat: "%K %r %f"
+  outputTime: "K r f"
+testID1000805-02:
+  inputTime: "10:11:12"
+  inputFormat: "%h:%I:%s"
+  outputTime: "h:I:12"
+testID1000805-03:
+  inputTime: "10:11:12"
+  inputFormat: "%H %P%M"
+  outputTime: "10 PM"
+testID1001255:
+  inputTime: "10:11:12"
+  inputFormat: ""
+  outputTime: ""

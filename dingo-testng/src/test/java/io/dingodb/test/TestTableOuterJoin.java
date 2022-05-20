@@ -31,6 +31,40 @@ import java.util.List;
 public class TestTableOuterJoin {
     public static TableOuterJoin outerJoinObj = new TableOuterJoin();
 
+    public void initGirlsTB() throws SQLException {
+        String beauty_tbl_meta_path = "src/test/resources/testdata/tablemeta/beauty_tbl_meta.txt";
+        String beauty_tbl_value_path = "src/test/resources/testdata/tableInsertValues/beauty_tbl.txt";
+        String beauty_tbl_meta = FileReaderUtil.readFile(beauty_tbl_meta_path);
+        String beauty_tbl_value = FileReaderUtil.readFile(beauty_tbl_value_path);
+        outerJoinObj.createBeautyTable(beauty_tbl_meta);
+        outerJoinObj.insertValuesToBeauty(beauty_tbl_value);
+        String boys_tbl_meta_path = "src/test/resources/testdata/tablemeta/boys_tbl_meta.txt";
+        String boys_tbl_value_path = "src/test/resources/testdata/tableInsertValues/boys_tbl.txt";
+        String boys_right_value_path = "src/test/resources/testdata/tableInsertValues/boys_right.txt";
+        String boys_tbl_meta = FileReaderUtil.readFile(boys_tbl_meta_path);
+        String boys_tbl_value = FileReaderUtil.readFile(boys_tbl_value_path);
+        String boys_right_value = FileReaderUtil.readFile(boys_right_value_path);
+        outerJoinObj.createBoysTable(boys_tbl_meta);
+        outerJoinObj.insertValuesToBoys(boys_tbl_value);
+        outerJoinObj.createBoysRightTable(boys_tbl_meta);
+        outerJoinObj.insertValuesToBoysRight(boys_right_value);
+    }
+
+    public void initEmployeesTB() throws SQLException {
+        String departments_tbl_meta_path = "src/test/resources/testdata/tablemeta/departments_tbl_meta.txt";
+        String departments_tbl_value_path = "src/test/resources/testdata/tableInsertValues/departments.txt";
+        String departments_tbl_meta = FileReaderUtil.readFile(departments_tbl_meta_path);
+        String departments_tbl_value = FileReaderUtil.readFile(departments_tbl_value_path);
+        outerJoinObj.createDepartmentsTable(departments_tbl_meta);
+        outerJoinObj.insertValuesToDepartments(departments_tbl_value);
+        String employees_tbl_meta_path = "src/test/resources/testdata/tablemeta/employees_tbl_meta.txt";
+        String employeess_tbl_value_path = "src/test/resources/testdata/tableInsertValues/employees.txt";
+        String employees_tbl_meta = FileReaderUtil.readFile(employees_tbl_meta_path);
+        String employees_tbl_value = FileReaderUtil.readFile(employeess_tbl_value_path);
+        outerJoinObj.createEmployeesTable(employees_tbl_meta);
+        outerJoinObj.insertValuesToEmployees(employees_tbl_value);
+    }
+
     public void initStudentAndClassTB() throws SQLException {
         String student_tbl_meta_path = "src/test/resources/testdata/tablemeta/student_tbl_meta.txt";
         String student_tbl_value_path = "src/test/resources/testdata/tableInsertValues/student_tbl.txt";
@@ -61,6 +95,7 @@ public class TestTableOuterJoin {
         String product2_value = FileReaderUtil.readFile(product2_value_path);
         outerJoinObj.createProuct2Table(product2_meta);
         outerJoinObj.insertValuesToProduct2(product2_value);
+        outerJoinObj.createProuct3Table(product2_meta);
     }
 
     public void initTestTB() throws SQLException {
@@ -76,7 +111,23 @@ public class TestTableOuterJoin {
         outerJoinObj.insertValuesToTest2(test2_value);
     }
 
-    public List<List> expectedList1() {
+    public void initW3cTB() throws SQLException {
+        String w3c_meta_path = "src/test/resources/testdata/tablemeta/w3cschool_tbl_meta.txt";
+        String w3c_value_path = "src/test/resources/testdata/tableInsertValues/w3cschool_tbl.txt";
+        String w3c_meta = FileReaderUtil.readFile(w3c_meta_path);
+        String w3c_value = FileReaderUtil.readFile(w3c_value_path);
+        outerJoinObj.createw3cTable(w3c_meta);
+        outerJoinObj.insertValuesTow3c(w3c_value);
+        String tcount_meta_path = "src/test/resources/testdata/tablemeta/tcount_tbl_meta.txt";
+        String tcount_value_path = "src/test/resources/testdata/tableInsertValues/tcount_tbl.txt";
+        String tcount_meta = FileReaderUtil.readFile(tcount_meta_path);
+        String tcount_value = FileReaderUtil.readFile(tcount_value_path);
+        outerJoinObj.createtcountTable(tcount_meta);
+        outerJoinObj.insertValuesTotcount(tcount_value);
+    }
+
+
+    public List<List> expectedFullList1() {
         String[][] dataArray = {{"2","lisi","101","101","class-2"},{"1","zhangsan","100","100","class-1"},
                 {null,null,null,"103","class-3"},{"3","wangwu","102",null,null}};
         List<List> expectedList = new ArrayList<List>();
@@ -90,7 +141,7 @@ public class TestTableOuterJoin {
         return expectedList;
     }
 
-    public List<List> expectedList2() {
+    public List<List> expectedFullList2() {
         String[][] dataArray = {{"1","2","3",null,null},{"4","5","6",null,null},
                 {"7","8","9",null,null},{null,null,null,"3","1"},{null,null,null,"6","2"}};
         List<List> expectedList = new ArrayList<List>();
@@ -104,7 +155,7 @@ public class TestTableOuterJoin {
         return expectedList;
     }
 
-    public List<List> expectedList3() {
+    public List<List> expectedFullList3() {
         String[][] dataArray = {{"2","lisi","101",null,null},{"1","zhangsan","100",null,null},
                 {"3","wangwu","102",null,null}};
         List<List> expectedList = new ArrayList<List>();
@@ -118,7 +169,7 @@ public class TestTableOuterJoin {
         return expectedList;
     }
 
-    public List<List> expectedList4() {
+    public List<List> expectedFullList4() {
         String[][] dataArray = {{"2","Lisi",null,null},{null,null,"5","Hello"},{"1","Zhangsan","1","Zhangsan"},
                 {"4","Tita",null,null},{"3","Wang Wu","3","Wang Wu"},{null,null,"6","NiNi"}};
         List<List> expectedList = new ArrayList<List>();
@@ -132,7 +183,7 @@ public class TestTableOuterJoin {
         return expectedList;
     }
 
-    public List<List> expectedList5() {
+    public List<List> expectedFullList5() {
         String[][] dataArray = {{"2","lisi","class-2"},{"1","zhangsan","class-1"},
                 {null,null,"class-3"},{"3","wangwu",null}};
         List<List> expectedList = new ArrayList<List>();
@@ -146,7 +197,7 @@ public class TestTableOuterJoin {
         return expectedList;
     }
 
-    public List<List> expectedList6() {
+    public List<List> expectedFullList6() {
         String[][] dataArray = {{"2","lisi","101","101","class-2"},{"1","zhangsan","100","100","class-1"}};
         List<List> expectedList = new ArrayList<List>();
         for(int i=0; i<dataArray.length; i++) {
@@ -159,7 +210,7 @@ public class TestTableOuterJoin {
         return expectedList;
     }
 
-    public List<List> expectedList7() {
+    public List<List> expectedFullList7() {
         String[][] dataArray = {{null,null,null,"103","class-3"},{"3","wangwu","102",null,null}};
         List<List> expectedList = new ArrayList<List>();
         for(int i=0; i<dataArray.length; i++) {
@@ -244,7 +295,7 @@ public class TestTableOuterJoin {
                 {"2","lisi","101","100","class-1"}, {"3","wangwu","102","100","class-1"},
                 {"1","zhangsan","100","101","class-2"}, {"2","lisi","101","101","class-2"},
                 {"3","wangwu","102","101","class-2"}, {"1","zhangsan","100","103","class-3"},
-                {"2","lisi","101","103","class-3"}, {"3","wangwu","102","103","class-3"},};
+                {"2","lisi","101","103","class-3"}, {"3","wangwu","102","103","class-3"}};
         List<List> expectedList = new ArrayList<List>();
         for(int i=0; i<dataArray.length; i++) {
             List columnList = new ArrayList();
@@ -256,6 +307,173 @@ public class TestTableOuterJoin {
         return expectedList;
     }
 
+    public List<List> expectedLeftList1() {
+        String[][] dataArray = {{"LiuYan","8"}, {"TeacherLi","9"}, {"DuLala","9"},
+                {"LingShan","9"}, {"Shuange","9"}, {"Xia Xue","9"}};
+        List<List> expectedList = new ArrayList<List>();
+        for(int i=0; i<dataArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<dataArray[i].length; j++) {
+                columnList.add(dataArray[i][j]);
+            }
+            expectedList.add(columnList);
+        }
+        return expectedList;
+    }
+
+    public List<List> expectedLeftList2() {
+        String[][] dataArray = {{"1","LiuYan","female","1988-02-03 00:00:00","18209876577","8",null,null,null},
+                {"2","TeacherLi","female","1987-12-30 00:00:00","18219876577","9",null,null,null},
+                {"3","Angelay","female","1989-02-03 00:00:00","18209876567","3","3","Xiao Ming","50"},
+                {"4","ReBa","female","1993-02-03 00:00:00","18209876579","2","2","Han Han","800"},
+                {"5","DuLala","female","1992-02-03 00:00:00","18209179577","9",null,null,null},
+                {"6","zhiRuo","female","1988-02-03 00:00:00","18209876577","1","1","Zhang Wuji","100"},
+                {"7","LingShan","female","1987-12-30 00:00:00","18219876577","9",null,null,null},
+                {"8","Xiao Zhao","female","1989-02-03 00:00:00","18209876567","1","1","Zhang Wuji","100"},
+                {"9","Shuange","female","1993-02-03 00:00:00","18209876579","9",null,null,null},
+                {"10","Wang Yuyan","female","1992-02-03 00:00:00","18209179577","4","4","DuanYU","300"},
+                {"11","Xia Xue","female","1993-02-03 00:00:00","18209876579","9",null,null,null},
+                {"12","Zhao Min","female","1992-02-03 00:00:00","18209179577","1","1","Zhang Wuji","100"}};
+        List<List> expectedList = new ArrayList<List>();
+        for(int i=0; i<dataArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<dataArray[i].length; j++) {
+                columnList.add(dataArray[i][j]);
+            }
+            expectedList.add(columnList);
+        }
+        return expectedList;
+    }
+
+    public List<List> expectedLeftList3() {
+        String[][] dataArray = {{"120","Tre","200","1700",null},{"130","Cor","205","1700",null},
+                {"140","Con","121","1700",null},{"150","Sha","145","1700",null},
+                {"160","Ben","200","1700",null},{"170","Man","200","1700",null},
+                {"180","Con","108","1700",null},{"190","Con","200","1700",null},
+                {"200","Ope","200","1700",null},{"210","IT","114","1700",null},
+                {"220","NOC","103","1700",null},{"230","IT","145","1700",null},
+                {"240","Gov","201","1700",null},{"250","Ret","145","1700",null},
+                {"260","Rec","204","1700",null},{"270","Pay","100","1700",null}};
+        List<List> expectedList = new ArrayList<List>();
+        for(int i=0; i<dataArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<dataArray[i].length; j++) {
+                columnList.add(dataArray[i][j]);
+            }
+            expectedList.add(columnList);
+        }
+        return expectedList;
+    }
+
+    public List<List> expectedLeftList4() {
+        String[][] dataArray = {{"1","2","3",null,null}, {"4","5","6",null,null},{"7","8","9",null,null}};
+        List<List> expectedList = new ArrayList<List>();
+        for(int i=0; i<dataArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<dataArray[i].length; j++) {
+                columnList.add(dataArray[i][j]);
+            }
+            expectedList.add(columnList);
+        }
+        return expectedList;
+    }
+
+    public List<List> expectedLeftList5() {
+        String[][] dataArray = {{"1","2","3"}, {"4","5","6"},{"7","8","9"}};
+        List<List> expectedList = new ArrayList<List>();
+        for(int i=0; i<dataArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<dataArray[i].length; j++) {
+                columnList.add(dataArray[i][j]);
+            }
+            expectedList.add(columnList);
+        }
+        return expectedList;
+    }
+
+    public List<List> expectedLeftList6() {
+        String[][] dataArray = {{"1","LiuYan"}, {"2","TeacherLi"},{"5","DuLala"}};
+        List<List> expectedList = new ArrayList<List>();
+        for(int i=0; i<dataArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<dataArray[i].length; j++) {
+                columnList.add(dataArray[i][j]);
+            }
+            expectedList.add(columnList);
+        }
+        return expectedList;
+    }
+
+    public List<List> expectedLeftList7() {
+        String[][] dataArray = {{"2","Lisi",null,null}, {"1","Zhangsan","1","Zhangsan"},
+                {"4","Tita",null,null},{"3","Wang Wu","3","Wang Wu"}};
+        List<List> expectedList = new ArrayList<List>();
+        for(int i=0; i<dataArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<dataArray[i].length; j++) {
+                columnList.add(dataArray[i][j]);
+            }
+            expectedList.add(columnList);
+        }
+        return expectedList;
+    }
+
+    public List<List> expectedRightList1() {
+        String[][] dataArray = {{null,"5","Zhang Fei"}, {null,"6","Panda"}};
+        List<List> expectedList = new ArrayList<List>();
+        for(int i=0; i<dataArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<dataArray[i].length; j++) {
+                columnList.add(dataArray[i][j]);
+            }
+            expectedList.add(columnList);
+        }
+        return expectedList;
+    }
+
+    public List<List> expectedRightList2() {
+        String[][] dataArray = {{null,null,null,null,"mahran","20"}, {null,null,null,null,"Jen",null},
+                {null,null,null,null,"Gill","20"},{"1","Learn PHP","John Poul","2007-05-24","John Poul","1"},
+                {"3","JAVA Tutorial","Sanjay","2007-05-06","Sanjay","1"}};
+        List<List> expectedList = new ArrayList<List>();
+        for(int i=0; i<dataArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<dataArray[i].length; j++) {
+                columnList.add(dataArray[i][j]);
+            }
+            expectedList.add(columnList);
+        }
+        return expectedList;
+    }
+
+    public List<List> expectedRightList3() {
+        String[][] dataArray = {{null,null,null,"3","1"}, {null,null,null,"6","2"}};
+        List<List> expectedList = new ArrayList<List>();
+        for(int i=0; i<dataArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<dataArray[i].length; j++) {
+                columnList.add(dataArray[i][j]);
+            }
+            expectedList.add(columnList);
+        }
+        return expectedList;
+    }
+
+    public List<List> expectedRightList4() {
+        String[][] dataArray = {{null,null,"5","Hello"}, {"1","Zhangsan","1","Zhangsan"},
+                {"3","Wang Wu","3","Wang Wu"},{null,null,"6","NiNi"}};
+        List<List> expectedList = new ArrayList<List>();
+        for(int i=0; i<dataArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<dataArray[i].length; j++) {
+                columnList.add(dataArray[i][j]);
+            }
+            expectedList.add(columnList);
+        }
+        return expectedList;
+    }
+
+
     @BeforeClass(alwaysRun = true, description = "测试前连接数据库")
     public static void setUpAll() throws SQLException {
         Assert.assertNotNull(TableOuterJoin.connection);
@@ -264,7 +482,7 @@ public class TestTableOuterJoin {
     @Test(priority = 0, enabled = true, description = "验证全外连接查询全部数据")
     public void test01FullOuterJoinAllData() throws SQLException {
         initStudentAndClassTB();
-        List<List> expectedList = expectedList1();
+        List<List> expectedList = expectedFullList1();
         System.out.println("Expected: " + expectedList);
         List<List> actualListWithOuter = outerJoinObj.fullOuterJoinAll();
         System.out.println("Actual: " + actualListWithOuter);
@@ -276,7 +494,7 @@ public class TestTableOuterJoin {
     @Test(priority = 1, enabled = true, dependsOnMethods = {"test01FullOuterJoinAllData"},
             description = "验证省略outer")
     public void test02FullOuterJoinOmitOuter() throws SQLException {
-        List<List> expectedList = expectedList1();
+        List<List> expectedList = expectedFullList1();
         System.out.println("Expected: " + expectedList);
         List<List> actualListOmitOuter = outerJoinObj.fullOuterJoinOmitOuter();
         System.out.println("Actual: " + actualListOmitOuter);
@@ -294,7 +512,7 @@ public class TestTableOuterJoin {
     @Test(priority = 3, enabled = true, description = "验证两表没有相同数据时查询全连接数据")
     public void test04FullOuterJoinNoSameData() throws SQLException {
         initProductTB();
-        List<List> expectedList = expectedList2();
+        List<List> expectedList = expectedFullList2();
         System.out.println("Expected: " + expectedList);
         List<List> actualListNoSameData = outerJoinObj.fullOuterJoinNoSameData();
         System.out.println("Actual: " + actualListNoSameData);
@@ -306,7 +524,7 @@ public class TestTableOuterJoin {
     @Test(priority = 4, enabled = true, dependsOnMethods = {"test01FullOuterJoinAllData"},
             description = "验证当一个表为空时，全连接查询")
     public void test05FullOuterJoinOneEmpty() throws SQLException {
-        List<List> expectedList = expectedList3();
+        List<List> expectedList = expectedFullList3();
         System.out.println("Expected: " + expectedList);
         List<List> actualListOneEmpty = outerJoinObj.fullOuterJoinOneEmpty();
         System.out.println("Actual: " + actualListOneEmpty);
@@ -318,7 +536,7 @@ public class TestTableOuterJoin {
     @Test(priority = 5, enabled = true, description = "验证使用using(key)作为条件")
     public void test06FullOuterJoinUsingKeyState() throws SQLException {
         initTestTB();
-        List<List> expectedList = expectedList4();
+        List<List> expectedList = expectedFullList4();
         System.out.println("Expected: " + expectedList);
         List<List> actualListUsingKeyState = outerJoinObj.fullOuterJoinUsingKeyState();
         System.out.println("Actual: " + actualListUsingKeyState);
@@ -336,7 +554,7 @@ public class TestTableOuterJoin {
     @Test(priority = 7, enabled = true, dependsOnMethods = {"test06FullOuterJoinUsingKeyState"},
             description = "验证使用*查询所有")
     public void test08FullOuterJoinStarQueryAll() throws SQLException {
-        List<List> expectedList = expectedList4();
+        List<List> expectedList = expectedFullList4();
         System.out.println("Expected: " + expectedList);
         List<List> actualListStarQueryAll = outerJoinObj.fullOuterJoinStarQueryAll();
         System.out.println("Actual: " + actualListStarQueryAll);
@@ -354,7 +572,7 @@ public class TestTableOuterJoin {
     @Test(priority = 9, enabled = true, dependsOnMethods = {"test01FullOuterJoinAllData"},
             description = "验证查询独有字段可不使用表名修饰")
     public void test10FullOuterJoinUniqueFieldQuery() throws SQLException {
-        List<List> expectedList = expectedList5();
+        List<List> expectedList = expectedFullList5();
         System.out.println("Expected: " + expectedList);
         List<List> actualListUniqueFieldQuery = outerJoinObj.fullOuterJoinUniqueFieldQuery();
         System.out.println("Actual: " + actualListUniqueFieldQuery);
@@ -366,7 +584,7 @@ public class TestTableOuterJoin {
     @Test(priority = 10, enabled = true, dependsOnMethods = {"test01FullOuterJoinAllData"},
             description = "验证表名位置互换查询结果相同")
     public void test11FullOuterJoinExchangeTable() throws SQLException {
-        List<List> expectedList = expectedList1();
+        List<List> expectedList = expectedFullList1();
         System.out.println("Expected: " + expectedList);
         List<List> actualListExchangeTable = outerJoinObj.fullOuterJoinExchangeTable();
         System.out.println("Actual: " + actualListExchangeTable);
@@ -378,7 +596,7 @@ public class TestTableOuterJoin {
     @Test(priority = 11, enabled = true, dependsOnMethods = {"test01FullOuterJoinAllData"},
             description = "验证查询两表匹配到的数据")
     public void test12FullOuterJoinMatchRows() throws SQLException {
-        List<List> expectedList = expectedList6();
+        List<List> expectedList = expectedFullList6();
         System.out.println("Expected: " + expectedList);
         List<List> actualListMatchRow = outerJoinObj.fullOuterJoinMatchRow();
         System.out.println("Actual: " + actualListMatchRow);
@@ -390,7 +608,7 @@ public class TestTableOuterJoin {
     @Test(priority = 12, enabled = true, dependsOnMethods = {"test01FullOuterJoinAllData"},
             description = "验证查询两表未匹配到的数据")
     public void test13FullOuterJoinNotMatchRows() throws SQLException {
-        List<List> expectedList = expectedList7();
+        List<List> expectedList = expectedFullList7();
         System.out.println("Expected: " + expectedList);
         List<List> actualListNotMatchRow = outerJoinObj.fullOuterJoinNotMatchRow();
         System.out.println("Actual: " + actualListNotMatchRow);
@@ -521,6 +739,210 @@ public class TestTableOuterJoin {
         Assert.assertTrue(expectedList.containsAll(actualListExchangeTable));
     }
 
+    @Test(priority = 25, enabled = true, description = "验证左连接仅查询在左表的数据")
+    public void test26LeftJoinOnlyInLeftTable() throws SQLException {
+        initGirlsTB();
+        List<List> expectedList = expectedLeftList1();
+        System.out.println("Expected: " + expectedList);
+        List<List> actualLeftList = outerJoinObj.leftOuterJoinOnlyInLeft();
+        System.out.println("Actual: " + actualLeftList);
+
+        Assert.assertTrue(actualLeftList.containsAll(expectedList));
+        Assert.assertTrue(expectedList.containsAll(actualLeftList));
+    }
+
+    @Test(priority = 26, enabled = true, dependsOnMethods = {"test26LeftJoinOnlyInLeftTable"}, description = "验证左连接全部数据")
+    public void test27LeftJoinAllData() throws SQLException {
+        List<List> expectedList = expectedLeftList2();
+        System.out.println("Expected: " + expectedList);
+        List<List> actualLeftList = outerJoinObj.leftOuterJoinAllData();
+        System.out.println("Actual: " + actualLeftList);
+
+        Assert.assertTrue(actualLeftList.containsAll(expectedList));
+        Assert.assertTrue(expectedList.containsAll(actualLeftList));
+    }
+
+    @Test(priority = 27, enabled = true, description = "验证左连接省略outer")
+    public void test28LeftJoinOmitOuter() throws SQLException {
+        initEmployeesTB();
+        List<List> expectedList = expectedLeftList3();
+        System.out.println("Expected: " + expectedList);
+        List<List> actualLeftList = outerJoinObj.leftOuterJoinOmitOuter();
+        System.out.println("Actual: " + actualLeftList);
+
+        Assert.assertTrue(actualLeftList.containsAll(expectedList));
+        Assert.assertTrue(expectedList.containsAll(actualLeftList));
+    }
+
+    @Test(priority = 28, enabled = true, dependsOnMethods = {"test04FullOuterJoinNoSameData"}, description = "验证左连接两表无交集")
+    public void test29LeftJoinNoSameData() throws SQLException {
+        List<List> expectedList = expectedLeftList4();
+        System.out.println("Expected: " + expectedList);
+        List<List> actualLeftList = outerJoinObj.leftOuterJoinNoSameData();
+        System.out.println("Actual: " + actualLeftList);
+
+        Assert.assertTrue(actualLeftList.containsAll(expectedList));
+        Assert.assertTrue(expectedList.containsAll(actualLeftList));
+    }
+
+    @Test(priority = 29, enabled = true, dependsOnMethods = {"test04FullOuterJoinNoSameData"},
+            expectedExceptions = SQLException.class, description = "验证连接字段在一个表中不存在")
+    public void test30LeftJoinKeyNotExist() throws SQLException {
+        outerJoinObj.leftOuterJoinWrongKey();
+    }
+
+    @Test(priority = 30, enabled = true, dependsOnMethods = {"test04FullOuterJoinNoSameData"},
+            description = "验证左表为空，返回空，无异常")
+    public void test31LeftJoinNoDataLeft() throws SQLException {
+        Boolean actualRowReturn = outerJoinObj.leftOuterJoinNoDataLeft();
+        System.out.println(actualRowReturn);
+        Assert.assertFalse(actualRowReturn);
+    }
+
+    @Test(priority = 31, enabled = true, dependsOnMethods = {"test04FullOuterJoinNoSameData"},
+            description = "右表无数据，左表可返回全部")
+    public void test32LeftJoinNoDataRight() throws SQLException {
+        List<List> expectedList = expectedLeftList5();
+        System.out.println("Expected: " + expectedList);
+        List<List> actualLeftList = outerJoinObj.leftOuterJoinNoDataRight();
+        System.out.println("Actual: " + actualLeftList);
+
+        Assert.assertTrue(actualLeftList.containsAll(expectedList));
+        Assert.assertTrue(expectedList.containsAll(actualLeftList));
+    }
+
+    @Test(priority = 32, enabled = true, dependsOnMethods = {"test26LeftJoinOnlyInLeftTable"},
+            description = "缺少连接条件，预期异常")
+    public void test33LeftJoinMissingCondition() throws SQLException {
+        outerJoinObj.leftOuterJoinMissingCondition();
+    }
+
+    @Test(priority = 33, enabled = true, dependsOnMethods = {"test26LeftJoinOnlyInLeftTable"},
+            description = "验证添加where条件")
+    public void test34LeftJoinWhereState() throws SQLException {
+        List<List> expectedList = expectedLeftList6();
+        System.out.println("Expected: " + expectedList);
+        List<List> actualLeftList = outerJoinObj.leftOuterJoinWhereState();
+        System.out.println("Actual: " + actualLeftList);
+
+        Assert.assertTrue(actualLeftList.containsAll(expectedList));
+        Assert.assertTrue(expectedList.containsAll(actualLeftList));
+    }
+
+    @Test(priority = 34, enabled = true, dependsOnMethods = {"test06FullOuterJoinUsingKeyState"},
+            description = "验证连接使用using(key)")
+    public void test345LeftJoinUsingKey() throws SQLException {
+        List<List> expectedList = expectedLeftList7();
+        System.out.println("Expected: " + expectedList);
+        List<List> actualLeftList = outerJoinObj.leftOuterJoinUsingKey();
+        System.out.println("Actual: " + actualLeftList);
+
+        Assert.assertTrue(actualLeftList.containsAll(expectedList));
+        Assert.assertTrue(expectedList.containsAll(actualLeftList));
+    }
+
+
+    @Test(priority = 35, enabled = true, dependsOnMethods = {"test26LeftJoinOnlyInLeftTable"},
+            description = "验证右连接仅查询在右表的数据")
+    public void test36RightJoinOnlyInRightTable() throws SQLException {
+        List<List> expectedList = expectedRightList1();
+        System.out.println("Expected: " + expectedList);
+        List<List> actualRightList = outerJoinObj.rightOuterJoinOnlyInRight();
+        System.out.println("Actual: " + actualRightList);
+
+        Assert.assertTrue(actualRightList.containsAll(expectedList));
+        Assert.assertTrue(expectedList.containsAll(actualRightList));
+    }
+
+    @Test(priority = 36, enabled = true, description = "验证右连接全部表数据")
+    public void test37RightJoinAllData() throws SQLException {
+        initW3cTB();
+        List<List> expectedList = expectedRightList2();
+        System.out.println("Expected: " + expectedList);
+        List<List> actualRightList = outerJoinObj.rightOuterJoinAllData();
+        System.out.println("Actual: " + actualRightList);
+
+        Assert.assertTrue(actualRightList.containsAll(expectedList));
+        Assert.assertTrue(expectedList.containsAll(actualRightList));
+    }
+
+    @Test(priority = 37, enabled = true, dependsOnMethods = {"test28LeftJoinOmitOuter"}, description = "验证右连接省略outer")
+    public void test38RightJoinOmitOuter() throws SQLException {
+        List<List> expectedList = expectedLeftList3();
+        System.out.println("Expected: " + expectedList);
+        List<List> actualRightList = outerJoinObj.rightOuterJoinOmitOuter();
+        System.out.println("Actual: " + actualRightList);
+
+        Assert.assertTrue(actualRightList.containsAll(expectedList));
+        Assert.assertTrue(expectedList.containsAll(actualRightList));
+    }
+
+    @Test(priority = 38, enabled = true, dependsOnMethods = {"test04FullOuterJoinNoSameData"}, description = "验证右连接两表无交集")
+    public void test39RightJoinNoSameData() throws SQLException {
+        List<List> expectedList = expectedRightList3();
+        System.out.println("Expected: " + expectedList);
+        List<List> actualRightList = outerJoinObj.rightOuterJoinNoSameData();
+        System.out.println("Actual: " + actualRightList);
+
+        Assert.assertTrue(actualRightList.containsAll(expectedList));
+        Assert.assertTrue(expectedList.containsAll(actualRightList));
+    }
+
+    @Test(priority = 39, enabled = true, dependsOnMethods = {"test04FullOuterJoinNoSameData"},
+            expectedExceptions = SQLException.class, description = "验证连接字段在一个表中不存在")
+    public void test40RightJoinKeyNotExist() throws SQLException {
+        outerJoinObj.rightOuterJoinWrongKey();
+    }
+
+    @Test(priority = 40, enabled = true, dependsOnMethods = {"test04FullOuterJoinNoSameData"},
+            description = "左表无数据，右表可返回全部")
+    public void test41RightJoinNoDataLeft() throws SQLException {
+        List<List> expectedList = expectedLeftList5();
+        System.out.println("Expected: " + expectedList);
+        List<List> actualRightList = outerJoinObj.rightOuterJoinNoDataLeft();
+        System.out.println("Actual: " + actualRightList);
+
+        Assert.assertTrue(actualRightList.containsAll(expectedList));
+        Assert.assertTrue(expectedList.containsAll(actualRightList));
+    }
+
+    @Test(priority = 41, enabled = true, dependsOnMethods = {"test04FullOuterJoinNoSameData"},
+            description = "验证右表为空，返回空，无异常")
+    public void test42RightJoinNoDataRight() throws SQLException {
+        Boolean actualRowReturn = outerJoinObj.rightOuterJoinNoDataRight();
+        System.out.println(actualRowReturn);
+        Assert.assertFalse(actualRowReturn);
+    }
+
+    @Test(priority = 42, enabled = true, dependsOnMethods = {"test26LeftJoinOnlyInLeftTable"},
+            description = "验证添加where条件")
+    public void test43RightJoinWhereState() throws SQLException {
+        String expectedStr = "Panda";
+        System.out.println("Expected: " + expectedStr);
+        String actualRightStr = outerJoinObj.rightOuterJoinWhereState();
+        System.out.println("Actual: " + actualRightStr);
+
+        Assert.assertEquals(actualRightStr, expectedStr);
+    }
+
+//    @Test(priority = 43, enabled = true, dependsOnMethods = {"test26LeftJoinOnlyInLeftTable"}, description = "缺少连接条件，预期异常")
+    @Test(priority = 43, enabled = true, description = "缺少连接条件，预期异常")
+    public void test44RightJoinMissingCondition() throws SQLException {
+        outerJoinObj.rightOuterJoinMissingCondition();
+    }
+
+    @Test(priority = 44, enabled = true, dependsOnMethods = {"test06FullOuterJoinUsingKeyState"},
+            description = "验证连接使用using(key)")
+    public void test45RightJoinUsingKey() throws SQLException {
+        List<List> expectedList = expectedRightList4();
+        System.out.println("Expected: " + expectedList);
+        List<List> actualRightList = outerJoinObj.rightOuterJoinUsingKey();
+        System.out.println("Actual: " + actualRightList);
+
+        Assert.assertTrue(actualRightList.containsAll(expectedList));
+        Assert.assertTrue(expectedList.containsAll(actualRightList));
+    }
+
 
     @AfterClass(alwaysRun = true, description = "测试完成后删除数据和表格并关闭连接")
     public void tearDownAll() throws SQLException {
@@ -541,6 +963,22 @@ public class TestTableOuterJoin {
         tearDownStatement.execute("drop table test1");
         tearDownStatement.execute("delete from test2");
         tearDownStatement.execute("drop table test2");
+        tearDownStatement.execute("delete from beauty_tbl");
+        tearDownStatement.execute("drop table beauty_tbl");
+        tearDownStatement.execute("delete from boys_tbl");
+        tearDownStatement.execute("drop table boys_tbl");
+        tearDownStatement.execute("delete from boys_right");
+        tearDownStatement.execute("drop table boys_right");
+        tearDownStatement.execute("delete from product3");
+        tearDownStatement.execute("drop table product3");
+        tearDownStatement.execute("delete from w3cschool_tbl");
+        tearDownStatement.execute("drop table w3cschool_tbl");
+        tearDownStatement.execute("delete from tcount_tbl");
+        tearDownStatement.execute("drop table tcount_tbl");
+        tearDownStatement.execute("delete from departments_tbl");
+        tearDownStatement.execute("drop table departments_tbl");
+        tearDownStatement.execute("delete from employees_tbl");
+        tearDownStatement.execute("drop table employees_tbl");
 
         tearDownStatement.close();
         TableOuterJoin.connection.close();

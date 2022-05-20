@@ -1,0 +1,4 @@
+(1,'Zhang Wuji',100),
+(2,'Han Han',800),
+(3,'Xiao Ming',50),
+(4,'DuanYU',300)

@@ -34,9 +34,3 @@ testID1000786-03:
 testID1000812:
   inputDate: "14:49:59"
   inputFormat: "%Y-%m-%d"
-testID1001256:
-  inputDate: "2022-05-17"
-  inputFormat: "%A%B%C"
-testID1001257:
-  inputDate: "2022-05-17"
-  inputFormat: ""

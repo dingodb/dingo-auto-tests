@@ -40,12 +40,6 @@ testID1000802-04:
 testID1000802-05:
   inputTime: "016060"
   inputFormat: "%H:%i:%S"
-testID1000805-01:
-  inputTime: "10:11:12"
-  inputFormat: "%K %r %f"
-testID1000805-02:
-  inputTime: "10:11:12"
-  inputFormat: "%h:%I:%s"
 testID1000806-01:
   inputTime: "10:11:12.873672"
   inputFormat: "%H:%i:%S"
@@ -55,6 +49,3 @@ testID1000806-02:
 testID1000811:
   inputTime: "2022/04/13"
   inputFormat: "%H:%i:%S"
-testID1001255:
-  inputTime: "10:11:12"
-  inputFormat: ""

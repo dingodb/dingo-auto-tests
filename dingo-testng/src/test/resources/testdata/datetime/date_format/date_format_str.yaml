@@ -346,3 +346,15 @@ testID1001262-03:
   inputDate: "19891231235959"
   inputFormat: "%H hours %i minutes %s Seconds"
   outputDate: "23 hours 59 minutes 59 Seconds"
+testID1001256-01:
+  inputDate: "2022-05-17"
+  inputFormat: "%A%B%C"
+  outputDate: "ABC"
+testID1001256-02:
+  inputDate: "2022-05-17 13:45:50"
+  inputFormat: "%Y/%m/%d %H%A%M"
+  outputDate: "2022/05/17 13AM"
+testID1001257-01:
+  inputDate: "2022-05-17"
+  inputFormat: ""
+  outputDate: ""

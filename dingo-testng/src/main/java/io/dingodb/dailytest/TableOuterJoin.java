@@ -44,6 +44,99 @@ public class TableOuterJoin {
         }
     }
 
+    //创建beauty_tbl表
+    public void createBeautyTable(String beautyMeta) throws SQLException {
+        Statement statement = connection.createStatement();
+        String createBeautyTableSQL = "create table beauty_tbl" + beautyMeta;
+
+        statement.execute(createBeautyTableSQL);
+        statement.close();
+    }
+
+    //向beauty_tbl表插入数据
+    public void insertValuesToBeauty(String beautyValues) throws SQLException {
+        Statement statement = connection.createStatement();
+        String insertBeautyValuesSQL = "insert into beauty_tbl values " + beautyValues;
+
+        statement.executeUpdate(insertBeautyValuesSQL);
+        statement.close();
+    }
+
+    //创建boys_tbl表
+    public void createBoysTable(String boysMeta) throws SQLException {
+        Statement statement = connection.createStatement();
+        String createBoysTableSQL = "create table boys_tbl" + boysMeta;
+
+        statement.execute(createBoysTableSQL);
+        statement.close();
+    }
+
+
+    //向boys_tbl表插入数据
+    public void insertValuesToBoys(String boysValues) throws SQLException {
+        Statement statement = connection.createStatement();
+        String insertBoysValuesSQL = "insert into boys_tbl values " + boysValues;
+
+        statement.executeUpdate(insertBoysValuesSQL);
+        statement.close();
+    }
+
+    //创建boys_right表
+    public void createBoysRightTable(String boysMeta) throws SQLException {
+        Statement statement = connection.createStatement();
+        String createBoysTableSQL = "create table boys_right" + boysMeta;
+
+        statement.execute(createBoysTableSQL);
+        statement.close();
+    }
+
+
+    //向boys_right表插入数据
+    public void insertValuesToBoysRight(String boysRightValues) throws SQLException {
+        Statement statement = connection.createStatement();
+        String insertBoysRightValuesSQL = "insert into boys_right(id,boyName,userCP) values " + boysRightValues;
+
+        statement.executeUpdate(insertBoysRightValuesSQL);
+        statement.close();
+    }
+
+    //创建departments_tbl表
+    public void createDepartmentsTable(String departmentsMeta) throws SQLException {
+        Statement statement = connection.createStatement();
+        String createDepartmentsTableSQL = "create table departments_tbl" + departmentsMeta;
+
+        statement.execute(createDepartmentsTableSQL);
+        statement.close();
+    }
+
+
+    //向departments_tbl表插入数据
+    public void insertValuesToDepartments(String departmentsValues) throws SQLException {
+        Statement statement = connection.createStatement();
+        String insertDepartmentsValuesSQL = "insert into departments_tbl values " + departmentsValues;
+
+        statement.executeUpdate(insertDepartmentsValuesSQL);
+        statement.close();
+    }
+
+    //创建employees_tbl表
+    public void createEmployeesTable(String employeesMeta) throws SQLException {
+        Statement statement = connection.createStatement();
+        String createEmployeesTableSQL = "create table employees_tbl" + employeesMeta;
+
+        statement.execute(createEmployeesTableSQL);
+        statement.close();
+    }
+
+    //向employees_tbl表插入数据
+    public void insertValuesToEmployees(String employeesValues) throws SQLException {
+        Statement statement = connection.createStatement();
+        String insertEmployeesValuesSQL = "insert into employees_tbl values " + employeesValues;
+
+        statement.executeUpdate(insertEmployeesValuesSQL);
+        statement.close();
+    }
+
     //创建student_tbl表
     public void createStudentTable(String studentMeta) throws SQLException {
         Statement statement = connection.createStatement();
@@ -134,6 +227,15 @@ public class TableOuterJoin {
         statement.close();
     }
 
+    //创建product3空表
+    public void createProuct3Table(String product3Meta) throws SQLException {
+        Statement statement = connection.createStatement();
+        String createProduct3TableSQL = "create table product3" + product3Meta;
+
+        statement.execute(createProduct3TableSQL);
+        statement.close();
+    }
+
     //创建test1表
     public void createTest1Table(String test1Meta) throws SQLException {
         Statement statement = connection.createStatement();
@@ -169,6 +271,380 @@ public class TableOuterJoin {
         statement.executeUpdate(insertTest2ValuesSQL);
         statement.close();
     }
+
+    //创建w3cschool_tbl表
+    public void createw3cTable(String w3cMeta) throws SQLException {
+        Statement statement = connection.createStatement();
+        String createw3cTableSQL = "create table w3cschool_tbl" + w3cMeta;
+
+        statement.execute(createw3cTableSQL);
+        statement.close();
+    }
+
+    //向w3cschool_tbl表插入数据
+    public void insertValuesTow3c(String w3cValues) throws SQLException {
+        Statement statement = connection.createStatement();
+        String insertw3cValuesSQL = "insert into w3cschool_tbl values " + w3cValues;
+
+        statement.executeUpdate(insertw3cValuesSQL);
+        statement.close();
+    }
+
+    //创建tcount_tbl表
+    public void createtcountTable(String tcountMeta) throws SQLException {
+        Statement statement = connection.createStatement();
+        String createtcountTableSQL = "create table tcount_tbl" + tcountMeta;
+
+        statement.execute(createtcountTableSQL);
+        statement.close();
+    }
+
+    //向tcount_tbl表插入数据
+    public void insertValuesTotcount(String tcountValues) throws SQLException {
+        Statement statement = connection.createStatement();
+        String inserttcountValuesSQL = "insert into tcount_tbl values " + tcountValues;
+
+        statement.executeUpdate(inserttcountValuesSQL);
+        statement.close();
+    }
+
+
+
+    public List<List> leftOuterJoinOnlyInLeft() throws SQLException {
+        Statement statement = connection.createStatement();
+        String querySQL = "select beauty_tbl.name,boyfriend_id from beauty_tbl left outer join " +
+                "boys_tbl on boys_tbl.id=beauty_tbl.boyfriend_id where boys_tbl.id is null";
+        ResultSet resultSet = statement.executeQuery(querySQL);
+        List<List> queryList = new ArrayList<List>();
+
+        while(resultSet.next()) {
+            List rowList = new ArrayList ();
+            rowList.add(resultSet.getString(1));
+            rowList.add(resultSet.getString(2));
+            queryList.add(rowList);
+        }
+        statement.close();
+        return queryList;
+    }
+
+    public List<List> leftOuterJoinAllData() throws SQLException {
+        Statement statement = connection.createStatement();
+        String querySQL = "select beauty_tbl.*,boys_tbl.* from beauty_tbl left outer join " +
+                "boys_tbl on boys_tbl.id=beauty_tbl.boyfriend_id";
+        ResultSet resultSet = statement.executeQuery(querySQL);
+        List<List> queryList = new ArrayList<List>();
+
+        while(resultSet.next()) {
+            List rowList = new ArrayList ();
+            rowList.add(resultSet.getString(1));
+            rowList.add(resultSet.getString(2));
+            rowList.add(resultSet.getString(3));
+            rowList.add(resultSet.getString(4));
+            rowList.add(resultSet.getString(5));
+            rowList.add(resultSet.getString(6));
+            rowList.add(resultSet.getString(7));
+            rowList.add(resultSet.getString(8));
+            rowList.add(resultSet.getString(9));
+            queryList.add(rowList);
+        }
+        statement.close();
+        return queryList;
+    }
+
+    //左连接省略outer
+    public List<List> leftOuterJoinOmitOuter() throws SQLException {
+        Statement statement = connection.createStatement();
+        String querySQL = "SELECT d.*,e.employee_id\n" +
+                "FROM departments_tbl d\n" +
+                "LEFT JOIN employees_tbl e\n" +
+                "ON d.department_id = e.department_id\n" +
+                "WHERE e.employee_id IS NULL";
+        ResultSet resultSet = statement.executeQuery(querySQL);
+        List<List> queryList = new ArrayList<List>();
+
+        while(resultSet.next()) {
+            List rowList = new ArrayList ();
+            rowList.add(resultSet.getString(1));
+            rowList.add(resultSet.getString(2));
+            rowList.add(resultSet.getString(3));
+            rowList.add(resultSet.getString(4));
+            rowList.add(resultSet.getString(5));
+            queryList.add(rowList);
+        }
+        statement.close();
+        return queryList;
+    }
+
+    //左连接两表无交集
+    public List<List> leftOuterJoinNoSameData() throws SQLException {
+        Statement statement = connection.createStatement();
+        String querySQL = "select product1.*,product2.* from product1 left join product2 on product1.id = product2.id";
+        ResultSet resultSet = statement.executeQuery(querySQL);
+        List<List> queryList = new ArrayList<List>();
+
+        while(resultSet.next()) {
+            List rowList = new ArrayList ();
+            rowList.add(resultSet.getString(1));
+            rowList.add(resultSet.getString(2));
+            rowList.add(resultSet.getString(3));
+            rowList.add(resultSet.getString(4));
+            rowList.add(resultSet.getString(5));
+            queryList.add(rowList);
+        }
+        statement.close();
+        return queryList;
+    }
+
+    //左连接字段不存在
+    public void leftOuterJoinWrongKey() throws SQLException {
+        Statement statement = connection.createStatement();
+        String querySQL = "select product1.*,product2.* from product1 left join product2 on product1.buyers = product2.buyers";
+        statement.executeQuery(querySQL);
+        statement.close();
+    }
+
+    //左表无数据
+     public Boolean leftOuterJoinNoDataLeft() throws SQLException {
+        Statement statement = connection.createStatement();
+        String querySQL = "select product3.* from product3 left join product1 on product1.id=product3.id";
+        ResultSet resultSet = statement.executeQuery(querySQL);
+//        statement.close();
+        return resultSet.next();
+    }
+
+    //左连接右表无数据
+    public List<List> leftOuterJoinNoDataRight() throws SQLException {
+        Statement statement = connection.createStatement();
+        String querySQL = "select product1.* from product1 left join product3 on product3.id=product1.id";
+        ResultSet resultSet = statement.executeQuery(querySQL);
+        List<List> queryList = new ArrayList<List>();
+
+        while(resultSet.next()) {
+            List rowList = new ArrayList ();
+            rowList.add(resultSet.getString(1));
+            rowList.add(resultSet.getString(2));
+            rowList.add(resultSet.getString(3));
+            queryList.add(rowList);
+        }
+        statement.close();
+        return queryList;
+    }
+
+    //左连接where条件
+    public List<List> leftOuterJoinWhereState() throws SQLException {
+        Statement statement = connection.createStatement();
+        String querySQL = "SELECT beauty_tbl.id,beauty_tbl.name from beauty_tbl left join boys_tbl on " +
+                "boys_tbl.id = beauty_tbl.boyfriend_id where boys_tbl.id is null and beauty_tbl.id<7";
+        ResultSet resultSet = statement.executeQuery(querySQL);
+        List<List> queryList = new ArrayList<List>();
+
+        while(resultSet.next()) {
+            List rowList = new ArrayList ();
+            rowList.add(resultSet.getString(1));
+            rowList.add(resultSet.getString(2));
+            queryList.add(rowList);
+        }
+        statement.close();
+        return queryList;
+    }
+
+    //左连接using(key)用法
+    public List<List> leftOuterJoinUsingKey() throws SQLException {
+        Statement statement = connection.createStatement();
+        String querySQL = "select test1.*,test2.* from test1 left join test2 using(id)";
+        ResultSet resultSet = statement.executeQuery(querySQL);
+        List<List> queryList = new ArrayList<List>();
+
+        while(resultSet.next()) {
+            List rowList = new ArrayList ();
+            rowList.add(resultSet.getString(1));
+            rowList.add(resultSet.getString(2));
+            rowList.add(resultSet.getString(3));
+            rowList.add(resultSet.getString(4));
+            queryList.add(rowList);
+        }
+        statement.close();
+        return queryList;
+    }
+
+    //左连接缺少连接条件
+    public void leftOuterJoinMissingCondition() throws SQLException {
+        Statement statement = connection.createStatement();
+        String querySQL = "select beauty_tbl.name,boyfriend_id from beauty_tbl left outer join boys_tbl";
+        statement.executeQuery(querySQL);
+        statement.close();
+    }
+
+
+    //右连接仅查询右表数据
+    public List<List> rightOuterJoinOnlyInRight() throws SQLException {
+        Statement statement = connection.createStatement();
+        String querySQL = "select beauty_tbl.boyfriend_id,boys_right.id,boys_right.boyName from beauty_tbl right join boys_right on " +
+                "boys_right.id=beauty_tbl.boyfriend_id where beauty_tbl.boyfriend_id is null";
+        ResultSet resultSet = statement.executeQuery(querySQL);
+        List<List> queryList = new ArrayList<List>();
+
+        while(resultSet.next()) {
+            List rowList = new ArrayList ();
+            rowList.add(resultSet.getString(1));
+            rowList.add(resultSet.getString(2));
+            rowList.add(resultSet.getString(3));
+            queryList.add(rowList);
+        }
+        statement.close();
+        return queryList;
+    }
+
+    //右连接返回全部数据
+    public List<List> rightOuterJoinAllData() throws SQLException {
+        Statement statement = connection.createStatement();
+        String querySQL = "select w3cschool_tbl.*,tcount_tbl.* from w3cschool_tbl right outer join tcount_tbl on" +
+                " tcount_tbl.w3cschool_author=w3cschool_tbl.w3cschool_author";
+        ResultSet resultSet = statement.executeQuery(querySQL);
+        List<List> queryList = new ArrayList<List>();
+
+        while(resultSet.next()) {
+            List rowList = new ArrayList ();
+            rowList.add(resultSet.getString(1));
+            rowList.add(resultSet.getString(2));
+            rowList.add(resultSet.getString(3));
+            rowList.add(resultSet.getString(4));
+            rowList.add(resultSet.getString(5));
+            rowList.add(resultSet.getString(6));
+
+            queryList.add(rowList);
+        }
+        statement.close();
+        return queryList;
+    }
+
+    //右连接省略outer
+    public List<List> rightOuterJoinOmitOuter() throws SQLException {
+        Statement statement = connection.createStatement();
+        String querySQL = "SELECT d.*,e.employee_id\n" +
+                "FROM employees_tbl e\n" +
+                "RIGHT JOIN departments_tbl d\n" +
+                "ON d.department_id = e.department_id\n" +
+                "WHERE e.employee_id IS NULL";
+        ResultSet resultSet = statement.executeQuery(querySQL);
+        List<List> queryList = new ArrayList<List>();
+
+        while(resultSet.next()) {
+            List rowList = new ArrayList ();
+            rowList.add(resultSet.getString(1));
+            rowList.add(resultSet.getString(2));
+            rowList.add(resultSet.getString(3));
+            rowList.add(resultSet.getString(4));
+            rowList.add(resultSet.getString(5));
+            queryList.add(rowList);
+        }
+        statement.close();
+        return queryList;
+    }
+
+    //右连接两表无交集
+    public List<List> rightOuterJoinNoSameData() throws SQLException {
+        Statement statement = connection.createStatement();
+        String querySQL = "select product1.*,product2.* from product1 right join product2 on product1.id = product2.id";
+        ResultSet resultSet = statement.executeQuery(querySQL);
+        List<List> queryList = new ArrayList<List>();
+
+        while(resultSet.next()) {
+            List rowList = new ArrayList ();
+            rowList.add(resultSet.getString(1));
+            rowList.add(resultSet.getString(2));
+            rowList.add(resultSet.getString(3));
+            rowList.add(resultSet.getString(4));
+            rowList.add(resultSet.getString(5));
+            queryList.add(rowList);
+        }
+        statement.close();
+        return queryList;
+    }
+
+    //右连接字段不存在
+    public void rightOuterJoinWrongKey() throws SQLException {
+        Statement statement = connection.createStatement();
+        String querySQL = "select product1.*,product2.* from product1 right join product2 on product1.buyers = product2.buyers";
+        statement.executeQuery(querySQL);
+        statement.close();
+    }
+
+    //右连接左表无数据
+    public List<List> rightOuterJoinNoDataLeft() throws SQLException {
+        Statement statement = connection.createStatement();
+        String querySQL = "select product1.* from product3 right join product1 on product1.id=product3.id";
+        ResultSet resultSet = statement.executeQuery(querySQL);
+        List<List> queryList = new ArrayList<List>();
+
+        while(resultSet.next()) {
+            List rowList = new ArrayList ();
+            rowList.add(resultSet.getString(1));
+            rowList.add(resultSet.getString(2));
+            rowList.add(resultSet.getString(3));
+            queryList.add(rowList);
+        }
+        statement.close();
+        return queryList;
+    }
+
+    //右表无数据
+    public Boolean rightOuterJoinNoDataRight() throws SQLException {
+        Statement statement = connection.createStatement();
+        String querySQL = "select product3.* from product1 right join product3 on product3.id=product1.id";
+        ResultSet resultSet = statement.executeQuery(querySQL);
+//        statement.close();
+        return resultSet.next();
+    }
+
+    //右连接where条件
+    public String rightOuterJoinWhereState() throws SQLException {
+        Statement statement = connection.createStatement();
+        String querySQL = "SELECT boys_right.boyName from beauty_tbl right join boys_right on boys_right.id=beauty_tbl.boyfriend_id " +
+                "where beauty_tbl.boyfriend_id is null and boys_right.id>5";
+        ResultSet resultSet = statement.executeQuery(querySQL);
+        String whereResult = null;
+
+        while(resultSet.next()) {
+            whereResult = resultSet.getString(1);
+        }
+        statement.close();
+        return whereResult;
+    }
+
+    //右连接缺少连接条件
+    public void rightOuterJoinMissingCondition() throws SQLException {
+        Statement statement = connection.createStatement();
+        String querySQL = "select boys_tbl.* from beauty_tbl right outer join boys_tbl where beauty_tbl.boyfriend_id is null";
+        statement.executeQuery(querySQL);
+        statement.close();
+    }
+
+    //右连接using(key)用法
+    public List<List> rightOuterJoinUsingKey() throws SQLException {
+        Statement statement = connection.createStatement();
+        String querySQL = "select test1.*,test2.* from test1 right join test2 using(id)";
+        ResultSet resultSet = statement.executeQuery(querySQL);
+        List<List> queryList = new ArrayList<List>();
+
+        while(resultSet.next()) {
+            List rowList = new ArrayList ();
+            rowList.add(resultSet.getString(1));
+            rowList.add(resultSet.getString(2));
+            rowList.add(resultSet.getString(3));
+            rowList.add(resultSet.getString(4));
+            queryList.add(rowList);
+        }
+        statement.close();
+        return queryList;
+    }
+
+
+
+
+
+
+
 
     public List<List> fullOuterJoinAll() throws SQLException {
         Statement statement = connection.createStatement();

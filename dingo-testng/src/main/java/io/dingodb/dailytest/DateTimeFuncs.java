@@ -658,6 +658,7 @@ public class DateTimeFuncs {
         Statement statement = connection.createStatement();
         String date_formatMissingArgSql = "select date_format('" + inputParam + "')";
         statement.executeQuery(date_formatMissingArgSql);
+        statement.close();
     }
 
     // 获取函数Time_Format参数为字符串返回值
@@ -707,6 +708,7 @@ public class DateTimeFuncs {
         Statement statement = connection.createStatement();
         String time_formatMissingArgSql = "select time_format('" + inputParam + "')";
         statement.executeQuery(time_formatMissingArgSql);
+        statement.close();
     }
 
     // 获取函数Time_Format参数为Null的返回值
