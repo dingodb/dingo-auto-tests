@@ -4,7 +4,7 @@ testID1000799-01:
   outputTime: "08:30:26"
 testID1000799-02:
   inputTime: "235959"
-  inputFormat: "%H:%i:%S'"
+  inputFormat: "%H:%i:%S"
   outputTime: "23:59:59"
 testID1000799-03:
   inputTime: "120000"
@@ -12,7 +12,7 @@ testID1000799-03:
   outputTime: "12.00.00"
 testID1000799-04:
   inputTime: "180000"
-  inputFormat: "%H:%i'"
+  inputFormat: "%H:%i"
   outputTime: "18:00"
 testID1000799-05:
   inputTime: "001800"
