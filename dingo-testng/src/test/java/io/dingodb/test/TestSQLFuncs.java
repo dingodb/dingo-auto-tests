@@ -776,6 +776,587 @@ public class TestSQLFuncs {
     }
 
 
+    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "limit超过数据条数")
+    public void testCase286() throws SQLException, ClassNotFoundException {
+        int actualRowNum = funcObj.case286();
+        System.out.println("Actual: " + actualRowNum);
+        Assert.assertEquals(actualRowNum, 15);
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "offset小于等于数据总条数")
+    public void testCase289() throws SQLException, ClassNotFoundException {
+        int actualRowNum1 = funcObj.case289_1();
+        int actualRowNum2 = funcObj.case289_2();
+        int actualRowNum3 = funcObj.case289_3();
+        System.out.println("Actual: " + actualRowNum1);
+        System.out.println("Actual: " + actualRowNum2);
+        System.out.println("Actual: " + actualRowNum3);
+        Assert.assertEquals(actualRowNum1, 5);
+        Assert.assertEquals(actualRowNum2, 1);
+        Assert.assertEquals(actualRowNum3, 14);
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "offset超过数据条数")
+    public void testCase290() throws SQLException, ClassNotFoundException {
+        Boolean actualResult = funcObj.case290();
+        System.out.println("Actual: " + actualResult);
+        Assert.assertFalse(actualResult);
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "limit 0条")
+    public void testCase291() throws SQLException, ClassNotFoundException {
+        Boolean actualResult1 = funcObj.case291_1();
+        Boolean actualResult2 = funcObj.case291_2();
+        System.out.println("Actual: " + actualResult1);
+        System.out.println("Actual: " + actualResult2);
+        Assert.assertFalse(actualResult1);
+        Assert.assertFalse(actualResult2);
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase067"}, expectedExceptions = SQLException.class,
+            description = "limit 负数")
+    public void testCase292_1() throws SQLException, ClassNotFoundException {
+        funcObj.case292_1();
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase067"}, expectedExceptions = SQLException.class,
+            description = "limit 负数")
+    public void testCase292_2() throws SQLException, ClassNotFoundException {
+        funcObj.case292_2();
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "验证limit限制小数")
+    public void testCase293_1() throws SQLException, ClassNotFoundException {
+//        String[][] limitArray = {
+//                {"1", "zhangsan", "18", "23.5", "Beijing"}, {"2", "lisi", "25", "895.0", " beijing haidian "},
+//                {"3", "l3", "55", "123.123", "wuhan NO.1 Street"}
+//        };
+
+        String[][] limitArray = {{"zhangsan", "18"}, {"lisi", "25"}, {"l3", "55"}};
+
+        List<List> expectedLimitList = new ArrayList<List>();
+        for(int i=0; i<limitArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<limitArray[i].length; j++) {
+                columnList.add(limitArray[i][j]);
+            }
+            expectedLimitList.add(columnList);
+        }
+        System.out.println("Expected: " + expectedLimitList);
+        List<List> actualLimitList = funcObj.case293_1();
+        System.out.println("Actual: " + actualLimitList);
+        Assert.assertEquals(actualLimitList,expectedLimitList);
+//        Assert.assertTrue(actualLimitList.containsAll(expectedLimitList));
+//        Assert.assertTrue(expectedLimitList.containsAll(actualLimitList));
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "验证limit限制小数")
+    public void testCase293_2() throws SQLException, ClassNotFoundException {
+        String[][] limitArray = {
+                {"4","HAHA","57","9.0762556","CHANGping"},
+                {"5","awJDs","1","1453.9999","pingYang1"},
+                {"6","123","544","0.0","543"}
+        };
+
+        List<List> expectedLimitList = new ArrayList<List>();
+        for(int i=0; i<limitArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<limitArray[i].length; j++) {
+                columnList.add(limitArray[i][j]);
+            }
+            expectedLimitList.add(columnList);
+        }
+        System.out.println("Expected: " + expectedLimitList);
+        List<List> actualLimitList = funcObj.case293_2();
+        System.out.println("Actual: " + actualLimitList);
+        Assert.assertEquals(actualLimitList, expectedLimitList);
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase067"}, expectedExceptions = SQLException.class,
+            description = "limit 字符串")
+    public void testCase294_1() throws SQLException, ClassNotFoundException {
+        funcObj.case294_1();
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase067"}, expectedExceptions = SQLException.class,
+            description = "limit 字符串")
+    public void testCase294_2() throws SQLException, ClassNotFoundException {
+        funcObj.case294_2();
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase067"}, expectedExceptions = SQLException.class,
+            description = "offset 为负数")
+    public void testCase295_1() throws SQLException, ClassNotFoundException {
+        funcObj.case295_1();
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase067"}, expectedExceptions = SQLException.class,
+            description = "offset 为字符串")
+    public void testCase295_2() throws SQLException, ClassNotFoundException {
+        funcObj.case295_2();
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "offset 为小数")
+    public void testCase295_3() throws SQLException, ClassNotFoundException {
+//        String[][] limitArray = {
+//                {"4","HAHA","57","9.0762556","CHANGping"},
+//                {"5","awJDs","1","1453.9999","pingYang1"},
+//                {"6","123","544","0.0","543"}
+//        };
+
+        String[][] limitArray = {
+                {"HAHA","57"},
+                {"awJDs","1"},
+                {"123","544"}
+        };
+
+        List<List> expectedLimitList = new ArrayList<List>();
+        for(int i=0; i<limitArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<limitArray[i].length; j++) {
+                columnList.add(limitArray[i][j]);
+            }
+            expectedLimitList.add(columnList);
+        }
+        System.out.println("Expected: " + expectedLimitList);
+        List<List> actualLimitList = funcObj.case295_3();
+        System.out.println("Actual: " + actualLimitList);
+        Assert.assertEquals(actualLimitList,expectedLimitList);
+//        Assert.assertTrue(actualLimitList.containsAll(expectedLimitList));
+//        Assert.assertTrue(expectedLimitList.containsAll(actualLimitList));
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase067"}, expectedExceptions = SQLException.class,
+            description = "缺失参数，预期异常")
+    public void testCase296_1() throws SQLException, ClassNotFoundException {
+        funcObj.case296_1();
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase067"}, expectedExceptions = SQLException.class,
+            description = "缺失参数，预期异常")
+    public void testCase296_2() throws SQLException, ClassNotFoundException {
+        funcObj.case296_2();
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase067"}, expectedExceptions = SQLException.class,
+            description = "缺失参数，预期异常")
+    public void testCase296_3() throws SQLException, ClassNotFoundException {
+        funcObj.case296_3();
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "in范围只有一个元素")
+    public void testCase297() throws SQLException, ClassNotFoundException {
+        String[][] inArray = {
+                {"1","zhangsan","18","23.5","Beijing"},
+                {"8","zhangsan","18","12.3","shanghai"}
+        };
+
+        List<List> expectedInList = new ArrayList<List>();
+        for(int i=0; i<inArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<inArray[i].length; j++) {
+                columnList.add(inArray[i][j]);
+            }
+            expectedInList.add(columnList);
+        }
+        System.out.println("Expected: " + expectedInList);
+        List<List> actualInList = funcObj.case297();
+        System.out.println("Actual: " + actualInList);
+        Assert.assertEquals(actualInList, expectedInList);
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "in范围有两个元素")
+    public void testCase298() throws SQLException, ClassNotFoundException {
+        String[][] inArray = {
+                {"1","zhangsan","18","23.5","Beijing"},
+                {"2","lisi","25","895.0"," beijing haidian "},
+                {"8","zhangsan","18","12.3","shanghai"},
+                {"10","lisi","256","1234.456","nanjing"}
+        };
+
+        List<List> expectedInList = new ArrayList<List>();
+        for(int i=0; i<inArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<inArray[i].length; j++) {
+                columnList.add(inArray[i][j]);
+            }
+            expectedInList.add(columnList);
+        }
+        System.out.println("Expected: " + expectedInList);
+        List<List> actualInList = funcObj.case298();
+        System.out.println("Actual: " + actualInList);
+        Assert.assertEquals(actualInList, expectedInList);
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "in范围有部分元素不在表里")
+    public void testCase299_1() throws SQLException, ClassNotFoundException {
+        String[][] inArray = {
+                {"1","zhangsan","18","23.5","Beijing"},
+                {"2","lisi","25","895.0"," beijing haidian "},
+                {"8","zhangsan","18","12.3","shanghai"},
+                {"10","lisi","256","1234.456","nanjing"}
+        };
+
+        List<List> expectedInList = new ArrayList<List>();
+        for(int i=0; i<inArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<inArray[i].length; j++) {
+                columnList.add(inArray[i][j]);
+            }
+            expectedInList.add(columnList);
+        }
+        System.out.println("Expected: " + expectedInList);
+        List<List> actualInList = funcObj.case299_1();
+        System.out.println("Actual: " + actualInList);
+        Assert.assertEquals(actualInList, expectedInList);
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "in范围有部分元素不在表里")
+    public void testCase299_2() throws SQLException, ClassNotFoundException {
+//        String[][] inArray = {
+//                {"1","zhangsan","18","23.5","Beijing"},{"3","l3","55","123.123","wuhan NO.1 Street"},
+//                {"5","awJDs","1","1453.9999","pingYang1"},{"7","yamaha","76","2.3","beijing changyang"},
+//                {"9","op ","76","109.325","wuhan"},{"11","  aB c  dE ","61","99.9999","beijing chaoyang"},
+//                {"13","HAHA","57","9.0762556","CHANGping"},{"15","1.5","18","0.1235","http://WWW.baidu.com"}
+//        };
+
+        String[][] inArray = {
+                {"zhangsan","18"},{"l3","55"},
+                {"awJDs","1"},{"yamaha","76"},
+                {"op ","76"},{"  aB c  dE ","61"},
+                {"HAHA","57"},{"1.5","18"}
+        };
+
+        List<List> expectedInList = new ArrayList<List>();
+        for(int i=0; i<inArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<inArray[i].length; j++) {
+                columnList.add(inArray[i][j]);
+            }
+            expectedInList.add(columnList);
+        }
+        System.out.println("Expected: " + expectedInList);
+        List<List> actualInList = funcObj.case299_2();
+        System.out.println("Actual: " + actualInList);
+//        Assert.assertEquals(actualInList,expectedInList);
+        Assert.assertTrue(actualInList.containsAll(expectedInList));
+        Assert.assertTrue(expectedInList.containsAll(actualInList));
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "in范围元素全不在表里")
+    public void testCase300() throws SQLException, ClassNotFoundException {
+        Boolean actualResult = funcObj.case300();
+        System.out.println("Actual: " + actualResult);
+        Assert.assertFalse(actualResult);
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "in查找多个字段")
+    public void testCase301() throws SQLException, ClassNotFoundException {
+        String[][] inArray = {
+                {"1","zhangsan","18","23.5","Beijing"},
+                {"10","lisi","256","1234.456","nanjing"}
+        };
+
+        List<List> expectedInList = new ArrayList<List>();
+        for(int i=0; i<inArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<inArray[i].length; j++) {
+                columnList.add(inArray[i][j]);
+            }
+            expectedInList.add(columnList);
+        }
+        System.out.println("Expected: " + expectedInList);
+        List<List> actualInList = funcObj.case301();
+        System.out.println("Actual: " + actualInList);
+        Assert.assertEquals(actualInList, expectedInList);
+    }
+
+    @Test(enabled = true, description = "in范围有空字符串")
+    public void testCase302() throws SQLException, ClassNotFoundException {
+        String[][] inArray = {
+                {"2","lisi","35","120.98",""},
+                {"7","baba","99","23.51648",""},
+                {"11","","0","0.01",""}
+        };
+
+        List<List> expectedInList = new ArrayList<List>();
+        for(int i=0; i<inArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<inArray[i].length; j++) {
+                columnList.add(inArray[i][j]);
+            }
+            expectedInList.add(columnList);
+        }
+        System.out.println("Expected: " + expectedInList);
+        List<List> actualInList = funcObj.case302();
+        System.out.println("Actual: " + actualInList);
+        Assert.assertEquals(actualInList, expectedInList);
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "not in范围只有一个元素")
+    public void testCase308() throws SQLException, ClassNotFoundException {
+        String[][] inArray = {
+                {"2","lisi","25","895.0"," beijing haidian "},
+                {"3","l3","55","123.123","wuhan NO.1 Street"},
+                {"4","HAHA","57","9.0762556","CHANGping"},
+                {"5","awJDs","1","1453.9999","pingYang1"},
+                {"6","123","544","0.0","543"},
+                {"7","yamaha","76","2.3","beijing changyang"},
+                {"9","op ","76","109.325","wuhan"},
+                {"10","lisi","256","1234.456","nanjing"},
+                {"11","  aB c  dE ","61","99.9999","beijing chaoyang"},
+                {"12"," abcdef","2","2345.0","123"},
+                {"13","HAHA","57","9.0762556","CHANGping"},
+                {"14","zhngsna","99","32.0","chong qing "},
+                {"15","1.5","18","0.1235","http://WWW.baidu.com"}
+        };
+
+        List<List> expectedInList = new ArrayList<List>();
+        for(int i=0; i<inArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<inArray[i].length; j++) {
+                columnList.add(inArray[i][j]);
+            }
+            expectedInList.add(columnList);
+        }
+        System.out.println("Expected: " + expectedInList);
+        List<List> actualInList = funcObj.case308();
+        System.out.println("Actual: " + actualInList);
+        Assert.assertEquals(actualInList, expectedInList);
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "not in范围有多个元素")
+    public void testCase309_1() throws SQLException, ClassNotFoundException {
+        String[][] inArray = {
+                {"3","l3","55","123.123","wuhan NO.1 Street"},
+                {"4","HAHA","57","9.0762556","CHANGping"},
+                {"5","awJDs","1","1453.9999","pingYang1"},
+                {"6","123","544","0.0","543"},
+                {"7","yamaha","76","2.3","beijing changyang"},
+                {"9","op ","76","109.325","wuhan"},
+                {"11","  aB c  dE ","61","99.9999","beijing chaoyang"},
+                {"12"," abcdef","2","2345.0","123"},
+                {"13","HAHA","57","9.0762556","CHANGping"},
+                {"14","zhngsna","99","32.0","chong qing "},
+                {"15","1.5","18","0.1235","http://WWW.baidu.com"}
+        };
+
+        List<List> expectedInList = new ArrayList<List>();
+        for(int i=0; i<inArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<inArray[i].length; j++) {
+                columnList.add(inArray[i][j]);
+            }
+            expectedInList.add(columnList);
+        }
+        System.out.println("Expected: " + expectedInList);
+        List<List> actualInList = funcObj.case309_1();
+        System.out.println("Actual: " + actualInList);
+        Assert.assertEquals(actualInList, expectedInList);
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "not in范围有多个元素")
+    public void testCase309_2() throws SQLException, ClassNotFoundException {
+        String[][] inArray = {
+                {"2","lisi","25","895.0"," beijing haidian "},
+                {"4","HAHA","57","9.0762556","CHANGping"},
+                {"6","123","544","0.0","543"},
+                {"8","zhangsan","18","12.3","shanghai"},
+                {"11","  aB c  dE ","61","99.9999","beijing chaoyang"},
+                {"12"," abcdef","2","2345.0","123"},
+                {"13","HAHA","57","9.0762556","CHANGping"},
+                {"14","zhngsna","99","32.0","chong qing "}
+        };
+
+        List<List> expectedInList = new ArrayList<List>();
+        for(int i=0; i<inArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<inArray[i].length; j++) {
+                columnList.add(inArray[i][j]);
+            }
+            expectedInList.add(columnList);
+        }
+        System.out.println("Expected: " + expectedInList);
+        List<List> actualInList = funcObj.case309_2();
+        System.out.println("Actual: " + actualInList);
+        Assert.assertEquals(actualInList, expectedInList);
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "not in范围元素不在表中")
+    public void testCase310() throws SQLException, ClassNotFoundException {
+        String[][] inArray = {
+                {"1","zhangsan","18","23.5","Beijing"},
+                {"2","lisi","25","895.0"," beijing haidian "},
+                {"3","l3","55","123.123","wuhan NO.1 Street"},
+                {"4","HAHA","57","9.0762556","CHANGping"},
+                {"5","awJDs","1","1453.9999","pingYang1"},
+                {"6","123","544","0.0","543"},
+                {"7","yamaha","76","2.3","beijing changyang"},
+                {"8","zhangsan","18","12.3","shanghai"},
+                {"9","op ","76","109.325","wuhan"},
+                {"10","lisi","256","1234.456","nanjing"},
+                {"11","  aB c  dE ","61","99.9999","beijing chaoyang"},
+                {"12"," abcdef","2","2345.0","123"},
+                {"13","HAHA","57","9.0762556","CHANGping"},
+                {"14","zhngsna","99","32.0","chong qing "},
+                {"15","1.5","18","0.1235","http://WWW.baidu.com"}
+        };
+
+        List<List> expectedInList = new ArrayList<List>();
+        for(int i=0; i<inArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<inArray[i].length; j++) {
+                columnList.add(inArray[i][j]);
+            }
+            expectedInList.add(columnList);
+        }
+        System.out.println("Expected: " + expectedInList);
+        List<List> actualInList = funcObj.case310();
+        System.out.println("Actual: " + actualInList);
+        Assert.assertEquals(actualInList, expectedInList);
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "not in范围多个字段")
+    public void testCase311() throws SQLException, ClassNotFoundException {
+        String[][] inArray = {
+                {"4","HAHA","57","9.0762556","CHANGping"},
+                {"6","123","544","0.0","543"},
+                {"11","  aB c  dE ","61","99.9999","beijing chaoyang"},
+                {"12"," abcdef","2","2345.0","123"},
+                {"13","HAHA","57","9.0762556","CHANGping"},
+                {"14","zhngsna","99","32.0","chong qing "},
+                {"15","1.5","18","0.1235","http://WWW.baidu.com"}
+        };
+
+        List<List> expectedInList = new ArrayList<List>();
+        for(int i=0; i<inArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<inArray[i].length; j++) {
+                columnList.add(inArray[i][j]);
+            }
+            expectedInList.add(columnList);
+        }
+        System.out.println("Expected: " + expectedInList);
+        List<List> actualInList = funcObj.case311();
+        System.out.println("Actual: " + actualInList);
+        Assert.assertEquals(actualInList, expectedInList);
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase302"}, description = "not in范围有空字符串")
+    public void testCase312() throws SQLException, ClassNotFoundException {
+        String[][] inArray = {
+                {"1","zhangsan","18","90.33","beijing"},
+                {"3","Hello","35","18.0","beijing"},
+                {"4","HELLO2","15","23.0","chaoyangdis_1 NO.street"},
+                {"5","lala","18","12.1234560987","beijing"},
+                {"6","88","18","12.0","changping 89"},
+                {"8","zala","100","54.0","wuwuxi "},
+                {"9"," uzlia ","28","23.6","  maya"},
+                {"10","  MaiTeng","66","70.3","ding TAO  "}
+        };
+
+        List<List> expectedInList = new ArrayList<List>();
+        for(int i=0; i<inArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<inArray[i].length; j++) {
+                columnList.add(inArray[i][j]);
+            }
+            expectedInList.add(columnList);
+        }
+        System.out.println("Expected: " + expectedInList);
+        List<List> actualInList = funcObj.case312();
+        System.out.println("Actual: " + actualInList);
+        Assert.assertEquals(actualInList, expectedInList);
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase312"}, description = "update中使用in范围")
+    public void testCase306() throws SQLException, ClassNotFoundException {
+        String[][] inArray = {
+                {"1","laozhang"},
+                {"2","laozhang"},
+                {"6","laozhang"},
+        };
+        List<List> expectedInList = new ArrayList<List>();
+        for(int i=0; i<inArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<inArray[i].length; j++) {
+                columnList.add(inArray[i][j]);
+            }
+            expectedInList.add(columnList);
+        }
+        System.out.println("Expected: " + expectedInList);
+        List<List> actualInList = funcObj.case306();
+        System.out.println("Actual: " + actualInList);
+        Assert.assertEquals(actualInList, expectedInList);
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase306"}, description = "update中使用not in范围")
+    public void testCase313() throws SQLException, ClassNotFoundException {
+        String[][] inArray = {
+                {"1","laozhang","18","90.33","beijing"},
+                {"2","laozhang","35","120.98",""},
+                {"3","Hello","35","18.0","beijing"},{"4","HELLO2","15","23.0","chaoyangdis_1 NO.street"},
+                {"5","lala","18","12.1234560987","beijing"},{"6","laozhang","18","12.0","changping 89"},
+                {"7","baba","99","23.51648",""},{"8","zala","100","54.0","wuwuxi "},
+                {"9"," uzlia ","28","23.6","BJ"},{"10","  MaiTeng","66","70.3","BJ"},
+                {"11","","0","0.01","BJ"}
+        };
+        List<List> expectedInList = new ArrayList<List>();
+        for(int i=0; i<inArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<inArray[i].length; j++) {
+                columnList.add(inArray[i][j]);
+            }
+            expectedInList.add(columnList);
+        }
+        System.out.println("Expected: " + expectedInList);
+        List<List> actualInList = funcObj.case313();
+        System.out.println("Actual: " + actualInList);
+        Assert.assertEquals(actualInList, expectedInList);
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase313"}, description = "delete语句使用，in关键字")
+    public void testCase307() throws SQLException, ClassNotFoundException {
+        String[][] inArray = {
+                {"3","Hello","35","18.0","beijing"},{"4","HELLO2","15","23.0","chaoyangdis_1 NO.street"},
+                {"8","zala","100","54.0","wuwuxi "}, {"9"," uzlia ","28","23.6","BJ"},
+                {"10","  MaiTeng","66","70.3","BJ"}, {"11","","0","0.01","BJ"}
+        };
+        List<List> expectedInList = new ArrayList<List>();
+        for(int i=0; i<inArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<inArray[i].length; j++) {
+                columnList.add(inArray[i][j]);
+            }
+            expectedInList.add(columnList);
+        }
+        System.out.println("Expected: " + expectedInList);
+        List<List> actualInList = funcObj.case307();
+        System.out.println("Actual: " + actualInList);
+        Assert.assertEquals(actualInList, expectedInList);
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase307"}, description = "delete语句使用，not in关键字")
+    public void testCase314() throws SQLException, ClassNotFoundException {
+        String[][] inArray = {
+                {"3","Hello","35","18.0","beijing"},{"4","HELLO2","15","23.0","chaoyangdis_1 NO.street"},
+                {"8","zala","100","54.0","wuwuxi "}, {"9"," uzlia ","28","23.6","BJ"},
+                {"11","","0","0.01","BJ"}
+        };
+        List<List> expectedInList = new ArrayList<List>();
+        for(int i=0; i<inArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<inArray[i].length; j++) {
+                columnList.add(inArray[i][j]);
+            }
+            expectedInList.add(columnList);
+        }
+        System.out.println("Expected: " + expectedInList);
+        List<List> actualInList = funcObj.case314();
+        System.out.println("Actual: " + actualInList);
+        Assert.assertEquals(actualInList, expectedInList);
+    }
+
 
 
     @AfterClass(description = "测试完成后删除数据和表格并关闭连接")
@@ -786,6 +1367,8 @@ public class TestSQLFuncs {
         tearDownStatement.execute("drop table " + tableName);
         tearDownStatement.execute("delete from emptest065");
         tearDownStatement.execute("drop table emptest065");
+        tearDownStatement.execute("delete from test302");
+        tearDownStatement.execute("drop table test302");
         tearDownStatement.close();
         connection.close();
     }
