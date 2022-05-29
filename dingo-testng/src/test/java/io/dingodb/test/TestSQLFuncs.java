@@ -1357,6 +1357,541 @@ public class TestSQLFuncs {
         Assert.assertEquals(actualInList, expectedInList);
     }
 
+    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "单个and")
+    public void testCase315() throws SQLException, ClassNotFoundException {
+        String[][] andArray = {
+                {"1","zhangsan","18","23.5","Beijing"},
+                {"8","zhangsan","18","12.3","shanghai"}
+        };
+        List<List> expectedAndList = new ArrayList<List>();
+        for(int i=0; i<andArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<andArray[i].length; j++) {
+                columnList.add(andArray[i][j]);
+            }
+            expectedAndList.add(columnList);
+        }
+        System.out.println("Expected: " + expectedAndList);
+        List<List> actualAndList = funcObj.case315();
+        System.out.println("Actual: " + actualAndList);
+        Assert.assertEquals(actualAndList, expectedAndList);
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "多个and")
+    public void testCase316_1() throws SQLException, ClassNotFoundException {
+        String[][] andArray = {{"8","zhangsan"}};
+        List<List> expectedAndList = new ArrayList<List>();
+        for(int i=0; i<andArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<andArray[i].length; j++) {
+                columnList.add(andArray[i][j]);
+            }
+            expectedAndList.add(columnList);
+        }
+        System.out.println("Expected: " + expectedAndList);
+        List<List> actualAndList = funcObj.case316_1();
+        System.out.println("Actual: " + actualAndList);
+        Assert.assertEquals(actualAndList, expectedAndList);
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "多个and")
+    public void testCase316_2() throws SQLException, ClassNotFoundException {
+        String[][] andArray = {{"1","zhangsan","18","23.5","Beijing"},
+                {"3","l3","55","123.123","wuhan NO.1 Street"},
+                {"5","awJDs","1","1453.9999","pingYang1"}
+        };
+        List<List> expectedAndList = new ArrayList<List>();
+        for(int i=0; i<andArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<andArray[i].length; j++) {
+                columnList.add(andArray[i][j]);
+            }
+            expectedAndList.add(columnList);
+        }
+        System.out.println("Expected: " + expectedAndList);
+        List<List> actualAndList = funcObj.case316_2();
+        System.out.println("Actual: " + actualAndList);
+        Assert.assertEquals(actualAndList, expectedAndList);
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "多个and")
+    public void testCase316_3() throws SQLException, ClassNotFoundException {
+        String[][] andArray = {{"8","zhangsan","18","12.3","shanghai"}};
+        List<List> expectedAndList = new ArrayList<List>();
+        for(int i=0; i<andArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<andArray[i].length; j++) {
+                columnList.add(andArray[i][j]);
+            }
+            expectedAndList.add(columnList);
+        }
+        System.out.println("Expected: " + expectedAndList);
+        List<List> actualAndList = funcObj.case316_3();
+        System.out.println("Actual: " + actualAndList);
+        Assert.assertEquals(actualAndList, expectedAndList);
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "单个or")
+    public void testCase319() throws SQLException, ClassNotFoundException {
+        String[][] andArray = {
+                {"1","zhangsan","18","23.5","Beijing"},
+                {"8","zhangsan","18","12.3","shanghai"},
+                {"15","1.5","18","0.1235","http://WWW.baidu.com"}
+        };
+        List<List> expectedAndList = new ArrayList<List>();
+        for(int i=0; i<andArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<andArray[i].length; j++) {
+                columnList.add(andArray[i][j]);
+            }
+            expectedAndList.add(columnList);
+        }
+        System.out.println("Expected: " + expectedAndList);
+        List<List> actualAndList = funcObj.case319();
+        System.out.println("Actual: " + actualAndList);
+        Assert.assertEquals(actualAndList, expectedAndList);
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "多个or")
+    public void testCase320_1() throws SQLException, ClassNotFoundException {
+        String[][] orArray = {
+                {"zhangsan"},
+                {"zhangsan"},
+                {" abcdef"},
+                {"1.5"}
+        };
+        List<List> expectedOrList = new ArrayList<List>();
+        for(int i=0; i<orArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<orArray[i].length; j++) {
+                columnList.add(orArray[i][j]);
+            }
+            expectedOrList.add(columnList);
+        }
+        System.out.println("Expected: " + expectedOrList);
+        List<List> actualOrList = funcObj.case320_1();
+        System.out.println("Actual: " + actualOrList);
+        Assert.assertEquals(actualOrList, expectedOrList);
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "多个or")
+    public void testCase320_2() throws SQLException, ClassNotFoundException {
+        String[][] orArray = {
+                {"zhangsan"}, {"lisi"}, {"l3"}, {"HAHA"},
+                {"awJDs"}, {"123"}, {"yamaha"}, {"zhangsan"},
+                {"op "}, {"lisi"}, {"  aB c  dE "}, {" abcdef"},
+                {"HAHA"}, {"zhngsna"}, {"1.5"}
+        };
+        List<List> expectedOrList = new ArrayList<List>();
+        for(int i=0; i<orArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<orArray[i].length; j++) {
+                columnList.add(orArray[i][j]);
+            }
+            expectedOrList.add(columnList);
+        }
+        System.out.println("Expected: " + expectedOrList);
+        List<List> actualOrList = funcObj.case320_2();
+        System.out.println("Actual: " + actualOrList);
+        Assert.assertEquals(actualOrList, expectedOrList);
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "and和or一起使用")
+    public void testCase323() throws SQLException, ClassNotFoundException {
+        String[][] andArray = {
+                {"1","zhangsan","18","23.5","Beijing"},
+                {"8","zhangsan","18","12.3","shanghai"}
+        };
+        List<List> expectedAndList = new ArrayList<List>();
+        for(int i=0; i<andArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<andArray[i].length; j++) {
+                columnList.add(andArray[i][j]);
+            }
+            expectedAndList.add(columnList);
+        }
+        System.out.println("Expected: " + expectedAndList);
+        List<List> actualAndList = funcObj.case323();
+        System.out.println("Actual: " + actualAndList);
+        Assert.assertEquals(actualAndList, expectedAndList);
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "验证支持括号")
+    public void testCase324() throws SQLException, ClassNotFoundException {
+        String[][] andArray = {
+                {"1","zhangsan","18","23.5","Beijing"}
+        };
+        List<List> expectedAndList = new ArrayList<List>();
+        for(int i=0; i<andArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<andArray[i].length; j++) {
+                columnList.add(andArray[i][j]);
+            }
+            expectedAndList.add(columnList);
+        }
+        System.out.println("Expected: " + expectedAndList);
+        List<List> actualAndList = funcObj.case324();
+        System.out.println("Actual: " + actualAndList);
+        Assert.assertEquals(actualAndList, expectedAndList);
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "所有字段去重")
+    public void testCase325() throws SQLException, ClassNotFoundException {
+        String[][] dataArray = {
+                {"1","zhangsan","18","23.5","Beijing"},
+                {"2","lisi","25","895.0"," beijing haidian "},
+                {"3","l3","55","123.123","wuhan NO.1 Street"},
+                {"4","HAHA","57","9.0762556","CHANGping"},
+                {"5","awJDs","1","1453.9999","pingYang1"},
+                {"6","123","544","0.0","543"},
+                {"7","yamaha","76","2.3","beijing changyang"},
+                {"8","zhangsan","18","12.3","shanghai"},
+                {"9","op ","76","109.325","wuhan"},
+                {"10","lisi","256","1234.456","nanjing"},
+                {"11","  aB c  dE ","61","99.9999","beijing chaoyang"},
+                {"12"," abcdef","2","2345.0","123"},
+                {"13","HAHA","57","9.0762556","CHANGping"},
+                {"14","zhngsna","99","32.0","chong qing "},
+                {"15","1.5","18","0.1235","http://WWW.baidu.com"}
+        };
+
+        List<List> expectedDataList = new ArrayList<List>();
+        for(int i=0; i<dataArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<dataArray[i].length; j++) {
+                columnList.add(dataArray[i][j]);
+            }
+            expectedDataList.add(columnList);
+        }
+        System.out.println("Expected: " + expectedDataList);
+        List<List> actualDataList = funcObj.case325();
+        System.out.println("Actual: " + actualDataList);
+        Assert.assertEquals(actualDataList, expectedDataList);
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "多个字段去重")
+    public void testCase326() throws SQLException, ClassNotFoundException {
+        String[][] dataArray = {
+                {"zhangsan","18","23.5","Beijing"},
+                {"lisi","25","895.0"," beijing haidian "},
+                {"l3","55","123.123","wuhan NO.1 Street"},
+                {"HAHA","57","9.0762556","CHANGping"},
+                {"awJDs","1","1453.9999","pingYang1"},
+                {"123","544","0.0","543"},
+                {"yamaha","76","2.3","beijing changyang"},
+                {"zhangsan","18","12.3","shanghai"},
+                {"op ","76","109.325","wuhan"},
+                {"lisi","256","1234.456","nanjing"},
+                {"  aB c  dE ","61","99.9999","beijing chaoyang"},
+                {" abcdef","2","2345.0","123"},
+                {"zhngsna","99","32.0","chong qing "},
+                {"1.5","18","0.1235","http://WWW.baidu.com"}
+        };
+
+        List<List> expectedDataList = new ArrayList<List>();
+        for(int i=0; i<dataArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<dataArray[i].length; j++) {
+                columnList.add(dataArray[i][j]);
+            }
+            expectedDataList.add(columnList);
+        }
+        System.out.println("Expected: " + expectedDataList);
+        List<List> actualDataList = funcObj.case326();
+        System.out.println("Actual: " + actualDataList);
+        Assert.assertTrue(actualDataList.containsAll(expectedDataList));
+        Assert.assertTrue(expectedDataList.containsAll(actualDataList));
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase067"}, expectedExceptions = SQLException.class,
+            description = "验证distinct不在所有字段前")
+    public void testCase327_1() throws SQLException, ClassNotFoundException {
+        funcObj.case327_1();
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase067"}, expectedExceptions = SQLException.class,
+            description = "验证distinct不在所有字段前")
+    public void testCase327_2() throws SQLException, ClassNotFoundException {
+        funcObj.case327_2();
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "验证count和distinct一起使用")
+    public void testCase329() throws SQLException, ClassNotFoundException {
+        int actualNum = funcObj.case329();
+        System.out.println("Actual: " + actualNum);
+        Assert.assertEquals(actualNum,12);
+    }
+
+    @Test(enabled = true, description = "验证distinct在空表中使用")
+    public void testCase330() throws SQLException, ClassNotFoundException {
+        Boolean actualResult = funcObj.case330();
+        System.out.println("Actual: " + actualResult);
+        Assert.assertFalse(actualResult);
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase314"}, description = "无重复返回全部数据")
+    public void testCase331() throws SQLException, ClassNotFoundException {
+        String[][] dataArray = {
+                {"Hello"},{"HELLO2"},
+                {"zala"}, {" uzlia "}, {""}
+        };
+        List<List> expectedDataList = new ArrayList<List>();
+        for(int i=0; i<dataArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<dataArray[i].length; j++) {
+                columnList.add(dataArray[i][j]);
+            }
+            expectedDataList.add(columnList);
+        }
+        System.out.println("Expected: " + expectedDataList);
+        List<List> actualDataList = funcObj.case331();
+        System.out.println("Actual: " + actualDataList);
+        Assert.assertTrue(actualDataList.containsAll(expectedDataList));
+        Assert.assertTrue(expectedDataList.containsAll(actualDataList));
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "复合查询1")
+    public void testCase332() throws SQLException, ClassNotFoundException {
+        String[][] dataArray = {
+                {"zhangsan","12.3"},{"1.5","0.1235"}
+        };
+        List<List> expectedDataList = new ArrayList<List>();
+        for(int i=0; i<dataArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<dataArray[i].length; j++) {
+                columnList.add(dataArray[i][j]);
+            }
+            expectedDataList.add(columnList);
+        }
+        System.out.println("Expected: " + expectedDataList);
+        List<List> actualDataList = funcObj.case332();
+        System.out.println("Actual: " + actualDataList);
+        Assert.assertEquals(actualDataList, expectedDataList);
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "复合查询2")
+    public void testCase333() throws SQLException, ClassNotFoundException {
+        String[][] dataArray = {
+                {"544","0.0","543"},{"18","0.1235","http://WWW.baidu.com"}
+        };
+        List<List> expectedDataList = new ArrayList<List>();
+        for(int i=0; i<dataArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<dataArray[i].length; j++) {
+                columnList.add(dataArray[i][j]);
+            }
+            expectedDataList.add(columnList);
+        }
+        System.out.println("Expected: " + expectedDataList);
+        List<List> actualDataList = funcObj.case333();
+        System.out.println("Actual: " + actualDataList);
+        Assert.assertEquals(actualDataList, expectedDataList);
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "复合查询3")
+    public void testCase334() throws SQLException, ClassNotFoundException {
+        String[] dataArray = {"8","8","9","2514.356","130","14","0.0"};
+        List expectedDataList = new ArrayList();
+        for(int i=0; i<dataArray.length; i++) {
+            expectedDataList.add(dataArray[i]);
+        }
+        System.out.println("Expected: " + expectedDataList);
+        List actualDataList = funcObj.case334();
+        System.out.println("Actual: " + actualDataList);
+        Assert.assertEquals(actualDataList, expectedDataList);
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase334"}, description = "插入相同主键")
+    public void testCase335() throws SQLException, ClassNotFoundException {
+        int expectedNum = funcObj.case335();
+        Assert.assertEquals(expectedNum, 0);
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase335"}, expectedExceptions = SQLException.class,
+            description = "插入字段和表字段不符")
+    public void testCase336_1() throws SQLException, ClassNotFoundException {
+        funcObj.case336_1();
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase336_1"}, expectedExceptions = SQLException.class,
+            description = "插入字段和表字段不符")
+    public void testCase336_2() throws SQLException, ClassNotFoundException {
+        funcObj.case336_2();
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase336_2"}, expectedExceptions = SQLException.class,
+            description = "插入字段和表字段类型不符")
+    public void testCase337() throws SQLException, ClassNotFoundException {
+        funcObj.case337();
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase337"}, description = "修改表数据，要修改的值不存在")
+    public void testCase338() throws SQLException, ClassNotFoundException {
+        int expectedNum = funcObj.case338();
+        Assert.assertEquals(expectedNum, 0);
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase330"}, description = "表为空，删除表")
+    public void testCase339() throws SQLException, ClassNotFoundException {
+        int expectedNum = funcObj.case339();
+        Assert.assertEquals(expectedNum, 0);
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase338"}, description = "删除空结果集")
+    public void testCase340() throws SQLException, ClassNotFoundException {
+        int expectedNum = funcObj.case340();
+        Assert.assertEquals(expectedNum, 0);
+    }
+
+    @Test(enabled = true, expectedExceptions = SQLException.class, description = "删除不存在的表")
+    public void testCase341() throws SQLException, ClassNotFoundException {
+        funcObj.case341();
+    }
+
+    @Test(enabled = true, description = "创建表后删除插入，再创建同表，原数据也删除")
+    public void testCase342() throws SQLException, ClassNotFoundException {
+        Boolean expectedResult = funcObj.case342();
+        Assert.assertFalse(expectedResult);
+    }
+
+    @Test(enabled = true, description = "创建表未指定not null")
+    public void testCase343() throws SQLException, ClassNotFoundException {
+        String[][] dataArray = {{"1","hello",null,null,null}};
+        List<List> expectedDataList = new ArrayList<List>();
+        for(int i=0; i<dataArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<dataArray[i].length; j++) {
+                columnList.add(dataArray[i][j]);
+            }
+            expectedDataList.add(columnList);
+        }
+        System.out.println("Expected: " + expectedDataList);
+        List actualDataList = funcObj.case343();
+        System.out.println("Actual: " + actualDataList);
+        Assert.assertEquals(actualDataList, expectedDataList);
+    }
+
+    @Test(enabled = true, description = "创建表指定null,有默认值")
+    public void testCase344() throws SQLException, ClassNotFoundException {
+        String[][] dataArray = {{"1","hello","20",null,null}};
+        List<List> expectedDataList = new ArrayList<List>();
+        for(int i=0; i<dataArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<dataArray[i].length; j++) {
+                columnList.add(dataArray[i][j]);
+            }
+            expectedDataList.add(columnList);
+        }
+        System.out.println("Expected: " + expectedDataList);
+        List actualDataList = funcObj.case344();
+        System.out.println("Actual: " + actualDataList);
+        Assert.assertEquals(actualDataList, expectedDataList);
+    }
+
+    @Test(enabled = true, description = "创建表指定not null,有默认值")
+    public void testCase624() throws SQLException, ClassNotFoundException {
+        String[][] dataArray = {{"1","hello","20",null,"shanghai"}};
+        List<List> expectedDataList = new ArrayList<List>();
+        for(int i=0; i<dataArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<dataArray[i].length; j++) {
+                columnList.add(dataArray[i][j]);
+            }
+            expectedDataList.add(columnList);
+        }
+        System.out.println("Expected: " + expectedDataList);
+        List actualDataList = funcObj.case624();
+        System.out.println("Actual: " + actualDataList);
+        Assert.assertEquals(actualDataList, expectedDataList);
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "select语句插入数据")
+    public void testCase1049() throws SQLException, ClassNotFoundException {
+        String[][] dataArray = {
+                {"6","123","544","0.0","543"},
+                {"7","yamaha","76","2.3","beijing changyang"},
+                {"8","zhangsan","18","12.3","shanghai"},
+                {"9","op ","76","109.325","wuhan"},
+                {"10","lisi","256","1234.456","nanjing"},
+                {"11","  aB c  dE ","61","99.9999","beijing chaoyang"},
+                {"12"," abcdef","2","2345.0","123"},
+                {"13","HAHA","57","9.0762556","CHANGping"},
+                {"14","zhngsna","99","32.0","chong qing "},
+                {"15","1.5","18","0.1235","http://WWW.baidu.com"}
+        };
+
+        List<List> expectedDataList = new ArrayList<List>();
+        for(int i=0; i<dataArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<dataArray[i].length; j++) {
+                columnList.add(dataArray[i][j]);
+            }
+            expectedDataList.add(columnList);
+        }
+        System.out.println("Expected: " + expectedDataList);
+        List<List> actualDataList = funcObj.case1049();
+        System.out.println("Actual: " + actualDataList);
+        Assert.assertEquals(actualDataList, expectedDataList);
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase1049"}, description = "删除后，插入相同数据")
+    public void testCase346() throws SQLException, ClassNotFoundException {
+        int expectedNum = funcObj.case346();
+        Assert.assertEquals(expectedNum, 1);
+    }
+
+    @Test(enabled = true, description = "count字段不计入null")
+    public void testCase1119() throws SQLException, ClassNotFoundException {
+
+        List expectedDataList = new ArrayList();
+        expectedDataList.add("2");
+        expectedDataList.add("4");
+        expectedDataList.add("4");
+
+        System.out.println("Expected: " + expectedDataList);
+        List actualDataList = funcObj.case1119();
+        System.out.println("Actual: " + actualDataList);
+        Assert.assertEquals(actualDataList, expectedDataList);
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase346"}, description = "or在update中使用")
+    public void testCase321() throws SQLException, ClassNotFoundException {
+        String[][] dataArray = {{"1","new"},{"8","new"},{"15","new"}};
+        List<List> expectedDataList = new ArrayList<List>();
+        for(int i=0; i<dataArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<dataArray[i].length; j++) {
+                columnList.add(dataArray[i][j]);
+            }
+            expectedDataList.add(columnList);
+        }
+        System.out.println("Expected: " + expectedDataList);
+        List<List> actualDataList = funcObj.case321();
+        System.out.println("Actual: " + actualDataList);
+        Assert.assertEquals(actualDataList, expectedDataList);
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase321"}, description = "or在delete中使用")
+    public void testCase322() throws SQLException, ClassNotFoundException {
+        String[][] dataArray = {
+                {"2","lisi","25","895.0"," beijing haidian "},
+                {"3","l3","55","123.123","wuhan NO.1 Street"},
+                {"4","HAHA","57","9.0762556","CHANGping"},
+                {"13","HAHA","57","9.0762556","CHANGping"},
+        };
+        List<List> expectedDataList = new ArrayList<List>();
+        for(int i=0; i<dataArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<dataArray[i].length; j++) {
+                columnList.add(dataArray[i][j]);
+            }
+            expectedDataList.add(columnList);
+        }
+        System.out.println("Expected: " + expectedDataList);
+        List<List> actualDataList = funcObj.case322();
+        System.out.println("Actual: " + actualDataList);
+        Assert.assertEquals(actualDataList, expectedDataList);
+    }
 
 
     @AfterClass(description = "测试完成后删除数据和表格并关闭连接")
@@ -1369,6 +1904,14 @@ public class TestSQLFuncs {
         tearDownStatement.execute("drop table emptest065");
         tearDownStatement.execute("delete from test302");
         tearDownStatement.execute("drop table test302");
+        tearDownStatement.execute("drop table case330");
+//        tearDownStatement.execute("drop table case341");
+        tearDownStatement.execute("drop table case342");
+        tearDownStatement.execute("drop table case343");
+        tearDownStatement.execute("drop table case344");
+        tearDownStatement.execute("drop table case624");
+        tearDownStatement.execute("drop table case1049");
+        tearDownStatement.execute("drop table case1119");
         tearDownStatement.close();
         connection.close();
     }

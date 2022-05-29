@@ -25,8 +25,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SQLFuncs {
-//    private static final String defaultConnectIP = "172.20.61.1";
-    private static String defaultConnectIP = CommonArgs.getDefaultDingoClusterIP();
+    private static final String defaultConnectIP = "172.20.61.1";
+//    private static String defaultConnectIP = CommonArgs.getDefaultDingoClusterIP();
     private static final String JDBC_DRIVER = "io.dingodb.driver.client.DingoDriverClient";
     private static String connectUrl = "jdbc:dingo:thin:url=" + defaultConnectIP + ":8765";
 
@@ -88,11 +88,11 @@ public class SQLFuncs {
         connection = connectDB();
         Statement statement = connection.createStatement();
 
-        String distinctNameSql = "select distinct(name) from " + funcTableName;
+        String distinctNameSql = "select distinct(name) dn from " + funcTableName;
         ResultSet distinctNameRst = statement.executeQuery(distinctNameSql);
         List<String> distinctNameList = new ArrayList<String>();
         while (distinctNameRst.next()) {
-            distinctNameList.add(distinctNameRst.getString("name"));
+            distinctNameList.add(distinctNameRst.getString("dn"));
         }
         statement.close();
 //        connection.close();
@@ -963,6 +963,7 @@ public class SQLFuncs {
         Statement statement = connection.createStatement();
         String querySQL = "select name,sum(amount) sa from emptest065 group by sa";
         statement.executeQuery(querySQL);
+        statement.close();
     }
 
     //使用非查询字段分组
@@ -989,6 +990,7 @@ public class SQLFuncs {
         Statement statement = connection.createStatement();
         String querySQL = "select * from emptest065 group by age";
         statement.executeQuery(querySQL);
+        statement.close();
     }
 
     //使用多字段分组
@@ -1040,6 +1042,7 @@ public class SQLFuncs {
         while(resultSet.next()) {
             rowNum++;
         }
+        statement.close();
         return rowNum;
     }
 
@@ -1053,6 +1056,7 @@ public class SQLFuncs {
         while(resultSet.next()) {
             rowNum++;
         }
+        statement.close();
         return rowNum;
     }
 
@@ -1066,6 +1070,7 @@ public class SQLFuncs {
         while(resultSet.next()) {
             rowNum++;
         }
+        statement.close();
         return rowNum;
     }
 
@@ -1079,6 +1084,7 @@ public class SQLFuncs {
         while(resultSet.next()) {
             rowNum++;
         }
+        statement.close();
         return rowNum;
     }
 
@@ -1117,6 +1123,7 @@ public class SQLFuncs {
         Statement statement = connection.createStatement();
         String querySQL = "select name,age from emptest065 limit -1";
         statement.executeQuery(querySQL);
+        statement.close();
     }
 
     //限制输出条数为负数
@@ -1125,6 +1132,7 @@ public class SQLFuncs {
         Statement statement = connection.createStatement();
         String querySQL = "select name,age from emptest065 limit -1 offset 3";
         statement.executeQuery(querySQL);
+        statement.close();
     }
 
     //限制输出条数为小数
@@ -1140,6 +1148,7 @@ public class SQLFuncs {
             rowList.add(String.valueOf(resultSet.getInt(2)));
             queryList.add(rowList);
         }
+        statement.close();
         return queryList;
     }
 
@@ -1159,6 +1168,7 @@ public class SQLFuncs {
             rowList.add(resultSet.getString(5));
             queryList.add(rowList);
         }
+        statement.close();
         return queryList;
     }
 
@@ -1168,6 +1178,7 @@ public class SQLFuncs {
         Statement statement = connection.createStatement();
         String querySQL = "select name,age from emptest065 limit '2'";
         statement.executeQuery(querySQL);
+        statement.close();
     }
 
     //限制输出条数为字符串
@@ -1176,6 +1187,7 @@ public class SQLFuncs {
         Statement statement = connection.createStatement();
         String querySQL = "select name,age from emptest065 limit '3' offset 3";
         statement.executeQuery(querySQL);
+        statement.close();
     }
 
     //offset为负数
@@ -1184,6 +1196,7 @@ public class SQLFuncs {
         Statement statement = connection.createStatement();
         String querySQL = "select name,age from emptest065 limit 3 offset -2";
         statement.executeQuery(querySQL);
+        statement.close();
     }
 
     //offset为字符串
@@ -1192,6 +1205,7 @@ public class SQLFuncs {
         Statement statement = connection.createStatement();
         String querySQL = "select name,age from emptest065 limit 3 offset '3'";
         statement.executeQuery(querySQL);
+        statement.close();
     }
 
     //限制起始索引为小数
@@ -1207,6 +1221,7 @@ public class SQLFuncs {
             rowList.add(String.valueOf(resultSet.getInt(2)));
             queryList.add(rowList);
         }
+        statement.close();
         return queryList;
     }
 
@@ -1216,6 +1231,7 @@ public class SQLFuncs {
         Statement statement = connection.createStatement();
         String querySQL = "select name,age from emptest065 limit offset 3";
         statement.executeQuery(querySQL);
+        statement.close();
     }
 
     //参数缺失，预期异常
@@ -1224,6 +1240,7 @@ public class SQLFuncs {
         Statement statement = connection.createStatement();
         String querySQL = "select name,age from emptest065 limit 5 offset";
         statement.executeQuery(querySQL);
+        statement.close();
     }
 
     //参数缺失，预期异常
@@ -1232,6 +1249,7 @@ public class SQLFuncs {
         Statement statement = connection.createStatement();
         String querySQL = "select name,age from emptest065 limit";
         statement.executeQuery(querySQL);
+        statement.close();
     }
 
     //in运算符，指定范围只一个元素
@@ -1250,6 +1268,7 @@ public class SQLFuncs {
             rowList.add(resultSet.getString(5));
             queryList.add(rowList);
         }
+        statement.close();
         return queryList;
     }
 
@@ -1269,6 +1288,7 @@ public class SQLFuncs {
             rowList.add(resultSet.getString(5));
             queryList.add(rowList);
         }
+        statement.close();
         return queryList;
     }
 
@@ -1288,6 +1308,7 @@ public class SQLFuncs {
             rowList.add(resultSet.getString(5));
             queryList.add(rowList);
         }
+        statement.close();
         return queryList;
     }
 
@@ -1304,6 +1325,7 @@ public class SQLFuncs {
             rowList.add(String.valueOf(resultSet.getInt(2)));
             queryList.add(rowList);
         }
+        statement.close();
         return queryList;
     }
 
@@ -1333,6 +1355,7 @@ public class SQLFuncs {
             rowList.add(resultSet.getString(5));
             queryList.add(rowList);
         }
+        statement.close();
         return queryList;
     }
 
@@ -1377,6 +1400,7 @@ public class SQLFuncs {
             rowList.add(resultSet.getString(5));
             queryList.add(rowList);
         }
+        statement.close();
         return queryList;
     }
 
@@ -1396,6 +1420,7 @@ public class SQLFuncs {
             rowList.add(resultSet.getString(5));
             queryList.add(rowList);
         }
+        statement.close();
         return queryList;
     }
 
@@ -1415,6 +1440,7 @@ public class SQLFuncs {
             rowList.add(resultSet.getString(5));
             queryList.add(rowList);
         }
+        statement.close();
         return queryList;
     }
 
@@ -1434,6 +1460,7 @@ public class SQLFuncs {
             rowList.add(resultSet.getString(5));
             queryList.add(rowList);
         }
+        statement.close();
         return queryList;
     }
 
@@ -1453,6 +1480,7 @@ public class SQLFuncs {
             rowList.add(resultSet.getString(5));
             queryList.add(rowList);
         }
+        statement.close();
         return queryList;
     }
 
@@ -1472,6 +1500,7 @@ public class SQLFuncs {
             rowList.add(resultSet.getString(5));
             queryList.add(rowList);
         }
+        statement.close();
         return queryList;
     }
 
@@ -1491,6 +1520,7 @@ public class SQLFuncs {
             rowList.add(resultSet.getString(5));
             queryList.add(rowList);
         }
+        statement.close();
         return queryList;
     }
 
@@ -1509,6 +1539,7 @@ public class SQLFuncs {
             rowList.add(resultSet.getString(2));
             queryList.add(rowList);
         }
+        statement.close();
         return queryList;
     }
 
@@ -1530,6 +1561,7 @@ public class SQLFuncs {
             rowList.add(resultSet.getString(5));
             queryList.add(rowList);
         }
+        statement.close();
         return queryList;
     }
 
@@ -1551,6 +1583,7 @@ public class SQLFuncs {
             rowList.add(resultSet.getString(5));
             queryList.add(rowList);
         }
+        statement.close();
         return queryList;
     }
 
@@ -1572,17 +1605,634 @@ public class SQLFuncs {
             rowList.add(resultSet.getString(5));
             queryList.add(rowList);
         }
+        statement.close();
+        return queryList;
+    }
+
+
+    //单个and使用
+    public List<List> case315() throws SQLException, ClassNotFoundException {
+        connection = connectDB();
+        Statement statement = connection.createStatement();
+        String querySQL = "select * from emptest065 where name='zhangsan' and age=18";
+        ResultSet resultSet = statement.executeQuery(querySQL);
+        List<List> queryList = new ArrayList<List>();
+        while(resultSet.next()) {
+            List rowList = new ArrayList ();
+            rowList.add(String.valueOf(resultSet.getInt(1)));
+            rowList.add(resultSet.getString(2));
+            rowList.add(String.valueOf(resultSet.getInt(3)));
+            rowList.add(String.valueOf(resultSet.getDouble(4)));
+            rowList.add(resultSet.getString(5));
+            queryList.add(rowList);
+        }
+        statement.close();
+        return queryList;
+    }
+
+    //多个and使用
+    public List<List> case316_1() throws SQLException, ClassNotFoundException {
+        connection = connectDB();
+        Statement statement = connection.createStatement();
+        String querySQL = "select id,name from emptest065 where id>5 and name='zhangsan' and age=18";
+        ResultSet resultSet = statement.executeQuery(querySQL);
+        List<List> queryList = new ArrayList<List>();
+        while(resultSet.next()) {
+            List rowList = new ArrayList ();
+            rowList.add(String.valueOf(resultSet.getInt(1)));
+            rowList.add(resultSet.getString(2));
+            queryList.add(rowList);
+        }
+        statement.close();
+        return queryList;
+    }
+
+    //多个and使用
+    public List<List> case316_2() throws SQLException, ClassNotFoundException {
+        connection = connectDB();
+        Statement statement = connection.createStatement();
+        String querySQL = "select * from emptest065 where id<10 and name not in('lisi') and age<60 and amount>20.0";
+        ResultSet resultSet = statement.executeQuery(querySQL);
+        List<List> queryList = new ArrayList<List>();
+        while(resultSet.next()) {
+            List rowList = new ArrayList ();
+            rowList.add(String.valueOf(resultSet.getInt(1)));
+            rowList.add(resultSet.getString(2));
+            rowList.add(String.valueOf(resultSet.getInt(3)));
+            rowList.add(String.valueOf(resultSet.getDouble(4)));
+            rowList.add(resultSet.getString(5));
+            queryList.add(rowList);
+        }
+        statement.close();
+        return queryList;
+    }
+
+    //多个and使用
+    public List<List> case316_3() throws SQLException, ClassNotFoundException {
+        connection = connectDB();
+        Statement statement = connection.createStatement();
+        String querySQL = "select * from emptest065 where id in(2,4,6,8,10) and age>=18 and name='zhangsan'";
+        ResultSet resultSet = statement.executeQuery(querySQL);
+        List<List> queryList = new ArrayList<List>();
+        while(resultSet.next()) {
+            List rowList = new ArrayList ();
+            rowList.add(String.valueOf(resultSet.getInt(1)));
+            rowList.add(resultSet.getString(2));
+            rowList.add(String.valueOf(resultSet.getInt(3)));
+            rowList.add(String.valueOf(resultSet.getDouble(4)));
+            rowList.add(resultSet.getString(5));
+            queryList.add(rowList);
+        }
+        statement.close();
+        return queryList;
+    }
+
+    //单个or使用
+    public List<List> case319() throws SQLException, ClassNotFoundException {
+        connection = connectDB();
+        Statement statement = connection.createStatement();
+        String querySQL = "select * from emptest065 where name='zhangsan' or age=18";
+        ResultSet resultSet = statement.executeQuery(querySQL);
+        List<List> queryList = new ArrayList<List>();
+        while(resultSet.next()) {
+            List rowList = new ArrayList ();
+            rowList.add(String.valueOf(resultSet.getInt(1)));
+            rowList.add(resultSet.getString(2));
+            rowList.add(String.valueOf(resultSet.getInt(3)));
+            rowList.add(String.valueOf(resultSet.getDouble(4)));
+            rowList.add(resultSet.getString(5));
+            queryList.add(rowList);
+        }
+        statement.close();
+        return queryList;
+    }
+
+    //多个or使用
+    public List<List> case320_1() throws SQLException, ClassNotFoundException {
+        connection = connectDB();
+        Statement statement = connection.createStatement();
+        String querySQL = "select name from emptest065 where address='123' or name='zhangsan' or age=18";
+        ResultSet resultSet = statement.executeQuery(querySQL);
+        List<List> queryList = new ArrayList<List>();
+        while(resultSet.next()) {
+            List rowList = new ArrayList ();
+            rowList.add(resultSet.getString(1));
+            queryList.add(rowList);
+        }
+        statement.close();
+        return queryList;
+    }
+
+    //多个or使用
+    public List<List> case320_2() throws SQLException, ClassNotFoundException {
+        connection = connectDB();
+        Statement statement = connection.createStatement();
+        String querySQL = "select name from emptest065 where id<5 or address<>'Beijing' " +
+                "or name in ('zhangsan','lisi') or age not in (18,60)";
+        ResultSet resultSet = statement.executeQuery(querySQL);
+        List<List> queryList = new ArrayList<List>();
+        while(resultSet.next()) {
+            List rowList = new ArrayList ();
+            rowList.add(resultSet.getString(1));
+            queryList.add(rowList);
+        }
+        statement.close();
+        return queryList;
+    }
+
+    //and和or一起使用
+    public List<List> case323() throws SQLException, ClassNotFoundException {
+        connection = connectDB();
+        Statement statement = connection.createStatement();
+        String querySQL = "select * from emptest065 where id>5 and name='zhangsan' or age=18 and address='Beijing'";
+        ResultSet resultSet = statement.executeQuery(querySQL);
+        List<List> queryList = new ArrayList<List>();
+        while(resultSet.next()) {
+            List rowList = new ArrayList ();
+            rowList.add(String.valueOf(resultSet.getInt(1)));
+            rowList.add(resultSet.getString(2));
+            rowList.add(String.valueOf(resultSet.getInt(3)));
+            rowList.add(String.valueOf(resultSet.getDouble(4)));
+            rowList.add(resultSet.getString(5));
+            queryList.add(rowList);
+        }
+        statement.close();
+        return queryList;
+    }
+
+    //查询支持括号
+    public List<List> case324() throws SQLException, ClassNotFoundException {
+        connection = connectDB();
+        Statement statement = connection.createStatement();
+        String querySQL = "select * from emptest065 where (id>5 and name='zhangsan' or age=18) and address='Beijing'";
+        ResultSet resultSet = statement.executeQuery(querySQL);
+        List<List> queryList = new ArrayList<List>();
+        while(resultSet.next()) {
+            List rowList = new ArrayList ();
+            rowList.add(String.valueOf(resultSet.getInt(1)));
+            rowList.add(resultSet.getString(2));
+            rowList.add(String.valueOf(resultSet.getInt(3)));
+            rowList.add(String.valueOf(resultSet.getDouble(4)));
+            rowList.add(resultSet.getString(5));
+            queryList.add(rowList);
+        }
+        statement.close();
+        return queryList;
+    }
+
+    //所有字段去重
+    public List<List> case325() throws SQLException, ClassNotFoundException {
+        connection = connectDB();
+        Statement statement = connection.createStatement();
+        String querySQL = "select distinct * from emptest065";
+        ResultSet resultSet = statement.executeQuery(querySQL);
+        List<List> queryList = new ArrayList<List>();
+        while(resultSet.next()) {
+            List rowList = new ArrayList ();
+            rowList.add(String.valueOf(resultSet.getInt(1)));
+            rowList.add(resultSet.getString(2));
+            rowList.add(String.valueOf(resultSet.getInt(3)));
+            rowList.add(String.valueOf(resultSet.getDouble(4)));
+            rowList.add(resultSet.getString(5));
+            queryList.add(rowList);
+        }
+        statement.close();
+        return queryList;
+    }
+
+    //多个字段去重
+    public List<List> case326() throws SQLException, ClassNotFoundException {
+        connection = connectDB();
+        Statement statement = connection.createStatement();
+        String querySQL = "select distinct name,age,amount,address from emptest065";
+        ResultSet resultSet = statement.executeQuery(querySQL);
+        List<List> queryList = new ArrayList<List>();
+        while(resultSet.next()) {
+            List rowList = new ArrayList ();
+            rowList.add(resultSet.getString(1));
+            rowList.add(String.valueOf(resultSet.getInt(2)));
+            rowList.add(String.valueOf(resultSet.getDouble(3)));
+            rowList.add(resultSet.getString(4));
+            queryList.add(rowList);
+        }
+        statement.close();
+        return queryList;
+    }
+
+    //distinct关键字不在所有字段前
+    public void case327_1() throws SQLException, ClassNotFoundException {
+        connection = connectDB();
+        Statement statement = connection.createStatement();
+        String querySQL = "select id,distinct name,age from emptest065";
+        statement.executeQuery(querySQL);
+        statement.close();
+    }
+
+    //distinct关键字不在所有字段前
+    public void case327_2() throws SQLException, ClassNotFoundException {
+        connection = connectDB();
+        Statement statement = connection.createStatement();
+        String querySQL = "select id,distinct(name) from emptest065";
+        statement.executeQuery(querySQL);
+        statement.close();
+    }
+
+    //count和distinct一起使用
+    public int case329() throws SQLException, ClassNotFoundException {
+        connection = connectDB();
+        Statement statement = connection.createStatement();
+        String querySQL = "select count(distinct(name)) cdn from emptest065";
+        ResultSet resultSet = statement.executeQuery(querySQL);
+        int countNum = 0;
+        while(resultSet.next()) {
+            countNum = resultSet.getInt("cdn");
+        }
+        statement.close();
+        return countNum;
+    }
+
+    //distinct在空表中使用
+    public boolean case330() throws SQLException, ClassNotFoundException {
+        connection = connectDB();
+        Statement statement = connection.createStatement();
+        String createTable = "create table case330(id int, name varchar(20), primary key(id))";
+        statement.execute(createTable);
+        String querySQL = "select distinct(id) from case330";
+        ResultSet resultSet = statement.executeQuery(querySQL);
+        return resultSet.next();
+    }
+
+    //无重复
+    public List<List> case331() throws SQLException, ClassNotFoundException {
+        connection = connectDB();
+        Statement statement = connection.createStatement();
+        String querySQL = "select distinct(name) from test302";
+        ResultSet resultSet = statement.executeQuery(querySQL);
+        List<List> queryList = new ArrayList<List>();
+        while(resultSet.next()) {
+            List rowList = new ArrayList ();
+            rowList.add(resultSet.getString(1));
+
+            queryList.add(rowList);
+        }
+        statement.close();
+        return queryList;
+    }
+
+    //复合查询1
+    public List<List> case332() throws SQLException, ClassNotFoundException {
+        connection = connectDB();
+        Statement statement = connection.createStatement();
+        String querySQL = "select name,sum(amount) sa from emptest065 where id>3 and age<60 " +
+                "group by name order by sa DESC limit 5 offset 3";
+        ResultSet resultSet = statement.executeQuery(querySQL);
+        List<List> queryList = new ArrayList<List>();
+        while(resultSet.next()) {
+            List rowList = new ArrayList ();
+            rowList.add(resultSet.getString("name"));
+            rowList.add(String.valueOf(resultSet.getDouble("sa")));
+            queryList.add(rowList);
+        }
+        statement.close();
+        return queryList;
+    }
+
+    //复合查询2
+    public List<List> case333() throws SQLException, ClassNotFoundException {
+        connection = connectDB();
+        Statement statement = connection.createStatement();
+        String querySQL = "select avg(age) aa,min(amount) ma,address from emptest065 where id in(1,3,5,7,9,11,13,15) " +
+                "or name<>'zhangsan' group by address order by min(amount) limit 2";
+        ResultSet resultSet = statement.executeQuery(querySQL);
+        List<List> queryList = new ArrayList<List>();
+        while(resultSet.next()) {
+            List rowList = new ArrayList ();
+            rowList.add(String.valueOf(resultSet.getInt("aa")));
+            rowList.add(String.valueOf(resultSet.getDouble("ma")));
+            rowList.add(resultSet.getString("address"));
+            queryList.add(rowList);
+        }
+        statement.close();
+        return queryList;
+    }
+
+    //复合查询3
+    public List case334() throws SQLException, ClassNotFoundException {
+        connection = connectDB();
+        Statement statement = connection.createStatement();
+        String querySQL = "select count(distinct(name)),count(distinct(age)),count(distinct(address))," +
+                "format(sum(amount),3),avg(age),max(id),min(amount) from emptest065 where age>18";
+        ResultSet resultSet = statement.executeQuery(querySQL);
+        List queryList = new ArrayList();
+        while(resultSet.next()) {
+            queryList.add(resultSet.getString(1));
+            queryList.add(resultSet.getString(2));
+            queryList.add(resultSet.getString(3));
+            queryList.add(resultSet.getString(4));
+            queryList.add(resultSet.getString(5));
+            queryList.add(resultSet.getString(6));
+            queryList.add(resultSet.getString(7));
+        }
+
+        statement.close();
+        return queryList;
+    }
+
+    //插入重复主键
+    public int case335() throws SQLException, ClassNotFoundException {
+        connection = connectDB();
+        Statement statement = connection.createStatement();
+        String insertSQL = "insert into emptest065 values(1,'insert1',19,1.0,'shanghai'),(2,'insert2',29,20,'Beijing')";
+        int effectNum = statement.executeUpdate(insertSQL);
+        statement.close();
+        return effectNum;
+    }
+
+    //插入数据和字段不符，预期异常
+    public void case336_1() throws SQLException, ClassNotFoundException {
+        connection = connectDB();
+        Statement statement = connection.createStatement();
+        String insertSQL = "insert into emptest065 values(20,'zhang',18)";
+        statement.executeUpdate(insertSQL);
+        statement.close();
+    }
+
+    //插入数据和字段不符，预期异常
+    public void case336_2() throws SQLException, ClassNotFoundException {
+        connection = connectDB();
+        Statement statement = connection.createStatement();
+        String insertSQL = "insert into emptest065 values(21,'haha',18,19.0,'addr',2020)";
+        statement.executeUpdate(insertSQL);
+        statement.close();
+    }
+
+    //插入数据和字段类型不符，预期异常
+    public void case337() throws SQLException, ClassNotFoundException {
+        connection = connectDB();
+        Statement statement = connection.createStatement();
+        String insertSQL = "insert into emptest065 values(22,'haha','abc',19.0,'beijing')";
+        statement.executeUpdate(insertSQL);
+        statement.close();
+    }
+
+    //修改表数据，要修改的值不存在
+    public int case338() throws SQLException, ClassNotFoundException {
+        connection = connectDB();
+        Statement statement = connection.createStatement();
+        String updateSQL = "update emptest065 set name='update1' where name='1234'";
+        int effectNum = statement.executeUpdate(updateSQL);
+        statement.close();
+        return effectNum;
+    }
+
+    //表为空时，删除表数据
+    public int case339() throws SQLException, ClassNotFoundException {
+        connection = connectDB();
+        Statement statement = connection.createStatement();
+        String updateSQL = "delete from case330";
+        int effectNum = statement.executeUpdate(updateSQL);
+        statement.close();
+        return effectNum;
+    }
+
+    //删除结果集为空
+    public int case340() throws SQLException, ClassNotFoundException {
+        connection = connectDB();
+        Statement statement = connection.createStatement();
+        String deleteSQL = "delete from emptest065 where name='zhangsan' and name='lisi'";
+        int deletenum = statement.executeUpdate(deleteSQL);
+        statement.close();
+        return deletenum;
+    }
+
+    //删除表不存在
+    public void case341() throws SQLException, ClassNotFoundException {
+        connection = connectDB();
+        Statement statement = connection.createStatement();
+        String dropSQL = "drop table case341";
+        statement.execute(dropSQL);
+        statement.close();
+    }
+
+    //验证删除表，表数据一起删除
+    public boolean case342() throws SQLException, ClassNotFoundException {
+        connection = connectDB();
+        Statement statement = connection.createStatement();
+        String createTable = "create table case342(id int, name varchar(20), primary key(id))";
+        statement.execute(createTable);
+        String insertSQL = "insert into case342 values(1,'case342-1'),(2,'case342-2')";
+        statement.executeUpdate(insertSQL);
+        String dropSQL = "drop table case342";
+        statement.execute(dropSQL);
+        statement.execute(createTable);
+        String querySQL = "select * from case342";
+        ResultSet resultSet = statement.executeQuery(querySQL);
+        return resultSet.next();
+    }
+
+    //未指定not null
+    public List<List> case343() throws SQLException, ClassNotFoundException {
+        connection = connectDB();
+        Statement statement = connection.createStatement();
+        String createSQL = "create table case343(id int,name varchar(32) not null,age int," +
+                "amount double,address varchar(255),primary key(id))";
+        statement.execute(createSQL);
+        String insertSQL = "insert into case343(id,name) values(1,'hello')";
+        statement.executeUpdate(insertSQL);
+
+        String querySQL = "select * from case343";
+        ResultSet resultSet = statement.executeQuery(querySQL);
+
+        List<List> queryList = new ArrayList<List>();
+        while(resultSet.next()) {
+            List rowList = new ArrayList ();
+            rowList.add(String.valueOf(resultSet.getInt(1)));
+            rowList.add(resultSet.getString(2));
+            rowList.add(resultSet.getString(3));
+            rowList.add(resultSet.getString(4));
+            rowList.add(resultSet.getString(5));
+            queryList.add(rowList);
+        }
+
+        statement.close();
+        return queryList;
+    }
+
+    //指定Null,指定默认值
+    public List<List> case344() throws SQLException, ClassNotFoundException {
+        connection = connectDB();
+        Statement statement = connection.createStatement();
+        String createSQL = "create table case344(id int,name varchar(32) not null,age int null default 20," +
+                "amount double,address varchar(255),primary key(id))";
+        statement.execute(createSQL);
+        String insertSQL = "insert into case344(id,name) values(1,'hello')";
+        statement.executeUpdate(insertSQL);
+
+        String querySQL = "select * from case344";
+        ResultSet resultSet = statement.executeQuery(querySQL);
+
+        List<List> queryList = new ArrayList<List>();
+        while(resultSet.next()) {
+            List rowList = new ArrayList ();
+            rowList.add(String.valueOf(resultSet.getInt(1)));
+            rowList.add(resultSet.getString(2));
+            rowList.add(String.valueOf(resultSet.getInt(3)));
+            rowList.add(resultSet.getString(4));
+            rowList.add(resultSet.getString(5));
+            queryList.add(rowList);
+        }
+        statement.close();
+        return queryList;
+    }
+
+    //指定not Null,指定默认值
+    public List<List> case624() throws SQLException, ClassNotFoundException {
+        connection = connectDB();
+        Statement statement = connection.createStatement();
+        String createSQL = "create table case624(id int,name varchar(32) not null,age int not null default 20," +
+                "amount double,address varchar(255) default 'shanghai',primary key(id))";
+        statement.execute(createSQL);
+        String insertSQL = "insert into case624(id,name) values(1,'hello')";
+        statement.executeUpdate(insertSQL);
+
+        String querySQL = "select * from case624";
+        ResultSet resultSet = statement.executeQuery(querySQL);
+
+        List<List> queryList = new ArrayList<List>();
+        while(resultSet.next()) {
+            List rowList = new ArrayList ();
+            rowList.add(String.valueOf(resultSet.getInt(1)));
+            rowList.add(resultSet.getString(2));
+            rowList.add(String.valueOf(resultSet.getInt(3)));
+            rowList.add(resultSet.getString(4));
+            rowList.add(resultSet.getString(5));
+            queryList.add(rowList);
+        }
+        statement.close();
         return queryList;
     }
 
 
 
+    //删除记录，再插入相同主键的记录可成功
+    public int case346() throws SQLException, ClassNotFoundException {
+        connection = connectDB();
+        Statement statement = connection.createStatement();
+        String deleteSQL = "delete from emptest065 where id=2";
+        statement.execute(deleteSQL);
+        String insertSQL = "insert into emptest065 values(2,'lisi',25,895,' beijing haidian ')";
+        int updateNum = statement.executeUpdate(insertSQL);
 
+        statement.close();
+        return updateNum;
+    }
 
+    //指定not Null,指定默认值
+    public List<List> case1049() throws SQLException, ClassNotFoundException {
+        connection = connectDB();
+        Statement statement = connection.createStatement();
+        String createSQL = "create table case1049(id int,name varchar(32) not null,age int," +
+                "amount double,address varchar(255),primary key(id))";
+        statement.execute(createSQL);
+        String insertSQL = "insert into case1049 select * from emptest065 where id>5";
+        statement.executeUpdate(insertSQL);
 
+        String querySQL = "select * from case1049";
+        ResultSet resultSet = statement.executeQuery(querySQL);
 
+        List<List> queryList = new ArrayList<List>();
+        while(resultSet.next()) {
+            List rowList = new ArrayList ();
+            rowList.add(String.valueOf(resultSet.getInt(1)));
+            rowList.add(resultSet.getString(2));
+            rowList.add(String.valueOf(resultSet.getInt(3)));
+            rowList.add(String.valueOf(resultSet.getDouble(4)));
+            rowList.add(resultSet.getString(5));
+            queryList.add(rowList);
+        }
+        statement.close();
+        return queryList;
+    }
 
+    //count函数，不计入null
+    public List case1119() throws SQLException, ClassNotFoundException {
+        connection = connectDB();
+        Statement statement = connection.createStatement();
+        String createSQL = "create table case1119(id int, name varchar(20), age int, primary key(id))";
+        statement.execute(createSQL);
+        String insertSQL1 = "insert into case1119(id,name) values (1,'zhangsan'),(2,'hello')";
+        String insertSQL2 = "insert into case1119 values (3,'wangwu',18),(4,'Kla',20)";
+        statement.executeUpdate(insertSQL1);
+        statement.executeUpdate(insertSQL2);
 
+        String querySQL1 = "select count(age) from case1119";
+        ResultSet resultSet1 = statement.executeQuery(querySQL1);
 
+        List queryList = new ArrayList();
+        while(resultSet1.next()) {
+            queryList.add(String.valueOf(resultSet1.getInt(1)));
+        }
+
+        String querySQL2 = "select count(1) from case1119";
+        ResultSet resultSet2 = statement.executeQuery(querySQL2);
+        while(resultSet2.next()) {
+            queryList.add(String.valueOf(resultSet2.getInt(1)));
+        }
+
+        String querySQL3 = "select count(*) from case1119";
+        ResultSet resultSet3 = statement.executeQuery(querySQL3);
+        while(resultSet3.next()) {
+            queryList.add(String.valueOf(resultSet3.getInt(1)));
+        }
+        statement.close();
+        return queryList;
+    }
+
+    //or在update语句中使用
+    public List<List> case321() throws SQLException, ClassNotFoundException {
+        connection = connectDB();
+        Statement statement1 = connection.createStatement();
+        String updateSQL = "update emptest065 set name='new' where name='zhangsan' or age=18";
+        statement1.execute(updateSQL);
+
+        Statement statement2 = connection.createStatement();
+        String querySQL = "select id,name from emptest065 where name='new'";
+        ResultSet resultSet2 = statement2.executeQuery(querySQL);
+
+        List<List> queryList = new ArrayList<List>();
+        while(resultSet2.next()) {
+            List rowList = new ArrayList ();
+            rowList.add(resultSet2.getString(1));
+            rowList.add(resultSet2.getString(2));
+            queryList.add(rowList);
+        }
+
+        statement1.close();
+        statement2.close();
+        return queryList;
+    }
+
+    //or在update语句中使用
+    public List<List> case322() throws SQLException, ClassNotFoundException {
+        connection = connectDB();
+        Statement statement = connection.createStatement();
+        String deleteSQL = "delete from emptest065 where age<18 or age>60 or name='new'";
+        statement.execute(deleteSQL);
+        String querySQL = "select * from emptest065";
+        ResultSet resultSet = statement.executeQuery(querySQL);
+
+        List<List> queryList = new ArrayList<List>();
+        while(resultSet.next()) {
+            List rowList = new ArrayList ();
+            rowList.add(resultSet.getString(1));
+            rowList.add(resultSet.getString(2));
+            rowList.add(resultSet.getString(3));
+            rowList.add(resultSet.getString(4));
+            rowList.add(resultSet.getString(5));
+            queryList.add(rowList);
+        }
+        statement.close();
+        return queryList;
+    }
 
 }
