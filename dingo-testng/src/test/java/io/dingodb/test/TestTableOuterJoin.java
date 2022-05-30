@@ -18,11 +18,13 @@ package io.dingodb.test;
 
 import io.dingodb.dailytest.TableOuterJoin;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import utils.FileReaderUtil;
 
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -943,43 +945,43 @@ public class TestTableOuterJoin {
     }
 
 
-//    @AfterClass(alwaysRun = true, description = "测试完成后删除数据和表格并关闭连接")
-//    public void tearDownAll() throws SQLException {
-//        Statement tearDownStatement = TableOuterJoin.connection.createStatement();
-//        tearDownStatement.execute("delete from student_tbl");
-//        tearDownStatement.execute("drop table student_tbl");
-//        tearDownStatement.execute("delete from class_tbl");
-//        tearDownStatement.execute("drop table class_tbl");
-//        tearDownStatement.execute("delete from student_tbl1");
-//        tearDownStatement.execute("drop table student_tbl1");
-//        tearDownStatement.execute("delete from class_tbl1");
-//        tearDownStatement.execute("drop table class_tbl1");
-//        tearDownStatement.execute("delete from product1");
-//        tearDownStatement.execute("drop table product1");
-//        tearDownStatement.execute("delete from product2");
-//        tearDownStatement.execute("drop table product2");
-//        tearDownStatement.execute("delete from test1");
-//        tearDownStatement.execute("drop table test1");
-//        tearDownStatement.execute("delete from test2");
-//        tearDownStatement.execute("drop table test2");
-//        tearDownStatement.execute("delete from beauty_tbl");
-//        tearDownStatement.execute("drop table beauty_tbl");
-//        tearDownStatement.execute("delete from boys_tbl");
-//        tearDownStatement.execute("drop table boys_tbl");
-//        tearDownStatement.execute("delete from boys_right");
-//        tearDownStatement.execute("drop table boys_right");
-//        tearDownStatement.execute("delete from product3");
-//        tearDownStatement.execute("drop table product3");
-//        tearDownStatement.execute("delete from w3cschool_tbl");
-//        tearDownStatement.execute("drop table w3cschool_tbl");
-//        tearDownStatement.execute("delete from tcount_tbl");
-//        tearDownStatement.execute("drop table tcount_tbl");
-//        tearDownStatement.execute("delete from departments_tbl");
-//        tearDownStatement.execute("drop table departments_tbl");
-//        tearDownStatement.execute("delete from employees_tbl");
-//        tearDownStatement.execute("drop table employees_tbl");
-//
-//        tearDownStatement.close();
-//        TableOuterJoin.connection.close();
-//    }
+    @AfterClass(alwaysRun = true, description = "测试完成后删除数据和表格并关闭连接")
+    public void tearDownAll() throws SQLException {
+        Statement tearDownStatement = TableOuterJoin.connection.createStatement();
+        tearDownStatement.execute("delete from student_tbl");
+        tearDownStatement.execute("drop table student_tbl");
+        tearDownStatement.execute("delete from class_tbl");
+        tearDownStatement.execute("drop table class_tbl");
+        tearDownStatement.execute("delete from student_tbl1");
+        tearDownStatement.execute("drop table student_tbl1");
+        tearDownStatement.execute("delete from class_tbl1");
+        tearDownStatement.execute("drop table class_tbl1");
+        tearDownStatement.execute("delete from product1");
+        tearDownStatement.execute("drop table product1");
+        tearDownStatement.execute("delete from product2");
+        tearDownStatement.execute("drop table product2");
+        tearDownStatement.execute("delete from test1");
+        tearDownStatement.execute("drop table test1");
+        tearDownStatement.execute("delete from test2");
+        tearDownStatement.execute("drop table test2");
+        tearDownStatement.execute("delete from beauty_tbl");
+        tearDownStatement.execute("drop table beauty_tbl");
+        tearDownStatement.execute("delete from boys_tbl");
+        tearDownStatement.execute("drop table boys_tbl");
+        tearDownStatement.execute("delete from boys_right");
+        tearDownStatement.execute("drop table boys_right");
+        tearDownStatement.execute("delete from product3");
+        tearDownStatement.execute("drop table product3");
+        tearDownStatement.execute("delete from w3cschool_tbl");
+        tearDownStatement.execute("drop table w3cschool_tbl");
+        tearDownStatement.execute("delete from tcount_tbl");
+        tearDownStatement.execute("drop table tcount_tbl");
+        tearDownStatement.execute("delete from departments_tbl");
+        tearDownStatement.execute("drop table departments_tbl");
+        tearDownStatement.execute("delete from employees_tbl");
+        tearDownStatement.execute("drop table employees_tbl");
+
+        tearDownStatement.close();
+        TableOuterJoin.connection.close();
+    }
 }
