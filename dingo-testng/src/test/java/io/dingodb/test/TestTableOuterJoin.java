@@ -18,13 +18,11 @@ package io.dingodb.test;
 
 import io.dingodb.dailytest.TableOuterJoin;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import utils.FileReaderUtil;
 
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -348,10 +346,10 @@ public class TestTableOuterJoin {
     public List<List> expectedLeftList3() {
         String[][] dataArray = {{"120","Tre","200","1700",null},{"130","Cor","205","1700",null},
                 {"140","Con","121","1700",null},{"150","Sha","145","1700",null},
-                {"160","Ben","200","1700",null},{"170","Man","200","1700",null},
+                {"160","Ben","100","1700",null},{"170","Man","200","1700",null},
                 {"180","Con","108","1700",null},{"190","Con","200","1700",null},
-                {"200","Ope","200","1700",null},{"210","IT","114","1700",null},
-                {"220","NOC","103","1700",null},{"230","IT","145","1700",null},
+                {"200","Ope","200","1700",null},{"210","IT ","114","1700",null},
+                {"220","NOC","103","1700",null},{"230","IT ","145","1700",null},
                 {"240","Gov","201","1700",null},{"250","Ret","145","1700",null},
                 {"260","Rec","204","1700",null},{"270","Pay","100","1700",null}};
         List<List> expectedList = new ArrayList<List>();
@@ -419,7 +417,7 @@ public class TestTableOuterJoin {
     }
 
     public List<List> expectedRightList1() {
-        String[][] dataArray = {{null,"5","Zhang Fei"}, {null,"6","Panda"}};
+        String[][] dataArray = {{null,"5","Zhang Fei"}, {null,"6","Panan"}};
         List<List> expectedList = new ArrayList<List>();
         for(int i=0; i<dataArray.length; i++) {
             List columnList = new ArrayList();
@@ -767,11 +765,11 @@ public class TestTableOuterJoin {
         initEmployeesTB();
         List<List> expectedList = expectedLeftList3();
         System.out.println("Expected: " + expectedList);
-        List<List> actualLeftList = outerJoinObj.leftOuterJoinOmitOuter();
-        System.out.println("Actual: " + actualLeftList);
+        List<List> actualLeftOmiterOuterList = outerJoinObj.leftOuterJoinOmitOuter();
+        System.out.println("Actual: " + actualLeftOmiterOuterList);
 
-        Assert.assertTrue(actualLeftList.containsAll(expectedList));
-        Assert.assertTrue(expectedList.containsAll(actualLeftList));
+        Assert.assertTrue(actualLeftOmiterOuterList.containsAll(expectedList));
+        Assert.assertTrue(expectedList.containsAll(actualLeftOmiterOuterList));
     }
 
     @Test(priority = 28, enabled = true, dependsOnMethods = {"test04FullOuterJoinNoSameData"}, description = "验证左连接两表无交集")
@@ -811,7 +809,8 @@ public class TestTableOuterJoin {
         Assert.assertTrue(expectedList.containsAll(actualLeftList));
     }
 
-    @Test(priority = 32, enabled = true, dependsOnMethods = {"test26LeftJoinOnlyInLeftTable"},
+    @Test(priority = 32, enabled = true, expectedExceptions = SQLException.class,
+            dependsOnMethods = {"test26LeftJoinOnlyInLeftTable"},
             description = "缺少连接条件，预期异常")
     public void test33LeftJoinMissingCondition() throws SQLException {
         outerJoinObj.leftOuterJoinMissingCondition();
@@ -917,7 +916,7 @@ public class TestTableOuterJoin {
     @Test(priority = 42, enabled = true, dependsOnMethods = {"test26LeftJoinOnlyInLeftTable"},
             description = "验证添加where条件")
     public void test43RightJoinWhereState() throws SQLException {
-        String expectedStr = "Panda";
+        String expectedStr = "Panan";
         System.out.println("Expected: " + expectedStr);
         String actualRightStr = outerJoinObj.rightOuterJoinWhereState();
         System.out.println("Actual: " + actualRightStr);
@@ -926,7 +925,7 @@ public class TestTableOuterJoin {
     }
 
 //    @Test(priority = 43, enabled = true, dependsOnMethods = {"test26LeftJoinOnlyInLeftTable"}, description = "缺少连接条件，预期异常")
-    @Test(priority = 43, enabled = true, description = "缺少连接条件，预期异常")
+    @Test(priority = 43, enabled = true, expectedExceptions = SQLException.class, description = "缺少连接条件，预期异常")
     public void test44RightJoinMissingCondition() throws SQLException {
         outerJoinObj.rightOuterJoinMissingCondition();
     }
@@ -944,43 +943,43 @@ public class TestTableOuterJoin {
     }
 
 
-    @AfterClass(alwaysRun = true, description = "测试完成后删除数据和表格并关闭连接")
-    public void tearDownAll() throws SQLException {
-        Statement tearDownStatement = TableOuterJoin.connection.createStatement();
-        tearDownStatement.execute("delete from student_tbl");
-        tearDownStatement.execute("drop table student_tbl");
-        tearDownStatement.execute("delete from class_tbl");
-        tearDownStatement.execute("drop table class_tbl");
-        tearDownStatement.execute("delete from student_tbl1");
-        tearDownStatement.execute("drop table student_tbl1");
-        tearDownStatement.execute("delete from class_tbl1");
-        tearDownStatement.execute("drop table class_tbl1");
-        tearDownStatement.execute("delete from product1");
-        tearDownStatement.execute("drop table product1");
-        tearDownStatement.execute("delete from product2");
-        tearDownStatement.execute("drop table product2");
-        tearDownStatement.execute("delete from test1");
-        tearDownStatement.execute("drop table test1");
-        tearDownStatement.execute("delete from test2");
-        tearDownStatement.execute("drop table test2");
-        tearDownStatement.execute("delete from beauty_tbl");
-        tearDownStatement.execute("drop table beauty_tbl");
-        tearDownStatement.execute("delete from boys_tbl");
-        tearDownStatement.execute("drop table boys_tbl");
-        tearDownStatement.execute("delete from boys_right");
-        tearDownStatement.execute("drop table boys_right");
-        tearDownStatement.execute("delete from product3");
-        tearDownStatement.execute("drop table product3");
-        tearDownStatement.execute("delete from w3cschool_tbl");
-        tearDownStatement.execute("drop table w3cschool_tbl");
-        tearDownStatement.execute("delete from tcount_tbl");
-        tearDownStatement.execute("drop table tcount_tbl");
-        tearDownStatement.execute("delete from departments_tbl");
-        tearDownStatement.execute("drop table departments_tbl");
-        tearDownStatement.execute("delete from employees_tbl");
-        tearDownStatement.execute("drop table employees_tbl");
-
-        tearDownStatement.close();
-        TableOuterJoin.connection.close();
-    }
+//    @AfterClass(alwaysRun = true, description = "测试完成后删除数据和表格并关闭连接")
+//    public void tearDownAll() throws SQLException {
+//        Statement tearDownStatement = TableOuterJoin.connection.createStatement();
+//        tearDownStatement.execute("delete from student_tbl");
+//        tearDownStatement.execute("drop table student_tbl");
+//        tearDownStatement.execute("delete from class_tbl");
+//        tearDownStatement.execute("drop table class_tbl");
+//        tearDownStatement.execute("delete from student_tbl1");
+//        tearDownStatement.execute("drop table student_tbl1");
+//        tearDownStatement.execute("delete from class_tbl1");
+//        tearDownStatement.execute("drop table class_tbl1");
+//        tearDownStatement.execute("delete from product1");
+//        tearDownStatement.execute("drop table product1");
+//        tearDownStatement.execute("delete from product2");
+//        tearDownStatement.execute("drop table product2");
+//        tearDownStatement.execute("delete from test1");
+//        tearDownStatement.execute("drop table test1");
+//        tearDownStatement.execute("delete from test2");
+//        tearDownStatement.execute("drop table test2");
+//        tearDownStatement.execute("delete from beauty_tbl");
+//        tearDownStatement.execute("drop table beauty_tbl");
+//        tearDownStatement.execute("delete from boys_tbl");
+//        tearDownStatement.execute("drop table boys_tbl");
+//        tearDownStatement.execute("delete from boys_right");
+//        tearDownStatement.execute("drop table boys_right");
+//        tearDownStatement.execute("delete from product3");
+//        tearDownStatement.execute("drop table product3");
+//        tearDownStatement.execute("delete from w3cschool_tbl");
+//        tearDownStatement.execute("drop table w3cschool_tbl");
+//        tearDownStatement.execute("delete from tcount_tbl");
+//        tearDownStatement.execute("drop table tcount_tbl");
+//        tearDownStatement.execute("delete from departments_tbl");
+//        tearDownStatement.execute("drop table departments_tbl");
+//        tearDownStatement.execute("delete from employees_tbl");
+//        tearDownStatement.execute("drop table employees_tbl");
+//
+//        tearDownStatement.close();
+//        TableOuterJoin.connection.close();
+//    }
 }
