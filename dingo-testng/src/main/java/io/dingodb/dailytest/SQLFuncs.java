@@ -25,8 +25,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SQLFuncs {
-    private static final String defaultConnectIP = "172.20.61.1";
-//    private static String defaultConnectIP = CommonArgs.getDefaultDingoClusterIP();
+//    private static final String defaultConnectIP = "172.20.61.1";
+    private static String defaultConnectIP = CommonArgs.getDefaultDingoClusterIP();
     private static final String JDBC_DRIVER = "io.dingodb.driver.client.DingoDriverClient";
     private static String connectUrl = "jdbc:dingo:thin:url=" + defaultConnectIP + ":8765";
 
