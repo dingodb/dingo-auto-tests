@@ -1,0 +1,6 @@
+(snum varchar(4),
+sname varchar(20),
+ssex varchar(10),
+sage int,
+sdept varchar(5),
+primary key(snum))

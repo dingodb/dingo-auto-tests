@@ -1,0 +1,4 @@
+('9001', 'Li Yong', 'Male', 20, 'CS'),
+('9002', 'Liu Chen', 'Female', 19, 'IS'),
+('9003', 'Wang Ming', 'Female', 18, 'MA'),
+('9004', 'Zhang Li', 'Male', 18, 'IS')

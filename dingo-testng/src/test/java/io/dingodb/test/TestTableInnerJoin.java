@@ -32,12 +32,36 @@ import java.util.List;
 public class TestTableInnerJoin {
     public static TableInnerJoin tableJoinObj = new TableInnerJoin();
 
-    public static List<List<String>> girlsJoinList() {
+    public void initTable1054() throws SQLException {
+        String table1054_1_meta_path = "src/test/resources/testdata/tablemeta/table1054_1_meta.txt";
+        String table1054_1_value_path = "src/test/resources/testdata/tableInsertValues/table1054_1.txt";
+        String table1054_1_meta = FileReaderUtil.readFile(table1054_1_meta_path);
+        String table1054_1_value = FileReaderUtil.readFile(table1054_1_value_path);
+        tableJoinObj.createTable1054_1(table1054_1_meta);
+        tableJoinObj.insertValuesToTable1054_1(table1054_1_value);
+        String table1054_2_meta_path = "src/test/resources/testdata/tablemeta/table1054_2_meta.txt";
+        String table1054_2_value_path = "src/test/resources/testdata/tableInsertValues/table1054_2.txt";
+        String table1054_2_meta = FileReaderUtil.readFile(table1054_2_meta_path);
+        String table1054_2_value = FileReaderUtil.readFile(table1054_2_value_path);
+        tableJoinObj.createTable1054_2(table1054_2_meta);
+        tableJoinObj.insertValuesToTable1054_2(table1054_2_value);
+    }
+
+    public void initJobGradesTB() throws SQLException {
+        String job_grades_meta_path = "src/test/resources/testdata/tablemeta/job_grades_meta.txt";
+        String job_grades_value_path = "src/test/resources/testdata/tableInsertValues/job_grades.txt";
+        String job_grades_meta = FileReaderUtil.readFile(job_grades_meta_path);
+        String job_grades_value = FileReaderUtil.readFile(job_grades_value_path);
+        tableJoinObj.createJobGradesTable(job_grades_meta);
+        tableJoinObj.insertValuesToJobGrades(job_grades_value);
+    }
+
+    public static List<List> girlsJoinList() {
         String[][] beautyBoyArray = {{"ReBa","Han Han"},{"zhiRuo","Zhang Wuji"}, {"Xiao Zhao", "Zhang Wuji"},
                 {"Wang Yuyan", "DuanYU"}, {"Zhao Min", "Zhang Wuji"},{"Angelay", "Xiao Ming"}};
-        List<List<String>> girlsList = new ArrayList<List<String>>();
+        List<List> girlsList = new ArrayList<List>();
         for(int i=0; i<beautyBoyArray.length; i++) {
-            List<String> columnList = new ArrayList<>();
+            List columnList = new ArrayList();
             for (int j=0; j<beautyBoyArray[i].length; j++) {
                 columnList.add(beautyBoyArray[i][j]);
             }
@@ -45,6 +69,131 @@ public class TestTableInnerJoin {
         }
         return girlsList;
     }
+
+    public static List<List> expectedNEJoinList1() {
+        String[][] dataArray = {{"24000.0","E"},{"17000.0","E"},{"17000.0","E"},{"9000.0","C"},
+                {"6000.0","C"},{"4800.0","B"},{"4800.0","B"},{"4200.0","B"},{"12000.0","D"},{"9000.0","C"},
+                {"8200.0","C"},{"7700.0","C"},{"7800.0","C"},{"6900.0","C"},{"11000.0","D"},{"3100.0","B"},
+                {"2900.0","A"},{"2800.0","A"}};
+        List<List> expectedList = new ArrayList<List>();
+        for(int i=0; i<dataArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<dataArray[i].length; j++) {
+                columnList.add(dataArray[i][j]);
+            }
+            expectedList.add(columnList);
+        }
+        return expectedList;
+    }
+
+    public static List<List> expectedNEJoinList2() {
+        String[][] dataArray = {{"3","E"},{"38","C"},{"26","B"},{"16","D"},{"24","A"}};
+        List<List> expectedList = new ArrayList<List>();
+        for(int i=0; i<dataArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<dataArray[i].length; j++) {
+                columnList.add(dataArray[i][j]);
+            }
+            expectedList.add(columnList);
+        }
+        return expectedList;
+    }
+
+    public static List<List> expectedNEJoinList3() {
+        String[][] dataArray = {{"3","E"},{"16","D"},{"38","C"},{"26","B"},{"24","A"}};
+        List<List> expectedList = new ArrayList<List>();
+        for(int i=0; i<dataArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<dataArray[i].length; j++) {
+                columnList.add(dataArray[i][j]);
+            }
+            expectedList.add(columnList);
+        }
+        return expectedList;
+    }
+
+    public static List<List> expectedNEJoinList4() {
+        String[][] dataArray = {{"1","zhangsan","18","3","hello","35"},{"1","zhangsan","18","5","wangwu","25"},
+                {"1","zhangsan","18","6","Haha","20"},{"2","lisi","20","3","hello","35"},
+                {"2","lisi","20","5","wangwu","25"},{"3","wangwu","25","3","hello","35"},
+                {"4","liuming","18","3","hello","35"},{"4","liuming","18","5","wangwu","25"},
+                {"4","liuming","18","6","Haha","20"}};
+        List<List> expectedList = new ArrayList<List>();
+        for(int i=0; i<dataArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<dataArray[i].length; j++) {
+                columnList.add(dataArray[i][j]);
+            }
+            expectedList.add(columnList);
+        }
+        return expectedList;
+    }
+
+    public static List<List> expectedNEJoinList5() {
+        String[][] dataArray = {{"2","lisi","20","1","zhangsan","18"}, {"3","wangwu","25","1","zhangsan","18"},
+                {"3","wangwu","25","6","Haha","20"}};
+        List<List> expectedList = new ArrayList<List>();
+        for(int i=0; i<dataArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<dataArray[i].length; j++) {
+                columnList.add(dataArray[i][j]);
+            }
+            expectedList.add(columnList);
+        }
+        return expectedList;
+    }
+
+    public static List<List> expectedNEJoinList6() {
+        String[][] dataArray = {{"1","zhangsan","18","3","hello","35"},{"1","zhangsan","18","5","wangwu","25"},
+                {"1","zhangsan","18","6","Haha","20"},{"2","lisi","20","1","zhangsan","18"},
+                {"2","lisi","20","3","hello","35"}, {"2","lisi","20","5","wangwu","25"},
+                {"3","wangwu","25","1","zhangsan","18"},{"3","wangwu","25","3","hello","35"},
+                {"3","wangwu","25","6","Haha","20"}, {"4","liuming","18","3","hello","35"},
+                {"4","liuming","18","5","wangwu","25"}, {"4","liuming","18","6","Haha","20"}};
+        List<List> expectedList = new ArrayList<List>();
+        for(int i=0; i<dataArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<dataArray[i].length; j++) {
+                columnList.add(dataArray[i][j]);
+            }
+            expectedList.add(columnList);
+        }
+        return expectedList;
+    }
+
+    public static List<List> expectedNEJoinList7() {
+        String[][] dataArray = {{"9","Shuange","9","1","Zhang Wuji"},{"9","Shuange","9","2","Han Han"},
+                {"9","Shuange","9","3","Xiao Ming"},{"9","Shuange","9","4","DuanYU"},
+                {"10","Wang Yuyan","4","1","Zhang Wuji"},{"10","Wang Yuyan","4","2","Han Han"},
+                {"10","Wang Yuyan","4","3","Xiao Ming"},{"11","Xia Xue","9","1","Zhang Wuji"},
+                {"11","Xia Xue","9","2","Han Han"},{"11","Xia Xue","9","3","Xiao Ming"},
+                {"11","Xia Xue","9","4","DuanYU"},{"12","Zhao Min","1","2","Han Han"},
+                {"12","Zhao Min","1","3","Xiao Ming"},{"12","Zhao Min","1","4","DuanYU"}};
+        List<List> expectedList = new ArrayList<List>();
+        for(int i=0; i<dataArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<dataArray[i].length; j++) {
+                columnList.add(dataArray[i][j]);
+            }
+            expectedList.add(columnList);
+        }
+        return expectedList;
+    }
+
+    public static List<List> expectedNEJoinList8() {
+        String[][] dataArray = {{"1","2","3","3","1"},{"1","2","3","6","2"}, {"4","5","6","6","2"}};
+        List<List> expectedList = new ArrayList<List>();
+        for(int i=0; i<dataArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<dataArray[i].length; j++) {
+                columnList.add(dataArray[i][j]);
+            }
+            expectedList.add(columnList);
+        }
+        return expectedList;
+    }
+
+
 
     @BeforeClass(alwaysRun = true, description = "测试前连接数据库，创建表格和插入数据")
     public static void setUpAll() throws SQLException {
@@ -55,7 +204,7 @@ public class TestTableInnerJoin {
     public void test01InnerJoinOwnFieldWithoutTablePrefix() throws SQLException {
         tableJoinObj.createInnerTables();
         tableJoinObj.insertDataToInnerTables();
-        List<List<String>> expectedInnerJoinList = girlsJoinList();
+        List<List> expectedInnerJoinList = girlsJoinList();
         System.out.println("Expected: " + expectedInnerJoinList);
         List<List<String>> actualInnerJoinList = tableJoinObj.innerJoinOwnFieldWithoutTablePrefix();
         System.out.println("Acutal: " + actualInnerJoinList);
@@ -73,7 +222,7 @@ public class TestTableInnerJoin {
 
     @Test(priority = 1, enabled = true, dependsOnMethods = {"test01InnerJoinOwnFieldWithoutTablePrefix"}, description = "验证表名调换")
     public void test02InnerJoinTableExchange() throws SQLException {
-        List<List<String>> expectedExchangeList = girlsJoinList();
+        List<List> expectedExchangeList = girlsJoinList();
         System.out.println("Expected: " + expectedExchangeList);
         List<List<String>> actualExchangeList = tableJoinObj.innerJoinTableExchange();
         System.out.println("Acutal: " + actualExchangeList);
@@ -85,7 +234,7 @@ public class TestTableInnerJoin {
 
     @Test(priority = 2, enabled = true, dependsOnMethods = {"test01InnerJoinOwnFieldWithoutTablePrefix"}, description = "验证省略inner")
     public void test03JoinOmitInner() throws SQLException {
-        List<List<String>> expectedOmitInnerList = girlsJoinList();
+        List<List> expectedOmitInnerList = girlsJoinList();
         System.out.println("Expected: " + expectedOmitInnerList);
         List<List<String>> actualJoinOmitInnerList = tableJoinObj.joinOmitInner();
         System.out.println("Acutal: " + actualJoinOmitInnerList);
@@ -96,7 +245,7 @@ public class TestTableInnerJoin {
 
     @Test(priority = 3, enabled = true, dependsOnMethods = {"test01InnerJoinOwnFieldWithoutTablePrefix"}, description = "验证等值连接使用别名")
     public void test04InnerJoinWithTableAlias() throws SQLException {
-        List<List<String>> expectedInnerJoinWithTableAliasList = girlsJoinList();
+        List<List> expectedInnerJoinWithTableAliasList = girlsJoinList();
         System.out.println("Expected: " + expectedInnerJoinWithTableAliasList);
         List<List<String>> actualInnerJoinWithTableAliasList = tableJoinObj.innerJoinWithTableAlias();
         System.out.println("Acutal: " + actualInnerJoinWithTableAliasList);
@@ -291,6 +440,190 @@ public class TestTableInnerJoin {
         Assert.assertTrue(expectedSelfJoinList.containsAll(actualSelfJoinList));
     }
 
+
+    @Test(priority = 15, enabled = true, description = "验证内等连接-自然连接")
+    public void test16NaturalJoin() throws SQLException {
+        initTable1054();
+        String[][] joinArray = {{"9002","Liu Chen","Female","IS","2","90"}, {"9002","Liu Chen","Female","IS","3","80"},
+                {"9001","Li Yong","Male","CS","1","92"}, {"9001","Li Yong","Male","CS","2","85"},
+                {"9001","Li Yong","Male","CS","3","88"}};
+        List<List> expectedJoinList = new ArrayList<List>();
+        for(int i=0; i<joinArray.length; i++) {
+            List<String> columnList = new ArrayList<>();
+            for (int j=0; j<joinArray[i].length; j++) {
+                columnList.add(joinArray[i][j]);
+            }
+            expectedJoinList.add(columnList);
+        }
+        System.out.println("Expected: " + expectedJoinList);
+        List<List> actualJoinList = tableJoinObj.naturalJoin();
+        System.out.println("Actual: " + actualJoinList);
+        Assert.assertTrue(actualJoinList.containsAll(expectedJoinList));
+        Assert.assertTrue(expectedJoinList.containsAll(actualJoinList));
+    }
+
+    @Test(priority = 16, enabled = true, dependsOnMethods = {"test01InnerJoinOwnFieldWithoutTablePrefix"},
+            description = "验证内等连接使用逗号分隔表名，和where等值条件筛选")
+    public void test17InnerJoinCommaWithWhere() throws SQLException {
+        String[][] joinArray = {{"Angelay","Xiao Ming"},{"ReBa","Han Han"},{"zhiRuo","Zhang Wuji"},
+                {"Xiao Zhao","Zhang Wuji"},{"Wang Yuyan","DuanYU"},{"Zhao Min","Zhang Wuji"}};
+        List<List> expectedJoinList = new ArrayList<List>();
+        for(int i=0; i<joinArray.length; i++) {
+            List<String> columnList = new ArrayList<>();
+            for (int j=0; j<joinArray[i].length; j++) {
+                columnList.add(joinArray[i][j]);
+            }
+            expectedJoinList.add(columnList);
+        }
+        System.out.println("Expected: " + expectedJoinList);
+        List<List> actualJoinList = tableJoinObj.innerJoinCommaWhere();
+        System.out.println("Actual: " + actualJoinList);
+        Assert.assertTrue(actualJoinList.containsAll(expectedJoinList));
+        Assert.assertTrue(expectedJoinList.containsAll(actualJoinList));
+    }
+
+
+    @Test(priority = 17, enabled = true, description = "验证某一表无数据返回空")
+    public void test18InnerJoinOneEmpty() throws SQLException {
+        Boolean actualJoinResult = tableJoinObj.innerJoinOneEmpty();
+        Assert.assertFalse(actualJoinResult);
+    }
+
+    @Test(priority = 18, enabled = true, description = "验证内等连接using(key)")
+    public void test19InnerJoinUsingKey() throws SQLException {
+        String[][] joinArray = {{"1","zhangsan","18","1","zhangsan","18"}, {"3","wangwu","25","3","hello","35"}};
+        List<List> expectedJoinList = new ArrayList<List>();
+        for(int i=0; i<joinArray.length; i++) {
+            List<String> columnList = new ArrayList<>();
+            for (int j=0; j<joinArray[i].length; j++) {
+                columnList.add(joinArray[i][j]);
+            }
+            expectedJoinList.add(columnList);
+        }
+        System.out.println("Expected: " + expectedJoinList);
+        List<List> actualJoinList = tableJoinObj.innerJoinUsingKey();
+        System.out.println("Actual: " + actualJoinList);
+        Assert.assertTrue(actualJoinList.containsAll(expectedJoinList));
+        Assert.assertTrue(expectedJoinList.containsAll(actualJoinList));
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"test11InnerJoinGroupAndOrder"}, description = "内非连接，多个条件")
+    public void test20InnerNEJoinMultiCondition() throws SQLException {
+        initJobGradesTB();
+        List<List> expectedJoinList = expectedNEJoinList1();
+        System.out.println("Expected: " + expectedJoinList);
+
+        List<List> actualJoinList = tableJoinObj.innerNEJoinMultiCondition();
+        System.out.println("Actual: " + actualJoinList);
+        Assert.assertTrue(actualJoinList.containsAll(expectedJoinList));
+        Assert.assertTrue(expectedJoinList.containsAll(actualJoinList));
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"test20InnerNEJoinMultiCondition"}, description = "内非连接添加分组")
+    public void test21InnerNEJoinWithGroup() throws SQLException {
+        List<List> expectedJoinList = expectedNEJoinList2();
+        System.out.println("Expected: " + expectedJoinList);
+
+        List<List> actualJoinList = tableJoinObj.innerNEJoinWithGroup();
+        System.out.println("Actual: " + actualJoinList);
+        Assert.assertTrue(actualJoinList.containsAll(expectedJoinList));
+        Assert.assertTrue(expectedJoinList.containsAll(actualJoinList));
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"test20InnerNEJoinMultiCondition"}, description = "内非连接添加排序")
+    public void test22InnerNEJoinWithOrder() throws SQLException {
+        List<List> expectedJoinList = expectedNEJoinList3();
+        System.out.println("Expected: " + expectedJoinList);
+
+        List<List> actualJoinList = tableJoinObj.innerNEJoinWithOrder();
+        System.out.println("Actual: " + actualJoinList);
+        Assert.assertEquals(actualJoinList,expectedJoinList);
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"test19InnerJoinUsingKey"}, description = "内非连接小于")
+    public void test23InnerNEJoinST() throws SQLException {
+        List<List> expectedJoinList = expectedNEJoinList4();
+        System.out.println("Expected: " + expectedJoinList);
+
+        List<List> actualJoinList = tableJoinObj.innerNEJoinST();
+        System.out.println("Actual: " + actualJoinList);
+        Assert.assertTrue(actualJoinList.containsAll(expectedJoinList));
+        Assert.assertTrue(expectedJoinList.containsAll(actualJoinList));
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"test19InnerJoinUsingKey"}, description = "内非连接大于")
+    public void test24InnerNEJoinLT() throws SQLException {
+        List<List> expectedJoinList = expectedNEJoinList5();
+        System.out.println("Expected: " + expectedJoinList);
+
+        List<List> actualJoinList = tableJoinObj.innerNEJoinLT();
+        System.out.println("Actual: " + actualJoinList);
+        Assert.assertTrue(actualJoinList.containsAll(expectedJoinList));
+        Assert.assertTrue(expectedJoinList.containsAll(actualJoinList));
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"test19InnerJoinUsingKey"}, description = "内非连接不等于")
+    public void test25InnerNEJoinNE() throws SQLException {
+        List<List> expectedJoinList = expectedNEJoinList6();
+        System.out.println("Expected: " + expectedJoinList);
+
+        List<List> actualJoinList = tableJoinObj.innerNEJoinNE();
+        System.out.println("Actual: " + actualJoinList);
+        Assert.assertTrue(actualJoinList.containsAll(expectedJoinList));
+        Assert.assertTrue(expectedJoinList.containsAll(actualJoinList));
+    }
+
+    @Test(enabled = true, description = "内非连接无符合条件数据返回空")
+    public void test26InnerNEJoinNoDataMeet() throws SQLException {
+        Boolean actualQueryResult = tableJoinObj.innerNEJoinNoDataQuery();
+        System.out.println("Actual: " + actualQueryResult);
+        Assert.assertFalse(actualQueryResult);
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"test26InnerNEJoinNoDataMeet"}, expectedExceptions = SQLException.class,
+            description = "内非连接字段不存在，预期异常")
+    public void test27InnerNEJoinFieldNotExist() throws SQLException {
+        tableJoinObj.innerNEJoinNFieldNotExist();
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"test01InnerJoinOwnFieldWithoutTablePrefix"}, description = "内非连接添加Where")
+    public void test28InnerNEJoinWithWhere() throws SQLException {
+        List<List> expectedJoinList = expectedNEJoinList7();
+        System.out.println("Expected: " + expectedJoinList);
+
+        List<List> actualJoinList = tableJoinObj.innerNEJoinWithWhere();
+        System.out.println("Actual: " + actualJoinList);
+        Assert.assertTrue(actualJoinList.containsAll(expectedJoinList));
+        Assert.assertTrue(expectedJoinList.containsAll(actualJoinList));
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"test26InnerNEJoinNoDataMeet"}, description = "内非连接无符合条件数据返回空")
+    public void test29InnerNEJoinOneEmpty1() throws SQLException {
+        Boolean actualQueryResult = tableJoinObj.innerNEJoinOneEmpty_1();
+        System.out.println("Actual: " + actualQueryResult);
+        Assert.assertFalse(actualQueryResult);
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"test26InnerNEJoinNoDataMeet"}, description = "内非连接无符合条件数据返回空")
+    public void test29InnerNEJoinOneEmpty2() throws SQLException {
+        Boolean actualQueryResult = tableJoinObj.innerNEJoinOneEmpty_2();
+        System.out.println("Actual: " + actualQueryResult);
+        Assert.assertFalse(actualQueryResult);
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"test26InnerNEJoinNoDataMeet"}, description = "内非连接两表互换")
+    public void test30InnerNEJoinTableExchange() throws SQLException {
+        List<List> expectedJoinList = expectedNEJoinList8();
+        System.out.println("Expected: " + expectedJoinList);
+
+        List<List> actualJoinList1 = tableJoinObj.innerNEJoinExchangeTable1();
+        List<List> actualJoinList2 = tableJoinObj.innerNEJoinExchangeTable2();
+        System.out.println("Actual: " + actualJoinList1);
+        System.out.println("Actual: " + actualJoinList2);
+        Assert.assertEquals(actualJoinList1, expectedJoinList);
+        Assert.assertEquals(actualJoinList2, expectedJoinList);
+    }
+
     @AfterClass(alwaysRun = true, description = "测试完成后删除数据和表格并关闭连接")
     public void tearDownAll() throws SQLException {
         Statement tearDownStatement = TableInnerJoin.connection.createStatement();
@@ -304,6 +637,28 @@ public class TestTableInnerJoin {
         tearDownStatement.execute("drop table departments");
         tearDownStatement.execute("delete from employees");
         tearDownStatement.execute("drop table employees");
+        tearDownStatement.execute("delete from table1054_1");
+        tearDownStatement.execute("drop table table1054_1");
+        tearDownStatement.execute("delete from table1054_2");
+        tearDownStatement.execute("drop table table1054_2");
+        tearDownStatement.execute("delete from table1069_1");
+        tearDownStatement.execute("drop table table1069_1");
+        tearDownStatement.execute("delete from table1069_2");
+        tearDownStatement.execute("drop table table1069_2");
+        tearDownStatement.execute("delete from table1174_1");
+        tearDownStatement.execute("drop table table1174_1");
+        tearDownStatement.execute("delete from table1174_2");
+        tearDownStatement.execute("drop table table1174_2");
+        tearDownStatement.execute("delete from job_grades");
+        tearDownStatement.execute("drop table job_grades");
+        tearDownStatement.execute("delete from table1059_1");
+        tearDownStatement.execute("drop table table1059_1");
+        tearDownStatement.execute("delete from table1059_2");
+        tearDownStatement.execute("drop table table1059_2");
+        tearDownStatement.execute("delete from table1059_3");
+        tearDownStatement.execute("drop table table1059_3");
+        tearDownStatement.execute("delete from table1059_4");
+        tearDownStatement.execute("drop table table1059_4");
 
         tearDownStatement.close();
         TableInnerJoin.connection.close();

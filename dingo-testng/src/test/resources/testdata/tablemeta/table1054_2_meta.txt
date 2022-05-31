@@ -1,0 +1,1 @@
+(snum varchar(4), cno varchar(2), grade int, primary key(snum, cno))

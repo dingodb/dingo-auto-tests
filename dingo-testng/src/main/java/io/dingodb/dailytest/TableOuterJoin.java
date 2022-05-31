@@ -430,8 +430,8 @@ public class TableOuterJoin {
         return queryList;
     }
 
-    //左连接where条件
-    public List<List> leftOuterJoinWhereState() throws SQLException {
+    //左连接where条件1
+    public List<List> leftOuterJoinWhereState1() throws SQLException {
         Statement statement = connection.createStatement();
         String querySQL = "SELECT beauty_tbl.id,beauty_tbl.name from beauty_tbl left join boys_tbl on " +
                 "boys_tbl.id = beauty_tbl.boyfriend_id where boys_tbl.id is null and beauty_tbl.id<7";
@@ -442,6 +442,27 @@ public class TableOuterJoin {
             List rowList = new ArrayList ();
             rowList.add(resultSet.getString(1));
             rowList.add(resultSet.getString(2));
+            queryList.add(rowList);
+        }
+        statement.close();
+        return queryList;
+    }
+
+    //左连接where条件2
+    public List<List> leftOuterJoinWhereState2() throws SQLException {
+        Statement statement = connection.createStatement();
+        String querySQL = "select student_tbl.*,class_tbl.* from class_tbl left join student_tbl " +
+                "on student_tbl.class_id=class_tbl.cid where student_tbl.sid=1;";
+        ResultSet resultSet = statement.executeQuery(querySQL);
+        List<List> queryList = new ArrayList<List>();
+
+        while(resultSet.next()) {
+            List rowList = new ArrayList ();
+            rowList.add(resultSet.getString(1));
+            rowList.add(resultSet.getString(2));
+            rowList.add(resultSet.getString(3));
+            rowList.add(resultSet.getString(4));
+            rowList.add(resultSet.getString(5));
             queryList.add(rowList);
         }
         statement.close();
@@ -597,8 +618,8 @@ public class TableOuterJoin {
         return resultSet.next();
     }
 
-    //右连接where条件
-    public String rightOuterJoinWhereState() throws SQLException {
+    //右连接where条件1
+    public String rightOuterJoinWhereState1() throws SQLException {
         Statement statement = connection.createStatement();
         String querySQL = "SELECT boys_right.boyName from beauty_tbl right join boys_right on boys_right.id=beauty_tbl.boyfriend_id " +
                 "where beauty_tbl.boyfriend_id is null and boys_right.id>5";
@@ -610,6 +631,27 @@ public class TableOuterJoin {
         }
         statement.close();
         return whereResult;
+    }
+
+    //右连接where条件2
+    public List<List> rightOuterJoinWhereState2() throws SQLException {
+        Statement statement = connection.createStatement();
+        String querySQL = "select student_tbl.*,class_tbl.* from student_tbl right join class_tbl on " +
+                "student_tbl.class_id=class_tbl.cid where student_tbl.sid=1";
+        ResultSet resultSet = statement.executeQuery(querySQL);
+        List<List> queryList = new ArrayList<List>();
+
+        while(resultSet.next()) {
+            List rowList = new ArrayList ();
+            rowList.add(resultSet.getString(1));
+            rowList.add(resultSet.getString(2));
+            rowList.add(resultSet.getString(3));
+            rowList.add(resultSet.getString(4));
+            rowList.add(resultSet.getString(5));
+            queryList.add(rowList);
+        }
+        statement.close();
+        return queryList;
     }
 
     //右连接缺少连接条件
@@ -693,6 +735,28 @@ public class TableOuterJoin {
         statement.close();
     }
 
+    //全连接where条件1
+    public List<List> fullOuterJoinWhereState() throws SQLException {
+        Statement statement = connection.createStatement();
+        String querySQL = "select student_tbl.*,class_tbl.* from student_tbl full join class_tbl on " +
+                "student_tbl.class_id=class_tbl.cid where student_tbl.sid=1";
+        ResultSet resultSet = statement.executeQuery(querySQL);
+        List<List> queryList = new ArrayList<List>();
+
+        while(resultSet.next()) {
+            List rowList = new ArrayList ();
+            rowList.add(resultSet.getString(1));
+            rowList.add(resultSet.getString(2));
+            rowList.add(resultSet.getString(3));
+            rowList.add(resultSet.getString(4));
+            rowList.add(resultSet.getString(5));
+            queryList.add(rowList);
+        }
+        statement.close();
+        return queryList;
+    }
+
+    //验证两表无相同数据时，全连接
     public List<List> fullOuterJoinNoSameData() throws SQLException {
         Statement statement = connection.createStatement();
         String querySQL = "select product1.*,product2.* from product1 full outer join product2 on product1.id=product2.id";
@@ -712,6 +776,8 @@ public class TableOuterJoin {
         return queryList;
     }
 
+
+    //验证一表为空时全连接
     public List<List> fullOuterJoinOneEmpty() throws SQLException {
         Statement statement = connection.createStatement();
         String querySQL = "select s.*,c1.* from student_tbl s full join class_tbl1 c1 on s.class_id=c1.cid";

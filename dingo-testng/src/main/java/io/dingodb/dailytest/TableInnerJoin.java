@@ -130,6 +130,24 @@ public class TableInnerJoin {
         statement.close();
     }
 
+    //创建job_grades表
+    public void createJobGradesTable(String job_grades_Meta) throws SQLException {
+        Statement statement = connection.createStatement();
+        String createTableSQL = "create table job_grades" + job_grades_Meta;
+
+        statement.execute(createTableSQL);
+        statement.close();
+    }
+
+    //向job_grades表插入数据
+    public void insertValuesToJobGrades(String job_grades_Values) throws SQLException {
+        Statement statement = connection.createStatement();
+        String insertValuesSQL = "insert into job_grades values " + job_grades_Values;
+
+        statement.executeUpdate(insertValuesSQL);
+        statement.close();
+    }
+
     public List<List<String>> innerJoinOwnFieldWithoutTablePrefix() throws SQLException {
         Statement statement = connection.createStatement();
         String joinSQL = "select name, boyname from beauty inner join boys on beauty.boyfriend_id = boys.id";
@@ -314,5 +332,383 @@ public class TableInnerJoin {
         statement.close();
         return selfJoinList;
     }
+
+    //创建table1054_1表
+    public void createTable1054_1(String table10541Meta) throws SQLException {
+        Statement statement = connection.createStatement();
+        String createTableSQL = "create table table1054_1" + table10541Meta;
+
+        statement.execute(createTableSQL);
+        statement.close();
+    }
+
+    //向table1054_1表插入数据
+    public void insertValuesToTable1054_1(String table10541Values) throws SQLException {
+        Statement statement = connection.createStatement();
+        String insertValuesSQL = "insert into table1054_1 values " + table10541Values;
+
+        statement.executeUpdate(insertValuesSQL);
+        statement.close();
+    }
+
+    //创建table1054_2表
+    public void createTable1054_2(String table10542Meta) throws SQLException {
+        Statement statement = connection.createStatement();
+        String createTableSQL = "create table table1054_2" + table10542Meta;
+
+        statement.execute(createTableSQL);
+        statement.close();
+    }
+
+    //向table1054_2表插入数据
+    public void insertValuesToTable1054_2(String table10542Values) throws SQLException {
+        Statement statement = connection.createStatement();
+        String insertValuesSQL = "insert into table1054_2 values " + table10542Values;
+
+        statement.executeUpdate(insertValuesSQL);
+        statement.close();
+    }
+
+    //验证自然连接
+    public List<List> naturalJoin() throws SQLException {
+        Statement statement = connection.createStatement();
+        String querySql = "select table1054_1.snum, sname, ssex, sdept, cno, grade from table1054_1" +
+                " inner join table1054_2 on table1054_1.snum=table1054_2.snum";
+        ResultSet joinRst = statement.executeQuery(querySql);
+        List<List> joinList = new ArrayList<List>();
+        while (joinRst.next()) {
+            List equalRowList = new ArrayList();
+            equalRowList.add(joinRst.getString(1));
+            equalRowList.add(joinRst.getString(2));
+            equalRowList.add(joinRst.getString(3));
+            equalRowList.add(joinRst.getString(4));
+            equalRowList.add(joinRst.getString(5));
+            equalRowList.add(joinRst.getString(6));
+            joinList.add(equalRowList);
+        }
+
+        statement.close();
+        return joinList;
+    }
+
+    //验证内等连接，使用逗号分隔表名，并添加where条件进行连接
+    public List<List> innerJoinCommaWhere() throws SQLException {
+        Statement statement = connection.createStatement();
+        String querySql = "select name, boyname from beauty,boys where beauty.boyfriend_id = boys.id";
+        ResultSet joinRst = statement.executeQuery(querySql);
+        List<List> joinList = new ArrayList<List>();
+        while (joinRst.next()) {
+            List equalRowList = new ArrayList();
+            equalRowList.add(joinRst.getString(1));
+            equalRowList.add(joinRst.getString(2));
+            joinList.add(equalRowList);
+        }
+
+        statement.close();
+        return joinList;
+    }
+
+    public void createTable1069() throws SQLException {
+        Statement statement = connection.createStatement();
+        String createSql1 = "create table table1069_1 (id int, buyers int, price int, primary key(id))";
+        String createSql2 = "create table table1069_2 (id int, price int, primary key(id))";
+        String insertSql1 = "insert into table1069_1 values(1,2,3),(4,5,6),(7,8,9)";
+        statement.execute(createSql1);
+        statement.execute(createSql2);
+        statement.execute(insertSql1);
+        statement.close();
+    }
+
+    //验证某一表无数据返回空
+    public Boolean innerJoinOneEmpty() throws SQLException {
+        createTable1069();
+        Statement statement = connection.createStatement();
+        String querySql = "select table1069_1.* from table1069_1 inner join table1069_2 on table1069_2.id=table1069_1.id";
+        ResultSet joinRst = statement.executeQuery(querySql);
+        return joinRst.next();
+    }
+
+
+    //创建表，有相同字段
+    public void createTable1174() throws SQLException {
+        Statement statement = connection.createStatement();
+        String createSql1 = "create table table1174_1 (id int, name varchar(20), age int, primary key(id))";
+        String createSql2 = "create table table1174_2 (id int, name varchar(20), age int, primary key(id))";
+        String insertSql1 = "insert into table1174_1 values(1,'zhangsan',18),(2,'lisi',20),(3,'wangwu',25),(4,'liuming',18)";
+        String insertSql2 = "insert into table1174_2 values(1,'zhangsan',18),(3,'hello',35),(5,'wangwu',25),(6,'Haha',20)";
+        statement.execute(createSql1);
+        statement.execute(createSql2);
+        statement.execute(insertSql1);
+        statement.execute(insertSql2);
+        statement.close();
+    }
+
+    //验证内等连接，使用using(key)
+    public List<List> innerJoinUsingKey() throws SQLException {
+        createTable1174();
+        Statement statement = connection.createStatement();
+        String querySql = "select table1174_1.*,table1174_2.* from table1174_1 inner join table1174_2 using(id)";
+        ResultSet joinRst = statement.executeQuery(querySql);
+        List<List> joinList = new ArrayList<List>();
+        while (joinRst.next()) {
+            List equalRowList = new ArrayList();
+            equalRowList.add(joinRst.getString(1));
+            equalRowList.add(joinRst.getString(2));
+            equalRowList.add(joinRst.getString(3));
+            equalRowList.add(joinRst.getString(4));
+            equalRowList.add(joinRst.getString(5));
+            equalRowList.add(joinRst.getString(6));
+            joinList.add(equalRowList);
+        }
+
+        statement.close();
+        return joinList;
+    }
+
+    //验证内非连接多个条件
+    public List<List> innerNEJoinMultiCondition() throws SQLException {
+        Statement statement = connection.createStatement();
+        String querySql = "SELECT salary,grade_level from employees e " +
+                "inner JOIN job_grades g ON e.salary>=g.lowest_sal AND e.salary <=g.highest_sal " +
+                "where e.employee_id<118";
+        ResultSet joinRst = statement.executeQuery(querySql);
+        List<List> joinList = new ArrayList<List>();
+        while (joinRst.next()) {
+            List equalRowList = new ArrayList();
+            equalRowList.add(joinRst.getString(1));
+            equalRowList.add(joinRst.getString(2));
+            joinList.add(equalRowList);
+        }
+
+        statement.close();
+        return joinList;
+    }
+
+    //验证内非连接添加分组
+    public List<List> innerNEJoinWithGroup() throws SQLException {
+        Statement statement = connection.createStatement();
+        String querySql = "SELECT COUNT(*),grade_level\n" +
+                "FROM employees e\n" +
+                "JOIN job_grades g\n" +
+                "ON e.salary>=g.lowest_sal AND e.salary<=g.highest_sal\n" +
+                "GROUP BY grade_level";
+        ResultSet joinRst = statement.executeQuery(querySql);
+        List<List> joinList = new ArrayList<List>();
+        while (joinRst.next()) {
+            List equalRowList = new ArrayList();
+            equalRowList.add(joinRst.getString(1));
+            equalRowList.add(joinRst.getString(2));
+            joinList.add(equalRowList);
+        }
+
+        statement.close();
+        return joinList;
+    }
+
+    //验证内非连接添加排序
+    public List<List> innerNEJoinWithOrder() throws SQLException {
+        Statement statement = connection.createStatement();
+        String querySql = "SELECT COUNT(*) cn,grade_level FROM employees e inner JOIN job_grades g " +
+                "ON e.salary>=g.lowest_sal AND e.salary<=g.highest_sal " +
+                "GROUP BY grade_level ORDER BY grade_level DESC";
+        ResultSet joinRst = statement.executeQuery(querySql);
+        List<List> joinList = new ArrayList<List>();
+        while (joinRst.next()) {
+            List equalRowList = new ArrayList();
+            equalRowList.add(joinRst.getString(1));
+            equalRowList.add(joinRst.getString(2));
+            joinList.add(equalRowList);
+        }
+
+        statement.close();
+        return joinList;
+    }
+
+    //验证内非连接小于条件
+    public List<List> innerNEJoinST() throws SQLException {
+        Statement statement = connection.createStatement();
+        String querySql = "select table1174_1.*,table1174_2.* from table1174_1 inner join table1174_2" +
+                " on table1174_1.age<table1174_2.age";
+        ResultSet joinRst = statement.executeQuery(querySql);
+        List<List> joinList = new ArrayList<List>();
+        while (joinRst.next()) {
+            List equalRowList = new ArrayList();
+            equalRowList.add(joinRst.getString(1));
+            equalRowList.add(joinRst.getString(2));
+            equalRowList.add(joinRst.getString(3));
+            equalRowList.add(joinRst.getString(4));
+            equalRowList.add(joinRst.getString(5));
+            equalRowList.add(joinRst.getString(6));
+            joinList.add(equalRowList);
+        }
+
+        statement.close();
+        return joinList;
+    }
+
+    //验证内非连接大于条件
+    public List<List> innerNEJoinLT() throws SQLException {
+        Statement statement = connection.createStatement();
+        String querySql = "select table1174_1.*,table1174_2.* from table1174_1 inner join table1174_2" +
+                " on table1174_1.age>table1174_2.age";
+        ResultSet joinRst = statement.executeQuery(querySql);
+        List<List> joinList = new ArrayList<List>();
+        while (joinRst.next()) {
+            List equalRowList = new ArrayList();
+            equalRowList.add(joinRst.getString(1));
+            equalRowList.add(joinRst.getString(2));
+            equalRowList.add(joinRst.getString(3));
+            equalRowList.add(joinRst.getString(4));
+            equalRowList.add(joinRst.getString(5));
+            equalRowList.add(joinRst.getString(6));
+            joinList.add(equalRowList);
+        }
+
+        statement.close();
+        return joinList;
+    }
+
+    //验证内非连接不等于条件
+    public List<List> innerNEJoinNE() throws SQLException {
+        Statement statement = connection.createStatement();
+        String querySql = "select table1174_1.*,table1174_2.* from table1174_1 inner join table1174_2" +
+                " on table1174_1.age<>table1174_2.age";
+        ResultSet joinRst = statement.executeQuery(querySql);
+        List<List> joinList = new ArrayList<List>();
+        while (joinRst.next()) {
+            List equalRowList = new ArrayList();
+            equalRowList.add(joinRst.getString(1));
+            equalRowList.add(joinRst.getString(2));
+            equalRowList.add(joinRst.getString(3));
+            equalRowList.add(joinRst.getString(4));
+            equalRowList.add(joinRst.getString(5));
+            equalRowList.add(joinRst.getString(6));
+            joinList.add(equalRowList);
+        }
+
+        statement.close();
+        return joinList;
+    }
+
+    //创建表，非等值连接
+    public void createTable1059() throws SQLException {
+        Statement statement = connection.createStatement();
+        String createSql1 = "create table table1059_1 (id int, buyers int, price int, primary key(id))";
+        String createSql2 = "create table table1059_2 (id int, price int, primary key(id))";
+        String createSql3 = "create table table1059_3 (id int, price int, primary key(id))";
+        String createSql4 = "create table table1059_4 (id int, price int, primary key(id))";
+        String insertSql1 = "insert into table1059_1 values(1,2,3),(4,5,6),(7,8,9)";
+        String insertSql2 = "insert into table1059_2 values(8,9),(10,11)";
+        String insertSql4 = "insert into table1059_4 values(3,1),(6,2)";
+        statement.execute(createSql1);
+        statement.execute(createSql2);
+        statement.execute(createSql3);
+        statement.execute(createSql4);
+        statement.execute(insertSql1);
+        statement.execute(insertSql2);
+        statement.execute(insertSql4);
+        statement.close();
+    }
+
+    //验证内非连接无符合条件返回空
+    public Boolean innerNEJoinNoDataQuery() throws SQLException {
+        createTable1059();
+        Statement statement = connection.createStatement();
+        String querySql = "select table1059_1.*,table1059_2.* from table1059_1 inner join table1059_2 " +
+                "on table1059_1.buyers>table1059_2.price";
+        ResultSet joinRst = statement.executeQuery(querySql);
+        return joinRst.next();
+    }
+
+    //验证内非连接找不到字段
+    public void innerNEJoinNFieldNotExist() throws SQLException {
+        Statement statement = connection.createStatement();
+        String querySql = "select table1059_1.*,table1059_2.* from table1059_1 inner join table1059_2 " +
+                "on table1059_1.buyers<table1059_2.buyers";
+        ResultSet resultSet = statement.executeQuery(querySql);
+        statement.close();
+    }
+
+    //验证内非连接添加where条件
+    public List<List> innerNEJoinWithWhere() throws SQLException {
+        Statement statement = connection.createStatement();
+        String querySql = "select bu.id gid,name,bu.boyfriend_id,boys.id bid,boyName from beauty as bu " +
+                "inner join boys on boys.id<>bu.boyfriend_id where bu.id>8";
+        ResultSet joinRst = statement.executeQuery(querySql);
+        List<List> joinList = new ArrayList<List>();
+        while (joinRst.next()) {
+            List equalRowList = new ArrayList();
+            equalRowList.add(joinRst.getString("gid"));
+            equalRowList.add(joinRst.getString("name"));
+            equalRowList.add(joinRst.getString("boyfriend_id"));
+            equalRowList.add(joinRst.getString("bid"));
+            equalRowList.add(joinRst.getString("boyName"));
+            joinList.add(equalRowList);
+        }
+
+        statement.close();
+        return joinList;
+    }
+
+    //验证内非连接某一个表为空返回空
+    public Boolean innerNEJoinOneEmpty_1() throws SQLException {
+        Statement statement = connection.createStatement();
+        String querySql = "select table1059_1.* from table1059_1 inner join table1059_3 " +
+                "on table1059_3.id<table1059_1.id";
+        ResultSet joinRst = statement.executeQuery(querySql);
+        return joinRst.next();
+    }
+
+    //验证内非连接某一个表为空返回空
+    public Boolean innerNEJoinOneEmpty_2() throws SQLException {
+        Statement statement = connection.createStatement();
+        String querySql = "select table1059_3.* from table1059_3 inner join table1059_1 " +
+                "on table1059_1.id<>table1059_3.id";
+        ResultSet joinRst = statement.executeQuery(querySql);
+        return joinRst.next();
+    }
+
+    //验证内非连接两表互换
+    public List<List> innerNEJoinExchangeTable1() throws SQLException {
+        Statement statement = connection.createStatement();
+        String querySql = "select table1059_1.*,table1059_4.* from table1059_1" +
+                " inner join table1059_4 on table1059_1.buyers<table1059_4.id";
+        ResultSet joinRst = statement.executeQuery(querySql);
+        List<List> joinList = new ArrayList<List>();
+        while (joinRst.next()) {
+            List equalRowList = new ArrayList();
+            equalRowList.add(joinRst.getString(1));
+            equalRowList.add(joinRst.getString(2));
+            equalRowList.add(joinRst.getString(3));
+            equalRowList.add(joinRst.getString(4));
+            equalRowList.add(joinRst.getString(5));
+            joinList.add(equalRowList);
+        }
+
+        statement.close();
+        return joinList;
+    }
+
+    //验证内非连接两表互换
+    public List<List> innerNEJoinExchangeTable2() throws SQLException {
+        Statement statement = connection.createStatement();
+        String querySql = "select table1059_1.*,table1059_4.* from table1059_4" +
+                " inner join table1059_1 on table1059_1.buyers<table1059_4.id";
+        ResultSet joinRst = statement.executeQuery(querySql);
+        List<List> joinList = new ArrayList<List>();
+        while (joinRst.next()) {
+            List equalRowList = new ArrayList();
+            equalRowList.add(joinRst.getString(1));
+            equalRowList.add(joinRst.getString(2));
+            equalRowList.add(joinRst.getString(3));
+            equalRowList.add(joinRst.getString(4));
+            equalRowList.add(joinRst.getString(5));
+            joinList.add(equalRowList);
+        }
+
+        statement.close();
+        return joinList;
+    }
+
 
 }

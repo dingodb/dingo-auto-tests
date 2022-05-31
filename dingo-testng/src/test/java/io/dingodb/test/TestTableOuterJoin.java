@@ -473,6 +473,19 @@ public class TestTableOuterJoin {
         return expectedList;
     }
 
+    public List<List> expectedRightList5() {
+        String[][] dataArray = {{"1","zhangsan","100","100","class-1"}};
+        List<List> expectedList = new ArrayList<List>();
+        for(int i=0; i<dataArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<dataArray[i].length; j++) {
+                columnList.add(dataArray[i][j]);
+            }
+            expectedList.add(columnList);
+        }
+        return expectedList;
+    }
+
 
     @BeforeClass(alwaysRun = true, description = "测试前连接数据库")
     public static void setUpAll() throws SQLException {
@@ -509,8 +522,20 @@ public class TestTableOuterJoin {
         outerJoinObj.fullOuterJoinWithoutCondition();
     }
 
-    @Test(priority = 3, enabled = true, description = "验证两表没有相同数据时查询全连接数据")
-    public void test04FullOuterJoinNoSameData() throws SQLException {
+    @Test(priority = 3, enabled = true, dependsOnMethods = {"test01FullOuterJoinAllData"},
+            description = "验证添加where条件")
+    public void test04FullOuterJoinWhereState1() throws SQLException {
+        List<List> expectedList = expectedRightList5();
+        System.out.println("Expected: " + expectedList);
+        List<List> actualLeftList = outerJoinObj.fullOuterJoinWhereState();
+        System.out.println("Actual: " + actualLeftList);
+
+        Assert.assertTrue(actualLeftList.containsAll(expectedList));
+        Assert.assertTrue(expectedList.containsAll(actualLeftList));
+    }
+
+    @Test(priority = 4, enabled = true, description = "验证两表没有相同数据时查询全连接数据")
+    public void test05FullOuterJoinNoSameData() throws SQLException {
         initProductTB();
         List<List> expectedList = expectedFullList2();
         System.out.println("Expected: " + expectedList);
@@ -521,9 +546,9 @@ public class TestTableOuterJoin {
         Assert.assertTrue(expectedList.containsAll(actualListNoSameData));
     }
 
-    @Test(priority = 4, enabled = true, dependsOnMethods = {"test01FullOuterJoinAllData"},
+    @Test(priority = 5, enabled = true, dependsOnMethods = {"test01FullOuterJoinAllData"},
             description = "验证当一个表为空时，全连接查询")
-    public void test05FullOuterJoinOneEmpty() throws SQLException {
+    public void test06FullOuterJoinOneEmpty() throws SQLException {
         List<List> expectedList = expectedFullList3();
         System.out.println("Expected: " + expectedList);
         List<List> actualListOneEmpty = outerJoinObj.fullOuterJoinOneEmpty();
@@ -533,8 +558,8 @@ public class TestTableOuterJoin {
         Assert.assertTrue(expectedList.containsAll(actualListOneEmpty));
     }
 
-    @Test(priority = 5, enabled = true, description = "验证使用using(key)作为条件")
-    public void test06FullOuterJoinUsingKeyState() throws SQLException {
+    @Test(priority = 6, enabled = true, description = "验证使用using(key)作为条件")
+    public void test07FullOuterJoinUsingKeyState() throws SQLException {
         initTestTB();
         List<List> expectedList = expectedFullList4();
         System.out.println("Expected: " + expectedList);
@@ -545,15 +570,15 @@ public class TestTableOuterJoin {
         Assert.assertTrue(expectedList.containsAll(actualListUsingKeyState));
     }
 
-    @Test(priority = 6, enabled = true, dependsOnMethods = {"test04FullOuterJoinNoSameData"},
+    @Test(priority = 7, enabled = true, dependsOnMethods = {"test05FullOuterJoinNoSameData"},
             expectedExceptions = SQLException.class, description = "验证条件字段不存在，执行预期失败")
-    public void test07FullOuterJoinWrongKey() throws SQLException {
+    public void test08FullOuterJoinWrongKey() throws SQLException {
         outerJoinObj.fullOuterJoinWrongKey();
     }
 
-    @Test(priority = 7, enabled = true, dependsOnMethods = {"test06FullOuterJoinUsingKeyState"},
+    @Test(priority = 8, enabled = true, dependsOnMethods = {"test07FullOuterJoinUsingKeyState"},
             description = "验证使用*查询所有")
-    public void test08FullOuterJoinStarQueryAll() throws SQLException {
+    public void test09FullOuterJoinStarQueryAll() throws SQLException {
         List<List> expectedList = expectedFullList4();
         System.out.println("Expected: " + expectedList);
         List<List> actualListStarQueryAll = outerJoinObj.fullOuterJoinStarQueryAll();
@@ -563,15 +588,15 @@ public class TestTableOuterJoin {
         Assert.assertTrue(expectedList.containsAll(actualListStarQueryAll));
     }
 
-    @Test(priority = 8, enabled = true, dependsOnMethods = {"test06FullOuterJoinUsingKeyState"},
+    @Test(priority = 9, enabled = true, dependsOnMethods = {"test07FullOuterJoinUsingKeyState"},
             expectedExceptions = SQLException.class, description = "验证查询相同字段，不使用表名修饰预期失败")
-    public void test09FullOuterJoinWrongKey() throws SQLException {
+    public void test10FullOuterJoinWrongKey() throws SQLException {
         outerJoinObj.fullOuterJoinSameIDWithoutTablePrefix();
     }
 
-    @Test(priority = 9, enabled = true, dependsOnMethods = {"test01FullOuterJoinAllData"},
+    @Test(priority = 10, enabled = true, dependsOnMethods = {"test01FullOuterJoinAllData"},
             description = "验证查询独有字段可不使用表名修饰")
-    public void test10FullOuterJoinUniqueFieldQuery() throws SQLException {
+    public void test11FullOuterJoinUniqueFieldQuery() throws SQLException {
         List<List> expectedList = expectedFullList5();
         System.out.println("Expected: " + expectedList);
         List<List> actualListUniqueFieldQuery = outerJoinObj.fullOuterJoinUniqueFieldQuery();
@@ -581,9 +606,9 @@ public class TestTableOuterJoin {
         Assert.assertTrue(expectedList.containsAll(actualListUniqueFieldQuery));
     }
 
-    @Test(priority = 10, enabled = true, dependsOnMethods = {"test01FullOuterJoinAllData"},
+    @Test(priority = 11, enabled = true, dependsOnMethods = {"test01FullOuterJoinAllData"},
             description = "验证表名位置互换查询结果相同")
-    public void test11FullOuterJoinExchangeTable() throws SQLException {
+    public void test12FullOuterJoinExchangeTable() throws SQLException {
         List<List> expectedList = expectedFullList1();
         System.out.println("Expected: " + expectedList);
         List<List> actualListExchangeTable = outerJoinObj.fullOuterJoinExchangeTable();
@@ -593,9 +618,9 @@ public class TestTableOuterJoin {
         Assert.assertTrue(expectedList.containsAll(actualListExchangeTable));
     }
 
-    @Test(priority = 11, enabled = true, dependsOnMethods = {"test01FullOuterJoinAllData"},
+    @Test(priority = 12, enabled = true, dependsOnMethods = {"test01FullOuterJoinAllData"},
             description = "验证查询两表匹配到的数据")
-    public void test12FullOuterJoinMatchRows() throws SQLException {
+    public void test13FullOuterJoinMatchRows() throws SQLException {
         List<List> expectedList = expectedFullList6();
         System.out.println("Expected: " + expectedList);
         List<List> actualListMatchRow = outerJoinObj.fullOuterJoinMatchRow();
@@ -605,9 +630,9 @@ public class TestTableOuterJoin {
         Assert.assertTrue(expectedList.containsAll(actualListMatchRow));
     }
 
-    @Test(priority = 12, enabled = true, dependsOnMethods = {"test01FullOuterJoinAllData"},
+    @Test(priority = 13, enabled = true, dependsOnMethods = {"test01FullOuterJoinAllData"},
             description = "验证查询两表未匹配到的数据")
-    public void test13FullOuterJoinNotMatchRows() throws SQLException {
+    public void test14FullOuterJoinNotMatchRows() throws SQLException {
         List<List> expectedList = expectedFullList7();
         System.out.println("Expected: " + expectedList);
         List<List> actualListNotMatchRow = outerJoinObj.fullOuterJoinNotMatchRow();
@@ -617,23 +642,23 @@ public class TestTableOuterJoin {
         Assert.assertTrue(expectedList.containsAll(actualListNotMatchRow));
     }
 
-    @Test(priority = 13, enabled = true, dependsOnMethods = {"test01FullOuterJoinAllData"},
+    @Test(priority = 14, enabled = true, dependsOnMethods = {"test01FullOuterJoinAllData"},
             expectedExceptions = SQLException.class, description = "验证没有相同字段，使用using(key)条件预期失败")
-    public void test14FullOuterJoinUsingKeyNoSame() throws SQLException {
+    public void test15FullOuterJoinUsingKeyNoSame() throws SQLException {
         outerJoinObj.fullOuterJoinUsingKeyNoSameField();
     }
 
-    @Test(priority = 14, enabled = true, dependsOnMethods = {"test01FullOuterJoinAllData"},
+    @Test(priority = 15, enabled = true, dependsOnMethods = {"test01FullOuterJoinAllData"},
             description = "验证两表均为空，全连接返回空，无异常")
-    public void test15FullOuterJoinBothEmpty() throws SQLException {
+    public void test16FullOuterJoinBothEmpty() throws SQLException {
         Boolean actualRowReturn = outerJoinObj.fullOuterJoinBothEmpty();
         System.out.println(actualRowReturn);
         Assert.assertFalse(actualRowReturn);
     }
 
-    @Test(priority = 15, enabled = true, dependsOnMethods = {"test01FullOuterJoinAllData"},
+    @Test(priority = 16, enabled = true, dependsOnMethods = {"test01FullOuterJoinAllData"},
             description = "验证查询两表交叉连接的全部数据")
-    public void test16CrossJoinAllData() throws SQLException {
+    public void test17CrossJoinAllData() throws SQLException {
         List<List> expectedList = expectedCrossList1();
         System.out.println("Expected: " + expectedList);
         List<List> actualListCrossAll = outerJoinObj.crossJoinAll();
@@ -643,9 +668,9 @@ public class TestTableOuterJoin {
         Assert.assertTrue(expectedList.containsAll(actualListCrossAll));
     }
 
-    @Test(priority = 16, enabled = true, dependsOnMethods = {"test01FullOuterJoinAllData"},
+    @Test(priority = 17, enabled = true, dependsOnMethods = {"test01FullOuterJoinAllData"},
             description = "验证使用逗号分隔做交叉连接")
-    public void test17CrossJoinCommaSeparate() throws SQLException {
+    public void test18CrossJoinCommaSeparate() throws SQLException {
         List<List> expectedList = expectedCrossList1();
         System.out.println("Expected: " + expectedList);
         List<List> actualListCrossComma = outerJoinObj.crossJoinAllSeprateComma();
@@ -655,15 +680,15 @@ public class TestTableOuterJoin {
         Assert.assertTrue(expectedList.containsAll(actualListCrossComma));
     }
 
-    @Test(priority = 17, enabled = true, dependsOnMethods = {"test01FullOuterJoinAllData"},
+    @Test(priority = 18, enabled = true, dependsOnMethods = {"test01FullOuterJoinAllData"},
             expectedExceptions = SQLException.class, description = "验证交叉连接不允许使用连接条件")
-    public void test18CrossJoinExtraCondition() throws SQLException {
+    public void test19CrossJoinExtraCondition() throws SQLException {
         outerJoinObj.crossJoinExtraCondition();
     }
 
-    @Test(priority = 18, enabled = true, dependsOnMethods = {"test01FullOuterJoinAllData"},
+    @Test(priority = 19, enabled = true, dependsOnMethods = {"test01FullOuterJoinAllData"},
             description = "验证连接后使用where条件过滤")
-    public void test19CrossJoinWhereCondition() throws SQLException {
+    public void test20CrossJoinWhereCondition() throws SQLException {
         List<List> expectedList = expectedCrossList2();
         System.out.println("Expected: " + expectedList);
         List<List> actualListWhereCondition = outerJoinObj.crossJoinWhereCondition();
@@ -673,9 +698,9 @@ public class TestTableOuterJoin {
         Assert.assertTrue(expectedList.containsAll(actualListWhereCondition));
     }
 
-    @Test(priority = 19, enabled = true, dependsOnMethods = {"test01FullOuterJoinAllData"},
+    @Test(priority = 20, enabled = true, dependsOnMethods = {"test01FullOuterJoinAllData"},
             description = "验证使用逗号分隔交叉连接后使用where条件过滤")
-    public void test20CrossJoinCommaWhereCondition() throws SQLException {
+    public void test21CrossJoinCommaWhereCondition() throws SQLException {
         List<List> expectedList = expectedCrossList2();
         System.out.println("Expected: " + expectedList);
         List<List> actualListCommaWhereCondition = outerJoinObj.crossJoinCommaWhereCondition();
@@ -685,17 +710,17 @@ public class TestTableOuterJoin {
         Assert.assertTrue(expectedList.containsAll(actualListCommaWhereCondition));
     }
 
-    @Test(priority = 20, enabled = true, dependsOnMethods = {"test01FullOuterJoinAllData"},
+    @Test(priority = 21, enabled = true, dependsOnMethods = {"test01FullOuterJoinAllData"},
             description = "验证一表为空，交叉连接返回空，无异常")
-    public void test21CrossJoinOneEmpty() throws SQLException {
+    public void test22CrossJoinOneEmpty() throws SQLException {
         Boolean actualRowReturn = outerJoinObj.crossJoinOneEmpty();
         System.out.println(actualRowReturn);
         Assert.assertFalse(actualRowReturn);
     }
 
-    @Test(priority = 21, enabled = true, dependsOnMethods = {"test06FullOuterJoinUsingKeyState"},
+    @Test(priority = 22, enabled = true, dependsOnMethods = {"test07FullOuterJoinUsingKeyState"},
             description = "验证使用*查询交叉连接全部数据")
-    public void test22CrossJoinStarQueryAll() throws SQLException {
+    public void test23CrossJoinStarQueryAll() throws SQLException {
         List<List> expectedList = expectedCrossList3();
         System.out.println("Expected: " + expectedList);
         List<List> actualListStarQueryAll1 = outerJoinObj.crossJoinStarQueryAll1();
@@ -709,15 +734,15 @@ public class TestTableOuterJoin {
         Assert.assertTrue(expectedList.containsAll(actualListStarQueryAll2));
     }
 
-    @Test(priority = 22, enabled = true, dependsOnMethods = {"test06FullOuterJoinUsingKeyState"},
+    @Test(priority = 23, enabled = true, dependsOnMethods = {"test07FullOuterJoinUsingKeyState"},
             expectedExceptions = SQLException.class, description = "验证交叉连查询相同id不使用表名修饰，预期失败")
-    public void test23CrossJoinSameFieldNoTablePrefix() throws SQLException {
+    public void test24CrossJoinSameFieldNoTablePrefix() throws SQLException {
         outerJoinObj.crossJoinSameFieldNoTablePrefix();
     }
 
-    @Test(priority = 23, enabled = true, dependsOnMethods = {"test01FullOuterJoinAllData"},
+    @Test(priority = 24, enabled = true, dependsOnMethods = {"test01FullOuterJoinAllData"},
             description = "验证查询两表独有字段不需使用表名修饰")
-    public void test24CrossJoinUniqueFieldNoTablePrefix() throws SQLException {
+    public void test25CrossJoinUniqueFieldNoTablePrefix() throws SQLException {
         List<List> expectedList = expectedCrossList4();
         System.out.println("Expected: " + expectedList);
         List<List> actualListUniqueField = outerJoinObj.crossJoinUniqueFieldNoTablePrefix();
@@ -727,9 +752,9 @@ public class TestTableOuterJoin {
         Assert.assertTrue(expectedList.containsAll(actualListUniqueField));
     }
 
-    @Test(priority = 24, enabled = true, dependsOnMethods = {"test01FullOuterJoinAllData"},
+    @Test(priority = 25, enabled = true, dependsOnMethods = {"test01FullOuterJoinAllData"},
             description = "验证调换位置做交叉连接，笛卡尔积结果不同")
-    public void test25CrossJoinExchangeTable() throws SQLException {
+    public void test26CrossJoinExchangeTable() throws SQLException {
         List<List> expectedList = expectedCrossList5();
         System.out.println("Expected: " + expectedList);
         List<List> actualListExchangeTable = outerJoinObj.crossJoinExchangeTable();
@@ -739,8 +764,9 @@ public class TestTableOuterJoin {
         Assert.assertTrue(expectedList.containsAll(actualListExchangeTable));
     }
 
-    @Test(priority = 25, enabled = true, description = "验证左连接仅查询在左表的数据")
-    public void test26LeftJoinOnlyInLeftTable() throws SQLException {
+
+    @Test(priority = 26, enabled = true, description = "验证左连接仅查询在左表的数据")
+    public void test27LeftJoinOnlyInLeftTable() throws SQLException {
         initGirlsTB();
         List<List> expectedList = expectedLeftList1();
         System.out.println("Expected: " + expectedList);
@@ -751,8 +777,9 @@ public class TestTableOuterJoin {
         Assert.assertTrue(expectedList.containsAll(actualLeftList));
     }
 
-    @Test(priority = 26, enabled = true, dependsOnMethods = {"test26LeftJoinOnlyInLeftTable"}, description = "验证左连接全部数据")
-    public void test27LeftJoinAllData() throws SQLException {
+    @Test(priority = 27, enabled = true, dependsOnMethods = {"test27LeftJoinOnlyInLeftTable"},
+            description = "验证左连接全部数据")
+    public void test28LeftJoinAllData() throws SQLException {
         List<List> expectedList = expectedLeftList2();
         System.out.println("Expected: " + expectedList);
         List<List> actualLeftList = outerJoinObj.leftOuterJoinAllData();
@@ -762,8 +789,8 @@ public class TestTableOuterJoin {
         Assert.assertTrue(expectedList.containsAll(actualLeftList));
     }
 
-    @Test(priority = 27, enabled = true, description = "验证左连接省略outer")
-    public void test28LeftJoinOmitOuter() throws SQLException {
+    @Test(priority = 28, enabled = true, description = "验证左连接省略outer")
+    public void test29LeftJoinOmitOuter() throws SQLException {
         initEmployeesTB();
         List<List> expectedList = expectedLeftList3();
         System.out.println("Expected: " + expectedList);
@@ -774,8 +801,9 @@ public class TestTableOuterJoin {
         Assert.assertTrue(expectedList.containsAll(actualLeftOmiterOuterList));
     }
 
-    @Test(priority = 28, enabled = true, dependsOnMethods = {"test04FullOuterJoinNoSameData"}, description = "验证左连接两表无交集")
-    public void test29LeftJoinNoSameData() throws SQLException {
+    @Test(priority = 29, enabled = true, dependsOnMethods = {"test05FullOuterJoinNoSameData"},
+            description = "验证左连接两表无交集")
+    public void test30LeftJoinNoSameData() throws SQLException {
         List<List> expectedList = expectedLeftList4();
         System.out.println("Expected: " + expectedList);
         List<List> actualLeftList = outerJoinObj.leftOuterJoinNoSameData();
@@ -785,23 +813,23 @@ public class TestTableOuterJoin {
         Assert.assertTrue(expectedList.containsAll(actualLeftList));
     }
 
-    @Test(priority = 29, enabled = true, dependsOnMethods = {"test04FullOuterJoinNoSameData"},
+    @Test(priority = 30, enabled = true, dependsOnMethods = {"test05FullOuterJoinNoSameData"},
             expectedExceptions = SQLException.class, description = "验证连接字段在一个表中不存在")
-    public void test30LeftJoinKeyNotExist() throws SQLException {
+    public void test31LeftJoinKeyNotExist() throws SQLException {
         outerJoinObj.leftOuterJoinWrongKey();
     }
 
-    @Test(priority = 30, enabled = true, dependsOnMethods = {"test04FullOuterJoinNoSameData"},
+    @Test(priority = 31, enabled = true, dependsOnMethods = {"test05FullOuterJoinNoSameData"},
             description = "验证左表为空，返回空，无异常")
-    public void test31LeftJoinNoDataLeft() throws SQLException {
+    public void test32LeftJoinNoDataLeft() throws SQLException {
         Boolean actualRowReturn = outerJoinObj.leftOuterJoinNoDataLeft();
         System.out.println(actualRowReturn);
         Assert.assertFalse(actualRowReturn);
     }
 
-    @Test(priority = 31, enabled = true, dependsOnMethods = {"test04FullOuterJoinNoSameData"},
+    @Test(priority = 32, enabled = true, dependsOnMethods = {"test05FullOuterJoinNoSameData"},
             description = "右表无数据，左表可返回全部")
-    public void test32LeftJoinNoDataRight() throws SQLException {
+    public void test33LeftJoinNoDataRight() throws SQLException {
         List<List> expectedList = expectedLeftList5();
         System.out.println("Expected: " + expectedList);
         List<List> actualLeftList = outerJoinObj.leftOuterJoinNoDataRight();
@@ -811,28 +839,40 @@ public class TestTableOuterJoin {
         Assert.assertTrue(expectedList.containsAll(actualLeftList));
     }
 
-    @Test(priority = 32, enabled = true, expectedExceptions = SQLException.class,
-            dependsOnMethods = {"test26LeftJoinOnlyInLeftTable"},
+    @Test(priority = 33, enabled = true, expectedExceptions = SQLException.class,
+            dependsOnMethods = {"test27LeftJoinOnlyInLeftTable"},
             description = "缺少连接条件，预期异常")
-    public void test33LeftJoinMissingCondition() throws SQLException {
+    public void test34LeftJoinMissingCondition() throws SQLException {
         outerJoinObj.leftOuterJoinMissingCondition();
     }
 
-    @Test(priority = 33, enabled = true, dependsOnMethods = {"test26LeftJoinOnlyInLeftTable"},
+    @Test(priority = 34, enabled = true, dependsOnMethods = {"test27LeftJoinOnlyInLeftTable"},
             description = "验证添加where条件")
-    public void test34LeftJoinWhereState() throws SQLException {
+    public void test35LeftJoinWhereState1() throws SQLException {
         List<List> expectedList = expectedLeftList6();
         System.out.println("Expected: " + expectedList);
-        List<List> actualLeftList = outerJoinObj.leftOuterJoinWhereState();
+        List<List> actualLeftList = outerJoinObj.leftOuterJoinWhereState1();
         System.out.println("Actual: " + actualLeftList);
 
         Assert.assertTrue(actualLeftList.containsAll(expectedList));
         Assert.assertTrue(expectedList.containsAll(actualLeftList));
     }
 
-    @Test(priority = 34, enabled = true, dependsOnMethods = {"test06FullOuterJoinUsingKeyState"},
+    @Test(priority = 35, enabled = true, dependsOnMethods = {"test01FullOuterJoinAllData"},
+            description = "验证添加where条件")
+    public void test36LeftJoinWhereState2() throws SQLException {
+        List<List> expectedList = expectedRightList5();
+        System.out.println("Expected: " + expectedList);
+        List<List> actualLeftList = outerJoinObj.leftOuterJoinWhereState2();
+        System.out.println("Actual: " + actualLeftList);
+
+        Assert.assertTrue(actualLeftList.containsAll(expectedList));
+        Assert.assertTrue(expectedList.containsAll(actualLeftList));
+    }
+
+    @Test(priority = 36, enabled = true, dependsOnMethods = {"test07FullOuterJoinUsingKeyState"},
             description = "验证连接使用using(key)")
-    public void test345LeftJoinUsingKey() throws SQLException {
+    public void test37LeftJoinUsingKey() throws SQLException {
         List<List> expectedList = expectedLeftList7();
         System.out.println("Expected: " + expectedList);
         List<List> actualLeftList = outerJoinObj.leftOuterJoinUsingKey();
@@ -843,9 +883,9 @@ public class TestTableOuterJoin {
     }
 
 
-    @Test(priority = 35, enabled = true, dependsOnMethods = {"test26LeftJoinOnlyInLeftTable"},
+    @Test(priority = 37, enabled = true, dependsOnMethods = {"test27LeftJoinOnlyInLeftTable"},
             description = "验证右连接仅查询在右表的数据")
-    public void test36RightJoinOnlyInRightTable() throws SQLException {
+    public void test38RightJoinOnlyInRightTable() throws SQLException {
         List<List> expectedList = expectedRightList1();
         System.out.println("Expected: " + expectedList);
         List<List> actualRightList = outerJoinObj.rightOuterJoinOnlyInRight();
@@ -855,8 +895,8 @@ public class TestTableOuterJoin {
         Assert.assertTrue(expectedList.containsAll(actualRightList));
     }
 
-    @Test(priority = 36, enabled = true, description = "验证右连接全部表数据")
-    public void test37RightJoinAllData() throws SQLException {
+    @Test(priority = 38, enabled = true, description = "验证右连接全部表数据")
+    public void test39RightJoinAllData() throws SQLException {
         initW3cTB();
         List<List> expectedList = expectedRightList2();
         System.out.println("Expected: " + expectedList);
@@ -867,8 +907,8 @@ public class TestTableOuterJoin {
         Assert.assertTrue(expectedList.containsAll(actualRightList));
     }
 
-    @Test(priority = 37, enabled = true, dependsOnMethods = {"test28LeftJoinOmitOuter"}, description = "验证右连接省略outer")
-    public void test38RightJoinOmitOuter() throws SQLException {
+    @Test(priority = 39, enabled = true, dependsOnMethods = {"test29LeftJoinOmitOuter"}, description = "验证右连接省略outer")
+    public void test40RightJoinOmitOuter() throws SQLException {
         List<List> expectedList = expectedLeftList3();
         System.out.println("Expected: " + expectedList);
         List<List> actualRightList = outerJoinObj.rightOuterJoinOmitOuter();
@@ -878,8 +918,8 @@ public class TestTableOuterJoin {
         Assert.assertTrue(expectedList.containsAll(actualRightList));
     }
 
-    @Test(priority = 38, enabled = true, dependsOnMethods = {"test04FullOuterJoinNoSameData"}, description = "验证右连接两表无交集")
-    public void test39RightJoinNoSameData() throws SQLException {
+    @Test(priority = 40, enabled = true, dependsOnMethods = {"test05FullOuterJoinNoSameData"}, description = "验证右连接两表无交集")
+    public void test41RightJoinNoSameData() throws SQLException {
         List<List> expectedList = expectedRightList3();
         System.out.println("Expected: " + expectedList);
         List<List> actualRightList = outerJoinObj.rightOuterJoinNoSameData();
@@ -889,15 +929,15 @@ public class TestTableOuterJoin {
         Assert.assertTrue(expectedList.containsAll(actualRightList));
     }
 
-    @Test(priority = 39, enabled = true, dependsOnMethods = {"test04FullOuterJoinNoSameData"},
+    @Test(priority = 41, enabled = true, dependsOnMethods = {"test05FullOuterJoinNoSameData"},
             expectedExceptions = SQLException.class, description = "验证连接字段在一个表中不存在")
-    public void test40RightJoinKeyNotExist() throws SQLException {
+    public void test42RightJoinKeyNotExist() throws SQLException {
         outerJoinObj.rightOuterJoinWrongKey();
     }
 
-    @Test(priority = 40, enabled = true, dependsOnMethods = {"test04FullOuterJoinNoSameData"},
+    @Test(priority = 42, enabled = true, dependsOnMethods = {"test05FullOuterJoinNoSameData"},
             description = "左表无数据，右表可返回全部")
-    public void test41RightJoinNoDataLeft() throws SQLException {
+    public void test43RightJoinNoDataLeft() throws SQLException {
         List<List> expectedList = expectedLeftList5();
         System.out.println("Expected: " + expectedList);
         List<List> actualRightList = outerJoinObj.rightOuterJoinNoDataLeft();
@@ -907,34 +947,46 @@ public class TestTableOuterJoin {
         Assert.assertTrue(expectedList.containsAll(actualRightList));
     }
 
-    @Test(priority = 41, enabled = true, dependsOnMethods = {"test04FullOuterJoinNoSameData"},
+    @Test(priority = 43, enabled = true, dependsOnMethods = {"test05FullOuterJoinNoSameData"},
             description = "验证右表为空，返回空，无异常")
-    public void test42RightJoinNoDataRight() throws SQLException {
+    public void test44RightJoinNoDataRight() throws SQLException {
         Boolean actualRowReturn = outerJoinObj.rightOuterJoinNoDataRight();
         System.out.println(actualRowReturn);
         Assert.assertFalse(actualRowReturn);
     }
 
-    @Test(priority = 42, enabled = true, dependsOnMethods = {"test26LeftJoinOnlyInLeftTable"},
+    @Test(priority = 44, enabled = true, dependsOnMethods = {"test27LeftJoinOnlyInLeftTable"},
             description = "验证添加where条件")
-    public void test43RightJoinWhereState() throws SQLException {
+    public void test45RightJoinWhereState1() throws SQLException {
         String expectedStr = "Panan";
         System.out.println("Expected: " + expectedStr);
-        String actualRightStr = outerJoinObj.rightOuterJoinWhereState();
+        String actualRightStr = outerJoinObj.rightOuterJoinWhereState1();
         System.out.println("Actual: " + actualRightStr);
 
         Assert.assertEquals(actualRightStr, expectedStr);
     }
 
-//    @Test(priority = 43, enabled = true, dependsOnMethods = {"test26LeftJoinOnlyInLeftTable"}, description = "缺少连接条件，预期异常")
-    @Test(priority = 43, enabled = true, expectedExceptions = SQLException.class, description = "缺少连接条件，预期异常")
-    public void test44RightJoinMissingCondition() throws SQLException {
+    @Test(priority = 45, enabled = true, dependsOnMethods = {"test01FullOuterJoinAllData"},
+            description = "验证添加where条件")
+    public void test46RightJoinWhereState2() throws SQLException {
+        List<List> expectedList = expectedRightList5();
+        System.out.println("Expected: " + expectedList);
+        List<List> actualRightList = outerJoinObj.rightOuterJoinWhereState2();
+        System.out.println("Actual: " + actualRightList);
+
+        Assert.assertTrue(actualRightList.containsAll(expectedList));
+        Assert.assertTrue(expectedList.containsAll(actualRightList));
+    }
+
+    @Test(priority = 46, enabled = true, dependsOnMethods = {"test27LeftJoinOnlyInLeftTable"},
+            expectedExceptions = SQLException.class, description = "缺少连接条件，预期异常")
+    public void test47RightJoinMissingCondition() throws SQLException {
         outerJoinObj.rightOuterJoinMissingCondition();
     }
 
-    @Test(priority = 44, enabled = true, dependsOnMethods = {"test06FullOuterJoinUsingKeyState"},
+    @Test(priority = 47, enabled = true, dependsOnMethods = {"test07FullOuterJoinUsingKeyState"},
             description = "验证连接使用using(key)")
-    public void test45RightJoinUsingKey() throws SQLException {
+    public void test48RightJoinUsingKey() throws SQLException {
         List<List> expectedList = expectedRightList4();
         System.out.println("Expected: " + expectedList);
         List<List> actualRightList = outerJoinObj.rightOuterJoinUsingKey();
