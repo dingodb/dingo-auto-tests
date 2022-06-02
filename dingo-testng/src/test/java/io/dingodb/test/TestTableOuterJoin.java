@@ -493,11 +493,13 @@ public class TestTableOuterJoin {
     }
 
     @Test(priority = 0, enabled = true, description = "验证全外连接查询全部数据")
-    public void test01FullOuterJoinAllData() throws SQLException {
+    public void test01FullOuterJoinAllData() throws SQLException, InterruptedException {
         initStudentAndClassTB();
+        Thread.sleep(2000);
         List<List> expectedList = expectedFullList1();
         System.out.println("Expected: " + expectedList);
         List<List> actualListWithOuter = outerJoinObj.fullOuterJoinAll();
+        Thread.sleep(2000);
         System.out.println("Actual: " + actualListWithOuter);
 
         Assert.assertTrue(actualListWithOuter.containsAll(expectedList));
@@ -919,11 +921,12 @@ public class TestTableOuterJoin {
     }
 
     @Test(priority = 40, enabled = true, dependsOnMethods = {"test05FullOuterJoinNoSameData"}, description = "验证右连接两表无交集")
-    public void test41RightJoinNoSameData() throws SQLException {
+    public void test41RightJoinNoSameData() throws SQLException, InterruptedException {
         List<List> expectedList = expectedRightList3();
         System.out.println("Expected: " + expectedList);
         List<List> actualRightList = outerJoinObj.rightOuterJoinNoSameData();
         System.out.println("Actual: " + actualRightList);
+        Thread.sleep(2000);
 
         Assert.assertTrue(actualRightList.containsAll(expectedList));
         Assert.assertTrue(expectedList.containsAll(actualRightList));

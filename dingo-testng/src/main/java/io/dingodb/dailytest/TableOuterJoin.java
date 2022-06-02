@@ -25,8 +25,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TableOuterJoin {
-    //    private static final String defaultConnectIP = "172.20.3.26";
-    private static String defaultConnectIP = CommonArgs.getDefaultDingoClusterIP();
+        private static final String defaultConnectIP = "172.20.61.1";
+//    private static String defaultConnectIP = CommonArgs.getDefaultDingoClusterIP();
     private static final String JDBC_DRIVER = "io.dingodb.driver.client.DingoDriverClient";
     private static final String connectUrl = "jdbc:dingo:thin:url=" + defaultConnectIP + ":8765";
     public static Connection connection = null;
@@ -452,7 +452,7 @@ public class TableOuterJoin {
     public List<List> leftOuterJoinWhereState2() throws SQLException {
         Statement statement = connection.createStatement();
         String querySQL = "select student_tbl.*,class_tbl.* from class_tbl left join student_tbl " +
-                "on student_tbl.class_id=class_tbl.cid where student_tbl.sid=1;";
+                "on student_tbl.class_id=class_tbl.cid where student_tbl.sid=1";
         ResultSet resultSet = statement.executeQuery(querySQL);
         List<List> queryList = new ArrayList<List>();
 
@@ -564,7 +564,7 @@ public class TableOuterJoin {
     }
 
     //右连接两表无交集
-    public List<List> rightOuterJoinNoSameData() throws SQLException {
+    public List<List> rightOuterJoinNoSameData() throws SQLException, InterruptedException {
         Statement statement = connection.createStatement();
         String querySQL = "select product1.*,product2.* from product1 right join product2 on product1.id = product2.id";
         ResultSet resultSet = statement.executeQuery(querySQL);
@@ -579,6 +579,7 @@ public class TableOuterJoin {
             rowList.add(resultSet.getString(5));
             queryList.add(rowList);
         }
+        Thread.sleep(2000);
         statement.close();
         return queryList;
     }
