@@ -1,0 +1,36 @@
+testID1000101-01:
+  subStr: "123"
+  locateStr: "41230"
+  locateResult: "2"
+testID1000101-02:
+  subStr: "56"
+  locateStr: "3456"
+  locateResult: "3"
+testID1000101-03:
+  subStr: "22"
+  locateStr: "22"
+  locateResult: "1"
+testID1000101-04:
+  subStr: "0"
+  locateStr: "0"
+  locateResult: "1"
+testID1000103-01:
+  subStr: "2.0"
+  locateStr: "23412.0123"
+  locateResult: "5"
+testID1000103-02:
+  subStr: "0.1"
+  locateStr: "0.10"
+  locateResult: "1"
+testID1000105-03:
+  subStr: ""
+  locateStr: "123"
+  locateResult: "1"
+testID1000105-04:
+  subStr: ""
+  locateStr: "0.123"
+  locateResult: "1"
+testID1000107-10:
+  subStr: "567"
+  locateStr: "5617"
+  locateResult: "0"

@@ -197,6 +197,29 @@ public class YamlDataHelper{
                 break;
             }
 
+            case "testFormatCase092": {
+                yamlStrFuncList = getYamlList(iniReader.getValue("strFuncYaml", "formatYaml"));
+                break;
+            }
+
+            case "testLocateCase096": {
+                yamlStrFuncList = getYamlList(iniReader.getValue("strFuncYaml", "locate_str"));
+                break;
+            }
+            case "testLocateCase098": {
+                yamlStrFuncList = getYamlList(iniReader.getValue("strFuncYaml", "locate_int_str"));
+                break;
+            }
+            case "testLocateCase099": {
+                yamlStrFuncList = getYamlList(iniReader.getValue("strFuncYaml", "locate_int_int"));
+                break;
+            }
+
+            case "testLocateCase101": {
+                yamlStrFuncList = getYamlList(iniReader.getValue("strFuncYaml", "locate_str_int"));
+                break;
+            }
+
         }
         Object[][] files = new Object[yamlStrFuncList.size()][];
         for (int i = 0; i < yamlStrFuncList.size(); i++) {

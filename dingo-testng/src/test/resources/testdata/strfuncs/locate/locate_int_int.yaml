@@ -1,0 +1,60 @@
+testID1000099-01:
+  subStr: "0"
+  locateStr: "0"
+  locateResult: "1"
+testID1000099-02:
+  subStr: "56"
+  locateStr: "3456"
+  locateResult: "3"
+testID1000099-03:
+  subStr: "22"
+  locateStr: "22"
+  locateResult: "1"
+testID1000099-04:
+  subStr: "0"
+  locateStr: "1230"
+  locateResult: "4"
+testID1000100-01:
+  subStr: "0.123"
+  locateStr: "0.123"
+  locateResult: "1"
+testID1000100-02:
+  subStr: "56.345"
+  locateStr: "3456.345"
+  locateResult: "3"
+testID1000100-03:
+  subStr: "22.0"
+  locateStr: "22.0"
+  locateResult: "1"
+testID1000100-04:
+  subStr: "123.230"
+  locateStr: "123.23"
+  locateResult: "0"
+testID1000102-01:
+  subStr: "123"
+  locateStr: "41230.345"
+  locateResult: "2"
+testID1000102-02:
+  subStr: "56"
+  locateStr: "34.00056"
+  locateResult: "7"
+testID1000102-03:
+  subStr: "0"
+  locateStr: "22.0"
+  locateResult: "4"
+testID1000102-04:
+  subStr: "123"
+  locateStr: "123.0123"
+  locateResult: "1"
+testID1000107-07:
+  subStr: "0"
+  locateStr: "1"
+  locateResult: "0"
+testID1000107-08:
+  subStr: "123.1230"
+  locateStr: "123.123"
+  locateResult: "0"
+testID1000107-09:
+  subStr: "3.0"
+  locateStr: "30"
+  locateResult: "0"

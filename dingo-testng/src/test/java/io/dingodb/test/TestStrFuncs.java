@@ -327,7 +327,7 @@ public class TestStrFuncs extends YamlDataHelper {
     public void test21Char_lengthInStrFunc() throws SQLException, ClassNotFoundException {
         List<String> expectedChar_lengthList = new ArrayList<String>();
         String[] char_lengthArray = new String[]{"ijing","eijing haidian ","han NO.1 Street","ANGping","ngYang1","3",
-                "ijing changyang","anghai","han","njing","ijing chaoyang","3","ANGping","ong qing ","tp://WWW.baidu.com",};
+                "ijing changyang","anghai","han","njing","ijing chaoyang","3","ANGping","ong qing ","tp://WWW.baidu.com"};
         for (int i=0; i < char_lengthArray.length; i++){
             expectedChar_lengthList.add(char_lengthArray[i]);
         }
@@ -339,6 +339,185 @@ public class TestStrFuncs extends YamlDataHelper {
         Assert.assertTrue(actualChar_lengthInFuncList.equals(expectedChar_lengthList));
     }
 
+    @Test(enabled = true, expectedExceptions = SQLException.class, description = "验证拼接单个字段，预期异常")
+    public void testConcatCase079() throws SQLException, ClassNotFoundException {
+        strObj.concatCase079();
+    }
+
+    @Test(enabled = true, description = "验证concat拼接按条件查询结果")
+    public void testConcatCase083() throws SQLException, ClassNotFoundException {
+        List expectedList = new ArrayList();
+        expectedList.add("1235440.0");
+        expectedList.add("yamaha762.3");
+        expectedList.add("  aB c  dE 6199.9999");
+        expectedList.add("zhngsna9932.0");
+        System.out.println("期望输出列表：" + expectedList);
+
+        List actualConcatList = strObj.concatCase083();
+        System.out.println("实际输出列表：" + actualConcatList);
+        Assert.assertEquals(actualConcatList, expectedList);
+    }
+
+    @Test(enabled = true, description = "验证concat直接连接字符串")
+    public void testConcatCase084() throws SQLException, ClassNotFoundException {
+        List expectedList = new ArrayList();
+        expectedList.add("Hello World123");
+        expectedList.add("");
+        expectedList.add("01");
+        expectedList.add("http://www.baidu.com");
+        expectedList.add("http\\n.baidu\\t.com");
+        expectedList.add("abc~!@#$%^&*()_+=-|][}{;:/.,?><");
+        expectedList.add(null);
+        System.out.println("期望输出列表：" + expectedList);
+
+        List actualConcatList = strObj.concatCase084();
+        System.out.println("实际输出列表：" + actualConcatList);
+        Assert.assertEquals(actualConcatList, expectedList);
+    }
+
+    @Test(enabled = true, expectedExceptions = SQLException.class, description = "验证拼接不存在的字段，预期异常")
+    public void testConcatCase085() throws SQLException, ClassNotFoundException {
+        strObj.concatCase085();
+    }
+
+    @Test(enabled = true, description = "验证使用concat拼接")
+    public void testConcatFuncUsingConcat() throws SQLException, ClassNotFoundException {
+        List expectedList = new ArrayList();
+        expectedList.add("Hello World");
+        expectedList.add("http://www.baidu.com");
+        System.out.println("期望输出列表：" + expectedList);
+
+        List actualConcatList = strObj.concatFuncUsingConcat();
+        System.out.println("实际输出列表：" + actualConcatList);
+        Assert.assertEquals(actualConcatList, expectedList);
+    }
+
+    @Test(enabled = true, description = "验证format函数对整型字段保留大于0位小数")
+    public void testFormatCase087() throws SQLException, ClassNotFoundException {
+        List expectedFormatList = new ArrayList();
+        String[] formatArray = new String[]{"18.00","25.00","55.00","57.00","1.00","544.00","76.00","18.00",
+                "76.00","256.00","61.00","2.00","57.00","99.00","18.00"};
+        for (int i=0; i < formatArray.length; i++){
+            expectedFormatList.add(formatArray[i]);
+        }
+        System.out.println("期望输出列表：" + expectedFormatList);
+
+        List actualFormatList = strObj.formatCase087();
+        System.out.println("实际输出列表：" + actualFormatList);
+
+        Assert.assertTrue(actualFormatList.equals(expectedFormatList));
+    }
+
+    @Test(enabled = true, description = "验证format函数对整型字段保留0位小数")
+    public void testFormatCase088() throws SQLException, ClassNotFoundException {
+        List expectedFormatList = new ArrayList();
+        String[] formatArray = new String[]{"18","25","55","57","1","544","76","18","76","256","61","2","57","99","18"};
+        for (int i=0; i < formatArray.length; i++){
+            expectedFormatList.add(formatArray[i]);
+        }
+        System.out.println("期望输出列表：" + expectedFormatList);
+
+        List actualFormatList = strObj.formatCase088();
+        System.out.println("实际输出列表：" + actualFormatList);
+
+        Assert.assertTrue(actualFormatList.equals(expectedFormatList));
+    }
+
+    @Test(enabled = true, expectedExceptions = SQLException.class, description = "验证格式化字符串类型字段，预期异常")
+    public void testFormatCase089() throws SQLException, ClassNotFoundException {
+        strObj.formatCase089();
+    }
+
+    @Test(enabled = true, expectedExceptions = SQLException.class, description = "验证格式化不存在的字段，预期异常")
+    public void testFormatCase090() throws SQLException, ClassNotFoundException {
+        strObj.formatCase090();
+    }
+
+    @Test(enabled = true, description = "验证format函数对浮点型字段保留0位小数")
+    public void testFormatCase091() throws SQLException, ClassNotFoundException {
+        List expectedFormatList = new ArrayList();
+        String[] formatArray = new String[]{"24","895","123","9","1454","0","2","12","109","1234","100","2345","9","32","0"};
+        for (int i=0; i < formatArray.length; i++){
+            expectedFormatList.add(formatArray[i]);
+        }
+        System.out.println("期望输出列表：" + expectedFormatList);
+        List actualFormatList = strObj.formatCase091();
+        System.out.println("实际输出列表：" + actualFormatList);
+
+        Assert.assertTrue(actualFormatList.equals(expectedFormatList));
+    }
+
+    @Test(enabled = true, dataProvider = "yamlStrFuncMethod",description = "验证format函数对不同数值的格式化")
+    public void testFormatCase092(Map<String, String> param) throws SQLException, ClassNotFoundException {
+        String expectedFormatValue = param.get("formatResult");
+        System.out.println("Expected：" + expectedFormatValue);
+        String actualFormatValue = strObj.formatCase092(param.get("formatValue"), param.get("decimalNum"));
+        System.out.println("Actual：" + actualFormatValue);
+
+        Assert.assertTrue(actualFormatValue.equals(expectedFormatValue));
+    }
+
+    @Test(enabled = true, dataProvider = "yamlStrFuncMethod",description = "验证locate函数子串的查找，返回下标")
+    public void testLocateCase096(Map<String, String> param) throws SQLException, ClassNotFoundException {
+        String expectedLocateValue = param.get("locateResult");
+        System.out.println("Expected：" + expectedLocateValue);
+        String actualLocateValue = strObj.locateCase096(param.get("subStr"), param.get("locateStr"));
+        System.out.println("Actual：" + actualLocateValue);
+
+        Assert.assertEquals(actualLocateValue, expectedLocateValue);
+    }
+
+    @Test(enabled = true, dataProvider = "yamlStrFuncMethod",description = "验证locate函数子串为整型数字")
+    public void testLocateCase098(Map<String, String> param) throws SQLException, ClassNotFoundException {
+        String expectedLocateValue = param.get("locateResult");
+        System.out.println("Expected：" + expectedLocateValue);
+        String actualLocateValue = strObj.locateCase098(param.get("subStr"), param.get("locateStr"));
+        System.out.println("Actual：" + actualLocateValue);
+
+        Assert.assertEquals(actualLocateValue, expectedLocateValue);
+    }
+
+    @Test(enabled = true, dataProvider = "yamlStrFuncMethod",description = "验证locate函数子串和父串均为整型数字")
+    public void testLocateCase099(Map<String, String> param) throws SQLException, ClassNotFoundException {
+        String expectedLocateValue = param.get("locateResult");
+        System.out.println("Expected：" + expectedLocateValue);
+        String actualLocateValue = strObj.locateCase099(param.get("subStr"), param.get("locateStr"));
+        System.out.println("Actual：" + actualLocateValue);
+
+        Assert.assertEquals(actualLocateValue, expectedLocateValue);
+    }
+
+    @Test(enabled = true, dataProvider = "yamlStrFuncMethod",description = "验证locate函数子串为字符，父串为整型数字")
+    public void testLocateCase101(Map<String, String> param) throws SQLException, ClassNotFoundException {
+        String expectedLocateValue = param.get("locateResult");
+        System.out.println("Expected：" + expectedLocateValue);
+        String actualLocateValue = strObj.locateCase101(param.get("subStr"), param.get("locateStr"));
+        System.out.println("Actual：" + actualLocateValue);
+
+        Assert.assertEquals(actualLocateValue, expectedLocateValue);
+    }
+
+    @Test(enabled = true, expectedExceptions = SQLException.class, description = "验证locate函数不支持指定position参数")
+    public void testLocateCase112() throws SQLException, ClassNotFoundException {
+        strObj.locateCase112();
+    }
+
+    @Test(enabled = true, description = "验证locate函数在条件语句中使用")
+    public void testLocateCase113() throws SQLException, ClassNotFoundException {
+        List expectedLocateList = new ArrayList();
+        String[] formatArray = new String[]{"1beijing","2shanghai","3beijing","4shanghai","5beijing",
+                "6shanghai","7shanghai","8shanghai","9shanghai","10shanghai","11shanghai"};
+        for (int i=0; i < formatArray.length; i++){
+            expectedLocateList.add(formatArray[i]);
+        }
+        System.out.println("期望输出列表：" + expectedLocateList);
+        List actualLocateList = strObj.locateCase113();
+        System.out.println("实际输出列表：" + actualLocateList);
+
+        Assert.assertTrue(actualLocateList.containsAll(expectedLocateList));
+        Assert.assertTrue(expectedLocateList.containsAll(actualLocateList));
+    }
+
 
     @AfterClass(alwaysRun = true, description = "测试完成后删除数据和表格并关闭连接")
     public void tearDownAll() throws SQLException {
@@ -346,6 +525,8 @@ public class TestStrFuncs extends YamlDataHelper {
         Statement tearDownStatement = connection.createStatement();
         tearDownStatement.execute("delete from " + tableName);
         tearDownStatement.execute("drop table " + tableName);
+        tearDownStatement.execute("delete from tableStrCase113");
+        tearDownStatement.execute("drop table tableStrCase113");
         tearDownStatement.close();
         connection.close();
     }

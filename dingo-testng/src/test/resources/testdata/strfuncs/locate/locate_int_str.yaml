@@ -1,0 +1,16 @@
+testID1000098-01:
+  subStr: "0"
+  locateStr: "0abcd"
+  locateResult: "1"
+testID1000098-02:
+  subStr: "3456"
+  locateStr: "3456"
+  locateResult: "1"
+testID1000098-03:
+  subStr: "2"
+  locateStr: "1a 2b"
+  locateResult: "4"
+testID1000107-11:
+  subStr: "123"
+  locateStr: "012 3"
+  locateResult: "0"

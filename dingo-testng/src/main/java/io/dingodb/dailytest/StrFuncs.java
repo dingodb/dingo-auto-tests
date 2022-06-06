@@ -21,9 +21,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 
@@ -464,5 +462,324 @@ public class StrFuncs {
         statement.close();
         return char_lengthInStrFuncList;
     }
+
+
+    //只拼接一个字段，预期异常
+    public void concatCase079() throws SQLException, ClassNotFoundException {
+        String strFuncTableName = getStrTableName();
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String concatSQL = "select name|| from " + strFuncTableName;
+        ResultSet resultSet = statement.executeQuery(concatSQL);
+        statement.close();
+    }
+
+    //concat函数拼接查询条件结果
+    public List concatCase083() throws SQLException, ClassNotFoundException {
+        String strFuncTableName = getStrTableName();
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+        String concatSQL = "select name||age||amount cnaa from " + strFuncTableName +
+                " where (age<18 or age>60) and amount<100 and id >5";
+        ResultSet resultSet = statement.executeQuery(concatSQL);
+        List concatList = new ArrayList();
+        while(resultSet.next()) {
+            concatList.add(resultSet.getString("cnaa"));
+        }
+
+        statement.close();
+        return concatList;
+    }
+
+    //concat函数拼接字符串
+    public List concatCase084() throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+        String concatSQL1 = "select 'Hello'||' World'||123 cons";
+        String concatSQL2 = "select ''||''";
+        String concatSQL3 = "select 0||1";
+        String concatSQL4 = "select 'http:'||'//www'||'.baidu'||'.com'";
+        String concatSQL5 = "select 'http'||'\\n'||'.baidu'||'\\t.com'";
+        String concatSQL6 = "select 'abc'||'~!@#$%^&*()_+=-|][}{;:/.,?><'";
+        String concatSQL7 = "select 'abc'||null";
+        ResultSet resultSet1 = statement.executeQuery(concatSQL1);
+        List concatList = new ArrayList();
+        while(resultSet1.next()) {
+            concatList.add(resultSet1.getString("cons"));
+        }
+
+        ResultSet resultSet2 = statement.executeQuery(concatSQL2);
+        while(resultSet2.next()) {
+            concatList.add(resultSet2.getString(1));
+        }
+
+        ResultSet resultSet3 = statement.executeQuery(concatSQL3);
+        while(resultSet3.next()) {
+            concatList.add(resultSet3.getString(1));
+        }
+
+        ResultSet resultSet4 = statement.executeQuery(concatSQL4);
+        while(resultSet4.next()) {
+            concatList.add(resultSet4.getString(1));
+        }
+
+        ResultSet resultSet5 = statement.executeQuery(concatSQL5);
+        while(resultSet5.next()) {
+            concatList.add(resultSet5.getString(1));
+        }
+
+        ResultSet resultSet6 = statement.executeQuery(concatSQL6);
+        while(resultSet6.next()) {
+            concatList.add(resultSet6.getString(1));
+        }
+
+        ResultSet resultSet7 = statement.executeQuery(concatSQL7);
+        while(resultSet7.next()) {
+            concatList.add(resultSet7.getString(1));
+        }
+
+        statement.close();
+        return concatList;
+    }
+
+    //concat函数拼接字符串
+    public List concatFuncUsingConcat() throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+        String concatSQL1 = "select concat('Hello',' World')";
+        String concatSQL2 = "select concat(concat('http://','www.'),'baidu.com')";
+        ResultSet resultSet1 = statement.executeQuery(concatSQL1);
+        List concatList = new ArrayList();
+        while(resultSet1.next()) {
+            concatList.add(resultSet1.getString(1));
+        }
+
+        ResultSet resultSet2 = statement.executeQuery(concatSQL2);
+        while(resultSet2.next()) {
+            concatList.add(resultSet2.getString(1));
+        }
+
+        statement.close();
+        return concatList;
+    }
+
+
+    //拼接不存在的字段，预期异常
+    public void concatCase085() throws SQLException, ClassNotFoundException {
+        String strFuncTableName = getStrTableName();
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String concatSQL = "select name||age||birthday from " + strFuncTableName + " where id=1";
+        ResultSet resultSet = statement.executeQuery(concatSQL);
+        statement.close();
+    }
+
+    //格式化整型字段，保留大于0位小数位
+    public List formatCase087() throws SQLException, ClassNotFoundException {
+        String strFuncTableName = getStrTableName();
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String formatSQL = "select format(age,2) fage from " + strFuncTableName;
+        ResultSet formatRst = statement.executeQuery(formatSQL);
+        List formatList = new ArrayList();
+        while (formatRst.next()){
+            formatList.add(formatRst.getString("fage"));
+        }
+        statement.close();
+        return formatList;
+    }
+
+    //格式化整型字段，保留0位小数位
+    public List formatCase088() throws SQLException, ClassNotFoundException {
+        String strFuncTableName = getStrTableName();
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String formatSQL = "select format(age,0) fage from " + strFuncTableName;
+        ResultSet formatRst = statement.executeQuery(formatSQL);
+        List formatList = new ArrayList();
+        while (formatRst.next()){
+            formatList.add(formatRst.getString("fage"));
+        }
+        statement.close();
+        return formatList;
+    }
+
+    //格式化字符型字段，预期异常
+    public void formatCase089() throws SQLException, ClassNotFoundException {
+        String strFuncTableName = getStrTableName();
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String formatSQL = "select format(name,2) fname from " + strFuncTableName;
+        ResultSet formatRst = statement.executeQuery(formatSQL);
+        statement.close();
+    }
+
+    //格式化不存在的字段，预期异常
+    public void formatCase090() throws SQLException, ClassNotFoundException {
+        String strFuncTableName = getStrTableName();
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String formatSQL = "select format(birthday,2) fname from " + strFuncTableName;
+        ResultSet formatRst = statement.executeQuery(formatSQL);
+        statement.close();
+    }
+
+    //格式化浮点型字段，保留0位小数位
+    public List formatCase091() throws SQLException, ClassNotFoundException {
+        String strFuncTableName = getStrTableName();
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String formatSQL = "select format(amount,0) from " + strFuncTableName;
+        ResultSet formatRst = statement.executeQuery(formatSQL);
+        List formatList = new ArrayList();
+        while (formatRst.next()){
+            formatList.add(formatRst.getString(1));
+        }
+        statement.close();
+        return formatList;
+    }
+
+    //格式化浮点型字段，保留0位小数位
+    public String formatCase092(String formatValue, String decimalNum) throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String formatSQL = "select format(" + formatValue + "," + decimalNum +")";
+        ResultSet formatRst = statement.executeQuery(formatSQL);
+        String formatResultStr = null;
+        while (formatRst.next()){
+            formatResultStr = formatRst.getString(1);
+        }
+        statement.close();
+        return formatResultStr;
+    }
+
+    //locate函数，参数均为字符串
+    public String locateCase096(String subStr, String locateStr) throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String locateSQL = "select locate('" + subStr + "','" + locateStr +"')";
+        ResultSet locateRst = statement.executeQuery(locateSQL);
+        String locateResultStr = null;
+        while (locateRst.next()){
+            locateResultStr = locateRst.getString(1);
+        }
+        statement.close();
+        return locateResultStr;
+    }
+
+    //locate函数，子串为整型
+    public String locateCase098(String subStr, String locateStr) throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String locateSQL = "select locate(" + subStr + ",'" + locateStr +"')";
+        ResultSet locateRst = statement.executeQuery(locateSQL);
+        String locateResultStr = null;
+        while (locateRst.next()){
+            locateResultStr = locateRst.getString(1);
+        }
+        statement.close();
+        return locateResultStr;
+    }
+
+    //locate函数，子串和父串均为整型
+    public String locateCase099(String subStr, String locateStr) throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String locateSQL = "select locate(" + subStr + "," + locateStr +")";
+        ResultSet locateRst = statement.executeQuery(locateSQL);
+        String locateResultStr = null;
+        while (locateRst.next()){
+            locateResultStr = locateRst.getString(1);
+        }
+        statement.close();
+        return locateResultStr;
+    }
+
+    //locate函数，子串为字符，父串为整型
+    public String locateCase101(String subStr, String locateStr) throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String locateSQL = "select locate('" + subStr + "'," + locateStr +")";
+        ResultSet locateRst = statement.executeQuery(locateSQL);
+        String locateResultStr = null;
+        while (locateRst.next()){
+            locateResultStr = locateRst.getString(1);
+        }
+        statement.close();
+        return locateResultStr;
+    }
+
+    //locate函数，验证不支持position用法
+    public void locateCase112() throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String locateSQL = "select locate('a','bcadmjsac',5)";
+        ResultSet locateRst = statement.executeQuery(locateSQL);
+        statement.close();
+    }
+
+    public void createTableCase113() throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String createTableSQL = "create table " + "tableStrCase113" + "("
+                + "id int,"
+                + "name varchar(32) not null,"
+                + "age int,"
+                + "amount double,"
+                + "address varchar(255),"
+                + "primary key(id)"
+                + ")";
+        statement.execute(createTableSQL);
+
+        String insertSQL = "insert into tableStrCase113 values " +
+                "(1,'zhangsan',18,90.33,'beijing'),\n" +
+                "(2,'lisi',35,120.98,'haidian'),\n" +
+                "(3,'Hello',35,18.0,'beijing'),\n" +
+                "(4,'HELLO2',15,23.0,'chaoyangdis_1 NO.street'),\n" +
+                "(5,'lala',18,12.1234560987,'beijing'),\n" +
+                "(6,'88',18,12.0,'changping 89'),\n" +
+                "(7,'baba',99,23.51648,'haidian2'),\n" +
+                "(8,'zala',100,54.0,'wuwuxi '),\n" +
+                "(9,' uzlia ',28,23.6,'  maya'),\n" +
+                "(10,'  MaiTeng',66,70.3,'ding TAO  '),\n" +
+                "(11,'',0,0.01,'')";
+        statement.execute(insertSQL);
+        statement.close();
+    }
+
+    //验证locate函数在条件语句中使用
+    public List locateCase113() throws SQLException, ClassNotFoundException {
+        createTableCase113();
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+        String updateSql = "update tableStrCase113 set address='shanghai' where locate('beijing',address)=0";
+        statement.executeUpdate(updateSql);
+        String querySql = "select concat(id,address) from tableStrCase113";
+        ResultSet resultSet = statement.executeQuery(querySql);
+        List locateResultList = new ArrayList();
+
+        while(resultSet.next()) {
+            locateResultList.add(resultSet.getString(1));
+        }
+
+        statement.close();
+        return locateResultList;
+    }
+
+
 
 }

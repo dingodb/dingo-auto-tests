@@ -517,7 +517,7 @@ public class TableOuterJoin {
     }
 
     //右连接返回全部数据
-    public List<List> rightOuterJoinAllData() throws SQLException {
+    public List<List> rightOuterJoinAllData() throws SQLException, InterruptedException {
         Statement statement = connection.createStatement();
         String querySQL = "select w3cschool_tbl.*,tcount_tbl.* from w3cschool_tbl right outer join tcount_tbl on" +
                 " tcount_tbl.w3cschool_author=w3cschool_tbl.w3cschool_author";
@@ -535,6 +535,7 @@ public class TableOuterJoin {
 
             queryList.add(rowList);
         }
+        Thread.sleep(2000);
         statement.close();
         return queryList;
     }
@@ -593,7 +594,7 @@ public class TableOuterJoin {
     }
 
     //右连接左表无数据
-    public List<List> rightOuterJoinNoDataLeft() throws SQLException {
+    public List<List> rightOuterJoinNoDataLeft() throws SQLException, InterruptedException {
         Statement statement = connection.createStatement();
         String querySQL = "select product1.* from product3 right join product1 on product1.id=product3.id";
         ResultSet resultSet = statement.executeQuery(querySQL);
@@ -606,6 +607,7 @@ public class TableOuterJoin {
             rowList.add(resultSet.getString(3));
             queryList.add(rowList);
         }
+        Thread.sleep(2000);
         statement.close();
         return queryList;
     }

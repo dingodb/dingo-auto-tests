@@ -1,0 +1,56 @@
+testID1000092:
+  formatValue: "9.99999"
+  decimalNum: "2"
+  formatResult: "10.00"
+testID1000093:
+  formatValue: "9.000000"
+  decimalNum: "2"
+  formatResult: "9.00"
+testID1000094-01:
+  formatValue: "123.456"
+  decimalNum: "2"
+  formatResult: "123.46"
+testID1000094-02:
+  formatValue: "123.456"
+  decimalNum: "0"
+  formatResult: "123"
+testID1000094-03:
+  formatValue: "0.45"
+  decimalNum: "1"
+  formatResult: "0.5"
+testID1000094-04:
+  formatValue: "1234"
+  decimalNum: "2"
+  formatResult: "1234.00"
+testID1000094-05:
+  formatValue: "123.5"
+  decimalNum: "3"
+  formatResult: "123.500"
+testID1000094-06:
+  formatValue: "123"
+  decimalNum: "0"
+  formatResult: "123"
+testID1000094-07:
+  formatValue: "123.52"
+  decimalNum: "2"
+  formatResult: "123.52"
+testID1000094-08:
+  formatValue: "0.00"
+  decimalNum: "0"
+  formatResult: "0"
+testID1000094-09:
+  formatValue: "-1234.762"
+  decimalNum: "2"
+  formatResult: "-1234.76"
+testID1000094-10:
+  formatValue: "-5.762"
+  decimalNum: "0"
+  formatResult: "-6"
+testID1000095-01:
+  formatValue: "1235.2376"
+  decimalNum: "2"
+  formatResult: "1235.24"
+testID1000095-02:
+  formatValue: "938421.9827611"
+  decimalNum: "6"
+  formatResult: "938421.982761"

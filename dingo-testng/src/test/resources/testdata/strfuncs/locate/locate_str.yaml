@@ -1,0 +1,140 @@
+testID1000096-01:
+  subStr: "a"
+  locateStr: "abc"
+  locateResult: "1"
+testID1000096-02:
+  subStr: "HELLO"
+  locateStr: "HELLO WORLD"
+  locateResult: "1"
+testID1000096-03:
+  subStr: "1"
+  locateStr: "1a 2b"
+  locateResult: "1"
+testID1000096-04:
+  subStr: "abc 123"
+  locateStr: "abc 123"
+  locateResult: "1"
+testID1000096-05:
+  subStr: "~!@#$%^&*()_+=-|][}{;:/.,?><"
+  locateStr: "~!@#$%^&*()_+=-|][}{;:/.,?><"
+  locateResult: "1"
+testID1000097-01:
+  subStr: "c"
+  locateStr: "abcd"
+  locateResult: "3"
+testID1000097-02:
+  subStr: "World"
+  locateStr: "HELLO World"
+  locateResult: "7"
+testID1000097-03:
+  subStr: "2"
+  locateStr: "1a 2b"
+  locateResult: "4"
+testID1000104-01:
+  subStr: " "
+  locateStr: " abc d"
+  locateResult: "1"
+testID1000104-02:
+  subStr: "  "
+  locateStr: " abc  d"
+  locateResult: "5"
+testID1000104-03:
+  subStr: " "
+  locateStr: " "
+  locateResult: "1"
+testID1000105-01:
+  subStr: ""
+  locateStr: "a bc d"
+  locateResult: "1"
+testID1000105-02:
+  subStr: ""
+  locateStr: " "
+  locateResult: "1"
+testID1000106-01:
+  subStr: ""
+  locateStr: ""
+  locateResult: "1"
+testID1000107-01:
+  subStr: "abcd"
+  locateStr: "abc"
+  locateResult: "0"
+testID1000107-02:
+  subStr: "HELLO "
+  locateStr: "HELLOWORLD"
+  locateResult: "0"
+testID1000107-03:
+  subStr: "1"
+  locateStr: "2"
+  locateResult: "0"
+testID1000107-04:
+  subStr: "abc d"
+  locateStr: "abcd"
+  locateResult: "0"
+testID1000107-05:
+  subStr: "  "
+  locateStr: "ab d d"
+  locateResult: "0"
+testID1000107-06:
+  subStr: "a"
+  locateStr: "HAHA"
+  locateResult: "0"
+#testID1000108-01:
+#  subStr: "\n"
+#  locateStr: "ab\nc"
+#  locateResult: "3"
+#testID1000108-02:
+#  subStr: "\n"
+#  locateStr: "ab\\nc"
+#  locateResult: "4"
+testID1000108-03:
+  subStr: "\\n"
+  locateStr: "ab\\nc"
+  locateResult: "3"
+#testID1000108-04:
+#  subStr: "\n"
+#  locateStr: "ab\\\nc"
+#  locateResult: "5"
+#testID1000109-01:
+#  subStr: "\t"
+#  locateStr: "ab\tc"
+#  locateResult: "3"
+#testID1000109-02:
+#  subStr: "\t"
+#  locateStr: "ab\\tc"
+#  locateResult: "4"
+testID1000109-03:
+  subStr: "\\t"
+  locateStr: "ab\\tc"
+  locateResult: "3"
+#testID1000109-04:
+#  subStr: "\t"
+#  locateStr: "ab\\\tc"
+#  locateResult: "5"
+#testID1000110-01:
+#  subStr: "\b"
+#  locateStr: "ab\bc"
+#  locateResult: "3"
+#testID1000110-02:
+#  subStr: "\b"
+#  locateStr: "ab\\bc"
+#  locateResult: "4"
+testID1000110-03:
+  subStr: "\\b"
+  locateStr: "ab\\bc"
+  locateResult: "3"
+#testID1000110-04:
+#  subStr: "\b"
+#  locateStr: "ab\\\bc"
+#  locateResult: "5"
+#testID1000111-01:
+#  subStr: "\c"
+#  locateStr: "ab\cc"
+#  locateResult: "3"
+#testID1000111-02:
+#  subStr: "\c"
+#  locateStr: "ab\\cc"
+#  locateResult: "4"
+testID1000111-03:
+  subStr: "\\c"
+  locateStr: "ab\\cc"
+  locateResult: "3"
