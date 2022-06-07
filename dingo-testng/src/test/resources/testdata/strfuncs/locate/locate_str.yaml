@@ -78,6 +78,10 @@ testID1000107-06:
   subStr: "a"
   locateStr: "HAHA"
   locateResult: "0"
+testID1000303-01:
+  subStr: "abc"
+  locateStr: ""
+  locateResult: "0"
 #testID1000108-01:
 #  subStr: "\n"
 #  locateStr: "ab\nc"

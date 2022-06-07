@@ -727,6 +727,20 @@ public class TestDateTime extends YamlDataHelper{
         Assert.assertTrue(expectedList.containsAll(actualUpdateList));
     }
 
+    @Test(priority = 23, enabled = true, expectedExceptions = SQLException.class, description = "验证date类型字段，插入空值预期异常")
+    public void test24InsertBlankDate() throws SQLException {
+        dateTimeObj.insertBlankDate();
+    }
+
+    @Test(priority = 24, enabled = true, expectedExceptions = SQLException.class, description = "验证time类型字段，插入空值预期异常")
+    public void test25InsertBlankTime() throws SQLException {
+        dateTimeObj.insertBlankTime();
+    }
+
+    @Test(priority = 25, enabled = true, expectedExceptions = SQLException.class, description = "验证timestamp类型字段，插入空值预期异常")
+    public void test26InsertBlankTimestamp() throws SQLException {
+        dateTimeObj.insertBlankTimestamp();
+    }
 
 
     @AfterClass(alwaysRun = true, description = "测试完成后删除数据和表格并关闭连接")
@@ -757,6 +771,9 @@ public class TestDateTime extends YamlDataHelper{
 //        tearDownStatement.execute("drop table Orders7522");
         tearDownStatement.execute("delete from uptesttable");
         tearDownStatement.execute("drop table uptesttable");
+        tearDownStatement.execute("drop table case1434");
+        tearDownStatement.execute("drop table case1435");
+        tearDownStatement.execute("drop table case1436");
         tearDownStatement.close();
         DateTimeFuncs.connection.close();
     }

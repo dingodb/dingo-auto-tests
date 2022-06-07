@@ -518,6 +518,157 @@ public class TestStrFuncs extends YamlDataHelper {
         Assert.assertTrue(expectedLocateList.containsAll(actualLocateList));
     }
 
+    @Test(enabled = true, dataProvider = "yamlStrFuncMethod",description = "验证lower函数功能")
+    public void testLowerCase119(Map<String, String> param) throws SQLException, ClassNotFoundException {
+        String expectedLowerValue = param.get("outputCase");
+        System.out.println("Expected：" + expectedLowerValue);
+        String actualLowerValue = strObj.lowerCase119(param.get("inputCase"));
+        System.out.println("Actual：" + actualLowerValue);
+
+        Assert.assertEquals(actualLowerValue, expectedLowerValue);
+    }
+
+    @Test(enabled = true, dataProvider = "yamlStrFuncMethod",description = "验证upper函数功能")
+    public void testUpperCase125(Map<String, String> param) throws SQLException, ClassNotFoundException {
+        String expectedUpperValue = param.get("outputCase");
+        System.out.println("Expected：" + expectedUpperValue);
+        String actualUpperValue = strObj.upperCase125(param.get("inputCase"));
+        System.out.println("Actual：" + actualUpperValue);
+
+        Assert.assertEquals(actualUpperValue, expectedUpperValue);
+    }
+
+    @Test(enabled = true,description = "验证lower和upper函数查询起别名")
+    public void testLUCase126() throws SQLException, ClassNotFoundException {
+        String expectedStr = "abc1DEF2";
+        System.out.println("Expected：" + expectedStr);
+        String actualStr = strObj.lowerUpperCase126();
+        System.out.println("Actual：" + actualStr);
+
+        Assert.assertEquals(actualStr, expectedStr);
+    }
+
+    @Test(enabled = true, dataProvider = "yamlStrFuncMethod",description = "验证left函数截取字符串")
+    public void testLeftCase127(Map<String, String> param) throws SQLException, ClassNotFoundException {
+        String expectedStr = param.get("outputStr");
+        System.out.println("Expected：" + expectedStr);
+        String actualStr = strObj.leftCase127(param.get("inputStr"), param.get("inputLen"));
+        System.out.println("Actual：" + actualStr);
+
+        Assert.assertEquals(actualStr, expectedStr);
+    }
+
+    @Test(enabled = true, dataProvider = "yamlStrFuncMethod",description = "验证left函数截取数值")
+    public void testLeftCase130(Map<String, String> param) throws SQLException, ClassNotFoundException {
+        String expectedStr = param.get("outputStr");
+        System.out.println("Expected：" + expectedStr);
+        String actualStr = strObj.leftCase130(param.get("inputStr"), param.get("inputLen"));
+        System.out.println("Actual：" + actualStr);
+
+        Assert.assertEquals(actualStr, expectedStr);
+    }
+
+    @Test(enabled = true, expectedExceptions = SQLException.class, description = "验证left函数接收参数不符,预期异常")
+    public void testLeftCase133_1() throws SQLException, ClassNotFoundException {
+        strObj.leftCase133_1();
+    }
+
+    @Test(enabled = true, expectedExceptions = SQLException.class, description = "验证left函数接收参数不符，预期异常")
+    public void testLeftCase133_2() throws SQLException, ClassNotFoundException {
+        strObj.leftCase133_2();
+    }
+
+    @Test(enabled = true, expectedExceptions = SQLException.class, description = "验证left函数接收参数不符，预期异常")
+    public void testLeftCase134_1() throws SQLException, ClassNotFoundException {
+        strObj.leftCase134_1();
+    }
+
+    @Test(enabled = true, description = "验证left函数在表格中使用")
+    public void testLeftCase135() throws SQLException, ClassNotFoundException {
+        String[][] leftArray = {{"zha","beijing","1","23.5"},{"lis","nanjing","2","1234"},{"1.5","http://WWW","1","0.12"}};
+        List<List> expectedList = new ArrayList<List>();
+        for(int i=0; i<leftArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<leftArray[i].length; j++) {
+                columnList.add(leftArray[i][j]);
+            }
+            expectedList.add(columnList);
+        }
+        System.out.println("Expected: " + expectedList);
+
+        List<List> actualLeftList = strObj.leftCase135();
+        System.out.println("Actual: "+ actualLeftList);
+        Assert.assertTrue(actualLeftList.containsAll(expectedList));
+        Assert.assertTrue(expectedList.containsAll(actualLeftList));
+    }
+
+    @Test(enabled = true, dataProvider = "yamlStrFuncMethod",description = "验证right函数截取字符串")
+    public void testRightCase138(Map<String, String> param) throws SQLException, ClassNotFoundException {
+        String expectedStr = param.get("outputStr");
+        System.out.println("Expected：" + expectedStr);
+        String actualStr = strObj.rightCase138(param.get("inputStr"), param.get("inputLen"));
+        System.out.println("Actual：" + actualStr);
+
+        Assert.assertEquals(actualStr, expectedStr);
+    }
+
+    @Test(enabled = true, dataProvider = "yamlStrFuncMethod",description = "验证right函数截取数字")
+    public void testRightCase141(Map<String, String> param) throws SQLException, ClassNotFoundException {
+        String expectedStr = param.get("outputStr");
+        System.out.println("Expected：" + expectedStr);
+        String actualStr = strObj.rightCase141(param.get("inputStr"), param.get("inputLen"));
+        System.out.println("Actual：" + actualStr);
+
+        Assert.assertEquals(actualStr, expectedStr);
+    }
+
+    @Test(enabled = true, expectedExceptions = SQLException.class, description = "验证right函数接收参数不符,预期异常")
+    public void testRightCase144_1() throws SQLException, ClassNotFoundException {
+        strObj.rightCase144_1();
+    }
+
+    @Test(enabled = true, expectedExceptions = SQLException.class, description = "验证right函数接收参数不符，预期异常")
+    public void testRightCase144_2() throws SQLException, ClassNotFoundException {
+        strObj.rightCase144_2();
+    }
+
+    @Test(enabled = true, expectedExceptions = SQLException.class, description = "验证right函数接收参数不符，预期异常")
+    public void testRightCase145() throws SQLException, ClassNotFoundException {
+        strObj.rightCase145();
+    }
+
+    @Test(enabled = true, description = "验证right函数在表格中使用")
+    public void testRightCase146() throws SQLException, ClassNotFoundException {
+        String[][] rightArray = {{"beijing","23.5","18"},{"g haidian ","95.0","25"},{".baidu.com","1235","18"}};
+        List<List> expectedList = new ArrayList<List>();
+        for(int i=0; i<rightArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<rightArray[i].length; j++) {
+                columnList.add(rightArray[i][j]);
+            }
+            expectedList.add(columnList);
+        }
+        System.out.println("Expected: " + expectedList);
+
+        List<List> actualRightList = strObj.rightCase146();
+        System.out.println("Actual: "+ actualRightList);
+        Assert.assertTrue(actualRightList.containsAll(expectedList));
+        Assert.assertTrue(expectedList.containsAll(actualRightList));
+    }
+
+    @Test(enabled = true, description = "验证left，right函数和拼接函数一起使用")
+    public void testLeftRightCase149() throws SQLException, ClassNotFoundException {
+        List expectedList = new ArrayList();
+        expectedList.add("Hello World");
+        expectedList.add("test Dingo");
+        expectedList.add("Hello+World");
+        expectedList.add("test-go");
+        System.out.println("Expected: " + expectedList);
+        List<List> actualList = strObj.leftRightCase149();
+        System.out.println("Actual: "+ actualList);
+        Assert.assertEquals(actualList, expectedList);
+    }
+
 
     @AfterClass(alwaysRun = true, description = "测试完成后删除数据和表格并关闭连接")
     public void tearDownAll() throws SQLException {

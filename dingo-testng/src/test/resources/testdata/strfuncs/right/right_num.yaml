@@ -1,0 +1,56 @@
+testID1000141-01:
+  inputStr: "0"
+  inputLen: "1"
+  outputStr: "0"
+testID1000141-02:
+  inputStr: "12345"
+  inputLen: "4"
+  outputStr: "2345"
+testID1000141-03:
+  inputStr: "783"
+  inputLen: "5"
+  outputStr: "783"
+testID1000141-04:
+  inputStr: "-7372"
+  inputLen: "4"
+  outputStr: "7372"
+testID1000141-05:
+  inputStr: "-72"
+  inputLen: "3"
+  outputStr: "-72"
+testID1000142-01:
+  inputStr: "0.56"
+  inputLen: "1"
+  outputStr: "6"
+testID1000142-02:
+  inputStr: "1234.095"
+  inputLen: "5"
+  outputStr: "4.095"
+testID1000142-03:
+  inputStr: "78.3"
+  inputLen: "5"
+  outputStr: "78.3"
+testID1000142-04:
+  inputStr: "0.003"
+  inputLen: "4"
+  outputStr: ".003"
+testID1000142-05:
+  inputStr: "0.003"
+  inputLen: "5"
+  outputStr: "0.003"
+testID1000142-06:
+  inputStr: "-8.0"
+  inputLen: "4"
+  outputStr: "-8.0"
+testID1000142-07:
+  inputStr: "-8.00"
+  inputLen: "4"
+  outputStr: "8.00"
+testID1000143-02:
+  inputStr: "123"
+  inputLen: "0"
+  outputStr: ""
+testID1000143-03:
+  inputStr: "5.89"
+  inputLen: "0"
+  outputStr: ""

@@ -950,5 +950,34 @@ public class DateTimeFuncs {
         return queryUpdateList2;
     }
 
+    //创建表并插入空date
+    public void insertBlankDate() throws SQLException {
+        Statement statement = connection.createStatement();
+        String createSQL = "create table case1434 (id int, birthday date, primary key(id))";
+        statement.execute(createSQL);
+        String insertSQL = "insert into case1434 values(1,'')";
+        statement.execute(insertSQL);
+        statement.close();
+    }
+
+    //创建表并插入空time
+    public void insertBlankTime() throws SQLException {
+        Statement statement = connection.createStatement();
+        String createSQL = "create table case1435 (id int, create_time time, primary key(id))";
+        statement.execute(createSQL);
+        String insertSQL = "insert into case1435 values(1,'')";
+        statement.execute(insertSQL);
+        statement.close();
+    }
+
+    //创建表并插入空timestamp
+    public void insertBlankTimestamp() throws SQLException {
+        Statement statement = connection.createStatement();
+        String createSQL = "create table case1436 (id int, create_time timestamp, primary key(id))";
+        statement.execute(createSQL);
+        String insertSQL = "insert into case1436 values(1,'')";
+        statement.execute(insertSQL);
+        statement.close();
+    }
 
 }

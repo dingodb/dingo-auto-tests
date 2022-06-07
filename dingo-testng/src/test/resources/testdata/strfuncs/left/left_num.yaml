@@ -1,0 +1,48 @@
+testID1000130-01:
+  inputStr: "0"
+  inputLen: "1"
+  outputStr: "0"
+testID1000130-02:
+  inputStr: "12345"
+  inputLen: "4"
+  outputStr: "1234"
+testID1000130-03:
+  inputStr: "783"
+  inputLen: "5"
+  outputStr: "783"
+testID1000130-04:
+  inputStr: "-87372"
+  inputLen: "4"
+  outputStr: "-873"
+testID1000130-05:
+  inputStr: "-87372"
+  inputLen: "1"
+  outputStr: "-"
+testID1000131-01:
+  inputStr: "0.56"
+  inputLen: "1"
+  outputStr: "0"
+testID1000131-02:
+  inputStr: "1234.095"
+  inputLen: "5"
+  outputStr: "1234."
+testID1000131-03:
+  inputStr: "78.3"
+  inputLen: "5"
+  outputStr: "78.3"
+testID1000131-04:
+  inputStr: "0.003"
+  inputLen: "4"
+  outputStr: "0.00"
+testID1000131-05:
+  inputStr: "-8.123"
+  inputLen: "2"
+  outputStr: "-8"
+testID1000132-02:
+  inputStr: "123"
+  inputLen: "0"
+  outputStr: ""
+testID1000132-03:
+  inputStr: "8.123"
+  inputLen: "0"
+  outputStr: ""

@@ -54,3 +54,11 @@ testID1000095-02:
   formatValue: "938421.9827611"
   decimalNum: "6"
   formatResult: "938421.982761"
+testID1000151-01:
+  formatValue: "123.3456"
+  decimalNum: "-2"
+  formatResult: "123"
+testID1000305-01:
+  formatValue: "123.4556"
+  decimalNum: "2.5"
+  formatResult: "123.456"

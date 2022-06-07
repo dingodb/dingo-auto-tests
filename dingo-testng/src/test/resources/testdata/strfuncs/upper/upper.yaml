@@ -1,0 +1,30 @@
+testID1000125-1:
+  inputCase: "abc"
+  outputCase: "ABC"
+testID1000125-2:
+  inputCase: "zhangsan"
+  outputCase: "ZHANGSAN"
+testID1000125-3:
+  inputCase: "a bc123"
+  outputCase: "A BC123"
+testID1000125-4:
+  inputCase: "HELLO"
+  outputCase: "HELLO"
+testID1000125-5:
+  inputCase: "World"
+  outputCase: "WORLD"
+testID1000125-6:
+  inputCase: "teST1y"
+  outputCase: "TEST1Y"
+testID1000125-7:
+  inputCase: "998"
+  outputCase: "998"
+testID1000125-8:
+  inputCase: "ABC DE fg"
+  outputCase: "ABC DE FG"
+testID1000125-9:
+  inputCase: "123.456"
+  outputCase: "123.456"
+testID1000125-10:
+  inputCase: "http://WWW.baidu.COM"
+  outputCase: "HTTP://WWW.BAIDU.COM"

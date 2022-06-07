@@ -780,6 +780,254 @@ public class StrFuncs {
         return locateResultList;
     }
 
+    //验证lower函数直接使用
+    public String lowerCase119(String inputCase) throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String lowerSQL = "select lower('" + inputCase + "')";
+        ResultSet lowerRst = statement.executeQuery(lowerSQL);
+        String lowerResultStr = null;
+        while (lowerRst.next()){
+            lowerResultStr = lowerRst.getString(1);
+        }
+        statement.close();
+        return lowerResultStr;
+    }
+
+    //验证upper函数直接使用
+    public String upperCase125(String inputCase) throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String upperSQL = "select upper('" + inputCase + "')";
+        ResultSet upperRst = statement.executeQuery(upperSQL);
+        String upperResultStr = null;
+        while (upperRst.next()){
+            upperResultStr = upperRst.getString(1);
+        }
+        statement.close();
+        return upperResultStr;
+    }
+
+    //验证lower和upper函数查询起别名
+    public String lowerUpperCase126() throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String lcaseSQL = "select lcase('ABC1') as lc";
+        ResultSet lcaseRst = statement.executeQuery(lcaseSQL);
+        String luResultStr = null;
+        while (lcaseRst.next()){
+            luResultStr = lcaseRst.getString("lc");
+        }
+
+        String ucaseSQL = "select ucase('def2') as uc";
+        ResultSet ucaseRst = statement.executeQuery(ucaseSQL);
+        while (ucaseRst.next()){
+            luResultStr += ucaseRst.getString("uc");
+        }
+
+        statement.close();
+        return luResultStr;
+    }
+
+    //left函数，截取字符串
+    public String leftCase127(String inputStr, String leftLength) throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String leftSQL = "select left('" + inputStr + "'," + leftLength +")";
+        ResultSet resultSet = statement.executeQuery(leftSQL);
+        String leftResultStr = null;
+        while (resultSet.next()){
+            leftResultStr = resultSet.getString(1);
+        }
+        statement.close();
+        return leftResultStr;
+    }
+
+    //left函数，截取数字
+    public String leftCase130(String inputNum, String leftLength) throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String leftSQL = "select left(" + inputNum + "," + leftLength +")";
+        ResultSet resultSet = statement.executeQuery(leftSQL);
+        String leftResultStr = null;
+        while (resultSet.next()){
+            leftResultStr = resultSet.getString(1);
+        }
+        statement.close();
+        return leftResultStr;
+    }
+
+    //left函数，验证接收参数个数
+    public void leftCase133_1() throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String leftSQL = "select left('SQL test123',‘abc’,2)";
+        statement.executeQuery(leftSQL);
+        statement.close();
+    }
+
+    //left函数，验证接收参数个数
+    public void leftCase133_2() throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String leftSQL = "select left(‘abc’)";
+        statement.executeQuery(leftSQL);
+        statement.close();
+    }
+
+    //left函数，验证接收截取长度为字符
+    public void leftCase134_1() throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String leftSQL = "select left('SQL test123',‘a’)";
+        statement.executeQuery(leftSQL);
+        statement.close();
+    }
+
+    //left函数在表格中使用
+    public List<List> leftCase135() throws SQLException, ClassNotFoundException {
+        String strFuncTableName = getStrTableName();
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String leftSQL = "select left(name,3) lname, left(address,10) laddr, left(age,1) lage, left(amount,4) lamo from "
+                + strFuncTableName + " where id in (1,10,15)";
+        ResultSet leftRst = statement.executeQuery(leftSQL);
+        List<List> leftList = new ArrayList<List>();
+        while (leftRst.next()){
+            List rowList = new ArrayList();
+            rowList.add(leftRst.getString("lname"));
+            rowList.add(leftRst.getString("laddr"));
+            rowList.add(leftRst.getString("lage"));
+            rowList.add(leftRst.getString("lamo"));
+            leftList.add(rowList);
+        }
+        statement.close();
+        return leftList;
+    }
+
+    //right函数，截取字符串
+    public String rightCase138(String inputStr, String rightLength) throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String rightSQL = "select right('" + inputStr + "'," + rightLength +")";
+        ResultSet resultSet = statement.executeQuery(rightSQL);
+        String rightResultStr = null;
+        while (resultSet.next()){
+            rightResultStr = resultSet.getString(1);
+        }
+        statement.close();
+        return rightResultStr;
+    }
+
+    //right函数，截取数字
+    public String rightCase141(String inputStr, String rightLength) throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String rightSQL = "select right(" + inputStr + "," + rightLength +")";
+        ResultSet resultSet = statement.executeQuery(rightSQL);
+        String rightResultStr = null;
+        while (resultSet.next()){
+            rightResultStr = resultSet.getString(1);
+        }
+        statement.close();
+        return rightResultStr;
+    }
+
+    //right函数，验证接收参数个数
+    public void rightCase144_1() throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String rightSQL = "select right('SQL test123',‘abc’,2)";
+        statement.executeQuery(rightSQL);
+        statement.close();
+    }
+
+    //right函数，验证接收参数个数
+    public void rightCase144_2() throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String rightSQL = "select right(‘abc’)";
+        statement.executeQuery(rightSQL);
+        statement.close();
+    }
+
+    //right函数，验证接收截取长度为字符
+    public void rightCase145() throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String rightSQL = "select right('SQL test123',‘a’)";
+        statement.executeQuery(rightSQL);
+        statement.close();
+    }
+
+    //right函数在表格中使用
+    public List<List> rightCase146() throws SQLException, ClassNotFoundException {
+        String strFuncTableName = getStrTableName();
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String rightSQL = "select right(address,10) raddr, right(amount,4) ramo, right(age,2) rage from "
+                + strFuncTableName + " where id in (1,2,15)";
+        ResultSet rightRst = statement.executeQuery(rightSQL);
+        List<List> rightList = new ArrayList<List>();
+        while (rightRst.next()){
+            List rowList = new ArrayList();
+            rowList.add(rightRst.getString("raddr"));
+            rowList.add(rightRst.getString("ramo"));
+            rowList.add(rightRst.getString("rage"));
+            rightList.add(rowList);
+        }
+        statement.close();
+        return rightList;
+    }
+
+    //验证left和right函数和拼接函数一起使用
+    public List leftRightCase149() throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+        String querySQL1 = "select 'Hello'||left(' 1',1)||'World'";
+        String querySQL2 = "select 'test'||left(' Dingotest',6)";
+        String querySQL3 = "select 'Hello'||right('-+',1)||'World'";
+        String querySQL4 = "select 'test-'||right(' Dingo',2)";
+        ResultSet resultSet1 = statement.executeQuery(querySQL1);
+        List concatList = new ArrayList();
+        while(resultSet1.next()) {
+            concatList.add(resultSet1.getString(1));
+        }
+
+        ResultSet resultSet2 = statement.executeQuery(querySQL2);
+        while(resultSet2.next()) {
+            concatList.add(resultSet2.getString(1));
+        }
+
+        ResultSet resultSet3 = statement.executeQuery(querySQL3);
+        while(resultSet3.next()) {
+            concatList.add(resultSet3.getString(1));
+        }
+
+        ResultSet resultSet4 = statement.executeQuery(querySQL4);
+        while(resultSet4.next()) {
+            concatList.add(resultSet4.getString(1));
+        }
+
+        statement.close();
+        return concatList;
+    }
+
 
 
 }

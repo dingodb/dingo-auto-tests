@@ -1,0 +1,60 @@
+testID1000138-01:
+  inputStr: "SQL test123"
+  inputLen: "3"
+  outputStr: "123"
+testID1000138-02:
+  inputStr: "SQL test  "
+  inputLen: "3"
+  outputStr: "t  "
+testID1000138-03:
+  inputStr: "SQL"
+  inputLen: "1"
+  outputStr: "L"
+testID1000138-04:
+  inputStr: "http://www.baidu.com"
+  inputLen: "4"
+  outputStr: ".com"
+testID1000139-01:
+  inputStr: "SQL test123"
+  inputLen: "11"
+  outputStr: "SQL test123"
+testID1000139-02:
+  inputStr: " SQ L "
+  inputLen: "6"
+  outputStr: " SQ L "
+testID1000139-03:
+  inputStr: "S"
+  inputLen: "1"
+  outputStr: "S"
+testID1000139-04:
+  inputStr: " "
+  inputLen: "1"
+  outputStr: " "
+testID1000140-01:
+  inputStr: "abc"
+  inputLen: "5"
+  outputStr: "abc"
+testID1000140-02:
+  inputStr: " SQ t "
+  inputLen: "10"
+  outputStr: " SQ t "
+testID1000140-03:
+  inputStr: "S"
+  inputLen: "3"
+  outputStr: "S"
+testID1000140-04:
+  inputStr: " "
+  inputLen: "2"
+  outputStr: " "
+testID1000143-01:
+  inputStr: "SQL test123"
+  inputLen: "0"
+  outputStr: ""
+testID1000145-02:
+  inputStr: "abcd"
+  inputLen: "2.6"
+  outputStr: "bcd"
+testID1000145-03:
+  inputStr: "abcd"
+  inputLen: "-2"
+  outputStr: ""
