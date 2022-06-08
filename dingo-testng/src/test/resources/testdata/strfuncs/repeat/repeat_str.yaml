@@ -1,0 +1,64 @@
+testID1000148-01:
+  repeatStr: "ab"
+  repeatNum: "2"
+  repeatOut: "abab"
+testID1000148-02:
+  repeatStr: "a"
+  repeatNum: "10"
+  repeatOut: "aaaaaaaaaa"
+testID1000148-03:
+  repeatStr: "12"
+  repeatNum: "1"
+  repeatOut: "12"
+testID1000148-04:
+  repeatStr: "http://www.baidu.com;"
+  repeatNum: "3"
+  repeatOut: "http://www.baidu.com;http://www.baidu.com;http://www.baidu.com;"
+testID1000148-05:
+  repeatStr: "~!@#$%^&*()_+=-|][}{;:/.,?><"
+  repeatNum: "2"
+  repeatOut: "~!@#$%^&*()_+=-|][}{;:/.,?><~!@#$%^&*()_+=-|][}{;:/.,?><"
+testID1000152-01:
+  repeatStr: "ab"
+  repeatNum: "0"
+  repeatOut: ""
+testID1000152-02:
+  repeatStr: "a"
+  repeatNum: "0"
+  repeatOut: ""
+testID1000152-03:
+  repeatStr: "12"
+  repeatNum: "0"
+  repeatOut: ""
+testID1000152-04:
+  repeatStr: "http://www.baidu.com;"
+  repeatNum: "0"
+  repeatOut: ""
+testID1000152-05:
+  repeatStr: "~!@#$%^&*()_+=-|][}{;:/.,?><"
+  repeatNum: "0"
+  repeatOut: ""
+testID1000153-01:
+  repeatStr: "ab"
+  repeatNum: "-1"
+  repeatOut: ""
+testID1000153-02:
+  repeatStr: "-1"
+  repeatNum: "-2"
+  repeatOut: ""
+testID1000154-01:
+  repeatStr: "abc"
+  repeatNum: "2.4"
+  repeatOut: "abcabc"
+testID1000154-02:
+  repeatStr: "123 "
+  repeatNum: "2.5"
+  repeatOut: "123 123 123 "
+testID1000155-01:
+  repeatStr: "abc"
+  repeatNum: null
+  repeatOut: null
+testID1000155-02:
+  repeatStr: "123"
+  repeatNum: null
+  repeatOut: null

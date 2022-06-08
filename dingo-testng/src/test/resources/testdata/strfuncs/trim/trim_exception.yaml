@@ -1,0 +1,8 @@
+testID1000195-01:
+  trimState: "ltrim('a' from 'abca')"
+testID1000195-02:
+  trimState: "ltrim(leading 'a' from 'abc')"
+testID1000197-01:
+  trimState: "rtrim('a' from 'abca')"
+testID1000197-02:
+  trimState: "rtrim(leading 'a' from 'abc')"

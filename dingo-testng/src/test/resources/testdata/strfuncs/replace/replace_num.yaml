@@ -1,0 +1,40 @@
+testID1000170-01:
+  replaceParentStr: "112233"
+  replaceSubStr: "33"
+  replaceStr: "0"
+  replaceOutStr: "11220"
+testID1000170-02:
+  replaceParentStr: "1234"
+  replaceSubStr: "1234"
+  replaceStr: "4321"
+  replaceOutStr: "4321"
+testID1000170-03:
+  replaceParentStr: "123"
+  replaceSubStr: "1234"
+  replaceStr: "567"
+  replaceOutStr: "123"
+testID1000170-04:
+  replaceParentStr: "123003"
+  replaceSubStr: "3"
+  replaceStr: "99"
+  replaceOutStr: "12990099"
+testID1000171-01:
+  replaceParentStr: "123.003"
+  replaceSubStr: "123.00"
+  replaceStr: "99.2"
+  replaceOutStr: "99.23"
+testID1000171-02:
+  replaceParentStr: "123.003"
+  replaceSubStr: "123.00"
+  replaceStr: "99"
+  replaceOutStr: "993"
+testID1000171-03:
+  replaceParentStr: "123.003"
+  replaceSubStr: "123"
+  replaceStr: "99"
+  replaceOutStr: "99.003"
+testID1000171-04:
+  replaceParentStr: "123.003"
+  replaceSubStr: "3.003"
+  replaceStr: "0.0"
+  replaceOutStr: "120.0"

@@ -1,0 +1,55 @@
+testID1000173-01:
+  replaceParentStr: "abc"
+  replaceSubStr: "abc"
+  replaceStr: "123"
+  replaceOutStr: "123"
+testID1000173-02:
+  replaceParentStr: "aacaa"
+  replaceSubStr: "aa"
+  replaceStr: "0"
+  replaceOutStr: "0c0"
+testID1000173-03:
+  replaceParentStr: "http://www.apache.org"
+  replaceSubStr: "//"
+  replaceStr: "12"
+  replaceOutStr: "http:12www.apache.org"
+testID1000173-04:
+  replaceParentStr: "123"
+  replaceSubStr: "123"
+  replaceStr: "123"
+  replaceOutStr: "123"
+testID1000173-05:
+  replaceParentStr: "123"
+  replaceSubStr: "12"
+  replaceStr: "11"
+  replaceOutStr: "113"
+testID1000174-01:
+  replaceParentStr: "abc"
+  replaceSubStr: "abc"
+  replaceStr: "123.01"
+  replaceOutStr: "123.01"
+testID1000174-02:
+  replaceParentStr: "aacaa"
+  replaceSubStr: "aa"
+  replaceStr: "0.12"
+  replaceOutStr: "0.12c0.12"
+testID1000174-03:
+  replaceParentStr: "123"
+  replaceSubStr: "123"
+  replaceStr: "1.23"
+  replaceOutStr: "1.23"
+testID1000174-04:
+  replaceParentStr: "1"
+  replaceSubStr: "1"
+  replaceStr: "0.00"
+  replaceOutStr: "0.00"
+testID1000168-01:
+  replaceParentStr: "abc"
+  replaceSubStr: "c"
+  replaceStr: null
+  replaceOutStr: null
+testID1000168-02:
+  replaceParentStr: "abc"
+  replaceSubStr: "abc"
+  replaceStr: null
+  replaceOutStr: null

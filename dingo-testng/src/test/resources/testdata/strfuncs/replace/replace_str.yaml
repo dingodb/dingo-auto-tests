@@ -1,0 +1,106 @@
+testID1000163-01:
+  replaceParentStr: "abcdefg"
+  replaceSubStr: "g"
+  replaceStr: "a"
+  replaceOutStr: "abcdefa"
+testID1000163-02:
+  replaceParentStr: "aacaa"
+  replaceSubStr: "aa"
+  replaceStr: "bbb"
+  replaceOutStr: "bbbcbbb"
+testID1000163-03:
+  replaceParentStr: "http://www.apache.com"
+  replaceSubStr: ".com"
+  replaceStr: ".org"
+  replaceOutStr: "http://www.apache.org"
+testID1000163-04:
+  replaceParentStr: "1323345"
+  replaceSubStr: "33"
+  replaceStr: "00"
+  replaceOutStr: "1320045"
+testID1000163-05:
+  replaceParentStr: "s~!@#$%^&*()_+=-|][}{;:/.,?><"
+  replaceSubStr: "~!@#$%^&*()_+=-|][}{;:/.,?><"
+  replaceStr: "s"
+  replaceOutStr: "ss"
+testID1000164-01:
+  replaceParentStr: "abcd"
+  replaceSubStr: "abcd"
+  replaceStr: "efgh"
+  replaceOutStr: "efgh"
+testID1000164-02:
+  replaceParentStr: "~!@#$%^&*()_+=-|][}{;:/.,?><"
+  replaceSubStr: "~!@#$%^&*()_+=-|][}{;:/.,?><"
+  replaceStr: "~!@"
+  replaceOutStr: "~!@"
+testID1000164-03:
+  replaceParentStr: "http://www.apache.com"
+  replaceSubStr: "http://www.apache.com"
+  replaceStr: "http://WWW.baidu.com"
+  replaceOutStr: "http://WWW.baidu.com"
+testID1000164-04:
+  replaceParentStr: "1323345"
+  replaceSubStr: "1323345"
+  replaceStr: "00"
+  replaceOutStr: "00"
+testID1000165-01:
+  replaceParentStr: "abcd"
+  replaceSubStr: "abcde"
+  replaceStr: "test"
+  replaceOutStr: "abcd"
+testID1000165-02:
+  replaceParentStr: "http://www.apache.com"
+  replaceSubStr: "https://www.apache.com "
+  replaceStr: "https://WWW.baidu.com"
+  replaceOutStr: "http://www.apache.com"
+testID1000165-03:
+  replaceParentStr: "~!@#$%^&*()_+=-|][}{;:/.,?><"
+  replaceSubStr: "a~!@#$%^&*()_+=-|][}{;:/.,?><"
+  replaceStr: "bb"
+  replaceOutStr: "~!@#$%^&*()_+=-|][}{;:/.,?><"
+testID1000165-04:
+  replaceParentStr: "1323345"
+  replaceSubStr: "333"
+  replaceStr: "00"
+  replaceOutStr: "1323345"
+testID1000166-01:
+  replaceParentStr: "abcdecfg"
+  replaceSubStr: "c"
+  replaceStr: " "
+  replaceOutStr: "ab de fg"
+testID1000166-02:
+  replaceParentStr: "aacaa"
+  replaceSubStr: "aa"
+  replaceStr: " "
+  replaceOutStr: " c "
+testID1000166-03:
+  replaceParentStr: "  a bc  d"
+  replaceSubStr: "  "
+  replaceStr: " "
+  replaceOutStr: " a bc d"
+testID1000166-04:
+  replaceParentStr: "abc"
+  replaceSubStr: "abc"
+  replaceStr: " "
+  replaceOutStr: " "
+testID1000167-01:
+  replaceParentStr: "abcdecfg"
+  replaceSubStr: "c"
+  replaceStr: ""
+  replaceOutStr: "abdefg"
+testID1000167-02:
+  replaceParentStr: "aacaa"
+  replaceSubStr: "aa"
+  replaceStr: ""
+  replaceOutStr: "c"
+testID1000167-03:
+  replaceParentStr: "  a bc  d"
+  replaceSubStr: "  "
+  replaceStr: ""
+  replaceOutStr: "a bcd"
+testID1000167-04:
+  replaceParentStr: "abc"
+  replaceSubStr: "abc"
+  replaceStr: ""
+  replaceOutStr: ""
+

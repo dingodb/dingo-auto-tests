@@ -669,6 +669,290 @@ public class TestStrFuncs extends YamlDataHelper {
         Assert.assertEquals(actualList, expectedList);
     }
 
+    @Test(enabled = true, dataProvider = "yamlStrFuncMethod",description = "验证repeat复制字符串")
+    public void testRepeatCase148(Map<String, String> param) throws SQLException, ClassNotFoundException {
+        String expectedStr = param.get("repeatOut");
+        System.out.println("Expected：" + expectedStr);
+        String actualStr = strObj.repeatCase148(param.get("repeatStr"), param.get("repeatNum"));
+        System.out.println("Actual：" + actualStr);
+
+        Assert.assertEquals(actualStr, expectedStr);
+    }
+
+    @Test(enabled = true, dataProvider = "yamlStrFuncMethod",description = "验证repeat复制数值")
+    public void testRepeatCase157(Map<String, String> param) throws SQLException, ClassNotFoundException {
+        String expectedStr = param.get("repeatOut");
+        System.out.println("Expected：" + expectedStr);
+        String actualStr = strObj.repeatCase157(param.get("repeatStr"), param.get("repeatNum"));
+        System.out.println("Actual：" + actualStr);
+
+        Assert.assertEquals(actualStr, expectedStr);
+    }
+
+    @Test(enabled = true, description = "验证多个repeat使用")
+    public void testRepeatCase160() throws SQLException, ClassNotFoundException {
+        List expectedList = new ArrayList();
+        expectedList.add("abcabcabc");
+        expectedList.add("123123");
+        expectedList.add("1.10");
+        System.out.println("Expected: " + expectedList);
+        List<List> actualList = strObj.repeatCase160();
+        System.out.println("Actual: "+ actualList);
+        Assert.assertEquals(actualList, expectedList);
+    }
+
+    @Test(enabled = true, expectedExceptions = SQLException.class, description = "验证repeat函数接收参数不符,预期异常")
+    public void testRepeatCase161_1() throws SQLException, ClassNotFoundException {
+        strObj.repeatCase161_1();
+    }
+
+    @Test(enabled = true, expectedExceptions = SQLException.class, description = "验证repeat函数接收参数不符，预期异常")
+    public void testRepeatCase161_2() throws SQLException, ClassNotFoundException {
+        strObj.repeatCase161_2();
+    }
+
+    @Test(enabled = true, expectedExceptions = SQLException.class, description = "验证repeat函数复制参数为非数字")
+    public void testRepeatCase162() throws SQLException, ClassNotFoundException {
+        strObj.repeatCase162();
+    }
+
+    @Test(enabled = true, dataProvider = "yamlStrFuncMethod",description = "验证replace函数替换字符串")
+    public void testReplaceCase163(Map<String, String> param) throws SQLException, ClassNotFoundException {
+        String expectedStr = param.get("replaceOutStr");
+        System.out.println("Expected：" + expectedStr);
+        String actualStr = strObj.replaceCase163(param.get("replaceParentStr"), param.get("replaceSubStr"), param.get("replaceStr"));
+        System.out.println("Actual：" + actualStr);
+
+        Assert.assertEquals(actualStr, expectedStr);
+    }
+
+    @Test(enabled = true, dataProvider = "yamlStrFuncMethod",description = "验证replace函数替换数值")
+    public void testReplaceCase170(Map<String, String> param) throws SQLException, ClassNotFoundException {
+        String expectedStr = param.get("replaceOutStr");
+        System.out.println("Expected：" + expectedStr);
+        String actualStr = strObj.replaceCase170(param.get("replaceParentStr"), param.get("replaceSubStr"), param.get("replaceStr"));
+        System.out.println("Actual：" + actualStr);
+
+        Assert.assertEquals(actualStr, expectedStr);
+    }
+
+    @Test(enabled = true, expectedExceptions = SQLException.class, description = "验证replace函数接收参数不符，预期异常")
+    public void testReplaceCase172_1() throws SQLException, ClassNotFoundException {
+        strObj.replaceCase172_1();
+    }
+
+    @Test(enabled = true, expectedExceptions = SQLException.class, description = "验证replac函数接收参数不符，预期异常")
+    public void testReplaceCase172_2() throws SQLException, ClassNotFoundException {
+        strObj.replaceCase172_2();
+    }
+
+    @Test(enabled = true, expectedExceptions = SQLException.class, description = "验证replace函数接收参数不符，预期异常")
+    public void testReplaceCase172_3() throws SQLException, ClassNotFoundException {
+        strObj.replaceCase172_3();
+    }
+
+    @Test(enabled = true, expectedExceptions = SQLException.class, description = "验证replac函数接收参数不符，预期异常")
+    public void testReplaceCase172_4() throws SQLException, ClassNotFoundException {
+        strObj.replaceCase172_4();
+    }
+
+    @Test(enabled = true, dataProvider = "yamlStrFuncMethod",description = "验证replace函数替换字符串为数值")
+    public void testReplaceCase173(Map<String, String> param) throws SQLException, ClassNotFoundException {
+        String expectedStr = param.get("replaceOutStr");
+        System.out.println("Expected：" + expectedStr);
+        String actualStr = strObj.replaceCase173(param.get("replaceParentStr"), param.get("replaceSubStr"), param.get("replaceStr"));
+        System.out.println("Actual：" + actualStr);
+
+        Assert.assertEquals(actualStr, expectedStr);
+    }
+
+    @Test(enabled = true, dataProvider = "yamlStrFuncMethod",description = "验证replace函数替换数值为字符串")
+    public void testReplaceCase175(Map<String, String> param) throws SQLException, ClassNotFoundException {
+        String expectedStr = param.get("replaceOutStr");
+        System.out.println("Expected：" + expectedStr);
+        String actualStr = strObj.replaceCase175(param.get("replaceParentStr"), param.get("replaceSubStr"), param.get("replaceStr"));
+        System.out.println("Actual：" + actualStr);
+
+        Assert.assertEquals(actualStr, expectedStr);
+    }
+
+    @Test(enabled = true, description = "验证replace在update语句中使用")
+    public void testReplaceCase177() throws SQLException, ClassNotFoundException {
+        List expectedReplaceList = new ArrayList();
+        String[] replaceArray = new String[]{"1shanghai","2haidian","3 shanghai chaoyang ","4chaoyangdis_1 NO.street",
+                "5shanghai", "6shanghai changping 89","7haidian2","8wuwuxi ","9  maya","10",null};
+        for (int i=0; i < replaceArray.length; i++){
+            expectedReplaceList.add(replaceArray[i]);
+        }
+        System.out.println("期望输出列表：" + expectedReplaceList);
+        List actualReplaceList = strObj.replaceCase177();
+        System.out.println("实际输出列表：" + actualReplaceList);
+
+        Assert.assertTrue(actualReplaceList.containsAll(expectedReplaceList));
+        Assert.assertTrue(expectedReplaceList.containsAll(actualReplaceList));
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testReplaceCase177"},
+            description = "验证replace在update语句中使用，替换浮点型字段值为整型字段值")
+    public void testReplaceCase178() throws SQLException, ClassNotFoundException {
+        List expectedReplaceList = new ArrayList();
+        String[] replaceArray = new String[]{"1-18.0","3-35.0","5-18.0","7-99.0","9-28.0"};
+        for (int i=0; i < replaceArray.length; i++){
+            expectedReplaceList.add(replaceArray[i]);
+        }
+        System.out.println("期望输出列表：" + expectedReplaceList);
+        List actualReplaceList = strObj.replaceCase178();
+        System.out.println("实际输出列表：" + actualReplaceList);
+
+        Assert.assertTrue(actualReplaceList.containsAll(expectedReplaceList));
+        Assert.assertTrue(expectedReplaceList.containsAll(actualReplaceList));
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testReplaceCase178"},
+            description = "验证replace在update语句中使用,替换整型字段值为浮点型字段值")
+    public void testReplaceCase179_1() throws SQLException, ClassNotFoundException {
+        int actualReplaceRows = strObj.replaceCase179_1();
+        System.out.println("实际更新行数：" + actualReplaceRows);
+
+        Assert.assertEquals(actualReplaceRows, 4);
+    }
+
+    @Test(enabled = true, expectedExceptions = SQLException.class, dependsOnMethods = {"testReplaceCase179_1"},
+            description = "验证replac函数在update语句中使用，预期异常")
+    public void testReplaceCase179_2() throws SQLException, ClassNotFoundException {
+        int actualReplaceRows = strObj.replaceCase179_2();
+        System.out.println("实际更新行数：" + actualReplaceRows);
+    }
+
+    @Test(enabled = true, dataProvider = "yamlStrFuncMethod",description = "验证trim函数去除字符串两边空格")
+    public void testTrimCase181(Map<String, String> param) throws SQLException, ClassNotFoundException {
+        String expectedStr = param.get("trimOut");
+        System.out.println("Expected：" + expectedStr);
+        String actualStr = strObj.trimCase181(param.get("trimStr"));
+        System.out.println("Actual：" + actualStr);
+
+        Assert.assertEquals(actualStr, expectedStr);
+    }
+
+    @Test(enabled = true, dataProvider = "yamlStrFuncMethod",description = "验证trim函数leading用法去除字符串左边空格")
+    public void testTrimCase182(Map<String, String> param) throws SQLException, ClassNotFoundException {
+        String expectedStr = param.get("trimOut");
+        System.out.println("Expected：" + expectedStr);
+        String actualStr = strObj.trimCase182(param.get("trimStr"));
+        System.out.println("Actual：" + actualStr);
+
+        Assert.assertEquals(actualStr, expectedStr);
+    }
+
+    @Test(enabled = true, dataProvider = "yamlStrFuncMethod",description = "验证trim函数trailing用法去除字符串右边空格")
+    public void testTrimCase183(Map<String, String> param) throws SQLException, ClassNotFoundException {
+        String expectedStr = param.get("trimOut");
+        System.out.println("Expected：" + expectedStr);
+        String actualStr = strObj.trimCase183(param.get("trimStr"));
+        System.out.println("Actual：" + actualStr);
+
+        Assert.assertEquals(actualStr, expectedStr);
+    }
+
+    @Test(enabled = true, dataProvider = "yamlStrFuncMethod",description = "验证trim函数both去除字符串两边空格")
+    public void testTrimCase184(Map<String, String> param) throws SQLException, ClassNotFoundException {
+        String expectedStr = param.get("trimOut");
+        System.out.println("Expected：" + expectedStr);
+        String actualStr = strObj.trimCase184(param.get("trimStr"));
+        System.out.println("Actual：" + actualStr);
+
+        Assert.assertEquals(actualStr, expectedStr);
+    }
+
+    @Test(enabled = true, dataProvider = "yamlStrFuncMethod",description = "验证trim函数leading去除左边指定字符")
+    public void testTrimCase185(Map<String, String> param) throws SQLException, ClassNotFoundException {
+        String expectedStr = param.get("trimOut");
+        System.out.println("Expected：" + expectedStr);
+        String actualStr = strObj.trimCase185(param.get("trimStr"), param.get("leadingCha"));
+        System.out.println("Actual：" + actualStr);
+
+        Assert.assertEquals(actualStr, expectedStr);
+    }
+
+    @Test(enabled = true, dataProvider = "yamlStrFuncMethod",description = "验证trim函数trailing去除右边指定字符")
+    public void testTrimCase186(Map<String, String> param) throws SQLException, ClassNotFoundException {
+        String expectedStr = param.get("trimOut");
+        System.out.println("Expected：" + expectedStr);
+        String actualStr = strObj.trimCase186(param.get("trimStr"), param.get("trailingCha"));
+        System.out.println("Actual：" + actualStr);
+
+        Assert.assertEquals(actualStr, expectedStr);
+    }
+
+    @Test(enabled = true, dataProvider = "yamlStrFuncMethod",description = "验证trim函数both去除两边指定字符")
+    public void testTrimCase187(Map<String, String> param) throws SQLException, ClassNotFoundException {
+        String expectedStr = param.get("trimOut");
+        System.out.println("Expected：" + expectedStr);
+        String actualStr = strObj.trimCase187(param.get("trimStr"), param.get("bothCha"));
+        System.out.println("Actual：" + actualStr);
+
+        Assert.assertEquals(actualStr, expectedStr);
+    }
+
+    @Test(enabled = true, dataProvider = "yamlStrFuncMethod",description = "验证trim函数默认按both去除两边指定字符")
+    public void testTrimCase188(Map<String, String> param) throws SQLException, ClassNotFoundException {
+        String expectedStr = param.get("trimOut");
+        System.out.println("Expected：" + expectedStr);
+        String actualStr = strObj.trimCase188(param.get("trimStr"), param.get("bothCha"));
+        System.out.println("Actual：" + actualStr);
+
+        Assert.assertEquals(actualStr, expectedStr);
+    }
+
+    @Test(enabled = true, dataProvider = "yamlStrFuncMethod",description = "验证trim函数用于数值")
+    public void testTrimCase192(Map<String, String> param) throws SQLException, ClassNotFoundException {
+        String expectedStr = param.get("trimOut");
+        System.out.println("Expected：" + expectedStr);
+        String actualStr = strObj.trimCase192(param.get("trimState"));
+        System.out.println("Actual：" + actualStr);
+
+        Assert.assertEquals(actualStr, expectedStr);
+    }
+
+    @Test(enabled = true, dataProvider = "yamlStrFuncMethod",description = "验证ltrim函数去除字符串左边空格")
+    public void testLtrimCase194(Map<String, String> param) throws SQLException, ClassNotFoundException {
+        String expectedStr = param.get("trimOut");
+        System.out.println("Expected：" + expectedStr);
+        String actualStr = strObj.ltrimCase194(param.get("trimStr"));
+        System.out.println("Actual：" + actualStr);
+
+        Assert.assertEquals(actualStr, expectedStr);
+    }
+
+    @Test(enabled = true, dataProvider = "yamlStrFuncMethod",description = "验证rtrim函数去除字符串右边空格")
+    public void testRtrimCase196(Map<String, String> param) throws SQLException, ClassNotFoundException {
+        String expectedStr = param.get("trimOut");
+        System.out.println("Expected：" + expectedStr);
+        String actualStr = strObj.rtrimCase196(param.get("trimStr"));
+        System.out.println("Actual：" + actualStr);
+
+        Assert.assertEquals(actualStr, expectedStr);
+    }
+
+    @Test(enabled = true, dataProvider = "yamlStrFuncMethod", expectedExceptions = SQLException.class,description = "验证ltrim和rtrim函数不支持去除指定字符")
+    public void testTrimCase195(Map<String, String> param) throws SQLException, ClassNotFoundException {
+        strObj.trimCase195(param.get("trimState"));
+    }
+
+    @Test(enabled = true, description = "验证trim在表中使用")
+    public void testTrimCase198() throws SQLException, ClassNotFoundException {
+        List expectedTrimList = new ArrayList();
+        String[] trimArray = new String[]{"TAT","TATtt","18",".","aabcaa "," aabcaa","aabcaa"};
+        for (int i=0; i < trimArray.length; i++){
+            expectedTrimList.add(trimArray[i]);
+        }
+        System.out.println("期望输出列表：" + expectedTrimList);
+        List actualTrimList = strObj.trimCase198();
+        System.out.println("实际输出列表：" + actualTrimList);
+
+        Assert.assertEquals(actualTrimList, expectedTrimList);
+    }
+
 
     @AfterClass(alwaysRun = true, description = "测试完成后删除数据和表格并关闭连接")
     public void tearDownAll() throws SQLException {
@@ -678,6 +962,10 @@ public class TestStrFuncs extends YamlDataHelper {
         tearDownStatement.execute("drop table " + tableName);
         tearDownStatement.execute("delete from tableStrCase113");
         tearDownStatement.execute("drop table tableStrCase113");
+        tearDownStatement.execute("delete from tableReplaceCase177");
+        tearDownStatement.execute("drop table tableReplaceCase177");
+        tearDownStatement.execute("delete from tableTrimCase198");
+        tearDownStatement.execute("drop table tableTrimCase198");
         tearDownStatement.close();
         connection.close();
     }

@@ -1,0 +1,35 @@
+testID1000175-01:
+  replaceParentStr: "123"
+  replaceSubStr: "12"
+  replaceStr: "ab"
+  replaceOutStr: "ab3"
+testID1000175-02:
+  replaceParentStr: "1234"
+  replaceSubStr: "1234"
+  replaceStr: "test"
+  replaceOutStr: "test"
+testID1000175-03:
+  replaceParentStr: "123"
+  replaceSubStr: "123"
+  replaceStr: "1"
+  replaceOutStr: "1"
+testID1000176-01:
+  replaceParentStr: "123.01"
+  replaceSubStr: "123.01"
+  replaceStr: "test1"
+  replaceOutStr: "test1"
+testID1000176-02:
+  replaceParentStr: "123.01"
+  replaceSubStr: "3.0"
+  replaceStr: "123"
+  replaceOutStr: "121231"
+testID1000169-01:
+  replaceParentStr: "'abc'"
+  replaceSubStr: null
+  replaceStr: "test"
+  replaceOutStr: null
+testID1000169-02:
+  replaceParentStr: null
+  replaceSubStr: null
+  replaceStr: "ftest"
+  replaceOutStr: null

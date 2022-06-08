@@ -1,0 +1,24 @@
+testID1000157-01:
+  repeatStr: "0"
+  repeatNum: "2"
+  repeatOut: "00"
+testID1000157-02:
+  repeatStr: "123"
+  repeatNum: "10"
+  repeatOut: "123123123123123123123123123123"
+testID1000157-03:
+  repeatStr: "1873"
+  repeatNum: "3"
+  repeatOut: "187318731873"
+testID1000158-01:
+  repeatStr: "0.1"
+  repeatNum: "1"
+  repeatOut: "0.1"
+testID1000158-02:
+  repeatStr: "1234.092"
+  repeatNum: "10"
+  repeatOut: "1234.0921234.0921234.0921234.0921234.0921234.0921234.0921234.0921234.0921234.092"
+testID1000156-01:
+  repeatStr: null
+  repeatNum: "2"
+  repeatOut: null

@@ -250,6 +250,96 @@ public class YamlDataHelper{
                 break;
             }
 
+            case "testRepeatCase148": {
+                yamlStrFuncList = getYamlList(iniReader.getValue("strFuncYaml", "repeatStr"));
+                break;
+            }
+
+            case "testRepeatCase157": {
+                yamlStrFuncList = getYamlList(iniReader.getValue("strFuncYaml", "repeatNum"));
+                break;
+            }
+
+            case "testReplaceCase163": {
+                yamlStrFuncList = getYamlList(iniReader.getValue("strFuncYaml", "replaceStr"));
+                break;
+            }
+
+            case "testReplaceCase170": {
+                yamlStrFuncList = getYamlList(iniReader.getValue("strFuncYaml", "replaceNum"));
+                break;
+            }
+
+            case "testReplaceCase173": {
+                yamlStrFuncList = getYamlList(iniReader.getValue("strFuncYaml", "replaceStrNum"));
+                break;
+            }
+
+            case "testReplaceCase175": {
+                yamlStrFuncList = getYamlList(iniReader.getValue("strFuncYaml", "replaceNumStr"));
+                break;
+            }
+
+            case "testTrimCase181": {
+                yamlStrFuncList = getYamlList(iniReader.getValue("strFuncYaml", "trimStr"));
+                break;
+            }
+
+            case "testTrimCase182": {
+                yamlStrFuncList = getYamlList(iniReader.getValue("strFuncYaml", "trimLeadingStr"));
+                break;
+            }
+
+            case "testTrimCase183": {
+                yamlStrFuncList = getYamlList(iniReader.getValue("strFuncYaml", "trimTrailingStr"));
+                break;
+            }
+
+            case "testTrimCase184": {
+                yamlStrFuncList = getYamlList(iniReader.getValue("strFuncYaml", "trimBothStr"));
+                break;
+            }
+
+            case "testTrimCase185": {
+                yamlStrFuncList = getYamlList(iniReader.getValue("strFuncYaml", "trimLeadingXStr"));
+                break;
+            }
+
+            case "testTrimCase186": {
+                yamlStrFuncList = getYamlList(iniReader.getValue("strFuncYaml", "trimTrailingXStr"));
+                break;
+            }
+
+            case "testTrimCase187": {
+                yamlStrFuncList = getYamlList(iniReader.getValue("strFuncYaml", "trimBothXStr"));
+                break;
+            }
+
+            case "testTrimCase188": {
+                yamlStrFuncList = getYamlList(iniReader.getValue("strFuncYaml", "trimBothXStr"));
+                break;
+            }
+
+            case "testTrimCase192": {
+                yamlStrFuncList = getYamlList(iniReader.getValue("strFuncYaml", "trimNum"));
+                break;
+            }
+
+            case "testLtrimCase194": {
+                yamlStrFuncList = getYamlList(iniReader.getValue("strFuncYaml", "trimLeadingStr"));
+                break;
+            }
+
+            case "testRtrimCase196": {
+                yamlStrFuncList = getYamlList(iniReader.getValue("strFuncYaml", "trimTrailingStr"));
+                break;
+            }
+
+            case "testTrimCase195": {
+                yamlStrFuncList = getYamlList(iniReader.getValue("strFuncYaml", "trimException"));
+                break;
+            }
+
         }
         Object[][] files = new Object[yamlStrFuncList.size()][];
         for (int i = 0; i < yamlStrFuncList.size(); i++) {

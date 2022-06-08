@@ -1,0 +1,36 @@
+testID1000192-01:
+  trimState: "leading 1 from 11231"
+  trimOut: "231"
+testID1000192-02:
+  trimState: "trailing 1 from 12311"
+  trimOut: "123"
+testID1000192-03:
+  trimState: "both 1 from 112311"
+  trimOut: "23"
+testID1000192-04:
+  trimState: "leading 123 from 1234123"
+  trimOut: "4123"
+testID1000192-05:
+  trimState: "trailing 123 from 1234123"
+  trimOut: "1234"
+testID1000192-06:
+  trimState: "both 123 from 1234123"
+  trimOut: "4"
+testID1000192-07:
+  trimState: "123 from 1234123"
+  trimOut: "4"
+testID1000192-08:
+  trimState: "123 from 123123"
+  trimOut: ""
+testID1000193-01:
+  trimState: "1.1 from 1.1231"
+  trimOut: "231"
+testID1000193-02:
+  trimState: "leading 0.1 from 0.13110"
+  trimOut: "3110"
+testID1000193-03:
+  trimState: "both 1.1 from 1.12311"
+  trimOut: "2311"
+testID1000193-04:
+  trimState: "0 from 0.123"
+  trimOut: ".123"

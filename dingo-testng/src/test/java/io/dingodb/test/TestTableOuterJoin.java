@@ -537,11 +537,12 @@ public class TestTableOuterJoin {
     }
 
     @Test(priority = 4, enabled = true, description = "验证两表没有相同数据时查询全连接数据")
-    public void test05FullOuterJoinNoSameData() throws SQLException {
+    public void test05FullOuterJoinNoSameData() throws SQLException, InterruptedException {
         initProductTB();
         List<List> expectedList = expectedFullList2();
         System.out.println("Expected: " + expectedList);
         List<List> actualListNoSameData = outerJoinObj.fullOuterJoinNoSameData();
+        Thread.sleep(3000);
         System.out.println("Actual: " + actualListNoSameData);
 
         Assert.assertTrue(actualListNoSameData.containsAll(expectedList));

@@ -1,0 +1,56 @@
+testID1000186-01:
+  trimStr: "abc"
+  trailingCha: "c"
+  trimOut: "ab"
+testID1000186-02:
+  trimStr: " abc"
+  trailingCha: "c"
+  trimOut: " ab"
+testID1000186-03:
+  trimStr: " abc "
+  trailingCha: "c"
+  trimOut: " abc "
+testID1000186-04:
+  trimStr: "  c"
+  trailingCha: "  c"
+  trimOut: ""
+testID1000186-05:
+  trimStr: "abcda efa aa"
+  trailingCha: "a"
+  trimOut: "abcda efa "
+testID1000186-06:
+  trimStr: "aa abc ade aa a"
+  trailingCha: "a"
+  trimOut: "aa abc ade aa "
+testID1000186-07:
+  trimStr: "abc"
+  trailingCha: "cc"
+  trimOut: "abc"
+testID1000186-08:
+  trimStr: "aaaabbccaaaa"
+  trailingCha: "aa"
+  trimOut: "aaaabbcc"
+testID1000186-09:
+  trimStr: "aaaaabaaccaaa"
+  trailingCha: "aa"
+  trimOut: "aaaaabaacca"
+testID1000186-10:
+  trimStr: "aaabaaccaaaaa"
+  trailingCha: "aaa"
+  trimOut: "aaabaaccaa"
+testID1000186-11:
+  trimStr: "abcbcabc"
+  trailingCha: "abc"
+  trimOut: "abcbc"
+testID1000186-12:
+  trimStr: "abc123"
+  trailingCha: "abc123"
+  trimOut: ""
+testID1000186-13:
+  trimStr: " abc"
+  trailingCha: "abc"
+  trimOut: " "
+testID1000186-14:
+  trimStr: "bcd"
+  trailingCha: "a"
+  trimOut: "bcd"

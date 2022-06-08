@@ -1,0 +1,36 @@
+testID1000181-01:
+  trimStr: " abc"
+  trimOut: "abc"
+testID1000181-02:
+  trimStr: "abc "
+  trimOut: "abc"
+testID1000181-03:
+  trimStr: " abc "
+  trimOut: "abc"
+testID1000181-04:
+  trimStr: "  abc  "
+  trimOut: "abc"
+testID1000181-05:
+  trimStr: " a b  cd e  f "
+  trimOut: "a b  cd e  f"
+testID1000181-06:
+  trimStr: " http://www.baidu.com  "
+  trimOut: "http://www.baidu.com"
+testID1000181-07:
+  trimStr: "abc"
+  trimOut: "abc"
+testID1000181-08:
+  trimStr: "  s~!@#$%^&*()_+=-|][}{;:/.,?><  "
+  trimOut: "s~!@#$%^&*()_+=-|][}{;:/.,?><"
+testID1000181-09:
+  trimStr: "  123 "
+  trimOut: "123"
+testID1000181-10:
+  trimStr: "   99.09  "
+  trimOut: "99.09"
+testID1000189-01:
+  trimStr: "   "
+  trimOut: ""
+testID1000190-01:
+  trimStr: ""
+  trimOut: ""

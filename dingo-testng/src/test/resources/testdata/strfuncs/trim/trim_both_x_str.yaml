@@ -1,0 +1,56 @@
+testID1000187-01:
+  trimStr: "cabc "
+  bothCha: "c"
+  trimOut: "abc "
+testID1000187-02:
+  trimStr: " cabc"
+  bothCha: "c"
+  trimOut: " cab"
+testID1000187-03:
+  trimStr: " cabc "
+  bothCha: "c"
+  trimOut: " cabc "
+testID1000187-04:
+  trimStr: "cabc"
+  bothCha: "c"
+  trimOut: "ab"
+testID1000187-05:
+  trimStr: "abcda efa aa"
+  bothCha: "a"
+  trimOut: "bcda efa "
+testID1000187-06:
+  trimStr: "aa abc ade aa a"
+  bothCha: "a"
+  trimOut: " abc ade aa "
+testID1000187-07:
+  trimStr: "cabc"
+  bothCha: "cc"
+  trimOut: "cabc"
+testID1000187-08:
+  trimStr: "aaaabbccaaaa"
+  bothCha: "aa"
+  trimOut: "bbcc"
+testID1000187-09:
+  trimStr: "aaaaabaaccaaa"
+  bothCha: "aa"
+  trimOut: "abaacca"
+testID1000187-10:
+  trimStr: "aaabaaccaaaaa"
+  bothCha: "aaa"
+  trimOut: "baaccaa"
+testID1000187-11:
+  trimStr: "abcbcabc"
+  bothCha: "abc"
+  trimOut: "bc"
+testID1000187-12:
+  trimStr: "abc123"
+  bothCha: "abc123"
+  trimOut: ""
+testID1000187-13:
+  trimStr: "abc abc"
+  bothCha: "abc"
+  trimOut: " "
+testID1000187-14:
+  trimStr: "bcd"
+  bothCha: "a"
+  trimOut: "bcd"

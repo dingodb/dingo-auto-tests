@@ -760,7 +760,7 @@ public class TableOuterJoin {
     }
 
     //验证两表无相同数据时，全连接
-    public List<List> fullOuterJoinNoSameData() throws SQLException {
+    public List<List> fullOuterJoinNoSameData() throws SQLException, InterruptedException {
         Statement statement = connection.createStatement();
         String querySQL = "select product1.*,product2.* from product1 full outer join product2 on product1.id=product2.id";
         ResultSet resultSet = statement.executeQuery(querySQL);
@@ -775,6 +775,7 @@ public class TableOuterJoin {
             rowList.add(resultSet.getString(5));
             queryList.add(rowList);
         }
+        Thread.sleep(3000);
         statement.close();
         return queryList;
     }

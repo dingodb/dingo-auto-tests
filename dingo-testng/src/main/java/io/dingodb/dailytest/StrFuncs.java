@@ -1028,6 +1028,490 @@ public class StrFuncs {
         return concatList;
     }
 
+    //repeat函数复制字符串
+    public String repeatCase148(String repeatStr, String repeatNum) throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String repeatSQL = "select repeat('" + repeatStr + "'," + repeatNum +")";
+        ResultSet resultSet = statement.executeQuery(repeatSQL);
+        String repeatResultStr = null;
+        while (resultSet.next()){
+            repeatResultStr = resultSet.getString(1);
+        }
+        statement.close();
+        return repeatResultStr;
+    }
+
+    //repeat函数复制数值
+    public String repeatCase157(String repeatStr, String repeatNum) throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String repeatSQL = "select repeat(" + repeatStr + "," + repeatNum +")";
+        ResultSet resultSet = statement.executeQuery(repeatSQL);
+        String repeatResultStr = null;
+        while (resultSet.next()){
+            repeatResultStr = resultSet.getString(1);
+        }
+        statement.close();
+        return repeatResultStr;
+    }
+
+    //repeat使用多次
+    public List repeatCase160() throws SQLException, ClassNotFoundException {
+        String strFuncTableName = getStrTableName();
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String repeatSQL = "select repeat('abc',3), repeat(123,2),repeat(1.10,1)";
+        ResultSet repeatRst = statement.executeQuery(repeatSQL);
+        List repeatList = new ArrayList();
+        while (repeatRst.next()){
+            repeatList.add(repeatRst.getString(1));
+            repeatList.add(repeatRst.getString(2));
+            repeatList.add(repeatRst.getString(3));
+        }
+        statement.close();
+        return repeatList;
+    }
+
+    //repeat函数，验证接收参数个数
+    public void repeatCase161_1() throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String repeatSQL = "select repeat('abc',2,3)";
+        statement.executeQuery(repeatSQL);
+        statement.close();
+    }
+
+    //repeat函数，验证接收参数个数
+    public void repeatCase161_2() throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String repeatSQL = "select repeat('abc')";
+        statement.executeQuery(repeatSQL);
+        statement.close();
+    }
+
+    //repeat函数，验证复制参数为非数字
+    public void repeatCase162() throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String repeatSQL = "select repeat('abc123','a')";
+        statement.executeQuery(repeatSQL);
+        statement.close();
+    }
+
+    //replace函数替换字符串
+    public String replaceCase163(String replaceParentStr, String replaceSubStr, String replaceStr) throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String replaceSQL = "select replace('" + replaceParentStr + "','" + replaceSubStr + "','" + replaceStr + "')";
+        ResultSet resultSet = statement.executeQuery(replaceSQL);
+        String replaceResultStr = null;
+        while (resultSet.next()){
+            replaceResultStr = resultSet.getString(1);
+        }
+        statement.close();
+        return replaceResultStr;
+    }
+
+    //replace函数替换数值
+    public String replaceCase170(String replaceParentStr, String replaceSubStr, String replaceStr) throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String replaceSQL = "select replace(" + replaceParentStr + "," + replaceSubStr + "," + replaceStr + ")";
+        ResultSet resultSet = statement.executeQuery(replaceSQL);
+        String replaceResultStr = null;
+        while (resultSet.next()){
+            replaceResultStr = resultSet.getString(1);
+        }
+        statement.close();
+        return replaceResultStr;
+    }
+
+    //replace函数，验证接收参数
+    public void replaceCase172_1() throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String replaceSQL = "select replace('abc','a')";
+        statement.executeQuery(replaceSQL);
+        statement.close();
+    }
+
+    //replace函数，验证接收参数
+    public void replaceCase172_2() throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String replaceSQL = "select replace('abc','a',)";
+        statement.executeQuery(replaceSQL);
+        statement.close();
+    }
+
+    //replace函数，验证接收参数
+    public void replaceCase172_3() throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String replaceSQL = "select replace('test','test','t','a')";
+        statement.executeQuery(replaceSQL);
+        statement.close();
+    }
+
+    //replace函数，验证接收参数
+    public void replaceCase172_4() throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String replaceSQL = "select replace('test')";
+        statement.executeQuery(replaceSQL);
+        statement.close();
+    }
+
+    //replace函数替换字符串为数值
+    public String replaceCase173(String replaceParentStr, String replaceSubStr, String replaceStr) throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String replaceSQL = "select replace('" + replaceParentStr + "','" + replaceSubStr + "'," + replaceStr + ")";
+        ResultSet resultSet = statement.executeQuery(replaceSQL);
+        String replaceResultStr = null;
+        while (resultSet.next()){
+            replaceResultStr = resultSet.getString(1);
+        }
+        statement.close();
+        return replaceResultStr;
+    }
+
+    //replace函数替换数值为字符串
+    public String replaceCase175(String replaceParentStr, String replaceSubStr, String replaceStr) throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String replaceSQL = "select replace(" + replaceParentStr + "," + replaceSubStr + ",'" + replaceStr + "')";
+        ResultSet resultSet = statement.executeQuery(replaceSQL);
+        String replaceResultStr = null;
+        while (resultSet.next()){
+            replaceResultStr = resultSet.getString(1);
+        }
+        statement.close();
+        return replaceResultStr;
+    }
+
+    public void createTableCase177() throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String createTableSQL = "create table " + "tableReplaceCase177" + "("
+                + "id int,"
+                + "name varchar(32) not null,"
+                + "age int,"
+                + "amount double,"
+                + "address varchar(255),"
+                + "primary key(id)"
+                + ")";
+        statement.execute(createTableSQL);
+
+        String insertSQL = "insert into tableReplaceCase177 values " +
+                "(1,'zhangsan',18,90.33,'beijing'),\n" +
+                "(2,'lisi',35,120.98,'haidian'),\n" +
+                "(3,'Hello',35,18.0,' beijing chaoyang '),\n" +
+                "(4,'HELLO2',15,23.0,'chaoyangdis_1 NO.street'),\n" +
+                "(5,'lala',18,12.1234560987,'beijing'),\n" +
+                "(6,'88',18,12.0,'beijing changping 89'),\n" +
+                "(7,'baba',99,23.51648,'haidian2'),\n" +
+                "(8,'zala',100,54.0,'wuwuxi '),\n" +
+                "(9,' uzlia ',28,23.6,'  maya'),\n" +
+                "(10,'  MaiTeng',66,70.3,''),\n" +
+                "(11,'',0,0.01,null)";
+        statement.execute(insertSQL);
+        statement.close();
+    }
+
+    //验证replace函数在update语句中的使用，替换字符串为字符串
+    public List replaceCase177() throws SQLException, ClassNotFoundException {
+        createTableCase177();
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+        String updateSql = "update tableReplaceCase177 set address = replace(address,'beijing','shanghai')";
+        statement.executeUpdate(updateSql);
+        String querySql = "select concat(id,address) cia from tableReplaceCase177";
+        ResultSet resultSet = statement.executeQuery(querySql);
+        List replaceResultList = new ArrayList();
+
+        while(resultSet.next()) {
+            replaceResultList.add(resultSet.getString("cia"));
+        }
+
+        statement.close();
+        return replaceResultList;
+    }
+
+    //验证replace函数在update语句中的使用，替换浮点型为整数值
+    public List replaceCase178() throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+        String updateSql = "update tableReplaceCase177 set amount = replace(amount,amount,age) where id in(1,3,5,7,9)";
+        statement.executeUpdate(updateSql);
+        String querySql = "select concat(concat(id,'-'),amount) cia from tableReplaceCase177 where id in(1,3,5,7,9)";
+        ResultSet resultSet = statement.executeQuery(querySql);
+        List replaceResultList = new ArrayList();
+
+        while(resultSet.next()) {
+            replaceResultList.add(resultSet.getString("cia"));
+        }
+
+        statement.close();
+        return replaceResultList;
+    }
+
+    //验证replace函数在update语句中的使用,替换整型为浮点型
+    public int replaceCase179_1() throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+        String updateSql = "update tableReplaceCase177 set age = cast(replace(age,age,amount) as double) where id in(2,4,6,8)";
+        int effectNum = statement.executeUpdate(updateSql);
+        return effectNum;
+    }
+
+    //验证replace函数在update语句中的使用，替换整型为浮点字符串
+    public int replaceCase179_2() throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+        String updateSql = "update tableReplaceCase177 set age = replace(age,age,amount) where id=10";
+        int effectNum = statement.executeUpdate(updateSql);
+        return effectNum;
+    }
+
+    //trim函数去除字符串两边空格
+    public String trimCase181(String trimStr) throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String trimSQL = "select trim('" + trimStr + "')";
+        ResultSet resultSet = statement.executeQuery(trimSQL);
+        String trimResultStr = null;
+        while (resultSet.next()){
+            trimResultStr = resultSet.getString(1);
+        }
+        statement.close();
+        return trimResultStr;
+    }
+
+    //trim函数 leading去除字符串左边空格
+    public String trimCase182(String trimStr) throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String trimSQL = "select trim(leading from '" + trimStr + "')";
+        ResultSet resultSet = statement.executeQuery(trimSQL);
+        String trimResultStr = null;
+        while (resultSet.next()){
+            trimResultStr = resultSet.getString(1);
+        }
+        statement.close();
+        return trimResultStr;
+    }
+
+    //trim函数 trailing去除字符串右边空格
+    public String trimCase183(String trimStr) throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String trimSQL = "select trim(trailing from '" + trimStr + "')";
+        ResultSet resultSet = statement.executeQuery(trimSQL);
+        String trimResultStr = null;
+        while (resultSet.next()){
+            trimResultStr = resultSet.getString(1);
+        }
+        statement.close();
+        return trimResultStr;
+    }
+
+    //trim函数 both去除字符串两边空格
+    public String trimCase184(String trimStr) throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String trimSQL = "select trim(both from '" + trimStr + "')";
+        ResultSet resultSet = statement.executeQuery(trimSQL);
+        String trimResultStr = null;
+        while (resultSet.next()){
+            trimResultStr = resultSet.getString(1);
+        }
+        statement.close();
+        return trimResultStr;
+    }
+
+    //trim函数 leading去除字符串左边指定字符
+    public String trimCase185(String trimStr, String leadingStr) throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String trimSQL = "select trim(leading '" + leadingStr + "' from '" + trimStr + "')";
+        ResultSet resultSet = statement.executeQuery(trimSQL);
+        String trimResultStr = null;
+        while (resultSet.next()){
+            trimResultStr = resultSet.getString(1);
+        }
+        statement.close();
+        return trimResultStr;
+    }
+
+    //trim函数 trailing去除字符串右边指定字符
+    public String trimCase186(String trimStr, String trailingStr) throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String trimSQL = "select trim(trailing '" + trailingStr + "' from '" + trimStr + "')";
+        ResultSet resultSet = statement.executeQuery(trimSQL);
+        String trimResultStr = null;
+        while (resultSet.next()){
+            trimResultStr = resultSet.getString(1);
+        }
+        statement.close();
+        return trimResultStr;
+    }
+
+    //trim函数 both去除字符串两边指定字符
+    public String trimCase187(String trimStr, String bothStr) throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String trimSQL = "select trim(both '" + bothStr + "' from '" + trimStr + "')";
+        ResultSet resultSet = statement.executeQuery(trimSQL);
+        String trimResultStr = null;
+        while (resultSet.next()){
+            trimResultStr = resultSet.getString(1);
+        }
+        statement.close();
+        return trimResultStr;
+    }
+
+    //trim函数默认按both去除两边指定字符
+    public String trimCase188(String trimStr, String bothStr) throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String trimSQL = "select trim('" + bothStr + "' from '" + trimStr + "')";
+        ResultSet resultSet = statement.executeQuery(trimSQL);
+        String trimResultStr = null;
+        while (resultSet.next()){
+            trimResultStr = resultSet.getString(1);
+        }
+        statement.close();
+        return trimResultStr;
+    }
+
+    //trim函数对数值使用
+    public String trimCase192(String trimState) throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String trimSQL = "select trim(" + trimState + ") tnum";
+        ResultSet resultSet = statement.executeQuery(trimSQL);
+        String trimResultStr = null;
+        while (resultSet.next()){
+            trimResultStr = resultSet.getString("tnum");
+        }
+        statement.close();
+        return trimResultStr;
+    }
+
+    //ltrim函数去除字符串左边空格
+    public String ltrimCase194(String ltrimStr) throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String trimSQL = "select ltrim('" + ltrimStr + "')";
+        ResultSet resultSet = statement.executeQuery(trimSQL);
+        String trimResultStr = null;
+        while (resultSet.next()){
+            trimResultStr = resultSet.getString(1);
+        }
+        statement.close();
+        return trimResultStr;
+    }
+
+    //rtrim函数去除字符串右边空格
+    public String rtrimCase196(String rtrimStr) throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String trimSQL = "select rtrim('" + rtrimStr + "')";
+        ResultSet resultSet = statement.executeQuery(trimSQL);
+        String trimResultStr = null;
+        while (resultSet.next()){
+            trimResultStr = resultSet.getString(1);
+        }
+        statement.close();
+        return trimResultStr;
+    }
+
+    //ltrim和rtrim函数不支持去除指定字符
+    public void trimCase195(String trimState) throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String trimSQL = "select " + trimState;
+        statement.executeQuery(trimSQL);
+        statement.close();
+    }
+
+    public void createTableCase198() throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String createTableSQL = "create table " + "tableTrimCase198" + "("
+                + "id int,"
+                + "name varchar(32) not null,"
+                + "age int,"
+                + "amount double,"
+                + "address varchar(255),"
+                + "primary key(id)"
+                + ")";
+        statement.execute(createTableSQL);
+
+        String insertSQL = "insert into tableTrimCase198 values " +
+                "(1,'tTATtt',181,18.18,' aabcaa ')";
+        statement.execute(insertSQL);
+        statement.close();
+    }
+
+    //trim在表格中使用
+    public List trimCase198() throws SQLException, ClassNotFoundException {
+        createTableCase198();
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String trimSQL = "select trim('t' from name) tname, trim(leading 't' from name) ldname, trim(trailing 1 from age) tlage, " +
+                "trim(both 18 from amount) boam, ltrim(address), rtrim(address), trim(both from address) " +
+                "from tableTrimCase198 where id=1";
+        ResultSet resultSet = statement.executeQuery(trimSQL);
+        List trimResultList = new ArrayList();
+        while (resultSet.next()){
+            trimResultList.add(resultSet.getString("tname"));
+            trimResultList.add(resultSet.getString("ldname"));
+            trimResultList.add(resultSet.getString("tlage"));
+            trimResultList.add(resultSet.getString("boam"));
+            trimResultList.add(resultSet.getString(5));
+            trimResultList.add(resultSet.getString(6));
+            trimResultList.add(resultSet.getString(7));
+        }
+        statement.close();
+        return trimResultList;
+    }
+
+
+
 
 
 }
