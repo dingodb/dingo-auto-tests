@@ -319,7 +319,7 @@ public class TableInnerJoin {
 
     public List<List<String>> selfJoin() throws SQLException {
         Statement statement = connection.createStatement();
-        String selfJoinsql = "select a.name,b.name from mytest a inner join mytest b on a.id=b.manager_id";
+        String selfJoinsql = "select a.name,b.name from mytest a inner join mytest b on a.manager_id=b.id";
         ResultSet selfJoinRst = statement.executeQuery(selfJoinsql);
         List<List<String>> selfJoinList = new ArrayList<List<String>>();
         while (selfJoinRst.next()) {

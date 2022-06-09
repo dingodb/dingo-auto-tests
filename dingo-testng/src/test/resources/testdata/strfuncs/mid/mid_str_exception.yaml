@@ -1,0 +1,32 @@
+testID1000207-01:
+  midStr: "abc"
+  midStartIndex: "0"
+  midLength: "3"
+testID1000207-02:
+  midStr: " abc "
+  midStartIndex: "0"
+  midLength: "3"
+testID1000207-03:
+  midStr: "0123"
+  midStartIndex: "0"
+  midLength: "1"
+testID1000209-01:
+  midStr: "abcde"
+  midStartIndex: "10"
+  midLength: "2"
+testID1000209-02:
+  midStr: "2"
+  midStartIndex: "2"
+  midLength: "1"
+testID1000209-03:
+  midStr: "123"
+  midStartIndex: "4"
+  midLength: "4"
+testID1000213-05:
+  midStr: "abcdef"
+  midStartIndex: "-10"
+  midLength: "1"
+testID1000215-05:
+  midStr: "abcdefg"
+  midStartIndex: "7.5"
+  midLength: "2"

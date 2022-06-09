@@ -1,0 +1,8 @@
+testID1000210-03:
+  midStr: "123"
+  midStartIndex: "4"
+  midLength: "1"
+testID1000211-03:
+  midStr: "123.0"
+  midStartIndex: "6"
+  midLength: "1"

@@ -1,0 +1,28 @@
+testID1000227-01:
+  subStr: "abcdefg"
+  subStartIndex: "10"
+  subLength: "2"
+testID1000227-02:
+  subStr: "http://www.baidu.com"
+  subStartIndex: "22"
+  subLength: "1"
+testID1000227-03:
+  subStr: "1234567"
+  subStartIndex: "9"
+  subLength: "3"
+testID1000229-01:
+  subStr: "abc"
+  subStartIndex: "0"
+  subLength: "3"
+testID1000229-02:
+  subStr: " abc "
+  subStartIndex: "0"
+  subLength: "3"
+testID1000229-03:
+  subStr: "0123"
+  subStartIndex: "0"
+  subLength: "1"
+testID1000233-05:
+  subStr: "abcdef"
+  subStartIndex: "-10"
+  subLength: "1"

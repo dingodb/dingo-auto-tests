@@ -1,0 +1,176 @@
+testID1000222-01:
+  subStr: "abcd"
+  subStartIndex: "1"
+  subLength: "3"
+  subOut: "abc"
+testID1000222-02:
+  subStr: "a"
+  subStartIndex: "1"
+  subLength: "1"
+  subOut: "a"
+testID1000223-01:
+  subStr: "abcde"
+  subStartIndex: "1"
+  subLength: "10"
+  subOut: "abcde"
+testID1000223-02:
+  subStr: "a"
+  subStartIndex: "1"
+  subLength: "2"
+  subOut: "a"
+testID1000224-01:
+  subStr: "abcdefg"
+  subStartIndex: "3"
+  subLength: "1"
+  subOut: "c"
+testID1000224-02:
+  subStr: "abcde"
+  subStartIndex: "2"
+  subLength: "4"
+  subOut: "bcde"
+testID1000225-01:
+  subStr: "abcdefg"
+  subStartIndex: "3"
+  subLength: "10"
+  subOut: "cdefg"
+testID1000225-02:
+  subStr: "http://www.baidu.com"
+  subStartIndex: "12"
+  subLength: "20"
+  subOut: "baidu.com"
+testID1000225-03:
+  subStr: "1234567"
+  subStartIndex: "6"
+  subLength: "3"
+  subOut: "67"
+testID1000226-01:
+  subStr: "abcdefg"
+  subStartIndex: "7"
+  subLength: "1"
+  subOut: "g"
+testID1000226-02:
+  subStr: "http://www.baidu.com"
+  subStartIndex: "20"
+  subLength: "2"
+  subOut: "m"
+testID1000226-03:
+  subStr: "1234567"
+  subStartIndex: "7"
+  subLength: "3"
+  subOut: "7"
+testID1000228-01:
+  subStr: "ab cd ef g"
+  subStartIndex: "4"
+  subLength: "3"
+  subOut: "cd "
+testID1000228-02:
+  subStr: " abcdefg f "
+  subStartIndex: "7"
+  subLength: "3"
+  subOut: "fg "
+testID1000228-03:
+  subStr: "  f  "
+  subStartIndex: "2"
+  subLength: "5"
+  subOut: " f  "
+testID1000230-01:
+  subStr: "a"
+  subStartIndex: "1"
+  subLength: "0"
+  subOut: ""
+testID1000230-02:
+  subStr: " abcdefg f "
+  subStartIndex: "2"
+  subLength: "0"
+  subOut: ""
+testID1000230-03:
+  subStr: "0123"
+  subStartIndex: "4"
+  subLength: "0"
+  subOut: ""
+
+testID1000233-01:
+  subStr: "www.csdn.net"
+  subStartIndex: "-8"
+  subLength: "4"
+  subOut: "csdn"
+testID1000233-02:
+  subStr: "1"
+  subStartIndex: "-1"
+  subLength: "1"
+  subOut: "1"
+testID1000233-03:
+  subStr: "abc"
+  subStartIndex: "-2"
+  subLength: "3"
+  subOut: "bc"
+testID1000233-04:
+  subStr: " ab c d  ef "
+  subStartIndex: "-12"
+  subLength: "6"
+  subOut: " ab c "
+testID1000234-01:
+  subStr: "abcde"
+  subStartIndex: "1"
+  subLength: "-2"
+  subOut: ""
+testID1000234-02:
+  subStr: "www.baidu.com"
+  subStartIndex: "13"
+  subLength: "-5"
+  subOut: ""
+testID1000234-03:
+  subStr: "1"
+  subStartIndex: "-1"
+  subLength: "-1"
+  subOut: ""
+testID1000234-04:
+  subStr: "abc"
+  subStartIndex: "-1"
+  subLength: "-4"
+  subOut: ""
+testID1000235-01:
+  subStr: "abcdefg"
+  subStartIndex: "2.4"
+  subLength: "2"
+  subOut: "bc"
+testID1000235-02:
+  subStr: "w.baidu.com"
+  subStartIndex: "2.5"
+  subLength: "1"
+  subOut: "b"
+testID1000235-03:
+  subStr: "abcdefg"
+  subStartIndex: "7.4"
+  subLength: "1"
+  subOut: "g"
+testID1000236-01:
+  subStr: "abcdefg"
+  subStartIndex: "2"
+  subLength: "2.4"
+  subOut: "bc"
+testID1000236-02:
+  subStr: "w.baidu.com"
+  subStartIndex: "1"
+  subLength: "2.5"
+  subOut: "w.b"
+testID1000236-03:
+  subStr: "abcdefg"
+  subStartIndex: "7"
+  subLength: "1.4"
+  subOut: "g"
+testID1000236-04:
+  subStr: "abcdefg"
+  subStartIndex: "6"
+  subLength: "1.5"
+  subOut: "fg"
+testID1000237-01:
+  subStr: ""
+  subStartIndex: "1"
+  subLength: "1"
+  subOut: ""
+testID1000237-02:
+  subStr: ""
+  subStartIndex: "2"
+  subLength: "1"
+  subOut: ""

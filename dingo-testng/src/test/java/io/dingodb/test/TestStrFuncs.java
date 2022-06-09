@@ -258,16 +258,22 @@ public class TestStrFuncs extends YamlDataHelper {
 
     @Test(enabled = true, description = "验证字符串反转")
     public void test15ReverseStr() throws SQLException, ClassNotFoundException {
-        List<String> expectedReverseList = new ArrayList<>();
-        String[] reverseArray = new String[]{"321","gnipGNAHC"," gniq gnohc","moc.udiab.WWW//:ptth"};
-        for (int i=0; i < reverseArray.length; i++){
-            expectedReverseList.add(reverseArray[i]);
-        }
-        System.out.println("期望输出列表为：" + expectedReverseList);
+        List<List> expectedReverseList = new ArrayList<List>();
+        String[][] reverseArray = {{"321","2"},{"gnipGNAHC","75"},{" gniq gnohc","99"},{"moc.udiab.WWW//:ptth","81"}};
 
-        List<String> actualReverseList = strObj.reverseFunc();
+        for(int i=0; i<reverseArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<reverseArray[i].length; j++) {
+                columnList.add(reverseArray[i][j]);
+            }
+            expectedReverseList.add(columnList);
+        }
+        System.out.println("Expected: " + expectedReverseList);
+
+        List<List> actualReverseList = strObj.reverseFunc();
         System.out.println("实际输出列表为：" + actualReverseList);
-        Assert.assertTrue(actualReverseList.equals(expectedReverseList));
+        Assert.assertTrue(actualReverseList.containsAll(expectedReverseList));
+        Assert.assertTrue(expectedReverseList.containsAll(actualReverseList));
     }
 
     @Test(enabled = true, dataProvider = "yamlStrFuncMethod", description = "验证获取字符串参数字符长度")
@@ -342,6 +348,35 @@ public class TestStrFuncs extends YamlDataHelper {
     @Test(enabled = true, expectedExceptions = SQLException.class, description = "验证拼接单个字段，预期异常")
     public void testConcatCase079() throws SQLException, ClassNotFoundException {
         strObj.concatCase079();
+    }
+
+    @Test(enabled = true, description = "验证拼接空表，返回空")
+    public void testConcatCase081() throws SQLException, ClassNotFoundException {
+        Boolean expectedReturn = false;
+        System.out.println("Expected: " + expectedReturn);
+        Boolean actualReturn = strObj.concatCase081();
+
+        Assert.assertFalse(actualReturn);
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testConcatCase081"}, description = "验证concat表格里使用")
+    public void testConcatCase077() throws SQLException, ClassNotFoundException {
+        String[][] concatArray = {{"1Haha10023.45BJ","10023.45","BJ23.45"},{null,"5018.9","SH18.9"},
+                {null,"00.0",null},{null,"00.01",null},{null,null,null},};
+        List<List> expectedList = new ArrayList<List>();
+        for(int i=0; i<concatArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<concatArray[i].length; j++) {
+                columnList.add(concatArray[i][j]);
+            }
+            expectedList.add(columnList);
+        }
+        System.out.println("Expected: " + expectedList);
+
+        List<List> actualConcatList = strObj.concatCase077();
+        System.out.println("Actual: "+ actualConcatList);
+        Assert.assertTrue(actualConcatList.containsAll(expectedList));
+        Assert.assertTrue(expectedList.containsAll(actualConcatList));
     }
 
     @Test(enabled = true, description = "验证concat拼接按条件查询结果")
@@ -953,6 +988,147 @@ public class TestStrFuncs extends YamlDataHelper {
         Assert.assertEquals(actualTrimList, expectedTrimList);
     }
 
+    @Test(enabled = true, dataProvider = "yamlStrFuncMethod",description = "验证mid函数截取字符串")
+    public void testMidCase201(Map<String, String> param) throws SQLException, ClassNotFoundException {
+        String expectedStr = param.get("midOut");
+        System.out.println("Expected：" + expectedStr);
+        String actualStr = strObj.midCase201(param.get("midStr"), param.get("midStartIndex"), param.get("midLength"));
+        System.out.println("Actual：" + actualStr);
+
+        Assert.assertEquals(actualStr, expectedStr);
+    }
+
+    @Test(enabled = true, dataProvider = "yamlStrFuncMethod",expectedExceptions = SQLException.class,
+            description = "验证mid函数参数不符，预期异常")
+    public void testMidCase207(Map<String, String> param) throws SQLException, ClassNotFoundException {
+        String actualStr = strObj.midCase201(param.get("midStr"), param.get("midStartIndex"), param.get("midLength"));
+    }
+
+    @Test(enabled = true, dataProvider = "yamlStrFuncMethod",description = "验证mid函数截取数字")
+    public void testMidCase210_1(Map<String, String> param) throws SQLException, ClassNotFoundException {
+        String expectedStr = param.get("midOut");
+        System.out.println("Expected：" + expectedStr);
+        String actualStr = strObj.midCase210(param.get("midStr"), param.get("midStartIndex"), param.get("midLength"));
+        System.out.println("Actual：" + actualStr);
+
+        Assert.assertEquals(actualStr, expectedStr);
+    }
+
+    @Test(enabled = true, dataProvider = "yamlStrFuncMethod",expectedExceptions = SQLException.class,
+            description = "验证mid函数参数不符，预期异常")
+    public void testMidCase210_2(Map<String, String> param) throws SQLException, ClassNotFoundException {
+        String actualStr = strObj.midCase210(param.get("midStr"), param.get("midStartIndex"), param.get("midLength"));
+    }
+
+    @Test(enabled = true, dataProvider = "yamlStrFuncMethod",expectedExceptions = SQLException.class,
+            description = "验证mid函数参数不符，预期异常")
+    public void testMidCase221(Map<String, String> param) throws SQLException, ClassNotFoundException {
+        String actualStr = strObj.midCase221(param.get("midState"));
+    }
+
+    @Test(enabled = true, dataProvider = "yamlStrFuncMethod",description = "验证mid函数省略截取长度参数")
+    public void testMidCase212(Map<String, String> param) throws SQLException, ClassNotFoundException {
+        String expectedStr = param.get("midOut");
+        System.out.println("Expected：" + expectedStr);
+        String actualStr = strObj.midCase212(param.get("midStr"), param.get("midStartIndex"));
+        System.out.println("Actual：" + actualStr);
+
+        Assert.assertEquals(actualStr, expectedStr);
+    }
+
+    @Test(enabled = true, dataProvider = "yamlStrFuncMethod",description = "验证subString函数截取字符串")
+    public void testSubStringCase222(Map<String, String> param) throws SQLException, ClassNotFoundException {
+        String expectedStr = param.get("subOut");
+        System.out.println("Expected：" + expectedStr);
+        String actualStr = strObj.subStringCase222(param.get("subStr"), param.get("subStartIndex"), param.get("subLength"));
+        System.out.println("Actual：" + actualStr);
+
+        Assert.assertEquals(actualStr, expectedStr);
+    }
+
+    @Test(enabled = true, dataProvider = "yamlStrFuncMethod",expectedExceptions = SQLException.class,
+            description = "验证subString函数参数不符，预期异常")
+    public void testSubStringCase227(Map<String, String> param) throws SQLException, ClassNotFoundException {
+        String actualStr = strObj.subStringCase222(param.get("subStr"), param.get("subStartIndex"), param.get("subLength"));
+    }
+
+    @Test(enabled = true, dataProvider = "yamlStrFuncMethod",description = "验证subString函数截取数值")
+    public void testSubStringCase231_1(Map<String, String> param) throws SQLException, ClassNotFoundException {
+        String expectedStr = param.get("subOut");
+        System.out.println("Expected：" + expectedStr);
+        String actualStr = strObj.subStringCase231(param.get("subStr"), param.get("subStartIndex"), param.get("subLength"));
+        System.out.println("Actual：" + actualStr);
+
+        Assert.assertEquals(actualStr, expectedStr);
+    }
+
+    @Test(enabled = true, dataProvider = "yamlStrFuncMethod",expectedExceptions = SQLException.class,
+            description = "验证subString函数参数不符，预期异常")
+    public void testSubStringCase231_2(Map<String, String> param) throws SQLException, ClassNotFoundException {
+        String actualStr = strObj.subStringCase231(param.get("subStr"), param.get("subStartIndex"), param.get("subLength"));
+    }
+
+    @Test(enabled = true, dataProvider = "yamlStrFuncMethod",expectedExceptions = SQLException.class,
+            description = "验证subString函数参数不符，预期异常")
+    public void testSubStringCase238(Map<String, String> param) throws SQLException, ClassNotFoundException {
+        String actualStr = strObj.subStringCase238(param.get("subState"));
+    }
+
+    @Test(enabled = true, dataProvider = "yamlStrFuncMethod",description = "验证subString函数支持from x for y用法")
+    public void testSubStringCase241(Map<String, String> param) throws SQLException, ClassNotFoundException {
+        String expectedStr = param.get("subOut");
+        System.out.println("Expected：" + expectedStr);
+        String actualStr = strObj.subStringCase241(param.get("subStr"), param.get("subStartIndex"), param.get("subLength"));
+        System.out.println("Actual：" + actualStr);
+
+        Assert.assertEquals(actualStr, expectedStr);
+    }
+
+    @Test(enabled = true, description = "验证mid,Substring函数在表格中使用")
+    public void testSubStringCase246() throws SQLException, ClassNotFoundException {
+        String[][] subArray = {{"lisi"," beijing","25"},{"lisi","nanjing","56"},{"1.5","http://W","18"}};
+        List<List> expectedList = new ArrayList<List>();
+        for(int i=0; i<subArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<subArray[i].length; j++) {
+                columnList.add(subArray[i][j]);
+            }
+            expectedList.add(columnList);
+        }
+        System.out.println("Expected: " + expectedList);
+
+        List<List> actualSubList = strObj.subStringCase246();
+        System.out.println("Actual: "+ actualSubList);
+        Assert.assertTrue(actualSubList.containsAll(expectedList));
+        Assert.assertTrue(expectedList.containsAll(actualSubList));
+    }
+
+    @Test(enabled = true, dataProvider = "yamlStrFuncMethod",description = "验证reverse函数反转字符串")
+    public void testReverseCase248(Map<String, String> param) throws SQLException, ClassNotFoundException {
+        String expectedStr = param.get("reverseOut");
+        System.out.println("Expected：" + expectedStr);
+        String actualStr = strObj.reverseCase248(param.get("reverseStr"));
+        System.out.println("Actual：" + actualStr);
+
+        Assert.assertEquals(actualStr, expectedStr);
+    }
+
+    @Test(enabled = true, dataProvider = "yamlStrFuncMethod",description = "验证reverse函数反转数值")
+    public void testReverseCase249(Map<String, String> param) throws SQLException, ClassNotFoundException {
+        String expectedStr = param.get("reverseOut");
+        System.out.println("Expected：" + expectedStr);
+        String actualStr = strObj.reverseCase249(param.get("reverseStr"));
+        System.out.println("Actual：" + actualStr);
+
+        Assert.assertEquals(actualStr, expectedStr);
+    }
+
+    @Test(enabled = true, dataProvider = "yamlStrFuncMethod",expectedExceptions = SQLException.class,
+            description = "验证reverse函数参数非法，预期异常")
+    public void testReverseCase255(Map<String, String> param) throws SQLException, ClassNotFoundException {
+        String actualStr = strObj.reverseCase249(param.get("reverseState"));
+    }
+
 
     @AfterClass(alwaysRun = true, description = "测试完成后删除数据和表格并关闭连接")
     public void tearDownAll() throws SQLException {
@@ -966,6 +1142,8 @@ public class TestStrFuncs extends YamlDataHelper {
         tearDownStatement.execute("drop table tableReplaceCase177");
         tearDownStatement.execute("delete from tableTrimCase198");
         tearDownStatement.execute("drop table tableTrimCase198");
+        tearDownStatement.execute("delete from tableConcatCase081");
+        tearDownStatement.execute("drop table tableConcatCase081");
         tearDownStatement.close();
         connection.close();
     }

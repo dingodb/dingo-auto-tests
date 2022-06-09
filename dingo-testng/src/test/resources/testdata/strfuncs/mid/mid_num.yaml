@@ -1,0 +1,65 @@
+testID1000210-01:
+  midStr: "1234567"
+  midStartIndex: "2"
+  midLength: "5"
+  midOut: "23456"
+testID1000210-02:
+  midStr: "0"
+  midStartIndex: "1"
+  midLength: "2"
+  midOut: "0"
+testID1000210-04:
+  midStr: "123"
+  midStartIndex: "1"
+  midLength: "3"
+  midOut: "123"
+testID1000210-05:
+  midStr: "123"
+  midStartIndex: "3"
+  midLength: "1"
+  midOut: "3"
+testID1000211-01:
+  midStr: "1.234567"
+  midStartIndex: "2"
+  midLength: "5"
+  midOut: ".2345"
+testID1000211-02:
+  midStr: "0.567"
+  midStartIndex: "1"
+  midLength: "2"
+  midOut: "0."
+testID1000211-04:
+  midStr: "0.123"
+  midStartIndex: "1"
+  midLength: "5"
+  midOut: "0.123"
+testID1000211-05:
+  midStr: "9.99"
+  midStartIndex: "4"
+  midLength: "1"
+  midOut: "9"
+testID1000215-04:
+  midStr: "1234"
+  midStartIndex: "2.5"
+  midLength: "2"
+  midOut: "34"
+testID1000215-05:
+  midStr: "1234060"
+  midStartIndex: "-2.5"
+  midLength: "3"
+  midOut: "060"
+testID1000216-05:
+  midStr: "103450"
+  midStartIndex: "1"
+  midLength: "1.5"
+  midOut: "10"
+testID1000217-03:
+  midStr: null
+  midStartIndex: "1"
+  midLength: "1"
+  midOut: null
+testID1000217-04:
+  midStr: null
+  midStartIndex: "2"
+  midLength: "2"
+  midOut: null

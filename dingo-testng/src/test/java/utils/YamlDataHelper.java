@@ -340,6 +340,81 @@ public class YamlDataHelper{
                 break;
             }
 
+            case "testMidCase201": {
+                yamlStrFuncList = getYamlList(iniReader.getValue("strFuncYaml", "midStr"));
+                break;
+            }
+
+            case "testMidCase207": {
+                yamlStrFuncList = getYamlList(iniReader.getValue("strFuncYaml", "midStrException"));
+                break;
+            }
+
+            case "testMidCase210_1": {
+                yamlStrFuncList = getYamlList(iniReader.getValue("strFuncYaml", "midNum"));
+                break;
+            }
+
+            case "testMidCase210_2": {
+                yamlStrFuncList = getYamlList(iniReader.getValue("strFuncYaml", "midNumException"));
+                break;
+            }
+
+            case "testMidCase221": {
+                yamlStrFuncList = getYamlList(iniReader.getValue("strFuncYaml", "midParamException"));
+                break;
+            }
+
+            case "testMidCase212": {
+                yamlStrFuncList = getYamlList(iniReader.getValue("strFuncYaml", "midIgnoreLength"));
+                break;
+            }
+
+            case "testSubStringCase222": {
+                yamlStrFuncList = getYamlList(iniReader.getValue("strFuncYaml", "subStringStr"));
+                break;
+            }
+
+            case "testSubStringCase227": {
+                yamlStrFuncList = getYamlList(iniReader.getValue("strFuncYaml", "subStringStrException"));
+                break;
+            }
+
+            case "testSubStringCase231_1": {
+                yamlStrFuncList = getYamlList(iniReader.getValue("strFuncYaml", "subStringNum"));
+                break;
+            }
+
+            case "testSubStringCase231_2": {
+                yamlStrFuncList = getYamlList(iniReader.getValue("strFuncYaml", "subStringNumException"));
+                break;
+            }
+
+            case "testSubStringCase238": {
+                yamlStrFuncList = getYamlList(iniReader.getValue("strFuncYaml", "subStringParamException"));
+                break;
+            }
+
+            case "testSubStringCase241": {
+                yamlStrFuncList = getYamlList(iniReader.getValue("strFuncYaml", "subStringFromForLength"));
+                break;
+            }
+
+            case "testReverseCase248": {
+                yamlStrFuncList = getYamlList(iniReader.getValue("strFuncYaml", "reverseStr"));
+                break;
+            }
+
+            case "testReverseCase249": {
+                yamlStrFuncList = getYamlList(iniReader.getValue("strFuncYaml", "reverseNum"));
+                break;
+            }
+
+            case "testReverseCase255": {
+                yamlStrFuncList = getYamlList(iniReader.getValue("strFuncYaml", "reverseException"));
+                break;
+            }
+
         }
         Object[][] files = new Object[yamlStrFuncList.size()][];
         for (int i = 0; i < yamlStrFuncList.size(); i++) {

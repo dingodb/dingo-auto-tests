@@ -1,0 +1,24 @@
+testID1000212-01:
+  midStr: "'abcdefg'"
+  midStartIndex: "2"
+  midOut: "bcdefg"
+testID1000212-02:
+  midStr: "1234567"
+  midStartIndex: "1"
+  midOut: "1234567"
+testID1001045-01:
+  midStr: "'www.baidu.com'"
+  midStartIndex: "5"
+  midOut: "baidu.com"
+testID1001045-02:
+  midStr: "'abcde'"
+  midStartIndex: "5"
+  midOut: "e"
+testID1001045-03:
+  midStr: "'abcde'"
+  midStartIndex: "-1"
+  midOut: "e"
+testID1001045-04:
+  midStr: "' abc '"
+  midStartIndex: "-5"
+  midOut: " abc "

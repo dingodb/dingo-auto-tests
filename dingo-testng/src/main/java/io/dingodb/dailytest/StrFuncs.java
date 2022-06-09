@@ -26,8 +26,8 @@ import java.util.List;
 
 
 public class StrFuncs {
-//    private static final String defaultConnectIP = "172.20.3.26";
-    private static String defaultConnectIP = CommonArgs.getDefaultDingoClusterIP();
+    private static final String defaultConnectIP = "172.20.3.26";
+//    private static String defaultConnectIP = CommonArgs.getDefaultDingoClusterIP();
     private static final String JDBC_DRIVER = "io.dingodb.driver.client.DingoDriverClient";
     private static String connectUrl = "jdbc:dingo:thin:url=" + defaultConnectIP + ":8765";
 
@@ -353,16 +353,19 @@ public class StrFuncs {
     }
 
     //reverse反转字符串
-    public List<String> reverseFunc() throws SQLException, ClassNotFoundException {
+    public List<List> reverseFunc() throws SQLException, ClassNotFoundException {
         String strFuncTableName = getStrTableName();
         connection = connectStrDB();
         Statement statement = connection.createStatement();
 
-        String reverseSQL = "select reverse(address) revAddr from " + strFuncTableName + " where id>11";
+        String reverseSQL = "select reverse(address) revAddr, reverse(age) from " + strFuncTableName + " where id>11";
         ResultSet reverseRst = statement.executeQuery(reverseSQL);
-        List<String> reverseList = new ArrayList<String>();
+        List<List> reverseList = new ArrayList<List>();
         while (reverseRst.next()){
-            reverseList.add(reverseRst.getString("revAddr"));
+            List rowList = new ArrayList();
+            rowList.add(reverseRst.getString("revAddr"));
+            rowList.add(reverseRst.getString(2));
+            reverseList.add(rowList);
         }
         statement.close();
         return reverseList;
@@ -575,6 +578,67 @@ public class StrFuncs {
         ResultSet resultSet = statement.executeQuery(concatSQL);
         statement.close();
     }
+
+    //创建空表
+    public void createEmptyTable081() throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String createTableSQL = "create table tableConcatCase081" + "("
+                + "id int,"
+                + "name varchar(32),"
+                + "age int,"
+                + "amount double,"
+                + "address varchar(255),"
+                + "primary key(id)"
+                + ")";
+        statement.execute(createTableSQL);
+        statement.close();
+    }
+
+
+    //空表拼接
+    public Boolean concatCase081() throws SQLException, ClassNotFoundException {
+        createEmptyTable081();
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+        String concatSQL = "select name||address cna from tableConcatCase081";
+        ResultSet resultSet = statement.executeQuery(concatSQL);
+
+        return resultSet.next();
+    }
+
+    public void insertTable081() throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+        String insertSQL = "insert into tableConcatCase081 values " +
+                "(1,'Haha',100,23.45,'BJ'),(2,null,50,18.9,'SH'),(3,'Lolo',0,0,null)," +
+                "(4,'Li Si',0,0.01,null),(5,'Www',18,null,'WH')";
+        statement.executeUpdate(insertSQL);
+        statement.close();
+    }
+
+    public List<List> concatCase077() throws SQLException, ClassNotFoundException {
+        insertTable081();
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+        String concatSQL1 = "select id||name||age||amount||address allCol,age||amount aaCol1,address||amount aaCol2 " +
+                "from tableConcatCase081";
+        ResultSet resultSet = statement.executeQuery(concatSQL1);
+        List<List> concatList = new ArrayList<List>();
+        while(resultSet.next()) {
+            List rowList = new ArrayList();
+            rowList.add(resultSet.getString("allCol"));
+            rowList.add(resultSet.getString("aaCol1"));
+            rowList.add(resultSet.getString("aaCol2"));
+            concatList.add(rowList);
+        }
+
+        statement.close();
+        return concatList;
+
+    }
+
 
     //格式化整型字段，保留大于0位小数位
     public List formatCase087() throws SQLException, ClassNotFoundException {
@@ -1509,6 +1573,178 @@ public class StrFuncs {
         statement.close();
         return trimResultList;
     }
+
+    //mid函数截取字符串
+    public String midCase201(String midStr, String startIndex, String midLength) throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String midSQL = "select mid('" + midStr + "'," + startIndex + "," + midLength + ")";
+        ResultSet resultSet = statement.executeQuery(midSQL);
+        String midResultStr = null;
+        while (resultSet.next()){
+            midResultStr = resultSet.getString(1);
+        }
+        statement.close();
+        return midResultStr;
+    }
+
+    //mid函数截取数字
+    public String midCase210(String midStr, String startIndex, String midLength) throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String midSQL = "select mid(" + midStr + "," + startIndex + "," + midLength + ")";
+        ResultSet resultSet = statement.executeQuery(midSQL);
+        String midResultStr = null;
+        while (resultSet.next()){
+            midResultStr = resultSet.getString(1);
+        }
+        statement.close();
+        return midResultStr;
+    }
+
+    //mid函数参数不符，预期异常
+    public String midCase221(String midState) throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String midSQL = "select mid(" + midState + ")";
+        ResultSet resultSet = statement.executeQuery(midSQL);
+        String midResultStr = null;
+        while (resultSet.next()){
+            midResultStr = resultSet.getString(1);
+        }
+        statement.close();
+        return midResultStr;
+    }
+
+    //mid函数参数省略截取长度参数，截取起始位置后所有文本
+    public String midCase212(String midStr, String startIndex) throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String midSQL = "select mid(" + midStr + "," + startIndex + ")";
+        ResultSet resultSet = statement.executeQuery(midSQL);
+        String midResultStr = null;
+        while (resultSet.next()){
+            midResultStr = resultSet.getString(1);
+        }
+        statement.close();
+        return midResultStr;
+    }
+
+    //subString函数截取字符串
+    public String subStringCase222(String subStr, String startIndex, String subLength) throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String subStringSQL = "select subString('" + subStr + "'," + startIndex + "," + subLength + ")";
+        ResultSet resultSet = statement.executeQuery(subStringSQL);
+        String subStrResultStr = null;
+        while (resultSet.next()){
+            subStrResultStr = resultSet.getString(1);
+        }
+        statement.close();
+        return subStrResultStr;
+    }
+
+    //subString函数截取数值
+    public String subStringCase231(String subStr, String startIndex, String subLength) throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String subStringSQL = "select subString(" + subStr + "," + startIndex + "," + subLength + ")";
+        ResultSet resultSet = statement.executeQuery(subStringSQL);
+        String subStrResultStr = null;
+        while (resultSet.next()){
+            subStrResultStr = resultSet.getString(1);
+        }
+        statement.close();
+        return subStrResultStr;
+    }
+
+    //subString函数参数不符，预期异常
+    public String subStringCase238(String subState) throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String subSQL = "select subString(" + subState + ")";
+        ResultSet resultSet = statement.executeQuery(subSQL);
+        String subResultStr = null;
+        while (resultSet.next()){
+            subResultStr = resultSet.getString(1);
+        }
+        statement.close();
+        return subResultStr;
+    }
+
+    //subString函数支持from startindex for length用法
+    public String subStringCase241(String subStr, String startIndex, String subLength) throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String subSQL = "select subString(" + subStr + " from " + startIndex + " for " + subLength + ")";
+        ResultSet resultSet = statement.executeQuery(subSQL);
+        String subResultStr = null;
+        while (resultSet.next()){
+            subResultStr = resultSet.getString(1);
+        }
+        statement.close();
+        return subResultStr;
+    }
+
+    //subString截取字符串
+    public List<List> subStringCase246() throws SQLException, ClassNotFoundException {
+        String strFuncTableName = getStrTableName();
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String subStringSQL = "select mid(name,1) mname,subString(address,1,8) sAddr,subString(age from -2 for 2)" +
+                " sAge from " + strFuncTableName + " where id in(2,10,15)";
+        ResultSet subStringRst = statement.executeQuery(subStringSQL);
+        List<List> subStringList = new ArrayList<List>();
+        while (subStringRst.next()){
+            List rowList = new ArrayList();
+            rowList.add(subStringRst.getString("mname"));
+            rowList.add(subStringRst.getString("sAddr"));
+            rowList.add(subStringRst.getString("sAge"));
+            subStringList.add(rowList);
+        }
+        statement.close();
+        return subStringList;
+    }
+
+    //验证reverse函数反转字符串
+    public String reverseCase248(String reverseStr) throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String reverseSQL = "select reverse('" + reverseStr + "')";
+        ResultSet resultSet = statement.executeQuery(reverseSQL);
+        String reverseResultStr = null;
+        while (resultSet.next()){
+            reverseResultStr = resultSet.getString(1);
+        }
+        statement.close();
+        return reverseResultStr;
+    }
+
+    //验证reverse函数反转数值
+    public String reverseCase249(String reverseStr) throws SQLException, ClassNotFoundException {
+        connection = connectStrDB();
+        Statement statement = connection.createStatement();
+
+        String reverseSQL = "select reverse(" + reverseStr + ")";
+        ResultSet resultSet = statement.executeQuery(reverseSQL);
+        String reverseResultStr = null;
+        while (resultSet.next()){
+            reverseResultStr = resultSet.getString(1);
+        }
+        statement.close();
+        return reverseResultStr;
+    }
+
 
 
 

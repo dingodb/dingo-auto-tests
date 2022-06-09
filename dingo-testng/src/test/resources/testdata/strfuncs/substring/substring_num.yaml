@@ -1,0 +1,65 @@
+testID1000231-01:
+  subStr: "1234567"
+  subStartIndex: "2"
+  subLength: "5"
+  subOut: "23456"
+testID1000231-02:
+  subStr: "0"
+  subStartIndex: "1"
+  subLength: "2"
+  subOut: "0"
+testID1000231-04:
+  subStr: "123"
+  subStartIndex: "1"
+  subLength: "3"
+  subOut: "123"
+testID1000231-05:
+  subStr: "123"
+  subStartIndex: "3"
+  subLength: "1"
+  subOut: "3"
+testID1000232-01:
+  subStr: "1.234567"
+  subStartIndex: "2"
+  subLength: "5"
+  subOut: ".2345"
+testID1000232-02:
+  subStr: "0.567"
+  subStartIndex: "1"
+  subLength: "2"
+  subOut: "0."
+testID1000232-04:
+  subStr: "0.123"
+  subStartIndex: "1"
+  subLength: "5"
+  subOut: "0.123"
+testID1000232-05:
+  subStr: "9.99"
+  subStartIndex: "4"
+  subLength: "1"
+  subOut: "9"
+testID1000235-04:
+  subStr: "1234"
+  subStartIndex: "2.5"
+  subLength: "2"
+  subOut: "34"
+testID1000235-05:
+  subStr: "1234060"
+  subStartIndex: "-2.6"
+  subLength: "3"
+  subOut: "060"
+testID1000236-05:
+  subStr: "103450"
+  subStartIndex: "1"
+  subLength: "1.5"
+  subOut: "10"
+testID1000237-03:
+  subStr: null
+  subStartIndex: "1"
+  subLength: "1"
+  subOut: null
+testID1000237-04:
+  subStr: null
+  subStartIndex: "2"
+  subLength: "2"
+  subOut: null

@@ -1,0 +1,18 @@
+testID1000221-01:
+  midState: "'www.baidu.com' from 5 for 4"
+testID1000220-01:
+  midState: "'aaabcde',3,'a'"
+testID1000219-01:
+  midState: "'aaabcde','a',3"
+testID1000212-01:
+  midState: "'aaabcde'"
+testID1000212-03:
+  midState: "'aaabcde',4,4,3"
+testID1000212-04:
+  midState: ""
+testID1001046-01:
+  midState: "'abcde',6"
+testID1001046-02:
+  midState: "'abcde',-6"
+testID1001046-03:
+  midState: "'abcde',0"

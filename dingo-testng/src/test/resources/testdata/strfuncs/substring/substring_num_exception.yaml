@@ -1,0 +1,8 @@
+testID1000231-03:
+  subStr: "123"
+  subStartIndex: "4"
+  subLength: "1"
+testID1000232-03:
+  subStr: "123.0"
+  subStartIndex: "6"
+  subLength: "1"

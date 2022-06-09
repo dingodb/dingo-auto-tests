@@ -1,0 +1,24 @@
+testID1000249-01:
+  reverseStr: "1234"
+  reverseOut: "4321"
+testID1000249-02:
+  reverseStr: "10"
+  reverseOut: "01"
+testID1000249-03:
+  reverseStr: "0"
+  reverseOut: "0"
+testID1000250-01:
+  reverseStr: "1234.0"
+  reverseOut: "0.4321"
+testID1000250-02:
+  reverseStr: "0.01230"
+  reverseOut: "03210.0"
+testID1000250-03:
+  reverseStr: "0.01"
+  reverseOut: "10.0"
+testID1000250-04:
+  reverseStr: "9.9"
+  reverseOut: "9.9"
+testID1000251-02:
+  reverseStr: null
+  reverseOut: null

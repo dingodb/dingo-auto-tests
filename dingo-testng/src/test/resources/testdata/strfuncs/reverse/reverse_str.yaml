@@ -1,0 +1,21 @@
+testID1000248-01:
+  reverseStr: "abcd"
+  reverseOut: "dcba"
+testID1000248-02:
+  reverseStr: "a"
+  reverseOut: "a"
+testID1000248-03:
+  reverseStr: "123"
+  reverseOut: "321"
+testID1000248-04:
+  reverseStr: "1234.0"
+  reverseOut: "0.4321"
+testID1000251-01:
+  reverseStr: ""
+  reverseOut: ""
+testID1000252-01:
+  reverseStr: " a  bc d  "
+  reverseOut: "  d cb  a "
+testID1000253-01:
+  reverseStr: "   "
+  reverseOut: "   "

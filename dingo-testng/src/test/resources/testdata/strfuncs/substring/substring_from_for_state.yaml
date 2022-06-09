@@ -1,0 +1,25 @@
+testID1000241-01:
+  subStr: "'www.baidu.com'"
+  subStartIndex: "5"
+  subLength: "5"
+  subOut: "baidu"
+testID1000241-02:
+  subStr: "'www.baidu.com'"
+  subStartIndex: "1"
+  subLength: "4"
+  subOut: "www."
+testID1000241-04:
+  subStr: "'www.baidu.com'"
+  subStartIndex: "5"
+  subLength: "20"
+  subOut: "baidu.com"
+testID1000241-06:
+  subStr: "'www.baidu.com'"
+  subStartIndex: "-10"
+  subLength: "4"
+  subOut: ".bai"
+testID1000241-07:
+  subStr: "12345.00"
+  subStartIndex: "1"
+  subLength: "5"
+  subOut: "12345"
