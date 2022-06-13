@@ -155,13 +155,13 @@ testID1000236-02:
   subLength: "2.5"
   subOut: "w.b"
 testID1000236-03:
-  subStr: "abcdefg"
+  subStr: "abcdefg  "
   subStartIndex: "7"
-  subLength: "1.4"
-  subOut: "g"
+  subLength: "3.4"
+  subOut: "g  "
 testID1000236-04:
   subStr: "abcdefg"
-  subStartIndex: "6"
+  subStartIndex: "6.2"
   subLength: "1.5"
   subOut: "fg"
 testID1000237-01:

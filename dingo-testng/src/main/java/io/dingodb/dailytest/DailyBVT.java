@@ -16,14 +16,15 @@
 
 package io.dingodb.dailytest;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Random;
 
 public class DailyBVT {
-//    private static final String defaultConnectIP = "172.20.3.26";
+//    private static final String defaultConnectIP = "172.20.3.27";
     private static String defaultConnectIP = CommonArgs.getDefaultDingoClusterIP();
     private static final String JDBC_DRIVER = "io.dingodb.driver.client.DingoDriverClient";
     private static final String connectUrl = "jdbc:dingo:thin:url=" + defaultConnectIP + ":8765";

@@ -14,5 +14,7 @@ testID1000644-1:
   insertDate: "(6441, 'zhang san', 18, 1342.09, 'Heze', '19-1-5')"
 testID1000644-2:
   insertDate: "(6442, 'Hello', 7, 10.50, 'TJ', '88-12-31')"
-testID1000833:
-  insertDate: "(833, 'Hello', 7, 10.50, 'TJ', '202112')"
+testID1000833-1:
+  insertDate: "(8331, 'Hello', 7, 10.50, 'TJ', '202112')"
+testID1000833-2:
+  insertDate: "(8332, 'Hello', 7, 10.50, 'TJ', '202241')"

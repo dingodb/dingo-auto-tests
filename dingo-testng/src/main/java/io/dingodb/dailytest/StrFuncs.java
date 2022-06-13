@@ -26,7 +26,7 @@ import java.util.List;
 
 
 public class StrFuncs {
-//    private static final String defaultConnectIP = "172.20.3.26";
+//    private static final String defaultConnectIP = "172.20.3.27";
     private static String defaultConnectIP = CommonArgs.getDefaultDingoClusterIP();
     private static final String JDBC_DRIVER = "io.dingodb.driver.client.DingoDriverClient";
     private static String connectUrl = "jdbc:dingo:thin:url=" + defaultConnectIP + ":8765";
@@ -605,7 +605,9 @@ public class StrFuncs {
         String concatSQL = "select name||address cna from tableConcatCase081";
         ResultSet resultSet = statement.executeQuery(concatSQL);
 
-        return resultSet.next();
+        Boolean queryResult = resultSet.next();
+        statement.close();
+        return queryResult;
     }
 
     public void insertTable081() throws SQLException, ClassNotFoundException {
@@ -1306,10 +1308,11 @@ public class StrFuncs {
         connection = connectStrDB();
         Statement statement = connection.createStatement();
         String updateSql = "update tableReplaceCase177 set address = replace(address,'beijing','shanghai')";
-        statement.executeUpdate(updateSql);
+        int effectRows = statement.executeUpdate(updateSql);
         String querySql = "select concat(id,address) cia from tableReplaceCase177";
         ResultSet resultSet = statement.executeQuery(querySql);
         List replaceResultList = new ArrayList();
+        replaceResultList.add(effectRows);
 
         while(resultSet.next()) {
             replaceResultList.add(resultSet.getString("cia"));
@@ -1343,6 +1346,7 @@ public class StrFuncs {
         Statement statement = connection.createStatement();
         String updateSql = "update tableReplaceCase177 set age = cast(replace(age,age,amount) as double) where id in(2,4,6,8)";
         int effectNum = statement.executeUpdate(updateSql);
+        statement.close();
         return effectNum;
     }
 
@@ -1352,6 +1356,7 @@ public class StrFuncs {
         Statement statement = connection.createStatement();
         String updateSql = "update tableReplaceCase177 set age = replace(age,age,amount) where id=10";
         int effectNum = statement.executeUpdate(updateSql);
+        statement.close();
         return effectNum;
     }
 
@@ -1744,10 +1749,5 @@ public class StrFuncs {
         statement.close();
         return reverseResultStr;
     }
-
-
-
-
-
 
 }

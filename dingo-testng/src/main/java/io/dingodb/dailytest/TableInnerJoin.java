@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TableInnerJoin {
-//    private static final String defaultConnectIP = "172.20.3.26";
+//    private static final String defaultConnectIP = "172.20.3.27";
     private static String defaultConnectIP = CommonArgs.getDefaultDingoClusterIP();
     private static final String JDBC_DRIVER = "io.dingodb.driver.client.DingoDriverClient";
     private static final String connectUrl = "jdbc:dingo:thin:url=" + defaultConnectIP + ":8765";
@@ -425,7 +425,9 @@ public class TableInnerJoin {
         Statement statement = connection.createStatement();
         String querySql = "select table1069_1.* from table1069_1 inner join table1069_2 on table1069_2.id=table1069_1.id";
         ResultSet joinRst = statement.executeQuery(querySql);
-        return joinRst.next();
+        Boolean queryResult = joinRst.next();
+        statement.close();
+        return queryResult;
     }
 
 
@@ -617,7 +619,9 @@ public class TableInnerJoin {
         String querySql = "select table1059_1.*,table1059_2.* from table1059_1 inner join table1059_2 " +
                 "on table1059_1.buyers>table1059_2.price";
         ResultSet joinRst = statement.executeQuery(querySql);
-        return joinRst.next();
+        Boolean queryResult =  joinRst.next();
+        statement.close();
+        return queryResult;
     }
 
     //验证内非连接找不到字段
@@ -656,7 +660,9 @@ public class TableInnerJoin {
         String querySql = "select table1059_1.* from table1059_1 inner join table1059_3 " +
                 "on table1059_3.id<table1059_1.id";
         ResultSet joinRst = statement.executeQuery(querySql);
-        return joinRst.next();
+        Boolean queryResult = joinRst.next();
+        statement.close();
+        return queryResult;
     }
 
     //验证内非连接某一个表为空返回空
@@ -665,7 +671,9 @@ public class TableInnerJoin {
         String querySql = "select table1059_3.* from table1059_3 inner join table1059_1 " +
                 "on table1059_1.id<>table1059_3.id";
         ResultSet joinRst = statement.executeQuery(querySql);
-        return joinRst.next();
+        Boolean queryResult = joinRst.next();
+        statement.close();
+        return queryResult;
     }
 
     //验证内非连接两表互换

@@ -420,7 +420,7 @@ public class TestTableInnerJoin {
         tableJoinObj.createSelfJoinTable();
         tableJoinObj.insertValuesToSelftJoinTable(selfJoinValues);
 
-        String[][] selfJoinArray = {{"Russell","Russell"},{"Bell","Russel"},{"Nayer","Bell"},{"Abel","Bell"},
+        String[][] selfJoinArray = {{"Russell","Russell"},{"Bell","Russell"},{"Nayer","Bell"},{"Abel","Bell"},
                 {"Kula","Russell"},{"Grant","Kula"},{"Sisi","Nayer"},{"Jason","Grant"},{"Peter","Abel"},
                 {"School","Kula"},{"Hall","Abel"}};
         List<List<String>> expectedSelfJoinList = new ArrayList<List<String>>();

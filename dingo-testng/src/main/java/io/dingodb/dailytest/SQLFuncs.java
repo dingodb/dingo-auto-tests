@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SQLFuncs {
-//    private static final String defaultConnectIP = "172.20.61.1";
+//    private static final String defaultConnectIP = "172.20.3.27";
     private static String defaultConnectIP = CommonArgs.getDefaultDingoClusterIP();
     private static final String JDBC_DRIVER = "io.dingodb.driver.client.DingoDriverClient";
     private static String connectUrl = "jdbc:dingo:thin:url=" + defaultConnectIP + ":8765";
@@ -399,6 +399,7 @@ public class SQLFuncs {
         while(resultSet.next()) {
             minAge = resultSet.getString(1);
         }
+        statement.close();
         return minAge;
     }
 
@@ -412,6 +413,7 @@ public class SQLFuncs {
         while(resultSet.next()) {
             maxAge = resultSet.getString(1);
         }
+        statement.close();
         return maxAge;
     }
 
@@ -425,6 +427,7 @@ public class SQLFuncs {
         while(resultSet.next()) {
             sumAge = resultSet.getString(1);
         }
+        statement.close();
         return sumAge;
     }
 
@@ -438,6 +441,7 @@ public class SQLFuncs {
         while(resultSet.next()) {
             avgAge = resultSet.getString(1);
         }
+        statement.close();
         return avgAge;
     }
 
@@ -454,7 +458,6 @@ public class SQLFuncs {
             countNum = resultSet.getInt(1);
         }
         statement.close();
-
         return countNum;
     }
 
@@ -464,7 +467,9 @@ public class SQLFuncs {
         Statement statement = connection.createStatement();
         String querySQL = "select age from emptest065 order by age asc";
         ResultSet resultSet = statement.executeQuery(querySQL);
-        return resultSet.next();
+        Boolean queryResult = resultSet.next();
+        statement.close();
+        return queryResult;
 
     }
 
@@ -474,7 +479,9 @@ public class SQLFuncs {
         Statement statement = connection.createStatement();
         String querySQL = "select age from emptest065 order by age desc";
         ResultSet resultSet = statement.executeQuery(querySQL);
-        return resultSet.next();
+        Boolean queryResult = resultSet.next();
+        statement.close();
+        return queryResult;
 
     }
 
@@ -484,8 +491,9 @@ public class SQLFuncs {
         Statement statement = connection.createStatement();
         String querySQL = "select name,sum(amount) sa from emptest065 group by name";
         ResultSet resultSet = statement.executeQuery(querySQL);
-        return resultSet.next();
-
+        Boolean queryResult = resultSet.next();
+        statement.close();
+        return queryResult;
     }
 
 
@@ -510,7 +518,6 @@ public class SQLFuncs {
             minAge = resultSet.getInt(1);
         }
         statement.close();
-
         return minAge;
     }
 
@@ -525,7 +532,6 @@ public class SQLFuncs {
             maxAge = resultSet.getInt(1);
         }
         statement.close();
-
         return maxAge;
     }
 
@@ -540,7 +546,6 @@ public class SQLFuncs {
             orderAgeList.add(resultSet.getInt("age"));
         }
         statement.close();
-
         return orderAgeList;
     }
 
@@ -555,7 +560,6 @@ public class SQLFuncs {
             orderAgeList.add(resultSet.getInt("age"));
         }
         statement.close();
-
         return orderAgeList;
     }
 
@@ -594,7 +598,6 @@ public class SQLFuncs {
             minNameStr = resultSet.getString(1);
         }
         statement.close();
-
         return minNameStr;
     }
 
@@ -609,7 +612,6 @@ public class SQLFuncs {
             maxNameStr = resultSet.getString(1);
         }
         statement.close();
-
         return maxNameStr;
     }
 
@@ -624,7 +626,6 @@ public class SQLFuncs {
             minAmount = resultSet.getDouble(1);
         }
         statement.close();
-
         return minAmount;
     }
 
@@ -639,7 +640,6 @@ public class SQLFuncs {
             maxAmount = resultSet.getDouble(1);
         }
         statement.close();
-
         return maxAmount;
     }
 
@@ -654,7 +654,6 @@ public class SQLFuncs {
             amountList.add(resultSet.getInt("canum"));
         }
         statement.close();
-
         return amountList;
     }
 
@@ -670,7 +669,6 @@ public class SQLFuncs {
         }
 
         statement.close();
-
         return ageList;
     }
 
@@ -1093,8 +1091,9 @@ public class SQLFuncs {
         Statement statement = connection.createStatement();
         String querySQL = "select name,age from emptest065 limit 5 offset 15";
         ResultSet resultSet = statement.executeQuery(querySQL);
-
-        return resultSet.next();
+        Boolean queryResult = resultSet.next();
+        statement.close();
+        return queryResult;
     }
 
     //限制输出条数为0
@@ -1104,7 +1103,9 @@ public class SQLFuncs {
         String querySQL = "select name,age from emptest065 limit 0";
         ResultSet resultSet = statement.executeQuery(querySQL);
 
-        return resultSet.next();
+        Boolean queryResult = resultSet.next();
+        statement.close();
+        return queryResult;
     }
 
     //限制输出条数为0
@@ -1114,7 +1115,9 @@ public class SQLFuncs {
         String querySQL = "select name,age from emptest065 limit 0 offset 3";
         ResultSet resultSet = statement.executeQuery(querySQL);
 
-        return resultSet.next();
+        Boolean queryResult = resultSet.next();
+        statement.close();
+        return queryResult;
     }
 
     //限制输出条数为负数
@@ -1335,7 +1338,9 @@ public class SQLFuncs {
         Statement statement = connection.createStatement();
         String querySQL = "select name,age from emptest065 where id in (16,18,20)";
         ResultSet resultSet = statement.executeQuery(querySQL);
-        return resultSet.next();
+        Boolean queryResult = resultSet.next();
+        statement.close();
+        return queryResult;
     }
 
     //in运算符，多个字段
@@ -1859,7 +1864,9 @@ public class SQLFuncs {
         statement.execute(createTable);
         String querySQL = "select distinct(id) from case330";
         ResultSet resultSet = statement.executeQuery(querySQL);
-        return resultSet.next();
+        Boolean queryResult = resultSet.next();
+        statement.close();
+        return queryResult;
     }
 
     //无重复
@@ -2027,7 +2034,9 @@ public class SQLFuncs {
         statement.execute(createTable);
         String querySQL = "select * from case342";
         ResultSet resultSet = statement.executeQuery(querySQL);
-        return resultSet.next();
+        Boolean queryResult = resultSet.next();
+        statement.close();
+        return queryResult;
     }
 
     //未指定not null
@@ -2127,7 +2136,7 @@ public class SQLFuncs {
         return updateNum;
     }
 
-    //指定not Null,指定默认值
+    //通过select语句插入数据
     public List<List> case1049() throws SQLException, ClassNotFoundException {
         connection = connectDB();
         Statement statement = connection.createStatement();

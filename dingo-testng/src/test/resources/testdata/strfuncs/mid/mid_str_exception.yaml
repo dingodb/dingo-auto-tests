@@ -19,9 +19,13 @@ testID1000209-02:
   midStartIndex: "2"
   midLength: "1"
 testID1000209-03:
-  midStr: "123"
+  midStr: "abc"
   midStartIndex: "4"
-  midLength: "4"
+  midLength: "1"
+testID1000209-04:
+  midStr: "abcde"
+  midStartIndex: "10"
+  midLength: "2"
 testID1000213-05:
   midStr: "abcdef"
   midStartIndex: "-10"

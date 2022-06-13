@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TableOuterJoin {
-//        private static final String defaultConnectIP = "172.20.61.1";
+//    private static final String defaultConnectIP = "172.20.3.27";
     private static String defaultConnectIP = CommonArgs.getDefaultDingoClusterIP();
     private static final String JDBC_DRIVER = "io.dingodb.driver.client.DingoDriverClient";
     private static final String connectUrl = "jdbc:dingo:thin:url=" + defaultConnectIP + ":8765";
@@ -408,8 +408,9 @@ public class TableOuterJoin {
         Statement statement = connection.createStatement();
         String querySQL = "select product3.* from product3 left join product1 on product1.id=product3.id";
         ResultSet resultSet = statement.executeQuery(querySQL);
-//        statement.close();
-        return resultSet.next();
+        Boolean queryResult = resultSet.next();
+        statement.close();
+        return queryResult;
     }
 
     //左连接右表无数据
@@ -617,8 +618,9 @@ public class TableOuterJoin {
         Statement statement = connection.createStatement();
         String querySQL = "select product3.* from product1 right join product3 on product3.id=product1.id";
         ResultSet resultSet = statement.executeQuery(querySQL);
-//        statement.close();
-        return resultSet.next();
+        Boolean queryResult = resultSet.next();
+        statement.close();
+        return queryResult;
     }
 
     //右连接where条件1
@@ -683,11 +685,6 @@ public class TableOuterJoin {
         statement.close();
         return queryList;
     }
-
-
-
-
-
 
 
 
@@ -941,9 +938,9 @@ public class TableOuterJoin {
         String querySQL = "select student_tbl1.*,class_tbl1.* from student_tbl1 " +
                 "full outer join class_tbl1 on student_tbl1.class_id=class_tbl1.cid";
         ResultSet resultSet = statement.executeQuery(querySQL);
-
-//        statement.close();
-        return resultSet.next();
+        Boolean queryResult = resultSet.next();
+        statement.close();
+        return queryResult;
     }
 
     public List<List> crossJoinAll() throws SQLException {
@@ -1035,9 +1032,9 @@ public class TableOuterJoin {
         Statement statement = connection.createStatement();
         String querySQL = "select student_tbl.*,class_tbl1.* from student_tbl cross join class_tbl1";
         ResultSet resultSet = statement.executeQuery(querySQL);
-
-//        statement.close();
-        return resultSet.next();
+        Boolean queryResult = resultSet.next();
+        statement.close();
+        return queryResult;
     }
 
     public List<List> crossJoinStarQueryAll1() throws SQLException {
@@ -1080,9 +1077,9 @@ public class TableOuterJoin {
         Statement statement = connection.createStatement();
         String querySQL = "select id from test1 cross join test2";
         ResultSet resultSet = statement.executeQuery(querySQL);
-
-//        statement.close();
-        return resultSet.next();
+        Boolean queryResult = resultSet.next();
+        statement.close();
+        return queryResult;
     }
 
     public List<List> crossJoinUniqueFieldNoTablePrefix() throws SQLException {

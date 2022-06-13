@@ -18,6 +18,10 @@ testID1000148-05:
   repeatStr: "~!@#$%^&*()_+=-|][}{;:/.,?><"
   repeatNum: "2"
   repeatOut: "~!@#$%^&*()_+=-|][}{;:/.,?><~!@#$%^&*()_+=-|][}{;:/.,?><"
+testID1000148-06:
+  repeatStr: " abc "
+  repeatNum: "3"
+  repeatOut: " abc  abc  abc "
 testID1000152-01:
   repeatStr: "ab"
   repeatNum: "0"

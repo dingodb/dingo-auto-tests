@@ -1,9 +1,12 @@
 testID1000708:
   inputTimestamp: "0"
   outputDate: "1970-01-01 08:00:00"
-testID1000709:
+testID1000709-01:
   inputTimestamp: "1649770110"
   outputDate: "2022-04-12 21:28:30"
+testID1000709-02:
+  inputTimestamp: "99999999"
+  outputDate: "1973-03-03 17:46:39"
 testID1000712:
   inputTimestamp: "2147483647"
   outputDate: "2038-01-19 11:14:07"

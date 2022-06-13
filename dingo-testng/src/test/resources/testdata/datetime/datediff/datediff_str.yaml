@@ -27,12 +27,12 @@ testID1000815-01:
   inputDate2: "2022-03-31"
   outputDiff: "1"
 testID1000815-02:
-  inputDate1: "2022-04-01"
+  inputDate1: "2022-4-1"
   inputDate2: "2021-05-30"
   outputDiff: "306"
 testID1000815-03:
   inputDate1: "2020-03-01"
-  inputDate2: "2019-03-01"
+  inputDate2: "2019-3-1"
   outputDiff: "366"
 testID1000815-04:
   inputDate1: "2020-03-01"
@@ -62,6 +62,10 @@ testID1000817-03:
   inputDate1: "1999-01-01"
   inputDate2: "2023-12-31"
   outputDiff: "-9130"
+testID1000817-04:
+  inputDate1: "1987-7-1"
+  inputDate2: "2022/5/1"
+  outputDiff: "-12723"
 testID1000819-01:
   inputDate1: "2022/04/13"
   inputDate2: "2022/05/31"

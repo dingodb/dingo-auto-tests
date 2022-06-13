@@ -134,6 +134,10 @@ testID1000764-08:
   inputDate: "2022.04.13"
   inputFormat: "%Y-%m-%d"
   outputDate: "2022-04-13"
+testID1000764-09:
+  inputDate: "2022-04-1"
+  inputFormat: "%Y-%m-%d"
+  outputDate: "2022-04-01"
 testID1000765-01:
   inputDate: "20220413103726"
   inputFormat: "%H:%i:%S"
@@ -182,6 +186,10 @@ testID1000766-08:
   inputDate: "1949.04.13"
   inputFormat: "%Y"
   outputDate: "1949"
+testID1000766-09:
+  inputDate: "2022-4-13 10:37:26"
+  inputFormat: "%Y"
+  outputDate: "2022"
 testID1000767-01:
   inputDate: "20220413103726"
   inputFormat: "%d - %H"

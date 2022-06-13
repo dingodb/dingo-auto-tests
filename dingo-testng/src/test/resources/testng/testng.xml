@@ -75,4 +75,10 @@
         </classes>
     </test>
 
+    <test name="DefectCaseTest">
+        <classes>
+            <class name="io.dingodb.test.TestDefectCase"></class>
+        </classes>
+    </test>
+
 </suite>

@@ -10,6 +10,9 @@ testID1000248-03:
 testID1000248-04:
   reverseStr: "1234.0"
   reverseOut: "0.4321"
+testID1000248-05:
+  reverseStr: "          abc          "
+  reverseOut: "          cba          "
 testID1000251-01:
   reverseStr: ""
   reverseOut: ""

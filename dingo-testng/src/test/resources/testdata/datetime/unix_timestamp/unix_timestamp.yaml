@@ -31,8 +31,11 @@ testID1000747:
 testID1000836:
   inputDate: "2022/04/12 17:14:43"
   outputTimestamp: "1649754883"
-testID1000837:
+testID1000837-01:
   inputDate: "2022/04/12"
+  outputTimestamp: "1649692800"
+testID1000837-02:
+  inputDate: "2022/4/12"
   outputTimestamp: "1649692800"
 testID1000838:
   inputDate: "2022.04.12 17:14:43"

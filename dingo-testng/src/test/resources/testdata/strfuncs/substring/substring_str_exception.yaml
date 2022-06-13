@@ -10,6 +10,10 @@ testID1000227-03:
   subStr: "1234567"
   subStartIndex: "9"
   subLength: "3"
+testID1000227-04:
+  subStr: "abc"
+  subStartIndex: "4"
+  subLength: "1"
 testID1000229-01:
   subStr: "abc"
   subStartIndex: "0"

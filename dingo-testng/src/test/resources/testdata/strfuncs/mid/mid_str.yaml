@@ -158,6 +158,11 @@ testID1000216-04:
   midStartIndex: "6"
   midLength: "1.5"
   midOut: "fg"
+testID1000216-05:
+  midStr: " abc defg  "
+  midStartIndex: "3.5"
+  midLength: "7.4"
+  midOut: "c defg "
 testID1000217-01:
   midStr: ""
   midStartIndex: "1"

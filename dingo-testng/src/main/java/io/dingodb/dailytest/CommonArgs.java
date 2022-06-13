@@ -25,7 +25,7 @@ public class CommonArgs {
         if (System.getenv().containsKey("ConnectIP")) {
             return System.getenv("ConnectIP");
         }
-        return  "172.20.3.26";
+        return  "172.20.3.27";
     }
     public static String getCurDateStr() {
         Date date = new Date();
