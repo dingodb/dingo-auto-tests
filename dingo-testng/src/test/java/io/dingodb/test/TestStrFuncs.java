@@ -19,6 +19,7 @@ package io.dingodb.test;
 import io.dingodb.dailytest.StrFuncs;
 import listener.EmailableReporterListener;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -26,6 +27,7 @@ import utils.YamlDataHelper;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -1129,22 +1131,22 @@ public class TestStrFuncs extends YamlDataHelper {
     }
 
 
-//    @AfterClass(alwaysRun = true, description = "测试完成后删除数据和表格并关闭连接")
-//    public void tearDownAll() throws SQLException {
-//        String tableName = strObj.getStrTableName();
-//        Statement tearDownStatement = connection.createStatement();
-//        tearDownStatement.execute("delete from " + tableName);
-//        tearDownStatement.execute("drop table " + tableName);
-//        tearDownStatement.execute("delete from tableStrCase113");
-//        tearDownStatement.execute("drop table tableStrCase113");
-//        tearDownStatement.execute("delete from tableReplaceCase177");
-//        tearDownStatement.execute("drop table tableReplaceCase177");
-//        tearDownStatement.execute("delete from tableTrimCase198");
-//        tearDownStatement.execute("drop table tableTrimCase198");
-//        tearDownStatement.execute("delete from tableConcatCase081");
-//        tearDownStatement.execute("drop table tableConcatCase081");
-//        tearDownStatement.close();
-//        connection.close();
-//    }
+    @AfterClass(alwaysRun = true, description = "测试完成后删除数据和表格并关闭连接")
+    public void tearDownAll() throws SQLException {
+        String tableName = strObj.getStrTableName();
+        Statement tearDownStatement = connection.createStatement();
+        tearDownStatement.execute("delete from " + tableName);
+        tearDownStatement.execute("drop table " + tableName);
+        tearDownStatement.execute("delete from tableStrCase113");
+        tearDownStatement.execute("drop table tableStrCase113");
+        tearDownStatement.execute("delete from tableReplaceCase177");
+        tearDownStatement.execute("drop table tableReplaceCase177");
+        tearDownStatement.execute("delete from tableTrimCase198");
+        tearDownStatement.execute("drop table tableTrimCase198");
+        tearDownStatement.execute("delete from tableConcatCase081");
+        tearDownStatement.execute("drop table tableConcatCase081");
+        tearDownStatement.close();
+        connection.close();
+    }
 
 }
