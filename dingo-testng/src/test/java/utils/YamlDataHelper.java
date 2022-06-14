@@ -455,10 +455,17 @@ public class YamlDataHelper{
                 yamlNegativeDateTimeList = getYamlList(iniReader.getValue("DateTimeNegativeYaml", "date_format_negative_missingArg"));
                 break;
             }
-            case "test22Time_FormatNegativeTime": {
+
+            case "test22Time_FormatNegativeTimeStr": {
                 yamlNegativeDateTimeList = getYamlList(iniReader.getValue("DateTimeNegativeYaml", "time_format_negative"));
                 break;
             }
+
+            case "test22Time_FormatNegativeTimeNum": {
+                yamlNegativeDateTimeList = getYamlList(iniReader.getValue("DateTimeNegativeYaml", "time_format_negative_num"));
+                break;
+            }
+
             case "test22Time_FormatNegativeArgFunc": {
                 yamlNegativeDateTimeList = getYamlList(iniReader.getValue("DateTimeNegativeYaml", "time_format_negative_funcArg"));
                 break;

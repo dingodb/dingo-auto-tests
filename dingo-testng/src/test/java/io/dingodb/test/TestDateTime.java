@@ -632,8 +632,14 @@ public class TestDateTime extends YamlDataHelper{
 
     @Test(priority = 21, enabled = true, dataProvider = "yamlNegativeDateTimeMethod", expectedExceptions = SQLException.class,
             description = "验证函数time_format时间格式非法，预期异常")
-    public void test22Time_FormatNegativeTime(Map<String, String> param) throws SQLException {
+    public void test22Time_FormatNegativeTimeStr(Map<String, String> param) throws SQLException {
         dateTimeObj.time_FormatStrArgFunc(param.get("inputTime"), param.get("inputFormat"));
+    }
+
+    @Test(priority = 21, enabled = true, dataProvider = "yamlNegativeDateTimeMethod", expectedExceptions = SQLException.class,
+            description = "验证函数time_format时间数字非法，预期异常")
+    public void test22Time_FormatNegativeTimeNum(Map<String, String> param) throws SQLException {
+        dateTimeObj.time_FormatNumArgFunc(param.get("inputTime"), param.get("inputFormat"));
     }
 
     @Test(priority = 21, enabled = true, dataProvider = "yamlNegativeDateTimeMethod", expectedExceptions = SQLException.class,

@@ -10,3 +10,23 @@ testID1000834-03:
   insertID: "13"
   insertTime: "000000"
   expectedTime: "00:00:00"
+testID1000835-01:
+  insertID: "8351"
+  insertTime: "12345"
+  expectedTime: "01:23:45"
+testID1000835-02:
+  insertID: "8352"
+  insertTime: "1"
+  expectedTime: "00:00:01"
+testID1000835-03:
+  insertID: "8353"
+  insertTime: "12"
+  expectedTime: "00:00:12"
+testID1000835-04:
+  insertID: "8354"
+  insertTime: "123"
+  expectedTime: "00:01:23"
+testID1000835-05:
+  insertID: "8355"
+  insertTime: "5959"
+  expectedTime: "00:59:59"

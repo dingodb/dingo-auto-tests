@@ -1,0 +1,12 @@
+testID1000800-09:
+  inputTime: "1111111"
+  inputFormat: "%H:%i:%S"
+testID1000800-10:
+  inputTime: "240000"
+  inputFormat: "%H:%i:%S"
+testID1000800-11:
+  inputTime: "235960"
+  inputFormat: "%H:%i:%S"
+testID1000800-12:
+  inputTime: "01211011"
+  inputFormat: "%H:%i:%S"

@@ -94,3 +94,31 @@ testID1001255:
   inputTime: "10:11:12"
   inputFormat: ""
   outputTime: ""
+testID1000800-01:
+  inputTime: "0413"
+  inputFormat: "%H-%i"
+  outputTime: "00-04"
+testID1000800-02:
+  inputTime: "1013"
+  inputFormat: "%i:%S"
+  outputTime: "10:13"
+testID1000800-03:
+  inputTime: "12225"
+  inputFormat: "%H:%i:%S"
+  outputTime: "01:22:25"
+testID1000800-04:
+  inputTime: "1"
+  inputFormat: "%S"
+  outputTime: "01"
+testID1000800-05:
+  inputTime: "1"
+  inputFormat: "%H"
+  outputTime: "00"
+testID1000800-08:
+  inputTime: "12"
+  inputFormat: "%H:%i:%S"
+  outputTime: "00:00:12"
+testID1000800-09:
+  inputTime: "123"
+  inputFormat: "%H:%i:%S"
+  outputTime: "00:01:23"

@@ -1,18 +1,18 @@
-testID1000800-01:
-  inputTime: "0413"
-  inputFormat: "%H-%i"
-testID1000800-02:
-  inputTime: "1013"
-  inputFormat: "%i:%S"
-testID1000800-03:
-  inputTime: "12225"
-  inputFormat: "%H:%i:%S"
-testID1000800-04:
-  inputTime: "1"
-  inputFormat: "%S"
-testID1000800-05:
-  inputTime: "1"
-  inputFormat: "%H"
+#testID1000800-01:
+#  inputTime: "0413"
+#  inputFormat: "%H-%i"
+#testID1000800-02:
+#  inputTime: "1013"
+#  inputFormat: "%i:%S"
+#testID1000800-03:
+#  inputTime: "12225"
+#  inputFormat: "%H:%i:%S"
+#testID1000800-04:
+#  inputTime: "1"
+#  inputFormat: "%S"
+#testID1000800-05:
+#  inputTime: "1"
+#  inputFormat: "%H"
 testID1000800-06:
   inputTime: "1111111"
   inputFormat: "%H:%i:%S"
