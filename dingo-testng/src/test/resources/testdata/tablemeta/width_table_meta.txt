@@ -1,0 +1,5 @@
+(id int not null, stu_no int not null, name varchar(20) not null, age int, amount double, sex char(10), address varchar(255) default "Bei Jing", birthday date,
+course_name varchar(10), book_count int, score int, class_no char, class_name varchar(10), teacher_no tinyint, teacher_name varchar(10),
+product_id int, product_name varchar(30), feed_name char, feed_no tinyint, price float, buyer_cnt bigint, stay_time double,
+goods_name varchar,shop_id bigint, shop_name varchar(30), shop_address varchar(100),create_time time, update_time timestamp, uuid varchar(64) default null,
+data_old boolean default true,write_date date, is_delete boolean default 1, primary key(id))

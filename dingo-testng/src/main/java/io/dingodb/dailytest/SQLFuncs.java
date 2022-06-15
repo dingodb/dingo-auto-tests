@@ -2244,4 +2244,80 @@ public class SQLFuncs {
         return queryList;
     }
 
+    //非主键插入null值，预期成功
+    public List case1443_1() throws SQLException, ClassNotFoundException {
+        connection = connectDB();
+        Statement statement = connection.createStatement();
+        String createSQL = "create table case1443(id int, name varchar(20), " +
+                "age int, amount double, address varchar(255),birthday date, " +
+                "create_time time, update_time timestamp, is_delete boolean,primary key(id))";
+        statement.execute(createSQL);
+        String insertSQL = "insert into case1443 values (1,null,null,null,null,null,null,null,null)";
+        statement.executeUpdate(insertSQL);
+        String querySQL = "select * from case1443";
+        ResultSet resultSet = statement.executeQuery(querySQL);
+        List actualRecord = new ArrayList();
+        while(resultSet.next()) {
+            actualRecord.add(resultSet.getString(1));
+            actualRecord.add(resultSet.getString(2));
+            actualRecord.add(resultSet.getString(3));
+            actualRecord.add(resultSet.getString(4));
+            actualRecord.add(resultSet.getString(5));
+            actualRecord.add(resultSet.getString(6));
+            actualRecord.add(resultSet.getString(7));
+            actualRecord.add(resultSet.getString(8));
+            actualRecord.add(resultSet.getString(9));
+        }
+        statement.close();
+        return actualRecord;
+    }
+
+    //主键插入null值，预期失败
+    public void case1443_2() throws SQLException, ClassNotFoundException {
+        connection = connectDB();
+        Statement statement = connection.createStatement();
+        String insertSQL = "insert into case1443(null,null,null,null,null,null,null,null,null)";
+        statement.executeUpdate(insertSQL);
+        statement.close();
+    }
+
+    //创建宽表
+    public void createWidthTable(String tableMeta) throws SQLException, ClassNotFoundException {
+        connection = connectDB();
+        Statement statement = connection.createStatement();
+        String createSQL = "create table case1483" + tableMeta;
+        statement.execute(createSQL);
+        statement.close();
+    }
+
+    //插入数据到宽表
+    public int insertWidthTable(String tableValues) throws SQLException, ClassNotFoundException {
+        connection = connectDB();
+        Statement statement = connection.createStatement();
+        String insertSQL = "insert into case1483 values " + tableValues;
+        int insertRows = statement.executeUpdate(insertSQL);
+        statement.close();
+        return insertRows;
+    }
+
+    public List<List> searchWidthTable() throws SQLException, ClassNotFoundException {
+        connection = connectDB();
+        Statement statement = connection.createStatement();
+        String querySQL = "select id,name,uuid,write_date,is_delete from case1483 where data_old and not is_delete";
+        ResultSet resultSet = statement.executeQuery(querySQL);
+        List<List> actualRecord = new ArrayList<List>();
+        while(resultSet.next()) {
+            List rowList = new ArrayList();
+            rowList.add(resultSet.getString(1));
+            rowList.add(resultSet.getString(2));
+            rowList.add(resultSet.getString(3));
+            rowList.add(resultSet.getDate(4).toString());
+            rowList.add(resultSet.getBoolean(5));
+            actualRecord.add(rowList);
+        }
+        statement.close();
+        return actualRecord;
+    }
+
+
 }

@@ -23,6 +23,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+import utils.FileReaderUtil;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -1877,7 +1878,7 @@ public class TestSQLFuncs {
                 {"2","lisi","25","895.0"," beijing haidian "},
                 {"3","l3","55","123.123","wuhan NO.1 Street"},
                 {"4","HAHA","57","9.0762556","CHANGping"},
-                {"13","HAHA","57","9.0762556","CHANGping"},
+                {"13","HAHA","57","9.0762556","CHANGping"}
         };
         List<List> expectedDataList = new ArrayList<List>();
         for(int i=0; i<dataArray.length; i++) {
@@ -1893,6 +1894,64 @@ public class TestSQLFuncs {
         Assert.assertEquals(actualDataList, expectedDataList);
     }
 
+    @Test(enabled = true, description = "非主键插入null，可成功")
+    public void testCase1443_1() throws SQLException, ClassNotFoundException {
+        List expectedDataList = new ArrayList();
+        expectedDataList.add("1");
+        expectedDataList.add(null);
+        expectedDataList.add(null);
+        expectedDataList.add(null);
+        expectedDataList.add(null);
+        expectedDataList.add(null);
+        expectedDataList.add(null);
+        expectedDataList.add(null);
+        expectedDataList.add(null);
+
+        System.out.println("Expected: " + expectedDataList);
+        List<List> actualDataList = funcObj.case1443_1();
+        System.out.println("Actual: " + actualDataList);
+        Assert.assertEquals(actualDataList, expectedDataList);
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testCase1443_1"}, expectedExceptions = SQLException.class,
+            description = "主键插入null，预期异常")
+    public void testCase1443_2() throws SQLException, ClassNotFoundException {
+        funcObj.case1443_2();
+    }
+
+    @Test(enabled = true, description = "验证宽表创建和数据插入成功")
+    public void testcase1483_widthTableCreate() throws SQLException, ClassNotFoundException {
+        String width_meta_path = "src/test/resources/testdata/tablemeta/width_table_meta.txt";
+        String width_value_path = "src/test/resources/testdata/tableInsertValues/width_table.txt";
+        String width_meta = FileReaderUtil.readFile(width_meta_path);
+        String width_value = FileReaderUtil.readFile(width_value_path);
+        funcObj.createWidthTable(width_meta);
+        int effectRows = funcObj.insertWidthTable(width_value);
+        Assert.assertEquals(effectRows, 4);
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"testcase1483_widthTableCreate"},description = "验证宽表查询")
+    public void testCase1483_widthTableQuery() throws SQLException, ClassNotFoundException {
+        String[][] dataArray = {
+                {"2","Wangwu","37234819900621890X","2021-12-31"},
+                {"4","lisi","100122200108110375","2022-12-31"}
+        };
+        List<List> expectedDataList = new ArrayList<List>();
+        for(int i=0; i<dataArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<dataArray[i].length; j++) {
+                columnList.add(dataArray[i][j]);
+            }
+            columnList.add(false);
+            expectedDataList.add(columnList);
+        }
+        System.out.println("Expected: " + expectedDataList);
+        List<List> actualDataList = funcObj.searchWidthTable();
+        System.out.println("Actual: " + actualDataList);
+        Assert.assertTrue(actualDataList.containsAll(expectedDataList));
+        Assert.assertTrue(expectedDataList.containsAll(actualDataList));
+    }
+
 
     @AfterClass(description = "测试完成后删除数据和表格并关闭连接")
     public void tearDownAll() throws SQLException {
@@ -1905,13 +1964,17 @@ public class TestSQLFuncs {
         tearDownStatement.execute("delete from test302");
         tearDownStatement.execute("drop table test302");
         tearDownStatement.execute("drop table case330");
-//        tearDownStatement.execute("drop table case341");
+//        //tearDownStatement.execute("drop table case341");
         tearDownStatement.execute("drop table case342");
         tearDownStatement.execute("drop table case343");
         tearDownStatement.execute("drop table case344");
         tearDownStatement.execute("drop table case624");
         tearDownStatement.execute("drop table case1049");
         tearDownStatement.execute("drop table case1119");
+        tearDownStatement.execute("delete from case1443");
+        tearDownStatement.execute("drop table case1443");
+        tearDownStatement.execute("delete from case1483");
+        tearDownStatement.execute("drop table case1483");
         tearDownStatement.close();
         connection.close();
     }
