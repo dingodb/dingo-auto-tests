@@ -24,6 +24,7 @@ version '3.0-SNAPSHOT'
 repositories {
     mavenCentral()
 //    maven {
+//        url 'https://packages.confluent.io/maven/'
 //        url = uri("https://maven.pkg.github.com/dingodb/dingo")
 //        credentials {
 //            username = System.getenv("DRIVERUSER")
@@ -46,6 +47,9 @@ dependencies {
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.20'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+//    implementation group: 'io.confluent', name: 'kafka-avro-serializer', version: '4.1.2'
+//    implementation 'org.apache.kafka:kafka-clients:3.1.1'
+//    implementation group: 'org.apache.avro', name: 'avro', version: '1.11.0'
 }
 
 

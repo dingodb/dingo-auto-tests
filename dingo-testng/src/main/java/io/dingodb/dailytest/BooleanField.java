@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BooleanField {
-//    private static final String defaultConnectIP = "172.20.3.27";
+//    private static final String defaultConnectIP = "172.20.61.1";
     private static String defaultConnectIP = CommonArgs.getDefaultDingoClusterIP();
     private static final String JDBC_DRIVER = "io.dingodb.driver.client.DingoDriverClient";
     private static final String connectUrl = "jdbc:dingo:thin:url=" + defaultConnectIP + ":8765";
@@ -223,6 +223,36 @@ public class BooleanField {
         return notFieldConditionList;
     }
 
+    // is true 查询
+    public List<String> queryIsTrue() throws SQLException {
+        String booleanTableName = getBooleanTableName();
+        Statement statement = connection.createStatement();
+
+        String querySql = "select * from " + booleanTableName + " where is_delete is true";
+        ResultSet queryRst = statement.executeQuery(querySql);
+        List<String> queryIsTrueList = new ArrayList<String>();
+        while (queryRst.next()) {
+            queryIsTrueList.add(queryRst.getString("NAME"));
+        }
+        statement.close();
+        return queryIsTrueList;
+    }
+
+    // is false 查询
+    public List<Integer> queryIsFalse() throws SQLException {
+        String booleanTableName = getBooleanTableName();
+        Statement statement = connection.createStatement();
+
+        String querySql = "select * from " + booleanTableName + " where is_delete is false";
+        ResultSet queryRst = statement.executeQuery(querySql);
+        List<Integer> queryIsFalseList = new ArrayList<Integer>();
+        while (queryRst.next()) {
+            queryIsFalseList.add(queryRst.getInt(1));
+        }
+        statement.close();
+        return queryIsFalseList;
+    }
+
     //插入0转换为false
     public int insertZeroValues() throws SQLException {
         String booleanTableName = getBooleanTableName();
@@ -279,5 +309,23 @@ public class BooleanField {
 
         statement.close();
         return integerOut;
+    }
+
+    //创建表格不支持类型写成bool
+    public void createBoolTable() throws SQLException, ClassNotFoundException {
+        String strBooleanTableName = getBooleanTableName();
+        Statement statement = connection.createStatement();
+
+        String createBLTableSQL = "create table booltest" + "("
+                + "id int,"
+                + "name varchar(32) not null,"
+                + "age int,"
+                + "amount double,"
+                + "address varchar(255),"
+                + "is_delete bool,"
+                + "primary key(id)"
+                + ")";
+        statement.execute(createBLTableSQL);
+        statement.close();
     }
 }

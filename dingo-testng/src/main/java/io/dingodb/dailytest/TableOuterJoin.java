@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TableOuterJoin {
-//    private static final String defaultConnectIP = "172.20.3.27";
+//    private static final String defaultConnectIP = "172.20.61.1";
     private static String defaultConnectIP = CommonArgs.getDefaultDingoClusterIP();
     private static final String JDBC_DRIVER = "io.dingodb.driver.client.DingoDriverClient";
     private static final String connectUrl = "jdbc:dingo:thin:url=" + defaultConnectIP + ":8765";
@@ -497,6 +497,26 @@ public class TableOuterJoin {
         statement.close();
     }
 
+    //左连接复合查询
+    public List<List> leftOuterJoinMixQuery() throws SQLException {
+        Statement statement = connection.createStatement();
+        String querySQL = "SELECT beauty_tbl.borndate,count(borndate) cb from beauty_tbl" +
+                " left join boys_right on boys_right.id=beauty_tbl.boyfriend_id " +
+                "where boys_right.id is not null and beauty_tbl.name<>'Angelay' " +
+                "group by borndate order by cb";
+        ResultSet resultSet = statement.executeQuery(querySQL);
+        List<List> queryList = new ArrayList<List>();
+
+        while(resultSet.next()) {
+            List rowList = new ArrayList ();
+            rowList.add(resultSet.getString(1));
+            rowList.add(resultSet.getString(2));
+            queryList.add(rowList);
+        }
+        statement.close();
+        return queryList;
+    }
+
 
     //右连接仅查询右表数据
     public List<List> rightOuterJoinOnlyInRight() throws SQLException {
@@ -686,6 +706,25 @@ public class TableOuterJoin {
         return queryList;
     }
 
+    //右连接复合查询
+    public List<List> rightOuterJoinMixQuery() throws SQLException {
+        Statement statement = connection.createStatement();
+        String querySQL = "SELECT boys_right.boyName,count(boys_right.boyName) cn from beauty_tbl" +
+                " right join boys_right on boys_right.id=beauty_tbl.boyfriend_id" +
+                " where beauty_tbl.boyfriend_id is not null and beauty_tbl.id<10" +
+                " and boys_right.boyName not in('Han Han','DuanYU') group by boyName order by cn desc";
+        ResultSet resultSet = statement.executeQuery(querySQL);
+        List<List> queryList = new ArrayList<List>();
+
+        while(resultSet.next()) {
+            List rowList = new ArrayList ();
+            rowList.add(resultSet.getString("boyName"));
+            rowList.add(resultSet.getString("cn"));
+            queryList.add(rowList);
+        }
+        statement.close();
+        return queryList;
+    }
 
 
     public List<List> fullOuterJoinAll() throws SQLException {

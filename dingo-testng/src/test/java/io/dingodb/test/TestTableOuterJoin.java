@@ -418,6 +418,20 @@ public class TestTableOuterJoin {
         return expectedList;
     }
 
+    public List<List> expectedLeftList8() {
+        String[][] dataArray = {{"1993-02-03 00:00:00", "1"}, {"1988-02-03 00:00:00", "1"},
+                {"1989-02-03 00:00:00", "1"},{"1992-02-03 00:00:00","2"}};
+        List<List> expectedList = new ArrayList<List>();
+        for(int i=0; i<dataArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<dataArray[i].length; j++) {
+                columnList.add(dataArray[i][j]);
+            }
+            expectedList.add(columnList);
+        }
+        return expectedList;
+    }
+
     public List<List> expectedRightList1() {
         String[][] dataArray = {{null,"5","Zhang Fei"}, {null,"6","Panan"}};
         List<List> expectedList = new ArrayList<List>();
@@ -475,6 +489,19 @@ public class TestTableOuterJoin {
 
     public List<List> expectedRightList5() {
         String[][] dataArray = {{"1","zhangsan","100","100","class-1"}};
+        List<List> expectedList = new ArrayList<List>();
+        for(int i=0; i<dataArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<dataArray[i].length; j++) {
+                columnList.add(dataArray[i][j]);
+            }
+            expectedList.add(columnList);
+        }
+        return expectedList;
+    }
+
+    public List<List> expectedRightList6() {
+        String[][] dataArray = {{"Zhang Wuji","2"},{"Xiao Ming", "1"}};
         List<List> expectedList = new ArrayList<List>();
         for(int i=0; i<dataArray.length; i++) {
             List columnList = new ArrayList();
@@ -1000,6 +1027,29 @@ public class TestTableOuterJoin {
 
         Assert.assertTrue(actualRightList.containsAll(expectedList));
         Assert.assertTrue(expectedList.containsAll(actualRightList));
+    }
+
+    @Test(priority = 48, enabled = true, dependsOnMethods = {"test27LeftJoinOnlyInLeftTable"},
+            description = "左连接复合查询")
+    public void test49LeftJoinMixQuery() throws SQLException {
+        List<List> expectedList = expectedLeftList8();
+        System.out.println("Expected: " + expectedList);
+        List<List> actualLeftList = outerJoinObj.leftOuterJoinMixQuery();
+        System.out.println("Actual: " + actualLeftList);
+
+        Assert.assertTrue(actualLeftList.containsAll(expectedList));
+        Assert.assertTrue(expectedList.containsAll(actualLeftList));
+    }
+
+    @Test(priority = 49, enabled = true, dependsOnMethods = {"test27LeftJoinOnlyInLeftTable"},
+            description = "右连接复合查询")
+    public void test50RightJoinMixQuery() throws SQLException {
+        List<List> expectedList = expectedRightList6();
+        System.out.println("Expected: " + expectedList);
+        List<List> actualRightList = outerJoinObj.rightOuterJoinMixQuery();
+        System.out.println("Actual: " + actualRightList);
+
+        Assert.assertEquals(actualRightList, expectedList);
     }
 
 

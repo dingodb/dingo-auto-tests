@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DateTimeFuncs {
-//    private static final String defaultConnectIP = "172.20.3.27";
+//    private static final String defaultConnectIP = "172.20.61.1";
     private static String defaultConnectIP = CommonArgs.getDefaultDingoClusterIP();
     private static final String JDBC_DRIVER = "io.dingodb.driver.client.DingoDriverClient";
     private static final String connectUrl = "jdbc:dingo:thin:url=" + defaultConnectIP + ":8765";
