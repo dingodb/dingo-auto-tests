@@ -13,14 +13,14 @@ prerequisite:
 
     . name: EMAILTO      value: [your receive email address] 
 
-    . name: EMAILCC      value: [your cc receive email address]
+    . name: EMAILCC      value: [your cc email address]
 
     . name: EMAILUSER    value: [your send email user]
 
     . name: EMAILPASS    value: [your send email password]
 
 steps:
-1. clone this repository of dev branch to your windows machine. 
+1. Clone this repository of dev branch to your windows machine. 
 2. Open this project using InteliJ IDEA.
 3. Execute Gradle task:
     _gradle test_
@@ -31,11 +31,11 @@ steps:
 prerequisite same with Windows OS.
 
 In addition, one more prerequisite is: 
-install gradle(v 7.3.3) in linux OS and add gradle /bin to path environment variable.Such as
+install gradle(v 7.3.3) in linux OS and add gradle /bin to path environment variable. Such as
 _export PATH=$PATH:/opt/gradle/gradle-7.3.3/bin_
 
 steps:
-1. clone this repository of dev branch to your linux host.
+1. Clone this repository of dev branch to your linux host.
 2. Navigate to dingo-auto-tests/dingo-testng directory.
 3. Run command:
     _gradle clean test_
