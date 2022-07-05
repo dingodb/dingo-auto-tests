@@ -28,7 +28,7 @@ public class DailyBVT {
     private static String defaultConnectIP = CommonArgs.getDefaultDingoClusterIP();
     private static final String JDBC_DRIVER = "io.dingodb.driver.client.DingoDriverClient";
     private static final String connectUrl = "jdbc:dingo:thin:url=" + defaultConnectIP + ":8765";
-    public static Connection connection;
+    public static Connection connection = null;
 
     public String inName = "tomy";
     public String newName = "new1";

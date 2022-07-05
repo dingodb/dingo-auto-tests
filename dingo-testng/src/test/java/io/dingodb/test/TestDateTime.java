@@ -353,7 +353,11 @@ public class TestDateTime extends YamlDataHelper{
             description = "验证函数unix_TimeStamp在表格中使用时的返回结果正常")
     public void test13Unix_TimeStampInTableDate() throws SQLException {
         List<String> expectedQueryUTSBList = new ArrayList<>();
-        String[] ustbArray = new String[]{"891792000","570988800","1646323200","1605024000","1285862400","553363200","-662716800"};
+        // unix_timestamp接收日期不考虑夏令时，1987-07-16日按标准时间返回时间戳
+        //String[] ustbArray = new String[]{"891792000","570988800","1646323200","1605024000","1285862400","553363200","-662716800"};
+
+        // unix_timestamp接收日期考虑夏令时，1987-07-16日为中国历史上的DST规则的DST offset=1的区间内，因此时间戳会减少一小时
+        String[] ustbArray = new String[]{"891792000","570988800","1646323200","1605024000","1285862400","553359600","-662716800"};
         for (int i=0; i < ustbArray.length; i++){
             expectedQueryUTSBList.add(ustbArray[i]);
         }

@@ -16,11 +16,18 @@
 
 package utils;
 
-import jakarta.mail.*;
+import jakarta.mail.Authenticator;
+import jakarta.mail.Message;
+import jakarta.mail.MessagingException;
+import jakarta.mail.Multipart;
+import jakarta.mail.PasswordAuthentication;
+import jakarta.mail.Session;
+import jakarta.mail.Transport;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeBodyPart;
 import jakarta.mail.internet.MimeMessage;
 import jakarta.mail.internet.MimeMultipart;
+import myobject.MailObject;
 
 import java.io.File;
 import java.io.FileReader;
@@ -28,8 +35,6 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Properties;
-
-import myobject.MailObject;
 
 public class SendEmailClient {
     private Session session;
@@ -142,18 +147,32 @@ public class SendEmailClient {
     }
 
     private String readFile(File file) {
-        try (FileReader fileReader = new FileReader(file)) {
-            char[] chars = new char[1];
-            StringBuilder stringBuilder = new StringBuilder();
-            while (fileReader.read(chars) != -1) {
-                for (char tmp : chars) {
-                    stringBuilder.append(tmp);
+        FileReader fileReader = null;
+        StringBuilder stringBuilder = null;
+        try {
+            fileReader = new FileReader(file);
+            char[] chars = new char[1024];
+            int len;
+            stringBuilder = new StringBuilder();
+            while ((len = fileReader.read(chars)) != -1) {
+                for (int i = 0; i < len; i++) {
+                    stringBuilder.append(chars[i]);
+                }
+//                for (char tmp : chars) {
+//                    stringBuilder.append(tmp);
+//                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fileReader != null) {
+                try {
+                    fileReader.close();
+                } catch (IOException e) {
+                    return "";
                 }
             }
-            fileReader.close();
             return stringBuilder.toString();
-        }catch (IOException e) {
-            return "";
         }
     }
 
