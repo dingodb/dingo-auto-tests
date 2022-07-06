@@ -25,7 +25,6 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import utils.YamlDataHelper;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -34,12 +33,11 @@ import java.util.Map;
 
 @Listeners(EmailableReporterListener.class)
 public class TestStrFuncs extends YamlDataHelper {
-    private static Connection connection;
     public static StrFuncs strObj = new StrFuncs();
 
     @BeforeClass(alwaysRun = true, description = "测试开始前，获取数据库连接创建数据表并插入数据")
     public static void ConnectCreateInsert() throws ClassNotFoundException, SQLException {
-        connection = StrFuncs.connectStrDB();
+        Assert.assertNotNull(StrFuncs.connection);
         strObj.createFuncTable();
         int insertRowNum = strObj.insertValues();
         Assert.assertEquals(insertRowNum,15);
@@ -1134,19 +1132,38 @@ public class TestStrFuncs extends YamlDataHelper {
     @AfterClass(alwaysRun = true, description = "测试完成后删除数据和表格并关闭连接")
     public void tearDownAll() throws SQLException {
         String tableName = strObj.getStrTableName();
-        Statement tearDownStatement = connection.createStatement();
-        tearDownStatement.execute("delete from " + tableName);
-        tearDownStatement.execute("drop table " + tableName);
-        tearDownStatement.execute("delete from tableStrCase113");
-        tearDownStatement.execute("drop table tableStrCase113");
-        tearDownStatement.execute("delete from tableReplaceCase177");
-        tearDownStatement.execute("drop table tableReplaceCase177");
-        tearDownStatement.execute("delete from tableTrimCase198");
-        tearDownStatement.execute("drop table tableTrimCase198");
-        tearDownStatement.execute("delete from tableConcatCase081");
-        tearDownStatement.execute("drop table tableConcatCase081");
-        tearDownStatement.close();
-        connection.close();
+        Statement tearDownStatement = null;
+        try {
+            tearDownStatement = StrFuncs.connection.createStatement();
+            tearDownStatement.execute("delete from " + tableName);
+            tearDownStatement.execute("drop table " + tableName);
+            tearDownStatement.execute("delete from tableStrCase113");
+            tearDownStatement.execute("drop table tableStrCase113");
+            tearDownStatement.execute("delete from tableReplaceCase177");
+            tearDownStatement.execute("drop table tableReplaceCase177");
+            tearDownStatement.execute("delete from tableTrimCase198");
+            tearDownStatement.execute("drop table tableTrimCase198");
+            tearDownStatement.execute("delete from tableConcatCase081");
+            tearDownStatement.execute("drop table tableConcatCase081");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if(tearDownStatement != null) {
+                    tearDownStatement.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                if(StrFuncs.connection != null) {
+                    StrFuncs.connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }

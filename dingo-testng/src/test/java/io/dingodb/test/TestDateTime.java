@@ -759,33 +759,51 @@ public class TestDateTime extends YamlDataHelper{
         String dateTableName = DateTimeFuncs.getDateTableName();
         String timeTableName = DateTimeFuncs.getTimeTableName();
         String timestampTableName = DateTimeFuncs.getTimestampTableName();
-        Statement tearDownStatement = DateTimeFuncs.connection.createStatement();
-        tearDownStatement.execute("delete from " + dateTimeTableName);
-        tearDownStatement.execute("delete from " + dateTableName);
-        tearDownStatement.execute("delete from " + timeTableName);
-        tearDownStatement.execute("delete from " + timestampTableName);
-        tearDownStatement.execute("drop table " + dateTimeTableName);
-        tearDownStatement.execute("drop table " + dateTableName);
-        tearDownStatement.execute("drop table " + timeTableName);
-        tearDownStatement.execute("drop table " + timestampTableName);
-        tearDownStatement.execute("drop table Orders705");
-        tearDownStatement.execute("drop table Orders673");
-        tearDownStatement.execute("drop table Orders6841");
-        tearDownStatement.execute("drop table Orders6842");
-        tearDownStatement.execute("drop table Orders690");
-        tearDownStatement.execute("drop table Orders6961");
-        tearDownStatement.execute("drop table Orders6962");
-        tearDownStatement.execute("drop table Orders7041");
-        tearDownStatement.execute("drop table Orders7042");
-        tearDownStatement.execute("drop table Orders752");
+        Statement tearDownStatement = null;
+        try {
+            tearDownStatement = DateTimeFuncs.connection.createStatement();
+            tearDownStatement.execute("delete from " + dateTimeTableName);
+            tearDownStatement.execute("delete from " + dateTableName);
+            tearDownStatement.execute("delete from " + timeTableName);
+            tearDownStatement.execute("delete from " + timestampTableName);
+            tearDownStatement.execute("drop table " + dateTimeTableName);
+            tearDownStatement.execute("drop table " + dateTableName);
+            tearDownStatement.execute("drop table " + timeTableName);
+            tearDownStatement.execute("drop table " + timestampTableName);
+            tearDownStatement.execute("drop table Orders705");
+            tearDownStatement.execute("drop table Orders673");
+            tearDownStatement.execute("drop table Orders6841");
+            tearDownStatement.execute("drop table Orders6842");
+            tearDownStatement.execute("drop table Orders690");
+            tearDownStatement.execute("drop table Orders6961");
+            tearDownStatement.execute("drop table Orders6962");
+            tearDownStatement.execute("drop table Orders7041");
+            tearDownStatement.execute("drop table Orders7042");
+            tearDownStatement.execute("drop table Orders752");
 //        tearDownStatement.execute("drop table Orders7522");
-        tearDownStatement.execute("delete from uptesttable");
-        tearDownStatement.execute("drop table uptesttable");
-        tearDownStatement.execute("drop table case1434");
-        tearDownStatement.execute("drop table case1435");
-        tearDownStatement.execute("drop table case1436");
-        tearDownStatement.close();
-        DateTimeFuncs.connection.close();
-    }
+            tearDownStatement.execute("delete from uptesttable");
+            tearDownStatement.execute("drop table uptesttable");
+            tearDownStatement.execute("drop table case1434");
+            tearDownStatement.execute("drop table case1435");
+            tearDownStatement.execute("drop table case1436");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if(tearDownStatement != null){
+                    tearDownStatement.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
 
+            try {
+                if(DateTimeFuncs.connection != null){
+                    DateTimeFuncs.connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

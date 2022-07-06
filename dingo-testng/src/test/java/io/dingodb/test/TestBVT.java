@@ -24,7 +24,6 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -33,17 +32,16 @@ import java.util.List;
 
 @Listeners(EmailableReporterListener.class)
 public class TestBVT {
-    private static Connection connection;
     public static DailyBVT bvtObj = new DailyBVT();
 
     @BeforeClass(alwaysRun = true, groups = {"BVT"}, description = "连接数据库")
     public static void setUpAll() throws ClassNotFoundException, SQLException {
-        connection = DailyBVT.connectDingo();
+        Assert.assertNotNull(DailyBVT.connection);
     }
 
     public List<String> getTableList() throws SQLException, ClassNotFoundException {
         List<String> tableList = new ArrayList<String>();
-        DatabaseMetaData dmd = connection.getMetaData();
+        DatabaseMetaData dmd = DailyBVT.connection.getMetaData();
         ResultSet resultSetSchema = dmd.getSchemas();
         List<String> schemaList = new ArrayList<>();
         while (resultSetSchema.next()) {
@@ -112,7 +110,7 @@ public class TestBVT {
 
     @AfterClass(description = "测试类完成后，关闭数据库连接")
     public void tearDownAll() throws SQLException, ClassNotFoundException {
-        connection.close();
+        DailyBVT.connection.close();
     }
 
 }

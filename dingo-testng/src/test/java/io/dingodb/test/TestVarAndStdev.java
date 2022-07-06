@@ -27,7 +27,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class TestVarAndStdev {
 
@@ -65,10 +64,10 @@ public class TestVarAndStdev {
     @Test(priority = 2, enabled = true, dependsOnMethods = {"test01VarCal"}, expectedExceptions = SQLException.class,
             description = "验证不支持varchar类型字段计算方差")
     public void test03VarvarcharCal() throws SQLException {
-        Statement statementVarChar = varstdevObj.connection.createStatement();
-        String varcharCalSQL = "select var(name) from vartest1";
-        statementVarChar.executeQuery(varcharCalSQL);
-        statementVarChar.close();
+        try(Statement statementVarChar = varstdevObj.connection.createStatement()) {
+            String varcharCalSQL = "select var(name) from vartest1";
+            statementVarChar.executeQuery(varcharCalSQL);
+        }
     }
 
     @Test(priority = 3, enabled = true, expectedExceptions = SQLException.class, description = "验证不支持日期类型字段计算方差")
@@ -77,29 +76,29 @@ public class TestVarAndStdev {
         String varTable5Values = FileReaderUtil.readFile(varTable5path);
         varstdevObj.varTable5Create();
         varstdevObj.varTable5Insert(varTable5Values);
-        Statement statementDate = varstdevObj.connection.createStatement();
-        String dateCalSQL = "select var(birthday) from vartest5";
+        try(Statement statementDate = varstdevObj.connection.createStatement()) {
+            String dateCalSQL = "select var(birthday) from vartest5";
 
-        statementDate.executeQuery(dateCalSQL);
-        statementDate.close();
+            statementDate.executeQuery(dateCalSQL);
+        }
     }
 
     @Test(priority = 4, enabled = true, expectedExceptions = SQLException.class, dependsOnMethods = {"test04VarDateCal"},
             description = "验证不支持时间类型字段计算方差")
     public void test05VarTimeCal() throws SQLException {
-        Statement statementTime = varstdevObj.connection.createStatement();
-        String timeCalSQL = "select var(create_time) from vartest5";
-        statementTime.executeQuery(timeCalSQL);
-        statementTime.close();
+        try(Statement statementTime = varstdevObj.connection.createStatement()) {
+            String timeCalSQL = "select var(create_time) from vartest5";
+            statementTime.executeQuery(timeCalSQL);
+        }
     }
 
     @Test(priority = 5, enabled = true, expectedExceptions = SQLException.class, dependsOnMethods = {"test04VarDateCal"},
             description = "验证不支持时间日期类型字段计算方差")
     public void test06VarDateTimeCal() throws SQLException {
-        Statement statementDateTime = varstdevObj.connection.createStatement();
-        String dateTimeCalSQL = "select var(update_time) from vartest5";
-        statementDateTime.executeQuery(dateTimeCalSQL);
-        statementDateTime.close();
+        try(Statement statementDateTime = varstdevObj.connection.createStatement()) {
+            String dateTimeCalSQL = "select var(update_time) from vartest5";
+            statementDateTime.executeQuery(dateTimeCalSQL);
+        }
     }
 
     @Test(priority = 6, enabled = true, dependsOnMethods = {"test01VarCal"}, description = "验证只一条数据计算返回null")
@@ -240,38 +239,37 @@ public class TestVarAndStdev {
     @Test(priority = 19, enabled = true, dependsOnMethods = {"test04VarDateCal"}, expectedExceptions = SQLException.class,
             description = "验证不支持varchar类型字段计算标准偏差")
     public void test20StdevVarcharCal() throws SQLException {
-        Statement statementVarCharStdev = varstdevObj.connection.createStatement();
-        String varcharStdevSQL = "select stdev(name) from vartest5";
-        statementVarCharStdev.executeQuery(varcharStdevSQL);
-        statementVarCharStdev.close();
+        try(Statement statementVarCharStdev = varstdevObj.connection.createStatement()) {
+            String varcharStdevSQL = "select stdev(name) from vartest5";
+            statementVarCharStdev.executeQuery(varcharStdevSQL);
+        }
     }
 
     @Test(priority = 20, enabled = true, dependsOnMethods = {"test04VarDateCal"}, expectedExceptions = SQLException.class,
             description = "验证不支持日期类型字段计算标准偏差")
     public void test21StdevDateCal() throws SQLException {
-        Statement statementStdevDate = varstdevObj.connection.createStatement();
-        String dateStdevSQL = "select stdev(birthday) from vartest5";
-
-        statementStdevDate.executeQuery(dateStdevSQL);
-        statementStdevDate.close();
+        try(Statement statementStdevDate = varstdevObj.connection.createStatement()) {
+            String dateStdevSQL = "select stdev(birthday) from vartest5";
+            statementStdevDate.executeQuery(dateStdevSQL);
+        }
     }
 
     @Test(priority = 21, enabled = true, expectedExceptions = SQLException.class, dependsOnMethods = {"test04VarDateCal"},
             description = "验证不支持时间类型字段计算标准偏差")
     public void test22StdevTimeCal() throws SQLException {
-        Statement statementStdevTime = varstdevObj.connection.createStatement();
-        String timeStdevSQL = "select Stdev(create_time) from vartest5";
-        statementStdevTime.executeQuery(timeStdevSQL);
-        statementStdevTime.close();
+        try(Statement statementStdevTime = varstdevObj.connection.createStatement()) {
+            String timeStdevSQL = "select Stdev(create_time) from vartest5";
+            statementStdevTime.executeQuery(timeStdevSQL);
+        }
     }
 
     @Test(priority = 22, enabled = true, expectedExceptions = SQLException.class, dependsOnMethods = {"test04VarDateCal"},
             description = "验证不支持时间日期类型字段计算标准偏差")
     public void test23StdevDateTimeCal() throws SQLException {
-        Statement statementStdevDateTime = varstdevObj.connection.createStatement();
-        String dateTimeStdevSQL = "select Stdev(update_time) from vartest5";
-        statementStdevDateTime.executeQuery(dateTimeStdevSQL);
-        statementStdevDateTime.close();
+        try(Statement statementStdevDateTime = varstdevObj.connection.createStatement()) {
+            String dateTimeStdevSQL = "select Stdev(update_time) from vartest5";
+            statementStdevDateTime.executeQuery(dateTimeStdevSQL);
+        }
     }
 
     @Test(priority = 23, enabled = true, dependsOnMethods = {"test04VarDateCal"}, description = "多个字段计算标准偏差")
@@ -314,19 +312,19 @@ public class TestVarAndStdev {
     @Test(priority = 26, enabled = true, expectedExceptions = SQLException.class, dependsOnMethods = {"test04VarDateCal"},
             description = "验证空参返回错误信息")
     public void test27VarBlankParamError() throws SQLException {
-        Statement statementVarBlankParam = varstdevObj.connection.createStatement();
-        String varBlankParamSQL = "select var() from vartest5";
-        statementVarBlankParam.executeQuery(varBlankParamSQL);
-        statementVarBlankParam.close();
+        try(Statement statementVarBlankParam = varstdevObj.connection.createStatement()) {
+            String varBlankParamSQL = "select var() from vartest5";
+            statementVarBlankParam.executeQuery(varBlankParamSQL);
+        }
     }
 
     @Test(priority = 27, enabled = true, expectedExceptions = SQLException.class, dependsOnMethods = {"test04VarDateCal"},
             description = "验证空参返回错误信息")
     public void test28StdevBlankParamError() throws SQLException {
-        Statement statementStdevBlankParam = varstdevObj.connection.createStatement();
-        String stdevBlankParamSQL = "select stdev() from vartest5";
-        statementStdevBlankParam.executeQuery(stdevBlankParamSQL);
-        statementStdevBlankParam.close();
+        try(Statement statementStdevBlankParam = varstdevObj.connection.createStatement()) {
+            String stdevBlankParamSQL = "select stdev() from vartest5";
+            statementStdevBlankParam.executeQuery(stdevBlankParamSQL);
+        }
     }
 
     @Test(priority = 28, enabled = true, expectedExceptions = SQLException.class, description = "验证不支持布尔型字段计算方差")
@@ -335,21 +333,19 @@ public class TestVarAndStdev {
         String varTable7Values = FileReaderUtil.readFile(varTable7path);
         varstdevObj.varTable7Create();
         varstdevObj.varTable7Insert(varTable7Values);
-        Statement statementDate = varstdevObj.connection.createStatement();
-        String booleanVarCalSQL = "select var(is_delete) from vartest7";
-
-        statementDate.executeQuery(booleanVarCalSQL);
-        statementDate.close();
+        try(Statement statementDate = varstdevObj.connection.createStatement()) {
+            String booleanVarCalSQL = "select var(is_delete) from vartest7";
+            statementDate.executeQuery(booleanVarCalSQL);
+        }
     }
 
     @Test(priority = 29, enabled = true, dependsOnMethods = {"test29VarBooleanCal"}, expectedExceptions = SQLException.class,
             description = "验证不支持布尔型字段计算标准偏差")
     public void test30StdevBooleanCal() throws SQLException {
-        Statement statementDate = varstdevObj.connection.createStatement();
-        String booleanStdevCalSQL = "select stdev(is_delete) from vartest7";
-
-        statementDate.executeQuery(booleanStdevCalSQL);
-        statementDate.close();
+        try(Statement statementDate = varstdevObj.connection.createStatement()) {
+            String booleanStdevCalSQL = "select stdev(is_delete) from vartest7";
+            statementDate.executeQuery(booleanStdevCalSQL);
+        }
     }
 
     @Test(priority = 30, enabled = true, description = "字段值均为null，返回null")
@@ -372,26 +368,43 @@ public class TestVarAndStdev {
 
     @AfterClass(alwaysRun = true, description = "测试完成后删除数据和表格并关闭连接")
     public void tearDownAll() throws SQLException {
-        Statement teardownStatement = AggregateFuncVARandSTDEV.connection.createStatement();
-        teardownStatement.execute("delete from vartest1");
-        teardownStatement.execute("drop table vartest1");
-        teardownStatement.execute("delete from vartest2");
-        teardownStatement.execute("drop table vartest2");
-        teardownStatement.execute("delete from vartest3");
-        teardownStatement.execute("drop table vartest3");
-        teardownStatement.execute("delete from vartest4");
-        teardownStatement.execute("drop table vartest4");
-        teardownStatement.execute("delete from vartest5");
-        teardownStatement.execute("drop table vartest5");
-        teardownStatement.execute("delete from vartest7");
-        teardownStatement.execute("drop table vartest7");
-        teardownStatement.execute("delete from vartest8");
-        teardownStatement.execute("drop table vartest8");
-        teardownStatement.execute("delete from product");
-        teardownStatement.execute("drop table product");
-        teardownStatement.close();
-        AggregateFuncVARandSTDEV.connection.close();
+        Statement teardownStatement = null;
+        try {
+            teardownStatement = AggregateFuncVARandSTDEV.connection.createStatement();
+            teardownStatement.execute("delete from vartest1");
+            teardownStatement.execute("drop table vartest1");
+            teardownStatement.execute("delete from vartest2");
+            teardownStatement.execute("drop table vartest2");
+            teardownStatement.execute("delete from vartest3");
+            teardownStatement.execute("drop table vartest3");
+            teardownStatement.execute("delete from vartest4");
+            teardownStatement.execute("drop table vartest4");
+            teardownStatement.execute("delete from vartest5");
+            teardownStatement.execute("drop table vartest5");
+            teardownStatement.execute("delete from vartest7");
+            teardownStatement.execute("drop table vartest7");
+            teardownStatement.execute("delete from vartest8");
+            teardownStatement.execute("drop table vartest8");
+            teardownStatement.execute("delete from product");
+            teardownStatement.execute("drop table product");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if(teardownStatement != null) {
+                    teardownStatement.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
 
+            try {
+                if(AggregateFuncVARandSTDEV.connection != null) {
+                    AggregateFuncVARandSTDEV.connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
-
 }

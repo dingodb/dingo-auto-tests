@@ -25,7 +25,6 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import utils.FileReaderUtil;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -33,12 +32,11 @@ import java.util.List;
 
 @Listeners(EmailableReporterListener.class)
 public class TestSQLFuncs {
-    private static Connection connection;
     public static SQLFuncs funcObj = new SQLFuncs();
 
     @BeforeClass()
     public static void ConnectDBAndCreateFuncTable() throws ClassNotFoundException, SQLException {
-        connection = SQLFuncs.connectDB();
+        Assert.assertNotNull(SQLFuncs.connection);
         funcObj.createFuncTable();
     }
 
@@ -1956,27 +1954,47 @@ public class TestSQLFuncs {
     @AfterClass(description = "测试完成后删除数据和表格并关闭连接")
     public void tearDownAll() throws SQLException {
         String tableName = funcObj.getFuncTableName();
-        Statement tearDownStatement = connection.createStatement();
-        tearDownStatement.execute("delete from " + tableName);
-        tearDownStatement.execute("drop table " + tableName);
-        tearDownStatement.execute("delete from emptest065");
-        tearDownStatement.execute("drop table emptest065");
-        tearDownStatement.execute("delete from test302");
-        tearDownStatement.execute("drop table test302");
-        tearDownStatement.execute("drop table case330");
+        Statement tearDownStatement = null;
+        try {
+            tearDownStatement = SQLFuncs.connection.createStatement();
+            tearDownStatement.execute("delete from " + tableName);
+            tearDownStatement.execute("drop table " + tableName);
+            tearDownStatement.execute("delete from emptest065");
+            tearDownStatement.execute("drop table emptest065");
+            tearDownStatement.execute("delete from test302");
+            tearDownStatement.execute("drop table test302");
+            tearDownStatement.execute("drop table case330");
 //        //tearDownStatement.execute("drop table case341");
-        tearDownStatement.execute("drop table case342");
-        tearDownStatement.execute("drop table case343");
-        tearDownStatement.execute("drop table case344");
-        tearDownStatement.execute("drop table case624");
-        tearDownStatement.execute("drop table case1049");
-        tearDownStatement.execute("drop table case1119");
-        tearDownStatement.execute("delete from case1443");
-        tearDownStatement.execute("drop table case1443");
-        tearDownStatement.execute("delete from case1483");
-        tearDownStatement.execute("drop table case1483");
-        tearDownStatement.close();
-        connection.close();
+            tearDownStatement.execute("drop table case342");
+            tearDownStatement.execute("drop table case343");
+            tearDownStatement.execute("drop table case344");
+            tearDownStatement.execute("drop table case624");
+            tearDownStatement.execute("drop table case1049");
+            tearDownStatement.execute("drop table case1119");
+            tearDownStatement.execute("delete from case1443");
+            tearDownStatement.execute("drop table case1443");
+            tearDownStatement.execute("delete from case1483");
+            tearDownStatement.execute("drop table case1483");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if(tearDownStatement != null) {
+                    tearDownStatement.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                if(SQLFuncs.connection != null) {
+                    SQLFuncs.connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 
 }

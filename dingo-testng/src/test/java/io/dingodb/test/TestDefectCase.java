@@ -189,11 +189,30 @@ public class TestDefectCase {
 
     @AfterClass(alwaysRun = true, description = "测试完成后删除数据和表格并关闭连接")
     public void tearDownAll() throws SQLException {
-        Statement tearDownStatement = DefectCase.connection.createStatement();
-        tearDownStatement.execute("delete from defect0033");
-        tearDownStatement.execute("drop table defect0033");
-        tearDownStatement.close();
-        DefectCase.connection.close();
+        Statement tearDownStatement = null;
+        try {
+            tearDownStatement = DefectCase.connection.createStatement();
+            tearDownStatement.execute("delete from defect0033");
+            tearDownStatement.execute("drop table defect0033");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if(tearDownStatement != null) {
+                    tearDownStatement.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                if(DefectCase.connection != null) {
+                    DefectCase.connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }

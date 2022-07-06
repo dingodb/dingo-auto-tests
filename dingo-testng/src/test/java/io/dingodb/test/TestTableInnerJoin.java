@@ -257,19 +257,19 @@ public class TestTableInnerJoin {
     @Test(priority = 4, enabled = true, dependsOnMethods = {"test01InnerJoinOwnFieldWithoutTablePrefix"},
             expectedExceptions = SQLException.class, description = "验证缺少等值条件，预期异常")
     public void test05InnerJoinWithoutCondition() throws SQLException {
-        Statement noConditionStatement = TableInnerJoin.connection.createStatement();
-        String innerJoinWithoutConditionSQL = "select name, boyname from beauty inner join boys";
-        noConditionStatement.executeQuery(innerJoinWithoutConditionSQL);
-        noConditionStatement.close();
+        try(Statement noConditionStatement = TableInnerJoin.connection.createStatement()) {
+            String innerJoinWithoutConditionSQL = "select name, boyname from beauty inner join boys";
+            noConditionStatement.executeQuery(innerJoinWithoutConditionSQL);
+        }
     }
 
     @Test(priority = 5, enabled = true, dependsOnMethods = {"test01InnerJoinOwnFieldWithoutTablePrefix"},
             expectedExceptions = SQLException.class, description = "验证起别名后等值条件依然使用表原名，预期异常")
     public void test06InnerJoinAliasWithOriginalName() throws SQLException {
-        Statement originalStatement = TableInnerJoin.connection.createStatement();
-        String innerJoinAliasWithOriginalNameSQL = "select g.id, g.name, b.boyname from beauty as g inner join boys as b on beauty.boyfriend_id = boys.id";
-        originalStatement.executeQuery(innerJoinAliasWithOriginalNameSQL);
-        originalStatement.close();
+        try(Statement originalStatement = TableInnerJoin.connection.createStatement()) {
+            String innerJoinAliasWithOriginalNameSQL = "select g.id, g.name, b.boyname from beauty as g inner join boys as b on beauty.boyfriend_id = boys.id";
+            originalStatement.executeQuery(innerJoinAliasWithOriginalNameSQL);
+        }
     }
 
     @Test(priority = 6, enabled = true, dependsOnMethods = {"test01InnerJoinOwnFieldWithoutTablePrefix"},
@@ -297,10 +297,10 @@ public class TestTableInnerJoin {
     @Test(priority = 7, enabled = true, dependsOnMethods = {"test01InnerJoinOwnFieldWithoutTablePrefix"},
             expectedExceptions = SQLException.class, description = "验证查询两表的相同字段名不使用表名修饰，预期异常")
     public void test08InnerJoinSameFieldNameWithoutTablePrefix() throws SQLException {
-        Statement statementNoPrefix = TableInnerJoin.connection.createStatement();
-        String innerJoinWithoutTablePrefixSQL = "select id, name, boyname from beauty inner join boys on beauty.boyfriend_id = boys.id";
-        statementNoPrefix.executeQuery(innerJoinWithoutTablePrefixSQL);
-        statementNoPrefix.close();
+        try(Statement statementNoPrefix = TableInnerJoin.connection.createStatement()) {
+            String innerJoinWithoutTablePrefixSQL = "select id, name, boyname from beauty inner join boys on beauty.boyfriend_id = boys.id";
+            statementNoPrefix.executeQuery(innerJoinWithoutTablePrefixSQL);
+        }
     }
 
     @Test(priority = 8, enabled = true, dependsOnMethods = {"test01InnerJoinOwnFieldWithoutTablePrefix"},
@@ -399,10 +399,10 @@ public class TestTableInnerJoin {
     @Test(priority = 12, enabled = true, dependsOnMethods = {"test01InnerJoinOwnFieldWithoutTablePrefix"},
             expectedExceptions = SQLException.class, description = "验证查询两表的相同字段名不使用表名修饰，预期异常")
     public void test13InnerJoinWrongFieldCondition() throws SQLException {
-        Statement wrongFieldStatement = TableInnerJoin.connection.createStatement();
-        String innerJoinWrongFieldConditionSQL = "select name, boyname from beauty join boys on boys.id=beauty.boyfriendid";
-        wrongFieldStatement.executeQuery(innerJoinWrongFieldConditionSQL);
-        wrongFieldStatement.close();
+        try(Statement wrongFieldStatement = TableInnerJoin.connection.createStatement()) {
+            String innerJoinWrongFieldConditionSQL = "select name, boyname from beauty join boys on boys.id=beauty.boyfriendid";
+            wrongFieldStatement.executeQuery(innerJoinWrongFieldConditionSQL);
+        }
     }
 
     @Test(priority = 13, enabled = true, dependsOnMethods = {"test01InnerJoinOwnFieldWithoutTablePrefix"},
@@ -626,41 +626,59 @@ public class TestTableInnerJoin {
 
     @AfterClass(alwaysRun = true, description = "测试完成后删除数据和表格并关闭连接")
     public void tearDownAll() throws SQLException {
-        Statement tearDownStatement = TableInnerJoin.connection.createStatement();
-        tearDownStatement.execute("delete from beauty");
-        tearDownStatement.execute("drop table beauty");
-        tearDownStatement.execute("delete from boys");
-        tearDownStatement.execute("drop table boys");
-        tearDownStatement.execute("delete from mytest");
-        tearDownStatement.execute("drop table mytest");
-        tearDownStatement.execute("delete from departments");
-        tearDownStatement.execute("drop table departments");
-        tearDownStatement.execute("delete from employees");
-        tearDownStatement.execute("drop table employees");
-        tearDownStatement.execute("delete from table1054_1");
-        tearDownStatement.execute("drop table table1054_1");
-        tearDownStatement.execute("delete from table1054_2");
-        tearDownStatement.execute("drop table table1054_2");
-        tearDownStatement.execute("delete from table1069_1");
-        tearDownStatement.execute("drop table table1069_1");
-        tearDownStatement.execute("delete from table1069_2");
-        tearDownStatement.execute("drop table table1069_2");
-        tearDownStatement.execute("delete from table1174_1");
-        tearDownStatement.execute("drop table table1174_1");
-        tearDownStatement.execute("delete from table1174_2");
-        tearDownStatement.execute("drop table table1174_2");
-        tearDownStatement.execute("delete from job_grades");
-        tearDownStatement.execute("drop table job_grades");
-        tearDownStatement.execute("delete from table1059_1");
-        tearDownStatement.execute("drop table table1059_1");
-        tearDownStatement.execute("delete from table1059_2");
-        tearDownStatement.execute("drop table table1059_2");
-        tearDownStatement.execute("delete from table1059_3");
-        tearDownStatement.execute("drop table table1059_3");
-        tearDownStatement.execute("delete from table1059_4");
-        tearDownStatement.execute("drop table table1059_4");
+        Statement tearDownStatement = null;
+        try {
+            tearDownStatement = TableInnerJoin.connection.createStatement();
+            tearDownStatement.execute("delete from beauty");
+            tearDownStatement.execute("drop table beauty");
+            tearDownStatement.execute("delete from boys");
+            tearDownStatement.execute("drop table boys");
+            tearDownStatement.execute("delete from mytest");
+            tearDownStatement.execute("drop table mytest");
+            tearDownStatement.execute("delete from departments");
+            tearDownStatement.execute("drop table departments");
+            tearDownStatement.execute("delete from employees");
+            tearDownStatement.execute("drop table employees");
+            tearDownStatement.execute("delete from table1054_1");
+            tearDownStatement.execute("drop table table1054_1");
+            tearDownStatement.execute("delete from table1054_2");
+            tearDownStatement.execute("drop table table1054_2");
+            tearDownStatement.execute("delete from table1069_1");
+            tearDownStatement.execute("drop table table1069_1");
+            tearDownStatement.execute("delete from table1069_2");
+            tearDownStatement.execute("drop table table1069_2");
+            tearDownStatement.execute("delete from table1174_1");
+            tearDownStatement.execute("drop table table1174_1");
+            tearDownStatement.execute("delete from table1174_2");
+            tearDownStatement.execute("drop table table1174_2");
+            tearDownStatement.execute("delete from job_grades");
+            tearDownStatement.execute("drop table job_grades");
+            tearDownStatement.execute("delete from table1059_1");
+            tearDownStatement.execute("drop table table1059_1");
+            tearDownStatement.execute("delete from table1059_2");
+            tearDownStatement.execute("drop table table1059_2");
+            tearDownStatement.execute("delete from table1059_3");
+            tearDownStatement.execute("drop table table1059_3");
+            tearDownStatement.execute("delete from table1059_4");
+            tearDownStatement.execute("drop table table1059_4");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if(tearDownStatement != null) {
+                    tearDownStatement.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
 
-        tearDownStatement.close();
-        TableInnerJoin.connection.close();
+            try {
+                if(TableInnerJoin.connection != null) {
+                    TableInnerJoin.connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

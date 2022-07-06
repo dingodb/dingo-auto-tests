@@ -213,22 +213,22 @@ public class TestBooleanField extends YamlDataHelper {
             dependsOnMethods = {"test08NotFieldAsConditionQuery"}, description = "预期插入失败")
     public void test09InsertStrValue(Map<String, String> param) throws SQLException {
         String booleanTable = BooleanField.getBooleanTableName();
-        Statement statement = BooleanField.connection.createStatement();
-        String insertSql = "insert into " + booleanTable + " values (" + param.get("ID") +
-                ",'vivo',20,456.7,'shanghai','" + param.get("booleanValue") + "')";
-        statement.execute(insertSql);
-        statement.close();
+        try(Statement statement = BooleanField.connection.createStatement()) {
+            String insertSql = "insert into " + booleanTable + " values (" + param.get("ID") +
+                    ",'vivo',20,456.7,'shanghai','" + param.get("booleanValue") + "')";
+            statement.execute(insertSql);
+        }
     }
 
     @Test(priority = 9, enabled = true, expectedExceptions = SQLException.class, dataProvider = "yamlBooleanMethod",
             dependsOnMethods = {"test09InsertStrValue"}, description = "预期插入失败")
     public void test10InsertWrongValue(Map<String, String> param) throws SQLException {
         String booleanTable = BooleanField.getBooleanTableName();
-        Statement statement = BooleanField.connection.createStatement();
-        String insertSql = "insert into " + booleanTable + " values (" + param.get("ID") +
-                ",'vivo',20,456.7,'shanghai'," + param.get("booleanValue") + ")";
-        statement.execute(insertSql);
-        statement.close();
+        try(Statement statement = BooleanField.connection.createStatement()) {
+            String insertSql = "insert into " + booleanTable + " values (" + param.get("ID") +
+                    ",'vivo',20,456.7,'shanghai'," + param.get("booleanValue") + ")";
+            statement.execute(insertSql);
+        }
     }
 
 
@@ -261,12 +261,31 @@ public class TestBooleanField extends YamlDataHelper {
     }
 
     @AfterClass (alwaysRun = true, description = "执行测试后删除数据，删除表")
-    public void teardownAll() throws SQLException {
+    public void teardownAll() {
         String booleanTable = BooleanField.getBooleanTableName();
-        Statement tearDownStatement = BooleanField.connection.createStatement();
-        tearDownStatement.execute("delete from " + booleanTable);
-        tearDownStatement.execute("drop table " + booleanTable);
-        tearDownStatement.close();
-        BooleanField.connection.close();
+        Statement tearDownStatement = null;
+        try {
+            tearDownStatement = BooleanField.connection.createStatement();
+            tearDownStatement.execute("delete from " + booleanTable);
+            tearDownStatement.execute("drop table " + booleanTable);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if(tearDownStatement != null){
+                    tearDownStatement.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                if(BooleanField.connection != null){
+                    BooleanField.connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

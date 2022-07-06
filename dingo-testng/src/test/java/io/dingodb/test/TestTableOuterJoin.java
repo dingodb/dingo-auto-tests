@@ -522,11 +522,9 @@ public class TestTableOuterJoin {
     @Test(priority = 0, enabled = true, description = "验证全外连接查询全部数据")
     public void test01FullOuterJoinAllData() throws SQLException, InterruptedException {
         initStudentAndClassTB();
-        Thread.sleep(2000);
         List<List> expectedList = expectedFullList1();
         System.out.println("Expected: " + expectedList);
         List<List> actualListWithOuter = outerJoinObj.fullOuterJoinAll();
-        Thread.sleep(2000);
         System.out.println("Actual: " + actualListWithOuter);
 
         Assert.assertTrue(actualListWithOuter.containsAll(expectedList));
@@ -569,7 +567,6 @@ public class TestTableOuterJoin {
         List<List> expectedList = expectedFullList2();
         System.out.println("Expected: " + expectedList);
         List<List> actualListNoSameData = outerJoinObj.fullOuterJoinNoSameData();
-        Thread.sleep(3000);
         System.out.println("Actual: " + actualListNoSameData);
 
         Assert.assertTrue(actualListNoSameData.containsAll(expectedList));
@@ -1055,41 +1052,59 @@ public class TestTableOuterJoin {
 
     @AfterClass(alwaysRun = true, description = "测试完成后删除数据和表格并关闭连接")
     public void tearDownAll() throws SQLException {
-        Statement tearDownStatement = TableOuterJoin.connection.createStatement();
-        tearDownStatement.execute("delete from student_tbl");
-        tearDownStatement.execute("drop table student_tbl");
-        tearDownStatement.execute("delete from class_tbl");
-        tearDownStatement.execute("drop table class_tbl");
-        tearDownStatement.execute("delete from student_tbl1");
-        tearDownStatement.execute("drop table student_tbl1");
-        tearDownStatement.execute("delete from class_tbl1");
-        tearDownStatement.execute("drop table class_tbl1");
-        tearDownStatement.execute("delete from product1");
-        tearDownStatement.execute("drop table product1");
-        tearDownStatement.execute("delete from product2");
-        tearDownStatement.execute("drop table product2");
-        tearDownStatement.execute("delete from test1");
-        tearDownStatement.execute("drop table test1");
-        tearDownStatement.execute("delete from test2");
-        tearDownStatement.execute("drop table test2");
-        tearDownStatement.execute("delete from beauty_tbl");
-        tearDownStatement.execute("drop table beauty_tbl");
-        tearDownStatement.execute("delete from boys_tbl");
-        tearDownStatement.execute("drop table boys_tbl");
-        tearDownStatement.execute("delete from boys_right");
-        tearDownStatement.execute("drop table boys_right");
-        tearDownStatement.execute("delete from product3");
-        tearDownStatement.execute("drop table product3");
-        tearDownStatement.execute("delete from w3cschool_tbl");
-        tearDownStatement.execute("drop table w3cschool_tbl");
-        tearDownStatement.execute("delete from tcount_tbl");
-        tearDownStatement.execute("drop table tcount_tbl");
-        tearDownStatement.execute("delete from departments_tbl");
-        tearDownStatement.execute("drop table departments_tbl");
-        tearDownStatement.execute("delete from employees_tbl");
-        tearDownStatement.execute("drop table employees_tbl");
+        Statement tearDownStatement = null;
+        try {
+            tearDownStatement = TableOuterJoin.connection.createStatement();
+            tearDownStatement.execute("delete from student_tbl");
+            tearDownStatement.execute("drop table student_tbl");
+            tearDownStatement.execute("delete from class_tbl");
+            tearDownStatement.execute("drop table class_tbl");
+            tearDownStatement.execute("delete from student_tbl1");
+            tearDownStatement.execute("drop table student_tbl1");
+            tearDownStatement.execute("delete from class_tbl1");
+            tearDownStatement.execute("drop table class_tbl1");
+            tearDownStatement.execute("delete from product1");
+            tearDownStatement.execute("drop table product1");
+            tearDownStatement.execute("delete from product2");
+            tearDownStatement.execute("drop table product2");
+            tearDownStatement.execute("delete from test1");
+            tearDownStatement.execute("drop table test1");
+            tearDownStatement.execute("delete from test2");
+            tearDownStatement.execute("drop table test2");
+            tearDownStatement.execute("delete from beauty_tbl");
+            tearDownStatement.execute("drop table beauty_tbl");
+            tearDownStatement.execute("delete from boys_tbl");
+            tearDownStatement.execute("drop table boys_tbl");
+            tearDownStatement.execute("delete from boys_right");
+            tearDownStatement.execute("drop table boys_right");
+            tearDownStatement.execute("delete from product3");
+            tearDownStatement.execute("drop table product3");
+            tearDownStatement.execute("delete from w3cschool_tbl");
+            tearDownStatement.execute("drop table w3cschool_tbl");
+            tearDownStatement.execute("delete from tcount_tbl");
+            tearDownStatement.execute("drop table tcount_tbl");
+            tearDownStatement.execute("delete from departments_tbl");
+            tearDownStatement.execute("drop table departments_tbl");
+            tearDownStatement.execute("delete from employees_tbl");
+            tearDownStatement.execute("drop table employees_tbl");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if(tearDownStatement != null) {
+                    tearDownStatement.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
 
-        tearDownStatement.close();
-        TableOuterJoin.connection.close();
+            try {
+                if(TableOuterJoin.connection != null) {
+                    TableOuterJoin.connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
