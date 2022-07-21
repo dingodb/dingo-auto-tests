@@ -1,0 +1,6 @@
+testID1001549-01:
+  betweenState: "select * from betweenTest2 where age not between null and null"
+testID1001549-02:
+  betweenState: "select id,name from betweenTest2 where id not between null and null"
+testID1001549-03:
+  betweenState: "select id,name,age from betweenTest2 where name not between null and null"

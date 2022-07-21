@@ -366,12 +366,14 @@ public class TestSQLFuncs {
     @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "验证将double类型转为整型")
     public void testCase136() throws SQLException, ClassNotFoundException {
         List expectedCastList = new ArrayList();
-        Integer[] castArray = new Integer[]{23, 895, 123, 9, 1453, 0, 2, 12, 109, 1234, 99, 2345, 9, 32, 0};
+        Integer[] castArray = new Integer[]{24, 895, 123, 9, 1454, 0, 2, 12, 109, 1234, 100, 2345, 9, 32, 0};
         for (int i=0; i < castArray.length; i++){
             expectedCastList.add(castArray[i]);
         }
         System.out.println("Expected: " + expectedCastList);
         List actualCastList = funcObj.case136();
+
+        System.out.println("Actual: " + actualCastList);
 
         Assert.assertTrue(actualCastList.containsAll(expectedCastList));
         Assert.assertTrue(expectedCastList.containsAll(actualCastList));
@@ -1298,7 +1300,7 @@ public class TestSQLFuncs {
                 {"5","lala","18","12.1234560987","beijing"},{"6","laozhang","18","12.0","changping 89"},
                 {"7","baba","99","23.51648",""},{"8","zala","100","54.0","wuwuxi "},
                 {"9"," uzlia ","28","23.6","BJ"},{"10","  MaiTeng","66","70.3","BJ"},
-                {"11","","0","0.01","BJ"}
+                {"11","","0","0.01",""}
         };
         List<List> expectedInList = new ArrayList<List>();
         for(int i=0; i<inArray.length; i++) {
@@ -1319,7 +1321,7 @@ public class TestSQLFuncs {
         String[][] inArray = {
                 {"3","Hello","35","18.0","beijing"},{"4","HELLO2","15","23.0","chaoyangdis_1 NO.street"},
                 {"8","zala","100","54.0","wuwuxi "}, {"9"," uzlia ","28","23.6","BJ"},
-                {"10","  MaiTeng","66","70.3","BJ"}, {"11","","0","0.01","BJ"}
+                {"10","  MaiTeng","66","70.3","BJ"}, {"11","","0","0.01",""}
         };
         List<List> expectedInList = new ArrayList<List>();
         for(int i=0; i<inArray.length; i++) {
@@ -1340,7 +1342,7 @@ public class TestSQLFuncs {
         String[][] inArray = {
                 {"3","Hello","35","18.0","beijing"},{"4","HELLO2","15","23.0","chaoyangdis_1 NO.street"},
                 {"8","zala","100","54.0","wuwuxi "}, {"9"," uzlia ","28","23.6","BJ"},
-                {"11","","0","0.01","BJ"}
+                {"11","","0","0.01",""}
         };
         List<List> expectedInList = new ArrayList<List>();
         for(int i=0; i<inArray.length; i++) {
@@ -1409,6 +1411,7 @@ public class TestSQLFuncs {
         }
         System.out.println("Expected: " + expectedAndList);
         List<List> actualAndList = funcObj.case316_2();
+        System.out.println("Actual: " + actualAndList);
         System.out.println("Actual: " + actualAndList);
         Assert.assertEquals(actualAndList, expectedAndList);
     }

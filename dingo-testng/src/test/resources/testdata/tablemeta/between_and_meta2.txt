@@ -1,0 +1,5 @@
+(
+employee_id int NOT NULL,
+salary double DEFAULT NULL,
+PRIMARY KEY (employee_id)
+)

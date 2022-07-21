@@ -1,0 +1,7 @@
+(1,'zhangsan', 18, null, null, null, null, null, true),
+(2,'lisi', null, null, null, null, null, null, false),
+(3,'li3', 33, null, null, null, null, null, false),
+(4,'HAHA', 25, null, null, null, null, null, true),
+(5,'awJDs', 44, null, null, null, null, null, true),
+(6,'123', 20, null, null, null, null, null, true),
+(7,'yamaha', null, null, null, null, null, null, false)

@@ -1,0 +1,12 @@
+testID10001547-01:
+  betweenState: "select * from betweenTest where age not between 50 and 18"
+testID10001547-02:
+  betweenState: "select id,name from betweenTest where id not between 10 and 1"
+testID10001547-03:
+  betweenState: "select id,name,age from betweenTest where name not between 's' and 'g'"
+testID10001547-04:
+  betweenState: "select * from betweenTest where birthday not between '2022-07-07' and '2010-01-01'"
+testID10001547-05:
+  betweenState: "select * from betweenTest where create_time not between '20:00:00' and '08:00:00'"
+testID10001547-06:
+  betweenState: "select * from betweenTest where update_time not between '2022-12-31 10:00:00' and '2010-10-10 00:00:00'"

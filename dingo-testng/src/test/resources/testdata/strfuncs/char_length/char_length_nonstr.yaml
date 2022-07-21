@@ -48,16 +48,19 @@ testID1001144-06:
   outputlen: "5"
 testID1001149-01:
   paramstr: "Now()"
-  outputlen: "19"
+#  outputlen: "19"
+  outputlen: "23"
 testID1001149-02:
   paramstr: "curTime()"
-  outputlen: "8"
+#  outputlen: "8"
+  outputlen: "12"
 testID1001149-03:
   paramstr: "curDate()"
   outputlen: "10"
 testID1001149-04:
   paramstr: "current_timestamp"
-  outputlen: "19"
+#  outputlen: "19"
+  outputlen: "23"
 testID1001149-05:
   paramstr: "unix_timestamp(Now())"
   outputlen: "10"

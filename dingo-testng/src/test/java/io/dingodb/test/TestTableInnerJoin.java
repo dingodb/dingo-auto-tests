@@ -32,6 +32,37 @@ import java.util.List;
 public class TestTableInnerJoin {
     public static TableInnerJoin tableJoinObj = new TableInnerJoin();
 
+    public void initBeautyTB() throws SQLException {
+        String beauty_meta_path = "src/test/resources/testdata/tablemeta/beauty_tbl_meta.txt";
+        String boys_meta_path = "src/test/resources/testdata/tablemeta/boys_tbl_meta.txt";
+        String beauty_value_path = "src/test/resources/testdata/tableInsertValues/beauty_tbl.txt";
+        String boys_value_path = "src/test/resources/testdata/tableInsertValues/boys_tbl.txt";
+        String beauty_meta = FileReaderUtil.readFile(beauty_meta_path);
+        String boys_meta = FileReaderUtil.readFile(boys_meta_path);
+        String beauty_value = FileReaderUtil.readFile(beauty_value_path);
+        String boys_value = FileReaderUtil.readFile(boys_value_path);
+
+        tableJoinObj.createInnerTables(beauty_meta, boys_meta);
+        tableJoinObj.insertDataToInnerTables(beauty_value, boys_value);
+    }
+
+    public void initEmployeeTB() throws SQLException {
+        String departmentTablepath = "src/test/resources/testdata/tableInsertValues/departments.txt";
+        String employeeTablepath = "src/test/resources/testdata/tableInsertValues/employees.txt";
+        String depValues = FileReaderUtil.readFile(departmentTablepath);
+        String empValues = FileReaderUtil.readFile(employeeTablepath);
+        tableJoinObj.createEmployeesTables();
+        tableJoinObj.insertValuesToEmployeeTables(depValues, empValues);
+    }
+
+    public void initSelfJoinTB() throws SQLException {
+        String selfJoinTablepath = "src/test/resources/testdata/tableInsertValues/selfjoin.txt";
+        String selfJoinValues = FileReaderUtil.readFile(selfJoinTablepath);
+        tableJoinObj.createSelfJoinTable();
+        tableJoinObj.insertValuesToSelftJoinTable(selfJoinValues);
+    }
+
+
     public void initTable1054() throws SQLException {
         String table1054_1_meta_path = "src/test/resources/testdata/tablemeta/table1054_1_meta.txt";
         String table1054_1_value_path = "src/test/resources/testdata/tableInsertValues/table1054_1.txt";
@@ -200,10 +231,49 @@ public class TestTableInnerJoin {
         Assert.assertNotNull(TableInnerJoin.connection);
     }
 
-    @Test(priority = 0, enabled = true, description = "验证等值连接查询各自特有字段不使用表名修饰")
+    @Test(description = "创建内连接测试用表beauty和boys，并插入数据")
+    public void test00createInnerTableAndInsertValues1() throws SQLException {
+        initBeautyTB();
+    }
+
+    @Test(description = "创建employees和department表，并插入数据")
+    public void test00createInnerTableAndInsertValues2() throws SQLException {
+        initEmployeeTB();
+    }
+
+    @Test(description = "创建job_grades表，并插入数据")
+    public void test00createInnerTableAndInsertValues3() throws SQLException {
+        initJobGradesTB();
+    }
+
+    @Test(description = "创建用于自连接测试的表，并插入数据")
+    public void test00createInnerTableAndInsertValues4() throws SQLException {
+        initSelfJoinTB();
+    }
+
+    @Test(description = "创建用于内等-自然连接测试的表，并插入数据")
+    public void test00createInnerTableAndInsertValues5() throws SQLException {
+        initTable1054();
+    }
+
+    @Test(description = "创建用于内等连接，某一表无数据")
+    public void test00createInnerTableAndInsertValues6() throws SQLException {
+        tableJoinObj.createTable1069();
+    }
+
+    @Test(description = "创建表，有相同字段")
+    public void test00createInnerTableAndInsertValues7() throws SQLException {
+        tableJoinObj.createTable1174();
+    }
+
+    @Test(description = "创建用于非等值连接的测试表，并插入数据")
+    public void test00createInnerTableAndInsertValues8() throws SQLException {
+        tableJoinObj.createTable1059();
+    }
+
+    @Test(priority = 0, enabled = true, dependsOnMethods = {"test00createInnerTableAndInsertValues1"},
+            description = "验证等值连接查询各自特有字段不使用表名修饰")
     public void test01InnerJoinOwnFieldWithoutTablePrefix() throws SQLException {
-        tableJoinObj.createInnerTables();
-        tableJoinObj.insertDataToInnerTables();
         List<List> expectedInnerJoinList = girlsJoinList();
         System.out.println("Expected: " + expectedInnerJoinList);
         List<List<String>> actualInnerJoinList = tableJoinObj.innerJoinOwnFieldWithoutTablePrefix();
@@ -220,7 +290,7 @@ public class TestTableInnerJoin {
 //        }
     }
 
-    @Test(priority = 1, enabled = true, dependsOnMethods = {"test01InnerJoinOwnFieldWithoutTablePrefix"}, description = "验证表名调换")
+    @Test(priority = 1, enabled = true, dependsOnMethods = {"test00createInnerTableAndInsertValues1"}, description = "验证表名调换")
     public void test02InnerJoinTableExchange() throws SQLException {
         List<List> expectedExchangeList = girlsJoinList();
         System.out.println("Expected: " + expectedExchangeList);
@@ -232,7 +302,7 @@ public class TestTableInnerJoin {
 
     }
 
-    @Test(priority = 2, enabled = true, dependsOnMethods = {"test01InnerJoinOwnFieldWithoutTablePrefix"}, description = "验证省略inner")
+    @Test(priority = 2, enabled = true, dependsOnMethods = {"test00createInnerTableAndInsertValues1"}, description = "验证省略inner")
     public void test03JoinOmitInner() throws SQLException {
         List<List> expectedOmitInnerList = girlsJoinList();
         System.out.println("Expected: " + expectedOmitInnerList);
@@ -243,7 +313,7 @@ public class TestTableInnerJoin {
         Assert.assertTrue(expectedOmitInnerList.containsAll(actualJoinOmitInnerList));
     }
 
-    @Test(priority = 3, enabled = true, dependsOnMethods = {"test01InnerJoinOwnFieldWithoutTablePrefix"}, description = "验证等值连接使用别名")
+    @Test(priority = 3, enabled = true, dependsOnMethods = {"test00createInnerTableAndInsertValues1"}, description = "验证等值连接使用别名")
     public void test04InnerJoinWithTableAlias() throws SQLException {
         List<List> expectedInnerJoinWithTableAliasList = girlsJoinList();
         System.out.println("Expected: " + expectedInnerJoinWithTableAliasList);
@@ -254,7 +324,7 @@ public class TestTableInnerJoin {
         Assert.assertTrue(expectedInnerJoinWithTableAliasList.containsAll(actualInnerJoinWithTableAliasList));
     }
 
-    @Test(priority = 4, enabled = true, dependsOnMethods = {"test01InnerJoinOwnFieldWithoutTablePrefix"},
+    @Test(priority = 4, enabled = true, dependsOnMethods = {"test00createInnerTableAndInsertValues1"},
             expectedExceptions = SQLException.class, description = "验证缺少等值条件，预期异常")
     public void test05InnerJoinWithoutCondition() throws SQLException {
         try(Statement noConditionStatement = TableInnerJoin.connection.createStatement()) {
@@ -263,7 +333,7 @@ public class TestTableInnerJoin {
         }
     }
 
-    @Test(priority = 5, enabled = true, dependsOnMethods = {"test01InnerJoinOwnFieldWithoutTablePrefix"},
+    @Test(priority = 5, enabled = true, dependsOnMethods = {"test00createInnerTableAndInsertValues1"},
             expectedExceptions = SQLException.class, description = "验证起别名后等值条件依然使用表原名，预期异常")
     public void test06InnerJoinAliasWithOriginalName() throws SQLException {
         try(Statement originalStatement = TableInnerJoin.connection.createStatement()) {
@@ -272,7 +342,7 @@ public class TestTableInnerJoin {
         }
     }
 
-    @Test(priority = 6, enabled = true, dependsOnMethods = {"test01InnerJoinOwnFieldWithoutTablePrefix"},
+    @Test(priority = 6, enabled = true, dependsOnMethods = {"test00createInnerTableAndInsertValues1"},
             description = "验证查询两表的相同字段名必须使用表名修饰")
     public void test07InnerJoinSameFieldNameWithTablePrefix() throws SQLException {
         String[][] beautyBoyArray = {{"4", "ReBa", "2", "Han Han"},{"6", "zhiRuo", "1", "Zhang Wuji"}, {"8", "Xiao Zhao", "1", "Zhang Wuji"},
@@ -294,7 +364,7 @@ public class TestTableInnerJoin {
         Assert.assertTrue(expectedGirlsList.containsAll(actualGirlsList));
     }
 
-    @Test(priority = 7, enabled = true, dependsOnMethods = {"test01InnerJoinOwnFieldWithoutTablePrefix"},
+    @Test(priority = 7, enabled = true, dependsOnMethods = {"test00createInnerTableAndInsertValues1"},
             expectedExceptions = SQLException.class, description = "验证查询两表的相同字段名不使用表名修饰，预期异常")
     public void test08InnerJoinSameFieldNameWithoutTablePrefix() throws SQLException {
         try(Statement statementNoPrefix = TableInnerJoin.connection.createStatement()) {
@@ -303,7 +373,7 @@ public class TestTableInnerJoin {
         }
     }
 
-    @Test(priority = 8, enabled = true, dependsOnMethods = {"test01InnerJoinOwnFieldWithoutTablePrefix"},
+    @Test(priority = 8, enabled = true, dependsOnMethods = {"test00createInnerTableAndInsertValues1"},
             description = "验证使用group子句")
     public void test09InnerJoinGroupState() throws SQLException {
         String[][] groupArray = {{"1", "DuanYU"},{"1", "Xiao Ming"}, {"1", "Han Han"}, {"3", "Zhang Wuji"}};
@@ -324,7 +394,7 @@ public class TestTableInnerJoin {
         Assert.assertTrue(expectedGroupList.containsAll(actualGroupList));
     }
 
-    @Test(priority = 9, enabled = true, dependsOnMethods = {"test01InnerJoinOwnFieldWithoutTablePrefix"},
+    @Test(priority = 9, enabled = true, dependsOnMethods = {"test00createInnerTableAndInsertValues1"},
             description = "验证使用Where条件子句")
     public void test10InnerJoinWhereState() throws SQLException {
         String[][] whereArray = {{"zhiRuo", "Zhang Wuji"},{"Xiao Zhao", "Zhang Wuji"}, {"ReBa", "Han Han"}, {"Angelay", "Xiao Ming"}};
@@ -345,15 +415,9 @@ public class TestTableInnerJoin {
         Assert.assertTrue(expectedWhereList.containsAll(actualWhereList));
     }
 
-    @Test(priority = 10, enabled = true, description = "验证内等连接添加分组后排序")
+    @Test(priority = 10, enabled = true, dependsOnMethods = {"test00createInnerTableAndInsertValues2"},
+            description = "验证内等连接添加分组后排序")
     public void test11InnerJoinGroupAndOrder() throws SQLException {
-        String departmentTablepath = "src/test/resources/testdata/tableInsertValues/departments.txt";
-        String employeeTablepath = "src/test/resources/testdata/tableInsertValues/employees.txt";
-        String depValues = FileReaderUtil.readFile(departmentTablepath);
-        String empValues = FileReaderUtil.readFile(employeeTablepath);
-        tableJoinObj.createEmployeesTables();
-        tableJoinObj.insertValuesToEmployeeTables(depValues, empValues);
-
         String[][] groupAndOrderArray = {{"45", "Shi"},{"35", "Sal"}, {"6", "Fin"}, {"6", "Pur"}, {"5","IT"},
                 {"3","Exe"}, {"2","Acc"}, {"2","Mar"}, {"1","Adm"}, {"1","Pub"}, {"1","Hum"}};
         List<List<String>> expectedGroupAndOrderList = new ArrayList<List<String>>();
@@ -374,7 +438,7 @@ public class TestTableInnerJoin {
         Assert.assertTrue(expectedGroupAndOrderList.containsAll(actualGroupAndOrderList));
     }
 
-    @Test(priority = 11, enabled = true, dependsOnMethods = {"test11InnerJoinGroupAndOrder"},
+    @Test(priority = 11, enabled = true, dependsOnMethods = {"test00createInnerTableAndInsertValues2"},
             description = "验证内等连接添加分组后排序并限制条数")
     public void test12InnerJoinGroupAndOrderLimit() throws SQLException {
         String[][] groupAndOrderLimitArray = {{"1","Adm"}, {"1","Pub"}, {"1","Hum"}, {"2","Acc"}, {"2","Mar"}};
@@ -396,7 +460,7 @@ public class TestTableInnerJoin {
         Assert.assertTrue(expectedGroupAndOrderLimitList.containsAll(actualGroupAndOrderLimitList));
     }
 
-    @Test(priority = 12, enabled = true, dependsOnMethods = {"test01InnerJoinOwnFieldWithoutTablePrefix"},
+    @Test(priority = 12, enabled = true, dependsOnMethods = {"test00createInnerTableAndInsertValues1"},
             expectedExceptions = SQLException.class, description = "验证查询两表的相同字段名不使用表名修饰，预期异常")
     public void test13InnerJoinWrongFieldCondition() throws SQLException {
         try(Statement wrongFieldStatement = TableInnerJoin.connection.createStatement()) {
@@ -405,7 +469,7 @@ public class TestTableInnerJoin {
         }
     }
 
-    @Test(priority = 13, enabled = true, dependsOnMethods = {"test01InnerJoinOwnFieldWithoutTablePrefix"},
+    @Test(priority = 13, enabled = true, dependsOnMethods = {"test00createInnerTableAndInsertValues1"},
             description = "验证等值条件无相同数据的查询")
     public void test14InnerJoinNoSameData() throws SQLException {
         List<String> actualInnerJoinNoSameDataList = tableJoinObj.innerJoinNoSameData();
@@ -413,13 +477,9 @@ public class TestTableInnerJoin {
 
     }
 
-    @Test(priority = 14, enabled = true, description = "验证自连接")
+    @Test(priority = 14, enabled = true, dependsOnMethods = {"test00createInnerTableAndInsertValues4"},
+            description = "验证自连接")
     public void test15selfJoin() throws SQLException {
-        String selfJoinTablepath = "src/test/resources/testdata/tableInsertValues/selfjoin.txt";
-        String selfJoinValues = FileReaderUtil.readFile(selfJoinTablepath);
-        tableJoinObj.createSelfJoinTable();
-        tableJoinObj.insertValuesToSelftJoinTable(selfJoinValues);
-
         String[][] selfJoinArray = {{"Russell","Russell"},{"Bell","Russell"},{"Nayer","Bell"},{"Abel","Bell"},
                 {"Kula","Russell"},{"Grant","Kula"},{"Sisi","Nayer"},{"Jason","Grant"},{"Peter","Abel"},
                 {"School","Kula"},{"Hall","Abel"}};
@@ -441,9 +501,9 @@ public class TestTableInnerJoin {
     }
 
 
-    @Test(priority = 15, enabled = true, description = "验证内等连接-自然连接")
+    @Test(priority = 15, enabled = true, dependsOnMethods = {"test00createInnerTableAndInsertValues5"},
+            description = "验证内等连接-自然连接")
     public void test16NaturalJoin() throws SQLException {
-        initTable1054();
         String[][] joinArray = {{"9002","Liu Chen","Female","IS","2","90"}, {"9002","Liu Chen","Female","IS","3","80"},
                 {"9001","Li Yong","Male","CS","1","92"}, {"9001","Li Yong","Male","CS","2","85"},
                 {"9001","Li Yong","Male","CS","3","88"}};
@@ -462,7 +522,7 @@ public class TestTableInnerJoin {
         Assert.assertTrue(expectedJoinList.containsAll(actualJoinList));
     }
 
-    @Test(priority = 16, enabled = true, dependsOnMethods = {"test01InnerJoinOwnFieldWithoutTablePrefix"},
+    @Test(priority = 16, enabled = true, dependsOnMethods = {"test00createInnerTableAndInsertValues1"},
             description = "验证内等连接使用逗号分隔表名，和where等值条件筛选")
     public void test17InnerJoinCommaWithWhere() throws SQLException {
         String[][] joinArray = {{"Angelay","Xiao Ming"},{"ReBa","Han Han"},{"zhiRuo","Zhang Wuji"},
@@ -483,13 +543,15 @@ public class TestTableInnerJoin {
     }
 
 
-    @Test(priority = 17, enabled = true, description = "验证某一表无数据返回空")
+    @Test(priority = 17, enabled = true, dependsOnMethods = {"test00createInnerTableAndInsertValues6"},
+            description = "验证某一表无数据返回空")
     public void test18InnerJoinOneEmpty() throws SQLException {
         Boolean actualJoinResult = tableJoinObj.innerJoinOneEmpty();
         Assert.assertFalse(actualJoinResult);
     }
 
-    @Test(priority = 18, enabled = true, description = "验证内等连接using(key)")
+    @Test(priority = 18, enabled = true, dependsOnMethods = {"test00createInnerTableAndInsertValues7"},
+            description = "验证内等连接using(key)")
     public void test19InnerJoinUsingKey() throws SQLException {
         String[][] joinArray = {{"1","zhangsan","18","1","zhangsan","18"}, {"3","wangwu","25","3","hello","35"}};
         List<List> expectedJoinList = new ArrayList<List>();
@@ -507,9 +569,9 @@ public class TestTableInnerJoin {
         Assert.assertTrue(expectedJoinList.containsAll(actualJoinList));
     }
 
-    @Test(enabled = true, dependsOnMethods = {"test11InnerJoinGroupAndOrder"}, description = "内非连接，多个条件")
+    @Test(enabled = true, dependsOnMethods = {"test00createInnerTableAndInsertValues2", "test00createInnerTableAndInsertValues3"},
+            description = "内非连接，多个条件")
     public void test20InnerNEJoinMultiCondition() throws SQLException {
-        initJobGradesTB();
         List<List> expectedJoinList = expectedNEJoinList1();
         System.out.println("Expected: " + expectedJoinList);
 
@@ -519,7 +581,8 @@ public class TestTableInnerJoin {
         Assert.assertTrue(expectedJoinList.containsAll(actualJoinList));
     }
 
-    @Test(enabled = true, dependsOnMethods = {"test20InnerNEJoinMultiCondition"}, description = "内非连接添加分组")
+    @Test(enabled = true, dependsOnMethods = {"test00createInnerTableAndInsertValues2", "test00createInnerTableAndInsertValues3"},
+            description = "内非连接添加分组")
     public void test21InnerNEJoinWithGroup() throws SQLException {
         List<List> expectedJoinList = expectedNEJoinList2();
         System.out.println("Expected: " + expectedJoinList);
@@ -530,7 +593,8 @@ public class TestTableInnerJoin {
         Assert.assertTrue(expectedJoinList.containsAll(actualJoinList));
     }
 
-    @Test(enabled = true, dependsOnMethods = {"test20InnerNEJoinMultiCondition"}, description = "内非连接添加排序")
+    @Test(enabled = true, dependsOnMethods = {"test00createInnerTableAndInsertValues2", "test00createInnerTableAndInsertValues3"},
+            description = "内非连接添加排序")
     public void test22InnerNEJoinWithOrder() throws SQLException {
         List<List> expectedJoinList = expectedNEJoinList3();
         System.out.println("Expected: " + expectedJoinList);
@@ -540,7 +604,7 @@ public class TestTableInnerJoin {
         Assert.assertEquals(actualJoinList,expectedJoinList);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"test19InnerJoinUsingKey"}, description = "内非连接小于")
+    @Test(enabled = true, dependsOnMethods = {"test00createInnerTableAndInsertValues7"}, description = "内非连接小于")
     public void test23InnerNEJoinST() throws SQLException {
         List<List> expectedJoinList = expectedNEJoinList4();
         System.out.println("Expected: " + expectedJoinList);
@@ -551,7 +615,7 @@ public class TestTableInnerJoin {
         Assert.assertTrue(expectedJoinList.containsAll(actualJoinList));
     }
 
-    @Test(enabled = true, dependsOnMethods = {"test19InnerJoinUsingKey"}, description = "内非连接大于")
+    @Test(enabled = true, dependsOnMethods = {"test00createInnerTableAndInsertValues7"}, description = "内非连接大于")
     public void test24InnerNEJoinLT() throws SQLException {
         List<List> expectedJoinList = expectedNEJoinList5();
         System.out.println("Expected: " + expectedJoinList);
@@ -562,7 +626,7 @@ public class TestTableInnerJoin {
         Assert.assertTrue(expectedJoinList.containsAll(actualJoinList));
     }
 
-    @Test(enabled = true, dependsOnMethods = {"test19InnerJoinUsingKey"}, description = "内非连接不等于")
+    @Test(enabled = true, dependsOnMethods = {"test00createInnerTableAndInsertValues7"}, description = "内非连接不等于")
     public void test25InnerNEJoinNE() throws SQLException {
         List<List> expectedJoinList = expectedNEJoinList6();
         System.out.println("Expected: " + expectedJoinList);
@@ -573,20 +637,20 @@ public class TestTableInnerJoin {
         Assert.assertTrue(expectedJoinList.containsAll(actualJoinList));
     }
 
-    @Test(enabled = true, description = "内非连接无符合条件数据返回空")
+    @Test(enabled = true, dependsOnMethods = {"test00createInnerTableAndInsertValues8"}, description = "内非连接无符合条件数据返回空")
     public void test26InnerNEJoinNoDataMeet() throws SQLException {
         Boolean actualQueryResult = tableJoinObj.innerNEJoinNoDataQuery();
         System.out.println("Actual: " + actualQueryResult);
         Assert.assertFalse(actualQueryResult);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"test26InnerNEJoinNoDataMeet"}, expectedExceptions = SQLException.class,
+    @Test(enabled = true, dependsOnMethods = {"test00createInnerTableAndInsertValues8"}, expectedExceptions = SQLException.class,
             description = "内非连接字段不存在，预期异常")
     public void test27InnerNEJoinFieldNotExist() throws SQLException {
         tableJoinObj.innerNEJoinNFieldNotExist();
     }
 
-    @Test(enabled = true, dependsOnMethods = {"test01InnerJoinOwnFieldWithoutTablePrefix"}, description = "内非连接添加Where")
+    @Test(enabled = true, dependsOnMethods = {"test00createInnerTableAndInsertValues1"}, description = "内非连接添加Where")
     public void test28InnerNEJoinWithWhere() throws SQLException {
         List<List> expectedJoinList = expectedNEJoinList7();
         System.out.println("Expected: " + expectedJoinList);
@@ -597,21 +661,21 @@ public class TestTableInnerJoin {
         Assert.assertTrue(expectedJoinList.containsAll(actualJoinList));
     }
 
-    @Test(enabled = true, dependsOnMethods = {"test26InnerNEJoinNoDataMeet"}, description = "内非连接无符合条件数据返回空")
+    @Test(enabled = true, dependsOnMethods = {"test00createInnerTableAndInsertValues8"}, description = "内非连接无符合条件数据返回空")
     public void test29InnerNEJoinOneEmpty1() throws SQLException {
         Boolean actualQueryResult = tableJoinObj.innerNEJoinOneEmpty_1();
         System.out.println("Actual: " + actualQueryResult);
         Assert.assertFalse(actualQueryResult);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"test26InnerNEJoinNoDataMeet"}, description = "内非连接无符合条件数据返回空")
+    @Test(enabled = true, dependsOnMethods = {"test00createInnerTableAndInsertValues8"}, description = "内非连接无符合条件数据返回空")
     public void test29InnerNEJoinOneEmpty2() throws SQLException {
         Boolean actualQueryResult = tableJoinObj.innerNEJoinOneEmpty_2();
         System.out.println("Actual: " + actualQueryResult);
         Assert.assertFalse(actualQueryResult);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"test26InnerNEJoinNoDataMeet"}, description = "内非连接两表互换")
+    @Test(enabled = true, dependsOnMethods = {"test00createInnerTableAndInsertValues8"}, description = "内非连接两表互换")
     public void test30InnerNEJoinTableExchange() throws SQLException {
         List<List> expectedJoinList = expectedNEJoinList8();
         System.out.println("Expected: " + expectedJoinList);
@@ -627,6 +691,43 @@ public class TestTableInnerJoin {
     @AfterClass(alwaysRun = true, description = "测试完成后删除数据和表格并关闭连接")
     public void tearDownAll() throws SQLException {
         Statement tearDownStatement = null;
+//        tearDownStatement = TableInnerJoin.connection.createStatement();
+//        tearDownStatement.execute("delete from beauty");
+//        tearDownStatement.execute("drop table beauty");
+//        tearDownStatement.execute("delete from boys");
+//        tearDownStatement.execute("drop table boys");
+//        tearDownStatement.execute("delete from mytest");
+//        tearDownStatement.execute("drop table mytest");
+//        tearDownStatement.execute("delete from departments");
+//        tearDownStatement.execute("drop table departments");
+//        tearDownStatement.execute("delete from employees");
+//        tearDownStatement.execute("drop table employees");
+//        tearDownStatement.execute("delete from table1054_1");
+//        tearDownStatement.execute("drop table table1054_1");
+//        tearDownStatement.execute("delete from table1054_2");
+//        tearDownStatement.execute("drop table table1054_2");
+//        tearDownStatement.execute("delete from table1069_1");
+//        tearDownStatement.execute("drop table table1069_1");
+//        tearDownStatement.execute("delete from table1069_2");
+//        tearDownStatement.execute("drop table table1069_2");
+//        tearDownStatement.execute("delete from table1174_1");
+//        tearDownStatement.execute("drop table table1174_1");
+//        tearDownStatement.execute("delete from table1174_2");
+//        tearDownStatement.execute("drop table table1174_2");
+//        tearDownStatement.execute("delete from job_grades");
+//        tearDownStatement.execute("drop table job_grades");
+//        tearDownStatement.execute("delete from table1059_1");
+//        tearDownStatement.execute("drop table table1059_1");
+//        tearDownStatement.execute("delete from table1059_2");
+//        tearDownStatement.execute("drop table table1059_2");
+//        tearDownStatement.execute("delete from table1059_3");
+//        tearDownStatement.execute("drop table table1059_3");
+//        tearDownStatement.execute("delete from table1059_4");
+//        tearDownStatement.execute("drop table table1059_4");
+//
+//        tearDownStatement.close();
+//        TableInnerJoin.connection.close();
+
         try {
             tearDownStatement = TableInnerJoin.connection.createStatement();
             tearDownStatement.execute("delete from beauty");

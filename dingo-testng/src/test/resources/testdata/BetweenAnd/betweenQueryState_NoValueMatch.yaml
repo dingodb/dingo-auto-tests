@@ -1,0 +1,14 @@
+testID1001539-01:
+  betweenState: "select * from betweenTest where id between 50 and 100"
+testID1001539-02:
+  betweenState: "select name,age from betweenTest where age between 201 and 250"
+testID1001539-03:
+  betweenState: "select id,amount from betweenTest where amount between 100000 and 200000"
+testID1001540-01:
+  betweenState: "select * from betweenTest where address between 'd' and 'g'"
+testID1001541-01:
+  betweenState: "select * from betweenTest where birthday between '1991-01-01' and '1993-10-10'"
+testID1001541-02:
+  betweenState: "select * from betweenTest where create_time between '14:30:00' and '15:00:00'"
+testID1001541-03:
+  betweenState: "select * from betweenTest where update_time between '2021-10-10 00:00:00' and '2022-03-31 22:00:00'"

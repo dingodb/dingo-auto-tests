@@ -1,0 +1,4 @@
+testID1001558-01:
+  betweenState: "select * from betweenTest where birthday not between '1999/12/31' and '2022/12/01'"
+testID1001559-01:
+  betweenState: "select * from betweenTest where update_time not between '1999/12/31 10:00:00' and '2022/07/07 23:00:00'"

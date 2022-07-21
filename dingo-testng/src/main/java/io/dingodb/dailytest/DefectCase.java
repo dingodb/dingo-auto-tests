@@ -45,13 +45,20 @@ public class DefectCase {
         }
     }
 
-    //插入的字段不含不允许为null的字段
-    public void defect0033_1() throws SQLException {
+    public void createTable0033() throws SQLException {
         try(Statement statement = connection.createStatement()) {
             String createSQL = "create table defect0033(id int, name varchar(20) not null, age int not null, amount double, " +
                     "address varchar(255), birthday date, create_time time, update_time timestamp, is_delete boolean, primary key (id))";
             statement.execute(createSQL);
+        }
+    }
 
+    //插入的字段不含不允许为null的字段
+    public void defect0033_1() throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+//            String createSQL = "create table defect0033(id int, name varchar(20) not null, age int not null, amount double, " +
+//                    "address varchar(255), birthday date, create_time time, update_time timestamp, is_delete boolean, primary key (id))";
+//            statement.execute(createSQL);
             String insertSQL = "insert into defect0033(id,name) values(331,'zhangsan')";
             statement.executeUpdate(insertSQL);
         }
@@ -68,10 +75,6 @@ public class DefectCase {
     //不插入主键,失败
     public void defect0033_3() throws SQLException {
         try(Statement statement = connection.createStatement()) {
-            String createSQL = "create table defect0033(id int, name varchar(20) not null, age int not null, amount double, " +
-                    "address varchar(255), birthday date, create_time time, update_time timestamp, is_delete boolean, primary key (id))";
-            statement.execute(createSQL);
-
             String insertSQL = "insert into defect0033(name,age) values('zhangsan',18)";
             statement.executeUpdate(insertSQL);
         }
@@ -116,6 +119,7 @@ public class DefectCase {
         }
     }
 
+    //创建表时，字段重复，预期失败
     public void defect0136() throws SQLException {
         try(Statement statement = connection.createStatement()) {
             String createSql = "create table defect0136(id int, name varchar(20), name varchar(10), age int, primary key(id))";

@@ -35,18 +35,27 @@ public class TestDefectCase {
         Assert.assertNotNull(DefectCase.connection);
     }
 
-    @Test(priority = 0, enabled = true, expectedExceptions = SQLException.class, description = "插入值不含不允许为null的字段，预期异常")
+    @Test(description = "创建测试表")
+    public void test00CreateDefectTable1() throws SQLException {
+        defectObj.createTable0033();
+    }
+
+    @Test(priority = 0, enabled = true, dependsOnMethods = {"test00CreateDefectTable1"},
+            expectedExceptions = SQLException.class, description = "插入值不含不允许为null的字段，预期异常")
     public void testDefect0033_1() throws SQLException {
         defectObj.defect0033_1();
     }
 
-    @Test(priority = 1, enabled = true, expectedExceptions = SQLException.class, description = "不允许为null的字段,插入值为null，预期异常")
+    @Test(priority = 1, enabled = true, dependsOnMethods = {"test00CreateDefectTable1"},
+            expectedExceptions = SQLException.class, description = "不允许为null的字段,插入值为null，预期异常")
     public void testDefect0033_2() throws SQLException {
         defectObj.defect0033_2();
 
     }
 
-    @Test(priority = 2, enabled = true, expectedExceptions = SQLException.class, description = "不插入主键，预期异常")
+    @Test(priority = 2, enabled = true, expectedExceptions = SQLException.class,
+            dependsOnMethods = {"test00CreateDefectTable1"},
+            description = "不插入主键，预期异常")
     public void testDefect0033_3() throws SQLException {
         defectObj.defect0033_3();
 

@@ -587,7 +587,6 @@ public class StrFuncs {
 
     //空表拼接
     public Boolean concatCase081() throws SQLException, ClassNotFoundException {
-        createEmptyTable081();
         try(Statement statement = connection.createStatement()) {
             String concatSQL = "select name||address cna from tableConcatCase081";
             ResultSet resultSet = statement.executeQuery(concatSQL);
@@ -608,6 +607,7 @@ public class StrFuncs {
         }
     }
 
+    //拼接字符串，整型，浮点型字段
     public List<List> concatCase077() throws SQLException, ClassNotFoundException {
         insertTable081();
         try(Statement statement = connection.createStatement()) {
@@ -800,7 +800,6 @@ public class StrFuncs {
 
     //验证locate函数在条件语句中使用
     public List locateCase113() throws SQLException, ClassNotFoundException {
-        createTableCase113();
         try(Statement statement = connection.createStatement()) {
             String updateSql = "update tableStrCase113 set address='shanghai' where locate('beijing',address)=0";
             statement.executeUpdate(updateSql);
@@ -1232,7 +1231,6 @@ public class StrFuncs {
 
     //验证replace函数在update语句中的使用，替换字符串为字符串
     public List replaceCase177() throws SQLException, ClassNotFoundException {
-        createTableCase177();
         try(Statement statement = connection.createStatement()) {
             String updateSql = "update tableReplaceCase177 set address = replace(address,'beijing','shanghai')";
             int effectRows = statement.executeUpdate(updateSql);
@@ -1470,7 +1468,6 @@ public class StrFuncs {
 
     //trim在表格中使用
     public List trimCase198() throws SQLException, ClassNotFoundException {
-        createTableCase198();
         try(Statement statement = connection.createStatement()) {
             String trimSQL = "select trim('t' from name) tname, trim(leading 't' from name) ldname, trim(trailing 1 from age) tlage, " +
                     "trim(both 18 from amount) boam, ltrim(address), rtrim(address), trim(both from address) " +

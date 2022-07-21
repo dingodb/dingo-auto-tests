@@ -613,7 +613,7 @@ public class SQLFuncs {
         }
     }
 
-    //double型转整型
+    //double型转整型，小数位四舍五入处理（需求变更后）
     public List case136() throws SQLException, ClassNotFoundException {
         try(Statement statement = connection.createStatement()) {
             String querySQL = "select cast(amount as int) as canum from emptest065";

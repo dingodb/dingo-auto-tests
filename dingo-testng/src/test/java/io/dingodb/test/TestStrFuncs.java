@@ -43,6 +43,26 @@ public class TestStrFuncs extends YamlDataHelper {
         Assert.assertEquals(insertRowNum,15);
     }
 
+    @Test(description = "创建用于locate函数测试的表")
+    public void test00CreateStrTable1() throws SQLException, ClassNotFoundException {
+        strObj.createTableCase113();
+    }
+
+    @Test(description = "创建用于replace函数测试的表")
+    public void test00CreateStrTable2() throws SQLException, ClassNotFoundException {
+        strObj.createTableCase177();
+    }
+
+    @Test(description = "创建用于replace函数测试的表")
+    public void test00CreateStrTable3() throws SQLException, ClassNotFoundException {
+        strObj.createTableCase198();
+    }
+
+    @Test(description = "创建用于拼接测试的空表")
+    public void test00CreateStrTable4() throws SQLException, ClassNotFoundException {
+        strObj.createEmptyTable081();
+    }
+
     @Test(enabled = true,description = "验证字符串拼接的功能")
     public void test01ConcatStr() throws SQLException, ClassNotFoundException {
         String expectedConcatStr = "zhangsan18beijing";
@@ -348,7 +368,8 @@ public class TestStrFuncs extends YamlDataHelper {
         strObj.concatCase079();
     }
 
-    @Test(enabled = true, description = "验证拼接空表，返回空")
+    @Test(enabled = true, dependsOnMethods = {"test00CreateStrTable4"},
+            description = "验证拼接空表，返回空")
     public void testConcatCase081() throws SQLException, ClassNotFoundException {
         Boolean expectedReturn = false;
         System.out.println("Expected: " + expectedReturn);
@@ -535,7 +556,8 @@ public class TestStrFuncs extends YamlDataHelper {
         strObj.locateCase112();
     }
 
-    @Test(enabled = true, description = "验证locate函数在条件语句中使用")
+    @Test(enabled = true, dependsOnMethods = {"test00CreateStrTable1"},
+            description = "验证locate函数在条件语句中使用")
     public void testLocateCase113() throws SQLException, ClassNotFoundException {
         List expectedLocateList = new ArrayList();
         String[] formatArray = new String[]{"1beijing","2shanghai","3beijing","4shanghai","5beijing",
@@ -809,7 +831,8 @@ public class TestStrFuncs extends YamlDataHelper {
         Assert.assertEquals(actualStr, expectedStr);
     }
 
-    @Test(enabled = true, description = "验证replace在update语句中使用")
+    @Test(enabled = true, dependsOnMethods = "test00CreateStrTable2",
+            description = "验证replace在update语句中使用")
     public void testReplaceCase177() throws SQLException, ClassNotFoundException {
         List expectedReplaceList = new ArrayList();
         expectedReplaceList.add(4);
@@ -973,7 +996,8 @@ public class TestStrFuncs extends YamlDataHelper {
         strObj.trimCase195(param.get("trimState"));
     }
 
-    @Test(enabled = true, description = "验证trim在表中使用")
+    @Test(enabled = true, dependsOnMethods = {"test00CreateStrTable3"},
+            description = "验证trim在表中使用")
     public void testTrimCase198() throws SQLException, ClassNotFoundException {
         List expectedTrimList = new ArrayList();
         String[] trimArray = new String[]{"TAT","TATtt","18",".","aabcaa "," aabcaa","aabcaa"};

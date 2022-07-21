@@ -1,0 +1,24 @@
+testID1001564-01:
+  betweenState: "select * from betweenTest3 where age between 18 and 20"
+testID1001564-02:
+  betweenState: "select * from betweenTest3 where amount between 10.00 and 100.00"
+testID1001564-03:
+  betweenState: "select * from betweenTest3 where address between 'a' and 'd'"
+testID1001564-04:
+  betweenState: "select * from betweenTest3 where birthday between '2010-01-01' and '2020-12-31'"
+testID1001564-05:
+  betweenState: "select * from betweenTest3 where create_time between '00:00:00' and '23:00:00'"
+testID1001564-06:
+  betweenState: "select * from betweenTest3 where update_time between '1999-10-21 00:00:00' and '2022-07-31 23:59:59'"
+testID1001565-01:
+  betweenState: "select * from betweenTest3 where age not between 18 and 20"
+testID1001565-02:
+  betweenState: "select * from betweenTest3 where amount not between 10.00 and 100.00"
+testID1001565-03:
+  betweenState: "select * from betweenTest3 where address not between 'a' and 'd'"
+testID1001565-04:
+  betweenState: "select * from betweenTest3 where birthday not between '2010-01-01' and '2020-12-31'"
+testID1001565-05:
+  betweenState: "select * from betweenTest3 where create_time not between '00:00:00' and '20:00:00'"
+testID1001565-06:
+  betweenState: "select * from betweenTest3 where update_time not between '1999-10-21 00:00:00' and '2022-07-31 23:59:59'"

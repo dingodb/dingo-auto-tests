@@ -1,0 +1,30 @@
+testID10001583-01:
+  betweenState: "select * from betweenTest where age not between 25 and 25"
+  rowCount: "20"
+  testField: "age"
+  testValue: "25"
+testID10001583-02:
+  betweenState: "select id,name,age from betweenTest where id not between 10 and 10"
+  rowCount: "20"
+  testField: "id"
+  testValue: "10"
+testID10001583-03:
+  betweenState: "select id,name,age from betweenTest where name not between 'HAHA' and 'HAHA'"
+  rowCount: "20"
+  testField: "name"
+  testValue: "HAHA"
+testID10001583-04:
+  betweenState: "select * from betweenTest where birthday not between '2010-10-01' and '2010-10-01'"
+  rowCount: "19"
+  testField: "birthday"
+  testValue: "2010-10-01"
+testID10001583-05:
+  betweenState: "select * from betweenTest where create_time not between '19:00:00' and '19:00:00'"
+  rowCount: "19"
+  testField: "create_time"
+  testValue: "19:00:00"
+testID10001583-06:
+  betweenState: "select * from betweenTest where update_time not between '1997-07-01 00:00:00' and '1997-07-01 00:00:00'"
+  rowCount: "20"
+  testField: "update_time"
+  testValue: "1997-07-01 00:00:00"

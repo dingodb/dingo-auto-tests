@@ -489,4 +489,97 @@ public class YamlDataHelper{
         }
         return files;
     }
+
+    @DataProvider
+    public Object[][] yamlBetweenMethod(Method method) {
+        List<Map<String, String>> yamlBetweenList = null;
+        switch (method.getName()) {
+            case "test08BetweenStartLTEnd": {
+                yamlBetweenList = getYamlList(iniReader.getValue("BetweenAndYaml", "between_StartGTEnd"));
+                break;
+            }
+
+            case "test09BetweenQueryFullRange": {
+                yamlBetweenList = getYamlList(iniReader.getValue("BetweenAndYaml", "between_FullRange"));
+                break;
+            }
+
+            case "test10BetweenQueryInvalidDateTime": {
+                yamlBetweenList = getYamlList(iniReader.getValue("BetweenAndYaml", "between_InvalidDateTime"));
+                break;
+            }
+
+            case "test11BetweenNoValueMatch": {
+                yamlBetweenList = getYamlList(iniReader.getValue("BetweenAndYaml", "between_NoValueMatch"));
+                break;
+            }
+
+            case "test19NotBetweenStartLTEnd": {
+                yamlBetweenList = getYamlList(iniReader.getValue("BetweenAndYaml", "not_between_StartGTEnd"));
+                break;
+            }
+
+            case "test20NotBetweenQueryFullRange": {
+                yamlBetweenList = getYamlList(iniReader.getValue("BetweenAndYaml", "not_between_FullRange"));
+                break;
+            }
+
+            case "test21NotBetweenQueryInvalidDateTime": {
+                yamlBetweenList = getYamlList(iniReader.getValue("BetweenAndYaml", "not_between_InvalidDateTime"));
+                break;
+            }
+
+            case "test30NotBetweenNoValueMatch": {
+                yamlBetweenList = getYamlList(iniReader.getValue("BetweenAndYaml", "not_between_NoValueMatch"));
+                break;
+            }
+
+            case "test31BetweenNotSupportDateFormat": {
+                yamlBetweenList = getYamlList(iniReader.getValue("BetweenAndYaml", "between_NotSupportDateFormat"));
+                break;
+            }
+
+            case "test32NotBetweenNotSupportDateFormat": {
+                yamlBetweenList = getYamlList(iniReader.getValue("BetweenAndYaml", "not_between_NotSupportDateFormat"));
+                break;
+            }
+
+            case "test33IncorrectParam": {
+                yamlBetweenList = getYamlList(iniReader.getValue("BetweenAndYaml", "query_incorrectParam"));
+                break;
+            }
+
+            case "test34BetweenNullParam": {
+                yamlBetweenList = getYamlList(iniReader.getValue("BetweenAndYaml", "between_NullValue"));
+                break;
+            }
+
+            case "test38NotBetweenBothNullParam": {
+                yamlBetweenList = getYamlList(iniReader.getValue("BetweenAndYaml", "not_between_NullValue"));
+                break;
+            }
+
+            case "test39ColumnNull": {
+                yamlBetweenList = getYamlList(iniReader.getValue("BetweenAndYaml", "query_ColumnNull"));
+                break;
+            }
+
+            case "test08BetweenStartEQEnd": {
+                yamlBetweenList = getYamlList(iniReader.getValue("BetweenAndYaml", "between_StartEQEnd"));
+                break;
+            }
+
+            case "test19NotBetweenStartEQEnd": {
+                yamlBetweenList = getYamlList(iniReader.getValue("BetweenAndYaml", "not_between_StartEQEnd"));
+                break;
+            }
+
+        }
+        Object[][] files = new Object[yamlBetweenList.size()][];
+        for (int i = 0; i < yamlBetweenList.size(); i++) {
+            files[i] = new Object[]{yamlBetweenList.get(i)};
+        }
+        return files;
+    }
+
 }

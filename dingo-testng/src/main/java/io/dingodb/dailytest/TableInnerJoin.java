@@ -41,50 +41,36 @@ public class TableInnerJoin {
         }
     }
 
-    public void createInnerTables() throws SQLException {
+    public void createInnerTables(String beautyMeta, String boysMeta) throws SQLException {
         String innerTable1 = "beauty";
         String innerTable2 = "boys";
         try(Statement statement = connection.createStatement()) {
-            String createSQL1 = "create table " + innerTable1 + "(id int NOT NULL,\n" +
-                    "name varchar(50) NOT NULL,\n" +
-                    "sex varchar(10) DEFAULT 'female',\n" +
-                    "borndate timestamp DEFAULT '1987-01-01 00:00:00',\n" +
-                    "phone varchar(11) NOT NULL,\n" +
-                    "boyfriend_id int DEFAULT NULL,\n" +
-                    "PRIMARY KEY (id)\n" +
-                    ")";
-
-            String createSQL2 = "create table " + innerTable2 + "(\n" +
-                    "id int NOT NULL,\n" +
-                    "boyName varchar(20) DEFAULT NULL,\n" +
-                    "userCP int DEFAULT NULL,\n" +
-                    "PRIMARY KEY (id)\n" +
-                    ")";
+            String createSQL1 = "create table " + innerTable1 + beautyMeta;
+            String createSQL2 = "create table " + innerTable2 + boysMeta;
             statement.execute(createSQL1);
             statement.execute(createSQL2);
         }
     }
 
-    public void insertDataToInnerTables() throws SQLException {
+    public void insertDataToInnerTables(String beautyValue, String boysValue) throws SQLException {
         try(Statement statement = connection.createStatement()) {
-            String table1Values = "(1,'LiuYan','female','1988-02-03 00:00:00','18209876577',8),\n" +
-                    "(2,'TeacherLi','female','1987-12-30 00:00:00','18219876577',9),\n" +
-                    "(3,'Angelay','female','1989-02-03 00:00:00','18209876567',3),\n" +
-                    "(4,'ReBa','female','1993-02-03 00:00:00','18209876579',2),\n" +
-                    "(5,'DuLala','female','1992-02-03 00:00:00','18209179577',9),\n" +
-                    "(6,'zhiRuo','female','1988-02-03 00:00:00','18209876577',1),\n" +
-                    "(7,'LingShan','female','1987-12-30 00:00:00','18219876577',9),\n" +
-                    "(8,'Xiao Zhao','female','1989-02-03 00:00:00','18209876567',1),\n" +
-                    "(9,'Shuange','female','1993-02-03 00:00:00','18209876579',9),\n" +
-                    "(10,'Wang Yuyan','female','1992-02-03 00:00:00','18209179577',4),\n" +
-                    "(11,'Xia Xue','female','1993-02-03 00:00:00','18209876579',9),\n" +
-                    "(12,'Zhao Min','female','1992-02-03 00:00:00','18209179577',1)";
+//            String table1Values = "(1,'LiuYan','female','1988-02-03 00:00:00','18209876577',8),\n" +
+//                    "(2,'TeacherLi','female','1987-12-30 00:00:00','18219876577',9),\n" +
+//                    "(3,'Angelay','female','1989-02-03 00:00:00','18209876567',3),\n" +
+//                    "(4,'ReBa','female','1993-02-03 00:00:00','18209876579',2),\n" +
+//                    "(5,'DuLala','female','1992-02-03 00:00:00','18209179577',9),\n" +
+//                    "(6,'zhiRuo','female','1988-02-03 00:00:00','18209876577',1),\n" +
+//                    "(7,'LingShan','female','1987-12-30 00:00:00','18219876577',9),\n" +
+//                    "(8,'Xiao Zhao','female','1989-02-03 00:00:00','18209876567',1),\n" +
+//                    "(9,'Shuange','female','1993-02-03 00:00:00','18209876579',9),\n" +
+//                    "(10,'Wang Yuyan','female','1992-02-03 00:00:00','18209179577',4),\n" +
+//                    "(11,'Xia Xue','female','1993-02-03 00:00:00','18209876579',9),\n" +
+//                    "(12,'Zhao Min','female','1992-02-03 00:00:00','18209179577',1)";
+//
+//            String table2Values = "(1,'Zhang Wuji',100),(2,'Han Han',800),(3,'Xiao Ming',50),(4,'DuanYU',300)";
 
-            String table2Values = "(1,'Zhang Wuji',100),(2,'Han Han',800),(3,'Xiao Ming',50),(4,'DuanYU',300)";
-
-            String insertSQL1 = "insert into beauty values " + table1Values;
-            String insertSQL2 = "insert into boys values " + table2Values;
-
+            String insertSQL1 = "insert into beauty values " + beautyValue;
+            String insertSQL2 = "insert into boys values " + boysValue;
             statement.execute(insertSQL1);
             statement.execute(insertSQL2);
         }
@@ -428,7 +414,6 @@ public class TableInnerJoin {
 
     //验证某一表无数据返回空
     public Boolean innerJoinOneEmpty() throws SQLException {
-        createTable1069();
         try(Statement statement = connection.createStatement()) {
             String querySql = "select table1069_1.* from table1069_1 inner join table1069_2 on table1069_2.id=table1069_1.id";
             ResultSet joinRst = statement.executeQuery(querySql);
@@ -454,7 +439,6 @@ public class TableInnerJoin {
 
     //验证内等连接，使用using(key)
     public List<List> innerJoinUsingKey() throws SQLException {
-        createTable1174();
         try(Statement statement = connection.createStatement()) {
             String querySql = "select table1174_1.*,table1174_2.* from table1174_1 inner join table1174_2 using(id)";
             ResultSet joinRst = statement.executeQuery(querySql);
@@ -628,7 +612,6 @@ public class TableInnerJoin {
 
     //验证内非连接无符合条件返回空
     public Boolean innerNEJoinNoDataQuery() throws SQLException {
-        createTable1059();
         try(Statement statement = connection.createStatement()) {
             String querySql = "select table1059_1.*,table1059_2.* from table1059_1 inner join table1059_2 " +
                     "on table1059_1.buyers>table1059_2.price";

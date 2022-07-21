@@ -55,9 +55,14 @@ public class TestBooleanField extends YamlDataHelper {
         Assert.assertNotNull(BooleanField.connection);
     }
 
-    @Test(priority = 0, enabled = true, description = "验证带有布尔类型字段的表的创建")
+    @Test(description = "创建布尔型测试的表")
+    public void test00CreateBooleanTable() throws SQLException, ClassNotFoundException {
+        booleanObj.createBoolTable();
+    }
+
+    @Test(priority = 0, enabled = true, dependsOnMethods = {"test00CreateBooleanTable"},
+            description = "验证带有布尔类型字段的表的创建")
     public void test01BooleanFieldTableCreate() throws SQLException, ClassNotFoundException {
-        booleanObj.createBooleanTable();
         String expectedTableName = booleanObj.getBooleanTableName().toUpperCase();
         List<String> actualTableList = getTableList();
         Assert.assertTrue(actualTableList.contains(expectedTableName));

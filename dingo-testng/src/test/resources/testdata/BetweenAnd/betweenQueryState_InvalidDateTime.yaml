@@ -1,0 +1,16 @@
+testID1001534-01:
+  betweenState: "where birthday between '1999-12-32' and '2022-12-01'"
+testID1001534-02:
+  betweenState: "where birthday between '2000-01-01' and '2022-13-01'"
+testID1001535-01:
+  betweenState: "where create_time between '00:00:00' and '24:00:00'"
+testID1001535-02:
+  betweenState: "where create_time between '10:30:60' and '12:30:30'"
+testID1001535-03:
+  betweenState: "where create_time between '12:00:00' and '20:30:60'"
+testID1001536-01:
+  betweenState: "where update_time between '2000-02-30 00:00:00' and '2010-10-11 23:00:00'"
+testID1001536-02:
+  betweenState: "where update_time between '2020-12-31 24:00:00' and '2022-12-31 12:30:30'"
+testID1001536-03:
+  betweenState: "where update_time between '2001-13-01 12:60:00' and '2022-05-05 23:59:60'"
