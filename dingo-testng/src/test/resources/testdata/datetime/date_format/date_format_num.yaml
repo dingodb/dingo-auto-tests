@@ -1,43 +1,43 @@
-testID1000774:
-  inputDate: "20220413103726"
-  inputFormat: "%H:%i:%S %m/%d/%Y"
-  outputDate: "10:37:26 04/13/2022"
-testID1000775:
-  inputDate: "20220413103706"
-  inputFormat: "%Y/%m/%d %H:%i:%S"
-  outputDate: "2022/04/13 10:37:06"
-testID1000776:
-  inputDate: "20220413103706"
-  inputFormat: "%Y-%m-%d %H.%i.%S"
-  outputDate: "2022-04-13 10.37.06"
-testID1000777:
-  inputDate: "20220413103706"
-  inputFormat: "%Y-%m-%d %H:%i:%S"
-  outputDate: "2022-04-13 10:37:06"
-testID1000778-01:
-  inputDate: "20220413103706"
-  inputFormat: "%Y-%m-%d"
-  outputDate: "2022-04-13"
-testID1000778-02:
-  inputDate: "20220401103706"
-  inputFormat: "%Y-%m-%d"
-  outputDate: "2022-04-01"
-testID1000779:
-  inputDate: "20220413103706"
-  inputFormat: "%H:%i:%S"
-  outputDate: "10:37:06"
-testID1000780-01:
-  inputDate: "20220413103706"
-  inputFormat: "%Y"
-  outputDate: "2022"
-testID1000780-02:
-  inputDate: "19990401"
-  inputFormat: "%Y"
-  outputDate: "1999"
-testID1000781:
-  inputDate: "20220413103706"
-  inputFormat: "%d - %H"
-  outputDate: "13 - 10"
+#testID1000774:
+#  inputDate: "20220413103726"
+#  inputFormat: "%H:%i:%S %m/%d/%Y"
+#  outputDate: "10:37:26 04/13/2022"
+#testID1000775:
+#  inputDate: "20220413103706"
+#  inputFormat: "%Y/%m/%d %H:%i:%S"
+#  outputDate: "2022/04/13 10:37:06"
+#testID1000776:
+#  inputDate: "20220413103706"
+#  inputFormat: "%Y-%m-%d %H.%i.%S"
+#  outputDate: "2022-04-13 10.37.06"
+#testID1000777:
+#  inputDate: "20220413103706"
+#  inputFormat: "%Y-%m-%d %H:%i:%S"
+#  outputDate: "2022-04-13 10:37:06"
+#testID1000778-01:
+#  inputDate: "20220413103706"
+#  inputFormat: "%Y-%m-%d"
+#  outputDate: "2022-04-13"
+#testID1000778-02:
+#  inputDate: "20220401103706"
+#  inputFormat: "%Y-%m-%d"
+#  outputDate: "2022-04-01"
+#testID1000779:
+#  inputDate: "20220413103706"
+#  inputFormat: "%H:%i:%S"
+#  outputDate: "10:37:06"
+#testID1000780-01:
+#  inputDate: "20220413103706"
+#  inputFormat: "%Y"
+#  outputDate: "2022"
+#testID1000780-02:
+#  inputDate: "19990401"
+#  inputFormat: "%Y"
+#  outputDate: "1999"
+#testID1000781:
+#  inputDate: "20220413103706"
+#  inputFormat: "%d - %H"
+#  outputDate: "13 - 10"
 testID1000782-01:
   inputDate: "20220413103706"
   inputFormat: "%Y/%m/%d"
@@ -46,31 +46,31 @@ testID1000782-02:
   inputDate: "19990401"
   inputFormat: "%Y/%m/%d"
   outputDate: "1999/04/01"
-testID1000783-01:
-  inputDate: "20220413103706"
-  inputFormat: "%Y.%m.%d"
-  outputDate: "2022.04.13"
-testID1000783-02:
-  inputDate: "19990401"
-  inputFormat: "%Y.%m.%d"
-  outputDate: "1999.04.01"
-testID1000784-01:
-  inputDate: "20220413103726"
-  inputFormat: "Year:%Y Month:%m Day:%d"
-  outputDate: "Year:2022 Month:04 Day:13"
-testID1000784-02:
-  inputDate: "20220404"
-  inputFormat: "Year:%Y Month:%m Day:%d"
-  outputDate: "Year:2022 Month:04 Day:04"
-testID1000784-03:
-  inputDate: "20220413103726"
-  inputFormat: "%m month and %d day of Year %Y, %H hour %i minutes and %S seconds"
-  outputDate: "04 month and 13 day of Year 2022, 10 hour 37 minutes and 26 seconds"
-testID1000785:
-  inputDate: "20220413103726"
-  inputFormat: "%Ss"
-  outputDate: "26s"
-testID1001262-04:
-  inputDate: "20101001010203"
-  inputFormat: "%H.%i.%s"
-  outputDate: "01.02.03"
+#testID1000783-01:
+#  inputDate: "20220413103706"
+#  inputFormat: "%Y.%m.%d"
+#  outputDate: "2022.04.13"
+#testID1000783-02:
+#  inputDate: "19990401"
+#  inputFormat: "%Y.%m.%d"
+#  outputDate: "1999.04.01"
+#testID1000784-01:
+#  inputDate: "20220413103726"
+#  inputFormat: "Year:%Y Month:%m Day:%d"
+#  outputDate: "Year:2022 Month:04 Day:13"
+#testID1000784-02:
+#  inputDate: "20220404"
+#  inputFormat: "Year:%Y Month:%m Day:%d"
+#  outputDate: "Year:2022 Month:04 Day:04"
+#testID1000784-03:
+#  inputDate: "20220413103726"
+#  inputFormat: "%m month and %d day of Year %Y, %H hour %i minutes and %S seconds"
+#  outputDate: "04 month and 13 day of Year 2022, 10 hour 37 minutes and 26 seconds"
+#testID1000785:
+#  inputDate: "20220413103726"
+#  inputFormat: "%Ss"
+#  outputDate: "26s"
+#testID1001262-04:
+#  inputDate: "20101001010203"
+#  inputFormat: "%H.%i.%s"
+#  outputDate: "01.02.03"

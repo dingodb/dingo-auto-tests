@@ -37,10 +37,35 @@ public class TestSQLFuncs {
     @BeforeClass()
     public static void ConnectDBAndCreateFuncTable() throws ClassNotFoundException, SQLException {
         Assert.assertNotNull(SQLFuncs.connection);
+    }
+
+    @Test(description = "创建SQL功能测试表1")
+    public void test00CreateFuncTable1() throws SQLException, ClassNotFoundException {
         funcObj.createFuncTable();
     }
 
-    @Test(groups = {"preFuncs"},description = "验证批量插入数据到创建的数据表中")
+    @Test(description = "创建SQL功能测试表2 - 空表")
+    public void test00CreateFuncTable2() throws SQLException, ClassNotFoundException {
+        funcObj.createEmpTable();
+    }
+
+    @Test(dependsOnGroups = {"emp"}, description = "空表插入一条数据")
+    public void test00InsertSingleTable2() throws SQLException, ClassNotFoundException {
+        funcObj.insertOneRowToTable();
+    }
+
+    @Test(dependsOnGroups = {"single"}, description = "在单条数据基础上再插入多条数据")
+    public void test00InsertMultiTable2() throws SQLException, ClassNotFoundException {
+        funcObj.insertMoreRowsToTable();
+    }
+
+    @Test(description = "创建SQL功能测试表3 - 用户插入null的验证")
+    public void test00CreateFuncTable3() throws SQLException, ClassNotFoundException {
+        funcObj.createTable302();
+    }
+
+    @Test(groups = {"preFuncs"}, dependsOnMethods = {"test00CreateFuncTable1"},
+            description = "验证批量插入数据到创建的数据表中")
     public void test01MultiInsert() throws SQLException, ClassNotFoundException {
         int expectedMultiInsertCount = 9;
         int actualMultiInsertCount = funcObj.insertMultiValues();
@@ -248,70 +273,77 @@ public class TestSQLFuncs {
     /**
      * v0.2.0补充测试用例
      */
-    @Test(enabled = true, description = "验证表为空时，取最小值，返回Null")
+    @Test(enabled = true, groups = {"emp"}, dependsOnMethods = {"test00CreateFuncTable2"}, description = "验证表为空时，取最小值，返回Null")
     public void testCase065() throws SQLException, ClassNotFoundException {
         String actualMin = funcObj.case065();
         Assert.assertNull(actualMin);
     }
 
-    @Test(enabled = true, description = "验证表为空时，取最大值，返回Null")
+    @Test(enabled = true, groups = {"emp"}, dependsOnMethods = {"test00CreateFuncTable2"},
+            description = "验证表为空时，取最大值，返回Null")
     public void testCase069() throws SQLException, ClassNotFoundException {
         String actualMax = funcObj.case069();
         Assert.assertNull(actualMax);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase065","testCase069"},
+    @Test(enabled = true, groups = {"emp"}, dependsOnMethods = {"test00CreateFuncTable2"},
             description = "验证表为空时，取age字段加和，返回Null")
     public void testCase073() throws SQLException, ClassNotFoundException {
         String actualSum = funcObj.case073();
         Assert.assertNull(actualSum);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase073"}, description = "验证表为空时，取age字段求平均，返回Null")
+    @Test(enabled = true, groups = {"emp"}, dependsOnMethods = {"test00CreateFuncTable2"},
+            description = "验证表为空时，取age字段求平均，返回Null")
     public void testCase259() throws SQLException, ClassNotFoundException {
         String actualAvg = funcObj.case259();
         Assert.assertNull(actualAvg);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase259"}, description = "验证表为空时，count统计返回0")
+    @Test(enabled = true, groups = {"emp"}, dependsOnMethods = {"test00CreateFuncTable2"},
+            description = "验证表为空时，count统计返回0")
     public void testCase074() throws SQLException, ClassNotFoundException {
         int actualCount = funcObj.case074();
         Assert.assertEquals(actualCount, 0);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase074"}, description = "验证表为空时，升序返回空")
+    @Test(enabled = true, groups = {"emp"}, dependsOnMethods = {"test00CreateFuncTable2"},
+            description = "验证表为空时，升序返回空")
     public void testCase263() throws SQLException, ClassNotFoundException {
         Boolean actualAscOrder = funcObj.case263();
         Assert.assertFalse(actualAscOrder);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase263"}, description = "验证表为空时，降序返回空")
+    @Test(enabled = true, groups = {"emp"}, dependsOnMethods = {"test00CreateFuncTable2"},
+            description = "验证表为空时，降序返回空")
     public void testCase272() throws SQLException, ClassNotFoundException {
         Boolean actualDescOrder = funcObj.case272();
         Assert.assertFalse(actualDescOrder);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase272"}, description = "验证表为空时，分组查询")
+    @Test(enabled = true, groups = {"emp"}, dependsOnMethods = {"test00CreateFuncTable2"},
+            description = "验证表为空时，分组查询")
     public void testCase281() throws SQLException, ClassNotFoundException {
         Boolean actualGroup = funcObj.case281();
         Assert.assertFalse(actualGroup);
     }
 
-
-
-    @Test(enabled = true, dependsOnMethods = {"testCase281"}, description = "验证表中只有一条数据，查询最小值")
+    @Test(enabled = true, groups = {"single"}, dependsOnMethods = {"test00InsertSingleTable2"},
+            description = "验证表中只有一条数据，查询最小值")
     public void testCase066() throws SQLException, ClassNotFoundException {
         int actualMinAge = funcObj.case066();
         Assert.assertEquals(actualMinAge, 18);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase066"}, description = "验证表中只有一条数据，查询最大值")
+    @Test(enabled = true, groups = {"single"}, dependsOnMethods = {"test00InsertSingleTable2"},
+            description = "验证表中只有一条数据，查询最大值")
     public void testCase070() throws SQLException, ClassNotFoundException {
         int actualMaxAge = funcObj.case070();
         Assert.assertEquals(actualMaxAge, 18);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase070"}, description = "验证表中只有一条数据，字段升序")
+    @Test(enabled = true, groups = {"single"}, dependsOnMethods = {"test00InsertSingleTable2"},
+            description = "验证表中只有一条数据，字段升序")
     public void testCase262() throws SQLException, ClassNotFoundException {
         List expectedOrderList = new ArrayList();
         expectedOrderList.add(18);
@@ -319,7 +351,8 @@ public class TestSQLFuncs {
         Assert.assertEquals(actualOrderList, expectedOrderList);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase262"}, description = "验证表中只有一条数据，字段降序")
+    @Test(enabled = true, groups = {"single"}, dependsOnMethods = {"test00InsertSingleTable2"},
+            description = "验证表中只有一条数据，字段降序")
     public void testCase271() throws SQLException, ClassNotFoundException {
         List expectedOrderList = new ArrayList();
         expectedOrderList.add(18);
@@ -327,7 +360,7 @@ public class TestSQLFuncs {
         Assert.assertEquals(actualOrderList, expectedOrderList);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase271"}, description = "验证对varchar类型字段查询最小值")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, description = "验证对varchar类型字段查询最小值")
     public void testCase067() throws SQLException, ClassNotFoundException {
         String expectedMinName = "  aB c  dE ";
         System.out.println("Expected: " + expectedMinName);
@@ -336,7 +369,7 @@ public class TestSQLFuncs {
         Assert.assertEquals(actualMinName, expectedMinName);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "验证对varchar类型字段查询最大值")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, description = "验证对varchar类型字段查询最大值")
     public void testCase071() throws SQLException, ClassNotFoundException {
         String expectedMaxNamge = "zhngsna";
         System.out.println("Expected: " + expectedMaxNamge);
@@ -345,7 +378,7 @@ public class TestSQLFuncs {
         Assert.assertEquals(actualMaxName, expectedMaxNamge);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "验证对double类型字段查询最小值")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, description = "验证对double类型字段查询最小值")
     public void testCase068() throws SQLException, ClassNotFoundException {
         Double expectedMinAmount = 0.0;
         System.out.println("Expected: " + expectedMinAmount);
@@ -354,7 +387,7 @@ public class TestSQLFuncs {
         Assert.assertEquals(actualMinAmount, expectedMinAmount);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "验证对double类型字段查询最大值")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, description = "验证对double类型字段查询最大值")
     public void testCase072() throws SQLException, ClassNotFoundException {
         Double expectedMaxAmount = 2345.0;
         System.out.println("Expected: " + expectedMaxAmount);
@@ -363,7 +396,7 @@ public class TestSQLFuncs {
         Assert.assertEquals(actualMaxAmount, expectedMaxAmount);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "验证将double类型转为整型")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, description = "验证将double类型转为整型")
     public void testCase136() throws SQLException, ClassNotFoundException {
         List expectedCastList = new ArrayList();
         Integer[] castArray = new Integer[]{24, 895, 123, 9, 1454, 0, 2, 12, 109, 1234, 100, 2345, 9, 32, 0};
@@ -380,7 +413,7 @@ public class TestSQLFuncs {
 
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "验证将int类型转为double类型")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, description = "验证将int类型转为double类型")
     public void testCase137() throws SQLException, ClassNotFoundException {
         List expectedCastList = new ArrayList();
         Double[] castArray = new Double[]{18.0, 25.0, 55.0, 57.0, 1.0, 544.0, 76.0, 18.0, 76.0, 256.0,
@@ -396,32 +429,32 @@ public class TestSQLFuncs {
 
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, expectedExceptions = SQLException.class,
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, expectedExceptions = SQLException.class,
             description = "验证varchar类型字段不支持求和")
     public void testCase257() throws SQLException, ClassNotFoundException {
         funcObj.case257();
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, expectedExceptions = SQLException.class,
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, expectedExceptions = SQLException.class,
             description = "验证varchar类型字段不支持求和,即使都为数值字符串")
     public void testCase258() throws SQLException, ClassNotFoundException {
         funcObj.case258();
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, expectedExceptions = SQLException.class,
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, expectedExceptions = SQLException.class,
             description = "验证varchar类型字段不支持求平均")
     public void testCase260() throws SQLException, ClassNotFoundException {
         funcObj.case260();
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, expectedExceptions = SQLException.class,
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, expectedExceptions = SQLException.class,
             description = "验证varchar类型字段不支持求平均,即使都为数值字符串")
     public void testCase261() throws SQLException, ClassNotFoundException {
         funcObj.case261();
     }
 
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "验证varchar类型字段升序")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, description = "验证varchar类型字段升序")
     public void testCase265() throws SQLException, ClassNotFoundException {
         String[][] orderArray = {{"11","  aB c  dE "},{"12"," abcdef"},{"15","1.5"},{"6","123"}, {"4","HAHA"},
                 {"13","HAHA"},{"5","awJDs"}, {"3","l3"},{"2","lisi"},{"10","lisi"},{"9","op "},{"7","yamaha"},
@@ -441,7 +474,7 @@ public class TestSQLFuncs {
         Assert.assertEquals(actualOrderList, expectedList);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "验证varchar类型字段降序")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, description = "验证varchar类型字段降序")
     public void testCase273() throws SQLException, ClassNotFoundException {
         String[][] orderArray = {{"14","zhngsna"},{"1","zhangsan"},{"8","zhangsan"},{"7","yamaha"},{"9","op "},
                 {"2","lisi"},{"10","lisi"},{"3","l3"},{"5","awJDs"},{"4","HAHA"},{"13","HAHA"},{"6","123"},
@@ -459,7 +492,7 @@ public class TestSQLFuncs {
         Assert.assertEquals(actualOrderList, expectedList);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "验证按两个字段升序")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, description = "验证按两个字段升序")
     public void testCase266() throws SQLException, ClassNotFoundException {
         String[][] orderArray = {
                 {"5","awJDs","1","1453.9999"},{"12"," abcdef","2","2345.0"},{"15","1.5","18","0.1235"},
@@ -481,7 +514,7 @@ public class TestSQLFuncs {
         Assert.assertEquals(actualOrderList, expectedOrderList);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "验证按两个字段降序")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, description = "验证按两个字段降序")
     public void testCase274() throws SQLException, ClassNotFoundException {
         String[][] orderArray = {
                 {"6","123","544","0.0","543"},{"10","lisi","256","1234.456","nanjing"},
@@ -506,7 +539,7 @@ public class TestSQLFuncs {
         Assert.assertEquals(actualOrderList, expectedOrderList);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "验证按三个字段升序")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, description = "验证按三个字段升序")
     public void testCase267() throws SQLException, ClassNotFoundException {
         String[][] orderArray = {
                 {"5","awJDs","1","1453.9999","pingYang1"},{"12"," abcdef","2","2345.0","123"},
@@ -532,7 +565,7 @@ public class TestSQLFuncs {
         Assert.assertEquals(actualOrderList, expectedOrderList);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "验证按三个字段降序")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, description = "验证按三个字段降序")
     public void testCase275() throws SQLException, ClassNotFoundException {
         String[][] orderArray = {
                 {"6","123","544","0.0","543"},{"10","lisi","256","1234.456","nanjing"},
@@ -558,19 +591,19 @@ public class TestSQLFuncs {
         Assert.assertEquals(actualOrderList, expectedOrderList);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, expectedExceptions = SQLException.class,
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, expectedExceptions = SQLException.class,
             description = "验证升序缺少字段，预期异常")
     public void testCase268() throws SQLException, ClassNotFoundException {
         funcObj.case268();
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, expectedExceptions = SQLException.class,
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, expectedExceptions = SQLException.class,
             description = "验证降序缺少字段，预期异常")
     public void testCase276() throws SQLException, ClassNotFoundException {
         funcObj.case276();
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "验证升序字段重复")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, description = "验证升序字段重复")
     public void testCase269() throws SQLException, ClassNotFoundException {
         List expectedOrderList = new ArrayList();
         Integer[] orderArray = new Integer[]{1,2,18,18,18,25,55,57,57,61,76,76,99,256,544};
@@ -584,7 +617,7 @@ public class TestSQLFuncs {
         Assert.assertEquals(actualOrderList,expectedOrderList);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "验证降序字段重复")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, description = "验证降序字段重复")
     public void testCase277() throws SQLException, ClassNotFoundException {
         List expectedOrderList = new ArrayList();
         Integer[] orderArray = new Integer[]{544,256,99,76,76,61,57,57,55,25,18,18,18,2,1};
@@ -598,7 +631,7 @@ public class TestSQLFuncs {
         Assert.assertEquals(actualOrderList,expectedOrderList);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "验证升序降序同时使用")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, description = "验证升序降序同时使用")
     public void testCase279_1() throws SQLException, ClassNotFoundException {
         String[][] orderArray = {
                 {"6","123","544","0.0","543"},{"10","lisi","256","1234.456","nanjing"},
@@ -624,7 +657,7 @@ public class TestSQLFuncs {
         Assert.assertEquals(actualOrderList, expectedOrderList);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "验证升序降序同时使用")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, description = "验证升序降序同时使用")
     public void testCase279_2() throws SQLException, ClassNotFoundException {
         String[][] orderArray = {
                 {"11","  aB c  dE ","61","99.9999","beijing chaoyang"},{"12"," abcdef","2","2345.0","123"},
@@ -650,7 +683,7 @@ public class TestSQLFuncs {
         Assert.assertEquals(actualOrderList, expectedOrderList);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "验证升序降序同时使用,字段相同")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, description = "验证升序降序同时使用,字段相同")
     public void testCase280_1() throws SQLException, ClassNotFoundException {
         String[][] orderArray = {
                 {"6", "544"},{"10", "256"},{"14", "99"},{"7", "76"},{"9", "76"},{"11", "61"},{"4", "57"},
@@ -670,7 +703,7 @@ public class TestSQLFuncs {
         Assert.assertEquals(actualOrderList, expectedOrderList);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "验证升序降序同时使用,字段相同")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, description = "验证升序降序同时使用,字段相同")
     public void testCase280_2() throws SQLException, ClassNotFoundException {
         String[][] orderArray = {
                 {"5", "1"},{"12", "2"},{"1", "18"},{"8", "18"},{"15", "18"},{"2", "25"},{"3", "55"},{"4", "57"},
@@ -691,13 +724,13 @@ public class TestSQLFuncs {
         Assert.assertEquals(actualOrderList, expectedOrderList);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, expectedExceptions = SQLException.class,
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, expectedExceptions = SQLException.class,
             description = "验证使用聚合字段分组，预期失败")
     public void testCase282() throws SQLException, ClassNotFoundException {
         funcObj.case282();
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "使用非查询字段分组")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, description = "使用非查询字段分组")
     public void testCase283() throws SQLException, ClassNotFoundException {
         String[][] groupArray = {
                 {"281", "2129.456"},{"2", "2345.0"},{"55", "123.123"},{"1", "1453.9999"},{"36", "35.8"},
@@ -719,13 +752,13 @@ public class TestSQLFuncs {
         Assert.assertTrue(expectedGroupList.containsAll(actualGroupList));
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, expectedExceptions = SQLException.class,
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, expectedExceptions = SQLException.class,
             description = "全表分组，预期失败")
     public void testCase284() throws SQLException, ClassNotFoundException {
         funcObj.case284();
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "使用多字段分组")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, description = "使用多字段分组")
     public void testCase285_1() throws SQLException, ClassNotFoundException {
         String[][] groupArray = {
                 {"lisi", "25", "895.0"},{"zhngsna","99","32.0"},{"awJDs","1","1453.9999"},
@@ -749,7 +782,7 @@ public class TestSQLFuncs {
         Assert.assertTrue(expectedGroupList.containsAll(actualGroupList));
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "使用多字段分组")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, description = "使用多字段分组")
     public void testCase285_2() throws SQLException, ClassNotFoundException {
         String[][] groupArray = {
                 {"zhangsan","18","23.5","Beijing"},{" abcdef","2","2345.0","123"},
@@ -777,14 +810,14 @@ public class TestSQLFuncs {
     }
 
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "limit超过数据条数")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, description = "limit超过数据条数")
     public void testCase286() throws SQLException, ClassNotFoundException {
         int actualRowNum = funcObj.case286();
         System.out.println("Actual: " + actualRowNum);
         Assert.assertEquals(actualRowNum, 15);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "offset小于等于数据总条数")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, description = "offset小于等于数据总条数")
     public void testCase289() throws SQLException, ClassNotFoundException {
         int actualRowNum1 = funcObj.case289_1();
         int actualRowNum2 = funcObj.case289_2();
@@ -797,14 +830,14 @@ public class TestSQLFuncs {
         Assert.assertEquals(actualRowNum3, 14);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "offset超过数据条数")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, description = "offset超过数据条数")
     public void testCase290() throws SQLException, ClassNotFoundException {
         Boolean actualResult = funcObj.case290();
         System.out.println("Actual: " + actualResult);
         Assert.assertFalse(actualResult);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "limit 0条")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, description = "limit 0条")
     public void testCase291() throws SQLException, ClassNotFoundException {
         Boolean actualResult1 = funcObj.case291_1();
         Boolean actualResult2 = funcObj.case291_2();
@@ -814,19 +847,19 @@ public class TestSQLFuncs {
         Assert.assertFalse(actualResult2);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, expectedExceptions = SQLException.class,
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, expectedExceptions = SQLException.class,
             description = "limit 负数")
     public void testCase292_1() throws SQLException, ClassNotFoundException {
         funcObj.case292_1();
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, expectedExceptions = SQLException.class,
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, expectedExceptions = SQLException.class,
             description = "limit 负数")
     public void testCase292_2() throws SQLException, ClassNotFoundException {
         funcObj.case292_2();
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "验证limit限制小数")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, description = "验证limit限制小数")
     public void testCase293_1() throws SQLException, ClassNotFoundException {
 //        String[][] limitArray = {
 //                {"1", "zhangsan", "18", "23.5", "Beijing"}, {"2", "lisi", "25", "895.0", " beijing haidian "},
@@ -851,7 +884,7 @@ public class TestSQLFuncs {
 //        Assert.assertTrue(expectedLimitList.containsAll(actualLimitList));
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "验证limit限制小数")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, description = "验证limit限制小数")
     public void testCase293_2() throws SQLException, ClassNotFoundException {
         String[][] limitArray = {
                 {"4","HAHA","57","9.0762556","CHANGping"},
@@ -873,31 +906,31 @@ public class TestSQLFuncs {
         Assert.assertEquals(actualLimitList, expectedLimitList);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, expectedExceptions = SQLException.class,
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, expectedExceptions = SQLException.class,
             description = "limit 字符串")
     public void testCase294_1() throws SQLException, ClassNotFoundException {
         funcObj.case294_1();
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, expectedExceptions = SQLException.class,
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, expectedExceptions = SQLException.class,
             description = "limit 字符串")
     public void testCase294_2() throws SQLException, ClassNotFoundException {
         funcObj.case294_2();
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, expectedExceptions = SQLException.class,
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, expectedExceptions = SQLException.class,
             description = "offset 为负数")
     public void testCase295_1() throws SQLException, ClassNotFoundException {
         funcObj.case295_1();
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, expectedExceptions = SQLException.class,
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, expectedExceptions = SQLException.class,
             description = "offset 为字符串")
     public void testCase295_2() throws SQLException, ClassNotFoundException {
         funcObj.case295_2();
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "offset 为小数")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, description = "offset 为小数")
     public void testCase295_3() throws SQLException, ClassNotFoundException {
 //        String[][] limitArray = {
 //                {"4","HAHA","57","9.0762556","CHANGping"},
@@ -927,25 +960,25 @@ public class TestSQLFuncs {
 //        Assert.assertTrue(expectedLimitList.containsAll(actualLimitList));
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, expectedExceptions = SQLException.class,
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, expectedExceptions = SQLException.class,
             description = "缺失参数，预期异常")
     public void testCase296_1() throws SQLException, ClassNotFoundException {
         funcObj.case296_1();
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, expectedExceptions = SQLException.class,
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, expectedExceptions = SQLException.class,
             description = "缺失参数，预期异常")
     public void testCase296_2() throws SQLException, ClassNotFoundException {
         funcObj.case296_2();
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, expectedExceptions = SQLException.class,
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, expectedExceptions = SQLException.class,
             description = "缺失参数，预期异常")
     public void testCase296_3() throws SQLException, ClassNotFoundException {
         funcObj.case296_3();
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "in范围只有一个元素")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, description = "in范围只有一个元素")
     public void testCase297() throws SQLException, ClassNotFoundException {
         String[][] inArray = {
                 {"1","zhangsan","18","23.5","Beijing"},
@@ -966,7 +999,7 @@ public class TestSQLFuncs {
         Assert.assertEquals(actualInList, expectedInList);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "in范围有两个元素")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, description = "in范围有两个元素")
     public void testCase298() throws SQLException, ClassNotFoundException {
         String[][] inArray = {
                 {"1","zhangsan","18","23.5","Beijing"},
@@ -989,7 +1022,7 @@ public class TestSQLFuncs {
         Assert.assertEquals(actualInList, expectedInList);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "in范围有部分元素不在表里")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, description = "in范围有部分元素不在表里")
     public void testCase299_1() throws SQLException, ClassNotFoundException {
         String[][] inArray = {
                 {"1","zhangsan","18","23.5","Beijing"},
@@ -1012,7 +1045,7 @@ public class TestSQLFuncs {
         Assert.assertEquals(actualInList, expectedInList);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "in范围有部分元素不在表里")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, description = "in范围有部分元素不在表里")
     public void testCase299_2() throws SQLException, ClassNotFoundException {
 //        String[][] inArray = {
 //                {"1","zhangsan","18","23.5","Beijing"},{"3","l3","55","123.123","wuhan NO.1 Street"},
@@ -1044,14 +1077,14 @@ public class TestSQLFuncs {
         Assert.assertTrue(expectedInList.containsAll(actualInList));
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "in范围元素全不在表里")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, description = "in范围元素全不在表里")
     public void testCase300() throws SQLException, ClassNotFoundException {
         Boolean actualResult = funcObj.case300();
         System.out.println("Actual: " + actualResult);
         Assert.assertFalse(actualResult);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "in查找多个字段")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, description = "in查找多个字段")
     public void testCase301() throws SQLException, ClassNotFoundException {
         String[][] inArray = {
                 {"1","zhangsan","18","23.5","Beijing"},
@@ -1072,7 +1105,7 @@ public class TestSQLFuncs {
         Assert.assertEquals(actualInList, expectedInList);
     }
 
-    @Test(enabled = true, description = "in范围有空字符串")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00CreateFuncTable3"}, description = "in范围有空字符串")
     public void testCase302() throws SQLException, ClassNotFoundException {
         String[][] inArray = {
                 {"2","lisi","35","120.98",""},
@@ -1094,7 +1127,7 @@ public class TestSQLFuncs {
         Assert.assertEquals(actualInList, expectedInList);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "not in范围只有一个元素")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, description = "not in范围只有一个元素")
     public void testCase308() throws SQLException, ClassNotFoundException {
         String[][] inArray = {
                 {"2","lisi","25","895.0"," beijing haidian "},
@@ -1126,7 +1159,7 @@ public class TestSQLFuncs {
         Assert.assertEquals(actualInList, expectedInList);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "not in范围有多个元素")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, description = "not in范围有多个元素")
     public void testCase309_1() throws SQLException, ClassNotFoundException {
         String[][] inArray = {
                 {"3","l3","55","123.123","wuhan NO.1 Street"},
@@ -1156,7 +1189,7 @@ public class TestSQLFuncs {
         Assert.assertEquals(actualInList, expectedInList);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "not in范围有多个元素")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, description = "not in范围有多个元素")
     public void testCase309_2() throws SQLException, ClassNotFoundException {
         String[][] inArray = {
                 {"2","lisi","25","895.0"," beijing haidian "},
@@ -1183,7 +1216,7 @@ public class TestSQLFuncs {
         Assert.assertEquals(actualInList, expectedInList);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "not in范围元素不在表中")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, description = "not in范围元素不在表中")
     public void testCase310() throws SQLException, ClassNotFoundException {
         String[][] inArray = {
                 {"1","zhangsan","18","23.5","Beijing"},
@@ -1217,7 +1250,7 @@ public class TestSQLFuncs {
         Assert.assertEquals(actualInList, expectedInList);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "not in范围多个字段")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, description = "not in范围多个字段")
     public void testCase311() throws SQLException, ClassNotFoundException {
         String[][] inArray = {
                 {"4","HAHA","57","9.0762556","CHANGping"},
@@ -1243,7 +1276,7 @@ public class TestSQLFuncs {
         Assert.assertEquals(actualInList, expectedInList);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase302"}, description = "not in范围有空字符串")
+    @Test(enabled = true, dependsOnMethods = {"test00CreateFuncTable3"}, description = "not in范围有空字符串")
     public void testCase312() throws SQLException, ClassNotFoundException {
         String[][] inArray = {
                 {"1","zhangsan","18","90.33","beijing"},
@@ -1358,7 +1391,7 @@ public class TestSQLFuncs {
         Assert.assertEquals(actualInList, expectedInList);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "单个and")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, description = "单个and")
     public void testCase315() throws SQLException, ClassNotFoundException {
         String[][] andArray = {
                 {"1","zhangsan","18","23.5","Beijing"},
@@ -1378,7 +1411,7 @@ public class TestSQLFuncs {
         Assert.assertEquals(actualAndList, expectedAndList);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "多个and")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, description = "多个and")
     public void testCase316_1() throws SQLException, ClassNotFoundException {
         String[][] andArray = {{"8","zhangsan"}};
         List<List> expectedAndList = new ArrayList<List>();
@@ -1395,7 +1428,7 @@ public class TestSQLFuncs {
         Assert.assertEquals(actualAndList, expectedAndList);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "多个and")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, description = "多个and")
     public void testCase316_2() throws SQLException, ClassNotFoundException {
         String[][] andArray = {{"1","zhangsan","18","23.5","Beijing"},
                 {"3","l3","55","123.123","wuhan NO.1 Street"},
@@ -1416,7 +1449,7 @@ public class TestSQLFuncs {
         Assert.assertEquals(actualAndList, expectedAndList);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "多个and")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, description = "多个and")
     public void testCase316_3() throws SQLException, ClassNotFoundException {
         String[][] andArray = {{"8","zhangsan","18","12.3","shanghai"}};
         List<List> expectedAndList = new ArrayList<List>();
@@ -1433,7 +1466,7 @@ public class TestSQLFuncs {
         Assert.assertEquals(actualAndList, expectedAndList);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "单个or")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, description = "单个or")
     public void testCase319() throws SQLException, ClassNotFoundException {
         String[][] andArray = {
                 {"1","zhangsan","18","23.5","Beijing"},
@@ -1454,7 +1487,7 @@ public class TestSQLFuncs {
         Assert.assertEquals(actualAndList, expectedAndList);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "多个or")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, description = "多个or")
     public void testCase320_1() throws SQLException, ClassNotFoundException {
         String[][] orArray = {
                 {"zhangsan"},
@@ -1476,7 +1509,7 @@ public class TestSQLFuncs {
         Assert.assertEquals(actualOrList, expectedOrList);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "多个or")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, description = "多个or")
     public void testCase320_2() throws SQLException, ClassNotFoundException {
         String[][] orArray = {
                 {"zhangsan"}, {"lisi"}, {"l3"}, {"HAHA"},
@@ -1498,7 +1531,7 @@ public class TestSQLFuncs {
         Assert.assertEquals(actualOrList, expectedOrList);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "and和or一起使用")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, description = "and和or一起使用")
     public void testCase323() throws SQLException, ClassNotFoundException {
         String[][] andArray = {
                 {"1","zhangsan","18","23.5","Beijing"},
@@ -1518,7 +1551,7 @@ public class TestSQLFuncs {
         Assert.assertEquals(actualAndList, expectedAndList);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "验证支持括号")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, description = "验证支持括号")
     public void testCase324() throws SQLException, ClassNotFoundException {
         String[][] andArray = {
                 {"1","zhangsan","18","23.5","Beijing"}
@@ -1537,7 +1570,7 @@ public class TestSQLFuncs {
         Assert.assertEquals(actualAndList, expectedAndList);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "所有字段去重")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, description = "所有字段去重")
     public void testCase325() throws SQLException, ClassNotFoundException {
         String[][] dataArray = {
                 {"1","zhangsan","18","23.5","Beijing"},
@@ -1571,7 +1604,7 @@ public class TestSQLFuncs {
         Assert.assertEquals(actualDataList, expectedDataList);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "多个字段去重")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, description = "多个字段去重")
     public void testCase326() throws SQLException, ClassNotFoundException {
         String[][] dataArray = {
                 {"zhangsan","18","23.5","Beijing"},
@@ -1605,19 +1638,20 @@ public class TestSQLFuncs {
         Assert.assertTrue(expectedDataList.containsAll(actualDataList));
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, expectedExceptions = SQLException.class,
-            description = "验证distinct不在所有字段前")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"},
+            expectedExceptions = SQLException.class, description = "验证distinct不在所有字段前")
     public void testCase327_1() throws SQLException, ClassNotFoundException {
         funcObj.case327_1();
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, expectedExceptions = SQLException.class,
-            description = "验证distinct不在所有字段前")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"},
+            expectedExceptions = SQLException.class, description = "验证distinct不在所有字段前")
     public void testCase327_2() throws SQLException, ClassNotFoundException {
         funcObj.case327_2();
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "验证count和distinct一起使用")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"},
+            description = "验证count和distinct一起使用")
     public void testCase329() throws SQLException, ClassNotFoundException {
         int actualNum = funcObj.case329();
         System.out.println("Actual: " + actualNum);
@@ -1652,7 +1686,7 @@ public class TestSQLFuncs {
         Assert.assertTrue(expectedDataList.containsAll(actualDataList));
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "复合查询1")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, description = "复合查询1")
     public void testCase332() throws SQLException, ClassNotFoundException {
         String[][] dataArray = {
                 {"zhangsan","12.3"},{"1.5","0.1235"}
@@ -1671,7 +1705,7 @@ public class TestSQLFuncs {
         Assert.assertEquals(actualDataList, expectedDataList);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "复合查询2")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, description = "复合查询2")
     public void testCase333() throws SQLException, ClassNotFoundException {
         String[][] dataArray = {
                 {"544","0.0","543"},{"18","0.1235","http://WWW.baidu.com"}
@@ -1690,7 +1724,7 @@ public class TestSQLFuncs {
         Assert.assertEquals(actualDataList, expectedDataList);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "复合查询3")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, description = "复合查询3")
     public void testCase334() throws SQLException, ClassNotFoundException {
         String[] dataArray = {"8","8","9","2514.356","130","14","0.0"};
         List expectedDataList = new ArrayList();
@@ -1807,7 +1841,7 @@ public class TestSQLFuncs {
         Assert.assertEquals(actualDataList, expectedDataList);
     }
 
-    @Test(enabled = true, dependsOnMethods = {"testCase067"}, description = "select语句插入数据")
+    @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, description = "select语句插入数据")
     public void testCase1049() throws SQLException, ClassNotFoundException {
         String[][] dataArray = {
                 {"6","123","544","0.0","543"},

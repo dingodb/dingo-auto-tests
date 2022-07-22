@@ -1,4 +1,4 @@
-testID1000790:
-  inputParam: "2022-04-13"
+#testID1000790:
+#  inputParam: "2022-04-13"
 testID1000791:
   inputParam: "%Y-%m-%d"

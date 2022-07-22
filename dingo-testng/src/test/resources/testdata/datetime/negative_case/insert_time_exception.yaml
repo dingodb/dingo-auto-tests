@@ -22,3 +22,13 @@ testID1000835-07:
   insertTime: "(8357, 'zhang san', 18, 1342.09, 'BJ', '0011111')"
 testID1000835-08:
   insertTime: "(8358, 'zhang san', 18, 1342.09, 'BJ', '240000')"
+testID1000835-09:
+  insertTime: "(8359, 'zhang san', 18, 1342.09, 'BJ', '1')"
+testID1000835-10:
+  insertTime: "(83510, 'zhang san', 18, 1342.09, 'BJ', '12')"
+testID1000835-11:
+  insertTime: "(83511, 'zhang san', 18, 1342.09, 'BJ', '123')"
+testID1000835-12:
+  insertTime: "(83512, 'zhang san', 18, 1342.09, 'BJ', '5959')"
+testID1000835-13:
+  insertTime: "(83513, 'zhang san', 18, 1342.09, 'BJ', '12345')"

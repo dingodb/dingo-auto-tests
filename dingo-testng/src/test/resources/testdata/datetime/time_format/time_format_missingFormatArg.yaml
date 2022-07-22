@@ -1,0 +1,6 @@
+testID1000803-01:
+  inputTime: "10:10:10"
+  outTime: "10:10:10"
+testID1000803-02:
+  inputTime: "235959"
+  outTime: "23:59:59"

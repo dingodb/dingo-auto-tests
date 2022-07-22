@@ -57,7 +57,7 @@ public class TestBooleanField extends YamlDataHelper {
 
     @Test(description = "创建布尔型测试的表")
     public void test00CreateBooleanTable() throws SQLException, ClassNotFoundException {
-        booleanObj.createBoolTable();
+        booleanObj.createBooleanTable();
     }
 
     @Test(priority = 0, enabled = true, dependsOnMethods = {"test00CreateBooleanTable"},

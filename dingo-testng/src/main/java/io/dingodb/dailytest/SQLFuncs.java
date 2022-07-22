@@ -366,7 +366,6 @@ public class SQLFuncs {
 
     //表为空时，求最小值
     public String case065() throws SQLException, ClassNotFoundException {
-        createEmpTable();
         try(Statement statement = connection.createStatement()) {
             String querySQL = "select min(age) from emptest065";
             ResultSet resultSet = statement.executeQuery(querySQL);
@@ -479,7 +478,6 @@ public class SQLFuncs {
 
     //单行数据求最小值
     public int case066() throws SQLException, ClassNotFoundException {
-        insertOneRowToTable();
         try(Statement statement = connection.createStatement()) {
             String querySQL = "select min(age) from emptest065";
             ResultSet resultSet = statement.executeQuery(querySQL);
@@ -558,7 +556,6 @@ public class SQLFuncs {
 
     //字符串类型字段求最小值
     public String case067() throws SQLException, ClassNotFoundException {
-        insertMoreRowsToTable();
         try(Statement statement = connection.createStatement()) {
             String querySQL = "select min(name) from emptest065";
             ResultSet resultSet = statement.executeQuery(querySQL);
@@ -1341,7 +1338,6 @@ public class SQLFuncs {
 
     //in运算符,范围为空字符串
     public List<List> case302() throws SQLException, ClassNotFoundException {
-        createTable302();
         try(Statement statement = connection.createStatement()) {
             String querySQL = "select * from test302 where address in ('')";
             ResultSet resultSet = statement.executeQuery(querySQL);

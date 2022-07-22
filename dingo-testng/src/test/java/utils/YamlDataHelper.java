@@ -104,6 +104,12 @@ public class YamlDataHelper{
                 yamlList = getYamlList(iniReader.getValue("DateTimeYaml", "date_format_funcArg"));
                 break;
             }
+
+            case "test14Date_FormatMissingFormatArg": {
+                yamlList = getYamlList(iniReader.getValue("DateTimeYaml", "date_format_missingFormatArg"));
+                break;
+            }
+
             case "test22Time_FormatStrArgFunc": {
                 yamlList = getYamlList(iniReader.getValue("DateTimeYaml", "time_format_str"));
                 break;
@@ -114,6 +120,11 @@ public class YamlDataHelper{
             }
             case "test22Time_FormatArgFunc": {
                 yamlList = getYamlList(iniReader.getValue("DateTimeYaml", "time_format_funcArg"));
+                break;
+            }
+
+            case "test22Time_FormatMissingFormatArg": {
+                yamlList = getYamlList(iniReader.getValue("DateTimeYaml", "time_format_missingFormatArg"));
                 break;
             }
             case "test15DateDiffStrArgFunc": {
@@ -150,6 +161,16 @@ public class YamlDataHelper{
             }
             case "test21InsertWithFunc": {
                 yamlList = getYamlList(iniReader.getValue("DateTimeYaml", "create_table_funcs"));
+                break;
+            }
+
+            case "test27Timestamp_FormatFuncArgFunc": {
+                yamlList = getYamlList(iniReader.getValue("DateTimeYaml", "timestamp_format_funcArg"));
+                break;
+            }
+
+            case "test28Timestamp_FormatStrArgFunc": {
+                yamlList = getYamlList(iniReader.getValue("DateTimeYaml", "timestamp_format_str"));
                 break;
             }
         }
@@ -451,7 +472,7 @@ public class YamlDataHelper{
                 yamlNegativeDateTimeList = getYamlList(iniReader.getValue("DateTimeNegativeYaml", "date_format_negative"));
                 break;
             }
-            case "test14Date_FormatMissingArg": {
+            case "test14Date_FormatMissingDateArg": {
                 yamlNegativeDateTimeList = getYamlList(iniReader.getValue("DateTimeNegativeYaml", "date_format_negative_missingArg"));
                 break;
             }

@@ -191,22 +191,6 @@ public class DateTimeFuncs {
         }
     }
 
-    //查询date_format在表格timestamp字段使用的结果
-    public List<String> queryDate_FormatTimestampInTable() throws SQLException {
-        String queryDFTSTable = getDateTimeTableName();
-        try(Statement statement = connection.createStatement()) {
-            String queryDFTSSql = "select name,date_format(update_Time, '%Y/%m/%d %H.%i.%s') ts_out from " + queryDFTSTable + " where id<8";
-
-            ResultSet queryDFTSRst = statement.executeQuery(queryDFTSSql);
-            List<String> queryDFTSList = new ArrayList<String>();
-            while (queryDFTSRst.next()) {
-                queryDFTSList.add(queryDFTSRst.getString("ts_out"));
-            }
-            statement.close();
-            return queryDFTSList;
-        }
-    }
-
     //创建含有date字段类型的表格
     public void createDateTable() throws Exception {
         String dateTableName = getDateTableName();
@@ -676,13 +660,29 @@ public class DateTimeFuncs {
         }
     }
 
-    // 获取函数Date_Format缺少参数，返回错误
-    public void date_FormatMissingArg(String inputParam) throws SQLException {
+    // 函数Date_Format缺少格式参数，按标准日期格式输出
+    public String date_FormatMissingFormatArg(String inputDate) throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String date_formatSql = "select date_format('" + inputDate + "')";
+            ResultSet date_formatRst = statement.executeQuery(date_formatSql);
+            String date_formatStr  = null;
+            while (date_formatRst.next()) {
+                date_formatStr = date_formatRst.getString(1);
+            }
+
+            statement.close();
+            return date_formatStr;
+        }
+    }
+
+    // 获取函数Date_Format缺少日期参数，返回错误
+    public void date_FormatMissingDateArg(String inputParam) throws SQLException {
         try(Statement statement = connection.createStatement()) {
             String date_formatMissingArgSql = "select date_format('" + inputParam + "')";
             statement.executeQuery(date_formatMissingArgSql);
         }
     }
+
 
     // 获取函数Time_Format参数为字符串返回值
     public String time_FormatStrArgFunc(String inputTime, String inputFormat) throws SQLException {
@@ -726,6 +726,21 @@ public class DateTimeFuncs {
 
             statement.close();
             return time_formatFuncArgStr;
+        }
+    }
+
+    // 2022-07-22: 需求变更后，函数Time_Format缺少格式参数，按标准时间格式输出
+    public String time_FormatMissingFormatArg(String inputTime) throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String time_formatSql = "select time_format('" + inputTime + "')";
+            ResultSet time_formatRst = statement.executeQuery(time_formatSql);
+            String time_formatStr  = null;
+            while (time_formatRst.next()) {
+                time_formatStr = time_formatRst.getString(1);
+            }
+
+            statement.close();
+            return time_formatStr;
         }
     }
 
@@ -1007,6 +1022,52 @@ public class DateTimeFuncs {
             statement.execute(createSQL);
             String insertSQL = "insert into case1436 values(1,'')";
             statement.execute(insertSQL);
+        }
+    }
+
+    // 获取函数timestamp_Format参数为时间日期函数的返回值
+    public String timestamp_FormatFuncArg(String inputFunc, String inputFormat) throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String timestamp_formatFuncArgSql = "select timestamp_format(" + inputFunc + ",'" + inputFormat + "')";
+            ResultSet timestamp_formatFuncArgRst = statement.executeQuery(timestamp_formatFuncArgSql);
+            String timestamp_formatFuncArgStr  = null;
+            while (timestamp_formatFuncArgRst.next()) {
+                timestamp_formatFuncArgStr = timestamp_formatFuncArgRst.getString(1);
+            }
+
+            statement.close();
+            return timestamp_formatFuncArgStr;
+        }
+    }
+
+    // 获取函数Timestamp_Format参数为字符串返回值
+    public String timestamp_FormatStrArgFunc(String inputDate, String inputFormat) throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String timestamp_formatSargSql = "select timestamp_format('" + inputDate + "','" + inputFormat + "')";
+            ResultSet timestamp_formatSargRst = statement.executeQuery(timestamp_formatSargSql);
+            String timestamp_formatSargStr  = null;
+            while (timestamp_formatSargRst.next()) {
+                timestamp_formatSargStr = timestamp_formatSargRst.getString(1);
+            }
+
+            statement.close();
+            return timestamp_formatSargStr;
+        }
+    }
+
+    //查询timestamp_format在表格timestamp字段使用的结果
+    public List<String> queryTimestamp_FormatTimestampInTable() throws SQLException {
+        String queryTable = getDateTimeTableName();
+        try(Statement statement = connection.createStatement()) {
+            String querySql = "select name,timestamp_format(update_Time, '%Y/%m/%d %H.%i.%s') ts_out from " + queryTable + " where id<8";
+
+            ResultSet resultSet = statement.executeQuery(querySql);
+            List<String> queryList = new ArrayList<String>();
+            while (resultSet.next()) {
+                queryList.add(resultSet.getString("ts_out"));
+            }
+            statement.close();
+            return queryList;
         }
     }
 }

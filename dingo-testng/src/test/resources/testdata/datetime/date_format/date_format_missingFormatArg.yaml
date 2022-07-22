@@ -1,0 +1,15 @@
+testID1001663-01:
+  inputDate: "2022/7/2"
+  outDate: "2022-07-02"
+testID1001663-02:
+  inputDate: "2022/07/22"
+  outDate: "2022-07-22"
+testID1001663-03:
+  inputDate: "20220722"
+  outDate: "2022-07-22"
+testID1001663-04:
+  inputDate: "2022.07.22"
+  outDate: "2022-07-22"
+testID1001663-05:
+  inputDate: "2022-07-22"
+  outDate: "2022-07-22"

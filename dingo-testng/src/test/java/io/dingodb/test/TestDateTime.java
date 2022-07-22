@@ -24,7 +24,6 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import utils.GetDateDiff;
-import utils.GetZeroTimestampOfCurDate;
 import utils.JDK8DateTime;
 import utils.YamlDataHelper;
 
@@ -323,16 +322,24 @@ public class TestDateTime extends YamlDataHelper{
         String returnUnix_TimeStampWithFuncArg = dateTimeObj.unix_TimeStampFuncArg(param.get("argFunc"));
         System.out.println("Return Timestamp: " + returnUnix_TimeStampWithFuncArg);
         Assert.assertEquals(returnUnix_TimeStampWithFuncArg.length(), 10);
-        if (param.get("argFunc").equals("Now()") || param.get("argFunc").equals("Current_TimeStamp()") ||
-                param.get("argFunc").equals("Current_TimeStamp")) {
-            int timeStampDiff = (int) (Integer.parseInt(returnUnix_TimeStampWithFuncArg) - currentTimeStamp);
-            Assert.assertTrue(Math.abs(timeStampDiff) < 60);
-        } else if (param.get("argFunc").equals("CurDate()") || param.get("argFunc").equals("Current_Date()") ||
-                param.get("argFunc").equals("Current_Date")) {
-            Long todayStartTime = GetZeroTimestampOfCurDate.getTodayStartTime();
-            System.out.println("CurDateStartTimeStamp: " + todayStartTime);
-            Assert.assertTrue(returnUnix_TimeStampWithFuncArg.equals(String.valueOf(todayStartTime)));
-        }
+        int timeStampDiff = (int) (Integer.parseInt(returnUnix_TimeStampWithFuncArg) - currentTimeStamp);
+        Assert.assertTrue(Math.abs(timeStampDiff) < 60);
+
+
+        /**
+         *2022-07-22：需求变更后，不再支持日期格式
+         */
+
+//        if (param.get("argFunc").equals("Now()") || param.get("argFunc").equals("Current_TimeStamp()") ||
+//                param.get("argFunc").equals("Current_TimeStamp")) {
+//            int timeStampDiff = (int) (Integer.parseInt(returnUnix_TimeStampWithFuncArg) - currentTimeStamp);
+//            Assert.assertTrue(Math.abs(timeStampDiff) < 60);
+//        } else if (param.get("argFunc").equals("CurDate()") || param.get("argFunc").equals("Current_Date()") ||
+//                param.get("argFunc").equals("Current_Date")) {
+//            Long todayStartTime = GetZeroTimestampOfCurDate.getTodayStartTime();
+//            System.out.println("CurDateStartTimeStamp: " + todayStartTime);
+//            Assert.assertTrue(returnUnix_TimeStampWithFuncArg.equals(String.valueOf(todayStartTime)));
+//        }
     }
 
     @Test(priority = 12, enabled = true, dataProvider = "yamlNegativeDateTimeMethod", expectedExceptions = SQLException.class,
@@ -343,14 +350,17 @@ public class TestDateTime extends YamlDataHelper{
     }
 
     @Test(priority = 12, enabled = true, dataProvider = "yamlNegativeDateTimeMethod", expectedExceptions = SQLException.class,
-            description = "验证函数unix_TimeStamp输入带有小数的数字，预期异常")
+            description = "验证函数unix_TimeStamp输入带有小数的数字或curdate函数，预期异常")
     public void test13Unix_TimeStampNegativeNum(Map<String, String> param) throws SQLException {
         dateTimeObj.unix_TimeStampNumArg(param.get("inputDate"));
 
     }
 
-    @Test(priority = 12, enabled = true, dependsOnMethods = {"test02DateTimeInsert"},
-            description = "验证函数unix_TimeStamp在表格中使用时的返回结果正常")
+    /**
+     * 2022-07-22：需求变更后，unix_timestamp不再支持date类型的格式，用例预期异常
+     */
+    @Test(priority = 12, enabled = true, expectedExceptions = SQLException.class, dependsOnMethods = {"test02DateTimeInsert"},
+            description = "验证函数unix_TimeStamp在表格中Date字段使用，预期异常")
     public void test13Unix_TimeStampInTableDate() throws SQLException {
         List<String> expectedQueryUTSBList = new ArrayList<>();
         // unix_timestamp接收日期不考虑夏令时，1987-07-16日按标准时间返回时间戳
@@ -368,7 +378,8 @@ public class TestDateTime extends YamlDataHelper{
         Assert.assertTrue(actualQueryUTSBList.equals(expectedQueryUTSBList));
     }
 
-    @Test(priority = 12, enabled = true, dependsOnMethods = {"test02DateTimeInsert"}, description = "验证函数unix_TimeStamp在表格中使用时的返回结果正常")
+    @Test(priority = 12, enabled = true, dependsOnMethods = {"test02DateTimeInsert"},
+            description = "验证函数unix_TimeStamp在表格中使用时的返回结果正常")
     public void test13Unix_TimeStampInTableTimestamp() throws SQLException {
         List<String> expectedQueryUTSCList = new ArrayList<>();
         String[] ustcArray = new String[]{"1649412307","951753600","920217599","1620100800","1285869722","-536528868","1669827723"};
@@ -392,7 +403,11 @@ public class TestDateTime extends YamlDataHelper{
         Assert.assertEquals(actualDate_FormatSargStr, expectedDate_FormatSargStr);
     }
 
-    @Test(priority = 13, enabled = true, dataProvider = "yamlDataMethod", description = "验证函数date_format数字参数的返回结果正常")
+    /**
+     * 2022-07-22：需求变更后，date_format函数的第一个参数不再支持数字，传入数字，预期异常。
+     */
+    @Test(priority = 13, enabled = true, dataProvider = "yamlDataMethod", expectedExceptions = SQLException.class,
+            description = "验证函数date_format日期参数为数字，预期异常")
     public void test14Date_FormatNumArgFunc(Map<String, String> param) throws SQLException {
         String expectedDate_FormatNargStr = param.get("outputDate");
         System.out.println("Expected: " + expectedDate_FormatNargStr);
@@ -409,6 +424,21 @@ public class TestDateTime extends YamlDataHelper{
         Assert.assertTrue(matchRst);
     }
 
+
+    /**
+     * 2022-07-22: 最新实现，date_format缺少格式参数，默认按标准日期格式输出
+     * @param param
+     * @throws SQLException
+     */
+    @Test(priority = 13, enabled = true, dataProvider = "yamlDataMethod", description = "验证函数date_format缺少格式参数，默认按标准日期格式输出")
+    public void test14Date_FormatMissingFormatArg(Map<String, String> param) throws SQLException {
+        String expectedOutDate = param.get("outDate");
+        System.out.println("Expected: " + expectedOutDate);
+        String actualOutDate = dateTimeObj.date_FormatMissingFormatArg(param.get("inputDate"));
+        System.out.println("Actual: " + actualOutDate);
+        Assert.assertEquals(actualOutDate, expectedOutDate);
+    }
+
     @Test(priority = 13, enabled = true, dependsOnMethods = {"test02DateTimeInsert"}, description = "验证函数date_format在表格中使用时的返回结果正常")
     public void test14Date_FormatTableDate() throws SQLException {
         List<String> expectedQueryDFBList = new ArrayList<>();
@@ -422,21 +452,6 @@ public class TestDateTime extends YamlDataHelper{
         List<String> actualQueryDFBList = dateTimeObj.queryDate_FormatDateInTable();
         System.out.println("实际查询到的列表为：" + actualQueryDFBList);
         Assert.assertTrue(actualQueryDFBList.equals(expectedQueryDFBList));
-    }
-
-    @Test(priority = 13, enabled = true, dependsOnMethods = {"test02DateTimeInsert"}, description = "验证函数date_format在表格中使用时的返回结果正常")
-    public void test14Date_FormatTableTimestamp() throws SQLException {
-        List<String> expectedQueryDFTSList = new ArrayList<>();
-        String[] dftsArray = new String[]{"2022/04/08 18.05.07","2000/02/29 00.00.00","1999/02/28 23.59.59",
-                "2021/05/04 12.00.00","2010/10/01 02.02.02","1952/12/31 12.12.12","2022/12/01 01.02.03"};
-        for (int i=0; i < dftsArray.length; i++){
-            expectedQueryDFTSList.add(dftsArray[i]);
-        }
-        System.out.println("期望查询到的列表为：" + expectedQueryDFTSList);
-
-        List<String> actualQueryDFTSList = dateTimeObj.queryDate_FormatTimestampInTable();
-        System.out.println("实际查询到的列表为：" + actualQueryDFTSList);
-        Assert.assertTrue(actualQueryDFTSList.equals(expectedQueryDFTSList));
     }
 
     @Test(priority = 13, enabled = true, description = "验证函数date_format参数为Null返回Null")
@@ -461,8 +476,8 @@ public class TestDateTime extends YamlDataHelper{
 
     @Test(priority = 13, enabled = true, dataProvider = "yamlNegativeDateTimeMethod", expectedExceptions = SQLException.class,
             description = "验证函数date_format缺少参数，预期异常")
-    public void test14Date_FormatMissingArg(Map<String, String> param) throws SQLException {
-        dateTimeObj.date_FormatMissingArg(param.get("inputParam"));
+    public void test14Date_FormatMissingDateArg(Map<String, String> param) throws SQLException {
+        dateTimeObj.date_FormatMissingDateArg(param.get("inputParam"));
     }
 
     @Test(priority = 14, enabled = true, dataProvider = "yamlDataMethod", description = "验证函数datediff字符串参数的返回结果正常")
@@ -474,7 +489,14 @@ public class TestDateTime extends YamlDataHelper{
         Assert.assertEquals(actualDateStrArgDiff, expectedDateStrArgDiff);
     }
 
-    @Test(priority = 14, enabled = true, dataProvider = "yamlDataMethod", description = "验证函数datediff数字参数的返回结果正常")
+
+    /**
+     * 2022-07-22: 需求变更后，datediff函数不再支持数字类型的日期参数，预期异常
+     * @param param
+     * @throws SQLException
+     */
+    @Test(priority = 14, enabled = true, dataProvider = "yamlDataMethod", expectedExceptions = SQLException.class,
+            description = "验证函数datediff数字参数的返回结果正常")
     public void test15DateDiffNumArgFunc(Map<String, String> param) throws SQLException {
         String expectedDateNumArgDiff = param.get("outputDiff");
         System.out.println("Expected: " + expectedDateNumArgDiff);
@@ -541,6 +563,7 @@ public class TestDateTime extends YamlDataHelper{
         System.out.println("Actual: " + actualTimeQuery);
         Assert.assertEquals(actualTimeQuery, expectedTimeQuery);
     }
+
 
     @Test(priority = 16, enabled = true, dataProvider = "yamlDataMethod", description = "验证函数和字符串上下文返回")
     public void test17FuncConcatStr(Map<String, String> param) throws SQLException {
@@ -611,7 +634,14 @@ public class TestDateTime extends YamlDataHelper{
         Assert.assertEquals(actualTime_FormatSargStr, expectedTime_FormatSargStr);
     }
 
-    @Test(priority = 21, enabled = true, dataProvider = "yamlDataMethod", description = "验证函数time_format数字参数的返回结果正常")
+
+    /**
+     * 2022-07-22: 需求变更后，time_format函数不再支持数字类型的时间参数，预期失败
+     * @param param
+     * @throws SQLException
+     */
+    @Test(priority = 21, enabled = true, dataProvider = "yamlDataMethod", expectedExceptions = SQLException.class,
+            description = "验证函数time_format数字参数的返回结果正常")
     public void test22Time_FormatNumArgFunc(Map<String, String> param) throws SQLException {
         String expectedTime_FormatNargStr = param.get("outputTime");
         System.out.println("Expected: " + expectedTime_FormatNargStr);
@@ -644,6 +674,21 @@ public class TestDateTime extends YamlDataHelper{
             description = "验证函数time_format时间数字非法，预期异常")
     public void test22Time_FormatNegativeTimeNum(Map<String, String> param) throws SQLException {
         dateTimeObj.time_FormatNumArgFunc(param.get("inputTime"), param.get("inputFormat"));
+    }
+
+    /**
+     * 2022-07-22: 最新实现，time_format缺少格式参数，默认按标准时间格式输出
+     * @param param
+     * @throws SQLException
+     */
+    @Test(priority = 21, enabled = true, dataProvider = "yamlDataMethod",
+            description = "验证函数time_format缺少格式参数，默认按标准时间格式输出")
+    public void test22Time_FormatMissingFormatArg(Map<String, String> param) throws SQLException {
+        String expectedOutTime = param.get("outTime");
+        System.out.println("Expected: " + expectedOutTime);
+        String actualOutTime = dateTimeObj.time_FormatMissingFormatArg(param.get("inputTime"));
+        System.out.println("Actual: " + actualOutTime);
+        Assert.assertEquals(actualOutTime, expectedOutTime);
     }
 
     @Test(priority = 21, enabled = true, dataProvider = "yamlNegativeDateTimeMethod", expectedExceptions = SQLException.class,
@@ -750,6 +795,40 @@ public class TestDateTime extends YamlDataHelper{
     @Test(priority = 25, enabled = true, expectedExceptions = SQLException.class, description = "验证timestamp类型字段，插入空值预期异常")
     public void test26InsertBlankTimestamp() throws SQLException {
         dateTimeObj.insertBlankTimestamp();
+    }
+
+    @Test(priority = 26, enabled = true, dataProvider = "yamlDataMethod", description = "验证函数timestamp_format参数为函数的返回结果正常")
+    public void test27Timestamp_FormatFuncArgFunc(Map<String, String> param) throws SQLException {
+        String actualTimestamp_FormatFuncArgStr = dateTimeObj.timestamp_FormatFuncArg(param.get("argFunc"), param.get("inputFormat"));
+        System.out.println("Actual: " + actualTimestamp_FormatFuncArgStr);
+        boolean matchRst = actualTimestamp_FormatFuncArgStr.matches(param.get("matchReg"));
+        Assert.assertTrue(matchRst);
+    }
+
+    @Test(priority = 26, enabled = true, dataProvider = "yamlDataMethod", description = "验证函数timestamp_format字符串参数的返回结果正常")
+    public void test28Timestamp_FormatStrArgFunc(Map<String, String> param) throws SQLException {
+        String expectedTimestamp_FormatSargStr = param.get("outputDate");
+        System.out.println("Expected: " + expectedTimestamp_FormatSargStr);
+        String actualTimestamp_FormatSargStr = dateTimeObj.timestamp_FormatStrArgFunc(param.get("inputDate"), param.get("inputFormat"));
+        System.out.println("Actual: " + actualTimestamp_FormatSargStr);
+
+        Assert.assertEquals(actualTimestamp_FormatSargStr, expectedTimestamp_FormatSargStr);
+    }
+
+    @Test(priority = 26, enabled = true, dependsOnMethods = {"test02DateTimeInsert"},
+            description = "验证函数timestamp_format在表格中对timestamp类型字段使用时的返回结果正常")
+    public void test29Timestamp_FormatTableTimestamp() throws SQLException {
+        List<String> expectedQueryList = new ArrayList<>();
+        String[] tsfArray = new String[]{"2022/04/08 18.05.07","2000/02/29 00.00.00","1999/02/28 23.59.59",
+                "2021/05/04 12.00.00","2010/10/01 02.02.02","1952/12/31 12.12.12","2022/12/01 01.02.03"};
+        for (int i=0; i < tsfArray.length; i++){
+            expectedQueryList.add(tsfArray[i]);
+        }
+        System.out.println("期望查询到的列表为：" + expectedQueryList);
+
+        List<String> actualQueryList = dateTimeObj.queryTimestamp_FormatTimestampInTable();
+        System.out.println("实际查询到的列表为：" + actualQueryList);
+        Assert.assertTrue(actualQueryList.equals(expectedQueryList));
     }
 
 

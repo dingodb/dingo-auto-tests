@@ -46,9 +46,30 @@ testID1000802-06:
 testID1000806-01:
   inputTime: "10:11:12.873672"
   inputFormat: "%H:%i:%S"
-testID1000806-02:
-  inputTime: "101112.299"
-  inputFormat: "%H:%i:%S"
+#testID1000806-02:
+#  inputTime: "101112.299"
+#  inputFormat: "%H:%i:%S"
 testID1000811:
   inputTime: "2022/04/13"
+  inputFormat: "%H:%i:%S"
+testID1000800-01:
+  inputTime: "0413"
+  inputFormat: "%H-%i"
+testID1000800-02:
+  inputTime: "1013"
+  inputFormat: "%i:%S"
+testID1000800-03:
+  inputTime: "12225"
+  inputFormat: "%H:%i:%S"
+testID1000800-04:
+  inputTime: "1"
+  inputFormat: "%S"
+testID1000800-05:
+  inputTime: "1"
+  inputFormat: "%H"
+testID1000800-08:
+  inputTime: "12"
+  inputFormat: "%H:%i:%S"
+testID1000800-09:
+  inputTime: "123"
   inputFormat: "%H:%i:%S"

@@ -10,3 +10,9 @@ testID1000740-05:
   inputDate: "20220412172630.87921"
 testID1000740-06:
   inputDate: "20220412172630.999999"
+testID1000750-01:
+  inputDate: "CurDate()"
+testID1000750-02:
+  inputDate: "Current_Date"
+testID1000750-03:
+  inputDate: "Current_Date()"

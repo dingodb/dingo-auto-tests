@@ -1,11 +1,11 @@
 testID1000749:
   argFunc: "Now()"
-testID1000750-01:
-  argFunc: "CurDate()"
-testID1000750-02:
-  argFunc: "Current_Date"
-testID1000750-03:
-  argFunc: "Current_Date()"
+#testID1000750-01:
+#  argFunc: "CurDate()"
+#testID1000750-02:
+#  argFunc: "Current_Date"
+#testID1000750-03:
+#  argFunc: "Current_Date()"
 testID1000751-01:
   argFunc: "Current_TimeStamp()"
 testID1000751-02:
