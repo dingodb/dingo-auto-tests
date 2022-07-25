@@ -564,7 +564,6 @@ public class TestDateTime extends YamlDataHelper{
         Assert.assertEquals(actualTimeQuery, expectedTimeQuery);
     }
 
-
     @Test(priority = 16, enabled = true, dataProvider = "yamlDataMethod", description = "验证函数和字符串上下文返回")
     public void test17FuncConcatStr(Map<String, String> param) throws SQLException {
         String actualFuncConcatStr = dateTimeObj.funcConcatStr(param.get("funcName"));
@@ -633,7 +632,6 @@ public class TestDateTime extends YamlDataHelper{
 
         Assert.assertEquals(actualTime_FormatSargStr, expectedTime_FormatSargStr);
     }
-
 
     /**
      * 2022-07-22: 需求变更后，time_format函数不再支持数字类型的时间参数，预期失败
@@ -806,7 +804,7 @@ public class TestDateTime extends YamlDataHelper{
     }
 
     @Test(priority = 26, enabled = true, dataProvider = "yamlDataMethod", description = "验证函数timestamp_format字符串参数的返回结果正常")
-    public void test28Timestamp_FormatStrArgFunc(Map<String, String> param) throws SQLException {
+    public void test27Timestamp_FormatStrArgFunc(Map<String, String> param) throws SQLException {
         String expectedTimestamp_FormatSargStr = param.get("outputDate");
         System.out.println("Expected: " + expectedTimestamp_FormatSargStr);
         String actualTimestamp_FormatSargStr = dateTimeObj.timestamp_FormatStrArgFunc(param.get("inputDate"), param.get("inputFormat"));
@@ -815,9 +813,19 @@ public class TestDateTime extends YamlDataHelper{
         Assert.assertEquals(actualTimestamp_FormatSargStr, expectedTimestamp_FormatSargStr);
     }
 
+    @Test(priority = 26, enabled = true, dataProvider = "yamlDataMethod",
+            description = "验证函数timestamp_format日期参数为数字，数字按时间戳转换为对应的日期输出")
+    public void test27Timestamp_FormatNumArgFunc(Map<String, String> param) throws SQLException {
+        String expectedTimestamp_FormatNargStr = param.get("outputTimestamp");
+        System.out.println("Expected: " + expectedTimestamp_FormatNargStr);
+        String actualTimestamp_FormatNargStr = dateTimeObj.timestamp_FormatNumArgFunc(param.get("inputTimestamp"), param.get("inputFormat"));
+        System.out.println("Actual: " + actualTimestamp_FormatNargStr);
+        Assert.assertEquals(actualTimestamp_FormatNargStr, expectedTimestamp_FormatNargStr);
+    }
+
     @Test(priority = 26, enabled = true, dependsOnMethods = {"test02DateTimeInsert"},
             description = "验证函数timestamp_format在表格中对timestamp类型字段使用时的返回结果正常")
-    public void test29Timestamp_FormatTableTimestamp() throws SQLException {
+    public void test27Timestamp_FormatTableTimestamp() throws SQLException {
         List<String> expectedQueryList = new ArrayList<>();
         String[] tsfArray = new String[]{"2022/04/08 18.05.07","2000/02/29 00.00.00","1999/02/28 23.59.59",
                 "2021/05/04 12.00.00","2010/10/01 02.02.02","1952/12/31 12.12.12","2022/12/01 01.02.03"};
@@ -829,6 +837,30 @@ public class TestDateTime extends YamlDataHelper{
         List<String> actualQueryList = dateTimeObj.queryTimestamp_FormatTimestampInTable();
         System.out.println("实际查询到的列表为：" + actualQueryList);
         Assert.assertTrue(actualQueryList.equals(expectedQueryList));
+    }
+
+    @Test(priority = 26, enabled = true, description = "验证函数timestamp_format首个参数为空字符串返回Null")
+    public void test27Timestamp_FormatEmptyTimestampArg() throws SQLException {
+        String actualTimestamp_FormatEmptyTimestampArgStr = dateTimeObj.timestamp_FormatEmptyArg();
+        System.out.println("Actual: " + actualTimestamp_FormatEmptyTimestampArgStr);
+        Assert.assertNull(actualTimestamp_FormatEmptyTimestampArgStr);
+    }
+
+    @Test(priority = 26, enabled = true, dataProvider = "yamlDataMethod",
+            description = "验证函数Timestamp_format缺少格式参数，默认按标准Timestamp格式输出")
+    public void test27Timestamp_FormatMissingFormatArg(Map<String, String> param) throws SQLException {
+        String expectedOutTimestamp = param.get("outputTimestamp");
+        System.out.println("Expected: " + expectedOutTimestamp);
+        String actualOutTimestamp = dateTimeObj.timestamp_FormatMissingFormatArg(param.get("inputTimestamp"));
+        System.out.println("Actual: " + actualOutTimestamp);
+        Assert.assertEquals(actualOutTimestamp, expectedOutTimestamp);
+    }
+
+    @Test(priority = 26, enabled = true, description = "验证函数timestamp_format参数为Null返回Null")
+    public void test27Timestamp_FormatNullArg() throws SQLException {
+        String actualTimestamp_FormatNullArgStr = dateTimeObj.timestamp_FormatNullArg();
+        System.out.println("Actual: " + actualTimestamp_FormatNullArgStr);
+        Assert.assertNull(actualTimestamp_FormatNullArgStr);
     }
 
 

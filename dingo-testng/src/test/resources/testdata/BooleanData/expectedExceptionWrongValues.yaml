@@ -10,12 +10,12 @@ testID1000998-03:
 testID1000998-04:
   ID: "26"
   booleanValue: "False0"
-testID1000995-01:
-  ID: "27"
-  booleanValue: "-1"
-testID1000995-02:
-  ID: "28"
-  booleanValue: "-128"
+#testID1000995-01:
+#  ID: "27"
+#  booleanValue: "-1"
+#testID1000995-02:
+#  ID: "28"
+#  booleanValue: "-128"
 testID1000995-03:
   ID: "29"
   booleanValue: "-2.5"

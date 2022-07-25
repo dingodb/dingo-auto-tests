@@ -1,0 +1,36 @@
+testID1001667-01:
+  inputTimestamp: "0"
+  inputFormat: "%Y-%m-%d %H:%i:%S"
+  outputTimestamp: "1970-01-01 08:00:00"
+testID1001667-02:
+  inputTimestamp: "99999999"
+  inputFormat: "%Y/%m/%d"
+  outputTimestamp: "1973/03/03"
+testID1001667-03:
+  inputTimestamp: "9999999"
+  inputFormat: "%H:%i:%S"
+  outputTimestamp: "01:46:39"
+testID1001667-04:
+  inputTimestamp: "1658743382"
+  inputFormat: "%Y-%m-%d %H:%i:%S"
+  outputTimestamp: "2022-07-25 18:03:02"
+testID1001667-05:
+  inputTimestamp: "13868743435"
+  inputFormat: "%Y/%m/%d %H:%i:%S"
+  outputTimestamp: "2409/06/26 04:43:55"
+testID1001667-06:
+  inputTimestamp: "-1"
+  inputFormat: "%Y-%m-%d %H:%i:%S"
+  outputTimestamp: "1970-01-01 07:59:59"
+testID1001667-07:
+  inputTimestamp: "-1683492324"
+  inputFormat: "%Y/%m/%d %H:%i:%S"
+  outputTimestamp: "1916/08/27 11:14:36"
+testID1001667-08:
+  inputTimestamp: "100"
+  inputFormat: "%Y%m%d%H%i%s"
+  outputTimestamp: "19700101080140"
+testID1001667-09:
+  inputTimestamp: "-100"
+  inputFormat: "%Y.%m.%d %H.%i.%S"
+  outputTimestamp: "1970.01.01 07.58.20"

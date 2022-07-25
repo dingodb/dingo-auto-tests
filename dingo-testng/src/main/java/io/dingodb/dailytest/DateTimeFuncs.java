@@ -1055,6 +1055,21 @@ public class DateTimeFuncs {
         }
     }
 
+    // 获取函数Timestamp_Format参数为数字返回值
+    public String timestamp_FormatNumArgFunc(String inputTimestamp, String inputFormat) throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String timestamp_formatNargSql = "select timestamp_format(" + inputTimestamp + ",'" + inputFormat + "')";
+            ResultSet timestamp_formatNargRst = statement.executeQuery(timestamp_formatNargSql);
+            String timestamp_formatNargStr  = null;
+            while (timestamp_formatNargRst.next()) {
+                timestamp_formatNargStr = timestamp_formatNargRst.getString(1);
+            }
+
+            statement.close();
+            return timestamp_formatNargStr;
+        }
+    }
+
     //查询timestamp_format在表格timestamp字段使用的结果
     public List<String> queryTimestamp_FormatTimestampInTable() throws SQLException {
         String queryTable = getDateTimeTableName();
@@ -1068,6 +1083,51 @@ public class DateTimeFuncs {
             }
             statement.close();
             return queryList;
+        }
+    }
+
+    // timestamp_format的第一个参数为空字符串时，预期返回null
+    public String timestamp_FormatEmptyArg() throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String timestamp_formatEmptyArgSql = "select timestamp_format('','%Y%m%d')";
+            ResultSet timestamp_formatEmptyArgRst = statement.executeQuery(timestamp_formatEmptyArgSql);
+            String timestamp_formatEmptyArgStr  = null;
+            while (timestamp_formatEmptyArgRst.next()) {
+                timestamp_formatEmptyArgStr = timestamp_formatEmptyArgRst.getString(1);
+            }
+
+            statement.close();
+            return timestamp_formatEmptyArgStr;
+        }
+    }
+
+    // 函数timestamp_Format缺少格式参数，按标准timestamp格式输出
+    public String timestamp_FormatMissingFormatArg(String inputTimestamp) throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String timestamp_formatSql = "select timestamp_format('" + inputTimestamp + "')";
+            ResultSet timestamp_formatRst = statement.executeQuery(timestamp_formatSql);
+            String timestamp_formatStr  = null;
+            while (timestamp_formatRst.next()) {
+                timestamp_formatStr = timestamp_formatRst.getString(1);
+            }
+
+            statement.close();
+            return timestamp_formatStr;
+        }
+    }
+
+    // 获取函数timestamp_Format参数为Null的返回值
+    public String timestamp_FormatNullArg() throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String timestamp_formatNullArgSql = "select timestamp_format(Null,'%Y-%m-%d %H:%i:%S')";
+            ResultSet timestamp_formatNullArgRst = statement.executeQuery(timestamp_formatNullArgSql);
+            String timestamp_formatNullArgStr  = null;
+            while (timestamp_formatNullArgRst.next()) {
+                timestamp_formatNullArgStr = timestamp_formatNullArgRst.getString(1);
+            }
+
+            statement.close();
+            return timestamp_formatNullArgStr;
         }
     }
 }

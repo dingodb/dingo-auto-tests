@@ -1,6 +1,9 @@
-testID1000803-01:
+testID1001664-01:
   inputTime: "10:10:10"
   outTime: "10:10:10"
-testID1000803-02:
+testID1001664-02:
   inputTime: "235959"
   outTime: "23:59:59"
+testID1001664-03:
+  inputTime: "000000"
+  outTime: "00:00:00"

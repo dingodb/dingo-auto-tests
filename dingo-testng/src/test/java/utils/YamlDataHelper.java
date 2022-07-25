@@ -169,8 +169,18 @@ public class YamlDataHelper{
                 break;
             }
 
-            case "test28Timestamp_FormatStrArgFunc": {
+            case "test27Timestamp_FormatStrArgFunc": {
                 yamlList = getYamlList(iniReader.getValue("DateTimeYaml", "timestamp_format_str"));
+                break;
+            }
+
+            case "test27Timestamp_FormatNumArgFunc": {
+                yamlList = getYamlList(iniReader.getValue("DateTimeYaml", "timestamp_format_num"));
+                break;
+            }
+
+            case "test27Timestamp_FormatMissingFormatArg": {
+                yamlList = getYamlList(iniReader.getValue("DateTimeYaml", "timestamp_format_missingFormatArg"));
                 break;
             }
         }
