@@ -1,0 +1,4 @@
+testID1001642-01:
+  absState: "select abs()"
+testID1001642-02:
+  absState: "select abs(3,-4)"

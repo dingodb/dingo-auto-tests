@@ -1,0 +1,72 @@
+testID1001637-01:
+  inputNum: "2"
+  outNum: "2"
+testID1001637-02:
+  inputNum: "1024"
+  outNum: "1024"
+testID1001637-03:
+  inputNum: "65536"
+  outNum: "65536"
+testID1001637-04:
+  inputNum: "2147483647"
+  outNum: "2147483647"
+testID1001637-05:
+  inputNum: "2147483648"
+  outNum: "2147483648"
+testID1001637-06:
+  inputNum: "4294967295"
+  outNum: "4294967295"
+testID1001637-07:
+  inputNum: "4294967296"
+  outNum: "4294967296"
+testID1001637-08:
+  inputNum: "18446744073709551615"
+  outNum: "18446744073709551615"
+testID1001637-09:
+  inputNum: "18446744073709551616"
+  outNum: "18446744073709551616"
+testID1001638-01:
+  inputNum: "0"
+  outNum: "0"
+testID1001639-01:
+  inputNum: "-2"
+  outNum: "2"
+testID1001639-02:
+  inputNum: "-1024"
+  outNum: "1024"
+testID1001639-03:
+  inputNum: "-65536"
+  outNum: "65536"
+testID1001639-04:
+  inputNum: "-2147483647"
+  outNum: "2147483647"
+testID1001639-05:
+  inputNum: "-2147483648"
+  outNum: "2147483648"
+testID1001639-06:
+  inputNum: "-4294967295"
+  outNum: "4294967295"
+testID1001639-07:
+  inputNum: "-4294967296"
+  outNum: "4294967296"
+testID1001639-08:
+  inputNum: "-18446744073709551615"
+  outNum: "18446744073709551615"
+testID1001639-09:
+  inputNum: "-18446744073709551616"
+  outNum: "18446744073709551616"
+testID1001640-01:
+  inputNum: "2.58"
+  outNum: "2.58"
+testID1001640-02:
+  inputNum: "100.0000"
+  outNum: "100.0000"
+testID1001640-03:
+  inputNum: "-10.24"
+  outNum: "10.24"
+testID1001640-04:
+  inputNum: "-9.99999"
+  outNum: "9.99999"
+testID1001641-01:
+  inputNum: null
+  outNum: null

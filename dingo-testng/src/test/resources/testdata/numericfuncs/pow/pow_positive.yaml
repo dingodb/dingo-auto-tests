@@ -1,0 +1,128 @@
+testID1001594-01:
+  num1: "2"
+  num2: "3"
+  outResult: "8"
+testID1001594-02:
+  num1: "10"
+  num2: "10"
+  outResult: "10000000000"
+testID1001595-01:
+  num1: "2.5"
+  num2: "2"
+  outResult: "6.25"
+testID1001595-02:
+  num1: "4.23456"
+  num2: "8"
+  outResult: "103387.09356594924"
+testID1001595-03:
+  num1: "5.0"
+  num2: "3"
+  outResult: "125.0"
+testID1001595-04:
+  num1: "8.00"
+  num2: "2"
+  outResult: "64.0"
+testID1001595-05:
+  num1: "2.1234567"
+  num2: "2"
+  outResult: "4.50906835677489"
+testID1001595-06:
+  num1: "0.8738498754295426"
+  num2: "2"
+  outResult: "0.7636136047882272"
+testID1001596-01:
+  num1: "-6"
+  num2: "3"
+  outResult: "-216"
+testID1001596-02:
+  num1: "-10"
+  num2: "4"
+  outResult: "10000"
+testID1001596-03:
+  num1: "-2.5"
+  num2: "2"
+  outResult: "6.25"
+testID1001596-04:
+  num1: "-3.07"
+  num2: "5"
+  outResult: "-272.70423183069994"
+testID1001597-01:
+  num1: null
+  num2: "3"
+  outResult: null
+testID1001599-01:
+  num1: "0"
+  num2: "5"
+  outResult: "0"
+testID1001600-01:
+  num1: "2147483648"
+  num2: "2"
+  outResult: "4611686018427387904"
+testID1001600-02:
+  num1: "4294967297"
+  num2: "1"
+  outResult: "4294967297"
+#testID1001600-03:
+#  num1: "4294967297"
+#  num2: "2"
+#  outResult: "18446744082299486209"
+testID1001601-01:
+  num1: "2"
+  num2: "-3"
+  outResult: "0.125"
+testID1001601-02:
+  num1: "10"
+  num2: "-10"
+  outResult: "0.0000000001"
+testID1001601-03:
+  num1: "17"
+  num2: "-4"
+  outResult: "0.000011973036721303624"
+testID1001602-01:
+  num1: "2"
+  num2: "0"
+  outResult: "1"
+testID1001602-02:
+  num1: "128"
+  num2: "0"
+  outResult: "1"
+testID1001602-03:
+  num1: "-17"
+  num2: "0"
+  outResult: "1"
+testID1001602-04:
+  num1: "2345.57"
+  num2: "0"
+  outResult: "1"
+testID1001602-05:
+  num1: "-0.5352092"
+  num2: "0"
+  outResult: "1"
+testID1001602-06:
+  num1: "0"
+  num2: "0"
+  outResult: "1"
+testID1001603-01:
+  num1: "123"
+  num2: null
+  outResult: null
+testID1001603-02:
+  num1: "-17"
+  num2: null
+  outResult: null
+testID1001603-03:
+  num1: "2345.57"
+  num2: null
+  outResult: null
+testID1001603-04:
+  num1: "-0.5352092"
+  num2: null
+  outResult: null
+testID1001603-05:
+  num1: "0"
+  num2: null
+  outResult: null
+testID1001604-01:
+  num1: null
+  num2: null
+  outResult: null

@@ -1,0 +1,9 @@
+testID1001618-01:
+  inputNum: "3.456"
+  outResult: "3"
+testID1001618-02:
+  inputNum: "1.0"
+  outResult: "1"
+testID1001618-03:
+  inputNum: "-1.5"
+  outResult: "-2"

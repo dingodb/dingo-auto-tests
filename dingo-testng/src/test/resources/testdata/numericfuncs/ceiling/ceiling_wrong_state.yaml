@@ -1,0 +1,4 @@
+testID1001626-01:
+  ceilingState: "select ceiling()"
+testID1001628-01:
+  ceilingState: "select ceiling(12.56, 1)"

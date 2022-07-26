@@ -1,0 +1,10 @@
+testID1001607-01:
+  powState: "select pow(16,)"
+testID1001607-02:
+  powState: "select pow(,3)"
+testID1001608-01:
+  powState: "select pow()"
+testID1001608-02:
+  powState: "select pow(3)"
+testID1001608-03:
+  powState: "select pow(2,3,5)"

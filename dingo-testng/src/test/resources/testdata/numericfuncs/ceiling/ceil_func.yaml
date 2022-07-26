@@ -1,0 +1,24 @@
+testID1001629-01:
+  inputNum: "1.23"
+  outNum: "2"
+testID1001629-02:
+  inputNum: "99.9999"
+  outNum: "100"
+testID1001629-03:
+  inputNum: "-2.3"
+  outNum: "-2"
+testID1001629-04:
+  inputNum: "-33.66"
+  outNum: "-33"
+testID1001629-05:
+  inputNum: "18"
+  outNum: "18"
+testID1001629-06:
+  inputNum: "0"
+  outNum: "0"
+testID1001629-07:
+  inputNum: "-55"
+  outNum: "-55"
+testID1001629-08:
+  inputNum: null
+  outNum: null

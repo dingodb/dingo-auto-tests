@@ -1,0 +1,168 @@
+testID1001610-01:
+  inputNum: "1345.298"
+  decimalLen: "1"
+  outResult: "1345.3"
+testID1001610-02:
+  inputNum: "3.455"
+  decimalLen: "2"
+  outResult: "3.46"
+testID1001610-03:
+  inputNum: "87.01"
+  decimalLen: "1"
+  outResult: "87.0"
+testID1001610-04:
+  inputNum: "0.4674323"
+  decimalLen: "3"
+  outResult: "0.467"
+testID1001610-05:
+  inputNum: "-1.23"
+  decimalLen: "1"
+  outResult: "-1.2"
+testID1001610-06:
+  inputNum: "-1.586"
+  decimalLen: "2"
+  outResult: "-1.59"
+testID1001610-07:
+  inputNum: "898200.091"
+  decimalLen: "1"
+  outResult: "898200.1"
+testID1001610-08:
+  inputNum: "2.53"
+  decimalLen: "5"
+  outResult: "2.53000"
+testID1001610-09:
+  inputNum: "-0.921"
+  decimalLen: "3"
+  outResult: "-0.921"
+testID1001610-10:
+  inputNum: "-0.5"
+  decimalLen: "2"
+  outResult: "-0.50"
+testID1001611-01:
+  inputNum: "1.598"
+  decimalLen: "0"
+  outResult: "2"
+testID1001611-02:
+  inputNum: "3.455"
+  decimalLen: "0"
+  outResult: "3"
+testID1001611-03:
+  inputNum: "87.01"
+  decimalLen: "0"
+  outResult: "87"
+testID1001611-04:
+  inputNum: "0.4674323"
+  decimalLen: "0"
+  outResult: "0"
+testID1001611-05:
+  inputNum: "0.58"
+  decimalLen: "0"
+  outResult: "1"
+testID1001611-06:
+  inputNum: "-1.23"
+  decimalLen: "0"
+  outResult: "-1"
+testID1001611-07:
+  inputNum: "-1.5860"
+  decimalLen: "0"
+  outResult: "-2"
+testID1001612-01:
+  inputNum: "5.598"
+  decimalLen: "-1"
+  outResult: "10"
+testID1001612-02:
+  inputNum: "123.455"
+  decimalLen: "-2"
+  outResult: "100"
+testID1001612-03:
+  inputNum: "-1.23"
+  decimalLen: "-1"
+  outResult: "0"
+testID1001612-04:
+  inputNum: "-155.586"
+  decimalLen: "-2"
+  outResult: "-200"
+testID1001612-05:
+  inputNum: "329828.4327"
+  decimalLen: "-3"
+  outResult: "330000"
+testID1001612-06:
+  inputNum: "0.984371"
+  decimalLen: "-2"
+  outResult: "0"
+testID1001612-07:
+  inputNum: "1000000"
+  decimalLen: "-6"
+  outResult: "1000000"
+testID1001612-08:
+  inputNum: "1000000"
+  decimalLen: "-7"
+  outResult: "0"
+testID1001612-09:
+  inputNum: "2.0"
+  decimalLen: "-1"
+  outResult: "0"
+testID1001612-10:
+  inputNum: "34467.012545"
+  decimalLen: "-3"
+  outResult: "34000"
+testID1001612-11:
+  inputNum: "-234.6432"
+  decimalLen: "-4"
+  outResult: "0"
+testID1001613-01:
+  inputNum: "123"
+  decimalLen: "3"
+  outResult: "123"
+testID1001613-02:
+  inputNum: "-123"
+  decimalLen: "3"
+  outResult: "-123"
+testID1001613-03:
+  inputNum: "100"
+  decimalLen: "0"
+  outResult: "100"
+testID1001613-04:
+  inputNum: "135"
+  decimalLen: "-2"
+  outResult: "100"
+testID1001613-05:
+  inputNum: "-135"
+  decimalLen: "-1"
+  outResult: "-140"
+testID1001613-06:
+  inputNum: "35"
+  decimalLen: "-2"
+  outResult: "0"
+testID1001614-01:
+  inputNum: "12.34"
+  decimalLen: null
+  outResult: null
+testID1001614-02:
+  inputNum: null
+  decimalLen: 2
+  outResult: null
+testID1001614-03:
+  inputNum: null
+  decimalLen: null
+  outResult: null
+testID1001614-04:
+  inputNum: null
+  decimalLen: "0"
+  outResult: null
+testID1001614-05:
+  inputNum: "-135"
+  decimalLen: null
+  outResult: null
+testID1001620-01:
+  inputNum: "0.123456789012345"
+  decimalLen: "10"
+  outResult: "0.1234567890"
+testID1001620-02:
+  inputNum: "0.123456789052345"
+  decimalLen: "11"
+  outResult: "0.1234567891"
+testID1001620-03:
+  inputNum: "0.123456789016345"
+  decimalLen: "12"
+  outResult: "0.1234567890"

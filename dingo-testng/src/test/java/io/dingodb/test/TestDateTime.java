@@ -780,19 +780,37 @@ public class TestDateTime extends YamlDataHelper{
         Assert.assertTrue(expectedList.containsAll(actualUpdateList));
     }
 
-    @Test(priority = 23, enabled = true, expectedExceptions = SQLException.class, description = "验证date类型字段，插入空值预期异常")
+    @Test(priority = 23, enabled = true, description = "验证date类型字段，插入空值处理为null")
     public void test24InsertBlankDate() throws SQLException {
-        dateTimeObj.insertBlankDate();
+        List expectedList = new ArrayList();
+        expectedList.add(1);
+        expectedList.add(null);
+        System.out.println("Expected: " + expectedList);
+        List actualList = dateTimeObj.insertBlankDate();
+        System.out.println("Actual: " + actualList);
+        Assert.assertEquals(actualList, expectedList);
     }
 
-    @Test(priority = 24, enabled = true, expectedExceptions = SQLException.class, description = "验证time类型字段，插入空值预期异常")
+    @Test(priority = 24, enabled = true, description = "验证time类型字段，插入空值处理为null")
     public void test25InsertBlankTime() throws SQLException {
-        dateTimeObj.insertBlankTime();
+        List expectedList = new ArrayList();
+        expectedList.add(1);
+        expectedList.add(null);
+        System.out.println("Expected: " + expectedList);
+        List actualList = dateTimeObj.insertBlankTime();
+        System.out.println("Actual: " + actualList);
+        Assert.assertEquals(actualList, expectedList);
     }
 
-    @Test(priority = 25, enabled = true, expectedExceptions = SQLException.class, description = "验证timestamp类型字段，插入空值预期异常")
+    @Test(priority = 25, enabled = true, description = "验证timestamp类型字段，插入空值处理为null")
     public void test26InsertBlankTimestamp() throws SQLException {
-        dateTimeObj.insertBlankTimestamp();
+        List expectedList = new ArrayList();
+        expectedList.add(1);
+        expectedList.add(null);
+        System.out.println("Expected: " + expectedList);
+        List actualList = dateTimeObj.insertBlankTimestamp();
+        System.out.println("Actual: " + actualList);
+        Assert.assertEquals(actualList, expectedList);
     }
 
     @Test(priority = 26, enabled = true, dataProvider = "yamlDataMethod", description = "验证函数timestamp_format参数为函数的返回结果正常")

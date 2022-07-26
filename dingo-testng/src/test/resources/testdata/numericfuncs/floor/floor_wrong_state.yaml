@@ -1,0 +1,4 @@
+testID1001634-01:
+  floorState: "select floor()"
+testID1001636-01:
+  floorState: "select floor(12.56, 1)"

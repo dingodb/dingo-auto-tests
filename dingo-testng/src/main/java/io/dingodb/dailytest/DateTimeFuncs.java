@@ -996,32 +996,60 @@ public class DateTimeFuncs {
     }
 
     //创建表并插入空date
-    public void insertBlankDate() throws SQLException {
+    public List insertBlankDate() throws SQLException {
         try(Statement statement = connection.createStatement()) {
             String createSQL = "create table case1434 (id int, birthday date, primary key(id))";
             statement.execute(createSQL);
             String insertSQL = "insert into case1434 values(1,'')";
             statement.execute(insertSQL);
+            String querySQl = "select * from case1434 where id=1";
+            ResultSet resultSet = statement.executeQuery(querySQl);
+            List queryList = new ArrayList();
+            while(resultSet.next()) {
+                queryList.add(resultSet.getInt(1));
+                queryList.add(resultSet.getDate(2));
+            }
+            statement.close();
+            return queryList;
         }
     }
 
     //创建表并插入空time
-    public void insertBlankTime() throws SQLException {
+    public List insertBlankTime() throws SQLException {
         try(Statement statement = connection.createStatement()) {
             String createSQL = "create table case1435 (id int, create_time time, primary key(id))";
             statement.execute(createSQL);
             String insertSQL = "insert into case1435 values(1,'')";
             statement.execute(insertSQL);
+            String querySQl = "select * from case1435 where id=1";
+            ResultSet resultSet = statement.executeQuery(querySQl);
+            List queryList = new ArrayList();
+            while(resultSet.next()) {
+                queryList.add(resultSet.getInt(1));
+                queryList.add(resultSet.getTime(2));
+            }
+            statement.close();
+            return queryList;
         }
     }
 
     //创建表并插入空timestamp
-    public void insertBlankTimestamp() throws SQLException {
+    public List insertBlankTimestamp() throws SQLException {
         try(Statement statement = connection.createStatement()) {
             String createSQL = "create table case1436 (id int, create_time timestamp, primary key(id))";
             statement.execute(createSQL);
             String insertSQL = "insert into case1436 values(1,'')";
             statement.execute(insertSQL);
+
+            String querySQl = "select * from case1434 where id=1";
+            ResultSet resultSet = statement.executeQuery(querySQl);
+            List queryList = new ArrayList();
+            while(resultSet.next()) {
+                queryList.add(resultSet.getInt(1));
+                queryList.add(resultSet.getTimestamp(2));
+            }
+            statement.close();
+            return queryList;
         }
     }
 

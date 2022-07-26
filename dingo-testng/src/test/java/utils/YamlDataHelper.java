@@ -192,6 +192,73 @@ public class YamlDataHelper{
     }
 
     @DataProvider
+    public Object[][] yamlNegativeDateTimeMethod(Method method) {
+        List<Map<String, String>> yamlNegativeDateTimeList = null;
+        switch (method.getName()) {
+            case "test18InsertNegativeDate": {
+                yamlNegativeDateTimeList = getYamlList(iniReader.getValue("DateTimeNegativeYaml", "insert_negative_date"));
+                break;
+            }
+            case "test19InsertNegativeTime": {
+                yamlNegativeDateTimeList = getYamlList(iniReader.getValue("DateTimeNegativeYaml", "insert_negative_time"));
+                break;
+            }
+            case "test20InsertNegativeTimeStamp": {
+                yamlNegativeDateTimeList = getYamlList(iniReader.getValue("DateTimeNegativeYaml", "insert_negative_timestamp"));
+                break;
+            }
+            case "test13Unix_TimeStampNegativeDate": {
+                yamlNegativeDateTimeList = getYamlList(iniReader.getValue("DateTimeNegativeYaml", "unix_timestamp_negative_date"));
+                break;
+            }
+            case "test13Unix_TimeStampNegativeNum": {
+                yamlNegativeDateTimeList = getYamlList(iniReader.getValue("DateTimeNegativeYaml", "unix_timestamp_negative_num"));
+                break;
+            }
+            case "test14Date_FormatNegativeDate": {
+                yamlNegativeDateTimeList = getYamlList(iniReader.getValue("DateTimeNegativeYaml", "date_format_negative"));
+                break;
+            }
+            case "test14Date_FormatMissingDateArg": {
+                yamlNegativeDateTimeList = getYamlList(iniReader.getValue("DateTimeNegativeYaml", "date_format_negative_missingArg"));
+                break;
+            }
+
+            case "test22Time_FormatNegativeTimeStr": {
+                yamlNegativeDateTimeList = getYamlList(iniReader.getValue("DateTimeNegativeYaml", "time_format_negative"));
+                break;
+            }
+
+            case "test22Time_FormatNegativeTimeNum": {
+                yamlNegativeDateTimeList = getYamlList(iniReader.getValue("DateTimeNegativeYaml", "time_format_negative_num"));
+                break;
+            }
+
+            case "test22Time_FormatNegativeArgFunc": {
+                yamlNegativeDateTimeList = getYamlList(iniReader.getValue("DateTimeNegativeYaml", "time_format_negative_funcArg"));
+                break;
+            }
+            case "test22Time_FormatMissingArg": {
+                yamlNegativeDateTimeList = getYamlList(iniReader.getValue("DateTimeNegativeYaml", "time_format_negative_missingArg"));
+                break;
+            }
+            case "test15DateDiffNegativeDate": {
+                yamlNegativeDateTimeList = getYamlList(iniReader.getValue("DateTimeNegativeYaml", "datediff_negative"));
+                break;
+            }
+            case "test15DateDiffWrongArg": {
+                yamlNegativeDateTimeList = getYamlList(iniReader.getValue("DateTimeNegativeYaml", "datediff_negatieve_wrongArg"));
+                break;
+            }
+        }
+        Object[][] files = new Object[yamlNegativeDateTimeList.size()][];
+        for (int i = 0; i < yamlNegativeDateTimeList.size(); i++) {
+            files[i] = new Object[]{yamlNegativeDateTimeList.get(i)};
+        }
+        return files;
+    }
+
+    @DataProvider
     public Object[][] yamlBooleanMethod(Method method) {
         List<Map<String, String>> yamlBooleanList = null;
         switch (method.getName()) {
@@ -455,73 +522,6 @@ public class YamlDataHelper{
     }
 
     @DataProvider
-    public Object[][] yamlNegativeDateTimeMethod(Method method) {
-        List<Map<String, String>> yamlNegativeDateTimeList = null;
-        switch (method.getName()) {
-            case "test18InsertNegativeDate": {
-                yamlNegativeDateTimeList = getYamlList(iniReader.getValue("DateTimeNegativeYaml", "insert_negative_date"));
-                break;
-            }
-            case "test19InsertNegativeTime": {
-                yamlNegativeDateTimeList = getYamlList(iniReader.getValue("DateTimeNegativeYaml", "insert_negative_time"));
-                break;
-            }
-            case "test20InsertNegativeTimeStamp": {
-                yamlNegativeDateTimeList = getYamlList(iniReader.getValue("DateTimeNegativeYaml", "insert_negative_timestamp"));
-                break;
-            }
-            case "test13Unix_TimeStampNegativeDate": {
-                yamlNegativeDateTimeList = getYamlList(iniReader.getValue("DateTimeNegativeYaml", "unix_timestamp_negative_date"));
-                break;
-            }
-            case "test13Unix_TimeStampNegativeNum": {
-                yamlNegativeDateTimeList = getYamlList(iniReader.getValue("DateTimeNegativeYaml", "unix_timestamp_negative_num"));
-                break;
-            }
-            case "test14Date_FormatNegativeDate": {
-                yamlNegativeDateTimeList = getYamlList(iniReader.getValue("DateTimeNegativeYaml", "date_format_negative"));
-                break;
-            }
-            case "test14Date_FormatMissingDateArg": {
-                yamlNegativeDateTimeList = getYamlList(iniReader.getValue("DateTimeNegativeYaml", "date_format_negative_missingArg"));
-                break;
-            }
-
-            case "test22Time_FormatNegativeTimeStr": {
-                yamlNegativeDateTimeList = getYamlList(iniReader.getValue("DateTimeNegativeYaml", "time_format_negative"));
-                break;
-            }
-
-            case "test22Time_FormatNegativeTimeNum": {
-                yamlNegativeDateTimeList = getYamlList(iniReader.getValue("DateTimeNegativeYaml", "time_format_negative_num"));
-                break;
-            }
-
-            case "test22Time_FormatNegativeArgFunc": {
-                yamlNegativeDateTimeList = getYamlList(iniReader.getValue("DateTimeNegativeYaml", "time_format_negative_funcArg"));
-                break;
-            }
-            case "test22Time_FormatMissingArg": {
-                yamlNegativeDateTimeList = getYamlList(iniReader.getValue("DateTimeNegativeYaml", "time_format_negative_missingArg"));
-                break;
-            }
-            case "test15DateDiffNegativeDate": {
-                yamlNegativeDateTimeList = getYamlList(iniReader.getValue("DateTimeNegativeYaml", "datediff_negative"));
-                break;
-            }
-            case "test15DateDiffWrongArg": {
-                yamlNegativeDateTimeList = getYamlList(iniReader.getValue("DateTimeNegativeYaml", "datediff_negatieve_wrongArg"));
-                break;
-            }
-        }
-        Object[][] files = new Object[yamlNegativeDateTimeList.size()][];
-        for (int i = 0; i < yamlNegativeDateTimeList.size(); i++) {
-            files[i] = new Object[]{yamlNegativeDateTimeList.get(i)};
-        }
-        return files;
-    }
-
-    @DataProvider
     public Object[][] yamlBetweenMethod(Method method) {
         List<Map<String, String>> yamlBetweenList = null;
         switch (method.getName()) {
@@ -609,6 +609,128 @@ public class YamlDataHelper{
         Object[][] files = new Object[yamlBetweenList.size()][];
         for (int i = 0; i < yamlBetweenList.size(); i++) {
             files[i] = new Object[]{yamlBetweenList.get(i)};
+        }
+        return files;
+    }
+
+    @DataProvider
+    public Object[][] yamlNumericFuncMethod(Method method) {
+        List<Map<String, String>> yamlNumericFuncList = null;
+        switch (method.getName()) {
+            case "test01PowPositiveArg": {
+                yamlNumericFuncList = getYamlList(iniReader.getValue("NumericFuncsYaml", "pow_positive"));
+                break;
+            }
+
+            case "test02PowXStr": {
+                yamlNumericFuncList = getYamlList(iniReader.getValue("NumericFuncsYaml", "pow_x_str"));
+                break;
+            }
+
+            case "test03PowYDecimal": {
+                yamlNumericFuncList = getYamlList(iniReader.getValue("NumericFuncsYaml", "pow_y_decimal"));
+                break;
+            }
+
+            case "test04PowYStr": {
+                yamlNumericFuncList = getYamlList(iniReader.getValue("NumericFuncsYaml", "pow_y_str"));
+                break;
+            }
+
+            case "test05PowWrongArg": {
+                yamlNumericFuncList = getYamlList(iniReader.getValue("NumericFuncsYaml", "pow_wrong_state"));
+                break;
+            }
+
+            case "test06RoundPositiveArg": {
+                yamlNumericFuncList = getYamlList(iniReader.getValue("NumericFuncsYaml", "round_positive"));
+                break;
+            }
+
+            case "test07RoundYDecimal": {
+                yamlNumericFuncList = getYamlList(iniReader.getValue("NumericFuncsYaml", "round_y_decimal"));
+                break;
+            }
+
+            case "test08RoundXStr": {
+                yamlNumericFuncList = getYamlList(iniReader.getValue("NumericFuncsYaml", "round_x_str"));
+                break;
+            }
+
+            case "test09RoundYStr": {
+                yamlNumericFuncList = getYamlList(iniReader.getValue("NumericFuncsYaml", "round_y_str"));
+                break;
+            }
+
+            case "test10RoundWrongArg": {
+                yamlNumericFuncList = getYamlList(iniReader.getValue("NumericFuncsYaml", "round_wrong_state"));
+                break;
+            }
+
+            case "test11RoundXYStr": {
+                yamlNumericFuncList = getYamlList(iniReader.getValue("NumericFuncsYaml", "round_xy_str"));
+                break;
+            }
+
+            case "test12RoundXOnly": {
+                yamlNumericFuncList = getYamlList(iniReader.getValue("NumericFuncsYaml", "round_x_only"));
+                break;
+            }
+
+            case "test13CeilingPositiveArg": {
+                yamlNumericFuncList = getYamlList(iniReader.getValue("NumericFuncsYaml", "ceiling_positive"));
+                break;
+            }
+
+            case "test14CeilingWrongArg": {
+                yamlNumericFuncList = getYamlList(iniReader.getValue("NumericFuncsYaml", "ceiling_wrong_state"));
+                break;
+            }
+
+            case "test15CeilingStrArg": {
+                yamlNumericFuncList = getYamlList(iniReader.getValue("NumericFuncsYaml", "ceiling_str"));
+                break;
+            }
+
+            case "test16CeilFunc": {
+                yamlNumericFuncList = getYamlList(iniReader.getValue("NumericFuncsYaml", "ceil_func"));
+                break;
+            }
+
+            case "test17FloorPositiveArg": {
+                yamlNumericFuncList = getYamlList(iniReader.getValue("NumericFuncsYaml", "floor_positive"));
+                break;
+            }
+
+            case "test18FloorWrongArg": {
+                yamlNumericFuncList = getYamlList(iniReader.getValue("NumericFuncsYaml", "floor_wrong_state"));
+                break;
+            }
+
+            case "test19FloorStrArg": {
+                yamlNumericFuncList = getYamlList(iniReader.getValue("NumericFuncsYaml", "floor_str"));
+                break;
+            }
+
+            case "test20ABSPositiveArg": {
+                yamlNumericFuncList = getYamlList(iniReader.getValue("NumericFuncsYaml", "abs_positive"));
+                break;
+            }
+
+            case "test21ABSWrongArg": {
+                yamlNumericFuncList = getYamlList(iniReader.getValue("NumericFuncsYaml", "abs_wrong_state"));
+                break;
+            }
+
+            case "test22ABSStrArg": {
+                yamlNumericFuncList = getYamlList(iniReader.getValue("NumericFuncsYaml", "abs_str"));
+                break;
+            }
+
+        }
+        Object[][] files = new Object[yamlNumericFuncList.size()][];
+        for (int i = 0; i < yamlNumericFuncList.size(); i++) {
+            files[i] = new Object[]{yamlNumericFuncList.get(i)};
         }
         return files;
     }

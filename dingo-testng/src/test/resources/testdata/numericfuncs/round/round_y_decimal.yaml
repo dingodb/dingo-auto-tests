@@ -1,0 +1,6 @@
+testID1001615-01:
+  inputNum: "3.456"
+  decimalLen: "2.3"
+testID1001615-02:
+  inputNum: "0.1358"
+  decimalLen: "-1.5"
