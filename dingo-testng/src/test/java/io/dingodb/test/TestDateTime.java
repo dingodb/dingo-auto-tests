@@ -916,11 +916,11 @@ public class TestDateTime extends YamlDataHelper{
             tearDownStatement.execute("delete from " + dateTimeTableName);
             tearDownStatement.execute("delete from " + dateTableName);
             tearDownStatement.execute("delete from " + timeTableName);
-//            tearDownStatement.execute("delete from " + timestampTableName);
+            tearDownStatement.execute("delete from " + timestampTableName);
             tearDownStatement.execute("drop table " + dateTimeTableName);
             tearDownStatement.execute("drop table " + dateTableName);
             tearDownStatement.execute("drop table " + timeTableName);
-//            tearDownStatement.execute("drop table " + timestampTableName);
+            tearDownStatement.execute("drop table " + timestampTableName);
             tearDownStatement.execute("drop table Orders705");
             tearDownStatement.execute("drop table Orders673");
             tearDownStatement.execute("drop table Orders6841");
