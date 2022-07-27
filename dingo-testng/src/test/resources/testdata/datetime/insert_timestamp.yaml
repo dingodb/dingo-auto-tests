@@ -1,0 +1,28 @@
+testID1001672-01:
+  insertID: "16721"
+  insertTimestamp: "2000/4/1 18:26:05"
+  expectedTimestamp: "2000-04-01 18:26:05"
+testID1001672-02:
+  insertID: "16722"
+  insertTimestamp: "2022/07/27 00:00:00"
+  expectedTimestamp: "2022-07-27 00:00:00"
+testID1001672-03:
+  insertID: "16723"
+  insertTimestamp: "1978.7.7 23:59:59"
+  expectedTimestamp: "1978-07-07 23:59:59"
+testID1001672-04:
+  insertID: "16724"
+  insertTimestamp: "2010.05.31 01:01:01"
+  expectedTimestamp: "2010-05-31 01:01:01"
+testID1001672-05:
+  insertID: "16725"
+  insertTimestamp: "19900110100110"
+  expectedTimestamp: "1990-01-10 10:01:10"
+testID1001672-06:
+  insertID: "16726"
+  insertTimestamp: "2022-1-1 00:35:30"
+  expectedTimestamp: "2022-01-01 00:35:30"
+testID1001672-07:
+  insertID: "16727"
+  insertTimestamp: "1949-02-02 19:19:00"
+  expectedTimestamp: "1949-02-02 19:19:00"

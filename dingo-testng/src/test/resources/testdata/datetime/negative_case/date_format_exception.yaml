@@ -1,12 +1,18 @@
-testID1000772-01:
-  inputDate: "04/13/2022 10:37:26"
-  inputFormat: "%Y-%m-%d %H:%i:%S"
-testID1000772-02:
-  inputDate: "13.04.2022 10.37.26"
-  inputFormat: "%Y-%m-%d %H:%i:%S"
-testID1000772-03:
-  inputDate: "04-13-2022 10.37.26"
+#testID1000772-01:
+#  inputDate: "04/13/2022 10:37:26"
+#  inputFormat: "%Y-%m-%d %H:%i:%S"
+#testID1000772-02:
+#  inputDate: "13.04.2022 10.37.26"
+#  inputFormat: "%Y-%m-%d %H:%i:%S"
+#testID1000772-03:
+#  inputDate: "04-13-2022 10.37.26"
+#  inputFormat: "%Y/%m/%d %H:%i:%S"
+testID1000772-04:
+  inputDate: "2022-07-27 16:05:35"
   inputFormat: "%Y/%m/%d %H:%i:%S"
+testID1000772-05:
+  inputDate: "2022/07/27 16:05:35"
+  inputFormat: "%Y-%m-%d %H:%i:%S"
 testID1000773-01:
   inputDate: "04-13-2022"
   inputFormat: "%Y/%m/%d"

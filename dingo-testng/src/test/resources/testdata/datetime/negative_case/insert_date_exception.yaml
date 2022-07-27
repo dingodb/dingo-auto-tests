@@ -18,3 +18,7 @@ testID1000833-1:
   insertDate: "(8331, 'Hello', 7, 10.50, 'TJ', '202112')"
 testID1000833-2:
   insertDate: "(8332, 'Hello', 7, 10.50, 'TJ', '202241')"
+testID1000833-3:
+  insertDate: "(8333, 'Hello', 7, 10.50, 'TJ', '2022-04-01 11:12:13')"
+testID1000833-4:
+  insertDate: "(8334, 'Hello', 7, 10.50, 'TJ', '11:12:13')"

@@ -345,6 +345,24 @@ public class DateTimeFuncs {
         }
     }
 
+    // 插入其他格式timestamp类型数据并返回查询出的日期
+    public String insertVariousFormatTimestampValues(String inputID, String inputTimestamp) throws ClassNotFoundException, SQLException {
+        String timestampTableName = getTimestampTableName();
+        try(Statement statement = connection.createStatement()) {
+            String timestampFormatInsertSql = "insert into " + timestampTableName +
+                    " values (" + inputID + ",'lisan',35,26.56,'SH','" + inputTimestamp +  "')";
+            int insertRows = statement.executeUpdate(timestampFormatInsertSql);
+            String queryInsertTimestampSql = "select upload_time from " + timestampTableName + " where id = " + inputID;
+            ResultSet findTimestampRst = statement.executeQuery(queryInsertTimestampSql);
+            String findTimestampStr = null;
+            while (findTimestampRst.next()) {
+                findTimestampStr = findTimestampRst.getString("upload_time");
+            }
+            statement.close();
+            return findTimestampStr;
+        }
+    }
+
 
     // 获取函数Now()返回值
     public String nowFunc() throws SQLException {
@@ -1069,9 +1087,9 @@ public class DateTimeFuncs {
     }
 
     // 获取函数Timestamp_Format参数为字符串返回值
-    public String timestamp_FormatStrArgFunc(String inputDate, String inputFormat) throws SQLException {
+    public String timestamp_FormatStrArgFunc(String inputTimestamp, String inputFormat) throws SQLException {
         try(Statement statement = connection.createStatement()) {
-            String timestamp_formatSargSql = "select timestamp_format('" + inputDate + "','" + inputFormat + "')";
+            String timestamp_formatSargSql = "select timestamp_format('" + inputTimestamp + "','" + inputFormat + "')";
             ResultSet timestamp_formatSargRst = statement.executeQuery(timestamp_formatSargSql);
             String timestamp_formatSargStr  = null;
             while (timestamp_formatSargRst.next()) {
@@ -1141,6 +1159,13 @@ public class DateTimeFuncs {
 
             statement.close();
             return timestamp_formatStr;
+        }
+    }
+
+    // 函数Timestamp_Format参数非法，返回错误
+    public void timestamp_FormatWrongArg(String formatState) throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            statement.executeQuery(formatState);
         }
     }
 

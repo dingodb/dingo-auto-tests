@@ -1,0 +1,6 @@
+testID1001671-01:
+  formatState: "select timestamp_format('%Y-%m-%d %H:%i:%S')"
+testID1001671-02:
+  formatState: "select timestamp_format()"
+testID1001671-03:
+  formatState: "select timestamp_format('2022-07-27 19:00:00','2022-07-01 01:01:01','%Y-%m-%d')"

@@ -20,16 +20,160 @@ import io.dingodb.dailytest.NumericFuncs;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import utils.FileReaderUtil;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class TestNumericFuncs {
     public static NumericFuncs numericObj = new NumericFuncs();
 
+    public void initNumtestTalbe() throws SQLException {
+        String numtest_meta_path = "src/test/resources/testdata/tablemeta/numtest_meta.txt";
+        String numtest_value_path = "src/test/resources/testdata/tableInsertValues/numtest_value.txt";
+        String numtest_meta = FileReaderUtil.readFile(numtest_meta_path);
+        String numtest_value = FileReaderUtil.readFile(numtest_value_path);
+        numericObj.numericTableCreate(numtest_meta);
+        numericObj.insertTableValues(numtest_value);
+    }
+
+    public List expectedPowList1() {
+        List powList1 = new ArrayList();
+        String[] dataArray = {"10","625","8000","810000","0",null,"64339296875","6975757441"};
+        for (int i=0; i<dataArray.length; i++) {
+            powList1.add(dataArray[i]);
+        }
+        return powList1;
+    }
+
+    public List expectedPowList2() {
+        List powList2 = new ArrayList();
+        String[] dataArray = {"2.58","11904.9921",null,"0","-9127173372.88918"};
+        for (int i=0; i<dataArray.length; i++) {
+            powList2.add(dataArray[i]);
+        }
+        return powList2;
+    }
+
+    public List expectedRoundList1() {
+        List roundList1 = new ArrayList();
+        String[] dataArray = {"2.6","109.1",null,"0.0","-98.2","-5332.0","56.0","-343.5"};
+        for (int i=0; i<dataArray.length; i++) {
+            roundList1.add(dataArray[i]);
+        }
+        return roundList1;
+    }
+
+    public List expectedRoundList2() {
+        List roundList2 = new ArrayList();
+        String[] dataArray = {"3","109",null,"0","-98","-5332","56","-343"};
+        for (int i=0; i<dataArray.length; i++) {
+            roundList2.add(dataArray[i]);
+        }
+        return roundList2;
+    }
+
+    public List expectedRoundList3() {
+        List roundList3 = new ArrayList();
+        String[] dataArray = {"100","-100","-5300","100","-300"};
+        for (int i=0; i<dataArray.length; i++) {
+            roundList3.add(dataArray[i]);
+        }
+        return roundList3;
+    }
+
+    public List expectedCeilingList1() {
+        List ceilingList1 = new ArrayList();
+        String[] dataArray = {"3","110",null,"0","-98","-5331","56","-343"};
+        for (int i=0; i<dataArray.length; i++) {
+            ceilingList1.add(dataArray[i]);
+        }
+        return ceilingList1;
+    }
+
+    public List expectedFloorList1() {
+        List floorList1 = new ArrayList();
+        String[] dataArray = {"2","109",null,"0","-99","-5332","56","-344"};
+        for (int i=0; i<dataArray.length; i++) {
+            floorList1.add(dataArray[i]);
+        }
+        return floorList1;
+    }
+
+    public List expectedABSList1() {
+        List absList1 = new ArrayList();
+        String[] dataArray = {"2.58","109.11",null,"0.0","98.19","5331.9843","56","343.45"};
+        for (int i=0; i<dataArray.length; i++) {
+            absList1.add(dataArray[i]);
+        }
+        return absList1;
+    }
+
+    public List expectedModList1() {
+        List modList1 = new ArrayList();
+        String[] dataArray = {"0","1","2","2","0",null,"0","1"};
+        for (int i=0; i<dataArray.length; i++) {
+            modList1.add(dataArray[i]);
+        }
+        return modList1;
+    }
+
+    public List expectedModList2() {
+        List modList2 = new ArrayList();
+        String[] dataArray = {"2.58","9.11",null,"0",null,null,"21","-3.45"};
+        for (int i=0; i<dataArray.length; i++) {
+            modList2.add(dataArray[i]);
+        }
+        return modList2;
+    }
+
+    public List expectedModList3() {
+        List modList3 = new ArrayList();
+        String[] dataArray = {"2.26","25",null,null,"0",null,"35","17"};
+        for (int i=0; i<dataArray.length; i++) {
+            modList3.add(dataArray[i]);
+        }
+        return modList3;
+    }
+
+    public List expectedModList4() {
+        List modList4 = new ArrayList();
+        String[] dataArray = {"2.26","25",null,"35"};
+        for (int i=0; i<dataArray.length; i++) {
+            modList4.add(dataArray[i]);
+        }
+        return modList4;
+    }
+
+    public List expectedModList5() {
+        List modList5 = new ArrayList();
+        Integer[] dataArray = {2,4,6,8};
+        for (int i=0; i<dataArray.length; i++) {
+            modList5.add(dataArray[i]);
+        }
+        return modList5;
+    }
+
+    public List expectedModList6() {
+        List modList5 = new ArrayList();
+        Integer[] dataArray = {1,3,5,7};
+        for (int i=0; i<dataArray.length; i++) {
+            modList5.add(dataArray[i]);
+        }
+        return modList5;
+    }
+
+
     @BeforeClass(alwaysRun = true, description = "测试开始前，连接数据库")
     public static void setupAll() {
         Assert.assertNotNull(numericObj.connection);
+    }
+
+    @Test(enabled = true, description = "创建数值函数测试表")
+    public void test00NumericFuncTableCreate() throws SQLException {
+        initNumtestTalbe();
     }
 
     @Test(priority = 0, enabled = true, dataProvider = "yamlNumericFuncMethod", description = "验证Pow函数，正向用例")
@@ -186,5 +330,193 @@ public class TestNumericFuncs {
         numericObj.absStrArg(param.get("inputNum"));
     }
 
+    @Test(priority = 22, enabled = true, dataProvider = "yamlNumericFuncMethod", description = "验证mod函数，正向用例")
+    public void test23PowPositiveArg(Map<String, String> param) throws SQLException {
+        String exepectedRes = param.get("outNum");
+        System.out.println("Expected: " + exepectedRes);
+
+        String actualRes = numericObj.modPositiveArg(param.get("num1"), param.get("num2"));
+        System.out.println("Actual: " + actualRes);
+        Assert.assertEquals(actualRes, exepectedRes);
+    }
+
+    @Test(priority = 23, enabled = true, expectedExceptions = SQLException.class, description = "验证mod函数参数非法，预期失败")
+    public void test24ModWrongArg(Map<String, String> param) throws SQLException {
+        numericObj.modWrongArg(param.get("modState"));
+    }
+
+    @Test(priority = 24, enabled = true, dataProvider = "yamlNumericFuncMethod", expectedExceptions = SQLException.class,
+            description = "验证mod函数第一个参数为字符串，预期失败")
+    public void test25ModXStr(Map<String, String> param) throws SQLException {
+        numericObj.modxStr(param.get("num1"), param.get("num2"));
+    }
+
+    @Test(priority = 25, enabled = true, dataProvider = "yamlNumericFuncMethod", expectedExceptions = SQLException.class,
+            description = "验证mod函数第二个参数为字符串，预期失败")
+    public void test26ModYStr(Map<String, String> param) throws SQLException {
+        numericObj.modyStr(param.get("num1"), param.get("num2"));
+    }
+
+    @Test(priority = 26, enabled = true, dataProvider = "yamlNumericFuncMethod", expectedExceptions = SQLException.class,
+            description = "验证mod函数两个参数均为字符串，预期失败")
+    public void test27ModXYStr(Map<String, String> param) throws SQLException {
+        numericObj.modxyStr(param.get("num1"), param.get("num2"));
+    }
+
+    @Test(priority = 27, enabled = true, description = "验证pow函数在表格中使用")
+    public void test28PowInTable1() throws SQLException {
+        List expectedList = expectedPowList1();
+        System.out.println("Expected: " + expectedList);
+        List actualList = numericObj.powInTable1();
+        System.out.println("Actual: " + actualList);
+
+        Assert.assertEquals(actualList, expectedList);
+    }
+
+    @Test(priority = 28, enabled = true, description = "验证pow函数在表格中使用")
+    public void test29PowInTable2() throws SQLException {
+        List expectedList = expectedPowList2();
+        System.out.println("Expected: " + expectedList);
+        List actualList = numericObj.powInTable2();
+        System.out.println("Actual: " + actualList);
+
+        Assert.assertTrue(actualList.containsAll(expectedList));
+        Assert.assertTrue(expectedList.containsAll(actualList));
+    }
+
+    @Test(priority = 29, enabled = true, description = "验证round函数在表格中使用")
+    public void test30RoundInTable1() throws SQLException {
+        List expectedList = expectedRoundList1();
+        System.out.println("Expected: " + expectedList);
+        List actualList = numericObj.roundInTable1();
+        System.out.println("Actual: " + actualList);
+
+        Assert.assertEquals(actualList, expectedList);
+    }
+
+    @Test(priority = 30, enabled = true, description = "验证round函数在表格中使用")
+    public void test31RoundInTable2() throws SQLException {
+        List expectedList = expectedRoundList2();
+        System.out.println("Expected: " + expectedList);
+        List actualList = numericObj.roundInTable2();
+        System.out.println("Actual: " + actualList);
+
+        Assert.assertEquals(actualList, expectedList);
+    }
+
+    @Test(priority = 31, enabled = true, description = "验证round函数在表格中使用")
+    public void test32RoundInTable3() throws SQLException {
+        List expectedList = expectedRoundList3();
+        System.out.println("Expected: " + expectedList);
+        List actualList = numericObj.roundInTable3();
+        System.out.println("Actual: " + actualList);
+
+        Assert.assertTrue(actualList.containsAll(expectedList));
+        Assert.assertTrue(expectedList.containsAll(actualList));
+    }
+
+    @Test(priority = 32, enabled = true, description = "验证ceiling函数在表格中使用")
+    public void test33CeilingInTable1() throws SQLException {
+        List expectedList = expectedCeilingList1();
+        System.out.println("Expected: " + expectedList);
+        List actualList = numericObj.ceilingInTable1();
+        System.out.println("Actual: " + actualList);
+
+        Assert.assertEquals(actualList, expectedList);
+    }
+
+    @Test(priority = 33, enabled = true, description = "验证floor函数在表格中使用")
+    public void test34FloorInTable1() throws SQLException {
+        List expectedList = expectedFloorList1();
+        System.out.println("Expected: " + expectedList);
+        List actualList = numericObj.floorInTable1();
+        System.out.println("Actual: " + actualList);
+
+        Assert.assertEquals(actualList, expectedList);
+    }
+
+    @Test(priority = 34, enabled = true, description = "验证abs函数在表格中使用")
+    public void test35ABSInTable1() throws SQLException {
+        List expectedList = expectedABSList1();
+        System.out.println("Expected: " + expectedList);
+        List actualList = numericObj.absInTable1();
+        System.out.println("Actual: " + actualList);
+
+        Assert.assertEquals(actualList, expectedList);
+    }
+
+    @Test(priority = 35, enabled = true, description = "验证mod函数在表格中使用")
+    public void test36ModInTable1() throws SQLException {
+        List expectedList = expectedModList1();
+        System.out.println("Expected: " + expectedList);
+        List actualList = numericObj.modInTable1();
+        System.out.println("Actual: " + actualList);
+
+        Assert.assertEquals(actualList, expectedList);
+    }
+
+    @Test(priority = 36, enabled = true, description = "验证mod函数在表格中使用")
+    public void test37ModInTable2() throws SQLException {
+        List expectedList = expectedModList2();
+        System.out.println("Expected: " + expectedList);
+        List actualList = numericObj.modInTable2();
+        System.out.println("Actual: " + actualList);
+
+        Assert.assertEquals(actualList, expectedList);
+    }
+
+    @Test(priority = 37, enabled = true, description = "验证mod函数在表格中使用")
+    public void test38ModInTable3() throws SQLException {
+        List expectedList = expectedModList3();
+        System.out.println("Expected: " + expectedList);
+        List actualList = numericObj.modInTable3();
+        System.out.println("Actual: " + actualList);
+
+        Assert.assertEquals(actualList, expectedList);
+    }
+
+    @Test(priority = 38, enabled = true, description = "验证mod函数在表格中使用")
+    public void test39ModInTable4() throws SQLException {
+        List expectedList = expectedModList4();
+        System.out.println("Expected: " + expectedList);
+        List actualList = numericObj.modInTable4();
+        System.out.println("Actual: " + actualList);
+
+        Assert.assertTrue(actualList.containsAll(expectedList));
+        Assert.assertTrue(expectedList.containsAll(actualList));
+    }
+
+    @Test(priority = 39, enabled = true, description = "验证mod函数在where条件语句中使用")
+    public void test40ModInWhereState1() throws SQLException {
+        List expectedList = expectedModList5();
+        System.out.println("Expected: " + expectedList);
+        List actualList = numericObj.modInWhereState1();
+        System.out.println("Actual: " + actualList);
+
+        Assert.assertTrue(actualList.containsAll(expectedList));
+        Assert.assertTrue(expectedList.containsAll(actualList));
+    }
+
+    @Test(priority = 40, enabled = true, description = "验证mod函数在where条件语句中使用")
+    public void test41ModInWhereState2() throws SQLException {
+        List expectedList = expectedModList6();
+        System.out.println("Expected: " + expectedList);
+        List actualList = numericObj.modInWhereState2();
+        System.out.println("Actual: " + actualList);
+
+        Assert.assertTrue(actualList.containsAll(expectedList));
+        Assert.assertTrue(expectedList.containsAll(actualList));
+    }
+
+    @Test(priority = 41, enabled = true, description = "验证mod函数在where条件语句中使用")
+    public void test42ModInWhereState3() throws SQLException {
+        List expectedList = expectedModList6();
+        System.out.println("Expected: " + expectedList);
+        List actualList = numericObj.modInWhereState3();
+        System.out.println("Actual: " + actualList);
+
+        Assert.assertTrue(actualList.containsAll(expectedList));
+        Assert.assertTrue(expectedList.containsAll(actualList));
+    }
 
 }

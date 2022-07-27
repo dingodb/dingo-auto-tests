@@ -564,6 +564,16 @@ public class TestDateTime extends YamlDataHelper{
         Assert.assertEquals(actualTimeQuery, expectedTimeQuery);
     }
 
+    @Test(priority = 15, enabled = true, dependsOnMethods = {"test02TimestampInsert"}, dataProvider = "yamlDataMethod",
+            description = "验证插入不同格式的日期成功")
+    public void test16VariousFormatTimestampInsert(Map<String, String> param) throws SQLException, ClassNotFoundException {
+        String expectedTimestampQuery = param.get("expectedTimestamp");
+        System.out.println("Expected: " + expectedTimestampQuery);
+        String actualTimestampQuery = dateTimeObj.insertVariousFormatTimestampValues(param.get("insertID"), param.get("insertTimestamp"));
+        System.out.println("Actual: " + actualTimestampQuery);
+        Assert.assertEquals(actualTimestampQuery, expectedTimestampQuery);
+    }
+
     @Test(priority = 16, enabled = true, dataProvider = "yamlDataMethod", description = "验证函数和字符串上下文返回")
     public void test17FuncConcatStr(Map<String, String> param) throws SQLException {
         String actualFuncConcatStr = dateTimeObj.funcConcatStr(param.get("funcName"));
@@ -881,6 +891,18 @@ public class TestDateTime extends YamlDataHelper{
         Assert.assertNull(actualTimestamp_FormatNullArgStr);
     }
 
+    @Test(priority = 26, enabled = true, dataProvider = "yamlNegativeDateTimeMethod", expectedExceptions = SQLException.class,
+            description = "验证函数timestamp_format日期格式非法，预期异常")
+    public void test27Timestamp_FormatNegativeTimestamp(Map<String, String> param) throws SQLException {
+        dateTimeObj.timestamp_FormatStrArgFunc(param.get("inputTimestamp"), param.get("inputFormat"));
+    }
+
+    @Test(priority = 26, enabled = true, dataProvider = "yamlNegativeDateTimeMethod", expectedExceptions = SQLException.class,
+            description = "验证函数timestamp_format参数非法，预期异常")
+    public void test27Timestamp_FormatWrongArg(Map<String, String> param) throws SQLException {
+        dateTimeObj.timestamp_FormatWrongArg(param.get("formatState"));
+    }
+
 
     @AfterClass(alwaysRun = true, description = "测试完成后删除数据和表格并关闭连接")
     public void tearDownAll() throws SQLException {
@@ -894,11 +916,11 @@ public class TestDateTime extends YamlDataHelper{
             tearDownStatement.execute("delete from " + dateTimeTableName);
             tearDownStatement.execute("delete from " + dateTableName);
             tearDownStatement.execute("delete from " + timeTableName);
-            tearDownStatement.execute("delete from " + timestampTableName);
+//            tearDownStatement.execute("delete from " + timestampTableName);
             tearDownStatement.execute("drop table " + dateTimeTableName);
             tearDownStatement.execute("drop table " + dateTableName);
             tearDownStatement.execute("drop table " + timeTableName);
-            tearDownStatement.execute("drop table " + timestampTableName);
+//            tearDownStatement.execute("drop table " + timestampTableName);
             tearDownStatement.execute("drop table Orders705");
             tearDownStatement.execute("drop table Orders673");
             tearDownStatement.execute("drop table Orders6841");

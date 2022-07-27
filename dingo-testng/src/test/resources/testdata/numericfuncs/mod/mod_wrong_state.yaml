@@ -1,0 +1,12 @@
+testID1001656-01:
+  modState: "select mod()"
+testID1001656-02:
+  modState: "select mod(25)"
+testID1001656-03:
+  modState: "select mod(255,3,5)"
+testID1001656-04:
+  modState: "select mod(,)"
+testID1001656-05:
+  modState: "select mod(10,)"
+testID1001656-06:
+  modState: "select mod(,5)"

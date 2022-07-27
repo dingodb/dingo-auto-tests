@@ -1,0 +1,236 @@
+testID1001644-01:
+  num1: "34"
+  num2: "3"
+  outNum: "1"
+testID1001644-02:
+  num1: "64"
+  num2: "2"
+  outNum: "0"
+testID1001644-03:
+  num1: "256"
+  num2: "256"
+  outNum: "0"
+testID1001644-04:
+  num1: "2480"
+  num2: "1241"
+  outNum: "1239"
+testID1001644-05:
+  num1: "2480"
+  num2: "1000"
+  outNum: "480"
+testID1001644-06:
+  num1: "2480"
+  num2: "100"
+  outNum: "80"
+testID1001644-07:
+  num1: "2480"
+  num2: "10"
+  outNum: "0"
+testID1001645-01:
+  num1: "34"
+  num2: "-3"
+  outNum: "1"
+testID1001645-02:
+  num1: "64"
+  num2: "-2"
+  outNum: "0"
+testID1001645-03:
+  num1: "256"
+  num2: "-256"
+  outNum: "0"
+testID1001645-04:
+  num1: "2480"
+  num2: "-1241"
+  outNum: "1239"
+testID1001646-01:
+  num1: "-34"
+  num2: "3"
+  outNum: "-1"
+testID1001646-02:
+  num1: "-64"
+  num2: "2"
+  outNum: "0"
+testID1001646-03:
+  num1: "-256"
+  num2: "256"
+  outNum: "0"
+testID1001646-04:
+  num1: "-2480"
+  num2: "1241"
+  outNum: "-1239"
+testID1001647-01:
+  num1: "-34"
+  num2: "-3"
+  outNum: "-1"
+testID1001647-02:
+  num1: "-64"
+  num2: "-2"
+  outNum: "0"
+testID1001647-03:
+  num1: "-256"
+  num2: "-256"
+  outNum: "0"
+testID1001647-04:
+  num1: "-2480"
+  num2: "-1241"
+  outNum: "-1239"
+testID1001648-01:
+  num1: "-34"
+  num2: "0"
+  outNum: null
+testID1001648-02:
+  num1: "64"
+  num2: "0"
+  outNum: null
+testID1001648-03:
+  num1: "10.25"
+  num2: "0"
+  outNum: null
+testID1001648-04:
+  num1: "-0.33"
+  num2: "0"
+  outNum: null
+testID1001648-05:
+  num1: "0"
+  num2: "0"
+  outNum: null
+testID1001649-01:
+  num1: "0"
+  num2: "3"
+  outNum: "0"
+testID1001649-02:
+  num1: "0"
+  num2: "-5"
+  outNum: "0"
+testID1001649-03:
+  num1: "0"
+  num2: "2.56"
+  outNum: "0"
+testID1001649-04:
+  num1: "0"
+  num2: "-0.5"
+  outNum: "0"
+testID1001650-01:
+  num1: "15"
+  num2: null
+  outNum: null
+testID1001650-02:
+  num1: "0"
+  num2: null
+  outNum: null
+testID1001650-03:
+  num1: "-1"
+  num2: null
+  outNum: null
+testID1001650-04:
+  num1: null
+  num2: "2"
+  outNum: null
+testID1001650-05:
+  num1: null
+  num2: "-2"
+  outNum: null
+testID1001650-06:
+  num1: null
+  num2: null
+  outNum: null
+testID1001651-01:
+  num1: "1"
+  num2: "4"
+  outNum: "1"
+testID1001651-02:
+  num1: "1280"
+  num2: "1281"
+  outNum: "1280"
+testID1001651-03:
+  num1: "2480"
+  num2: "10000"
+  outNum: "2480"
+testID1001652-01:
+  num1: "34.5"
+  num2: "3"
+  outNum: "1.5"
+testID1001652-02:
+  num1: "10.125"
+  num2: "4"
+  outNum: "2.125"
+testID1001652-03:
+  num1: "1.1"
+  num2: "1"
+  outNum: "0.1"
+testID1001652-04:
+  num1: -34.5""
+  num2: "-10"
+  outNum: "-4.5"
+testID1001652-05:
+  num1: "0.1234567890123"
+  num2: "2"
+  outNum: "0.1234567890123"
+testID1001653-01:
+  num1: "11"
+  num2: "2.5"
+  outNum: "1"
+testID1001653-02:
+  num1: "5"
+  num2: "6.125"
+  outNum: "5"
+testID1001653-03:
+  num1: "-10"
+  num2: "3.333"
+  outNum: "-0.001"
+testID1001653-04:
+  num1: "-10"
+  num2: "-1.25"
+  outNum: "0"
+testID1001653-05:
+  num1: "3"
+  num2: "0.1234567890123"
+  outNum: "0.0370370637048"
+testID1001653-06:
+  num1: "256"
+  num2: "2.56"
+  outNum: "0"
+testID1001653-07:
+  num1: "36435"
+  num2: "254.67"
+  outNum: "17.19"
+testID1001653-08:
+  num1: "9996"
+  num2: "-3.78920"
+  outNum: "0.09040"
+testID1001654-01:
+  num1: "2.5"
+  num2: "2.5"
+  outNum: "0"
+testID1001654-02:
+  num1: "5.125"
+  num2: "6.125"
+  outNum: "5.125"
+testID1001654-03:
+  num1: "1000.0001"
+  num2: "3.3333"
+  outNum: "0.0101"
+testID1001654-04:
+  num1: "-5.00"
+  num2: "-1.25"
+  outNum: "0"
+testID1001654-05:
+  num1: "3.483924598246"
+  num2: "-0.1234567890123"
+  outNum: "0.0271345059016"
+testID1001654-06:
+  num1: "-250.87"
+  num2: "30.52"
+  outNum: "-6.71"
+testID1001654-07:
+  num1: "3.483924598246"
+  num2: "-0.03483924598246"
+  outNum: "0.00000000000000"
+testID1001654-08:
+  num1: "-2.5"
+  num2: "2.50"
+  outNum: "0.00"
+testID1001654-09:
+  num1: "2.50"
+  num2: "-2.5"
+  outNum: "0.00"

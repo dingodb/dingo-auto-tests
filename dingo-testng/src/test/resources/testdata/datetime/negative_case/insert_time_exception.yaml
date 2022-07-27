@@ -14,6 +14,10 @@ testID1000707-1:
   insertTime: "(7071, 'zhang san', 18, 1342.09, 'BJ', '10-08-10')"
 testID1000707-2:
   insertTime: "(7072, 'zhang san', 18, 1342.09, 'BJ', '04:59-00')"
+testID1000707-3:
+  insertTime: "(7073, 'zhang san', 18, 1342.09, 'BJ', '2010-01-02')"
+testID1000707-4:
+  insertTime: "(7074, 'zhang san', 18, 1342.09, 'BJ', '2010-11-12 10:10:10')"
 #testID1000835:
 #  insertTime: "(835, 'zhang san', 18, 1342.09, 'BJ', '12345')"
 testID1000835-06:

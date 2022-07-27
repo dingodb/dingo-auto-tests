@@ -12,3 +12,13 @@ testID1000648-6:
   insertTimeStamp: "(6486, 'zhang san', 18, 1342.09, 'BJ', '202241 16:05:07')"
 testID1000648-7:
   insertTimeStamp: "(6487, 'zhang san', 18, 1342.09, 'BJ', '2022-04-11 12345')"
+testID1000648-8:
+  insertTimeStamp: "(6488, 'zhang san', 18, 1342.09, 'BJ', '202241102345')"
+testID1000648-9:
+  insertTimeStamp: "(6489, 'zhang san', 18, 1342.09, 'BJ', '2022121102345')"
+testID1000648-10:
+  insertTimeStamp: "(6490, 'zhang san', 18, 1342.09, 'BJ', '20221211 10:23:45')"
+testID1000648-11:
+  insertTimeStamp: "(6491, 'zhang san', 18, 1342.09, 'BJ', '2021-12-11')"
+testID1000648-12:
+  insertTimeStamp: "(6492, 'zhang san', 18, 1342.09, 'BJ', '20:10:11')"

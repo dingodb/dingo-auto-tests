@@ -1,0 +1,18 @@
+testID1000772-01:
+  inputTimestamp: "04/13/2022 10:37:26"
+  inputFormat: "%Y-%m-%d %H:%i:%S"
+testID1000772-02:
+  inputTimestamp: "13.04.2022 10.37.26"
+  inputFormat: "%Y-%m-%d %H:%i:%S"
+testID1000772-03:
+  inputTimestamp: "04-13-2022 10.37.26"
+  inputFormat: "%Y/%m/%d %H:%i:%S"
+testID1000786-02:
+  inputTimestamp: "2022-04-30"
+  inputFormat: "%Y/%m/%d"
+testID1000786-03:
+  inputTimestamp: "2022/02/28"
+  inputFormat: "%Y-%m-%d"
+testID1000812:
+  inputTimestamp: "14:49:59"
+  inputFormat: "%Y-%m-%d"

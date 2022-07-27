@@ -976,9 +976,39 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertNotNull(BetweenState.connection);
     }
 
-    @Test(priority = 0, enabled = true, description = "验证使用between and子句按主键范围查询")
-    public void test01BetweenQueryByPrimaryKeyRange() throws SQLException {
+    @Test(enabled = true, description = "创建测试表1")
+    public void test00CreateBetweenTable1() throws SQLException {
         initBetweenTable1();
+    }
+
+    @Test(enabled = true, description = "创建测试表2")
+    public void test00CreateBetweenTable2() throws SQLException {
+        initBetweenTable2();
+    }
+
+    @Test(enabled = true, description = "创建测试表3")
+    public void test00CreateBetweenTable3() throws SQLException {
+        initBetweenTable3();
+    }
+
+    @Test(enabled = true, description = "创建测试表4")
+    public void test00CreateBetweenTable4() throws SQLException {
+        initBetweenTable4();
+    }
+
+    @Test(enabled = true, description = "创建测试表5")
+    public void test00CreateBetweenTable5() throws SQLException {
+        initBetweenTable5();
+    }
+
+    @Test(enabled = true, description = "创建测试表6和7")
+    public void test00CreateBetweenTable67() throws SQLException {
+        initBetweenTable6And7();
+    }
+
+    @Test(priority = 0, enabled = true, dependsOnMethods = {"test00CreateBetweenTable1"},
+            description = "验证使用between and子句按主键范围查询")
+    public void test01BetweenQueryByPrimaryKeyRange() throws SQLException {
         List<List> expectedBetweenList = expectedTest01List();
         System.out.println("Expected: " + expectedBetweenList);
         List<List> actualBetweenList = betweenObj.betweenQueryByPrimaryKeyRange();
@@ -988,7 +1018,7 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertTrue(expectedBetweenList.containsAll(actualBetweenList));
     }
 
-    @Test(priority = 1, enabled = true, dependsOnMethods = {"test01BetweenQueryByPrimaryKeyRange"},
+    @Test(priority = 1, enabled = true, dependsOnMethods = {"test00CreateBetweenTable1"},
             description = "验证between按整型字段值进行范围查询")
     public void test02BetweenQueryByIntRange() throws SQLException {
         List<List> expectedBetweenList = expectedTest02List();
@@ -1000,7 +1030,7 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertTrue(expectedBetweenList.containsAll(actualBetweenList));
     }
 
-    @Test(priority = 2, enabled = true, dependsOnMethods = {"test01BetweenQueryByPrimaryKeyRange"},
+    @Test(priority = 2, enabled = true, dependsOnMethods = {"test00CreateBetweenTable1"},
             description = "验证between按浮点型字段值进行范围查询")
     public void test03BetweenQueryByDoubleRange() throws SQLException {
         List<List> expectedBetweenList = expectedTest03List();
@@ -1012,7 +1042,7 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertTrue(expectedBetweenList.containsAll(actualBetweenList));
     }
 
-    @Test(priority = 3, enabled = true, dependsOnMethods = {"test01BetweenQueryByPrimaryKeyRange"},
+    @Test(priority = 3, enabled = true, dependsOnMethods = {"test00CreateBetweenTable1"},
             description = "验证between按字符型字段值进行范围查询")
     public void test04BetweenQueryByStrRange1() throws SQLException {
         List<List> expectedBetweenList = expectedTest04List1();
@@ -1024,7 +1054,7 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertTrue(expectedBetweenList.containsAll(actualBetweenList));
     }
 
-    @Test(priority = 3, enabled = true, dependsOnMethods = {"test01BetweenQueryByPrimaryKeyRange"},
+    @Test(priority = 3, enabled = true, dependsOnMethods = {"test00CreateBetweenTable1"},
             description = "验证between按字符型字段值进行范围查询")
     public void test04BetweenQueryByStrRange2() throws SQLException {
         List<List> expectedBetweenList = expectedTest04List2();
@@ -1036,7 +1066,7 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertTrue(expectedBetweenList.containsAll(actualBetweenList));
     }
 
-    @Test(priority = 3, enabled = true, dependsOnMethods = {"test01BetweenQueryByPrimaryKeyRange"},
+    @Test(priority = 3, enabled = true, dependsOnMethods = {"test00CreateBetweenTable1"},
             description = "验证between按字符型字段值进行范围查询")
     public void test04BetweenQueryByStrRange3() throws SQLException {
         List<List> expectedBetweenList = expectedTest04List3();
@@ -1048,7 +1078,7 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertTrue(expectedBetweenList.containsAll(actualBetweenList));
     }
 
-    @Test(priority = 4, enabled = true, dependsOnMethods = {"test01BetweenQueryByPrimaryKeyRange"},
+    @Test(priority = 4, enabled = true, dependsOnMethods = {"test00CreateBetweenTable1"},
             description = "验证between按Date字段值进行范围查询")
     public void test05BetweenQueryByDateRange() throws SQLException {
         List<List> expectedBetweenList = expectedTest05List();
@@ -1060,7 +1090,7 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertTrue(expectedBetweenList.containsAll(actualBetweenList));
     }
 
-    @Test(priority = 5, enabled = true, dependsOnMethods = {"test01BetweenQueryByPrimaryKeyRange"},
+    @Test(priority = 5, enabled = true, dependsOnMethods = {"test00CreateBetweenTable1"},
             description = "验证between按Time字段值进行范围查询")
     public void test06BetweenQueryByTimeRange() throws SQLException {
         List<List> expectedBetweenList = expectedTest06List();
@@ -1072,7 +1102,7 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertTrue(expectedBetweenList.containsAll(actualBetweenList));
     }
 
-    @Test(priority = 6, enabled = true, dependsOnMethods = {"test01BetweenQueryByPrimaryKeyRange"},
+    @Test(priority = 6, enabled = true, dependsOnMethods = {"test00CreateBetweenTable1"},
             description = "验证between按TimeStamp字段值进行范围查询")
     public void test07BetweenQueryByTimeStampRange() throws SQLException {
         List<List> expectedBetweenList = expectedTest07List();
@@ -1084,7 +1114,7 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertTrue(expectedBetweenList.containsAll(actualBetweenList));
     }
 
-    @Test(priority = 7, enabled = true, dataProvider = "yamlBetweenMethod", dependsOnMethods = {"test01BetweenQueryByPrimaryKeyRange"},
+    @Test(priority = 7, enabled = true, dataProvider = "yamlBetweenMethod", dependsOnMethods = {"test00CreateBetweenTable1"},
             description = "验证between查询范围起始值大于终止值返回空集")
     public void test08BetweenStartGTEnd(Map<String, String> param) throws SQLException {
         Boolean actualQueryResult = betweenObj.betweenQueryStartGTEnd(param.get("betweenState"));
@@ -1093,7 +1123,7 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertFalse(actualQueryResult);
     }
 
-    @Test(priority = 7, enabled = true, dataProvider = "yamlBetweenMethod", dependsOnMethods = {"test01BetweenQueryByPrimaryKeyRange"},
+    @Test(priority = 7, enabled = true, dataProvider = "yamlBetweenMethod", dependsOnMethods = {"test00CreateBetweenTable1"},
             description = "验证between查询范围起始值等于终止值")
     public void test08BetweenStartEQEnd(Map<String, String> param) throws SQLException {
         StrTo2DList strTo2DList = new StrTo2DList();
@@ -1106,7 +1136,7 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertTrue(expectedBetweenList.containsAll(actualBetweenList));
     }
 
-    @Test(priority = 8, enabled = true, dataProvider = "yamlBetweenMethod", dependsOnMethods = {"test01BetweenQueryByPrimaryKeyRange"},
+    @Test(priority = 8, enabled = true, dataProvider = "yamlBetweenMethod", dependsOnMethods = {"test00CreateBetweenTable1"},
             description = "验证between查询全范围返回全部")
     public void test09BetweenQueryFullRange(Map<String, String> param) throws SQLException {
         int actualQueryRows = betweenObj.betweenQueryByFullRange(param.get("betweenState"));
@@ -1115,7 +1145,7 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertEquals(actualQueryRows, 21);
     }
 
-    @Test(priority = 9, enabled = true, dataProvider = "yamlBetweenMethod", dependsOnMethods = {"test01BetweenQueryByPrimaryKeyRange"},
+    @Test(priority = 9, enabled = true, dataProvider = "yamlBetweenMethod", dependsOnMethods = {"test00CreateBetweenTable1"},
             description = "验证查询范围时间日期值无效，返回空集")
     public void test10BetweenQueryInvalidDateTime(Map<String, String> param) throws SQLException {
         Boolean actualQueryResult = betweenObj.betweenQueryInvalidDateTime(param.get("betweenState"));
@@ -1124,7 +1154,7 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertFalse(actualQueryResult);
     }
 
-    @Test(priority = 10, enabled = true, dataProvider = "yamlBetweenMethod", dependsOnMethods = {"test01BetweenQueryByPrimaryKeyRange"},
+    @Test(priority = 10, enabled = true, dataProvider = "yamlBetweenMethod", dependsOnMethods = {"test00CreateBetweenTable1"},
             description = "验证查询范围未匹配到数据返回空集")
     public void test11BetweenNoValueMatch(Map<String, String> param) throws SQLException {
         Boolean actualQueryResult = betweenObj.betweenQueryNoValueMatched(param.get("betweenState"));
@@ -1133,7 +1163,7 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertFalse(actualQueryResult);
     }
 
-    @Test(priority = 11, enabled = true, dependsOnMethods = {"test01BetweenQueryByPrimaryKeyRange"},
+    @Test(priority = 11, enabled = true, dependsOnMethods = {"test00CreateBetweenTable1"},
             description = "验证使用not between and子句按主键范围查询")
     public void test12NotBetweenQueryByPrimaryKeyRange() throws SQLException {
         List<List> expectedNotBetweenList = expectedTest12List();
@@ -1145,7 +1175,7 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertTrue(expectedNotBetweenList.containsAll(actualNotBetweenList));
     }
 
-    @Test(priority = 12, enabled = true, dependsOnMethods = {"test01BetweenQueryByPrimaryKeyRange"},
+    @Test(priority = 12, enabled = true, dependsOnMethods = {"test00CreateBetweenTable1"},
             description = "验证使用not between and子句按整型范围查询")
     public void test13NotBetweenQueryByIntRange() throws SQLException {
         List<List> expectedNotBetweenList = expectedTest13List();
@@ -1157,7 +1187,7 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertTrue(expectedNotBetweenList.containsAll(actualNotBetweenList));
     }
 
-    @Test(priority = 13, enabled = true, dependsOnMethods = {"test01BetweenQueryByPrimaryKeyRange"},
+    @Test(priority = 13, enabled = true, dependsOnMethods = {"test00CreateBetweenTable1"},
             description = "验证not between按浮点型字段值进行范围查询")
     public void test14NotBetweenQueryByDoubleRange() throws SQLException {
         List<List> expectedNotBetweenList = expectedTest14List();
@@ -1170,7 +1200,7 @@ public class TestBetweenAndState extends YamlDataHelper {
     }
 
 
-    @Test(priority = 14, enabled = true, dependsOnMethods = {"test01BetweenQueryByPrimaryKeyRange"},
+    @Test(priority = 14, enabled = true, dependsOnMethods = {"test00CreateBetweenTable1"},
             description = "验证NotBetween按字符型字段值进行范围查询")
     public void test15NotBetweenQueryByStrRange1() throws SQLException {
         List<List> expectedNotBetweenList = expectedTest15List1();
@@ -1182,7 +1212,7 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertTrue(expectedNotBetweenList.containsAll(actualNotBetweenList));
     }
 
-    @Test(priority = 14, enabled = true, dependsOnMethods = {"test01BetweenQueryByPrimaryKeyRange"},
+    @Test(priority = 14, enabled = true, dependsOnMethods = {"test00CreateBetweenTable1"},
             description = "验证NotBetween按字符型字段值进行范围查询")
     public void test15NotBetweenQueryByStrRange2() throws SQLException {
         List<List> expectedNotBetweenList = expectedTest15List2();
@@ -1194,7 +1224,7 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertTrue(expectedNotBetweenList.containsAll(actualNotBetweenList));
     }
 
-    @Test(priority = 14, enabled = true, dependsOnMethods = {"test01BetweenQueryByPrimaryKeyRange"},
+    @Test(priority = 14, enabled = true, dependsOnMethods = {"test00CreateBetweenTable1"},
             description = "验证NotBetween按字符型字段值进行范围查询")
     public void test15NotBetweenQueryByStrRange3() throws SQLException {
         List<List> expectedNotBetweenList = expectedTest15List3();
@@ -1206,7 +1236,7 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertTrue(expectedNotBetweenList.containsAll(actualNotBetweenList));
     }
 
-    @Test(priority = 15, enabled = true, dependsOnMethods = {"test01BetweenQueryByPrimaryKeyRange"},
+    @Test(priority = 15, enabled = true, dependsOnMethods = {"test00CreateBetweenTable1"},
             description = "验证not between按Date字段值进行范围查询")
     public void test16NotBetweenQueryByDateRange() throws SQLException {
         List<List> expectedNotBetweenList = expectedTest16List();
@@ -1218,7 +1248,7 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertTrue(expectedNotBetweenList.containsAll(actualNotBetweenList));
     }
 
-    @Test(priority = 16, enabled = true, dependsOnMethods = {"test01BetweenQueryByPrimaryKeyRange"},
+    @Test(priority = 16, enabled = true, dependsOnMethods = {"test00CreateBetweenTable1"},
             description = "验证not between按Time字段值进行范围查询")
     public void test17NotBetweenQueryByTimeRange() throws SQLException {
         List<List> expectedNotBetweenList = expectedTest17List();
@@ -1230,7 +1260,7 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertTrue(expectedNotBetweenList.containsAll(actualNotBetweenList));
     }
 
-    @Test(priority = 17, enabled = true, dependsOnMethods = {"test01BetweenQueryByPrimaryKeyRange"},
+    @Test(priority = 17, enabled = true, dependsOnMethods = {"test00CreateBetweenTable1"},
             description = "验证not between按TimeStamp字段值进行范围查询")
     public void test18NotBetweenQueryByTimeStampRange() throws SQLException {
         List<List> expectedNotBetweenList = expectedTest18List();
@@ -1242,7 +1272,7 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertTrue(expectedNotBetweenList.containsAll(actualNotBetweenList));
     }
 
-    @Test(priority = 18, enabled = true, dataProvider = "yamlBetweenMethod", dependsOnMethods = {"test01BetweenQueryByPrimaryKeyRange"},
+    @Test(priority = 18, enabled = true, dataProvider = "yamlBetweenMethod", dependsOnMethods = {"test00CreateBetweenTable1"},
             description = "验证not between查询范围起始值大于终止值返回全部")
     public void test19NotBetweenStartGTEnd(Map<String, String> param) throws SQLException {
         int actualQueryRows = betweenObj.notBetweenQueryStartGTEnd(param.get("betweenState"));
@@ -1251,7 +1281,7 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertEquals(actualQueryRows, 21);
     }
 
-    @Test(priority = 18, enabled = true, dataProvider = "yamlBetweenMethod", dependsOnMethods = {"test01BetweenQueryByPrimaryKeyRange"},
+    @Test(priority = 18, enabled = true, dataProvider = "yamlBetweenMethod", dependsOnMethods = {"test00CreateBetweenTable1"},
             description = "验证not between查询范围起始值等于终止值返回除起止值外的全部")
     public void test19NotBetweenStartEQEnd(Map<String, String> param) throws SQLException {
         int expectedQueryRows = Integer.parseInt(param.get("rowCount"));
@@ -1260,7 +1290,7 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertFalse(actualNotBetweenList.contains(param.get("testValue")));
     }
 
-    @Test(priority = 19, enabled = true, dataProvider = "yamlBetweenMethod", dependsOnMethods = {"test01BetweenQueryByPrimaryKeyRange"},
+    @Test(priority = 19, enabled = true, dataProvider = "yamlBetweenMethod", dependsOnMethods = {"test00CreateBetweenTable1"},
             description = "验证not between输入值范围超过数据实际范围返回空")
     public void test20NotBetweenQueryFullRange(Map<String, String> param) throws SQLException {
         Boolean actualQueryResult = betweenObj.notBetweenQueryByFullRange(param.get("betweenState"));
@@ -1269,7 +1299,7 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertFalse(actualQueryResult);
     }
 
-    @Test(priority = 20, enabled = true, dataProvider = "yamlBetweenMethod", dependsOnMethods = {"test01BetweenQueryByPrimaryKeyRange"},
+    @Test(priority = 20, enabled = true, dataProvider = "yamlBetweenMethod", dependsOnMethods = {"test00CreateBetweenTable1"},
             description = "验证not between查询范围起止时间日期值均无效，返回空集")
     public void test21NotBetweenQueryInvalidDateTime(Map<String, String> param) throws SQLException {
         Boolean actualQueryResult = betweenObj.notBetweenQueryInvalidDateTime(param.get("betweenState"));
@@ -1278,7 +1308,7 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertFalse(actualQueryResult);
     }
 
-    @Test(priority = 21, enabled = true, dependsOnMethods = {"test01BetweenQueryByPrimaryKeyRange"},
+    @Test(priority = 21, enabled = true, dependsOnMethods = {"test00CreateBetweenTable1"},
             description = "验证not between查询起始日期无效，按另一个区间范围返回数据")
     public void test22NotBetweenQueryInvalidStartDate() throws SQLException {
         List<List> expectedNotBetweenList = expectedTest22List();
@@ -1290,7 +1320,7 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertTrue(expectedNotBetweenList.containsAll(actualNotBetweenList));
     }
 
-    @Test(priority = 22, enabled = true, dependsOnMethods = {"test01BetweenQueryByPrimaryKeyRange"},
+    @Test(priority = 22, enabled = true, dependsOnMethods = {"test00CreateBetweenTable1"},
             description = "验证not between查询终止日期无效，按另一个区间范围返回数据")
     public void test23NotBetweenQueryInvalidEndDate() throws SQLException {
         List<List> expectedNotBetweenList = expectedTest23List();
@@ -1302,7 +1332,7 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertTrue(expectedNotBetweenList.containsAll(actualNotBetweenList));
     }
 
-    @Test(priority = 23, enabled = true, dependsOnMethods = {"test01BetweenQueryByPrimaryKeyRange"},
+    @Test(priority = 23, enabled = true, dependsOnMethods = {"test00CreateBetweenTable1"},
             description = "验证not between查询起始时间无效，按另一个区间范围返回数据")
     public void test24NotBetweenQueryInvalidStartTime() throws SQLException {
         List<List> expectedNotBetweenList = expectedTest24List();
@@ -1314,7 +1344,7 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertTrue(expectedNotBetweenList.containsAll(actualNotBetweenList));
     }
 
-    @Test(priority = 24, enabled = true, dependsOnMethods = {"test01BetweenQueryByPrimaryKeyRange"},
+    @Test(priority = 24, enabled = true, dependsOnMethods = {"test00CreateBetweenTable1"},
             description = "验证not between查询终止时间无效，按另一个区间范围返回数据")
     public void test25NotBetweenQueryInvalidEndTime() throws SQLException {
         List<List> expectedNotBetweenList = expectedTest25List();
@@ -1326,7 +1356,7 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertTrue(expectedNotBetweenList.containsAll(actualNotBetweenList));
     }
 
-    @Test(priority = 25, enabled = true, dependsOnMethods = {"test01BetweenQueryByPrimaryKeyRange"},
+    @Test(priority = 25, enabled = true, dependsOnMethods = {"test00CreateBetweenTable1"},
             description = "验证not between查询起始timestamp无效，按另一个区间范围返回数据")
     public void test26NotBetweenQueryInvalidStartTimestamp1() throws SQLException {
         List<List> expectedNotBetweenList = expectedTest26List();
@@ -1338,7 +1368,7 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertTrue(expectedNotBetweenList.containsAll(actualNotBetweenList));
     }
 
-    @Test(priority = 26, enabled = true, dependsOnMethods = {"test01BetweenQueryByPrimaryKeyRange"},
+    @Test(priority = 26, enabled = true, dependsOnMethods = {"test00CreateBetweenTable1"},
             description = "验证not between查询起始timestamp无效，按另一个区间范围返回数据")
     public void test27NotBetweenQueryInvalidStartTimestamp2() throws SQLException {
         List<List> expectedNotBetweenList = expectedTest27List();
@@ -1350,7 +1380,7 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertTrue(expectedNotBetweenList.containsAll(actualNotBetweenList));
     }
 
-    @Test(priority = 27, enabled = true, dependsOnMethods = {"test01BetweenQueryByPrimaryKeyRange"},
+    @Test(priority = 27, enabled = true, dependsOnMethods = {"test00CreateBetweenTable1"},
             description = "验证not between查询终止timestamp无效，按另一个区间范围返回数据")
     public void test28NotBetweenQueryInvalidEndTimestamp1() throws SQLException {
         List<List> expectedNotBetweenList = expectedTest28List();
@@ -1362,7 +1392,7 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertTrue(expectedNotBetweenList.containsAll(actualNotBetweenList));
     }
 
-    @Test(priority = 28, enabled = true, dependsOnMethods = {"test01BetweenQueryByPrimaryKeyRange"},
+    @Test(priority = 28, enabled = true, dependsOnMethods = {"test00CreateBetweenTable1"},
             description = "验证not between查询终止timestamp无效，按另一个区间范围返回数据")
     public void test29NotBetweenQueryInvalidEndTimestamp2() throws SQLException {
         List<List> expectedNotBetweenList = expectedTest29List();
@@ -1374,7 +1404,7 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertTrue(expectedNotBetweenList.containsAll(actualNotBetweenList));
     }
 
-    @Test(priority = 29, enabled = true, dataProvider = "yamlBetweenMethod", dependsOnMethods = {"test01BetweenQueryByPrimaryKeyRange"},
+    @Test(priority = 29, enabled = true, dataProvider = "yamlBetweenMethod", dependsOnMethods = {"test00CreateBetweenTable1"},
             description = "验证not between查询范围未匹配到数据返回空集")
     public void test30NotBetweenNoValueMatch(Map<String, String> param) throws SQLException {
         Boolean actualQueryResult = betweenObj.notBetweenQueryNoValueMatched(param.get("betweenState"));
@@ -1383,35 +1413,34 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertFalse(actualQueryResult);
     }
 
-    @Test(priority = 30, enabled = true, dataProvider = "yamlBetweenMethod", dependsOnMethods = {"test01BetweenQueryByPrimaryKeyRange"},
+    @Test(priority = 30, enabled = true, dataProvider = "yamlBetweenMethod", dependsOnMethods = {"test00CreateBetweenTable1"},
             expectedExceptions = SQLException.class, description = "验证between查询日期范围不支持的日期格式，预期失败")
     public void test31BetweenNotSupportDateFormat(Map<String, String> param) throws SQLException {
         Boolean actualQueryResult = betweenObj.betweenQueryNotSupportDateFormat(param.get("betweenState"));
     }
 
-    @Test(priority = 31, enabled = true, dataProvider = "yamlBetweenMethod", dependsOnMethods = {"test01BetweenQueryByPrimaryKeyRange"},
+    @Test(priority = 31, enabled = true, dataProvider = "yamlBetweenMethod", dependsOnMethods = {"test00CreateBetweenTable1"},
             expectedExceptions = SQLException.class, description = "验证not between查询日期范围不支持的日期格式，预期失败")
     public void test32NotBetweenNotSupportDateFormat(Map<String, String> param) throws SQLException {
         Boolean actualQueryResult = betweenObj.notBetweenQueryNotSupportDateFormat(param.get("betweenState"));
     }
 
-    @Test(priority = 32, enabled = true, dataProvider = "yamlBetweenMethod", dependsOnMethods = {"test01BetweenQueryByPrimaryKeyRange"},
+    @Test(priority = 32, enabled = true, dataProvider = "yamlBetweenMethod", dependsOnMethods = {"test00CreateBetweenTable1"},
             expectedExceptions = SQLException.class, description = "验证参数不正确，预期失败")
     public void test33IncorrectParam(Map<String, String> param) throws SQLException {
         Boolean actualQueryResult = betweenObj.queryIncorrectParam(param.get("betweenState"));
     }
 
-    @Test(priority = 33, enabled = true, dataProvider = "yamlBetweenMethod",
+    @Test(priority = 33, enabled = true, dataProvider = "yamlBetweenMethod", dependsOnMethods = {"test00CreateBetweenTable2"},
             description = "验证任意参数为Null返回空集")
     public void test34BetweenNullParam(Map<String, String> param) throws SQLException {
-        initBetweenTable2();
         Boolean actualQueryResult = betweenObj.betweenQueryNullValue(param.get("betweenState"));
         System.out.println("Actual: " + actualQueryResult);
 
         Assert.assertFalse(actualQueryResult);
     }
 
-    @Test(priority = 34, enabled = true, dependsOnMethods = {"test34BetweenNullParam"},
+    @Test(priority = 34, enabled = true, dependsOnMethods = {"test00CreateBetweenTable2"},
             description = "not between查询当起始值其中一个为null，返回另一个非null值的范围数据")
     public void test35NotBetweenSingleNullParam1() throws SQLException {
         List<List> expectedNotBetweenList = expectedTest35List();
@@ -1423,7 +1452,7 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertTrue(expectedNotBetweenList.containsAll(actualNotBetweenList));
     }
 
-    @Test(priority = 35, enabled = true, dependsOnMethods = {"test34BetweenNullParam"},
+    @Test(priority = 35, enabled = true, dependsOnMethods = {"test00CreateBetweenTable2"},
             description = "not between查询当起始值其中一个为null，返回另一个非null值的范围数据")
     public void test36NotBetweenSingleNullParam1() throws SQLException {
         List<List> expectedNotBetweenList = expectedTest36List();
@@ -1435,7 +1464,7 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertTrue(expectedNotBetweenList.containsAll(actualNotBetweenList));
     }
 
-    @Test(priority = 36, enabled = true, dependsOnMethods = {"test34BetweenNullParam"},
+    @Test(priority = 36, enabled = true, dependsOnMethods = {"test00CreateBetweenTable2"},
             description = "not between查询当起始值其中一个为null，返回另一个非null值的范围数据")
     public void test37NotBetweenSingleNullParam3() throws SQLException {
         List<List> expectedNotBetweenList = expectedTest37List();
@@ -1447,7 +1476,7 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertTrue(expectedNotBetweenList.containsAll(actualNotBetweenList));
     }
 
-    @Test(priority = 37, enabled = true, dataProvider = "yamlBetweenMethod",dependsOnMethods = {"test34BetweenNullParam"},
+    @Test(priority = 37, enabled = true, dataProvider = "yamlBetweenMethod",dependsOnMethods = {"test00CreateBetweenTable2"},
             description = "验证not between起止参数均为Null返回空集")
     public void test38NotBetweenBothNullParam(Map<String, String> param) throws SQLException {
         Boolean actualQueryResult = betweenObj.notBetweenQueryBothNullValue(param.get("betweenState"));
@@ -1456,19 +1485,18 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertFalse(actualQueryResult);
     }
 
-    @Test(priority = 38, enabled = true, dataProvider = "yamlBetweenMethod",
+    @Test(priority = 38, enabled = true, dataProvider = "yamlBetweenMethod", dependsOnMethods = {"test00CreateBetweenTable3"},
             description = "验证整个字段所有值为Null，返回空集")
     public void test39ColumnNull(Map<String, String> param) throws SQLException {
-        initBetweenTable3();
         Boolean actualQueryResult = betweenObj.queryColumnNullValue(param.get("betweenState"));
         System.out.println("Actual: " + actualQueryResult);
 
         Assert.assertFalse(actualQueryResult);
     }
 
-    @Test(priority = 39, enabled = true, description = "验证between查询，字段值为null记录跳过")
+    @Test(priority = 39, enabled = true, dependsOnMethods = {"test00CreateBetweenTable4"},
+            description = "验证between查询，字段值为null记录跳过")
     public void test40BetweenColumnPartNull() throws SQLException {
-        initBetweenTable4();
         List<List> expectedNotBetweenList = expectedTest40List();
         System.out.println("Expected: " + expectedNotBetweenList);
         List<List> actualNotBetweenList = betweenObj.betweenQueryColumnPartNull();
@@ -1478,7 +1506,7 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertTrue(expectedNotBetweenList.containsAll(actualNotBetweenList));
     }
 
-    @Test(priority = 40, enabled = true, dependsOnMethods = {"test40BetweenColumnPartNull"},
+    @Test(priority = 40, enabled = true, dependsOnMethods = {"test00CreateBetweenTable4"},
             description = "验证not between查询，字段值为null记录跳过")
     public void test41NotBetweenColumnPartNull() throws SQLException {
         List<List> expectedNotBetweenList = expectedTest41List();
@@ -1490,7 +1518,7 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertTrue(expectedNotBetweenList.containsAll(actualNotBetweenList));
     }
 
-    @Test(priority = 41, enabled = true, dependsOnMethods = {"test01BetweenQueryByPrimaryKeyRange"},
+    @Test(priority = 41, enabled = true, dependsOnMethods = {"test00CreateBetweenTable1"},
             description = "验证多个between and查询")
     public void test42MultiBetweenQuery() throws SQLException {
         List<List> expectedBetweenList = expectedTest42List();
@@ -1502,7 +1530,7 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertTrue(expectedBetweenList.containsAll(actualBetweenList));
     }
 
-    @Test(priority = 42, enabled = true, dependsOnMethods = {"test01BetweenQueryByPrimaryKeyRange"},
+    @Test(priority = 42, enabled = true, dependsOnMethods = {"test00CreateBetweenTable1"},
             description = "验证多个not between and查询")
     public void test43MultiNotBetweenQuery() throws SQLException {
         List<List> expectedBetweenList = expectedTest43List();
@@ -1514,7 +1542,7 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertTrue(expectedBetweenList.containsAll(actualBetweenList));
     }
 
-    @Test(priority = 43, enabled = true, dependsOnMethods = {"test01BetweenQueryByPrimaryKeyRange"},
+    @Test(priority = 43, enabled = true, dependsOnMethods = {"test00CreateBetweenTable1"},
             description = "验证between和not between一起使用进行查询")
     public void test44BetweenAndNotBetweenQueryTogether1() throws SQLException {
         List<List> expectedBetweenList = expectedTest44List();
@@ -1525,7 +1553,7 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertEquals(actualBetweenList, expectedBetweenList);
     }
 
-    @Test(priority = 44, enabled = true, dependsOnMethods = {"test01BetweenQueryByPrimaryKeyRange"},
+    @Test(priority = 44, enabled = true, dependsOnMethods = {"test00CreateBetweenTable1"},
             description = "验证between和not between一起使用进行查询")
     public void test45BetweenAndNotBetweenQueryTogether2() throws SQLException {
         List<List> expectedBetweenList = expectedTest45List();
@@ -1536,7 +1564,7 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertEquals(actualBetweenList, expectedBetweenList);
     }
 
-    @Test(priority = 45, enabled = true, dependsOnMethods = {"test01BetweenQueryByPrimaryKeyRange"},
+    @Test(priority = 45, enabled = true, dependsOnMethods = {"test00CreateBetweenTable1"},
             description = "验证between查询使用聚合函数")
     public void test46BetweenQueryWithAggrFunc() throws SQLException {
         List expectedBetweenList = expectedTest46List();
@@ -1547,7 +1575,7 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertEquals(actualBetweenList, expectedBetweenList);
     }
 
-    @Test(priority = 46, enabled = true, dependsOnMethods = {"test01BetweenQueryByPrimaryKeyRange"},
+    @Test(priority = 46, enabled = true, dependsOnMethods = {"test00CreateBetweenTable1"},
             description = "验证not between查询使用聚合函数")
     public void test47NotBetweenQueryWithAggrFunc() throws SQLException {
         List expectedBetweenList = expectedTest47List();
@@ -1558,7 +1586,7 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertEquals(actualBetweenList, expectedBetweenList);
     }
 
-    @Test(priority = 47, enabled = true, dependsOnMethods = {"test01BetweenQueryByPrimaryKeyRange"},
+    @Test(priority = 47, enabled = true, dependsOnMethods = {"test00CreateBetweenTable1"},
             description = "验证between查询使用分组")
     public void test48BetweenQueryWithAggrFunc() throws SQLException {
         List<List> expectedBetweenList = expectedTest48List();
@@ -1570,7 +1598,7 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertTrue(expectedBetweenList.containsAll(actualBetweenList));
     }
 
-    @Test(priority = 48, enabled = true, dependsOnMethods = {"test01BetweenQueryByPrimaryKeyRange"},
+    @Test(priority = 48, enabled = true, dependsOnMethods = {"test00CreateBetweenTable1"},
             description = "验证not between查询使用分组")
     public void test49BetweenQueryWithAggrFunc() throws SQLException {
         List<List> expectedBetweenList = expectedTest49List();
@@ -1581,9 +1609,9 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertEquals(actualBetweenList,expectedBetweenList);
     }
 
-    @Test(priority = 49, enabled = true, description = "验证between语句在update语句中使用,更新字符串")
+    @Test(priority = 49, enabled = true, dependsOnMethods = {"test00CreateBetweenTable5"},
+            description = "验证between语句在update语句中使用,更新字符串")
     public void test50BetweenInCharUpdateState() throws SQLException {
-        initBetweenTable5();
         List<List> expectedBetweenList = expectedTest50List();
         System.out.println("Expected: " + expectedBetweenList);
         List<List> actualBetweenList = betweenObj.betweenInUpdateCharState();
@@ -1632,7 +1660,6 @@ public class TestBetweenAndState extends YamlDataHelper {
     @Test(priority = 53, enabled = true, dependsOnMethods = {"test53BetweenInDateTimeUpdateState"},
             description = "验证not between语句在update语句中使用,更新字符串")
     public void test54NotBetweenInCharUpdateState() throws SQLException {
-        initBetweenTable5();
         List<List> expectedBetweenList = expectedTest54List();
         System.out.println("Expected: " + expectedBetweenList);
         List<List> actualBetweenList = betweenObj.notBetweenInUpdateCharState();
@@ -1744,9 +1771,9 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertEquals(actualEffectRows, 0);
     }
 
-    @Test(priority = 63, enabled = true, description = "验证not between在非等值连接中使用")
+    @Test(priority = 63, enabled = true, dependsOnMethods = {"test00CreateBetweenTable67"},
+            description = "验证not between在非等值连接中使用")
     public void test64BetweenInInnerJoin() throws SQLException {
-        initBetweenTable6And7();
         List<List> expectedBetweenList = expectedTest64List();
         System.out.println("Expected: " + expectedBetweenList);
         List<List> actualBetweenList = betweenObj.betweenInInnerJoin();
@@ -1756,7 +1783,7 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertTrue(expectedBetweenList.containsAll(actualBetweenList));
     }
 
-    @Test(priority = 64, enabled = true, dependsOnMethods = {"test64BetweenInInnerJoin"},
+    @Test(priority = 64, enabled = true, dependsOnMethods = {"test00CreateBetweenTable67"},
             description = "验证not between在非等值连接中使用")
     public void test65NotBetweenInInnerJoin() throws SQLException {
         List<List> expectedBetweenList = expectedTest65List();
@@ -1767,7 +1794,6 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertTrue(actualBetweenList.containsAll(expectedBetweenList));
         Assert.assertTrue(expectedBetweenList.containsAll(actualBetweenList));
     }
-
 
 
     @AfterClass(alwaysRun = true, description = "测试完成后删除数据和表格并关闭连接")

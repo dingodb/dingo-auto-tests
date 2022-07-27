@@ -21,6 +21,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class NumericFuncs {
 //    private static final String defaultConnectIP = "172.20.3.27";
@@ -40,6 +42,22 @@ public class NumericFuncs {
             connection = DriverManager.getConnection(connectUrl);
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+
+    //创建数值函数测试表
+    public void numericTableCreate(String numtest_Meta) throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String createTableSQL = "create table numtest " + numtest_Meta;
+            statement.execute(createTableSQL);
+        }
+    }
+
+    //数值函数测试表插入数据
+    public void insertTableValues(String numtest_values) throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String insertValuesSQL = "insert into numtest values " + numtest_values;
+            statement.execute(insertValuesSQL);
         }
     }
 
@@ -240,9 +258,259 @@ public class NumericFuncs {
         }
     }
 
+    //mod函数，正向参数用例
+    public String modPositiveArg(String num1, String num2) throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String modSQL = "select mod(" + num1 + "," + num2 +")";
+            ResultSet resultSet = statement.executeQuery(modSQL);
+            String modStr = null;
+            while (resultSet.next()){
+                modStr = resultSet.getString(1);
+            }
+            statement.close();
+            return modStr;
+        }
+    }
 
+    //mod函数，参数个数不符，预期失败
+    public void modWrongArg(String modState) throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            statement.executeQuery(modState);
+        }
+    }
 
+    //mod函数，x为字符串，y为数值，预期失败
+    public void modxStr(String num1, String num2) throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String modSQL = "select mod('" + num1 + "'," + num2 +")";
+            statement.executeQuery(modSQL);
+        }
+    }
 
+    //mod函数，x为数值，y为字符串，预期失败
+    public void modyStr(String num1, String num2) throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String modSQL = "select mod(" + num1 + ",'" + num2 +"')";
+            statement.executeQuery(modSQL);
+        }
+    }
 
+    //mod函数，xy均为字符串，预期失败
+    public void modxyStr(String num1, String num2) throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String modSQL = "select mod('" + num1 + "','" + num2 +"')";
+            statement.executeQuery(modSQL);
+        }
+    }
+
+    //验证pow函数在表格中使用
+    public List powInTable1() throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String powSQL = "select pow(age,id) pai from numtest";
+            ResultSet resultSet = statement.executeQuery(powSQL);
+            List powList = new ArrayList<>();
+            while (resultSet.next()) {
+                powList.add(resultSet.getString("pai"));
+            }
+            statement.close();
+            return powList;
+        }
+    }
+
+    //验证pow函数在表格中使用
+    public List powInTable2() throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String powSQL = "select pow(amount,id) pai from numtest where id<6";
+            ResultSet resultSet = statement.executeQuery(powSQL);
+            List powList = new ArrayList<>();
+            while (resultSet.next()) {
+                powList.add(resultSet.getString("pai"));
+            }
+            statement.close();
+            return powList;
+        }
+    }
+
+    //验证round函数在表格中使用
+    public List roundInTable1() throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String roundSQL = "select round(amount,1) ra from numtest";
+            ResultSet resultSet = statement.executeQuery(roundSQL);
+            List roundList = new ArrayList<>();
+            while (resultSet.next()) {
+                roundList.add(resultSet.getString("ra"));
+            }
+            statement.close();
+            return roundList;
+        }
+    }
+
+    //验证round函数在表格中使用
+    public List roundInTable2() throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String roundSQL = "select round(amount) ra from numtest";
+            ResultSet resultSet = statement.executeQuery(roundSQL);
+            List roundList = new ArrayList<>();
+            while (resultSet.next()) {
+                roundList.add(resultSet.getString("ra"));
+            }
+            statement.close();
+            return roundList;
+        }
+    }
+
+    //验证round函数在表格中使用
+    public List roundInTable3() throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String roundSQL = "select round(amount,-2) ra from numtest where abs(amount)>50";
+            ResultSet resultSet = statement.executeQuery(roundSQL);
+            List roundList = new ArrayList<>();
+            while (resultSet.next()) {
+                roundList.add(resultSet.getString("ra"));
+            }
+            statement.close();
+            return roundList;
+        }
+    }
+
+    //验证ceiling函数在表格中使用
+    public List ceilingInTable1() throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String ceilingSQL = "select ceiling(amount) ca from numtest";
+            ResultSet resultSet = statement.executeQuery(ceilingSQL);
+            List ceilingList = new ArrayList<>();
+            while (resultSet.next()) {
+                ceilingList.add(resultSet.getString("ca"));
+            }
+            statement.close();
+            return ceilingList;
+        }
+    }
+
+    //验证floor函数在表格中使用
+    public List floorInTable1() throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String floorSQL = "select floor(amount) fa from numtest";
+            ResultSet resultSet = statement.executeQuery(floorSQL);
+            List floorList = new ArrayList<>();
+            while (resultSet.next()) {
+                floorList.add(resultSet.getString("fa"));
+            }
+            statement.close();
+            return floorList;
+        }
+    }
+
+    //验证abs函数在表格中使用
+    public List absInTable1() throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String absSQL = "select abs(amount) aa from numtest";
+            ResultSet resultSet = statement.executeQuery(absSQL);
+            List absList = new ArrayList<>();
+            while (resultSet.next()) {
+                absList.add(resultSet.getString("aa"));
+            }
+            statement.close();
+            return absList;
+        }
+    }
+
+    //验证mod函数在表格中使用
+    public List modInTable1() throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String modSQL = "select mod(age,id) mai from numtest";
+            ResultSet resultSet = statement.executeQuery(modSQL);
+            List modList = new ArrayList<>();
+            while (resultSet.next()) {
+                modList.add(resultSet.getString("mai"));
+            }
+            statement.close();
+            return modList;
+        }
+    }
+
+    //验证mod函数在表格中使用
+    public List modInTable2() throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String modSQL = "select mod(amount,age) maa from numtest";
+            ResultSet resultSet = statement.executeQuery(modSQL);
+            List modList = new ArrayList<>();
+            while (resultSet.next()) {
+                modList.add(resultSet.getString("maa"));
+            }
+            statement.close();
+            return modList;
+        }
+    }
+
+    //验证mod函数在表格中使用
+    public List modInTable3() throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String modSQL = "select mod(age,amount) maa from numtest";
+            ResultSet resultSet = statement.executeQuery(modSQL);
+            List modList = new ArrayList<>();
+            while (resultSet.next()) {
+                modList.add(resultSet.getString("maa"));
+            }
+            statement.close();
+            return modList;
+        }
+    }
+
+    //验证mod函数在表格中使用
+    public List modInTable4() throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String modSQL = "select mod(age,amount) maa from numtest where age>20 or abs(amount)<50";
+            ResultSet resultSet = statement.executeQuery(modSQL);
+            List modList = new ArrayList<>();
+            while (resultSet.next()) {
+                modList.add(resultSet.getString("maa"));
+            }
+            statement.close();
+            return modList;
+        }
+    }
+
+    //验证mod函数在where条件语句中使用
+    public List modInWhereState1() throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String modSQL = "select * from numtest where mod(id,2)=0";
+            ResultSet resultSet = statement.executeQuery(modSQL);
+            List modList = new ArrayList<>();
+            while (resultSet.next()) {
+                modList.add(resultSet.getInt(1));
+            }
+            statement.close();
+            return modList;
+        }
+    }
+
+    //验证mod函数在where条件语句中使用
+    public List modInWhereState2() throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String modSQL = "select * from numtest where mod(id,2)<>0";
+            ResultSet resultSet = statement.executeQuery(modSQL);
+            List modList = new ArrayList<>();
+            while (resultSet.next()) {
+                modList.add(resultSet.getInt(1));
+            }
+            statement.close();
+            return modList;
+        }
+    }
+
+    //验证mod函数在where条件语句中使用
+    public List modInWhereState3() throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String modSQL = "select * from numtest where mod(id,2)=1";
+            ResultSet resultSet = statement.executeQuery(modSQL);
+            List modList = new ArrayList<>();
+            while (resultSet.next()) {
+                modList.add(resultSet.getInt(1));
+            }
+            statement.close();
+            return modList;
+        }
+    }
 
 }
