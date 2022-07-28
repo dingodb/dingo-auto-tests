@@ -18,11 +18,13 @@ package io.dingodb.test;
 
 import io.dingodb.dailytest.NumericFuncs;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import utils.FileReaderUtil;
 
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -517,6 +519,34 @@ public class TestNumericFuncs {
 
         Assert.assertTrue(actualList.containsAll(expectedList));
         Assert.assertTrue(expectedList.containsAll(actualList));
+    }
+
+    @AfterClass(alwaysRun = true, description = "测试完成后删除数据和表格并关闭连接")
+    public void tearDownAll() throws SQLException {
+        Statement tearDownStatement = null;
+        try{
+            tearDownStatement = numericObj.connection.createStatement();
+            tearDownStatement.execute("delete from numtest");
+            tearDownStatement.execute("drop table numtest");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            try{
+                if(tearDownStatement != null) {
+                    tearDownStatement.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            try{
+                if(numericObj.connection != null) {
+                    numericObj.connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }
