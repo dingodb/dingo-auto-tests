@@ -202,7 +202,7 @@ public class BetweenState {
                 List rowList = new ArrayList<>();
                 rowList.add(resultSet.getString("id"));
                 rowList.add(resultSet.getString("name"));
-                rowList.add(resultSet.getInt("age"));
+                rowList.add(resultSet.getString("age"));
                 betweenList.add(rowList);
             }
             statement.close();
@@ -238,7 +238,7 @@ public class BetweenState {
                 List rowList = new ArrayList<>();
                 rowList.add(resultSet.getString("id"));
                 rowList.add(resultSet.getString("name"));
-                rowList.add(resultSet.getInt("amount"));
+                rowList.add(resultSet.getString("amount"));
                 betweenList.add(rowList);
             }
             statement.close();

@@ -47,7 +47,8 @@ public class YamlDataHelper{
             Map<String, String> tmp = new HashMap<>();
             for (Map.Entry<String, String> nameMapEntry : numNameMapValue.entrySet()){
                 String numKey = nameMapEntry.getKey();
-                String nameValue = nameMapEntry.getValue();
+                String nameValue = String.valueOf(nameMapEntry.getValue());
+//                String nameValue = nameMapEntry.getValue();
                 tmp.put(numKey, nameValue);
             }
             list.add(tmp);
@@ -743,7 +744,7 @@ public class YamlDataHelper{
                 break;
             }
 
-            case "test23PowPositiveArg": {
+            case "test23ModPositiveArg": {
                 yamlNumericFuncList = getYamlList(iniReader.getValue("NumericFuncsYaml", "mod_positive"));
                 break;
             }

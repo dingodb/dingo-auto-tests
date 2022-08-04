@@ -232,7 +232,7 @@ public class NumericFuncs {
     //abs函数，正向用例
     public String absPositiveArg(String inputNum) throws SQLException {
         try(Statement statement = connection.createStatement()) {
-            String absSQL = "select floor(" + inputNum + ")";
+            String absSQL = "select abs(" + inputNum + ")";
             ResultSet resultSet = statement.executeQuery(absSQL);
             String absStr = null;
             while (resultSet.next()){

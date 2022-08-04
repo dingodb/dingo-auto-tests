@@ -22,6 +22,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import utils.FileReaderUtil;
+import utils.YamlDataHelper;
 
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -29,7 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class TestNumericFuncs {
+public class TestNumericFuncs extends YamlDataHelper {
     public static NumericFuncs numericObj = new NumericFuncs();
 
     public void initNumtestTalbe() throws SQLException {
@@ -52,7 +53,7 @@ public class TestNumericFuncs {
 
     public List expectedPowList2() {
         List powList2 = new ArrayList();
-        String[] dataArray = {"2.58","11904.9921",null,"0","-9127173372.88918"};
+        String[] dataArray = {"2.58","11904.9921",null,"0.0","-9127173372.8891805099"};
         for (int i=0; i<dataArray.length; i++) {
             powList2.add(dataArray[i]);
         }
@@ -106,7 +107,7 @@ public class TestNumericFuncs {
 
     public List expectedABSList1() {
         List absList1 = new ArrayList();
-        String[] dataArray = {"2.58","109.11",null,"0.0","98.19","5331.9843","56","343.45"};
+        String[] dataArray = {"2.58","109.11",null,"0.0","98.19","5331.9843","56.0","343.45"};
         for (int i=0; i<dataArray.length; i++) {
             absList1.add(dataArray[i]);
         }
@@ -185,7 +186,11 @@ public class TestNumericFuncs {
 
         String actualRes = numericObj.powPositiveArg(param.get("num1"), param.get("num2"));
         System.out.println("Actual: " + actualRes);
-        Assert.assertEquals(actualRes, exepectedRes);
+        if(exepectedRes != "null") {
+            Assert.assertEquals(actualRes, exepectedRes);
+        } else {
+            Assert.assertNull(actualRes);
+        }
     }
 
     @Test(priority = 1, enabled = true, dataProvider = "yamlNumericFuncMethod", expectedExceptions = SQLException.class,
@@ -219,7 +224,12 @@ public class TestNumericFuncs {
 
         String actualRes = numericObj.roundPositiveArg(param.get("inputNum"), param.get("decimalLen"));
         System.out.println("Actual: " + actualRes);
-        Assert.assertEquals(actualRes, exepectedRes);
+        if(exepectedRes != "null") {
+            Assert.assertEquals(actualRes, exepectedRes);
+        } else {
+            Assert.assertNull(actualRes);
+        }
+
     }
 
     @Test(priority = 6, enabled = true, dataProvider = "yamlNumericFuncMethod", expectedExceptions = SQLException.class,
@@ -269,15 +279,21 @@ public class TestNumericFuncs {
 
         String actualRes = numericObj.ceilingPositiveArg(param.get("inputNum"));
         System.out.println("Actual: " + actualRes);
-        Assert.assertEquals(actualRes, exepectedRes);
+        if (exepectedRes != "null") {
+            Assert.assertEquals(actualRes, exepectedRes);
+        } else {
+            Assert.assertNull(actualRes);
+        }
     }
 
-    @Test(priority = 13, enabled = true, expectedExceptions = SQLException.class, description = "验证ceiling函数参数个数不符，预期失败")
+    @Test(priority = 13, enabled = true, dataProvider = "yamlNumericFuncMethod",
+            expectedExceptions = SQLException.class, description = "验证ceiling函数参数个数不符，预期失败")
     public void test14CeilingWrongArg(Map<String, String> param) throws SQLException {
         numericObj.ceilingWrongArg(param.get("ceilingState"));
     }
 
-    @Test(priority = 14, enabled = true, expectedExceptions = SQLException.class, description = "验证ceiling函数参数为字符串，预期失败")
+    @Test(priority = 14, enabled = true, dataProvider = "yamlNumericFuncMethod",
+            expectedExceptions = SQLException.class, description = "验证ceiling函数参数为字符串，预期失败")
     public void test15CeilingStrArg(Map<String, String> param) throws SQLException {
         numericObj.ceilingStrArg(param.get("inputNum"));
     }
@@ -289,7 +305,11 @@ public class TestNumericFuncs {
 
         String actualRes = numericObj.ceilFunc(param.get("inputNum"));
         System.out.println("Actual: " + actualRes);
-        Assert.assertEquals(actualRes, exepectedRes);
+        if (exepectedRes != "null") {
+            Assert.assertEquals(actualRes, exepectedRes);
+        } else {
+            Assert.assertNull(actualRes);
+        }
     }
 
     @Test(priority = 16, enabled = true, dataProvider = "yamlNumericFuncMethod", description = "验证floor函数，正常返回不大于x的最大整数值")
@@ -299,15 +319,21 @@ public class TestNumericFuncs {
 
         String actualRes = numericObj.floorPositiveArg(param.get("inputNum"));
         System.out.println("Actual: " + actualRes);
-        Assert.assertEquals(actualRes, exepectedRes);
+        if (exepectedRes != "null") {
+            Assert.assertEquals(actualRes, exepectedRes);
+        } else {
+            Assert.assertNull(actualRes);
+        }
     }
 
-    @Test(priority = 17, enabled = true, expectedExceptions = SQLException.class, description = "验证floor函数参数个数不符，预期失败")
+    @Test(priority = 17, enabled = true, dataProvider = "yamlNumericFuncMethod",
+            expectedExceptions = SQLException.class, description = "验证floor函数参数个数不符，预期失败")
     public void test18FloorWrongArg(Map<String, String> param) throws SQLException {
         numericObj.floorWrongArg(param.get("floorState"));
     }
 
-    @Test(priority = 18, enabled = true, expectedExceptions = SQLException.class, description = "验证floor函数参数为字符串，预期失败")
+    @Test(priority = 18, enabled = true, dataProvider = "yamlNumericFuncMethod",
+            expectedExceptions = SQLException.class, description = "验证floor函数参数为字符串，预期失败")
     public void test19FloorStrArg(Map<String, String> param) throws SQLException {
         numericObj.floorStrArg(param.get("inputNum"));
     }
@@ -319,30 +345,41 @@ public class TestNumericFuncs {
 
         String actualRes = numericObj.absPositiveArg(param.get("inputNum"));
         System.out.println("Actual: " + actualRes);
-        Assert.assertEquals(actualRes, exepectedRes);
+        if (exepectedRes != "null") {
+            Assert.assertEquals(actualRes, exepectedRes);
+        } else {
+            Assert.assertNull(actualRes);
+        }
     }
 
-    @Test(priority = 20, enabled = true, expectedExceptions = SQLException.class, description = "验证abs函数参数个数不符，预期失败")
+    @Test(priority = 20, enabled = true, dataProvider = "yamlNumericFuncMethod",
+            expectedExceptions = SQLException.class, description = "验证abs函数参数个数不符，预期失败")
     public void test21ABSWrongArg(Map<String, String> param) throws SQLException {
         numericObj.absWrongArg(param.get("absState"));
     }
 
-    @Test(priority = 21, enabled = true, expectedExceptions = SQLException.class, description = "验证abs函数参数为字符串，预期失败")
+    @Test(priority = 21, enabled = true, dataProvider = "yamlNumericFuncMethod",
+            expectedExceptions = SQLException.class, description = "验证abs函数参数为字符串，预期失败")
     public void test22ABSStrArg(Map<String, String> param) throws SQLException {
         numericObj.absStrArg(param.get("inputNum"));
     }
 
     @Test(priority = 22, enabled = true, dataProvider = "yamlNumericFuncMethod", description = "验证mod函数，正向用例")
-    public void test23PowPositiveArg(Map<String, String> param) throws SQLException {
+    public void test23ModPositiveArg(Map<String, String> param) throws SQLException {
         String exepectedRes = param.get("outNum");
         System.out.println("Expected: " + exepectedRes);
 
         String actualRes = numericObj.modPositiveArg(param.get("num1"), param.get("num2"));
         System.out.println("Actual: " + actualRes);
-        Assert.assertEquals(actualRes, exepectedRes);
+        if (exepectedRes != "null") {
+            Assert.assertEquals(actualRes, exepectedRes);
+        } else {
+            Assert.assertNull(actualRes);
+        }
     }
 
-    @Test(priority = 23, enabled = true, expectedExceptions = SQLException.class, description = "验证mod函数参数非法，预期失败")
+    @Test(priority = 23, enabled = true, dataProvider = "yamlNumericFuncMethod",
+            expectedExceptions = SQLException.class, description = "验证mod函数参数非法，预期失败")
     public void test24ModWrongArg(Map<String, String> param) throws SQLException {
         numericObj.modWrongArg(param.get("modState"));
     }

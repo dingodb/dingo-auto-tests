@@ -731,7 +731,11 @@ public class TestStrFuncs extends YamlDataHelper {
         String actualStr = strObj.repeatCase148(param.get("repeatStr"), param.get("repeatNum"));
         System.out.println("Actual：" + actualStr);
 
-        Assert.assertEquals(actualStr, expectedStr);
+        if (expectedStr != "null") {
+            Assert.assertEquals(actualStr, expectedStr);
+        } else {
+            Assert.assertNull(actualStr);
+        }
     }
 
     @Test(enabled = true, dataProvider = "yamlStrFuncMethod",description = "验证repeat复制数值")
@@ -741,7 +745,11 @@ public class TestStrFuncs extends YamlDataHelper {
         String actualStr = strObj.repeatCase157(param.get("repeatStr"), param.get("repeatNum"));
         System.out.println("Actual：" + actualStr);
 
-        Assert.assertEquals(actualStr, expectedStr);
+        if (expectedStr != "null") {
+            Assert.assertEquals(actualStr, expectedStr);
+        } else {
+            Assert.assertNull(actualStr);
+        }
     }
 
     @Test(enabled = true, description = "验证多个repeat使用")
@@ -818,7 +826,11 @@ public class TestStrFuncs extends YamlDataHelper {
         String actualStr = strObj.replaceCase173(param.get("replaceParentStr"), param.get("replaceSubStr"), param.get("replaceStr"));
         System.out.println("Actual：" + actualStr);
 
-        Assert.assertEquals(actualStr, expectedStr);
+        if (expectedStr != "null") {
+            Assert.assertEquals(actualStr, expectedStr);
+        } else {
+            Assert.assertNull(actualStr);
+        }
     }
 
     @Test(enabled = true, dataProvider = "yamlStrFuncMethod",description = "验证replace函数替换数值为字符串")
@@ -828,7 +840,11 @@ public class TestStrFuncs extends YamlDataHelper {
         String actualStr = strObj.replaceCase175(param.get("replaceParentStr"), param.get("replaceSubStr"), param.get("replaceStr"));
         System.out.println("Actual：" + actualStr);
 
-        Assert.assertEquals(actualStr, expectedStr);
+        if (expectedStr != "null") {
+            Assert.assertEquals(actualStr, expectedStr);
+        } else {
+            Assert.assertNull(actualStr);
+        }
     }
 
     @Test(enabled = true, dependsOnMethods = "test00CreateStrTable2",
@@ -1033,8 +1049,11 @@ public class TestStrFuncs extends YamlDataHelper {
         System.out.println("Expected：" + expectedStr);
         String actualStr = strObj.midCase210(param.get("midStr"), param.get("midStartIndex"), param.get("midLength"));
         System.out.println("Actual：" + actualStr);
-
-        Assert.assertEquals(actualStr, expectedStr);
+        if(expectedStr != "null") {
+            Assert.assertEquals(actualStr, expectedStr);
+        } else {
+            Assert.assertNull(actualStr);
+        }
     }
 
     @Test(enabled = true, dataProvider = "yamlStrFuncMethod",expectedExceptions = SQLException.class,
@@ -1082,7 +1101,11 @@ public class TestStrFuncs extends YamlDataHelper {
         String actualStr = strObj.subStringCase231(param.get("subStr"), param.get("subStartIndex"), param.get("subLength"));
         System.out.println("Actual：" + actualStr);
 
-        Assert.assertEquals(actualStr, expectedStr);
+        if (expectedStr != "null") {
+            Assert.assertEquals(actualStr, expectedStr);
+        } else {
+            Assert.assertNull(actualStr);
+        }
     }
 
     @Test(enabled = true, dataProvider = "yamlStrFuncMethod",expectedExceptions = SQLException.class,
@@ -1143,7 +1166,11 @@ public class TestStrFuncs extends YamlDataHelper {
         String actualStr = strObj.reverseCase249(param.get("reverseStr"));
         System.out.println("Actual：" + actualStr);
 
-        Assert.assertEquals(actualStr, expectedStr);
+        if (expectedStr != "null") {
+            Assert.assertEquals(actualStr, expectedStr);
+        } else {
+            Assert.assertNull(actualStr);
+        }
     }
 
     @Test(enabled = true, dataProvider = "yamlStrFuncMethod",expectedExceptions = SQLException.class,

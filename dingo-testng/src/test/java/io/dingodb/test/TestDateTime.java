@@ -542,7 +542,12 @@ public class TestDateTime extends YamlDataHelper{
         System.out.println("Expected: " + expectedDateDiff);
         String actualDateDiff = dateTimeObj.dateDiffStateArg(param.get("datediffState"));
         System.out.println("Actual: " + actualDateDiff);
-        Assert.assertEquals(actualDateDiff, expectedDateDiff);
+
+        if (expectedDateDiff != "null") {
+            Assert.assertEquals(actualDateDiff, expectedDateDiff);
+        } else {
+            Assert.assertNull(actualDateDiff);
+        }
     }
 
     @Test(priority = 15, enabled = true, dependsOnMethods = {"test02DateInsert"}, dataProvider = "yamlDataMethod", description = "验证插入不同格式的日期成功")
