@@ -5,7 +5,7 @@ testID1001532-02:
 testID1001532-03:
   betweenState: "select id,amount from betweenTest where amount between -1000000 and 1000000"
 testID1001533-01:
-  betweenState: "select * from betweenTest where birthday between '1900-01-01' and 2023-01-01"
+  betweenState: "select * from betweenTest where birthday between '1900-01-01' and '2023-01-01'"
 testID1001533-02:
   betweenState: "select id,create_time from betweenTest where create_time between '00:00:00' and '23:59:59'"
 testID1001533-03:

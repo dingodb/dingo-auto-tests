@@ -5,7 +5,7 @@ testID1001560-02:
 testID1001560-03:
   betweenState: "select id,amount from betweenTest where amount not between 0 and 100000"
 testID1001561-01:
-  betweenState: "select * from betweenTest where address not between between '7788' and 'Yang GU'"
+  betweenState: "select * from betweenTest where address not between ' ' and 'Yang GU'"
 testID1001562-01:
   betweenState: "select * from betweenTest where id <10 and (birthday not between '1949-01-01' and '2022-03-04')"
 testID1001562-02:

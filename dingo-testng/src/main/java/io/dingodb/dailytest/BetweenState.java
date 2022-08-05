@@ -220,7 +220,7 @@ public class BetweenState {
                 List rowList = new ArrayList<>();
                 rowList.add(resultSet.getString("id"));
                 rowList.add(resultSet.getString("name"));
-                rowList.add(resultSet.getInt("age"));
+                rowList.add(resultSet.getString("age"));
                 betweenList.add(rowList);
             }
             statement.close();
@@ -256,7 +256,7 @@ public class BetweenState {
                 List rowList = new ArrayList<>();
                 rowList.add(resultSet.getString("id"));
                 rowList.add(resultSet.getString("name"));
-                rowList.add(resultSet.getInt("amount"));
+                rowList.add(resultSet.getString("amount"));
                 betweenList.add(rowList);
             }
             statement.close();
@@ -1141,14 +1141,14 @@ public class BetweenState {
             String betweenUpdateSQL = "update betweenTest5 set is_delete=true where id between 16 and 20";
             statement.executeUpdate(betweenUpdateSQL);
 
-            String betweenQuerySQL = "select id,name,id_delete from betweenTest5 where id between 16 and 20";
+            String betweenQuerySQL = "select id,name,is_delete from betweenTest5 where id between 16 and 20";
             ResultSet resultSet = statement.executeQuery(betweenQuerySQL);
             List<List> betweenList = new ArrayList<List>();
             while (resultSet.next()) {
                 List rowList = new ArrayList();
                 rowList.add(resultSet.getString("id"));
                 rowList.add(resultSet.getString("name"));
-                rowList.add(resultSet.getString("id_delete"));
+                rowList.add(resultSet.getString("is_delete"));
 
                 betweenList.add(rowList);
             }
@@ -1240,17 +1240,17 @@ public class BetweenState {
     //验证not between在update语句中使用-布尔型字段更新
     public List<List> notBetweenInUpdateBooleanState() throws SQLException {
         try(Statement statement = connection.createStatement()) {
-            String betweenUpdateSQL = "update betweenTest5 set is_delete=true where id not between 16 and 20";
+            String betweenUpdateSQL = "update betweenTest5 set is_delete=false where id not between 16 and 20";
             statement.executeUpdate(betweenUpdateSQL);
 
-            String betweenQuerySQL = "select id,name,id_delete from betweenTest5 where id not between 16 and 20";
+            String betweenQuerySQL = "select id,name,is_delete from betweenTest5 where id not between 16 and 20";
             ResultSet resultSet = statement.executeQuery(betweenQuerySQL);
             List<List> betweenList = new ArrayList<List>();
             while (resultSet.next()) {
                 List rowList = new ArrayList();
                 rowList.add(resultSet.getString("id"));
                 rowList.add(resultSet.getString("name"));
-                rowList.add(resultSet.getString("id_delete"));
+                rowList.add(resultSet.getString("is_delete"));
 
                 betweenList.add(rowList);
             }
@@ -1292,8 +1292,9 @@ public class BetweenState {
                 rowList.add(resultSet.getString("address"));
                 rowList.add(resultSet.getString("birthday"));
                 rowList.add(resultSet.getTime("create_time").toString());
+//                rowList.add(resultSet.getString("create_time"));
                 rowList.add(resultSet.getString("update_time"));
-                rowList.add(resultSet.getString("id_delete"));
+                rowList.add(resultSet.getString("is_delete"));
 
                 betweenList.add(rowList);
             }
@@ -1327,7 +1328,7 @@ public class BetweenState {
                 rowList.add(resultSet.getString("birthday"));
                 rowList.add(resultSet.getTime("create_time").toString());
                 rowList.add(resultSet.getString("update_time"));
-                rowList.add(resultSet.getString("id_delete"));
+                rowList.add(resultSet.getString("is_delete"));
 
                 betweenList.add(rowList);
             }

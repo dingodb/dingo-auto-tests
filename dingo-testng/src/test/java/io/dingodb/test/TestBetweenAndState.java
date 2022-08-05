@@ -282,7 +282,7 @@ public class TestBetweenAndState extends YamlDataHelper {
         String[][] dataArray = {
                 {"1", "zhangsan","23.5"},{"4", "HAHA", "9.0762556"},{"6", "123", "0.0"},{"7", "yamaha", "2.3"},
                 {"10", "3M", "20010.0"},{"11", "GiGi", "4201.98"},{"12", "Kelay", "87231.0"},{"13", " Nigula", "98.99"},
-                {"18", "77", "77.77"},{"21", "Zala", "2000.01"}
+                {"18", "777", "77.77"},{"21", "Zala", "2000.01"}
         };
         List<List> notBetweenList = new ArrayList<List>();
         for(int i=0; i<dataArray.length; i++) {
@@ -299,7 +299,7 @@ public class TestBetweenAndState extends YamlDataHelper {
         String[][] dataArray = {
                 {"1", "zhangsan"},{"5", "awJDs"},{"6", "123"},{"7", "yamaha"},{"8", "wangwu"},
                 {"9", "Steven"},{"10", "3M"},{"13", " Nigula"},{"14", "Sity"},{"15", "Public"},{"17", "1.5"},
-                {"18", "77"},{"19", "Adidas"},{"21", "Zala"}
+                {"18", "777"},{"19", "Adidas"},{"21", "Zala"}
         };
         List<List> notBetweenList = new ArrayList<List>();
         for(int i=0; i<dataArray.length; i++) {
@@ -611,7 +611,7 @@ public class TestBetweenAndState extends YamlDataHelper {
 
     public static List<List> expectedTest42List() {
         String[][] dataArray = {
-                {"8", "wangwu", "44", "1000.0", "beijing", "2015-09-10", "03:45:10", "1999-02-28 23:59:59", "true"}
+                {"8", "wangwu", "44", "1000.0", "beijing", "2015-09-10", "03:45:10", "2001-11-11 18:05:07", "true"}
         };
         List<List> betweenList = new ArrayList<List>();
         for(int i=0; i<dataArray.length; i++) {
@@ -659,7 +659,7 @@ public class TestBetweenAndState extends YamlDataHelper {
 
     public static List<List> expectedTest45List() {
         String[][] dataArray = {
-                {"8", "wangwu", "44", "1000.0", "beijing", "2015-09-10", "03:45:10", "1999-02-28 23:59:59", "true"},
+                {"8", "wangwu", "44", "1000.0", "beijing", "2015-09-10", "03:45:10", "2001-11-11 18:05:07", "true"},
                 {"14", "Sity", "15", "2000.0", "beijing changyang", "1949-10-01", "12:30:00", "2022-12-31 23:59:59", "true"},
                 {"15", "Public", "18", "100.0", "beijing", "2007-08-15", "22:10:10", "2020-02-29 05:53:44", "true"},
                 {"7", "yamaha", "76", "2.3", "beijing changyang", "1949-01-01", "00:30:08", "2022-12-01 01:02:03", "false"}
@@ -896,17 +896,17 @@ public class TestBetweenAndState extends YamlDataHelper {
                 {"8", "C++", "35", "1234.5678", "SH", "1987-06-18", "23:59:59", "2022-07-31 12:00:00", "false"},
                 {"9", "C++", "35", "1234.5678", "SH", "1987-06-18", "23:59:59", "2022-07-31 12:00:00", "false"},
                 {"10", "C++", "35", "1234.5678", "SH", "1987-06-18", "23:59:59", "2022-07-31 12:00:00", "false"},
-                {"11", "C++", "66", "7980.0123", "SH", "2022-07-13", "11:48:06", "2022-08-01 00:00:00", "false"},
-                {"12", "C++", "66", "7980.0123", "SH", "2022-07-13", "11:48:06", "2022-08-01 00:00:00", "false"},
-                {"13", "C++", "66", "7980.0123", "SH", "2022-07-13", "11:48:06", "2022-08-01 00:00:00", "false"},
-                {"14", "C++", "66", "7980.0123", "SH", "2022-07-13", "11:48:06", "2022-08-01 00:00:00", "false"},
-                {"15", "C++", "66", "7980.0123", "SH", "2022-07-13", "11:48:06", "2022-08-01 00:00:00", "false"},
-                {"16", "C++", "66", "7980.0123", "SH", "1987-06-18", "23:59:59", "2022-07-31 12:00:00", "true"},
-                {"17", "C++", "66", "7980.0123", "SH", "1987-06-18", "23:59:59", "2022-07-31 12:00:00", "true"},
-                {"18", "C++", "66", "7980.0123", "SH", "1987-06-18", "23:59:59", "2022-07-31 12:00:00", "true"},
-                {"19", "C++", "66", "7980.0123", "SH", "1987-06-18", "23:59:59", "2022-07-31 12:00:00", "true"},
-                {"20", "C++", "66", "7980.0123", "SH", "1987-06-18", "23:59:59", "2022-07-31 12:00:00", "true"},
-                {"21", "C++", "66", "7980.0123", "SH", "1987-06-18", "23:59:59", "2022-07-31 12:00:00", "false"}
+                {"11", "C++", "66", "7890.0123", "SH", "2022-07-13", "11:48:06", "2022-08-01 00:00:00", "false"},
+                {"12", "C++", "66", "7890.0123", "SH", "2022-07-13", "11:48:06", "2022-08-01 00:00:00", "false"},
+                {"13", "C++", "66", "7890.0123", "SH", "2022-07-13", "11:48:06", "2022-08-01 00:00:00", "false"},
+                {"14", "C++", "66", "7890.0123", "SH", "2022-07-13", "11:48:06", "2022-08-01 00:00:00", "false"},
+                {"15", "C++", "66", "7890.0123", "SH", "2022-07-13", "11:48:06", "2022-08-01 00:00:00", "false"},
+                {"16", "C++", "66", "7890.0123", "SH", "1987-06-18", "23:59:59", "2022-07-31 12:00:00", "true"},
+                {"17", "C++", "66", "7890.0123", "SH", "1987-06-18", "23:59:59", "2022-07-31 12:00:00", "true"},
+                {"18", "C++", "66", "7890.0123", "SH", "1987-06-18", "23:59:59", "2022-07-31 12:00:00", "true"},
+                {"19", "C++", "66", "7890.0123", "SH", "1987-06-18", "23:59:59", "2022-07-31 12:00:00", "true"},
+                {"20", "C++", "66", "7890.0123", "SH", "1987-06-18", "23:59:59", "2022-07-31 12:00:00", "true"},
+                {"21", "C++", "66", "7890.0123", "SH", "1987-06-18", "23:59:59", "2022-07-31 12:00:00", "false"}
         };
         List<List> betweenList = new ArrayList<List>();
         for(int i=0; i<dataArray.length; i++) {
@@ -940,7 +940,7 @@ public class TestBetweenAndState extends YamlDataHelper {
 
     public static List<List> expectedTest64List() {
         String[][] dataArray = {
-                {"100", "10000", "B"},{"101", "7386", "A"}, {"103", "18350", "C"}
+                {"100", "10000.0", "B"},{"101", "7386.0", "A"}, {"103", "18350.0", "C"}
         };
         List<List> betweenList = new ArrayList<List>();
         for(int i=0; i<dataArray.length; i++) {
@@ -955,9 +955,9 @@ public class TestBetweenAndState extends YamlDataHelper {
 
     public static List<List> expectedTest65List() {
         String[][] dataArray = {
-                {"10000", "A"},{"10000", "C"}, {"7386", "B"},{"7386", "C"},
-                {"20001", "A"},{"20001", "B"},{"20001", "C"},{"18350", "A"},
-                {"18350", "B"},{"4500", "A"},{"4500", "B"},{"4500", "C"}
+                {"10000.0", "A"},{"10000.0", "C"}, {"7386.0", "B"},{"7386.0", "C"},
+                {"20001.0", "A"},{"20001.0", "B"},{"20001.0", "C"},{"18350.0", "A"},
+                {"18350.0", "B"},{"4500.0", "A"},{"4500.0", "B"},{"4500.0", "C"}
         };
         List<List> notBetweenList = new ArrayList<List>();
         for(int i=0; i<dataArray.length; i++) {
@@ -1588,7 +1588,7 @@ public class TestBetweenAndState extends YamlDataHelper {
 
     @Test(priority = 47, enabled = true, dependsOnMethods = {"test00CreateBetweenTable1"},
             description = "验证between查询使用分组")
-    public void test48BetweenQueryWithAggrFunc() throws SQLException {
+    public void test48BetweenQueryWithGroup() throws SQLException {
         List<List> expectedBetweenList = expectedTest48List();
         System.out.println("Expected: " + expectedBetweenList);
         List<List> actualBetweenList = betweenObj.betweenQueryWithGroup();
@@ -1600,7 +1600,7 @@ public class TestBetweenAndState extends YamlDataHelper {
 
     @Test(priority = 48, enabled = true, dependsOnMethods = {"test00CreateBetweenTable1"},
             description = "验证not between查询使用分组")
-    public void test49BetweenQueryWithAggrFunc() throws SQLException {
+    public void test49NotBetweenQueryWithGroup() throws SQLException {
         List<List> expectedBetweenList = expectedTest49List();
         System.out.println("Expected: " + expectedBetweenList);
         List<List> actualBetweenList = betweenObj.notBetweenQueryWithGroup();
@@ -1647,7 +1647,7 @@ public class TestBetweenAndState extends YamlDataHelper {
 
     @Test(priority = 52, enabled = true, dependsOnMethods = {"test52BetweenInDateTimeUpdateState"},
             description = "验证between语句在update语句中使用,更新布尔型")
-    public void test53BetweenInDateTimeUpdateState() throws SQLException {
+    public void test53BetweenInBooleanUpdateState() throws SQLException {
         List<List> expectedBetweenList = expectedTest53List();
         System.out.println("Expected: " + expectedBetweenList);
         List<List> actualBetweenList = betweenObj.betweenInUpdateBooleanState();
@@ -1657,7 +1657,7 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertTrue(expectedBetweenList.containsAll(actualBetweenList));
     }
 
-    @Test(priority = 53, enabled = true, dependsOnMethods = {"test53BetweenInDateTimeUpdateState"},
+    @Test(priority = 53, enabled = true, dependsOnMethods = {"test53BetweenInBooleanUpdateState"},
             description = "验证not between语句在update语句中使用,更新字符串")
     public void test54NotBetweenInCharUpdateState() throws SQLException {
         List<List> expectedBetweenList = expectedTest54List();
@@ -1695,7 +1695,7 @@ public class TestBetweenAndState extends YamlDataHelper {
 
     @Test(priority = 56, enabled = true, dependsOnMethods = {"test56NotBetweenInDateTimeUpdateState"},
             description = "验证not between语句在update语句中使用,更新布尔型")
-    public void test57NotBetweenInDateTimeUpdateState() throws SQLException {
+    public void test57NotBetweenInBooleanUpdateState() throws SQLException {
         List<List> expectedBetweenList = expectedTest57List();
         System.out.println("Expected: " + expectedBetweenList);
         List<List> actualBetweenList = betweenObj.notBetweenInUpdateBooleanState();
@@ -1705,7 +1705,7 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertTrue(expectedBetweenList.containsAll(actualBetweenList));
     }
 
-    @Test(priority = 57, enabled = true, dependsOnMethods = {"test57NotBetweenInDateTimeUpdateState"},
+    @Test(priority = 57, enabled = true, dependsOnMethods = {"test57NotBetweenInBooleanUpdateState"},
             description = "验证between语句更新范围集为空")
     public void test58BetweenUpdateEmpSet() throws SQLException {
         int actualEffectRows = betweenObj.betweenUpdateEmpSet();
@@ -1727,6 +1727,7 @@ public class TestBetweenAndState extends YamlDataHelper {
             description = "验证between在删除语句使用")
     public void test60BetweenInDeleteNotEmpSet() throws SQLException {
         int actualEffectRows = betweenObj.betweenDeleteNotEmpSet();
+        System.out.println("ActualEffected: " + actualEffectRows);
         Assert.assertEquals(actualEffectRows, 5);
 
         List<List> expectedBetweenList = expectedTest60List();
@@ -1762,7 +1763,7 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertEquals(actualEffectRows, 0);
     }
 
-    @Test(priority = 62, enabled = true, dependsOnMethods = {"test61NotBetweenInDeleteNotEmpSet"},
+    @Test(priority = 62, enabled = true, dependsOnMethods = {"test62BetweenDeleteEmpSet"},
             description = "验证not between语句删除范围集为空")
     public void test63NotBetweenDeleteEmpSet() throws SQLException {
         int actualEffectRows = betweenObj.notBetweenDeleteEmpSet();

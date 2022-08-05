@@ -542,7 +542,7 @@ public class YamlDataHelper{
     public Object[][] yamlBetweenMethod(Method method) {
         List<Map<String, String>> yamlBetweenList = null;
         switch (method.getName()) {
-            case "test08BetweenStartLTEnd": {
+            case "test08BetweenStartGTEnd": {
                 yamlBetweenList = getYamlList(iniReader.getValue("BetweenAndYaml", "between_StartGTEnd"));
                 break;
             }
@@ -562,7 +562,7 @@ public class YamlDataHelper{
                 break;
             }
 
-            case "test19NotBetweenStartLTEnd": {
+            case "test19NotBetweenStartGTEnd": {
                 yamlBetweenList = getYamlList(iniReader.getValue("BetweenAndYaml", "not_between_StartGTEnd"));
                 break;
             }
