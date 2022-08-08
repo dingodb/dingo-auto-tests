@@ -126,3 +126,11 @@ testID1001604-01:
   num1: null
   num2: null
   outResult: null
+#testID1001609-01:
+#  num1: "2"
+#  num2: "64"
+#  outResult: "18446744073709551616"
+#testID1001609-02:
+#  num1: "-2"
+#  num2: "63"
+#  outResult: "-9223372036854775808"

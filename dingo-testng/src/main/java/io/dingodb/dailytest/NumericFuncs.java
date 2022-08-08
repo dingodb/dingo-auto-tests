@@ -98,6 +98,34 @@ public class NumericFuncs {
         }
     }
 
+    //pow函数，验证参数边界，getDouble
+    public Double powRangeGetDouble(String num1, String num2) throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String powSQL = "select pow(" + num1 + "," + num2 +")";
+            ResultSet resultSet = statement.executeQuery(powSQL);
+            Double powGetDouble = null;
+            while (resultSet.next()){
+                powGetDouble = resultSet.getDouble(1);
+            }
+            statement.close();
+            return powGetDouble;
+        }
+    }
+
+    //pow函数，验证参数边界，getBigDecimal
+    public String powRangeGetBigDecimal(String num1, String num2) throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String powSQL = "select pow(" + num1 + "," + num2 +")";
+            ResultSet resultSet = statement.executeQuery(powSQL);
+            String powGetBigDecimal = null;
+            while (resultSet.next()){
+                powGetBigDecimal = resultSet.getBigDecimal(1).toString();
+            }
+            statement.close();
+            return powGetBigDecimal;
+        }
+    }
+
     //round函数，正向参数用例
     public String roundPositiveArg(String inputNum, String decimalLen) throws SQLException {
         try(Statement statement = connection.createStatement()) {
@@ -106,6 +134,20 @@ public class NumericFuncs {
             String roundStr = null;
             while (resultSet.next()){
                 roundStr = resultSet.getString(1);
+            }
+            statement.close();
+            return roundStr;
+        }
+    }
+
+    //round函数，验证整型参数的上下限
+    public String roundIntRange(String inputNum, String decimalLen) throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String roundSQL = "select round(" + inputNum + "," + decimalLen +")";
+            ResultSet resultSet = statement.executeQuery(roundSQL);
+            String roundStr = null;
+            while (resultSet.next()){
+                roundStr = resultSet.getBigDecimal(1).toString();
             }
             statement.close();
             return roundStr;
@@ -171,6 +213,20 @@ public class NumericFuncs {
         }
     }
 
+    //ceiling函数，验证参数为整型上下限
+    public String ceilingIntRange(String inputNum) throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String ceilingSQL = "select ceiling(" + inputNum + ")";
+            ResultSet resultSet = statement.executeQuery(ceilingSQL);
+            String ceilingStr = null;
+            while (resultSet.next()){
+                ceilingStr = resultSet.getBigDecimal(1).toString();
+            }
+            statement.close();
+            return ceilingStr;
+        }
+    }
+
     //ceiling函数，参数个数不符，预期失败
     public void ceilingWrongArg(String ceilingState) throws SQLException {
         try(Statement statement = connection.createStatement()) {
@@ -214,6 +270,20 @@ public class NumericFuncs {
         }
     }
 
+    //floor函数，验证参数为整型上下限
+    public String floorIntRange(String inputNum) throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String floorSQL = "select floor(" + inputNum + ")";
+            ResultSet resultSet = statement.executeQuery(floorSQL);
+            String floorStr = null;
+            while (resultSet.next()){
+                floorStr = resultSet.getBigDecimal(1).toString();
+            }
+            statement.close();
+            return floorStr;
+        }
+    }
+
     //floor函数，参数个数不符，预期失败
     public void floorWrongArg(String floorState) throws SQLException {
         try(Statement statement = connection.createStatement()) {
@@ -237,6 +307,20 @@ public class NumericFuncs {
             String absStr = null;
             while (resultSet.next()){
                 absStr = resultSet.getString(1);
+            }
+            statement.close();
+            return absStr;
+        }
+    }
+
+    //abs函数，验证参数为整型上下限
+    public String absIntRange(String inputNum) throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String absSQL = "select abs(" + inputNum + ")";
+            ResultSet resultSet = statement.executeQuery(absSQL);
+            String absStr = null;
+            while (resultSet.next()){
+                absStr = resultSet.getBigDecimal(1).toString();
             }
             statement.close();
             return absStr;

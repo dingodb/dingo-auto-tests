@@ -1,0 +1,32 @@
+testID1001609-01:
+  num1: "2"
+  num2: "64"
+  outResult: "1.8446744073709552E19"
+testID1001609-02:
+  num1: "-2"
+  num2: "63"
+  outResult: "-9.223372036854776E18"
+testID1001609-03:
+  num1: "2"
+  num2: "1023"
+  outResult: "8.98846567431158E307"
+testID1001609-04:
+  num1: "2"
+  num2: "1024"
+  outResult: "Infinity"
+testID1001609-05:
+  num1: "-2"
+  num2: "1023"
+  outResult: "-8.98846567431158E307"
+testID1001609-06:
+  num1: "-2"
+  num2: "1024"
+  outResult: "Infinity"
+testID1001609-07:
+  num1: "2"
+  num2: "1025"
+  outResult: "Infinity"
+testID1001609-08:
+  num1: "-2"
+  num2: "1025"
+  outResult: "-Infinity"

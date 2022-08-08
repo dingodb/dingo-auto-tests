@@ -639,6 +639,16 @@ public class YamlDataHelper{
                 break;
             }
 
+            case "test01PowRangeGetDouble": {
+                yamlNumericFuncList = getYamlList(iniReader.getValue("NumericFuncsYaml", "pow_range_getDouble"));
+                break;
+            }
+
+            case "test01PowRangeGetBigDecimal": {
+                yamlNumericFuncList = getYamlList(iniReader.getValue("NumericFuncsYaml", "pow_range_getBigDecimal"));
+                break;
+            }
+
             case "test02PowXStr": {
                 yamlNumericFuncList = getYamlList(iniReader.getValue("NumericFuncsYaml", "pow_x_str"));
                 break;
@@ -661,6 +671,11 @@ public class YamlDataHelper{
 
             case "test06RoundPositiveArg": {
                 yamlNumericFuncList = getYamlList(iniReader.getValue("NumericFuncsYaml", "round_positive"));
+                break;
+            }
+
+            case "test06RoundIntRange": {
+                yamlNumericFuncList = getYamlList(iniReader.getValue("NumericFuncsYaml", "round_range_int"));
                 break;
             }
 
@@ -699,6 +714,11 @@ public class YamlDataHelper{
                 break;
             }
 
+            case "test13CeilingIntRange": {
+                yamlNumericFuncList = getYamlList(iniReader.getValue("NumericFuncsYaml", "ceiling_range_int"));
+                break;
+            }
+
             case "test14CeilingWrongArg": {
                 yamlNumericFuncList = getYamlList(iniReader.getValue("NumericFuncsYaml", "ceiling_wrong_state"));
                 break;
@@ -719,6 +739,11 @@ public class YamlDataHelper{
                 break;
             }
 
+            case "test17FloorIntRange": {
+                yamlNumericFuncList = getYamlList(iniReader.getValue("NumericFuncsYaml", "floor_range_int"));
+                break;
+            }
+
             case "test18FloorWrongArg": {
                 yamlNumericFuncList = getYamlList(iniReader.getValue("NumericFuncsYaml", "floor_wrong_state"));
                 break;
@@ -731,6 +756,11 @@ public class YamlDataHelper{
 
             case "test20ABSPositiveArg": {
                 yamlNumericFuncList = getYamlList(iniReader.getValue("NumericFuncsYaml", "abs_positive"));
+                break;
+            }
+
+            case "test20ABSIntRange": {
+                yamlNumericFuncList = getYamlList(iniReader.getValue("NumericFuncsYaml", "abs_range_int"));
                 break;
             }
 

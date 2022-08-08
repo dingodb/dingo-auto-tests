@@ -193,6 +193,26 @@ public class TestNumericFuncs extends YamlDataHelper {
         }
     }
 
+    @Test(priority = 0, enabled = true, dataProvider = "yamlNumericFuncMethod", description = "验证Pow函数，参数边界，getDouble")
+    public void test01PowRangeGetDouble(Map<String, String> param) throws SQLException {
+        Double exepectedRes = Double.parseDouble(param.get("outResult"));
+        System.out.println("Expected: " + exepectedRes);
+
+        Double actualRes = numericObj.powRangeGetDouble(param.get("num1"), param.get("num2"));
+        System.out.println("Actual: " + actualRes);
+        Assert.assertEquals(actualRes, exepectedRes);
+    }
+
+    @Test(priority = 0, enabled = true, dataProvider = "yamlNumericFuncMethod", description = "验证Pow函数，参数边界，getBigDecimal")
+    public void test01PowRangeGetBigDecimal(Map<String, String> param) throws SQLException {
+        String exepectedRes = param.get("outResult");
+        System.out.println("Expected: " + exepectedRes);
+
+        String actualRes = numericObj.powRangeGetBigDecimal(param.get("num1"), param.get("num2"));
+        System.out.println("Actual: " + actualRes);
+        Assert.assertEquals(actualRes, exepectedRes);
+    }
+
     @Test(priority = 1, enabled = true, dataProvider = "yamlNumericFuncMethod", expectedExceptions = SQLException.class,
             description = "验证Pow函数第一个参数为字符串，预期失败")
     public void test02PowXStr(Map<String, String> param) throws SQLException {
@@ -229,6 +249,14 @@ public class TestNumericFuncs extends YamlDataHelper {
         } else {
             Assert.assertNull(actualRes);
         }
+
+    }
+
+    @Test(priority = 5, enabled = true, dataProvider = "yamlNumericFuncMethod", expectedExceptions = SQLException.class,
+            description = "验证round函数，整型参数越界，执行失败")
+    public void test06RoundIntRange(Map<String, String> param) throws SQLException {
+        String actualRes = numericObj.roundIntRange(param.get("inputNum"), param.get("decimalLen"));
+        System.out.println("Actual: " + actualRes);
 
     }
 
@@ -286,6 +314,13 @@ public class TestNumericFuncs extends YamlDataHelper {
         }
     }
 
+    @Test(priority = 12, enabled = true, dataProvider = "yamlNumericFuncMethod", expectedExceptions = SQLException.class,
+            description = "验证ceiling函数，整型参数越界，执行失败")
+    public void test13CeilingIntRange(Map<String, String> param) throws SQLException {
+        String actualRes = numericObj.ceilingIntRange(param.get("inputNum"));
+        System.out.println("Actual: " + actualRes);
+    }
+
     @Test(priority = 13, enabled = true, dataProvider = "yamlNumericFuncMethod",
             expectedExceptions = SQLException.class, description = "验证ceiling函数参数个数不符，预期失败")
     public void test14CeilingWrongArg(Map<String, String> param) throws SQLException {
@@ -326,6 +361,13 @@ public class TestNumericFuncs extends YamlDataHelper {
         }
     }
 
+    @Test(priority = 16, enabled = true, dataProvider = "yamlNumericFuncMethod", expectedExceptions = SQLException.class,
+            description = "验证floor函数，整型参数越界，执行失败")
+    public void test17FloorIntRange(Map<String, String> param) throws SQLException {
+        String actualRes = numericObj.floorIntRange(param.get("inputNum"));
+        System.out.println("Actual: " + actualRes);
+    }
+
     @Test(priority = 17, enabled = true, dataProvider = "yamlNumericFuncMethod",
             expectedExceptions = SQLException.class, description = "验证floor函数参数个数不符，预期失败")
     public void test18FloorWrongArg(Map<String, String> param) throws SQLException {
@@ -338,7 +380,7 @@ public class TestNumericFuncs extends YamlDataHelper {
         numericObj.floorStrArg(param.get("inputNum"));
     }
 
-    @Test(priority = 19, enabled = true, dataProvider = "yamlNumericFuncMethod", description = "验证floor函数，正常返回参数绝对值")
+    @Test(priority = 19, enabled = true, dataProvider = "yamlNumericFuncMethod", description = "验证abs函数，正常返回参数绝对值")
     public void test20ABSPositiveArg(Map<String, String> param) throws SQLException {
         String exepectedRes = param.get("outNum");
         System.out.println("Expected: " + exepectedRes);
@@ -350,6 +392,13 @@ public class TestNumericFuncs extends YamlDataHelper {
         } else {
             Assert.assertNull(actualRes);
         }
+    }
+
+    @Test(priority = 19, enabled = true, dataProvider = "yamlNumericFuncMethod", expectedExceptions = SQLException.class,
+            description = "验证abs函数，整型参数超出范围，预期失败")
+    public void test20ABSIntRange(Map<String, String> param) throws SQLException {
+        String actualRes = numericObj.absIntRange(param.get("inputNum"));
+        System.out.println("Actual: " + actualRes);
     }
 
     @Test(priority = 20, enabled = true, dataProvider = "yamlNumericFuncMethod",

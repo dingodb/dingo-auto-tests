@@ -1,0 +1,8 @@
+testID1001751-03:
+  inputNum: "9223372036854775808"
+  decimalLen: "2"
+#  outResult: "9223372036854775808"
+testID1001751-04:
+  inputNum: "-9223372036854775809"
+  decimalLen: "2"
+#  outResult: "-9223372036854775809"
