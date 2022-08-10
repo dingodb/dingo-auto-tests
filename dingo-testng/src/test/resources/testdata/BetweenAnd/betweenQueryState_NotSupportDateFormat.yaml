@@ -1,4 +1,0 @@
-testID1001537-01:
-  betweenState: "select * from betweenTest where birthday between '1999/12/31' and '2022/12/01'"
-testID1001538-01:
-  betweenState: "select * from betweenTest where update_time between '1999/12/31 10:00:00' and '2022/07/07 23:00:00'"

@@ -711,22 +711,42 @@ public class BetweenState {
     }
 
     //between查询日期范围，日期格式无效，预期失败
-    public Boolean betweenQueryNotSupportDateFormat(String queryState) throws SQLException {
+    public List<List> betweenQuerySupportOtherDateFormat(String queryColumn, String startDate, String endDate, String testField) throws SQLException {
         try(Statement statement = connection.createStatement()) {
-            ResultSet resultSet = statement.executeQuery(queryState);
-            Boolean queryResult = resultSet.next();
+            String querySQL = "select id,name," + queryColumn + " from betweenTest where " + queryColumn + " between '"
+                    + startDate + "' and '" + endDate + "'";
+            ResultSet resultSet = statement.executeQuery(querySQL);
+            String[] testFieldArray = testField.split(",");
+            List<List> betweenList = new ArrayList<List>();
+            while (resultSet.next()) {
+                List rowList = new ArrayList();
+                for(int i = 0; i < testFieldArray.length; i++){
+                    rowList.add(resultSet.getString(testFieldArray[i]));
+                }
+                betweenList.add(rowList);
+            }
             statement.close();
-            return queryResult;
+            return betweenList;
         }
     }
 
-    //not between查询日期范围，日期格式无效，预期失败
-    public Boolean notBetweenQueryNotSupportDateFormat(String queryState) throws SQLException {
+    //not between查询日期范围，其他日期格式查询
+    public List<List> notBetweenQuerySupportOtherDateFormat(String queryColumn, String startDate, String endDate, String testField) throws SQLException {
         try(Statement statement = connection.createStatement()) {
-            ResultSet resultSet = statement.executeQuery(queryState);
-            Boolean queryResult = resultSet.next();
+            String querySQL = "select id,name," + queryColumn + " from betweenTest where " + queryColumn + " not between '"
+                    + startDate + "' and '" + endDate + "'";
+            ResultSet resultSet = statement.executeQuery(querySQL);
+            String[] testFieldArray = testField.split(",");
+            List<List> notBetweenList = new ArrayList<List>();
+            while (resultSet.next()) {
+                List rowList = new ArrayList();
+                for(int i = 0; i < testFieldArray.length; i++){
+                    rowList.add(resultSet.getString(testFieldArray[i]));
+                }
+                notBetweenList.add(rowList);
+            }
             statement.close();
-            return queryResult;
+            return notBetweenList;
         }
     }
 

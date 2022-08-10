@@ -1414,15 +1414,31 @@ public class TestBetweenAndState extends YamlDataHelper {
     }
 
     @Test(priority = 30, enabled = true, dataProvider = "yamlBetweenMethod", dependsOnMethods = {"test00CreateBetweenTable1"},
-            expectedExceptions = SQLException.class, description = "验证between查询日期范围不支持的日期格式，预期失败")
-    public void test31BetweenNotSupportDateFormat(Map<String, String> param) throws SQLException {
-        Boolean actualQueryResult = betweenObj.betweenQueryNotSupportDateFormat(param.get("betweenState"));
+            description = "验证between查询日期范围支持的其他日期格式")
+    public void test31BetweenSupportOtherDateFormat(Map<String, String> param) throws SQLException {
+        StrTo2DList strTo2DList = new StrTo2DList();
+        List<List> expectedBetweenList = strTo2DList.construct2DList(param.get("dataStr"));
+        System.out.println("Expected: " + expectedBetweenList);
+
+        List<List> actualBetweenList = betweenObj.betweenQuerySupportOtherDateFormat(param.get("queryColumn"),
+                param.get("startDate"), param.get("endDate"),param.get("testField"));
+        System.out.println("Actual: " + actualBetweenList);
+        Assert.assertTrue(actualBetweenList.containsAll(expectedBetweenList));
+        Assert.assertTrue(expectedBetweenList.containsAll(actualBetweenList));
     }
 
     @Test(priority = 31, enabled = true, dataProvider = "yamlBetweenMethod", dependsOnMethods = {"test00CreateBetweenTable1"},
-            expectedExceptions = SQLException.class, description = "验证not between查询日期范围不支持的日期格式，预期失败")
-    public void test32NotBetweenNotSupportDateFormat(Map<String, String> param) throws SQLException {
-        Boolean actualQueryResult = betweenObj.notBetweenQueryNotSupportDateFormat(param.get("betweenState"));
+            description = "验证not between查询日期范围支持的其他日期格式")
+    public void test32NotBetweenSupportOtherDateFormat(Map<String, String> param) throws SQLException {
+        StrTo2DList strTo2DList = new StrTo2DList();
+        List<List> expectedNotBetweenList = strTo2DList.construct2DList(param.get("dataStr"));
+        System.out.println("Expected: " + expectedNotBetweenList);
+
+        List<List> actualNotBetweenList = betweenObj.notBetweenQuerySupportOtherDateFormat(param.get("queryColumn"),
+                param.get("startDate"), param.get("endDate"),param.get("testField"));
+        System.out.println("Actual: " + actualNotBetweenList);
+        Assert.assertTrue(actualNotBetweenList.containsAll(expectedNotBetweenList));
+        Assert.assertTrue(expectedNotBetweenList.containsAll(actualNotBetweenList));
     }
 
     @Test(priority = 32, enabled = true, dataProvider = "yamlBetweenMethod", dependsOnMethods = {"test00CreateBetweenTable1"},

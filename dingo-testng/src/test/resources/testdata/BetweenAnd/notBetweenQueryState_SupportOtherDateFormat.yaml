@@ -1,0 +1,36 @@
+testID1001558-01:
+  queryColumn: "birthday"
+  startDate: "1980/01/01"
+  endDate: "2022/05/31"
+  testField: "id,name,birthday"
+  dataStr: "7,yamaha,1949-01-01;11,GiGi,1976-07-07;14,Sity,1949-10-01;16,Juliya,1960-11-11;21,Zala,2022-07-07"
+testID1001558-02:
+  queryColumn: "birthday"
+  startDate: "1980.01.01"
+  endDate: "2022.05.31"
+  testField: "id,name,birthday"
+  dataStr: "7,yamaha,1949-01-01;11,GiGi,1976-07-07;14,Sity,1949-10-01;16,Juliya,1960-11-11;21,Zala,2022-07-07"
+testID1001558-03:
+  queryColumn: "birthday"
+  startDate: "19800101"
+  endDate: "20220531"
+  testField: "id,name,birthday"
+  dataStr: "7,yamaha,1949-01-01;11,GiGi,1976-07-07;14,Sity,1949-10-01;16,Juliya,1960-11-11;21,Zala,2022-07-07"
+testID1001559-01:
+  queryColumn: "update_time"
+  startDate: "1997/07/01 00:00:00"
+  endDate: "2022/07/07 13:30:03"
+  testField: "id,name,update_time"
+  dataStr: "6,123,1952-12-31 12:12:12;7,yamaha,2022-12-01 01:02:03;11,GiGi,2024-05-04 12:00:00;14,Sity,2022-12-31 23:59:59;17,1.5,1953-10-21 16:10:28"
+testID1001559-02:
+  queryColumn: "update_time"
+  startDate: "1997.07.01 00:00:00"
+  endDate: "2022.07.07 13:30:03"
+  testField: "id,name,update_time"
+  dataStr: "6,123,1952-12-31 12:12:12;7,yamaha,2022-12-01 01:02:03;11,GiGi,2024-05-04 12:00:00;14,Sity,2022-12-31 23:59:59;17,1.5,1953-10-21 16:10:28"
+testID1001559-03:
+  queryColumn: "update_time"
+  startDate: "19970701000000"
+  endDate: "20220707133003"
+  testField: "id,name,update_time"
+  dataStr: "6,123,1952-12-31 12:12:12;7,yamaha,2022-12-01 01:02:03;11,GiGi,2024-05-04 12:00:00;14,Sity,2022-12-31 23:59:59;17,1.5,1953-10-21 16:10:28"

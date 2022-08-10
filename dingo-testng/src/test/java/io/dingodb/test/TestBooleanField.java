@@ -265,6 +265,14 @@ public class TestBooleanField extends YamlDataHelper {
         booleanObj.createBoolTable();
     }
 
+    @Test(priority = 13, enabled = true, dependsOnMethods = {"test12IntegerValueQuery"}, description = "验证布尔类型字段插入null值")
+    public void test14InsertNull() throws SQLException {
+        String actualQuery = booleanObj.insertNull();
+        System.out.println("Actual: " + actualQuery);
+        Assert.assertNull(actualQuery);
+    }
+
+
     @AfterClass (alwaysRun = true, description = "执行测试后删除数据，删除表")
     public void teardownAll() {
         String booleanTable = BooleanField.getBooleanTableName();

@@ -582,13 +582,13 @@ public class YamlDataHelper{
                 break;
             }
 
-            case "test31BetweenNotSupportDateFormat": {
-                yamlBetweenList = getYamlList(iniReader.getValue("BetweenAndYaml", "between_NotSupportDateFormat"));
+            case "test31BetweenSupportOtherDateFormat": {
+                yamlBetweenList = getYamlList(iniReader.getValue("BetweenAndYaml", "between_SupportOtherDateFormat"));
                 break;
             }
 
-            case "test32NotBetweenNotSupportDateFormat": {
-                yamlBetweenList = getYamlList(iniReader.getValue("BetweenAndYaml", "not_between_NotSupportDateFormat"));
+            case "test32NotBetweenSupportOtherDateFormat": {
+                yamlBetweenList = getYamlList(iniReader.getValue("BetweenAndYaml", "not_between_SupportOtherDateFormat"));
                 break;
             }
 

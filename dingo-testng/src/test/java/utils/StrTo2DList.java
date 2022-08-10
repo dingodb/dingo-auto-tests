@@ -22,12 +22,12 @@ import java.util.List;
 
 public class StrTo2DList {
     /**
-     * @param construcStr e.g. 5,awJDs,2010-10-01:19,Adidas,2010-10-01
+     * @param construcStr e.g. 5,awJDs,2010-10-01;19,Adidas,2010-10-01
      * @return List<List>
      */
     public List<List> construct2DList(String construcStr){
         List<List> constructList = new ArrayList<List>();
-        String[] originArray = construcStr.split(":");
+        String[] originArray = construcStr.split(";");
 
         for(int i=0; i < originArray.length; i++) {
             constructList.add(new ArrayList(Arrays.asList(originArray[i].split(","))));

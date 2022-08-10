@@ -1,0 +1,36 @@
+testID1001537-01:
+  queryColumn: "birthday"
+  startDate: "1997/01/01"
+  endDate: "2010/10/01"
+  testField: "id,name,birthday"
+  dataStr: "1,zhangsan,1998-04-06;5,awJDs,2010-10-01;15,Public,2007-08-15;19,Adidas,2010-10-01"
+testID1001537-02:
+  queryColumn: "birthday"
+  startDate: "1997.01.01"
+  endDate: "2010.10.01"
+  testField: "id,name,birthday"
+  dataStr: "1,zhangsan,1998-04-06;5,awJDs,2010-10-01;15,Public,2007-08-15;19,Adidas,2010-10-01"
+testID1001537-03:
+  queryColumn: "birthday"
+  startDate: "19970101"
+  endDate: "20101001"
+  testField: "id,name,birthday"
+  dataStr: "1,zhangsan,1998-04-06;5,awJDs,2010-10-01;15,Public,2007-08-15;19,Adidas,2010-10-01"
+testID1001538-01:
+  queryColumn: "update_time"
+  startDate: "1999/01/01 00:00:00"
+  endDate: "2000/01/01 00:00:00"
+  testField: "id,name,update_time"
+  dataStr: "3,li3,1999-02-28 23:59:59;10,3M,1999-02-28 00:59:59;12,Kelay,2000-01-01 00:00:00;13, Nigula,1999-12-31 23:59:59"
+testID1001538-02:
+  queryColumn: "update_time"
+  startDate: "1999.01.01 00:00:00"
+  endDate: "2000.01.01 00:00:00"
+  testField: "id,name,update_time"
+  dataStr: "3,li3,1999-02-28 23:59:59;10,3M,1999-02-28 00:59:59;12,Kelay,2000-01-01 00:00:00;13, Nigula,1999-12-31 23:59:59"
+testID1001538-03:
+  queryColumn: "update_time"
+  startDate: "19990101000000"
+  endDate: "20000101000000"
+  testField: "id,name,update_time"
+  dataStr: "3,li3,1999-02-28 23:59:59;10,3M,1999-02-28 00:59:59;12,Kelay,2000-01-01 00:00:00;13, Nigula,1999-12-31 23:59:59"

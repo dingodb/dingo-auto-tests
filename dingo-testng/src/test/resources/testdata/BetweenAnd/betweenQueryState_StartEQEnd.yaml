@@ -1,24 +1,24 @@
 testID10001583-01:
   betweenState: "select * from betweenTest where age between 25 and 25"
   testField: "id,name,age"
-  dataStr: "2,lisi,25:"
+  dataStr: "2,lisi,25;"
 testID10001583-02:
   betweenState: "select id,name,age from betweenTest where id between 10 and 10"
   testField: "id,name,age"
-  dataStr: "10,3M,31:"
+  dataStr: "10,3M,31;"
 testID10001583-03:
   betweenState: "select id,name,age from betweenTest where name between 'HAHA' and 'HAHA'"
   testField: "id,name,age"
-  dataStr: "4,HAHA,57:"
+  dataStr: "4,HAHA,57;"
 testID10001583-04:
   betweenState: "select * from betweenTest where birthday between '2010-10-01' and '2010-10-01'"
   testField: "id,name,birthday"
-  dataStr: "5,awJDs,2010-10-01:19,Adidas,2010-10-01"
+  dataStr: "5,awJDs,2010-10-01;19,Adidas,2010-10-01"
 testID10001583-05:
   betweenState: "select * from betweenTest where create_time between '19:00:00' and '19:00:00'"
   testField: "id,name,create_time"
-  dataStr: "5,awJDs,19:00:00:19,Adidas,19:00:00"
+  dataStr: "5,awJDs,19:00:00;19,Adidas,19:00:00"
 testID10001583-06:
   betweenState: "select * from betweenTest where update_time between '1997-07-01 00:00:00' and '1997-07-01 00:00:00'"
   testField: "id,name,update_time"
-  dataStr: "20,Bilibili,1997-07-01 00:00:00:"
+  dataStr: "20,Bilibili,1997-07-01 00:00:00;"

@@ -309,6 +309,23 @@ public class BooleanField {
         }
     }
 
+    //布尔字段插入null值
+    public String insertNull() throws SQLException {
+        String booleanTableName = getBooleanTableName();
+        try(Statement statement = connection.createStatement()){
+            String insertSql = "insert into " + booleanTableName + " values(10001, 'kelay',76,2.30,'shanghai', null)";
+            int insertNum = statement.executeUpdate(insertSql);
+            String querySql = "select * from " + booleanTableName + " where id=10001";
+            ResultSet resultSet = statement.executeQuery(querySql);
+            String integerOut = null;
+            while (resultSet.next()) {
+                integerOut = resultSet.getString("is_delete");
+            }
+            statement.close();
+            return integerOut;
+        }
+    }
+
     //创建表格不支持类型写成bool
     public void createBoolTable() throws SQLException, ClassNotFoundException {
         String strBooleanTableName = getBooleanTableName();
