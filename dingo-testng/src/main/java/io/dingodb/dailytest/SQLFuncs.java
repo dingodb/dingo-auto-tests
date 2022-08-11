@@ -2257,4 +2257,236 @@ public class SQLFuncs {
             return actualRecord;
         }
     }
+
+
+    /**
+     * SQL层补充用例 - 2022/8/11
+     * 查询
+     */
+
+    //创建查询测试表1
+    public void queryTable1Create(String queryTable_Meta) throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String createTableSQL = "create table querytest1 " + queryTable_Meta;
+            statement.execute(createTableSQL);
+        }
+    }
+
+    //查询测试表1插入数据
+    public void queryTable1InsertValues(String queryTable_Values) throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String insertValuesSQL = "insert into querytest1 values " + queryTable_Values;
+            statement.execute(insertValuesSQL);
+        }
+    }
+
+    //按时间日期类型等值查询
+    public List<List> queryDateTimeEQCondition(String queryColumn, String eqValue, String testField) throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String querySQL = "select * from querytest1 where " + queryColumn + "='" + eqValue + "'";
+            ResultSet resultSet = statement.executeQuery(querySQL);
+            String[] testFieldArray = testField.split(",");
+            List<List> queryList = new ArrayList<List>();
+            while (resultSet.next()) {
+                List rowList = new ArrayList();
+                for(int i = 0; i < testFieldArray.length; i++){
+                    rowList.add(resultSet.getString(testFieldArray[i]));
+                }
+                queryList.add(rowList);
+            }
+            statement.close();
+            return queryList;
+        }
+    }
+
+    //按类型非等值查询
+    public int queryTypeNECondition(String queryColumn, String neValue) throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String querySQL = "select * from querytest1 where " + queryColumn + "<>" + neValue;
+            ResultSet resultSet = statement.executeQuery(querySQL);
+            int rowNum = 0;
+            while (resultSet.next()) {
+                rowNum += 1;
+            }
+            statement.close();
+            return rowNum;
+        }
+    }
+
+    //时间日期类型按in范围查询
+    public List<List> queryDateTimeInRangeCondition(String queryColumn, String inRange, String testField) throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String querySQL = "select " + testField + " from querytest1 where " + queryColumn + " in (" + inRange + ")";
+//            String querySQL = "select * from querytest1 where " + queryColumn + " in (" + inRange + ")";
+            ResultSet resultSet = statement.executeQuery(querySQL);
+            String[] testFieldArray = testField.split(",");
+            List<List> queryList = new ArrayList<List>();
+            while (resultSet.next()) {
+                List rowList = new ArrayList();
+                for(int i = 0; i < testFieldArray.length; i++){
+                    rowList.add(resultSet.getString(testFieldArray[i]));
+                }
+                queryList.add(rowList);
+            }
+            statement.close();
+            return queryList;
+        }
+    }
+
+    //时间日期类型按not in范围查询
+    public int queryDateTimeNotInRangeCondition(String queryColumn, String notInRange, String testField) throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String querySQL = "select " + testField + " from querytest1 where " + queryColumn + " not in (" + notInRange + ")";
+            ResultSet resultSet = statement.executeQuery(querySQL);
+            int rowNum = 0;
+            while (resultSet.next()) {
+                rowNum += 1;
+            }
+            statement.close();
+            return rowNum;
+        }
+    }
+
+    //布尔类型查询null值的行
+    public List<List> queryBooleanNullValue() throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String querySQL = "select * from querytest1 where is_delete is null";
+            ResultSet resultSet = statement.executeQuery(querySQL);
+            List<List> queryList = new ArrayList<List>();
+            while (resultSet.next()) {
+                List rowList = new ArrayList();
+                rowList.add(resultSet.getString("id"));
+                rowList.add(resultSet.getString("name"));
+                rowList.add(resultSet.getString("age"));
+                rowList.add(resultSet.getString("amount"));
+                rowList.add(resultSet.getString("address"));
+                rowList.add(resultSet.getString("birthday"));
+                rowList.add(resultSet.getTime("create_time").toString());
+                rowList.add(resultSet.getString("update_time"));
+                rowList.add(resultSet.getString("is_delete"));
+
+                queryList.add(rowList);
+            }
+            statement.close();
+            return queryList;
+        }
+    }
+
+    //字符型in范围含有null
+    public List<List> queryVarcharInRangeWithNull() throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String querySQL = "select * from querytest1 where address in ('beijing','Yang GU',null)";
+            ResultSet resultSet = statement.executeQuery(querySQL);
+            List<List> queryList = new ArrayList<List>();
+            while (resultSet.next()) {
+                List rowList = new ArrayList();
+                rowList.add(resultSet.getString("id"));
+                rowList.add(resultSet.getString("name"));
+                rowList.add(resultSet.getString("age"));
+                rowList.add(resultSet.getString("amount"));
+                rowList.add(resultSet.getString("address"));
+                rowList.add(resultSet.getString("birthday"));
+                rowList.add(resultSet.getTime("create_time").toString());
+                rowList.add(resultSet.getString("update_time"));
+                rowList.add(resultSet.getString("is_delete"));
+
+                queryList.add(rowList);
+            }
+            statement.close();
+            return queryList;
+        }
+    }
+
+    //整型in范围含有null
+    public List<List> queryIntInRangeWithNull() throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String querySQL = "select * from querytest1 where age in (18,null,20,120)";
+            ResultSet resultSet = statement.executeQuery(querySQL);
+            List<List> queryList = new ArrayList<List>();
+            while (resultSet.next()) {
+                List rowList = new ArrayList();
+                rowList.add(resultSet.getString("id"));
+                rowList.add(resultSet.getString("name"));
+                rowList.add(resultSet.getString("age"));
+                rowList.add(resultSet.getString("amount"));
+                rowList.add(resultSet.getString("address"));
+                rowList.add(resultSet.getString("birthday"));
+                rowList.add(resultSet.getTime("create_time").toString());
+                rowList.add(resultSet.getString("update_time"));
+                rowList.add(resultSet.getString("is_delete"));
+
+                queryList.add(rowList);
+            }
+            statement.close();
+            return queryList;
+        }
+    }
+
+    //浮点型in范围含有null
+    public List<List> queryDoubleInRangeWithNull() throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String querySQL = "select * from querytest1 where amount in (null,2000.01,100.0,0.0,1453.9999)";
+            ResultSet resultSet = statement.executeQuery(querySQL);
+            List<List> queryList = new ArrayList<List>();
+            while (resultSet.next()) {
+                List rowList = new ArrayList();
+                rowList.add(resultSet.getString("id"));
+                rowList.add(resultSet.getString("name"));
+                rowList.add(resultSet.getString("age"));
+                rowList.add(resultSet.getString("amount"));
+                rowList.add(resultSet.getString("address"));
+                rowList.add(resultSet.getString("birthday"));
+                rowList.add(resultSet.getTime("create_time").toString());
+                rowList.add(resultSet.getString("update_time"));
+                rowList.add(resultSet.getString("is_delete"));
+
+                queryList.add(rowList);
+            }
+            statement.close();
+            return queryList;
+        }
+    }
+
+    //布尔型in范围含有null
+    public List<List> queryBooleanInRangeWithNull() throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String querySQL = "select id,name,is_delete from querytest1 where is_delete in (false, null)";
+            ResultSet resultSet = statement.executeQuery(querySQL);
+            List<List> queryList = new ArrayList<List>();
+            while (resultSet.next()) {
+                List rowList = new ArrayList();
+                rowList.add(resultSet.getString("id"));
+                rowList.add(resultSet.getString("name"));
+//                rowList.add(resultSet.getString("age"));
+//                rowList.add(resultSet.getString("amount"));
+//                rowList.add(resultSet.getString("address"));
+//                rowList.add(resultSet.getString("birthday"));
+//                rowList.add(resultSet.getTime("create_time").toString());
+//                rowList.add(resultSet.getString("update_time"));
+                rowList.add(resultSet.getString("is_delete"));
+
+                queryList.add(rowList);
+            }
+            statement.close();
+            return queryList;
+        }
+    }
+
+    //字符，整型，浮点型，布尔型按not in范围查询
+    public int queryTypeNotInRangeCondition(String queryColumn, String notInRange) throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String querySQL = "select * from querytest1 where " + queryColumn + " not in (" + notInRange + ")";
+            ResultSet resultSet = statement.executeQuery(querySQL);
+            int rowNum = 0;
+            while (resultSet.next()) {
+                rowNum += 1;
+            }
+            statement.close();
+            return rowNum;
+        }
+    }
+
+
+
+
 }

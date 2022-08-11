@@ -1,0 +1,15 @@
+testID1001837-01:
+  queryColumn: "birthday"
+  eqValue: "2022-07-07"
+  testField: "id,name,birthday"
+  dataStr: "21,Zala,2022-07-07;"
+testID1001841-01:
+  queryColumn: "create_time"
+  eqValue: "19:00:00"
+  testField: "id,name,create_time"
+  dataStr: "5,awJDs,19:00:00;19,Adidas,19:00:00"
+testID1001845-01:
+  queryColumn: "update_time"
+  eqValue: "2022-12-31 23:59:59"
+  testField: "id,name,update_time"
+  dataStr: "14,Sity,2022-12-31 23:59:59;"

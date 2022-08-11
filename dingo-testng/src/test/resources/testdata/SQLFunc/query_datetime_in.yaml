@@ -1,0 +1,15 @@
+testID1001839-01:
+  queryColumn: "birthday"
+  inRange: "'1987-07-16','2020-11-11','2022-07-07'"
+  testField: "id,name,birthday"
+  dataStr: "4,HAHA,2020-11-11;6,123,1987-07-16;18,777,2020-11-11;21,Zala,2022-07-07"
+testID1001843-01:
+  queryColumn: "create_time"
+  inRange: "'08:10:10','01:02:03','19:00:00','00:00:00'"
+  testField: "id,name,create_time"
+  dataStr: "1,zhangsan,08:10:10;5,awJDs,19:00:00;6,123,01:02:03;19,Adidas,19:00:00;21,Zala,00:00:00"
+testID1001847-01:
+  queryColumn: "update_time"
+  inRange: "'2000-02-29 00:00:00','1997-07-01 00:00:00','2022-07-07 13:30:03'"
+  testField: "id,name,update_time"
+  dataStr: "2,lisi,2000-02-29 00:00:00;16,Juliya,2000-02-29 00:00:00;20,Bilibili,1997-07-01 00:00:00;21,Zala,2022-07-07 13:30:03"

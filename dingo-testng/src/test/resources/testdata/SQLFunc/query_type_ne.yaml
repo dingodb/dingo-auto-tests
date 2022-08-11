@@ -1,0 +1,32 @@
+testID1001838-01:
+  queryColumn: "birthday"
+  neValue: "'2022-07-07'"
+  rowNum: "20"
+testID1001842-01:
+  queryColumn: "create_time"
+  neValue: "'19:00:00'"
+  rowNum: "19"
+testID1001846-01:
+  queryColumn: "update_time"
+  neValue: "'2010-10-01 02:02:02'"
+  rowNum: "19"
+testID1001858-01:
+  queryColumn: "is_delete"
+  neValue: "true"
+  rowNum: "9"
+testID1001858-02:
+  queryColumn: "is_delete"
+  neValue: "false"
+  rowNum: "10"
+testID1001859-01:
+  queryColumn: "address"
+  neValue: "'beijing'"
+  rowNum: "18"
+testID1001860-01:
+  queryColumn: "age"
+  neValue: "18"
+  rowNum: "17"
+testID1001861-01:
+  queryColumn: "amount"
+  neValue: "1453.9999"
+  rowNum: "16"

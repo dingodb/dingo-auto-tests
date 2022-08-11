@@ -1,0 +1,16 @@
+testID1001853-01:
+  queryColumn: "address"
+  notInRange: "'beijing','Yang GU','pingYang1'"
+  rowNum: "15"
+testID1001854-01:
+  queryColumn: "age"
+  notInRange: "18,20,120"
+  rowNum: "15"
+testID1001855-01:
+  queryColumn: "amount"
+  notInRange: "2000.01,100.0,0.0,1453.9999"
+  rowNum: "13"
+testID1001856-01:
+  queryColumn: "is_delete"
+  notInRange: "false"
+  rowNum: "10"

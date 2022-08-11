@@ -1,0 +1,15 @@
+testID1001840-01:
+  queryColumn: "birthday"
+  notInRange: "'1987-07-16','2020-11-11','2022-07-07'"
+  testField: "id,name,birthday"
+  rowNum: "17"
+testID1001844-01:
+  queryColumn: "create_time"
+  notInRange: "'08:10:10','01:02:03','19:00:00','00:00:00'"
+  testField: "id,name,create_time"
+  rowNum: "16"
+testID1001848-01:
+  queryColumn: "update_time"
+  notInRange: "'2000-02-29 00:00:00','2022-12-01 01:02:03','1997-07-01 00:00:00','2022-07-07 13:30:03'"
+  testField: "id,name,update_time"
+  rowNum: "16"

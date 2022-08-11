@@ -24,18 +24,118 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import utils.FileReaderUtil;
+import utils.StrTo2DList;
+import utils.YamlDataHelper;
 
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Listeners(EmailableReporterListener.class)
-public class TestSQLFuncs {
+public class TestSQLFuncs extends YamlDataHelper {
     public static SQLFuncs funcObj = new SQLFuncs();
 
+    public void initQueryTable1() throws SQLException {
+        String queryTable1_meta_path = "src/test/resources/testdata/tablemeta/between_and_meta1.txt";
+        String queryTable1_value_path = "src/test/resources/testdata/tableInsertValues/SQLFunc_Query1.txt";
+        String queryTable1_meta = FileReaderUtil.readFile(queryTable1_meta_path);
+        String queryTable1_value = FileReaderUtil.readFile(queryTable1_value_path);
+        funcObj.queryTable1Create(queryTable1_meta);
+        funcObj.queryTable1InsertValues(queryTable1_value);
+    }
+
+    public List<List> case1857List() {
+        String[][] dataArray = {
+                {"7",null,null,null,null,"1949-01-01","00:30:08","2022-12-01 01:02:03",null},
+                {"14","Sity","15","2000.0","beijing changyang","1949-10-01","12:30:00","2022-12-31 23:59:59",null}
+        };
+        List<List> expectedList = new ArrayList<List>();
+        for(int i=0; i<dataArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<dataArray[i].length; j++) {
+                columnList.add(dataArray[i][j]);
+            }
+            expectedList.add(columnList);
+        }
+        return expectedList;
+    }
+
+    public List<List> case1849List() {
+        String[][] dataArray = {
+                {"1","zhangsan",null,"23.50","beijing","1998-04-06", "08:10:10", "2022-04-08 18:05:07", "true"},
+                {"8","wangwu","44","1000.0","beijing","2015-09-10", "03:45:10", "2001-11-11 18:05:07", "true"},
+                {"12","Kelay","10","87231.0","Yang GU", "2018-05-31", "21:00:00'", "2000-01-01 00:00:00", "true"}
+        };
+        List<List> expectedList = new ArrayList<List>();
+        for(int i=0; i<dataArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<dataArray[i].length; j++) {
+                columnList.add(dataArray[i][j]);
+            }
+            expectedList.add(columnList);
+        }
+        return expectedList;
+    }
+
+    public List<List> case1850List() {
+        String[][] dataArray = {
+                {"9","Steven","20",null," beijing haidian ", "1995-12-15", "16:35:38", "2008-08-08 08:00:00", "true"},
+                {"15","Public","18","100.0","beijing ","2007-08-15", "22:10:10", "2020-02-29 05:53:44", "true"},
+                {"17","1.5","120","500.0","JinMen", "2022-03-01", "15:20:20", "1953-10-21 16:10:28", "true"}
+        };
+        List<List> expectedList = new ArrayList<List>();
+        for(int i=0; i<dataArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<dataArray[i].length; j++) {
+                columnList.add(dataArray[i][j]);
+            }
+            expectedList.add(columnList);
+        }
+        return expectedList;
+    }
+
+    public List<List> case1851List() {
+        String[][] dataArray = {
+                {"5","awJDs","1","1453.9999","pingYang1", "2010-10-01", "19:00:00", "2010-10-01 02:02:02", "true"},
+                {"6","123","60,0","543", "1987-07-16", "01:02:03", "1952-12-31 12:12:12", "true"},
+                {"15","Public","18","100.0","beijing ","2007-08-15", "22:10:10", "2020-02-29 05:53:44", "true"},
+                {"19","Adidas","1","1453.9999","pingYang1", "2010-10-01", "19:00:00", "2010-10-01 02:02:02", "false"},
+                {"21","Zala",null,"2000.01","JiZhou", "2022-07-07", "00:00:00", "2022-07-07 13:30:03", "false"}
+        };
+        List<List> expectedList = new ArrayList<List>();
+        for(int i=0; i<dataArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<dataArray[i].length; j++) {
+                columnList.add(dataArray[i][j]);
+            }
+            expectedList.add(columnList);
+        }
+        return expectedList;
+    }
+
+    public List<List> case1852List() {
+        String[][] dataArray = {
+                {"2","lisi","false"},{"3","li3","false"},{"10","3M","false"},
+                {"11",null,"false"},{"13"," Nigula","false"},{"16","Juliya","false"},
+                {"18","777","false"},{"19","Adidas","false"},{"21","Zala","false"},
+
+        };
+        List<List> expectedList = new ArrayList<List>();
+        for(int i=0; i<dataArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<dataArray[i].length; j++) {
+                columnList.add(dataArray[i][j]);
+            }
+            expectedList.add(columnList);
+        }
+        return expectedList;
+    }
+
+
     @BeforeClass()
-    public static void ConnectDBAndCreateFuncTable() throws ClassNotFoundException, SQLException {
+    public static void setUpAll() throws ClassNotFoundException, SQLException {
         Assert.assertNotNull(SQLFuncs.connection);
     }
 
@@ -62,6 +162,15 @@ public class TestSQLFuncs {
     @Test(description = "创建SQL功能测试表3 - 用户插入null的验证")
     public void test00CreateFuncTable3() throws SQLException, ClassNotFoundException {
         funcObj.createTable302();
+    }
+
+    /**
+     * 2022/8/11 - 查询测试用例补充 - 测试用表创建和插入数据
+     * @throws SQLException
+     */
+    @Test(enabled = true, description = "创建查询测试表1")
+    public void test00CreateQueryTable1() throws SQLException {
+        initQueryTable1();
     }
 
     @Test(groups = {"preFuncs"}, dependsOnMethods = {"test00CreateFuncTable1"},
@@ -1987,6 +2096,123 @@ public class TestSQLFuncs {
         Assert.assertTrue(expectedDataList.containsAll(actualDataList));
     }
 
+    @Test(enabled = true, dataProvider = "yamlSQLFuncMethod", dependsOnMethods = {"test00CreateQueryTable1"},
+            description = "验证按时间日期等值查询")
+    public void testQueryDateTimeEQCondition(Map<String, String> param) throws SQLException {
+        StrTo2DList strTo2DList = new StrTo2DList();
+        List<List> expectedQueryList = strTo2DList.construct2DList(param.get("dataStr"));
+        System.out.println("Expected: " + expectedQueryList);
+
+        List<List> actualQueryList = funcObj.queryDateTimeEQCondition(param.get("queryColumn"),
+                param.get("eqValue"),param.get("testField"));
+        System.out.println("Actual: " + actualQueryList);
+        Assert.assertTrue(actualQueryList.containsAll(expectedQueryList));
+        Assert.assertTrue(expectedQueryList.containsAll(actualQueryList));
+    }
+
+    @Test(enabled = true, dataProvider = "yamlSQLFuncMethod", dependsOnMethods = {"test00CreateQueryTable1"},
+            description = "验证对各类型进行非等值查询")
+    public void testQueryTypeNECondition(Map<String, String> param) throws SQLException {
+        int expectedRows = Integer.parseInt(param.get("rowNum"));
+        System.out.println("Expected: " + expectedRows);
+
+        int actualRows = funcObj.queryTypeNECondition(param.get("queryColumn"), param.get("neValue"));
+        System.out.println("Actual: " + actualRows);
+        Assert.assertEquals(actualRows, expectedRows);
+    }
+
+    @Test(enabled = true, dataProvider = "yamlSQLFuncMethod", dependsOnMethods = {"test00CreateQueryTable1"},
+            description = "验证时间日期按in范围查询")
+    public void testQueryDateTimeInRangeCondition(Map<String, String> param) throws SQLException {
+        StrTo2DList strTo2DList = new StrTo2DList();
+        List<List> expectedQueryList = strTo2DList.construct2DList(param.get("dataStr"));
+        System.out.println("Expected: " + expectedQueryList);
+
+        List<List> actualQueryList = funcObj.queryDateTimeInRangeCondition(param.get("queryColumn"),
+                param.get("inRange"),param.get("testField"));
+        System.out.println("Actual: " + actualQueryList);
+        Assert.assertTrue(actualQueryList.containsAll(expectedQueryList));
+        Assert.assertTrue(expectedQueryList.containsAll(actualQueryList));
+    }
+
+    @Test(enabled = true, dataProvider = "yamlSQLFuncMethod", dependsOnMethods = {"test00CreateQueryTable1"},
+            description = "验证时间日期按not in范围查询")
+    public void testQueryDateTimeNotInRangeCondition(Map<String, String> param) throws SQLException {
+        int expectedRows = Integer.parseInt(param.get("rowNum"));
+        System.out.println("Expected: " + expectedRows);
+
+        int actualRows = funcObj.queryDateTimeNotInRangeCondition(param.get("queryColumn"),
+                param.get("notInRange"),param.get("testField"));
+        System.out.println("Actual: " + actualRows);
+        Assert.assertEquals(actualRows, expectedRows);
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"test00CreateQueryTable1"}, description = "查询布尔类型字段值为null的数据")
+    public void testQueryBooleanNull() throws SQLException {
+        List<List> expectedQueryList = case1857List();
+        System.out.println("Expected: " + expectedQueryList);
+
+        List<List> actualQueryList = funcObj.queryBooleanNullValue();
+        System.out.println("Actual: " + actualQueryList);
+        Assert.assertTrue(actualQueryList.containsAll(expectedQueryList));
+        Assert.assertTrue(expectedQueryList.containsAll(actualQueryList));
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"test00CreateQueryTable1"}, description = "字符型字段in范围查询含有null值")
+    public void testQueryVarcharInRangeWithNull() throws SQLException {
+        List<List> expectedQueryList = case1849List();
+        System.out.println("Expected: " + expectedQueryList);
+
+        List<List> actualQueryList = funcObj.queryVarcharInRangeWithNull();
+        System.out.println("Actual: " + actualQueryList);
+        Assert.assertTrue(actualQueryList.containsAll(expectedQueryList));
+        Assert.assertTrue(expectedQueryList.containsAll(actualQueryList));
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"test00CreateQueryTable1"}, description = "整型字段in范围查询含有null值")
+    public void testQueryIntInRangeWithNull() throws SQLException {
+        List<List> expectedQueryList = case1850List();
+        System.out.println("Expected: " + expectedQueryList);
+
+        List<List> actualQueryList = funcObj.queryIntInRangeWithNull();
+        System.out.println("Actual: " + actualQueryList);
+        Assert.assertTrue(actualQueryList.containsAll(expectedQueryList));
+        Assert.assertTrue(expectedQueryList.containsAll(actualQueryList));
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"test00CreateQueryTable1"}, description = "浮点型字段in范围查询含有null值")
+    public void testQueryDoubleInRangeWithNull() throws SQLException {
+        List<List> expectedQueryList = case1851List();
+        System.out.println("Expected: " + expectedQueryList);
+
+        List<List> actualQueryList = funcObj.queryDoubleInRangeWithNull();
+        System.out.println("Actual: " + actualQueryList);
+        Assert.assertTrue(actualQueryList.containsAll(expectedQueryList));
+        Assert.assertTrue(expectedQueryList.containsAll(actualQueryList));
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"test00CreateQueryTable1"}, description = "布尔型字段in范围查询含有null值")
+    public void testQueryBooleanInRangeWithNull() throws SQLException {
+        List<List> expectedQueryList = case1852List();
+        System.out.println("Expected: " + expectedQueryList);
+
+        List<List> actualQueryList = funcObj.queryBooleanInRangeWithNull();
+        System.out.println("Actual: " + actualQueryList);
+        Assert.assertTrue(actualQueryList.containsAll(expectedQueryList));
+        Assert.assertTrue(expectedQueryList.containsAll(actualQueryList));
+    }
+
+    @Test(enabled = true, dataProvider = "yamlSQLFuncMethod", dependsOnMethods = {"test00CreateQueryTable1"},
+            description = "验证其他类型按not in范围查询，字段值为null的数据不返回")
+    public void testQueryTypeNotInRangeCondition(Map<String, String> param) throws SQLException {
+        int expectedRows = Integer.parseInt(param.get("rowNum"));
+        System.out.println("Expected: " + expectedRows);
+
+        int actualRows = funcObj.queryTypeNotInRangeCondition(param.get("queryColumn"), param.get("notInRange"));
+        System.out.println("Actual: " + actualRows);
+        Assert.assertEquals(actualRows, expectedRows);
+    }
+
 
     @AfterClass(description = "测试完成后删除数据和表格并关闭连接")
     public void tearDownAll() throws SQLException {
@@ -2012,6 +2238,8 @@ public class TestSQLFuncs {
             tearDownStatement.execute("drop table case1443");
             tearDownStatement.execute("delete from case1483");
             tearDownStatement.execute("drop table case1483");
+            tearDownStatement.execute("delete from querytest1");
+            tearDownStatement.execute("drop table querytest1");
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

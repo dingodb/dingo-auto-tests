@@ -807,4 +807,40 @@ public class YamlDataHelper{
         return files;
     }
 
+    @DataProvider
+    public Object[][] yamlSQLFuncMethod(Method method) {
+        List<Map<String, String>> yamlSQLFuncList = null;
+        switch (method.getName()) {
+            case "testQueryDateTimeEQCondition": {
+                yamlSQLFuncList = getYamlList(iniReader.getValue("SQLFuncsYaml", "query_datetime_eq"));
+                break;
+            }
+
+            case "testQueryTypeNECondition": {
+                yamlSQLFuncList = getYamlList(iniReader.getValue("SQLFuncsYaml", "query_type_ne"));
+                break;
+            }
+
+            case "testQueryDateTimeInRangeCondition": {
+                yamlSQLFuncList = getYamlList(iniReader.getValue("SQLFuncsYaml", "query_datetime_in"));
+                break;
+            }
+
+            case "testQueryDateTimeNotInRangeCondition": {
+                yamlSQLFuncList = getYamlList(iniReader.getValue("SQLFuncsYaml", "query_datetime_not_in"));
+                break;
+            }
+
+            case "testQueryTypeNotInRangeCondition": {
+                yamlSQLFuncList = getYamlList(iniReader.getValue("SQLFuncsYaml", "query_type_not_in"));
+                break;
+            }
+        }
+        Object[][] files = new Object[yamlSQLFuncList.size()][];
+        for (int i = 0; i < yamlSQLFuncList.size(); i++) {
+            files[i] = new Object[]{yamlSQLFuncList.get(i)};
+        }
+        return files;
+    }
+
 }
