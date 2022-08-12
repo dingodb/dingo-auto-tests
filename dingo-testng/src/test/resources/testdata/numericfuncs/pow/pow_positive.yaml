@@ -17,11 +17,11 @@ testID1001595-02:
 testID1001595-03:
   num1: "5.0"
   num2: "3"
-  outResult: "125.0"
+  outResult: "125"
 testID1001595-04:
   num1: "8.00"
   num2: "2"
-  outResult: "64.00"
+  outResult: "64"
 testID1001595-05:
   num1: "2.1234567"
   num2: "2"

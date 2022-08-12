@@ -53,7 +53,7 @@ public class TestNumericFuncs extends YamlDataHelper {
 
     public List expectedPowList2() {
         List powList2 = new ArrayList();
-        String[] dataArray = {"2.58","11904.9921",null,"0.0","-9127173372.8891805099"};
+        String[] dataArray = {"2.58","11904.9921",null,"0","-9127173372.8891805099"};
         for (int i=0; i<dataArray.length; i++) {
             powList2.add(dataArray[i]);
         }
@@ -125,7 +125,7 @@ public class TestNumericFuncs extends YamlDataHelper {
 
     public List expectedModList2() {
         List modList2 = new ArrayList();
-        String[] dataArray = {"2.58","9.11",null,"0",null,null,"21","-3.45"};
+        String[] dataArray = {"2.58","9.11",null,"0.0",null,null,"21.0","-3.45"};
         for (int i=0; i<dataArray.length; i++) {
             modList2.add(dataArray[i]);
         }

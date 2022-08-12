@@ -87,6 +87,12 @@
         </classes>
     </test>
 
+    <test name="TableCreateTest">
+        <classes>
+            <class name="io.dingodb.test.TestTableCreate"></class>
+        </classes>
+    </test>
+
     <test name="DefectCaseTest">
         <classes>
             <class name="io.dingodb.test.TestDefectCase"></class>

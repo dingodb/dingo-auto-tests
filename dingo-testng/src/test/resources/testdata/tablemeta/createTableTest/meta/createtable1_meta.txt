@@ -1,0 +1,12 @@
+(
+id int not null,
+name varchar(20) not null default 'zhangsan',
+age int not null default 18,
+address varchar(255) not null default 'BJ Road.1',
+amount double not null default 1234.5678,
+birthday date not null default '1991-06-18',
+create_time time not null default '23:59:59',
+update_time timestamp not null default '2022-08-12 14:00:00',
+is_delete boolean not null default false,
+primary key(id)
+)

@@ -110,6 +110,10 @@ testID1001612-11:
   inputNum: "-234.6432"
   decimalLen: "-4"
   outResult: "0"
+testID1001612-12:
+  inputNum: "-5.89"
+  decimalLen: "-1"
+  outResult: "-10"
 testID1001613-01:
   inputNum: "123"
   decimalLen: "3"
