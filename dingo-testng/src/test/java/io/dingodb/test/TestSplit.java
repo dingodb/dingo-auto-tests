@@ -34,7 +34,7 @@ public class TestSplit {
 //    private static final String defaultConnectIP = "172.20.61.1";
     private static String defaultConnectIP = CommonArgs.getDefaultDingoClusterIP();
     private static final String JDBC_DRIVER = "io.dingodb.driver.client.DingoDriverClient";
-    private static final String connectUrl = "jdbc:dingo:thin:url=" + defaultConnectIP + ":8765";
+    private static final String connectUrl = "jdbc:dingo:thin:url=" + defaultConnectIP + ":8765/db?timeout=1000";
     public static Connection connection = null;
     private static String tableName = "jdbctest20";
 
@@ -123,7 +123,7 @@ public class TestSplit {
         }
     }
 
-    @Test(priority = 4, enabled = false, dependsOnMethods = {"test03CountRange"}, description = "验证区间更新")
+    @Test(priority = 4, enabled = true, dependsOnMethods = {"test03CountRange"}, description = "验证区间更新")
     public void test04UpdateRange() throws SQLException, InterruptedException {
 //        Thread.sleep(1200000);
         try(Statement statement = connection.createStatement()) {

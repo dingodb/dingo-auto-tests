@@ -1,0 +1,12 @@
+(
+id int not null,
+name varchar(20) not null,
+age int,
+address varchar(255),
+amount double,
+birthday date,
+create_time time,
+update_time timestamp,
+is_delete boolean,
+primary key(update_time)
+)
