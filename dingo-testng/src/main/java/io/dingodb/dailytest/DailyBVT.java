@@ -47,8 +47,12 @@ public class DailyBVT {
         }
     }
 
-    //创建连接方法
-//    public static void connectDingo() throws ClassNotFoundException, SQLException {
+    //获取数据库连接
+//    public static Connection connectDingo() throws ClassNotFoundException, SQLException, IOException {
+//        InputStream is = DailyBVT.class.getClassLoader().getResourceAsStream("jdbc.properties");
+//        Properties pros = new Properties();
+//        pros.load(is);
+//        String JDBC_DRIVER = pros.getProperty("JDBC_Driver");
 //        Class.forName(JDBC_DRIVER);
 //        connection = DriverManager.getConnection(connectUrl);
 //        return connection;
@@ -66,6 +70,7 @@ public class DailyBVT {
 
     //创建表
     public void createTable() throws Exception {
+//        connection = connectDingo();
         String tableName = getTableName();
         try(Statement statement = connection.createStatement()) {
             String sql = "create table " + tableName + "("

@@ -37,3 +37,27 @@ testID1000826-01:
 testID1000826-02:
   inputDate1: "22:03:12"
   inputDate2: "21:12:13"
+testID1000813-01:
+  inputDate1: "2022-04-13 23:59:59"
+  inputDate2: "2022-04-01 01:00:00"
+#  outputDiff: "12"
+testID1000814-01:
+  inputDate1: "2022-04-13 23:59:59"
+  inputDate2: "2022-04-01"
+#  outputDiff: "12"
+testID1000814-02:
+  inputDate1: "2022-04-13"
+  inputDate2: "2022-04-01 23:59:59"
+#  outputDiff: "12"
+testID1000822-01:
+  inputDate1: "20220413235959"
+  inputDate2: "20220531120000"
+#  outputDiff: "-48"
+testID1000840-02:
+  inputDate1: "2021/12/13 03:10:15"
+  inputDate2: "2020/3/3 23:15:00"
+#  outputDiff: "650"
+testID1000841-01:
+  inputDate1: "2022.04.13 15:17:58"
+  inputDate2: "2022.05.31 00:01:01"
+#  outputDiff: "-48"
