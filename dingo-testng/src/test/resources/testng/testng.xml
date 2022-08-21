@@ -87,6 +87,13 @@
         </classes>
     </test>
 
+    <test name="v0.4.0 compositeDataTypeTest">
+        <classes>
+            <class name="io.dingodb.test.compositedatatype.TestArrayField"></class>
+        </classes>
+    </test>
+
+
     <test name="TableCreateTest">
         <classes>
             <class name="io.dingodb.test.TestTableCreate"></class>

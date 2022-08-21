@@ -16,26 +16,19 @@
 
 package io.dingodb.dailytest;
 
+import io.dingodb.common.utils.JDBCUtils;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class AggregateFuncVARandSTDEV {
-    //    private static final String defaultConnectIP = "172.20.3.26";
-    private static String defaultConnectIP = CommonArgs.getDefaultDingoClusterIP();
-    private static final String JDBC_DRIVER = "io.dingodb.driver.client.DingoDriverClient";
-    private static final String connectUrl = "jdbc:dingo:thin:url=" + defaultConnectIP + ":8765";
     public static Connection connection = null;
 
-    static{
+    static {
         try {
-            Class.forName(JDBC_DRIVER);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        try {
-            connection = DriverManager.getConnection(connectUrl);
-        } catch (SQLException e) {
+            connection = JDBCUtils.getConnection();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -195,6 +188,7 @@ public class AggregateFuncVARandSTDEV {
                 ageVarCal1 = ageVarRst.getDouble(1);
             }
 
+            ageVarRst.close();
             statement.close();
             return ageVarCal1;
         }
@@ -211,6 +205,7 @@ public class AggregateFuncVARandSTDEV {
                 amountVarCal1 = amountVarRst.getDouble(1);
             }
 
+            amountVarRst.close();
             statement.close();
             return amountVarCal1;
         }
@@ -227,6 +222,7 @@ public class AggregateFuncVARandSTDEV {
                 ageVarOneRowCal = ageVarOneRowRst.getDouble(1);
             }
 
+            ageVarOneRowRst.close();
             statement.close();
             return ageVarOneRowCal;
         }
@@ -243,6 +239,7 @@ public class AggregateFuncVARandSTDEV {
                 ageVarCal2 = ageVarRst.getDouble(1);
             }
 
+            ageVarRst.close();
             statement.close();
             return ageVarCal2;
         }
@@ -259,6 +256,7 @@ public class AggregateFuncVARandSTDEV {
                 ageVarCal3 = ageVarRst.getDouble(1);
             }
 
+            ageVarRst.close();
             statement.close();
             return ageVarCal3;
         }
@@ -275,6 +273,7 @@ public class AggregateFuncVARandSTDEV {
                 ageVarCal4 = ageVarRst.getDouble(1);
             }
 
+            ageVarRst.close();
             statement.close();
             return ageVarCal4;
         }
@@ -292,6 +291,7 @@ public class AggregateFuncVARandSTDEV {
                 multiColumnVarList.add(multiColumnRST.getDouble("vam"));
             }
 
+            multiColumnRST.close();
             statement.close();
             return multiColumnVarList;
         }
@@ -308,6 +308,7 @@ public class AggregateFuncVARandSTDEV {
                 emptyTableVar = emptyTableRst.getDouble(1);
             }
 
+            emptyTableRst.close();
             statement.close();
             return emptyTableVar;
         }
@@ -330,6 +331,7 @@ public class AggregateFuncVARandSTDEV {
 
             }
 
+            varWithOtherAggrRST.close();
             statement.close();
             return varWithOtherAggrList;
         }
@@ -346,6 +348,7 @@ public class AggregateFuncVARandSTDEV {
                 ageStdevCal5 = ageStdevRst.getDouble(1);
             }
 
+            ageStdevRst.close();
             statement.close();
             return ageStdevCal5;
         }
@@ -362,6 +365,7 @@ public class AggregateFuncVARandSTDEV {
                 ageStdevCal2 = ageStdevRst.getDouble(1);
             }
 
+            ageStdevRst.close();
             statement.close();
             return ageStdevCal2;
         }
@@ -378,6 +382,7 @@ public class AggregateFuncVARandSTDEV {
                 ageStdevOneRowCal = ageStdevOneRowRst.getDouble(1);
             }
 
+            ageStdevOneRowRst.close();
             statement.close();
             return ageStdevOneRowCal;
         }
@@ -394,6 +399,7 @@ public class AggregateFuncVARandSTDEV {
                 ageStdevCal3 = ageStdevRst.getDouble(1);
             }
 
+            ageStdevRst.close();
             statement.close();
             return ageStdevCal3;
         }
@@ -410,6 +416,7 @@ public class AggregateFuncVARandSTDEV {
                 ageStdevCal4 = ageStdevRst.getDouble(1);
             }
 
+            ageStdevRst.close();
             statement.close();
             return ageStdevCal4;
         }
@@ -426,6 +433,7 @@ public class AggregateFuncVARandSTDEV {
                 amountStdevCal5 = amountStdevRst.getDouble(1);
             }
 
+            amountStdevRst.close();
             statement.close();
             return amountStdevCal5;
         }
@@ -443,6 +451,7 @@ public class AggregateFuncVARandSTDEV {
                 multiColumnStdevList.add(multiColumnStdevRST.getDouble("sam"));
             }
 
+            multiColumnStdevRST.close();
             statement.close();
             return multiColumnStdevList;
         }
@@ -459,6 +468,7 @@ public class AggregateFuncVARandSTDEV {
                 emptyTableStdev = emptyTableStdevRst.getDouble(1);
             }
 
+            emptyTableStdevRst.close();
             statement.close();
             return emptyTableStdev;
         }
@@ -481,6 +491,7 @@ public class AggregateFuncVARandSTDEV {
 
             }
 
+            stdevWithOtherAggrRST.close();
             statement.close();
             return stdevWithOtherAggrList;
         }
@@ -497,6 +508,7 @@ public class AggregateFuncVARandSTDEV {
                 ageVarCal8 = ageVarRst8.getDouble(1);
             }
 
+            ageVarRst8.close();
             statement.close();
             return ageVarCal8;
         }
@@ -513,6 +525,7 @@ public class AggregateFuncVARandSTDEV {
                 ageStdevCal8 = ageStdevRst8.getDouble(1);
             }
 
+            ageStdevRst8.close();
             statement.close();
             return ageStdevCal8;
         }

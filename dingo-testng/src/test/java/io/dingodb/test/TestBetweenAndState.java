@@ -16,6 +16,7 @@
 
 package io.dingodb.test;
 
+import io.dingodb.common.utils.JDBCUtils;
 import io.dingodb.dailytest.BetweenState;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -1127,7 +1128,7 @@ public class TestBetweenAndState extends YamlDataHelper {
             description = "验证between查询范围起始值等于终止值")
     public void test08BetweenStartEQEnd(Map<String, String> param) throws SQLException {
         StrTo2DList strTo2DList = new StrTo2DList();
-        List<List> expectedBetweenList = strTo2DList.construct2DList(param.get("dataStr"));
+        List<List> expectedBetweenList = strTo2DList.construct2DList(param.get("dataStr"), ";");
         System.out.println("Expected: " + expectedBetweenList);
         List<List> actualBetweenList = betweenObj.betweenQueryStartEQEnd(param.get("betweenState"), param.get("testField"));
         System.out.println("Actual: " + actualBetweenList);
@@ -1417,7 +1418,7 @@ public class TestBetweenAndState extends YamlDataHelper {
             description = "验证between查询日期范围支持的其他日期格式")
     public void test31BetweenSupportOtherDateFormat(Map<String, String> param) throws SQLException {
         StrTo2DList strTo2DList = new StrTo2DList();
-        List<List> expectedBetweenList = strTo2DList.construct2DList(param.get("dataStr"));
+        List<List> expectedBetweenList = strTo2DList.construct2DList(param.get("dataStr"), ";");
         System.out.println("Expected: " + expectedBetweenList);
 
         List<List> actualBetweenList = betweenObj.betweenQuerySupportOtherDateFormat(param.get("queryColumn"),
@@ -1431,7 +1432,7 @@ public class TestBetweenAndState extends YamlDataHelper {
             description = "验证not between查询日期范围支持的其他日期格式")
     public void test32NotBetweenSupportOtherDateFormat(Map<String, String> param) throws SQLException {
         StrTo2DList strTo2DList = new StrTo2DList();
-        List<List> expectedNotBetweenList = strTo2DList.construct2DList(param.get("dataStr"));
+        List<List> expectedNotBetweenList = strTo2DList.construct2DList(param.get("dataStr"), ";");
         System.out.println("Expected: " + expectedNotBetweenList);
 
         List<List> actualNotBetweenList = betweenObj.notBetweenQuerySupportOtherDateFormat(param.get("queryColumn"),
@@ -1835,21 +1836,7 @@ public class TestBetweenAndState extends YamlDataHelper {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            try {
-                if (tearDownStatement != null) {
-                    tearDownStatement.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-
-            try {
-                if (BetweenState.connection != null) {
-                    BetweenState.connection.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            JDBCUtils.closeResource(BetweenState.connection, tearDownStatement);
         }
     }
 }

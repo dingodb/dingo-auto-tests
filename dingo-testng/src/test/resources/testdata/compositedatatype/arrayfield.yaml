@@ -1,0 +1,40 @@
+testID1001881-01:
+  tableName: "intArray"
+  fieldName: "class_no"
+  fieldType: "int"
+testID1001881-02:
+  tableName: "bigintArray"
+  fieldName: "class_no"
+  fieldType: "bigint"
+testID1001882-01:
+  tableName: "varcharArray"
+  fieldName: "user_info"
+  fieldType: "varchar"
+testID1001882-02:
+  tableName: "charArray"
+  fieldName: "user_info"
+  fieldType: "char"
+testID1001883-01:
+  tableName: "doubleArray"
+  fieldName: "price"
+  fieldType: "double"
+testID1001883-02:
+  tableName: "floatArray"
+  fieldName: "price"
+  fieldType: "float"
+testID1001884:
+  tableName: "dateArray"
+  fieldName: "run_inter"
+  fieldType: "date"
+testID1001885:
+  tableName: "timeArray"
+  fieldName: "test_time"
+  fieldType: "time"
+testID1001886:
+  tableName: "timestampArray"
+  fieldName: "send_time"
+  fieldType: "timestamp"
+testID1001887:
+  tableName: "boolArray"
+  fieldName: "in_use"
+  fieldType: "boolean"

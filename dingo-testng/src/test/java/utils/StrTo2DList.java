@@ -25,13 +25,21 @@ public class StrTo2DList {
      * @param construcStr e.g. 5,awJDs,2010-10-01;19,Adidas,2010-10-01
      * @return List<List>
      */
-    public List<List> construct2DList(String construcStr){
+    public List<List> construct2DList(String construcStr, String splitCha){
         List<List> constructList = new ArrayList<List>();
-        String[] originArray = construcStr.split(";");
+        String[] originArray = construcStr.split(splitCha);
 
         for(int i=0; i < originArray.length; i++) {
             constructList.add(new ArrayList(Arrays.asList(originArray[i].split(","))));
         }
+
+        return constructList;
+    }
+
+    public List<List> construct1DList(String construcStr, String splitCha){
+        List constructList = new ArrayList();
+        String[] originArray = construcStr.split(splitCha);
+        constructList = Arrays.asList(originArray);
 
         return constructList;
     }

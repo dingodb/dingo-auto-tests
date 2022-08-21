@@ -16,6 +16,7 @@
 
 package io.dingodb.test;
 
+import io.dingodb.common.utils.JDBCUtils;
 import io.dingodb.dailytest.BooleanField;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -284,21 +285,7 @@ public class TestBooleanField extends YamlDataHelper {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            try {
-                if(tearDownStatement != null){
-                    tearDownStatement.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-
-            try {
-                if(BooleanField.connection != null){
-                    BooleanField.connection.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            JDBCUtils.closeResource(BooleanField.connection, tearDownStatement);
         }
     }
 }

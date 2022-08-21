@@ -16,8 +16,9 @@
 
 package io.dingodb.dailytest;
 
+import io.dingodb.common.utils.JDBCUtils;
+
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -25,22 +26,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BetweenState {
-//    private static final String defaultConnectIP = "172.20.3.27";
-//    private static final String defaultConnectIP = "172.20.61.1";
-    private static String defaultConnectIP = CommonArgs.getDefaultDingoClusterIP();
-    private static final String JDBC_DRIVER = "io.dingodb.driver.client.DingoDriverClient";
-    private static final String connectUrl = "jdbc:dingo:thin:url=" + defaultConnectIP + ":8765";
     public static Connection connection = null;
 
-    static{
+    static {
         try {
-            Class.forName(JDBC_DRIVER);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        try {
-            connection = DriverManager.getConnection(connectUrl);
-        } catch (SQLException e) {
+            connection = JDBCUtils.getConnection();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -170,6 +161,7 @@ public class BetweenState {
                 rowList.add(resultSet.getString("name"));
                 betweenList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return betweenList;
         }
@@ -187,6 +179,7 @@ public class BetweenState {
                 rowList.add(resultSet.getString("name"));
                 betweenList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return betweenList;
         }
@@ -205,6 +198,7 @@ public class BetweenState {
                 rowList.add(resultSet.getString("age"));
                 betweenList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return betweenList;
         }
@@ -223,6 +217,7 @@ public class BetweenState {
                 rowList.add(resultSet.getString("age"));
                 betweenList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return betweenList;
         }
@@ -241,6 +236,7 @@ public class BetweenState {
                 rowList.add(resultSet.getString("amount"));
                 betweenList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return betweenList;
         }
@@ -259,6 +255,7 @@ public class BetweenState {
                 rowList.add(resultSet.getString("amount"));
                 betweenList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return betweenList;
         }
@@ -276,6 +273,7 @@ public class BetweenState {
                 rowList.add(resultSet.getString("name"));
                 betweenList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return betweenList;
         }
@@ -293,6 +291,7 @@ public class BetweenState {
                 rowList.add(resultSet.getString("name"));
                 betweenList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return betweenList;
         }
@@ -310,6 +309,7 @@ public class BetweenState {
                 rowList.add(resultSet.getString("name"));
                 betweenList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return betweenList;
         }
@@ -327,6 +327,7 @@ public class BetweenState {
                 rowList.add(resultSet.getString("name"));
                 betweenList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return betweenList;
         }
@@ -345,6 +346,7 @@ public class BetweenState {
                 rowList.add(resultSet.getString("address"));
                 betweenList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return betweenList;
         }
@@ -363,6 +365,7 @@ public class BetweenState {
                 rowList.add(resultSet.getString("address"));
                 betweenList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return betweenList;
         }
@@ -381,6 +384,7 @@ public class BetweenState {
                 rowList.add(resultSet.getString("birthday"));
                 betweenList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return betweenList;
         }
@@ -399,6 +403,7 @@ public class BetweenState {
                 rowList.add(resultSet.getString("birthday"));
                 betweenList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return betweenList;
         }
@@ -417,6 +422,7 @@ public class BetweenState {
                 rowList.add(resultSet.getString("create_time"));
                 betweenList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return betweenList;
         }
@@ -435,6 +441,7 @@ public class BetweenState {
                 rowList.add(resultSet.getString("create_time"));
                 betweenList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return betweenList;
         }
@@ -453,6 +460,7 @@ public class BetweenState {
                 rowList.add(resultSet.getString("update_time"));
                 betweenList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return betweenList;
         }
@@ -471,6 +479,7 @@ public class BetweenState {
                 rowList.add(resultSet.getString("update_time"));
                 betweenList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return betweenList;
         }
@@ -481,6 +490,7 @@ public class BetweenState {
         try(Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery(queryState);
             Boolean queryResult = resultSet.next();
+            resultSet.close();
             statement.close();
             return queryResult;
         }
@@ -494,6 +504,7 @@ public class BetweenState {
             while (resultSet.next()) {
                 rowNum++;
             }
+            resultSet.close();
             statement.close();
             return rowNum;
         }
@@ -507,6 +518,7 @@ public class BetweenState {
             while (resultSet.next()) {
                 rowNum++;
             }
+            resultSet.close();
             statement.close();
             return rowNum;
         }
@@ -517,6 +529,7 @@ public class BetweenState {
         try(Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery(queryState);
             Boolean queryResult = resultSet.next();
+            resultSet.close();
             statement.close();
             return queryResult;
         }
@@ -529,6 +542,7 @@ public class BetweenState {
             String betweenSQL = "select * from betweenTest " + queryState;
             ResultSet resultSet = statement.executeQuery(betweenSQL);
             Boolean queryResult = resultSet.next();
+            resultSet.close();
             statement.close();
             return queryResult;
         }
@@ -540,6 +554,7 @@ public class BetweenState {
             String betweenSQL = "select * from betweenTest " + queryState;
             ResultSet resultSet = statement.executeQuery(betweenSQL);
             Boolean queryResult = resultSet.next();
+            resultSet.close();
             statement.close();
             return queryResult;
         }
@@ -558,6 +573,7 @@ public class BetweenState {
                 rowList.add(resultSet.getString("birthday"));
                 betweenList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return betweenList;
         }
@@ -576,6 +592,7 @@ public class BetweenState {
                 rowList.add(resultSet.getString("birthday"));
                 betweenList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return betweenList;
         }
@@ -594,6 +611,7 @@ public class BetweenState {
                 rowList.add(resultSet.getString("create_time"));
                 betweenList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return betweenList;
         }
@@ -612,6 +630,7 @@ public class BetweenState {
                 rowList.add(resultSet.getString("create_time"));
                 betweenList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return betweenList;
         }
@@ -630,6 +649,7 @@ public class BetweenState {
                 rowList.add(resultSet.getString("update_time"));
                 betweenList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return betweenList;
         }
@@ -648,6 +668,7 @@ public class BetweenState {
                 rowList.add(resultSet.getString("update_time"));
                 betweenList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return betweenList;
         }
@@ -666,6 +687,7 @@ public class BetweenState {
                 rowList.add(resultSet.getString("update_time"));
                 betweenList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return betweenList;
         }
@@ -684,6 +706,7 @@ public class BetweenState {
                 rowList.add(resultSet.getString("update_time"));
                 betweenList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return betweenList;
         }
@@ -695,6 +718,7 @@ public class BetweenState {
         try(Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery(queryState);
             Boolean queryResult = resultSet.next();
+            resultSet.close();
             statement.close();
             return queryResult;
         }
@@ -705,6 +729,7 @@ public class BetweenState {
         try(Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery(queryState);
             Boolean queryResult = resultSet.next();
+            resultSet.close();
             statement.close();
             return queryResult;
         }
@@ -725,6 +750,7 @@ public class BetweenState {
                 }
                 betweenList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return betweenList;
         }
@@ -745,6 +771,7 @@ public class BetweenState {
                 }
                 notBetweenList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return notBetweenList;
         }
@@ -755,6 +782,7 @@ public class BetweenState {
         try(Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery(queryState);
             Boolean queryResult = resultSet.next();
+            resultSet.close();
             statement.close();
             return queryResult;
         }
@@ -765,6 +793,7 @@ public class BetweenState {
         try(Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery(queryState);
             Boolean queryResult = resultSet.next();
+            resultSet.close();
             statement.close();
             return queryResult;
         }
@@ -783,6 +812,7 @@ public class BetweenState {
                 rowList.add(resultSet.getString("age"));
                 betweenList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return betweenList;
         }
@@ -800,6 +830,7 @@ public class BetweenState {
                 rowList.add(resultSet.getString("name"));;
                 betweenList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return betweenList;
         }
@@ -818,6 +849,7 @@ public class BetweenState {
                 rowList.add(resultSet.getString("age"));;
                 betweenList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return betweenList;
         }
@@ -828,6 +860,7 @@ public class BetweenState {
         try(Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery(queryState);
             Boolean queryResult = resultSet.next();
+            resultSet.close();
             statement.close();
             return queryResult;
         }
@@ -838,6 +871,7 @@ public class BetweenState {
         try(Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery(queryState);
             Boolean queryResult = resultSet.next();
+            resultSet.close();
             statement.close();
             return queryResult;
         }
@@ -856,6 +890,7 @@ public class BetweenState {
                 rowList.add(resultSet.getString("age"));
                 betweenList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return betweenList;
         }
@@ -874,6 +909,7 @@ public class BetweenState {
                 rowList.add(resultSet.getString("age"));
                 betweenList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return betweenList;
         }
@@ -892,6 +928,7 @@ public class BetweenState {
                 }
                 betweenList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return betweenList;
         }
@@ -905,6 +942,7 @@ public class BetweenState {
             while (resultSet.next()) {
                 betweenList.add(resultSet.getString(testFieldStr));
             }
+            resultSet.close();
             statement.close();
             return betweenList;
         }
@@ -930,6 +968,7 @@ public class BetweenState {
                 rowList.add(resultSet.getString(9));
                 betweenList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return betweenList;
         }
@@ -956,6 +995,7 @@ public class BetweenState {
                 rowList.add(resultSet.getString(9));
                 betweenList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return betweenList;
         }
@@ -981,6 +1021,7 @@ public class BetweenState {
                 rowList.add(resultSet.getString(9));
                 betweenList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return betweenList;
         }
@@ -1007,6 +1048,7 @@ public class BetweenState {
                 rowList.add(resultSet.getString(9));
                 betweenList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return betweenList;
         }
@@ -1024,6 +1066,7 @@ public class BetweenState {
                 betweenList.add(resultSet.getString("sa"));
                 betweenList.add(resultSet.getString("mb"));
             }
+            resultSet.close();
             statement.close();
             return betweenList;
         }
@@ -1042,6 +1085,7 @@ public class BetweenState {
                 betweenList.add(resultSet.getTime("mc").toString());
                 betweenList.add(resultSet.getString("mu"));
             }
+            resultSet.close();
             statement.close();
             return betweenList;
         }
@@ -1060,6 +1104,7 @@ public class BetweenState {
 
                 betweenList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return betweenList;
         }
@@ -1079,6 +1124,7 @@ public class BetweenState {
 
                 betweenList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return betweenList;
         }
@@ -1102,6 +1148,7 @@ public class BetweenState {
 
                 betweenList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return betweenList;
         }
@@ -1125,6 +1172,7 @@ public class BetweenState {
 
                 betweenList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return betweenList;
         }
@@ -1150,6 +1198,7 @@ public class BetweenState {
 
                 betweenList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return betweenList;
         }
@@ -1172,6 +1221,7 @@ public class BetweenState {
 
                 betweenList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return betweenList;
         }
@@ -1204,6 +1254,7 @@ public class BetweenState {
 
                 betweenList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return betweenList;
         }
@@ -1227,6 +1278,7 @@ public class BetweenState {
 
                 betweenList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return betweenList;
         }
@@ -1252,6 +1304,7 @@ public class BetweenState {
 
                 betweenList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return betweenList;
         }
@@ -1274,6 +1327,7 @@ public class BetweenState {
 
                 betweenList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return betweenList;
         }
@@ -1318,6 +1372,7 @@ public class BetweenState {
 
                 betweenList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return betweenList;
         }
@@ -1352,6 +1407,7 @@ public class BetweenState {
 
                 betweenList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return betweenList;
         }
@@ -1390,6 +1446,7 @@ public class BetweenState {
 
                 betweenList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return betweenList;
         }
@@ -1409,6 +1466,7 @@ public class BetweenState {
 
                 betweenList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return betweenList;
         }

@@ -16,8 +16,9 @@
 
 package io.dingodb.dailytest;
 
+import io.dingodb.common.utils.JDBCUtils;
+
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -25,22 +26,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DateTimeFuncs {
-//    private static final String defaultConnectIP = "172.20.3.27";
-//    private static final String defaultConnectIP = "172.20.61.1";
-    private static String defaultConnectIP = CommonArgs.getDefaultDingoClusterIP();
-    private static final String JDBC_DRIVER = "io.dingodb.driver.client.DingoDriverClient";
-    private static final String connectUrl = "jdbc:dingo:thin:url=" + defaultConnectIP + ":8765";
     public static Connection connection = null;
 
-    static{
+    static {
         try {
-            Class.forName(JDBC_DRIVER);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        try {
-            connection = DriverManager.getConnection(connectUrl);
-        } catch (SQLException e) {
+            connection = JDBCUtils.getConnection();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -138,6 +129,8 @@ public class DateTimeFuncs {
                     queryStr = resultSet.getString("OrderTime");
                 }
             }
+
+            resultSet.close();
             statement.close();
             return queryStr;
         }
@@ -154,6 +147,8 @@ public class DateTimeFuncs {
             while (queryUTSBRst.next()) {
                 queryUTSBList.add(queryUTSBRst.getString("UTSB"));
             }
+
+            queryUTSBRst.close();
             statement.close();
             return queryUTSBList;
         }
@@ -170,6 +165,8 @@ public class DateTimeFuncs {
             while (queryUTSCRst.next()) {
                 queryUTSCList.add(queryUTSCRst.getString("UTSC"));
             }
+
+            queryUTSCRst.close();
             statement.close();
             return queryUTSCList;
         }
@@ -186,6 +183,8 @@ public class DateTimeFuncs {
             while (queryDFBRst.next()) {
                 queryDFBList.add(queryDFBRst.getString("birth_out"));
             }
+
+            queryDFBRst.close();
             statement.close();
             return queryDFBList;
         }
@@ -239,6 +238,8 @@ public class DateTimeFuncs {
             while (findDateRst.next()) {
                 findDateStr = findDateRst.getString("birthday");
             }
+
+            findDateRst.close();
             statement.close();
             return findDateStr;
         }
@@ -293,6 +294,8 @@ public class DateTimeFuncs {
             while (queryTFTRst.next()) {
                 queryTFList.add(queryTFTRst.getString("time_out"));
             }
+
+            queryTFTRst.close();
             statement.close();
             return queryTFList;
         }
@@ -311,6 +314,8 @@ public class DateTimeFuncs {
             while (findTimeRst.next()) {
                 findTimeStr = findTimeRst.getTime("create_time").toString();
             }
+
+            findTimeRst.close();
             statement.close();
             return findTimeStr;
         }
@@ -358,6 +363,8 @@ public class DateTimeFuncs {
             while (findTimestampRst.next()) {
                 findTimestampStr = findTimestampRst.getString("upload_time");
             }
+
+            findTimestampRst.close();
             statement.close();
             return findTimestampStr;
         }
@@ -374,6 +381,7 @@ public class DateTimeFuncs {
                 nowString = nowRst.getString(1);
             }
 
+            nowRst.close();
             statement.close();
             return nowString;
         }
@@ -388,6 +396,8 @@ public class DateTimeFuncs {
             while (curDateRst.next()) {
                 curDateString = curDateRst.getString(1);
             }
+
+            curDateRst.close();
             statement.close();
             return curDateString;
         }
@@ -402,6 +412,8 @@ public class DateTimeFuncs {
             while (current_DateRst.next()) {
                 current_DateString = current_DateRst.getString(1);
             }
+
+            current_DateRst.close();
             statement.close();
             return current_DateString;
         }
@@ -417,6 +429,7 @@ public class DateTimeFuncs {
                 current_DateWithBracketString = current_DateWithBracketsRst.getString(1);
             }
 
+            current_DateWithBracketsRst.close();
             statement.close();
             return current_DateWithBracketString;
         }
@@ -432,6 +445,7 @@ public class DateTimeFuncs {
                 curTimeString = curTimeRst.getString(1);
             }
 
+            curTimeRst.close();
             statement.close();
             return curTimeString;
         }
@@ -447,6 +461,7 @@ public class DateTimeFuncs {
                 current_TimeString = current_TimeRst.getString(1);
             }
 
+            current_TimeRst.close();
             statement.close();
             return current_TimeString;
         }
@@ -462,6 +477,7 @@ public class DateTimeFuncs {
                 current_TimeWithBracketsString = current_TimeWithBracketsRst.getString(1);
             }
 
+            current_TimeWithBracketsRst.close();
             statement.close();
             return current_TimeWithBracketsString;
         }
@@ -477,6 +493,7 @@ public class DateTimeFuncs {
                 current_TimeStampString = current_TimeStampRst.getString(1);
             }
 
+            current_TimeStampRst.close();
             statement.close();
             return current_TimeStampString;
         }
@@ -492,6 +509,7 @@ public class DateTimeFuncs {
                 current_TimeStampWithBracketsString = current_TimeStampWithBracketsRst.getString(1);
             }
 
+            current_TimeStampWithBracketsRst.close();
             statement.close();
             return current_TimeStampWithBracketsString;
         }
@@ -507,6 +525,7 @@ public class DateTimeFuncs {
                 from_UnixTimeString = from_UnixTimeRst.getString(1);
             }
 
+            from_UnixTimeRst.close();
             statement.close();
             return from_UnixTimeString;
         }
@@ -522,6 +541,7 @@ public class DateTimeFuncs {
                 from_UnixTimeWithStringStr = from_UnixTimeWithStringRst.getString(1);
             }
 
+            from_UnixTimeWithStringRst.close();
             statement.close();
             return from_UnixTimeWithStringStr;
         }
@@ -553,6 +573,7 @@ public class DateTimeFuncs {
                 unix_TimeStampStr = unixTimeStampRst.getString(1);
             }
 
+            unixTimeStampRst.close();
             statement.close();
             return unix_TimeStampStr;
         }
@@ -568,6 +589,7 @@ public class DateTimeFuncs {
                 unix_TimeStampNoArgStr = unixTimeStampNoArgRst.getString(1);
             }
 
+            unixTimeStampNoArgRst.close();
             statement.close();
             return unix_TimeStampNoArgStr;
         }
@@ -583,6 +605,7 @@ public class DateTimeFuncs {
                 unix_TimeStampNumArgStr = unixTimeStampNumArgRst.getString(1);
             }
 
+            unixTimeStampNumArgRst.close();
             statement.close();
             return unix_TimeStampNumArgStr;
         }
@@ -598,6 +621,7 @@ public class DateTimeFuncs {
                 unix_TimeStampFuncArgStr = unixTimeStampFuncArgRst.getString(1);
             }
 
+            unixTimeStampFuncArgRst.close();
             statement.close();
             return unix_TimeStampFuncArgStr;
         }
@@ -613,6 +637,7 @@ public class DateTimeFuncs {
                 date_formatSargStr = date_formatSargRst.getString(1);
             }
 
+            date_formatSargRst.close();
             statement.close();
             return date_formatSargStr;
         }
@@ -628,6 +653,7 @@ public class DateTimeFuncs {
                 date_formatNargStr = date_formatNargRst.getString(1);
             }
 
+            date_formatNargRst.close();
             statement.close();
             return date_formatNargStr;
         }
@@ -643,6 +669,7 @@ public class DateTimeFuncs {
                 date_formatFuncArgStr = date_formatFuncArgRst.getString(1);
             }
 
+            date_formatFuncArgRst.close();
             statement.close();
             return date_formatFuncArgStr;
         }
@@ -658,6 +685,7 @@ public class DateTimeFuncs {
                 date_formatNullArgStr = date_formatNullArgRst.getString(1);
             }
 
+            date_formatNullArgRst.close();
             statement.close();
             return date_formatNullArgStr;
         }
@@ -673,6 +701,7 @@ public class DateTimeFuncs {
                 date_formatEmptyArgStr = date_formatEmptyArgRst.getString(1);
             }
 
+            date_formatEmptyArgRst.close();
             statement.close();
             return date_formatEmptyArgStr;
         }
@@ -688,6 +717,7 @@ public class DateTimeFuncs {
                 date_formatStr = date_formatRst.getString(1);
             }
 
+            date_formatRst.close();
             statement.close();
             return date_formatStr;
         }
@@ -712,6 +742,7 @@ public class DateTimeFuncs {
                 time_formatSargStr = time_formatSargRst.getString(1);
             }
 
+            time_formatSargRst.close();
             statement.close();
             return time_formatSargStr;
         }
@@ -727,6 +758,7 @@ public class DateTimeFuncs {
                 time_formatNargStr = time_formatNargRst.getString(1);
             }
 
+            time_formatNargRst.close();
             statement.close();
             return time_formatNargStr;
         }
@@ -742,6 +774,7 @@ public class DateTimeFuncs {
                 time_formatFuncArgStr = time_formatFuncArgRst.getString(1);
             }
 
+            time_formatFuncArgRst.close();
             statement.close();
             return time_formatFuncArgStr;
         }
@@ -757,6 +790,7 @@ public class DateTimeFuncs {
                 time_formatStr = time_formatRst.getString(1);
             }
 
+            time_formatRst.close();
             statement.close();
             return time_formatStr;
         }
@@ -780,6 +814,7 @@ public class DateTimeFuncs {
                 time_formatNullArgStr = time_formatNullArgRst.getString(1);
             }
 
+            time_formatNullArgRst.close();
             statement.close();
             return time_formatNullArgStr;
         }
@@ -795,6 +830,7 @@ public class DateTimeFuncs {
                 time_formatEmptyArgStr = time_formatEmptyArgRst.getString(1);
             }
 
+            time_formatEmptyArgRst.close();
             statement.close();
             return time_formatEmptyArgStr;
         }
@@ -810,6 +846,7 @@ public class DateTimeFuncs {
                 dateDiffSargStr = dateDiffSargRst.getString(1);
             }
 
+            dateDiffSargRst.close();
             statement.close();
             return dateDiffSargStr;
         }
@@ -825,6 +862,7 @@ public class DateTimeFuncs {
                 dateDiffNargStr = dateDiffNargRst.getString(1);
             }
 
+            dateDiffNargRst.close();
             statement.close();
             return dateDiffNargStr;
         }
@@ -840,6 +878,7 @@ public class DateTimeFuncs {
                 dateDiffFarg1Str = dateDiffFarg1Rst.getString(1);
             }
 
+            dateDiffFarg1Rst.close();
             statement.close();
             return dateDiffFarg1Str;
         }
@@ -854,6 +893,7 @@ public class DateTimeFuncs {
                 dateDiffFarg2Str = dateDiffFarg2Rst.getString(1);
             }
 
+            dateDiffFarg2Rst.close();
             statement.close();
             return dateDiffFarg2Str;
         }
@@ -868,6 +908,8 @@ public class DateTimeFuncs {
             while(dateDiffStateRst.next()) {
                 dateDiffStateStr = dateDiffStateRst.getString(1);
             }
+
+            dateDiffStateRst.close();
             statement.close();
             return dateDiffStateStr;
         }
@@ -883,6 +925,7 @@ public class DateTimeFuncs {
                 funcConcatStr = funcConcatRst.getString(1);
             }
 
+            funcConcatRst.close();
             statement.close();
             return funcConcatStr;
         }
@@ -979,6 +1022,8 @@ public class DateTimeFuncs {
 
                 queryUpdateList1.add(rowList);
             }
+
+            queryUpdateRst.close();
             statement.close();
             return queryUpdateList1;
         }
@@ -1008,6 +1053,8 @@ public class DateTimeFuncs {
 
                 queryUpdateList2.add(rowList);
             }
+
+            queryUpdateRst.close();
             statement.close();
             return queryUpdateList2;
         }
@@ -1027,6 +1074,8 @@ public class DateTimeFuncs {
                 queryList.add(resultSet.getInt(1));
                 queryList.add(resultSet.getDate(2));
             }
+
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -1046,6 +1095,8 @@ public class DateTimeFuncs {
                 queryList.add(resultSet.getInt(1));
                 queryList.add(resultSet.getTime(2));
             }
+
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -1066,6 +1117,7 @@ public class DateTimeFuncs {
                 queryList.add(resultSet.getInt(1));
                 queryList.add(resultSet.getTimestamp(2));
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -1081,6 +1133,7 @@ public class DateTimeFuncs {
                 timestamp_formatFuncArgStr = timestamp_formatFuncArgRst.getString(1);
             }
 
+            timestamp_formatFuncArgRst.close();
             statement.close();
             return timestamp_formatFuncArgStr;
         }
@@ -1096,6 +1149,7 @@ public class DateTimeFuncs {
                 timestamp_formatSargStr = timestamp_formatSargRst.getString(1);
             }
 
+            timestamp_formatSargRst.close();
             statement.close();
             return timestamp_formatSargStr;
         }
@@ -1111,6 +1165,7 @@ public class DateTimeFuncs {
                 timestamp_formatNargStr = timestamp_formatNargRst.getString(1);
             }
 
+            timestamp_formatNargRst.close();
             statement.close();
             return timestamp_formatNargStr;
         }
@@ -1127,6 +1182,8 @@ public class DateTimeFuncs {
             while (resultSet.next()) {
                 queryList.add(resultSet.getString("ts_out"));
             }
+
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -1142,6 +1199,7 @@ public class DateTimeFuncs {
                 timestamp_formatEmptyArgStr = timestamp_formatEmptyArgRst.getString(1);
             }
 
+            timestamp_formatEmptyArgRst.close();
             statement.close();
             return timestamp_formatEmptyArgStr;
         }
@@ -1157,6 +1215,7 @@ public class DateTimeFuncs {
                 timestamp_formatStr = timestamp_formatRst.getString(1);
             }
 
+            timestamp_formatRst.close();
             statement.close();
             return timestamp_formatStr;
         }
@@ -1179,6 +1238,7 @@ public class DateTimeFuncs {
                 timestamp_formatNullArgStr = timestamp_formatNullArgRst.getString(1);
             }
 
+            timestamp_formatNullArgRst.close();
             statement.close();
             return timestamp_formatNullArgStr;
         }

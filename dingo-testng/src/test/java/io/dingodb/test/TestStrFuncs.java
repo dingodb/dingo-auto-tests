@@ -16,6 +16,7 @@
 
 package io.dingodb.test;
 
+import io.dingodb.common.utils.JDBCUtils;
 import io.dingodb.dailytest.StrFuncs;
 import listener.EmailableReporterListener;
 import org.testng.Assert;
@@ -1199,21 +1200,7 @@ public class TestStrFuncs extends YamlDataHelper {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            try {
-                if(tearDownStatement != null) {
-                    tearDownStatement.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-
-            try {
-                if(StrFuncs.connection != null) {
-                    StrFuncs.connection.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            JDBCUtils.closeResource(StrFuncs.connection, tearDownStatement);
         }
     }
 

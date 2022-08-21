@@ -16,6 +16,7 @@
 
 package io.dingodb.test;
 
+import io.dingodb.common.utils.JDBCUtils;
 import io.dingodb.dailytest.TableCreate;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -226,11 +227,11 @@ public class TestTableCreate {
     }
 
     @Test(enabled = true, description = "创建测试表1,所有字段均不允许为null，所有字段均有默认值，只插入主键")
-    public void test01CreateTable1() throws SQLException {
+    public void test01AssignDefaultValue() throws SQLException {
         initTable1();
     }
-    @Test(enabled = true, description = "验证table1表数据")
-    public void test01Table1Records() throws SQLException {
+    @Test(enabled = true, description = "验证table1表数据,验证默认值")
+    public void test01CheckDefaultValue() throws SQLException {
         List<List> expectedRecords = expectedTable1List();
         System.out.println("Expected: " + expectedRecords);
 
@@ -240,7 +241,7 @@ public class TestTableCreate {
     }
 
     @Test(enabled = true, description = "创建测试表2,varchar类型字段为主键,插入数据有相同主键")
-    public void test02CreateTable2() throws SQLException {
+    public void test02CreateTable2PrimaryKeyVarchar() throws SQLException {
         initTable2();
     }
 
@@ -256,7 +257,7 @@ public class TestTableCreate {
     }
 
     @Test(enabled = true, description = "创建测试表3,double类型字段为主键,插入数据有相同主键")
-    public void test03CreateTable3() throws SQLException {
+    public void test03CreateTable3PrimaryKeyDouble() throws SQLException {
         initTable3();
     }
 
@@ -272,7 +273,7 @@ public class TestTableCreate {
     }
 
     @Test(enabled = true, description = "创建测试表4,date类型字段为主键,插入数据有相同主键")
-    public void test04CreateTable4() throws SQLException {
+    public void test04CreateTable4PrimaryKeyDate() throws SQLException {
         initTable4();
     }
 
@@ -288,7 +289,7 @@ public class TestTableCreate {
     }
 
     @Test(enabled = true, description = "创建测试表5,time类型字段为主键,插入数据有相同主键")
-    public void test05CreateTable5() throws SQLException {
+    public void test05CreateTable5PrimaryKeyTime() throws SQLException {
         initTable5();
     }
 
@@ -304,7 +305,7 @@ public class TestTableCreate {
     }
 
     @Test(enabled = true, description = "创建测试表6,timestamp类型字段为主键,插入数据有相同主键")
-    public void test06CreateTable6() throws SQLException {
+    public void test06CreateTable6PrimaryKeyTimestamp() throws SQLException {
         initTable6();
     }
 
@@ -320,7 +321,7 @@ public class TestTableCreate {
     }
 
     @Test(enabled = true, description = "创建测试表7,布尔类型字段为主键,插入数据有相同主键")
-    public void test07CreateTable7() throws SQLException {
+    public void test07CreateTable7PrimaryKeyBoolean() throws SQLException {
         initTable7();
     }
 
@@ -358,24 +359,8 @@ public class TestTableCreate {
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
-            try{
-                if(tearDownStatement != null) {
-                    tearDownStatement.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-
-            try{
-                if(tableCreateObj.connection != null) {
-                    tableCreateObj.connection.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            JDBCUtils.closeResource(tableCreateObj.connection, tearDownStatement);
         }
     }
-
-
 
 }

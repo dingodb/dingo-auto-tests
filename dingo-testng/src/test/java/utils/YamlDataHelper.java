@@ -843,4 +843,36 @@ public class YamlDataHelper{
         return files;
     }
 
+    @DataProvider
+    public Object[][] arrayFieldMethod(Method method) {
+        List<Map<String, String>> yamlArrayList = null;
+        switch (method.getName()) {
+            case "test01TableCreateWithArrayField": {
+                yamlArrayList = getYamlList(iniReader.getValue("ArrayFieldYaml", "arrayfield"));
+                break;
+            }
+
+            case "test02InsertArrayValues": {
+                yamlArrayList = getYamlList(iniReader.getValue("ArrayFieldYaml", "arrayvalues"));
+                break;
+            }
+
+            case "test03TableCreateWithArrayFieldDefaultValue": {
+                yamlArrayList = getYamlList(iniReader.getValue("ArrayFieldYaml", "arrayfield_withdefaultvalue"));
+                break;
+            }
+
+            case "test04InsertValuesWithArrayField": {
+                yamlArrayList = getYamlList(iniReader.getValue("ArrayFieldYaml", "arrayfield_withdefaultvalue"));
+                break;
+            }
+
+        }
+        Object[][] files = new Object[yamlArrayList.size()][];
+        for (int i = 0; i < yamlArrayList.size(); i++) {
+            files[i] = new Object[]{yamlArrayList.get(i)};
+        }
+        return files;
+    }
+
 }

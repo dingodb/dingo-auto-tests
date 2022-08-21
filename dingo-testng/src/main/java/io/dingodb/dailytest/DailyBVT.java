@@ -132,6 +132,7 @@ public class DailyBVT {
             while (querySet.next()) {
                 queryName = querySet.getString(2);
             }
+            querySet.close();
             statement.close();
             return queryName;
         }

@@ -16,8 +16,9 @@
 
 package io.dingodb.dailytest;
 
+import io.dingodb.common.utils.JDBCUtils;
+
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -25,32 +26,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SQLFuncs {
-//    private static final String defaultConnectIP = "172.20.3.27";
-//    private static final String defaultConnectIP = "172.20.61.1";
-    private static String defaultConnectIP = CommonArgs.getDefaultDingoClusterIP();
-    private static final String JDBC_DRIVER = "io.dingodb.driver.client.DingoDriverClient";
-    private static String connectUrl = "jdbc:dingo:thin:url=" + defaultConnectIP + ":8765";
-
     public static Connection connection = null;
 
-    static{
+    static {
         try {
-            Class.forName(JDBC_DRIVER);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        try {
-            connection = DriverManager.getConnection(connectUrl);
-        } catch (SQLException e) {
+            connection = JDBCUtils.getConnection();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
-//    public static Connection connectDB() throws ClassNotFoundException, SQLException {
-//        Class.forName(JDBC_DRIVER);
-//        connection = DriverManager.getConnection(connectUrl);
-//        return connection;
-//    }
 
     public static String getFuncTableName() {
         final String funcTablePrefix = "funcTest";
@@ -101,6 +85,8 @@ public class SQLFuncs {
             while (distinctNameRst.next()) {
                 distinctNameList.add(distinctNameRst.getString("dn"));
             }
+
+            distinctNameRst.close();
             statement.close();
             return distinctNameList;
         }
@@ -116,6 +102,8 @@ public class SQLFuncs {
             while (distinctAgeRst.next()) {
                 distinctAgeList.add(distinctAgeRst.getInt("age"));
             }
+
+            distinctAgeRst.close();
             statement.close();
             return distinctAgeList;
         }
@@ -131,6 +119,8 @@ public class SQLFuncs {
             while (avgRst.next()) {
                 avgAge = avgRst.getInt(1);
             }
+
+            avgRst.close();
             statement.close();
             return avgAge;
         }
@@ -146,6 +136,8 @@ public class SQLFuncs {
             while (sumRst.next()) {
                 sumAge = sumRst.getInt(1);
             }
+
+            sumRst.close();
             statement.close();
             return sumAge;
         }
@@ -161,6 +153,8 @@ public class SQLFuncs {
             while (maxRst.next()) {
                 maxAge = maxRst.getInt(1);
             }
+
+            maxRst.close();
             statement.close();
             return maxAge;
         }
@@ -176,6 +170,8 @@ public class SQLFuncs {
             while (minRst.next()) {
                 minAge = minRst.getInt(1);
             }
+
+            minRst.close();
             statement.close();
             return minAge;
         }
@@ -191,6 +187,8 @@ public class SQLFuncs {
             while (countRst.next()) {
                 countRows = countRst.getInt("cnt");
             }
+
+            countRst.close();
             statement.close();
             return countRows;
         }
@@ -206,6 +204,8 @@ public class SQLFuncs {
             while (orderAscRst.next()) {
                 orderAscAgeList.add(orderAscRst.getInt("age"));
             }
+
+            orderAscRst.close();
             statement.close();
             return orderAscAgeList;
         }
@@ -221,6 +221,8 @@ public class SQLFuncs {
             while (orderDescRst.next()) {
                 orderDescAgeList.add(orderDescRst.getInt("age"));
             }
+
+            orderDescRst.close();
             statement.close();
             return orderDescAgeList;
         }
@@ -236,6 +238,8 @@ public class SQLFuncs {
             while (limitRst.next()) {
                 limitList.add(limitRst.getString("name"));
             }
+
+            limitRst.close();
             statement.close();
             return limitList;
         }
@@ -251,6 +255,8 @@ public class SQLFuncs {
             while (orderLimitRst.next()) {
                 orderLimitList.add(orderLimitRst.getInt("age"));
             }
+
+            orderLimitRst.close();
             statement.close();
             return orderLimitList;
         }
@@ -266,6 +272,8 @@ public class SQLFuncs {
             while (orderLimitOffsetRst.next()) {
                 orderLimitOffsetList.add(orderLimitOffsetRst.getInt("age"));
             }
+
+            orderLimitOffsetRst.close();
             statement.close();
             return orderLimitOffsetList;
         }
@@ -284,6 +292,8 @@ public class SQLFuncs {
             while (groupOrderRst.next()) {
                 groupOrderAmountList.add(groupOrderRst.getDouble("sa"));
             }
+
+            groupOrderRst.close();
             statement.close();
             return groupOrderAmountList;
         }
@@ -299,6 +309,8 @@ public class SQLFuncs {
             while (groupOrderRst.next()) {
                 groupOrderNameList.add(groupOrderRst.getString("name"));
             }
+
+            groupOrderRst.close();
             statement.close();
             return groupOrderNameList;
         }
@@ -325,6 +337,8 @@ public class SQLFuncs {
             while (allRst.next()) {
                 afterDeleteNameList.add(allRst.getString("name"));
             }
+
+            allRst.close();
             statement.close();
             return afterDeleteNameList;
         }
@@ -343,6 +357,8 @@ public class SQLFuncs {
             while (castNameRst.next()) {
                 afterCast += castNameRst.getInt("castnum");
             }
+
+            castNameRst.close();
             statement.close();
             return afterCast;
         }
@@ -373,6 +389,7 @@ public class SQLFuncs {
             while(resultSet.next()) {
                 minAge = resultSet.getString(1);
             }
+            resultSet.close();
             statement.close();
             return minAge;
         }
@@ -387,6 +404,7 @@ public class SQLFuncs {
             while(resultSet.next()) {
                 maxAge = resultSet.getString(1);
             }
+            resultSet.close();
             statement.close();
             return maxAge;
         }
@@ -401,6 +419,7 @@ public class SQLFuncs {
             while(resultSet.next()) {
                 sumAge = resultSet.getString(1);
             }
+            resultSet.close();
             statement.close();
             return sumAge;
         }
@@ -415,6 +434,7 @@ public class SQLFuncs {
             while(resultSet.next()) {
                 avgAge = resultSet.getString(1);
             }
+            resultSet.close();
             statement.close();
             return avgAge;
         }
@@ -430,6 +450,7 @@ public class SQLFuncs {
             while(resultSet.next()) {
                 countNum = resultSet.getInt(1);
             }
+            resultSet.close();
             statement.close();
             return countNum;
         }
@@ -441,6 +462,7 @@ public class SQLFuncs {
             String querySQL = "select age from emptest065 order by age asc";
             ResultSet resultSet = statement.executeQuery(querySQL);
             Boolean queryResult = resultSet.next();
+            resultSet.close();
             statement.close();
             return queryResult;
         }
@@ -452,6 +474,7 @@ public class SQLFuncs {
             String querySQL = "select age from emptest065 order by age desc";
             ResultSet resultSet = statement.executeQuery(querySQL);
             Boolean queryResult = resultSet.next();
+            resultSet.close();
             statement.close();
             return queryResult;
         }
@@ -463,6 +486,7 @@ public class SQLFuncs {
             String querySQL = "select name,sum(amount) sa from emptest065 group by name";
             ResultSet resultSet = statement.executeQuery(querySQL);
             Boolean queryResult = resultSet.next();
+            resultSet.close();
             statement.close();
             return queryResult;
         }
@@ -485,6 +509,7 @@ public class SQLFuncs {
             while(resultSet.next()) {
                 minAge = resultSet.getInt(1);
             }
+            resultSet.close();
             statement.close();
             return minAge;
         }
@@ -499,6 +524,7 @@ public class SQLFuncs {
             while(resultSet.next()) {
                 maxAge = resultSet.getInt(1);
             }
+            resultSet.close();
             statement.close();
             return maxAge;
         }
@@ -513,6 +539,7 @@ public class SQLFuncs {
             while(resultSet.next()) {
                 orderAgeList.add(resultSet.getInt("age"));
             }
+            resultSet.close();
             statement.close();
             return orderAgeList;
         }
@@ -527,6 +554,7 @@ public class SQLFuncs {
             while(resultSet.next()) {
                 orderAgeList.add(resultSet.getInt("age"));
             }
+            resultSet.close();
             statement.close();
             return orderAgeList;
         }
@@ -563,6 +591,7 @@ public class SQLFuncs {
             while(resultSet.next()) {
                 minNameStr = resultSet.getString(1);
             }
+            resultSet.close();
             statement.close();
             return minNameStr;
         }
@@ -577,6 +606,7 @@ public class SQLFuncs {
             while(resultSet.next()) {
                 maxNameStr = resultSet.getString(1);
             }
+            resultSet.close();
             statement.close();
             return maxNameStr;
         }
@@ -591,6 +621,7 @@ public class SQLFuncs {
             while(resultSet.next()) {
                 minAmount = resultSet.getDouble(1);
             }
+            resultSet.close();
             statement.close();
             return minAmount;
         }
@@ -605,6 +636,7 @@ public class SQLFuncs {
             while(resultSet.next()) {
                 maxAmount = resultSet.getDouble(1);
             }
+            resultSet.close();
             statement.close();
             return maxAmount;
         }
@@ -619,6 +651,7 @@ public class SQLFuncs {
             while (resultSet.next()) {
                 amountList.add(resultSet.getInt("canum"));
             }
+            resultSet.close();
             statement.close();
             return amountList;
         }
@@ -634,6 +667,7 @@ public class SQLFuncs {
                 ageList.add(resultSet.getDouble("cad"));
             }
 
+            resultSet.close();
             statement.close();
             return ageList;
         }
@@ -684,6 +718,7 @@ public class SQLFuncs {
                 rowList.add(resultSet.getString(2));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -702,6 +737,7 @@ public class SQLFuncs {
                 rowList.add(resultSet.getString(2));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -722,6 +758,7 @@ public class SQLFuncs {
                 rowList.add(String.valueOf(resultSet.getDouble(4)));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -743,6 +780,7 @@ public class SQLFuncs {
                 rowList.add(resultSet.getString(5));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -765,6 +803,7 @@ public class SQLFuncs {
                 rowList.add(resultSet.getString(5));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -786,6 +825,7 @@ public class SQLFuncs {
                 rowList.add(resultSet.getString(5));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -817,6 +857,7 @@ public class SQLFuncs {
             while(resultSet.next()) {
                 queryList.add(resultSet.getInt(1));
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -832,6 +873,7 @@ public class SQLFuncs {
             while(resultSet.next()) {
                 queryList.add(resultSet.getInt(1));
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -853,6 +895,7 @@ public class SQLFuncs {
                 rowList.add(resultSet.getString(5));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -874,6 +917,7 @@ public class SQLFuncs {
                 rowList.add(resultSet.getString(5));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -892,6 +936,7 @@ public class SQLFuncs {
                 rowList.add(String.valueOf(resultSet.getInt(2)));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -910,6 +955,7 @@ public class SQLFuncs {
                 rowList.add(String.valueOf(resultSet.getInt(2)));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -936,6 +982,7 @@ public class SQLFuncs {
                 rowList.add(String.valueOf(resultSet.getDouble("samount")));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -963,6 +1010,7 @@ public class SQLFuncs {
                 rowList.add(String.valueOf(resultSet.getDouble(3)));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -983,6 +1031,7 @@ public class SQLFuncs {
                 rowList.add(resultSet.getString(4));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -997,6 +1046,7 @@ public class SQLFuncs {
             while(resultSet.next()) {
                 rowNum++;
             }
+            resultSet.close();
             statement.close();
             return rowNum;
         }
@@ -1011,6 +1061,7 @@ public class SQLFuncs {
             while(resultSet.next()) {
                 rowNum++;
             }
+            resultSet.close();
             statement.close();
             return rowNum;
         }
@@ -1025,6 +1076,7 @@ public class SQLFuncs {
             while(resultSet.next()) {
                 rowNum++;
             }
+            resultSet.close();
             statement.close();
             return rowNum;
         }
@@ -1039,6 +1091,7 @@ public class SQLFuncs {
             while(resultSet.next()) {
                 rowNum++;
             }
+            resultSet.close();
             statement.close();
             return rowNum;
         }
@@ -1049,6 +1102,7 @@ public class SQLFuncs {
             String querySQL = "select name,age from emptest065 limit 5 offset 15";
             ResultSet resultSet = statement.executeQuery(querySQL);
             Boolean queryResult = resultSet.next();
+            resultSet.close();
             statement.close();
             return queryResult;
         }
@@ -1059,8 +1113,8 @@ public class SQLFuncs {
         try(Statement statement = connection.createStatement()) {
             String querySQL = "select name,age from emptest065 limit 0";
             ResultSet resultSet = statement.executeQuery(querySQL);
-
             Boolean queryResult = resultSet.next();
+            resultSet.close();
             statement.close();
             return queryResult;
         }
@@ -1073,6 +1127,7 @@ public class SQLFuncs {
             ResultSet resultSet = statement.executeQuery(querySQL);
 
             Boolean queryResult = resultSet.next();
+            resultSet.close();
             statement.close();
             return queryResult;
         }
@@ -1106,6 +1161,7 @@ public class SQLFuncs {
                 rowList.add(String.valueOf(resultSet.getInt(2)));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -1126,6 +1182,7 @@ public class SQLFuncs {
                 rowList.add(resultSet.getString(5));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -1175,6 +1232,7 @@ public class SQLFuncs {
                 rowList.add(String.valueOf(resultSet.getInt(2)));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -1219,6 +1277,7 @@ public class SQLFuncs {
                 rowList.add(resultSet.getString(5));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -1239,6 +1298,7 @@ public class SQLFuncs {
                 rowList.add(resultSet.getString(5));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -1259,6 +1319,7 @@ public class SQLFuncs {
                 rowList.add(resultSet.getString(5));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -1276,6 +1337,7 @@ public class SQLFuncs {
                 rowList.add(String.valueOf(resultSet.getInt(2)));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -1287,6 +1349,7 @@ public class SQLFuncs {
             String querySQL = "select name,age from emptest065 where id in (16,18,20)";
             ResultSet resultSet = statement.executeQuery(querySQL);
             Boolean queryResult = resultSet.next();
+            resultSet.close();
             statement.close();
             return queryResult;
         }
@@ -1308,6 +1371,7 @@ public class SQLFuncs {
                 rowList.add(resultSet.getString(5));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -1351,6 +1415,7 @@ public class SQLFuncs {
                 rowList.add(resultSet.getString(5));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -1371,6 +1436,7 @@ public class SQLFuncs {
                 rowList.add(resultSet.getString(5));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -1391,6 +1457,7 @@ public class SQLFuncs {
                 rowList.add(resultSet.getString(5));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -1411,6 +1478,7 @@ public class SQLFuncs {
                 rowList.add(resultSet.getString(5));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -1431,6 +1499,7 @@ public class SQLFuncs {
                 rowList.add(resultSet.getString(5));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -1451,6 +1520,7 @@ public class SQLFuncs {
                 rowList.add(resultSet.getString(5));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -1471,6 +1541,7 @@ public class SQLFuncs {
                 rowList.add(resultSet.getString(5));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -1490,6 +1561,7 @@ public class SQLFuncs {
                 rowList.add(resultSet.getString(2));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -1512,6 +1584,7 @@ public class SQLFuncs {
                 rowList.add(resultSet.getString(5));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -1534,6 +1607,7 @@ public class SQLFuncs {
                 rowList.add(resultSet.getString(5));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -1556,6 +1630,7 @@ public class SQLFuncs {
                 rowList.add(resultSet.getString(5));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -1577,6 +1652,7 @@ public class SQLFuncs {
                 rowList.add(resultSet.getString(5));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -1594,6 +1670,7 @@ public class SQLFuncs {
                 rowList.add(resultSet.getString(2));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -1614,6 +1691,7 @@ public class SQLFuncs {
                 rowList.add(resultSet.getString(5));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -1634,6 +1712,7 @@ public class SQLFuncs {
                 rowList.add(resultSet.getString(5));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -1654,6 +1733,7 @@ public class SQLFuncs {
                 rowList.add(resultSet.getString(5));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -1670,6 +1750,7 @@ public class SQLFuncs {
                 rowList.add(resultSet.getString(1));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -1687,6 +1768,7 @@ public class SQLFuncs {
                 rowList.add(resultSet.getString(1));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -1707,6 +1789,7 @@ public class SQLFuncs {
                 rowList.add(resultSet.getString(5));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -1727,6 +1810,7 @@ public class SQLFuncs {
                 rowList.add(resultSet.getString(5));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -1747,6 +1831,7 @@ public class SQLFuncs {
                 rowList.add(resultSet.getString(5));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -1766,6 +1851,7 @@ public class SQLFuncs {
                 rowList.add(resultSet.getString(4));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -1796,6 +1882,7 @@ public class SQLFuncs {
             while(resultSet.next()) {
                 countNum = resultSet.getInt("cdn");
             }
+            resultSet.close();
             statement.close();
             return countNum;
         }
@@ -1809,6 +1896,7 @@ public class SQLFuncs {
             String querySQL = "select distinct(id) from case330";
             ResultSet resultSet = statement.executeQuery(querySQL);
             Boolean queryResult = resultSet.next();
+            resultSet.close();
             statement.close();
             return queryResult;
         }
@@ -1826,6 +1914,7 @@ public class SQLFuncs {
 
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -1844,6 +1933,7 @@ public class SQLFuncs {
                 rowList.add(String.valueOf(resultSet.getDouble("sa")));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -1863,6 +1953,7 @@ public class SQLFuncs {
                 rowList.add(resultSet.getString("address"));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -1885,6 +1976,7 @@ public class SQLFuncs {
                 queryList.add(resultSet.getString(7));
             }
 
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -1975,6 +2067,8 @@ public class SQLFuncs {
             String querySQL = "select * from case342";
             ResultSet resultSet = statement.executeQuery(querySQL);
             Boolean queryResult = resultSet.next();
+
+            resultSet.close();
             statement.close();
             return queryResult;
         }
@@ -2003,6 +2097,7 @@ public class SQLFuncs {
                 queryList.add(rowList);
             }
 
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -2030,6 +2125,7 @@ public class SQLFuncs {
                 rowList.add(resultSet.getString(5));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -2057,6 +2153,7 @@ public class SQLFuncs {
                 rowList.add(resultSet.getString(5));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -2099,6 +2196,7 @@ public class SQLFuncs {
                 rowList.add(resultSet.getString(5));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -2133,6 +2231,10 @@ public class SQLFuncs {
             while(resultSet3.next()) {
                 queryList.add(String.valueOf(resultSet3.getInt(1)));
             }
+
+            resultSet1.close();
+            resultSet2.close();
+            resultSet3.close();
             statement.close();
             return queryList;
         }
@@ -2156,6 +2258,7 @@ public class SQLFuncs {
                 queryList.add(rowList);
             }
 
+            resultSet2.close();
             statement1.close();
             statement2.close();
             return queryList;
@@ -2180,6 +2283,7 @@ public class SQLFuncs {
                 rowList.add(resultSet.getString(5));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -2208,6 +2312,7 @@ public class SQLFuncs {
                 actualRecord.add(resultSet.getString(8));
                 actualRecord.add(resultSet.getString(9));
             }
+            resultSet.close();
             statement.close();
             return actualRecord;
         }
@@ -2253,6 +2358,7 @@ public class SQLFuncs {
                 rowList.add(resultSet.getBoolean(5));
                 actualRecord.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return actualRecord;
         }
@@ -2294,6 +2400,7 @@ public class SQLFuncs {
                 }
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -2308,6 +2415,7 @@ public class SQLFuncs {
             while (resultSet.next()) {
                 rowNum += 1;
             }
+            resultSet.close();
             statement.close();
             return rowNum;
         }
@@ -2328,6 +2436,7 @@ public class SQLFuncs {
                 }
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -2342,6 +2451,7 @@ public class SQLFuncs {
             while (resultSet.next()) {
                 rowNum += 1;
             }
+            resultSet.close();
             statement.close();
             return rowNum;
         }
@@ -2367,6 +2477,7 @@ public class SQLFuncs {
 
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -2392,6 +2503,7 @@ public class SQLFuncs {
 
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -2417,6 +2529,7 @@ public class SQLFuncs {
 
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -2442,6 +2555,7 @@ public class SQLFuncs {
 
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -2467,6 +2581,7 @@ public class SQLFuncs {
 
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -2481,12 +2596,9 @@ public class SQLFuncs {
             while (resultSet.next()) {
                 rowNum += 1;
             }
+            resultSet.close();
             statement.close();
             return rowNum;
         }
     }
-
-
-
-
 }

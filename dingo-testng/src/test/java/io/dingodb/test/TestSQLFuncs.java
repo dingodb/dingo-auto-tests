@@ -16,6 +16,7 @@
 
 package io.dingodb.test;
 
+import io.dingodb.common.utils.JDBCUtils;
 import io.dingodb.dailytest.SQLFuncs;
 import listener.EmailableReporterListener;
 import org.testng.Assert;
@@ -2100,7 +2101,7 @@ public class TestSQLFuncs extends YamlDataHelper {
             description = "验证按时间日期等值查询")
     public void testQueryDateTimeEQCondition(Map<String, String> param) throws SQLException {
         StrTo2DList strTo2DList = new StrTo2DList();
-        List<List> expectedQueryList = strTo2DList.construct2DList(param.get("dataStr"));
+        List<List> expectedQueryList = strTo2DList.construct2DList(param.get("dataStr"),";");
         System.out.println("Expected: " + expectedQueryList);
 
         List<List> actualQueryList = funcObj.queryDateTimeEQCondition(param.get("queryColumn"),
@@ -2125,7 +2126,7 @@ public class TestSQLFuncs extends YamlDataHelper {
             description = "验证时间日期按in范围查询")
     public void testQueryDateTimeInRangeCondition(Map<String, String> param) throws SQLException {
         StrTo2DList strTo2DList = new StrTo2DList();
-        List<List> expectedQueryList = strTo2DList.construct2DList(param.get("dataStr"));
+        List<List> expectedQueryList = strTo2DList.construct2DList(param.get("dataStr"), ";");
         System.out.println("Expected: " + expectedQueryList);
 
         List<List> actualQueryList = funcObj.queryDateTimeInRangeCondition(param.get("queryColumn"),
@@ -2243,21 +2244,7 @@ public class TestSQLFuncs extends YamlDataHelper {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            try {
-                if(tearDownStatement != null) {
-                    tearDownStatement.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-
-            try {
-                if(SQLFuncs.connection != null) {
-                    SQLFuncs.connection.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            JDBCUtils.closeResource(SQLFuncs.connection, tearDownStatement);
         }
 
     }

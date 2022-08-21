@@ -16,6 +16,7 @@
 
 package io.dingodb.test;
 
+import io.dingodb.common.utils.JDBCUtils;
 import io.dingodb.dailytest.DateTimeFuncs;
 import listener.EmailableReporterListener;
 import org.testng.Assert;
@@ -491,7 +492,7 @@ public class TestDateTime extends YamlDataHelper{
 
 
     /**
-     * 2022-07-22: 需求变更后，datediff函数不再支持数字类型的日期参数，预期异常
+     * 2022-07-22: 需求变更后，datediff函数不再支持数字类型的日期参数,也不再支持timestamp类型的参数，预期异常
      * @param param
      * @throws SQLException
      */
@@ -945,21 +946,7 @@ public class TestDateTime extends YamlDataHelper{
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            try {
-                if(tearDownStatement != null){
-                    tearDownStatement.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-
-            try {
-                if(DateTimeFuncs.connection != null){
-                    DateTimeFuncs.connection.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            JDBCUtils.closeResource(DateTimeFuncs.connection, tearDownStatement);
         }
     }
 }

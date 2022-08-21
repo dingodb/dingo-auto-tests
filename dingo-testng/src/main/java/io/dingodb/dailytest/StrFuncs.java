@@ -16,8 +16,9 @@
 
 package io.dingodb.dailytest;
 
+import io.dingodb.common.utils.JDBCUtils;
+
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -26,33 +27,15 @@ import java.util.List;
 
 
 public class StrFuncs {
-//    private static final String defaultConnectIP = "172.20.3.27";
-//    private static final String defaultConnectIP = "172.20.61.1";
-    private static String defaultConnectIP = CommonArgs.getDefaultDingoClusterIP();
-    private static final String JDBC_DRIVER = "io.dingodb.driver.client.DingoDriverClient";
-    private static String connectUrl = "jdbc:dingo:thin:url=" + defaultConnectIP + ":8765";
-
     public static Connection connection = null;
 
-    static{
+    static {
         try {
-            Class.forName(JDBC_DRIVER);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        try {
-            connection = DriverManager.getConnection(connectUrl);
-        } catch (SQLException e) {
+            connection = JDBCUtils.getConnection();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
-//    //连接数据库,返回数据库连接对象
-//    public static Connection connectStrDB() throws ClassNotFoundException, SQLException {
-//        Class.forName(JDBC_DRIVER);
-//        connection = DriverManager.getConnection(connectUrl);
-//        return connection;
-//    }
 
     //生成测试表格名称并返回
     public static String getStrTableName() {
@@ -113,6 +96,8 @@ public class StrFuncs {
             while (concatRst.next()) {
                 concatStr = concatRst.getString("cnaa");
             }
+
+            concatRst.close();
             statement.close();
             return concatStr;
         }
@@ -128,6 +113,8 @@ public class StrFuncs {
             while (formatRst.next()){
                 formatList.add(formatRst.getString("famount"));
             }
+
+            formatRst.close();
             statement.close();
             return formatList;
         }
@@ -143,6 +130,8 @@ public class StrFuncs {
             while (locateRst.next()){
                 locateList.add(locateRst.getString("locName"));
             }
+
+            locateRst.close();
             statement.close();
             return locateList;
         }
@@ -164,6 +153,8 @@ public class StrFuncs {
             while (lcaseRst.next()){
                 lowerList.add(lcaseRst.getString("lcaAddress"));
             }
+            lowerRst.close();
+            lcaseRst.close();
             statement.close();
             return lowerList;
         }
@@ -185,6 +176,9 @@ public class StrFuncs {
             while (ucaseRst.next()){
                 upperList.add(ucaseRst.getString("ucaAddress"));
             }
+
+            upperRst.close();
+            ucaseRst.close();
             statement.close();
             return upperList;
         }
@@ -200,6 +194,7 @@ public class StrFuncs {
             while (leftRst.next()){
                 leftList.add(leftRst.getString("l3name"));
             }
+            leftRst.close();
             statement.close();
             return leftList;
         }
@@ -219,6 +214,9 @@ public class StrFuncs {
             while (rightRst2.next()){
                 rightList.add(rightRst2.getString("r3name"));
             }
+
+            rightRst.close();
+            rightRst2.close();
             statement.close();
             return rightList;
         }
@@ -238,6 +236,9 @@ public class StrFuncs {
             while (repeatRst2.next()){
                 repeatList.add(repeatRst2.getString("reName"));
             }
+
+            repeatRst.close();
+            repeatRst2.close();
             statement.close();
             return repeatList;
         }
@@ -253,6 +254,7 @@ public class StrFuncs {
             while (replaceRst.next()){
                 replaceList.add(replaceRst.getString("replAddress"));
             }
+            replaceRst.close();
             statement.close();
             return replaceList;
         }
@@ -268,6 +270,7 @@ public class StrFuncs {
             while (trimRst.next()){
                 trimList.add(trimRst.getString("trName"));
             }
+            trimRst.close();
             statement.close();
             return trimList;
         }
@@ -283,6 +286,7 @@ public class StrFuncs {
             while (ltrimRst.next()){
                 ltrimList.add(ltrimRst.getString("ltrName"));
             }
+            ltrimRst.close();
             statement.close();
             return ltrimList;
         }
@@ -298,6 +302,7 @@ public class StrFuncs {
             while (rtrimRst.next()){
                 rtrimList.add(rtrimRst.getString("rtrName"));
             }
+            rtrimRst.close();
             statement.close();
             return rtrimList;
         }
@@ -313,6 +318,7 @@ public class StrFuncs {
             while (midRst.next()){
                 midList.add(midRst.getString("midName"));
             }
+            midRst.close();
             statement.close();
             return midList;
         }
@@ -328,6 +334,7 @@ public class StrFuncs {
             while (midWithoutLengthArgRst.next()){
                 midWithoutLengthArgList.add(midWithoutLengthArgRst.getString("midName"));
             }
+            midWithoutLengthArgRst.close();
             statement.close();
             return midWithoutLengthArgList;
         }
@@ -343,6 +350,7 @@ public class StrFuncs {
             while (subStringRst.next()){
                 subStringList.add(subStringRst.getString("subAddr"));
             }
+            subStringRst.close();
             statement.close();
             return subStringList;
         }
@@ -361,6 +369,7 @@ public class StrFuncs {
                 rowList.add(reverseRst.getString(2));
                 reverseList.add(rowList);
             }
+            reverseRst.close();
             statement.close();
             return reverseList;
         }
@@ -377,6 +386,7 @@ public class StrFuncs {
                 lengthNum = char_lengthRst.getInt(1);
             }
 
+            char_lengthRst.close();
             statement.close();
             return lengthNum;
         }
@@ -393,6 +403,7 @@ public class StrFuncs {
                 lengthNum = char_lengthRst.getInt(1);
             }
 
+            char_lengthRst.close();
             statement.close();
             return lengthNum;
         }
@@ -406,6 +417,7 @@ public class StrFuncs {
             while(char_lengthRst.next()) {
                 lengthNum = char_lengthRst.getObject(1);
             }
+            char_lengthRst.close();
             statement.close();
             return lengthNum;
         }
@@ -420,6 +432,7 @@ public class StrFuncs {
             while(char_lengthRst.next()) {
                 lengthNum = char_lengthRst.getInt(1);
             }
+            char_lengthRst.close();
             statement.close();
             return lengthNum;
         }
@@ -441,6 +454,7 @@ public class StrFuncs {
                 char_lengthRowList.add(char_lengthRst.getInt(4));
                 char_lengthInTableList.add(char_lengthRowList);
             }
+            char_lengthRst.close();
             statement.close();
             return char_lengthInTableList;
         }
@@ -456,6 +470,7 @@ public class StrFuncs {
             while(char_lengthInFuncRst.next()) {
                 char_lengthInStrFuncList.add(char_lengthInFuncRst.getString("msub"));
             }
+            char_lengthInFuncRst.close();
             statement.close();
             return char_lengthInStrFuncList;
         }
@@ -468,6 +483,7 @@ public class StrFuncs {
         try(Statement statement = connection.createStatement()) {
             String concatSQL = "select name|| from " + strFuncTableName;
             ResultSet resultSet = statement.executeQuery(concatSQL);
+            resultSet.close();
         }
     }
 
@@ -483,6 +499,7 @@ public class StrFuncs {
                 concatList.add(resultSet.getString("cnaa"));
             }
 
+            resultSet.close();
             statement.close();
             return concatList;
         }
@@ -534,6 +551,13 @@ public class StrFuncs {
                 concatList.add(resultSet7.getString(1));
             }
 
+            resultSet1.close();
+            resultSet2.close();
+            resultSet3.close();
+            resultSet4.close();
+            resultSet5.close();
+            resultSet6.close();
+            resultSet7.close();
             statement.close();
             return concatList;
         }
@@ -555,6 +579,8 @@ public class StrFuncs {
                 concatList.add(resultSet2.getString(1));
             }
 
+            resultSet1.close();
+            resultSet2.close();
             statement.close();
             return concatList;
         }
@@ -567,6 +593,7 @@ public class StrFuncs {
         try(Statement statement = connection.createStatement()) {
             String concatSQL = "select name||age||birthday from " + strFuncTableName + " where id=1";
             ResultSet resultSet = statement.executeQuery(concatSQL);
+            resultSet.close();
         }
     }
 
@@ -592,6 +619,7 @@ public class StrFuncs {
             ResultSet resultSet = statement.executeQuery(concatSQL);
 
             Boolean queryResult = resultSet.next();
+            resultSet.close();
             statement.close();
             return queryResult;
         }
@@ -623,6 +651,7 @@ public class StrFuncs {
                 concatList.add(rowList);
             }
 
+            resultSet.close();
             statement.close();
             return concatList;
         }
@@ -638,6 +667,7 @@ public class StrFuncs {
             while (formatRst.next()){
                 formatList.add(formatRst.getString("fage"));
             }
+            formatRst.close();
             statement.close();
             return formatList;
         }
@@ -653,6 +683,7 @@ public class StrFuncs {
             while (formatRst.next()){
                 formatList.add(formatRst.getString("fage"));
             }
+            formatRst.close();
             statement.close();
             return formatList;
         }
@@ -664,6 +695,7 @@ public class StrFuncs {
         try(Statement statement = connection.createStatement()) {
             String formatSQL = "select format(name,2) fname from " + strFuncTableName;
             ResultSet formatRst = statement.executeQuery(formatSQL);
+            formatRst.close();
         }
     }
 
@@ -673,6 +705,7 @@ public class StrFuncs {
         try(Statement statement = connection.createStatement()) {
             String formatSQL = "select format(birthday,2) fname from " + strFuncTableName;
             ResultSet formatRst = statement.executeQuery(formatSQL);
+            formatRst.close();
         }
     }
 
@@ -686,6 +719,7 @@ public class StrFuncs {
             while (formatRst.next()){
                 formatList.add(formatRst.getString(1));
             }
+            formatRst.close();
             statement.close();
             return formatList;
         }
@@ -700,6 +734,7 @@ public class StrFuncs {
             while (formatRst.next()){
                 formatResultStr = formatRst.getString(1);
             }
+            formatRst.close();
             statement.close();
             return formatResultStr;
         }
@@ -714,6 +749,7 @@ public class StrFuncs {
             while (locateRst.next()){
                 locateResultStr = locateRst.getString(1);
             }
+            locateRst.close();
             statement.close();
             return locateResultStr;
         }
@@ -728,6 +764,7 @@ public class StrFuncs {
             while (locateRst.next()){
                 locateResultStr = locateRst.getString(1);
             }
+            locateRst.close();
             statement.close();
             return locateResultStr;
         }
@@ -742,6 +779,7 @@ public class StrFuncs {
             while (locateRst.next()){
                 locateResultStr = locateRst.getString(1);
             }
+            locateRst.close();
             statement.close();
             return locateResultStr;
         }
@@ -756,6 +794,7 @@ public class StrFuncs {
             while (locateRst.next()){
                 locateResultStr = locateRst.getString(1);
             }
+            locateRst.close();
             statement.close();
             return locateResultStr;
         }
@@ -766,6 +805,7 @@ public class StrFuncs {
         try(Statement statement = connection.createStatement()) {
             String locateSQL = "select locate('a','bcadmjsac',5)";
             ResultSet locateRst = statement.executeQuery(locateSQL);
+            locateRst.close();
         }
     }
 
@@ -811,6 +851,7 @@ public class StrFuncs {
                 locateResultList.add(resultSet.getString(1));
             }
 
+            resultSet.close();
             statement.close();
             return locateResultList;
         }
@@ -825,6 +866,7 @@ public class StrFuncs {
             while (lowerRst.next()){
                 lowerResultStr = lowerRst.getString(1);
             }
+            lowerRst.close();
             statement.close();
             return lowerResultStr;
         }
@@ -839,6 +881,7 @@ public class StrFuncs {
             while (upperRst.next()){
                 upperResultStr = upperRst.getString(1);
             }
+            upperRst.close();
             statement.close();
             return upperResultStr;
         }
@@ -860,6 +903,8 @@ public class StrFuncs {
                 luResultStr += ucaseRst.getString("uc");
             }
 
+            lcaseRst.close();
+            ucaseRst.close();
             statement.close();
             return luResultStr;
         }
@@ -874,6 +919,7 @@ public class StrFuncs {
             while (resultSet.next()){
                 leftResultStr = resultSet.getString(1);
             }
+            resultSet.close();
             statement.close();
             return leftResultStr;
         }
@@ -888,6 +934,7 @@ public class StrFuncs {
             while (resultSet.next()){
                 leftResultStr = resultSet.getString(1);
             }
+            resultSet.close();
             statement.close();
             return leftResultStr;
         }
@@ -933,6 +980,7 @@ public class StrFuncs {
                 rowList.add(leftRst.getString("lamo"));
                 leftList.add(rowList);
             }
+            leftRst.close();
             statement.close();
             return leftList;
         }
@@ -947,6 +995,7 @@ public class StrFuncs {
             while (resultSet.next()){
                 rightResultStr = resultSet.getString(1);
             }
+            resultSet.close();
             statement.close();
             return rightResultStr;
         }
@@ -961,6 +1010,7 @@ public class StrFuncs {
             while (resultSet.next()){
                 rightResultStr = resultSet.getString(1);
             }
+            resultSet.close();
             statement.close();
             return rightResultStr;
         }
@@ -1005,6 +1055,7 @@ public class StrFuncs {
                 rowList.add(rightRst.getString("rage"));
                 rightList.add(rowList);
             }
+            rightRst.close();
             statement.close();
             return rightList;
         }
@@ -1038,6 +1089,10 @@ public class StrFuncs {
                 concatList.add(resultSet4.getString(1));
             }
 
+            resultSet1.close();
+            resultSet2.close();
+            resultSet3.close();
+            resultSet4.close();
             statement.close();
             return concatList;
         }
@@ -1052,6 +1107,7 @@ public class StrFuncs {
             while (resultSet.next()){
                 repeatResultStr = resultSet.getString(1);
             }
+            resultSet.close();
             statement.close();
             return repeatResultStr;
         }
@@ -1066,6 +1122,7 @@ public class StrFuncs {
             while (resultSet.next()){
                 repeatResultStr = resultSet.getString(1);
             }
+            resultSet.close();
             statement.close();
             return repeatResultStr;
         }
@@ -1083,6 +1140,7 @@ public class StrFuncs {
                 repeatList.add(repeatRst.getString(2));
                 repeatList.add(repeatRst.getString(3));
             }
+            repeatRst.close();
             statement.close();
             return repeatList;
         }
@@ -1121,6 +1179,7 @@ public class StrFuncs {
             while (resultSet.next()){
                 replaceResultStr = resultSet.getString(1);
             }
+            resultSet.close();
             statement.close();
             return replaceResultStr;
         }
@@ -1135,6 +1194,7 @@ public class StrFuncs {
             while (resultSet.next()){
                 replaceResultStr = resultSet.getString(1);
             }
+            resultSet.close();
             statement.close();
             return replaceResultStr;
         }
@@ -1181,6 +1241,7 @@ public class StrFuncs {
             while (resultSet.next()){
                 replaceResultStr = resultSet.getString(1);
             }
+            resultSet.close();
             statement.close();
             return replaceResultStr;
         }
@@ -1195,6 +1256,7 @@ public class StrFuncs {
             while (resultSet.next()){
                 replaceResultStr = resultSet.getString(1);
             }
+            resultSet.close();
             statement.close();
             return replaceResultStr;
         }
@@ -1243,6 +1305,7 @@ public class StrFuncs {
                 replaceResultList.add(resultSet.getString("cia"));
             }
 
+            resultSet.close();
             statement.close();
             return replaceResultList;
         }
@@ -1261,6 +1324,7 @@ public class StrFuncs {
                 replaceResultList.add(resultSet.getString("cia"));
             }
 
+            resultSet.close();
             statement.close();
             return replaceResultList;
         }
@@ -1295,6 +1359,7 @@ public class StrFuncs {
             while (resultSet.next()){
                 trimResultStr = resultSet.getString(1);
             }
+            resultSet.close();
             statement.close();
             return trimResultStr;
         }
@@ -1309,6 +1374,7 @@ public class StrFuncs {
             while (resultSet.next()){
                 trimResultStr = resultSet.getString(1);
             }
+            resultSet.close();
             statement.close();
             return trimResultStr;
         }
@@ -1323,6 +1389,7 @@ public class StrFuncs {
             while (resultSet.next()){
                 trimResultStr = resultSet.getString(1);
             }
+            resultSet.close();
             statement.close();
             return trimResultStr;
         }
@@ -1337,6 +1404,7 @@ public class StrFuncs {
             while (resultSet.next()){
                 trimResultStr = resultSet.getString(1);
             }
+            resultSet.close();
             statement.close();
             return trimResultStr;
         }
@@ -1351,6 +1419,7 @@ public class StrFuncs {
             while (resultSet.next()){
                 trimResultStr = resultSet.getString(1);
             }
+            resultSet.close();
             statement.close();
             return trimResultStr;
         }
@@ -1365,6 +1434,7 @@ public class StrFuncs {
             while (resultSet.next()){
                 trimResultStr = resultSet.getString(1);
             }
+            resultSet.close();
             statement.close();
             return trimResultStr;
         }
@@ -1379,6 +1449,7 @@ public class StrFuncs {
             while (resultSet.next()){
                 trimResultStr = resultSet.getString(1);
             }
+            resultSet.close();
             statement.close();
             return trimResultStr;
         }
@@ -1393,6 +1464,7 @@ public class StrFuncs {
             while (resultSet.next()){
                 trimResultStr = resultSet.getString(1);
             }
+            resultSet.close();
             statement.close();
             return trimResultStr;
         }
@@ -1407,6 +1479,7 @@ public class StrFuncs {
             while (resultSet.next()){
                 trimResultStr = resultSet.getString("tnum");
             }
+            resultSet.close();
             statement.close();
             return trimResultStr;
         }
@@ -1421,6 +1494,7 @@ public class StrFuncs {
             while (resultSet.next()){
                 trimResultStr = resultSet.getString(1);
             }
+            resultSet.close();
             statement.close();
             return trimResultStr;
         }
@@ -1435,6 +1509,7 @@ public class StrFuncs {
             while (resultSet.next()){
                 trimResultStr = resultSet.getString(1);
             }
+            resultSet.close();
             statement.close();
             return trimResultStr;
         }
@@ -1483,6 +1558,7 @@ public class StrFuncs {
                 trimResultList.add(resultSet.getString(6));
                 trimResultList.add(resultSet.getString(7));
             }
+            resultSet.close();
             statement.close();
             return trimResultList;
         }
@@ -1497,6 +1573,7 @@ public class StrFuncs {
             while (resultSet.next()){
                 midResultStr = resultSet.getString(1);
             }
+            resultSet.close();
             statement.close();
             return midResultStr;
         }
@@ -1511,6 +1588,7 @@ public class StrFuncs {
             while (resultSet.next()){
                 midResultStr = resultSet.getString(1);
             }
+            resultSet.close();
             statement.close();
             return midResultStr;
         }
@@ -1525,6 +1603,7 @@ public class StrFuncs {
             while (resultSet.next()){
                 midResultStr = resultSet.getString(1);
             }
+            resultSet.close();
             statement.close();
             return midResultStr;
         }
@@ -1539,6 +1618,7 @@ public class StrFuncs {
             while (resultSet.next()){
                 midResultStr = resultSet.getString(1);
             }
+            resultSet.close();
             statement.close();
             return midResultStr;
         }
@@ -1553,6 +1633,7 @@ public class StrFuncs {
             while (resultSet.next()){
                 subStrResultStr = resultSet.getString(1);
             }
+            resultSet.close();
             statement.close();
             return subStrResultStr;
         }
@@ -1567,6 +1648,7 @@ public class StrFuncs {
             while (resultSet.next()){
                 subStrResultStr = resultSet.getString(1);
             }
+            resultSet.close();
             statement.close();
             return subStrResultStr;
         }
@@ -1581,6 +1663,7 @@ public class StrFuncs {
             while (resultSet.next()){
                 subResultStr = resultSet.getString(1);
             }
+            resultSet.close();
             statement.close();
             return subResultStr;
         }
@@ -1595,6 +1678,7 @@ public class StrFuncs {
             while (resultSet.next()){
                 subResultStr = resultSet.getString(1);
             }
+            resultSet.close();
             statement.close();
             return subResultStr;
         }
@@ -1615,6 +1699,7 @@ public class StrFuncs {
                 rowList.add(subStringRst.getString("sAge"));
                 subStringList.add(rowList);
             }
+            subStringRst.close();
             statement.close();
             return subStringList;
         }
@@ -1629,6 +1714,7 @@ public class StrFuncs {
             while (resultSet.next()){
                 reverseResultStr = resultSet.getString(1);
             }
+            resultSet.close();
             statement.close();
             return reverseResultStr;
         }
@@ -1643,6 +1729,7 @@ public class StrFuncs {
             while (resultSet.next()){
                 reverseResultStr = resultSet.getString(1);
             }
+            resultSet.close();
             statement.close();
             return reverseResultStr;
         }

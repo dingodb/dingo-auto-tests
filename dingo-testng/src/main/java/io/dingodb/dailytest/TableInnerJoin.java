@@ -16,27 +16,19 @@
 
 package io.dingodb.dailytest;
 
+import io.dingodb.common.utils.JDBCUtils;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TableInnerJoin {
-//    private static final String defaultConnectIP = "172.20.3.27";
-//    private static final String defaultConnectIP = "172.20.61.1";
-    private static String defaultConnectIP = CommonArgs.getDefaultDingoClusterIP();
-    private static final String JDBC_DRIVER = "io.dingodb.driver.client.DingoDriverClient";
-    private static final String connectUrl = "jdbc:dingo:thin:url=" + defaultConnectIP + ":8765";
     public static Connection connection = null;
 
-    static{
+    static {
         try {
-            Class.forName(JDBC_DRIVER);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        try {
-            connection = DriverManager.getConnection(connectUrl);
-        } catch (SQLException e) {
+            connection = JDBCUtils.getConnection();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -144,6 +136,7 @@ public class TableInnerJoin {
                 equalRowList.add(joinRst.getString(2));
                 joinList.add(equalRowList);
             }
+            joinRst.close();
             statement.close();
             return joinList;
         }
@@ -160,6 +153,7 @@ public class TableInnerJoin {
                 equalRowAliasList.add(joinAliasRst.getString(2));
                 joinAliasList.add(equalRowAliasList);
             }
+            joinAliasRst.close();
             statement.close();
             return joinAliasList;
         }
@@ -179,6 +173,7 @@ public class TableInnerJoin {
                 equalRowWithTablePrefixList.add(joinWithTablePrefixRst.getString(4));
                 joinWithTablePrefixList.add(equalRowWithTablePrefixList);
             }
+            joinWithTablePrefixRst.close();
             statement.close();
             return joinWithTablePrefixList;
         }
@@ -195,6 +190,7 @@ public class TableInnerJoin {
                 equalRowList.add(tableExchangeRst.getString(2));
                 tableExchangeList.add(equalRowList);
             }
+            tableExchangeRst.close();
             statement.close();
             return tableExchangeList;
         }
@@ -212,6 +208,7 @@ public class TableInnerJoin {
                 equalRowList.add(innerJoinGroupRst.getString(2));
                 innerJoinGroupList.add(equalRowList);
             }
+            innerJoinGroupRst.close();
             groupStatement.close();
             return innerJoinGroupList;
         }
@@ -229,6 +226,7 @@ public class TableInnerJoin {
                 equalRowList.add(innerJoinWhereRst.getString(2));
                 innerJoinWhereList.add(equalRowList);
             }
+            innerJoinWhereRst.close();
             whereStatement.close();
             return innerJoinWhereList;
         }
@@ -246,6 +244,7 @@ public class TableInnerJoin {
                 equalRowList.add(joinGroupAndOrderRst.getString("department_name"));
                 joinGroupAndOrderList.add(equalRowList);
             }
+            joinGroupAndOrderRst.close();
             joinGroupAndOrderStatement.close();
             return joinGroupAndOrderList;
         }
@@ -263,6 +262,7 @@ public class TableInnerJoin {
                 equalRowList.add(joinGroupAndOrderLimitRst.getString(2));
                 joinGroupAndOrderLimitList.add(equalRowList);
             }
+            joinGroupAndOrderLimitRst.close();
             joinGroupAndOrderLimitStatement.close();
             return joinGroupAndOrderLimitList;
         }
@@ -279,6 +279,7 @@ public class TableInnerJoin {
                 equalRowList.add(joinOmitInnerRst.getString(2));
                 joinOmitInnerList.add(equalRowList);
             }
+            joinOmitInnerRst.close();
             statement.close();
             return joinOmitInnerList;
         }
@@ -292,6 +293,7 @@ public class TableInnerJoin {
             while (joinNoSameDataRst.next()) {
                 joinNoSameDataList.add(joinNoSameDataRst.getString(1));
             }
+            joinNoSameDataRst.close();
             statement.close();
             return joinNoSameDataList;
         }
@@ -323,6 +325,7 @@ public class TableInnerJoin {
                 selfJoinList.add(equalRowList);
             }
 
+            selfJoinRst.close();
             statement.close();
             return selfJoinList;
         }
@@ -378,6 +381,7 @@ public class TableInnerJoin {
                 joinList.add(equalRowList);
             }
 
+            joinRst.close();
             statement.close();
             return joinList;
         }
@@ -396,6 +400,7 @@ public class TableInnerJoin {
                 joinList.add(equalRowList);
             }
 
+            joinRst.close();
             statement.close();
             return joinList;
         }
@@ -418,6 +423,7 @@ public class TableInnerJoin {
             String querySql = "select table1069_1.* from table1069_1 inner join table1069_2 on table1069_2.id=table1069_1.id";
             ResultSet joinRst = statement.executeQuery(querySql);
             Boolean queryResult = joinRst.next();
+            joinRst.close();
             statement.close();
             return queryResult;
         }
@@ -454,6 +460,7 @@ public class TableInnerJoin {
                 joinList.add(equalRowList);
             }
 
+            joinRst.close();
             statement.close();
             return joinList;
         }
@@ -474,6 +481,7 @@ public class TableInnerJoin {
                 joinList.add(equalRowList);
             }
 
+            joinRst.close();
             statement.close();
             return joinList;
         }
@@ -496,6 +504,7 @@ public class TableInnerJoin {
                 joinList.add(equalRowList);
             }
 
+            joinRst.close();
             statement.close();
             return joinList;
         }
@@ -516,6 +525,7 @@ public class TableInnerJoin {
                 joinList.add(equalRowList);
             }
 
+            joinRst.close();
             statement.close();
             return joinList;
         }
@@ -539,6 +549,7 @@ public class TableInnerJoin {
                 joinList.add(equalRowList);
             }
 
+            joinRst.close();
             statement.close();
             return joinList;
         }
@@ -562,6 +573,7 @@ public class TableInnerJoin {
                 joinList.add(equalRowList);
             }
 
+            joinRst.close();
             statement.close();
             return joinList;
         }
@@ -585,6 +597,7 @@ public class TableInnerJoin {
                 joinList.add(equalRowList);
             }
 
+            joinRst.close();
             statement.close();
             return joinList;
         }
@@ -617,6 +630,7 @@ public class TableInnerJoin {
                     "on table1059_1.buyers>table1059_2.price";
             ResultSet joinRst = statement.executeQuery(querySql);
             Boolean queryResult =  joinRst.next();
+            joinRst.close();
             statement.close();
             return queryResult;
         }
@@ -628,6 +642,7 @@ public class TableInnerJoin {
             String querySql = "select table1059_1.*,table1059_2.* from table1059_1 inner join table1059_2 " +
                     "on table1059_1.buyers<table1059_2.buyers";
             ResultSet resultSet = statement.executeQuery(querySql);
+            resultSet.close();
         }
     }
 
@@ -648,6 +663,7 @@ public class TableInnerJoin {
                 joinList.add(equalRowList);
             }
 
+            joinRst.close();
             statement.close();
             return joinList;
         }
@@ -660,6 +676,7 @@ public class TableInnerJoin {
                     "on table1059_3.id<table1059_1.id";
             ResultSet joinRst = statement.executeQuery(querySql);
             Boolean queryResult = joinRst.next();
+            joinRst.close();
             statement.close();
             return queryResult;
         }
@@ -672,6 +689,7 @@ public class TableInnerJoin {
                     "on table1059_1.id<>table1059_3.id";
             ResultSet joinRst = statement.executeQuery(querySql);
             Boolean queryResult = joinRst.next();
+            joinRst.close();
             statement.close();
             return queryResult;
         }
@@ -694,6 +712,7 @@ public class TableInnerJoin {
                 joinList.add(equalRowList);
             }
 
+            joinRst.close();
             statement.close();
             return joinList;
         }
@@ -716,6 +735,7 @@ public class TableInnerJoin {
                 joinList.add(equalRowList);
             }
 
+            joinRst.close();
             statement.close();
             return joinList;
         }

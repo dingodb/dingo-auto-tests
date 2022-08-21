@@ -16,8 +16,9 @@
 
 package io.dingodb.dailytest;
 
+import io.dingodb.common.utils.JDBCUtils;
+
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -25,22 +26,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NumericFuncs {
-//    private static final String defaultConnectIP = "172.20.3.27";
-//    private static final String defaultConnectIP = "172.20.61.1";
-    private static String defaultConnectIP = CommonArgs.getDefaultDingoClusterIP();
-    private static final String JDBC_DRIVER = "io.dingodb.driver.client.DingoDriverClient";
-    private static final String connectUrl = "jdbc:dingo:thin:url=" + defaultConnectIP + ":8765";
     public static Connection connection = null;
 
-    static{
+    static {
         try {
-            Class.forName(JDBC_DRIVER);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        try {
-            connection = DriverManager.getConnection(connectUrl);
-        } catch (SQLException e) {
+            connection = JDBCUtils.getConnection();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -70,6 +61,8 @@ public class NumericFuncs {
             while (resultSet.next()){
                 powStr = resultSet.getString(1);
             }
+
+            resultSet.close();
             statement.close();
             return powStr;
         }
@@ -107,6 +100,8 @@ public class NumericFuncs {
             while (resultSet.next()){
                 powGetDouble = resultSet.getDouble(1);
             }
+
+            resultSet.close();
             statement.close();
             return powGetDouble;
         }
@@ -121,6 +116,8 @@ public class NumericFuncs {
             while (resultSet.next()){
                 powGetBigDecimal = resultSet.getBigDecimal(1).toString();
             }
+
+            resultSet.close();
             statement.close();
             return powGetBigDecimal;
         }
@@ -135,6 +132,8 @@ public class NumericFuncs {
             while (resultSet.next()){
                 roundStr = resultSet.getString(1);
             }
+
+            resultSet.close();
             statement.close();
             return roundStr;
         }
@@ -149,6 +148,8 @@ public class NumericFuncs {
             while (resultSet.next()){
                 roundStr = resultSet.getBigDecimal(1).toString();
             }
+
+            resultSet.close();
             statement.close();
             return roundStr;
         }
@@ -194,6 +195,8 @@ public class NumericFuncs {
             while (resultSet.next()){
                 roundStr = resultSet.getString(1);
             }
+
+            resultSet.close();
             statement.close();
             return roundStr;
         }
@@ -208,6 +211,8 @@ public class NumericFuncs {
             while (resultSet.next()){
                 ceilingStr = resultSet.getString(1);
             }
+
+            resultSet.close();
             statement.close();
             return ceilingStr;
         }
@@ -222,6 +227,8 @@ public class NumericFuncs {
             while (resultSet.next()){
                 ceilingStr = resultSet.getBigDecimal(1).toString();
             }
+
+            resultSet.close();
             statement.close();
             return ceilingStr;
         }
@@ -251,6 +258,8 @@ public class NumericFuncs {
             while (resultSet.next()){
                 ceilStr = resultSet.getString(1);
             }
+
+            resultSet.close();
             statement.close();
             return ceilStr;
         }
@@ -265,6 +274,8 @@ public class NumericFuncs {
             while (resultSet.next()){
                 floorStr = resultSet.getString(1);
             }
+
+            resultSet.close();
             statement.close();
             return floorStr;
         }
@@ -279,6 +290,8 @@ public class NumericFuncs {
             while (resultSet.next()){
                 floorStr = resultSet.getBigDecimal(1).toString();
             }
+
+            resultSet.close();
             statement.close();
             return floorStr;
         }
@@ -308,6 +321,8 @@ public class NumericFuncs {
             while (resultSet.next()){
                 absStr = resultSet.getString(1);
             }
+
+            resultSet.close();
             statement.close();
             return absStr;
         }
@@ -322,6 +337,8 @@ public class NumericFuncs {
             while (resultSet.next()){
                 absStr = resultSet.getBigDecimal(1).toString();
             }
+
+            resultSet.close();
             statement.close();
             return absStr;
         }
@@ -351,6 +368,8 @@ public class NumericFuncs {
             while (resultSet.next()){
                 modStr = resultSet.getString(1);
             }
+
+            resultSet.close();
             statement.close();
             return modStr;
         }
@@ -396,6 +415,8 @@ public class NumericFuncs {
             while (resultSet.next()) {
                 powList.add(resultSet.getString("pai"));
             }
+
+            resultSet.close();
             statement.close();
             return powList;
         }
@@ -410,6 +431,8 @@ public class NumericFuncs {
             while (resultSet.next()) {
                 powList.add(resultSet.getString("pai"));
             }
+
+            resultSet.close();
             statement.close();
             return powList;
         }
@@ -424,6 +447,8 @@ public class NumericFuncs {
             while (resultSet.next()) {
                 roundList.add(resultSet.getString("ra"));
             }
+
+            resultSet.close();
             statement.close();
             return roundList;
         }
@@ -438,6 +463,8 @@ public class NumericFuncs {
             while (resultSet.next()) {
                 roundList.add(resultSet.getString("ra"));
             }
+
+            resultSet.close();
             statement.close();
             return roundList;
         }
@@ -452,6 +479,8 @@ public class NumericFuncs {
             while (resultSet.next()) {
                 roundList.add(resultSet.getString("ra"));
             }
+
+            resultSet.close();
             statement.close();
             return roundList;
         }
@@ -466,6 +495,8 @@ public class NumericFuncs {
             while (resultSet.next()) {
                 ceilingList.add(resultSet.getString("ca"));
             }
+
+            resultSet.close();
             statement.close();
             return ceilingList;
         }
@@ -480,6 +511,8 @@ public class NumericFuncs {
             while (resultSet.next()) {
                 floorList.add(resultSet.getString("fa"));
             }
+
+            resultSet.close();
             statement.close();
             return floorList;
         }
@@ -494,6 +527,8 @@ public class NumericFuncs {
             while (resultSet.next()) {
                 absList.add(resultSet.getString("aa"));
             }
+
+            resultSet.close();
             statement.close();
             return absList;
         }
@@ -508,6 +543,8 @@ public class NumericFuncs {
             while (resultSet.next()) {
                 modList.add(resultSet.getString("mai"));
             }
+
+            resultSet.close();
             statement.close();
             return modList;
         }
@@ -522,6 +559,8 @@ public class NumericFuncs {
             while (resultSet.next()) {
                 modList.add(resultSet.getString("maa"));
             }
+
+            resultSet.close();
             statement.close();
             return modList;
         }
@@ -536,6 +575,8 @@ public class NumericFuncs {
             while (resultSet.next()) {
                 modList.add(resultSet.getString("maa"));
             }
+
+            resultSet.close();
             statement.close();
             return modList;
         }
@@ -550,6 +591,8 @@ public class NumericFuncs {
             while (resultSet.next()) {
                 modList.add(resultSet.getString("maa"));
             }
+
+            resultSet.close();
             statement.close();
             return modList;
         }
@@ -564,6 +607,8 @@ public class NumericFuncs {
             while (resultSet.next()) {
                 modList.add(resultSet.getInt(1));
             }
+
+            resultSet.close();
             statement.close();
             return modList;
         }
@@ -578,6 +623,8 @@ public class NumericFuncs {
             while (resultSet.next()) {
                 modList.add(resultSet.getInt(1));
             }
+
+            resultSet.close();
             statement.close();
             return modList;
         }
@@ -592,6 +639,8 @@ public class NumericFuncs {
             while (resultSet.next()) {
                 modList.add(resultSet.getInt(1));
             }
+
+            resultSet.close();
             statement.close();
             return modList;
         }

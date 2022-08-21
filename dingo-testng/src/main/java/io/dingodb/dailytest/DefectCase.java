@@ -16,8 +16,9 @@
 
 package io.dingodb.dailytest;
 
+import io.dingodb.common.utils.JDBCUtils;
+
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -25,25 +26,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DefectCase {
-//    private static final String defaultConnectIP = "172.20.3.27";
-//    private static final String defaultConnectIP = "172.20.61.1";
-    private static String defaultConnectIP = CommonArgs.getDefaultDingoClusterIP();
-    private static final String JDBC_DRIVER = "io.dingodb.driver.client.DingoDriverClient";
-    private static final String connectUrl = "jdbc:dingo:thin:url=" + defaultConnectIP + ":8765";
     public static Connection connection = null;
 
-    static{
+    static {
         try {
-            Class.forName(JDBC_DRIVER);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        try {
-            connection = DriverManager.getConnection(connectUrl);
-        } catch (SQLException e) {
+            connection = JDBCUtils.getConnection();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
 
     public void createTable0033() throws SQLException {
         try(Statement statement = connection.createStatement()) {
@@ -114,6 +106,11 @@ public class DefectCase {
                 actualList.add(resultSet5.getInt(1));
             }
 
+            resultSet1.close();
+            resultSet2.close();
+            resultSet3.close();
+            resultSet4.close();
+            resultSet5.close();
             statement.close();
             return actualList;
         }
@@ -147,6 +144,8 @@ public class DefectCase {
                 actualList.add(resultSet.getString(8));
                 actualList.add(resultSet.getString(9));
             }
+
+            resultSet.close();
             statement.close();
             return actualList;
         }
@@ -177,6 +176,8 @@ public class DefectCase {
                 actualList.add(resultSet.getString(5));
                 actualList.add(resultSet.getString(6));
             }
+
+            resultSet.close();
             statement.close();
             return actualList;
         }
@@ -194,6 +195,8 @@ public class DefectCase {
                 rowList.add(resultSet.getString(2));
                 actualList.add(rowList);
             }
+
+            resultSet.close();
             statement.close();
             return actualList;
         }
@@ -211,6 +214,8 @@ public class DefectCase {
                 rowList.add(resultSet.getString(2));
                 actualList.add(rowList);
             }
+
+            resultSet.close();
             statement.close();
             return actualList;
         }
@@ -228,6 +233,8 @@ public class DefectCase {
                 rowList.add(resultSet.getString(2));
                 actualList.add(rowList);
             }
+
+            resultSet.close();
             statement.close();
             return actualList;
         }

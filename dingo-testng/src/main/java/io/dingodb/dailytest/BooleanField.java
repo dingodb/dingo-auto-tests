@@ -16,27 +16,19 @@
 
 package io.dingodb.dailytest;
 
+import io.dingodb.common.utils.JDBCUtils;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class BooleanField {
-//    private static final String defaultConnectIP = "172.20.3.27";
-//    private static final String defaultConnectIP = "172.20.61.1";
-    private static String defaultConnectIP = CommonArgs.getDefaultDingoClusterIP();
-    private static final String JDBC_DRIVER = "io.dingodb.driver.client.DingoDriverClient";
-    private static final String connectUrl = "jdbc:dingo:thin:url=" + defaultConnectIP + ":8765";
     public static Connection connection = null;
 
-    static{
+    static {
         try {
-            Class.forName(JDBC_DRIVER);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        try {
-            connection = DriverManager.getConnection(connectUrl);
-        } catch (SQLException e) {
+            connection = JDBCUtils.getConnection();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -91,7 +83,7 @@ public class BooleanField {
             while (queryTrueRst.next()) {
                 trueList.add(queryTrueRst.getBoolean("is_delete"));
             }
-
+            queryTrueRst.close();
             statement.close();
             return trueList;
         }
@@ -124,6 +116,7 @@ public class BooleanField {
                 falseList.add(queryFalseRst.getBoolean("is_delete"));
             }
 
+            queryFalseRst.close();
             statement.close();
             return falseList;
         }
@@ -158,6 +151,8 @@ public class BooleanField {
             while (queryTrueAndFalseRst.next()) {
                 trueAndfalseList.add(queryTrueAndFalseRst.getBoolean("is_delete"));
             }
+
+            queryTrueAndFalseRst.close();
             statement.close();
             return trueAndfalseList;
         }
@@ -173,6 +168,8 @@ public class BooleanField {
             while (queryTrueValueRst.next()) {
                 queryTrueValueList.add(queryTrueValueRst.getString("NAME"));
             }
+
+            queryTrueValueRst.close();
             statement.close();
             return queryTrueValueList;
         }
@@ -188,6 +185,8 @@ public class BooleanField {
             while (queryFalseValueRst.next()) {
                 queryFalseValueList.add(queryFalseValueRst.getInt(1));
             }
+
+            queryFalseValueRst.close();
             statement.close();
             return queryFalseValueList;
         }
@@ -203,6 +202,8 @@ public class BooleanField {
             while (fieldAsConditionRst.next()) {
                 fieldConditionList.add(fieldAsConditionRst.getBoolean("is_delete"));
             }
+
+            fieldAsConditionRst.close();
             statement.close();
             return fieldConditionList;
         }
@@ -218,6 +219,8 @@ public class BooleanField {
             while (notFieldAsConditionRst.next()) {
                 notFieldConditionList.add(notFieldAsConditionRst.getBoolean("is_delete"));
             }
+
+            notFieldAsConditionRst.close();
             statement.close();
             return notFieldConditionList;
         }
@@ -233,6 +236,8 @@ public class BooleanField {
             while (queryRst.next()) {
                 queryIsTrueList.add(queryRst.getString("NAME"));
             }
+
+            queryRst.close();
             statement.close();
             return queryIsTrueList;
         }
@@ -248,6 +253,8 @@ public class BooleanField {
             while (queryRst.next()) {
                 queryIsFalseList.add(queryRst.getInt(1));
             }
+
+            queryRst.close();
             statement.close();
             return queryIsFalseList;
         }
@@ -276,6 +283,8 @@ public class BooleanField {
             while (queryZeroRst.next()) {
                 zeroOut = queryZeroRst.getBoolean("is_delete");
             }
+
+            queryZeroRst.close();
             statement.close();
             return zeroOut;
         }
@@ -304,6 +313,8 @@ public class BooleanField {
             while (queryIntegerRst.next()) {
                 integerOut = queryIntegerRst.getBoolean("is_delete");
             }
+
+            queryIntegerRst.close();
             statement.close();
             return integerOut;
         }
@@ -321,6 +332,8 @@ public class BooleanField {
             while (resultSet.next()) {
                 integerOut = resultSet.getString("is_delete");
             }
+
+            resultSet.close();
             statement.close();
             return integerOut;
         }

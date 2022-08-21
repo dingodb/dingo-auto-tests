@@ -16,8 +16,9 @@
 
 package io.dingodb.dailytest;
 
+import io.dingodb.common.utils.JDBCUtils;
+
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -25,22 +26,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TableOuterJoin {
-//    private static final String defaultConnectIP = "172.20.3.27";
-//    private static final String defaultConnectIP = "172.20.61.1";
-    private static String defaultConnectIP = CommonArgs.getDefaultDingoClusterIP();
-    private static final String JDBC_DRIVER = "io.dingodb.driver.client.DingoDriverClient";
-    private static final String connectUrl = "jdbc:dingo:thin:url=" + defaultConnectIP + ":8765";
     public static Connection connection = null;
 
-    static{
+    static {
         try {
-            Class.forName(JDBC_DRIVER);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        try {
-            connection = DriverManager.getConnection(connectUrl);
-        } catch (SQLException e) {
+            connection = JDBCUtils.getConnection();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -291,6 +282,7 @@ public class TableOuterJoin {
                 rowList.add(resultSet.getString(2));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -316,6 +308,7 @@ public class TableOuterJoin {
                 rowList.add(resultSet.getString(9));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -341,6 +334,7 @@ public class TableOuterJoin {
                 rowList.add(resultSet.getString(5));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -362,6 +356,7 @@ public class TableOuterJoin {
                 rowList.add(resultSet.getString(5));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -381,6 +376,7 @@ public class TableOuterJoin {
             String querySQL = "select product3.* from product3 left join product1 on product1.id=product3.id";
             ResultSet resultSet = statement.executeQuery(querySQL);
             Boolean queryResult = resultSet.next();
+            resultSet.close();
             statement.close();
             return queryResult;
         }
@@ -400,6 +396,7 @@ public class TableOuterJoin {
                 rowList.add(resultSet.getString(3));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -419,6 +416,7 @@ public class TableOuterJoin {
                 rowList.add(resultSet.getString(2));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -441,6 +439,7 @@ public class TableOuterJoin {
                 rowList.add(resultSet.getString(5));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -461,6 +460,7 @@ public class TableOuterJoin {
                 rowList.add(resultSet.getString(4));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -490,6 +490,7 @@ public class TableOuterJoin {
                 rowList.add(resultSet.getString(2));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -510,6 +511,7 @@ public class TableOuterJoin {
                 rowList.add(resultSet.getString(3));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -534,6 +536,7 @@ public class TableOuterJoin {
 
                 queryList.add(rowList);
             }
+            resultSet.close();
             Thread.sleep(2000);
             statement.close();
             return queryList;
@@ -560,6 +563,7 @@ public class TableOuterJoin {
                 rowList.add(resultSet.getString(5));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -581,6 +585,7 @@ public class TableOuterJoin {
                 rowList.add(resultSet.getString(5));
                 queryList.add(rowList);
             }
+            resultSet.close();
             Thread.sleep(2000);
             statement.close();
             return queryList;
@@ -610,6 +615,7 @@ public class TableOuterJoin {
                 queryList.add(rowList);
             }
             Thread.sleep(2000);
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -621,6 +627,7 @@ public class TableOuterJoin {
             String querySQL = "select product3.* from product1 right join product3 on product3.id=product1.id";
             ResultSet resultSet = statement.executeQuery(querySQL);
             Boolean queryResult = resultSet.next();
+            resultSet.close();
             statement.close();
             return queryResult;
         }
@@ -637,6 +644,7 @@ public class TableOuterJoin {
             while(resultSet.next()) {
                 whereResult = resultSet.getString(1);
             }
+            resultSet.close();
             statement.close();
             return whereResult;
         }
@@ -659,6 +667,7 @@ public class TableOuterJoin {
                 rowList.add(resultSet.getString(5));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -687,6 +696,7 @@ public class TableOuterJoin {
                 rowList.add(resultSet.getString(4));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -708,6 +718,7 @@ public class TableOuterJoin {
                 rowList.add(resultSet.getString("cn"));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -728,6 +739,7 @@ public class TableOuterJoin {
                 rowList.add(resultSet.getString(5));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -749,6 +761,7 @@ public class TableOuterJoin {
                 rowList.add(resultSet.getString(5));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -778,6 +791,7 @@ public class TableOuterJoin {
                 rowList.add(resultSet.getString(5));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -799,6 +813,7 @@ public class TableOuterJoin {
                 rowList.add(resultSet.getString(5));
                 queryList.add(rowList);
             }
+            resultSet.close();
             Thread.sleep(3000);
             statement.close();
             return queryList;
@@ -821,6 +836,7 @@ public class TableOuterJoin {
                 rowList.add(resultSet.getString(5));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -841,6 +857,7 @@ public class TableOuterJoin {
                 rowList.add(resultSet.getString(4));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -870,6 +887,7 @@ public class TableOuterJoin {
                 rowList.add(resultSet.getString(4));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -897,6 +915,7 @@ public class TableOuterJoin {
                 rowList.add(resultSet.getString(3));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -919,6 +938,7 @@ public class TableOuterJoin {
                 rowList.add(resultSet.getString(5));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -941,6 +961,7 @@ public class TableOuterJoin {
                 rowList.add(resultSet.getString(5));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -963,6 +984,7 @@ public class TableOuterJoin {
                 rowList.add(resultSet.getString(5));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -983,6 +1005,7 @@ public class TableOuterJoin {
                     "full outer join class_tbl1 on student_tbl1.class_id=class_tbl1.cid";
             ResultSet resultSet = statement.executeQuery(querySQL);
             Boolean queryResult = resultSet.next();
+            resultSet.close();
             statement.close();
             return queryResult;
         }
@@ -1004,6 +1027,7 @@ public class TableOuterJoin {
                 rowList.add(resultSet.getString(5));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -1025,6 +1049,7 @@ public class TableOuterJoin {
                 rowList.add(resultSet.getString(5));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -1056,6 +1081,7 @@ public class TableOuterJoin {
                 rowList.add(resultSet.getString(5));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -1077,6 +1103,7 @@ public class TableOuterJoin {
                 rowList.add(resultSet.getString(5));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -1088,6 +1115,7 @@ public class TableOuterJoin {
             String querySQL = "select student_tbl.*,class_tbl1.* from student_tbl cross join class_tbl1";
             ResultSet resultSet = statement.executeQuery(querySQL);
             Boolean queryResult = resultSet.next();
+            resultSet.close();
             statement.close();
             return queryResult;
         }
@@ -1108,6 +1136,7 @@ public class TableOuterJoin {
                 rowList.add(resultSet.getString(4));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -1128,6 +1157,7 @@ public class TableOuterJoin {
                 rowList.add(resultSet.getString(4));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -1139,6 +1169,7 @@ public class TableOuterJoin {
             String querySQL = "select id from test1 cross join test2";
             ResultSet resultSet = statement.executeQuery(querySQL);
             Boolean queryResult = resultSet.next();
+            resultSet.close();
             statement.close();
             return queryResult;
         }
@@ -1158,6 +1189,7 @@ public class TableOuterJoin {
                 rowList.add(resultSet.getString(3));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }
@@ -1179,6 +1211,7 @@ public class TableOuterJoin {
                 rowList.add(resultSet.getString(5));
                 queryList.add(rowList);
             }
+            resultSet.close();
             statement.close();
             return queryList;
         }

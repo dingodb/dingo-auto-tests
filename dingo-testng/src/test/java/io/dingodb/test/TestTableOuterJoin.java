@@ -16,6 +16,7 @@
 
 package io.dingodb.test;
 
+import io.dingodb.common.utils.JDBCUtils;
 import io.dingodb.dailytest.TableOuterJoin;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -1122,21 +1123,7 @@ public class TestTableOuterJoin {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            try {
-                if(tearDownStatement != null) {
-                    tearDownStatement.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-
-            try {
-                if(TableOuterJoin.connection != null) {
-                    TableOuterJoin.connection.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            JDBCUtils.closeResource(TableOuterJoin.connection, tearDownStatement);
         }
     }
 }

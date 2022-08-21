@@ -110,7 +110,8 @@ public class TestBVT {
 
     @AfterClass(description = "测试类完成后，关闭数据库连接")
     public void tearDownAll() throws SQLException, ClassNotFoundException {
-        DailyBVT.connection.close();
+        if(DailyBVT.connection !=null) {
+            DailyBVT.connection.close();
+        }
     }
-
 }

@@ -16,7 +16,7 @@
 
 package io.dingodb.test;
 
-import io.dingodb.dailytest.CommonArgs;
+import io.dingodb.common.utils.JDBCUtils;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -24,29 +24,20 @@ import org.testng.annotations.Test;
 import utils.GetRandomValue;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 public class TestSplit {
-//    private static final String defaultConnectIP = "172.20.3.27";
-//    private static final String defaultConnectIP = "172.20.61.1";
-    private static String defaultConnectIP = CommonArgs.getDefaultDingoClusterIP();
-    private static final String JDBC_DRIVER = "io.dingodb.driver.client.DingoDriverClient";
-    private static final String connectUrl = "jdbc:dingo:thin:url=" + defaultConnectIP + ":8765/db?timeout=1000";
-    public static Connection connection = null;
-    private static String tableName = "jdbctest20";
 
-    static{
+    private static String tableName = "jdbctest20";
+    private static Connection connection = null;
+
+    static {
         try {
-            Class.forName(JDBC_DRIVER);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        try {
-            connection = DriverManager.getConnection(connectUrl);
-        } catch (SQLException e) {
+            connection = JDBCUtils.getConnection();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -75,8 +66,9 @@ public class TestSplit {
         testSplit.createSplitTable();
     }
 
-    @Test(priority = 1, enabled = true, dependsOnMethods = {"test00CreateSplitTable"}, description = "插入指定条数的数据量")
-    public void test01InsertValues() throws SQLException {
+    @Test(priority = 1, enabled = true, dependsOnMethods = {"test00CreateSplitTable"},
+            description = "使用statement插入指定条数的数据量")
+    public void test01InsertValues1() throws SQLException {
         int insertNum = 200000;
         try(Statement statement = connection.createStatement()) {
             for(int i=1; i<=insertNum; i++) {
@@ -91,7 +83,37 @@ public class TestSplit {
         }
     }
 
-    @Test(priority = 2, enabled = true, dependsOnMethods = {"test01InsertValues"}, description = "统计插入总条数是否正确")
+    @Test(priority = 1, enabled = false, dependsOnMethods = {"test00CreateSplitTable"},
+            description = "使用preparedStatement批量插入数据")
+    public void test01InsertValues2() throws SQLException {
+        int insertNum = 200000;
+        String insertsql = "insert into " + tableName + " values (?, ?, ?, ?)";
+        try(PreparedStatement ps = connection.prepareStatement(insertsql)) {
+            for(int i=1; i<=insertNum; i++) {
+                String nameStr = GetRandomValue.getRandStr(6);
+                int ageNum = GetRandomValue.getRandInt(100);
+//                double amountNum = Double.parseDouble(GetRandomValue.formateRate(String.valueOf(GetRandomValue.getRandDouble(0, 10000)),2));
+                double amountNum = GetRandomValue.getRandDouble(0, 10000);
+                ps.setInt(1, i);
+                ps.setString(2, nameStr);
+                ps.setInt(3, ageNum);
+                ps.setDouble(4, amountNum);
+
+                //添加批量sql
+                ps.addBatch();
+
+                if(i % 500 == 0){
+                    //执行batch
+                    ps.executeBatch();
+
+                    //清空batch
+                    ps.clearBatch();
+                }
+            }
+        }
+    }
+
+    @Test(priority = 2, enabled = true, dependsOnMethods = {"test01InsertValues1"}, description = "统计插入总条数是否正确")
     public void test02CountAll() throws SQLException, InterruptedException {
         Thread.sleep(1200000);
         try(Statement statement = connection.createStatement()) {
@@ -101,6 +123,8 @@ public class TestSplit {
             while (resultSet.next()) {
                 countNum = resultSet.getInt(1);
             }
+
+            resultSet.close();
             statement.close();
             System.out.println("count全表统计条数： " + countNum);
             Assert.assertEquals(countNum, 200000);
@@ -117,6 +141,8 @@ public class TestSplit {
             while (resultSet.next()) {
                 countNum = resultSet.getInt(1);
             }
+
+            resultSet.close();
             statement.close();
             System.out.println("count统计区间总条数： " + countNum);
             Assert.assertEquals(countNum, 160000);
@@ -138,12 +164,14 @@ public class TestSplit {
             while (resultSet.next()) {
                 countNum = resultSet.getInt(1);
             }
+
+            resultSet.close();
             statement.close();
             Assert.assertEquals(countNum, 160000);
         }
     }
 
-    @Test(priority = 5, enabled = true, dependsOnMethods = {"test03CountRange"}, description = "验证全表删除")
+    @Test(priority = 5, enabled = true, dependsOnMethods = {"test04UpdateRange"}, description = "验证全表删除")
     public void test05DeleteAll() throws SQLException, InterruptedException {
 //        Thread.sleep(1200000);
         try(Statement statement = connection.createStatement()) {
@@ -158,6 +186,8 @@ public class TestSplit {
             while (resultSet.next()) {
                 countNum = resultSet.getInt(1);
             }
+
+            resultSet.close();
             statement.close();
             System.out.println("清空表后，count统计条数： " + countNum);
             Assert.assertEquals(countNum, 0);
@@ -173,21 +203,7 @@ public class TestSplit {
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
-            try{
-                if(tearDownStatement != null) {
-                    tearDownStatement.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-
-            try{
-                if(connection != null) {
-                    connection.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            JDBCUtils.closeResource(connection, tearDownStatement);
         }
     }
 
