@@ -44,19 +44,32 @@ public class TestArrayField extends YamlDataHelper {
         arrayObj.tableCreateWithArrayField(param.get("tableName"), param.get("fieldName"), param.get("fieldType"));
     }
 
-    @Test(priority = 2, enabled = true, dataProvider = "arrayFieldMethod",
+    @Test(priority = 2, enabled = true, dataProvider = "arrayFieldMethod",dependsOnMethods = {"test01TableCreateWithArrayField"},
             description = "向不同数据类型的array字段的数据表中插入数据")
     public void test02InsertArrayValues(Map<String, String> param) throws SQLException {
         arrayObj.insertArrayValues(param.get("tableName"), param.get("arrayValues"));
     }
 
-    @Test(priority = 3, enabled = true, dataProvider = "arrayFieldMethod",
+    @Test(priority = 3, enabled = true, dataProvider = "arrayFieldMethod",dependsOnMethods = {"test02InsertArrayValues"},
+            description = "验证插入后的array值显示正确")
+    public void test02QueryArrayData(Map<String, String> param) throws SQLException {
+        StrTo2DList strTo2DList = new StrTo2DList();
+        List expectedList = strTo2DList.construct2DList(param.get("outData"), ";", "&");
+        System.out.println("Expected: " + expectedList);
+        List actualList = arrayObj.queryTableData(param.get("tableName"));
+        System.out.println("Actual: " + actualList);
+
+        Assert.assertEquals(actualList, expectedList);
+    }
+
+
+    @Test(priority = 4, enabled = true, dataProvider = "arrayFieldMethod",
             description = "创建含有不同数据类型的array字段的数据表,指定默认值")
     public void test03TableCreateWithArrayFieldDefaultValue(Map<String, String> param) throws SQLException {
         arrayObj.tableCreateWithArrayFieldDefaultValue(param.get("tableName"), param.get("fieldName"), param.get("fieldType"), param.get("defaultValue"));
     }
 
-    @Test(priority = 4, enabled = true, dataProvider = "arrayFieldMethod",
+    @Test(priority = 5, enabled = true, dataProvider = "arrayFieldMethod",
             description = "向不同数据表插入除数组类型字段外的其他字段值")
     public void test04InsertValuesWithArrayField(Map<String, String> param) throws SQLException {
         StrTo2DList strTo2DList = new StrTo2DList();

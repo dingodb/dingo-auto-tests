@@ -146,8 +146,7 @@ public class TestBetweenAndState extends YamlDataHelper {
 
     public static List<List> expectedTest04List1() {
         String[][] dataArray = {
-                {"2", "lisi"},{"3", "li3"}, {"4", "HAHA"},{"11", "GiGi"},
-                {"12", "Kelay"},{"16", "Juliya"},{"20", "Bilibili"}
+                {"2", "lisi"},{"3", "li3"}
         };
         List<List> betweenList = new ArrayList<List>();
         for(int i=0; i<dataArray.length; i++) {
@@ -161,7 +160,12 @@ public class TestBetweenAndState extends YamlDataHelper {
     }
 
     public static List<List> expectedTest04List2() {
-        String[][] dataArray = {{"10", "3M"},{"18", "777"}};
+        String[][] dataArray = {
+                {"4","HAHA"},{"9","Steven"},{"10", "3M"},
+                {"11","GiGi"},{"12","Kelay"},{"14","Sity"},
+                {"15","Public"},{"16","Juliya"},{"18", "777"},
+                {"19","Adidas"},{"20","Bilibili"},{"21","Zala"}
+        };
         List<List> betweenList = new ArrayList<List>();
         for(int i=0; i<dataArray.length; i++) {
             List columnList = new ArrayList();
@@ -175,9 +179,8 @@ public class TestBetweenAndState extends YamlDataHelper {
 
     public static List<List> expectedTest04List3() {
         String[][] dataArray = {
-                {"2", "lisi", "haidian"},{"4", "HAHA", "CHANGping"}, {"7", "yamaha", "beijing changyang"},
-                {"11", "GiGi", "Huhe"},{"14", "Sity", "beijing changyang"}, {"16", "Juliya", "Huluodao"},
-                {"17", "1.5", "JinMen"},{"21", "Zala", "JiZhou"}
+                {"1", "zhangsan", "beijing"},{"8", "wangwu", "beijing"}, {"10", "3M", "Lasa"},
+                {"12", "Kelay", "Yang GU"},{"15", "Public", "beijing"}, {"20", "Bilibili", "Xuchang"}
         };
         List<List> betweenList = new ArrayList<List>();
         for(int i=0; i<dataArray.length; i++) {
@@ -298,9 +301,10 @@ public class TestBetweenAndState extends YamlDataHelper {
 
     public static List<List> expectedTest15List1() {
         String[][] dataArray = {
-                {"1", "zhangsan"},{"5", "awJDs"},{"6", "123"},{"7", "yamaha"},{"8", "wangwu"},
-                {"9", "Steven"},{"10", "3M"},{"13", " Nigula"},{"14", "Sity"},{"15", "Public"},{"17", "1.5"},
-                {"18", "777"},{"19", "Adidas"},{"21", "Zala"}
+                {"1", "zhangsan"},{"4", "HAHA"},{"5", "awJDs"},{"6", "123"},{"7", "yamaha"},{"8", "wangwu"},
+                {"9", "Steven"},{"10", "3M"},{"11","GiGi"},{"12","Kelay"}, {"13", " Nigula"},{"14", "Sity"},
+                {"15", "Public"},{"16","Juliya"},{"17", "1.5"}, {"18", "777"},{"19", "Adidas"},
+                {"20","Bilibili"},{"21", "Zala"}
         };
         List<List> notBetweenList = new ArrayList<List>();
         for(int i=0; i<dataArray.length; i++) {
@@ -315,10 +319,8 @@ public class TestBetweenAndState extends YamlDataHelper {
 
     public static List<List> expectedTest15List2() {
         String[][] dataArray = {
-                {"1", "zhangsan"},{"2", "lisi"},{"3", "li3"},{"4", "HAHA"}, {"5", "awJDs"},
-                {"6", "123"},{"7", "yamaha"},{"8", "wangwu"}, {"9", "Steven"},{"11", "GiGi"},{"12", "Kelay"},
-                {"13", " Nigula"},{"14", "Sity"},{"15", "Public"},{"16", "Juliya"},{"17", "1.5"},
-                {"19", "Adidas"},{"20", "Bilibili"},{"21", "Zala"}
+                {"1", "zhangsan"},{"2", "lisi"},{"3", "li3"},{"5", "awJDs"},
+                {"6", "123"},{"7", "yamaha"},{"8", "wangwu"}, {"13", " Nigula"},{"17", "1.5"}
         };
         List<List> notBetweenList = new ArrayList<List>();
         for(int i=0; i<dataArray.length; i++) {
@@ -333,10 +335,11 @@ public class TestBetweenAndState extends YamlDataHelper {
 
     public static List<List> expectedTest15List3() {
         String[][] dataArray = {
-                {"1", "zhangsan", "beijing"},{"3", "li3", "wuhan NO.1 Street"},{"5", "awJDs", "pingYang1"},
-                {"6", "123", "543"},{"8", "wangwu", "beijing"}, {"9", "Steven", " beijing haidian "},{"10", "3M", "Lasa"},
-                {"12", "Kelay", "Yang GU"}, {"13", " Nigula", "Alaska"},{"15", "Public", "beijing"},{"18", "777", "7788"},
-                {"19", "Adidas", "pingYang1"},{"20", "Bilibili", "Xuchang"}
+                {"2", "lisi", "haidian"},{"3", "li3", "wuhan NO.1 Street"},{"4","HAHA","CHANGping"},
+                {"5", "awJDs", "pingYang1"}, {"6", "123", "543"},{"7","yamaha","beijing changyang"},
+                {"9", "Steven", " beijing haidian "},{"11", "GiGi", "Huhe"}, {"13", " Nigula", "Alaska"},
+                {"14", "Sity", "beijing changyang"},{"16","Juliya","Huluodao"},{"17","1.5","JinMen"},
+                {"18", "777", "7788"}, {"19", "Adidas", "pingYang1"},{"21", "Zala", "JiZhou"}
         };
         List<List> notBetweenList = new ArrayList<List>();
         for(int i=0; i<dataArray.length; i++) {
@@ -697,8 +700,8 @@ public class TestBetweenAndState extends YamlDataHelper {
 
     public static List<List> expectedTest48List() {
         String[][] dataArray = {
-                {"beijing", "1123.5"},{"CHANGping", "9.0762556"},
-                {"beijing changyang", "2002.3"},{"Alaska", "98.99"}
+                {"beijing", "1123.5"},{"Xuchang", "100.0"},{"pingYang1","2907.9998"},
+                {"beijing changyang", "2002.3"},{"Yang GU", "87231.0"},{"haidian","895.0"}
         };
         List<List> betweenList = new ArrayList<List>();
         for(int i=0; i<dataArray.length; i++) {
@@ -1128,7 +1131,7 @@ public class TestBetweenAndState extends YamlDataHelper {
             description = "验证between查询范围起始值等于终止值")
     public void test08BetweenStartEQEnd(Map<String, String> param) throws SQLException {
         StrTo2DList strTo2DList = new StrTo2DList();
-        List<List> expectedBetweenList = strTo2DList.construct2DList(param.get("dataStr"), ";");
+        List<List> expectedBetweenList = strTo2DList.construct2DList(param.get("dataStr"), ";", ",");
         System.out.println("Expected: " + expectedBetweenList);
         List<List> actualBetweenList = betweenObj.betweenQueryStartEQEnd(param.get("betweenState"), param.get("testField"));
         System.out.println("Actual: " + actualBetweenList);
@@ -1418,7 +1421,7 @@ public class TestBetweenAndState extends YamlDataHelper {
             description = "验证between查询日期范围支持的其他日期格式")
     public void test31BetweenSupportOtherDateFormat(Map<String, String> param) throws SQLException {
         StrTo2DList strTo2DList = new StrTo2DList();
-        List<List> expectedBetweenList = strTo2DList.construct2DList(param.get("dataStr"), ";");
+        List<List> expectedBetweenList = strTo2DList.construct2DList(param.get("dataStr"), ";", ",");
         System.out.println("Expected: " + expectedBetweenList);
 
         List<List> actualBetweenList = betweenObj.betweenQuerySupportOtherDateFormat(param.get("queryColumn"),
@@ -1432,7 +1435,7 @@ public class TestBetweenAndState extends YamlDataHelper {
             description = "验证not between查询日期范围支持的其他日期格式")
     public void test32NotBetweenSupportOtherDateFormat(Map<String, String> param) throws SQLException {
         StrTo2DList strTo2DList = new StrTo2DList();
-        List<List> expectedNotBetweenList = strTo2DList.construct2DList(param.get("dataStr"), ";");
+        List<List> expectedNotBetweenList = strTo2DList.construct2DList(param.get("dataStr"), ";",",");
         System.out.println("Expected: " + expectedNotBetweenList);
 
         List<List> actualNotBetweenList = betweenObj.notBetweenQuerySupportOtherDateFormat(param.get("queryColumn"),

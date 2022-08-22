@@ -2101,7 +2101,7 @@ public class TestSQLFuncs extends YamlDataHelper {
             description = "验证按时间日期等值查询")
     public void testQueryDateTimeEQCondition(Map<String, String> param) throws SQLException {
         StrTo2DList strTo2DList = new StrTo2DList();
-        List<List> expectedQueryList = strTo2DList.construct2DList(param.get("dataStr"),";");
+        List<List> expectedQueryList = strTo2DList.construct2DList(param.get("dataStr"),";",",");
         System.out.println("Expected: " + expectedQueryList);
 
         List<List> actualQueryList = funcObj.queryDateTimeEQCondition(param.get("queryColumn"),
@@ -2126,7 +2126,7 @@ public class TestSQLFuncs extends YamlDataHelper {
             description = "验证时间日期按in范围查询")
     public void testQueryDateTimeInRangeCondition(Map<String, String> param) throws SQLException {
         StrTo2DList strTo2DList = new StrTo2DList();
-        List<List> expectedQueryList = strTo2DList.construct2DList(param.get("dataStr"), ";");
+        List<List> expectedQueryList = strTo2DList.construct2DList(param.get("dataStr"), ";",",");
         System.out.println("Expected: " + expectedQueryList);
 
         List<List> actualQueryList = funcObj.queryDateTimeInRangeCondition(param.get("queryColumn"),

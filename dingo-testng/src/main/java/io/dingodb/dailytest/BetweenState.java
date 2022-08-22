@@ -336,7 +336,7 @@ public class BetweenState {
     //between按字符型字段值进行范围查找
     public List<List> betweenQueryByStrRange3() throws SQLException {
         try(Statement statement = connection.createStatement()) {
-            String betweenSQL = "select * from betweenTest where address between 'beijing ' and 'JiZhou'";
+            String betweenSQL = "select * from betweenTest where address between 'Lasa' and 'beijing '";
             ResultSet resultSet = statement.executeQuery(betweenSQL);
             List<List> betweenList = new ArrayList<List>();
             while (resultSet.next()) {
@@ -355,7 +355,7 @@ public class BetweenState {
     //not between按字符型字段值进行范围查找
     public List<List> notBetweenQueryByStrRange3() throws SQLException {
         try(Statement statement = connection.createStatement()) {
-            String betweenSQL = "select * from betweenTest where address not between 'beijing ' and 'JiZhou'";
+            String betweenSQL = "select * from betweenTest where address not between 'Lasa' and 'beijing '";
             ResultSet resultSet = statement.executeQuery(betweenSQL);
             List<List> betweenList = new ArrayList<List>();
             while (resultSet.next()) {
@@ -1094,7 +1094,7 @@ public class BetweenState {
     //between查询使用分组
     public List<List> betweenQueryWithGroup() throws SQLException {
         try(Statement statement = connection.createStatement()) {
-            String betweenSQL = "select address,sum(amount) sa from betweenTest where address between 'a' and 'd' group by address";
+            String betweenSQL = "select address,sum(amount) sa from betweenTest where address between 'U' and 'q' group by address";
             ResultSet resultSet = statement.executeQuery(betweenSQL);
             List<List> betweenList = new ArrayList<List>();
             while (resultSet.next()) {

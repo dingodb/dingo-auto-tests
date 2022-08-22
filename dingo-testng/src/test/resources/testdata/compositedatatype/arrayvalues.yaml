@@ -27,7 +27,7 @@ testID1001894-01:
   arrayValues: "(1, 'zhangsan', array[0.5,1234.567809,999.00])"
 testID1001894-02:
   tableName: "doubleArray"
-  arrayValues: "(2, 'lisi', array[0.0]),(3, 'wangwu', array[18.3,0.0001]),(4, 'Tomy-1', array[3721.00,66.66,78909.23])"
+  arrayValues: "(2, 'lisi', array[0.0]),(3, 'wangwu', array[18.3,0.0003567]),(4, 'Tomy-1', array[3721.00,66.66,78909.23])"
 testID1001894-03:
   tableName: "floatArray"
   arrayValues: "(1, 'zhangsan', array[0.5,1234.567809,999.00])"

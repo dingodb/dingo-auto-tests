@@ -46,6 +46,27 @@ public class ArrayField {
         }
     }
 
+    //查询插入后的数据
+    public List<List> queryTableData(String tableName) throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String sql = "select * from " + tableName;
+            ResultSet resultSet = statement.executeQuery(sql);
+            List<List> queryList = new ArrayList<List>();
+            while (resultSet.next()) {
+                List rowList = new ArrayList();
+                rowList.add(resultSet.getString(1));
+                rowList.add(resultSet.getString(2));
+                rowList.add(resultSet.getArray(3).toString());
+
+                queryList.add(rowList);
+            }
+            resultSet.close();
+            statement.close();
+            return queryList;
+        }
+    }
+
+
     //向表中插入array数组数据
     public void insertArrayValues(String tableName, String arrayValue) throws SQLException {
         try(Statement statement = connection.createStatement()) {

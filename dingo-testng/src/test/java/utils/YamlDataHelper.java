@@ -857,6 +857,11 @@ public class YamlDataHelper{
                 break;
             }
 
+            case "test02QueryArrayData": {
+                yamlArrayList = getYamlList(iniReader.getValue("ArrayFieldYaml", "querydata"));
+                break;
+            }
+
             case "test03TableCreateWithArrayFieldDefaultValue": {
                 yamlArrayList = getYamlList(iniReader.getValue("ArrayFieldYaml", "arrayfield_withdefaultvalue"));
                 break;

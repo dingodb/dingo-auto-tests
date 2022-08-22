@@ -38,6 +38,18 @@ testID1001610-10:
   inputNum: "-0.5"
   decimalLen: "2"
   outResult: "-0.50"
+testID1001610-11:
+  inputNum: "0.9223372036854775808"
+  decimalLen: "3"
+  outResult: "0.922"
+testID1001610-12:
+  inputNum: "9223372036.854775808"
+  decimalLen: "3"
+  outResult: "9223372036.855"
+testID1001610-13:
+  inputNum: "92233720.36854775808"
+  decimalLen: "3"
+  outResult: "92233720.369"
 testID1001611-01:
   inputNum: "1.598"
   decimalLen: "0"
