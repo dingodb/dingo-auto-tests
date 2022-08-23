@@ -65,9 +65,9 @@ public class TestSQLFuncs extends YamlDataHelper {
 
     public List<List> case1849List() {
         String[][] dataArray = {
-                {"1","zhangsan",null,"23.50","beijing","1998-04-06", "08:10:10", "2022-04-08 18:05:07", "true"},
+                {"1","zhangsan",null,"23.5","beijing","1998-04-06", "08:10:10", "2022-04-08 18:05:07", "true"},
                 {"8","wangwu","44","1000.0","beijing","2015-09-10", "03:45:10", "2001-11-11 18:05:07", "true"},
-                {"12","Kelay","10","87231.0","Yang GU", "2018-05-31", "21:00:00'", "2000-01-01 00:00:00", "true"}
+                {"12","Kelay","10","87231.0","Yang GU", "2018-05-31", "21:00:00", "2000-01-01 00:00:00", "true"}
         };
         List<List> expectedList = new ArrayList<List>();
         for(int i=0; i<dataArray.length; i++) {
@@ -100,7 +100,7 @@ public class TestSQLFuncs extends YamlDataHelper {
     public List<List> case1851List() {
         String[][] dataArray = {
                 {"5","awJDs","1","1453.9999","pingYang1", "2010-10-01", "19:00:00", "2010-10-01 02:02:02", "true"},
-                {"6","123","60,0","543", "1987-07-16", "01:02:03", "1952-12-31 12:12:12", "true"},
+                {"6","123","60","0.0","543", "1987-07-16", "01:02:03", "1952-12-31 12:12:12", "true"},
                 {"15","Public","18","100.0","beijing ","2007-08-15", "22:10:10", "2020-02-29 05:53:44", "true"},
                 {"19","Adidas","1","1453.9999","pingYang1", "2010-10-01", "19:00:00", "2010-10-01 02:02:02", "false"},
                 {"21","Zala",null,"2000.01","JiZhou", "2022-07-07", "00:00:00", "2022-07-07 13:30:03", "false"}
