@@ -206,3 +206,19 @@ testID1001752-02:
   inputNum: "-9223372036854775809.00"
   decimalLen: "2"
   outResult: "-9223372036854775809.00"
+testID1001621-01:
+  inputNum: "'1.298'"
+  decimalLen: "2"
+  outResult: "1.30"
+testID1001615-01:
+  inputNum: "3.456"
+  decimalLen: "'2'"
+  outResult: "3.46"
+testID1001669-01:
+  inputNum: "'3.456'"
+  decimalLen: "'2'"
+  outResult: "3.46"
+testID1001669-03:
+  inputNum: "'56'"
+  decimalLen: "'0'"
+  outResult: "56"

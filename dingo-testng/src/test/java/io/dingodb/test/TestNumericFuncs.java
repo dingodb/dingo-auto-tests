@@ -215,7 +215,7 @@ public class TestNumericFuncs extends YamlDataHelper {
     }
 
     @Test(priority = 1, enabled = true, dataProvider = "yamlNumericFuncMethod", expectedExceptions = SQLException.class,
-            description = "验证Pow函数第一个参数为字符串，预期失败")
+            description = "验证Pow函数第一个参数为非数字字符串，预期失败")
     public void test02PowXStr(Map<String, String> param) throws SQLException {
         numericObj.powxStr(param.get("num1"), param.get("num2"));
     }
@@ -227,7 +227,7 @@ public class TestNumericFuncs extends YamlDataHelper {
     }
 
     @Test(priority = 3, enabled = true, dataProvider = "yamlNumericFuncMethod", expectedExceptions = SQLException.class,
-            description = "验证Pow函数第二个参数为字符串，预期失败")
+            description = "验证Pow函数第二个参数为非数字字符串，预期失败")
     public void test04PowYStr(Map<String, String> param) throws SQLException {
         numericObj.powyStr(param.get("num1"), param.get("num2"));
     }

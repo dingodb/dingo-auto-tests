@@ -1,6 +1,6 @@
-testID1001627-01:
-  inputNum: "2.345"
-testID1001627-02:
-  inputNum: "-1.5"
+#testID1001627-01:
+#  inputNum: "2.345"
+#testID1001627-02:
+#  inputNum: "-1.5"
 testID1001627-03:
   inputNum: "a"

@@ -1,9 +1,9 @@
-testID1001669-01:
-  inputNum: "3.456"
-  decimalLen: "2"
+#testID1001669-01:
+#  inputNum: "3.456"
+#  decimalLen: "2"
 testID1001669-02:
   inputNum: "a"
   decimalLen: "a"
-testID1001669-03:
-  inputNum: "56"
-  decimalLen: "0"
+#testID1001669-03:
+#  inputNum: "56"
+#  decimalLen: "0"

@@ -138,3 +138,15 @@ testID1001604-01:
 #  num1: "-2"
 #  num2: "63"
 #  outResult: "-9223372036854775808"
+testID1001598-01:
+  num1: "'12'"
+  num2: "3"
+  outResult: "1728"
+testID1001606-01:
+  num1: "16"
+  num2: "'2'"
+  outResult: "256"
+testbothStr:
+  num1: "'2'"
+  num2: "'3'"
+  outResult: "8"

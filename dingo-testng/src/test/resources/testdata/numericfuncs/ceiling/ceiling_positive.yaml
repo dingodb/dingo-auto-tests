@@ -43,3 +43,9 @@ testID1001754-02:
 testID1001754-03:
   inputNum: "-9223372036854775809.678"
   outNum: "-9223372036854775809"
+testID1001627-01:
+  inputNum: "'2.345'"
+  outNum: "3"
+testID1001627-02:
+  inputNum: "'-1.5'"
+  outNum: "-1"

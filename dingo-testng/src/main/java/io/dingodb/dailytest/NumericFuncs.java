@@ -68,7 +68,7 @@ public class NumericFuncs {
         }
     }
 
-    //pow函数，x参数为字符串，预期失败
+    //pow函数，x参数为非数字字符串，预期失败
     public void powxStr(String num1, String num2) throws SQLException {
         try(Statement statement = connection.createStatement()) {
             String powSQL = "select pow('" + num1 + "'," + num2 +")";
@@ -76,7 +76,7 @@ public class NumericFuncs {
         }
     }
 
-    //pow函数，y参数为字符串，预期失败
+    //pow函数，y参数为非数字字符串，预期失败
     public void powyStr(String num1, String num2) throws SQLException {
         try(Statement statement = connection.createStatement()) {
             String powSQL = "select pow(" + num1 + ",'" + num2 +"')";

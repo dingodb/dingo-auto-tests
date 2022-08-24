@@ -94,3 +94,9 @@ testID1001757-02:
 testID1001757-03:
   inputNum: "-9223372036854775809.123"
   outNum: "9223372036854775809.123"
+testID1001643-01:
+  inputNum: "'-1.25'"
+  outNum: "1.25"
+testID1001643-02:
+  inputNum: "'34'"
+  outNum: "34"
