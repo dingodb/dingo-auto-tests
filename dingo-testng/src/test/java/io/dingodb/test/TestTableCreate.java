@@ -23,13 +23,15 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import utils.FileReaderUtil;
+import utils.YamlDataHelper;
 
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-public class TestTableCreate {
+public class TestTableCreate extends YamlDataHelper {
     public static TableCreate tableCreateObj = new TableCreate();
 
     public void initTable1() throws SQLException {
@@ -230,7 +232,7 @@ public class TestTableCreate {
     public void test01AssignDefaultValue() throws SQLException {
         initTable1();
     }
-    @Test(enabled = true, description = "验证table1表数据,验证默认值")
+    @Test(enabled = true, dependsOnMethods = {"test01AssignDefaultValue"}, description = "验证table1表数据,验证默认值")
     public void test01CheckDefaultValue() throws SQLException {
         List<List> expectedRecords = expectedTable1List();
         System.out.println("Expected: " + expectedRecords);
@@ -245,7 +247,7 @@ public class TestTableCreate {
         initTable2();
     }
 
-    @Test(enabled = true, description = "验证table2表数据")
+    @Test(enabled = true, dependsOnMethods = {"test02CreateTable2PrimaryKeyVarchar"}, description = "验证table2表数据")
     public void test02Table2Records() throws SQLException {
         List<List> expectedRecords = expectedTable2List();
         System.out.println("Expected: " + expectedRecords);
@@ -261,7 +263,7 @@ public class TestTableCreate {
         initTable3();
     }
 
-    @Test(enabled = true, description = "验证table3表数据")
+    @Test(enabled = true, dependsOnMethods = {"test03CreateTable3PrimaryKeyDouble"}, description = "验证table3表数据")
     public void test03Table3Records() throws SQLException {
         List<List> expectedRecords = expectedTable3List();
         System.out.println("Expected: " + expectedRecords);
@@ -277,7 +279,7 @@ public class TestTableCreate {
         initTable4();
     }
 
-    @Test(enabled = true, description = "验证table4表数据")
+    @Test(enabled = true, dependsOnMethods = {"test04CreateTable4PrimaryKeyDate"}, description = "验证table4表数据")
     public void test04Table4Records() throws SQLException {
         List<List> expectedRecords = expectedTable4List();
         System.out.println("Expected: " + expectedRecords);
@@ -293,7 +295,7 @@ public class TestTableCreate {
         initTable5();
     }
 
-    @Test(enabled = true, description = "验证table5表数据")
+    @Test(enabled = true, dependsOnMethods = {"test05CreateTable5PrimaryKeyTime"}, description = "验证table5表数据")
     public void test05Table5Records() throws SQLException {
         List<List> expectedRecords = expectedTable5List();
         System.out.println("Expected: " + expectedRecords);
@@ -309,7 +311,7 @@ public class TestTableCreate {
         initTable6();
     }
 
-    @Test(enabled = true, description = "验证table6表数据")
+    @Test(enabled = true, dependsOnMethods = {"test06CreateTable6PrimaryKeyTimestamp"}, description = "验证table6表数据")
     public void test06Table6Records() throws SQLException {
         List<List> expectedRecords = expectedTable6List();
         System.out.println("Expected: " + expectedRecords);
@@ -325,7 +327,7 @@ public class TestTableCreate {
         initTable7();
     }
 
-    @Test(enabled = true, description = "验证table7表数据")
+    @Test(enabled = true, dependsOnMethods = {"test07CreateTable7PrimaryKeyBoolean"}, description = "验证table7表数据")
     public void test07Table7Records() throws SQLException {
         List<List> expectedRecords = expectedTable7List();
         System.out.println("Expected: " + expectedRecords);
@@ -334,6 +336,20 @@ public class TestTableCreate {
         System.out.println("Actual: " + actualRecords);
         Assert.assertTrue(actualRecords.containsAll(expectedRecords));
         Assert.assertTrue(expectedRecords.containsAll(actualRecords));
+    }
+
+    @Test(enabled = true, dataProvider = "createTableMethod", description = "验证多主键表的创建")
+    public void test08TableCreateWithMultiPrimaryKey(Map<String, String> param) throws SQLException {
+        tableCreateObj.createTableWithMultiPrimaryKey(param.get("createState"));
+    }
+
+    @Test(enabled = true, dataProvider = "createTableMethod", dependsOnMethods = {"test08TableCreateWithMultiPrimaryKey"}, description = "验证多主键表的插入")
+    public void test09InsertValuesWithMultiPrimaryKey(Map<String, String> param) throws SQLException {
+        int expectedEffect = Integer.parseInt(param.get("effectRows"));
+        System.out.println("Expected effect rows: " + expectedEffect);
+        int actualEffect = tableCreateObj.insertTable1WithMultiPrimaryKey(param.get("insertValue"));
+        System.out.println("Actual effect rows: " + actualEffect);
+        Assert.assertEquals(actualEffect, expectedEffect);
     }
 
 
@@ -356,6 +372,10 @@ public class TestTableCreate {
             tearDownStatement.execute("drop table ctest006");
             tearDownStatement.execute("delete from ctest007");
             tearDownStatement.execute("drop table ctest007");
+            tearDownStatement.execute("delete from mpkey_tbl1");
+            tearDownStatement.execute("drop table mpkey_tbl1");
+            tearDownStatement.execute("delete from mpkey_tbl2");
+            tearDownStatement.execute("drop table mpkey_tbl2");
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {

@@ -1,0 +1,28 @@
+table001-01:
+  insertValue: "insert into mpkey_tbl1 values(1,'zhangsan',18,23.50,'beijing','1998-4-6', '08:10:10', '2022-4-8 18:05:07', true),(2,'lisi',25,895.00,'haidian', '1988-2-05', '06:15:8', '2000-02-29 00:00:00', false)"
+  effectRows: "2"
+table001-02:
+  insertValue: "insert into mpkey_tbl1 values(1,'zhangsan2',18,23.50,'beijing','1998-4-6', '08:10:10', '2022-4-8 18:05:07', true)"
+  effectRows: "1"
+table001-03:
+  insertValue: "insert into mpkey_tbl1 values(3,'lisi',25,895.00,'haidian', '1988-2-05', '06:15:8', '2000-02-29 00:00:00', false)"
+  effectRows: "1"
+table001-04:
+  insertValue: "insert into mpkey_tbl1 values(2,'lisi',25,895.00,'haidian', '1988-2-05', '06:15:8', '2000-02-29 00:00:00', false)"
+  effectRows: "0"
+table002-01:
+  insertValue: "insert into mpkey_tbl2 values('15823902300','Bilibili',200,100.0,'Xuchang', '1987-12-11', '11:11:00', '1997-07-01 00:00:00', true),('13887567843','Zala',76,2000.01,'JiZhou', '2022-07-07', '00:00:00', '2022-07-07 13:30:03', false),('13938591092','HAHA',57,9.07,'CHANGping', '2020-11-11', '5:59:59', '2021-05-04 12:00:00', true)"
+  effectRows: "3"
+table002-02:
+  insertValue: "insert into mpkey_tbl2 values('15823902300','Bilibili',200,100.0,'Xuchang', '1987-12-11', '11:11:00', '1997-07-01 01:00:00', true)"
+  effectRows: "1"
+table002-03:
+  insertValue: "insert into mpkey_tbl2 values('15823902300','Sisi',200,100.0,'Xuchang', '1987-12-11', '11:11:00', '1997-07-01 00:00:00', true)"
+  effectRows: "1"
+table002-04:
+  insertValue: "insert into mpkey_tbl2 values('15823902301','Bilibili',200,100.0,'Xuchang', '1987-12-11', '11:11:00', '1997-07-01 00:00:00', true),('13887567843','Zala',76,2000.01,'JiZhou', '2022-07-07', '00:00:00', '2022-07-07 13:30:03', false)"
+  effectRows: "1"
+table002-05:
+  insertValue: "insert into mpkey_tbl2 values('15823902300','Bilibili',200,100.0,'Xuchang', '1987-12-11', '11:11:00', '1997-07-01 00:00:00', true)"
+  effectRows: "0"
+

@@ -323,4 +323,20 @@ public class TableCreate {
             return queryList;
         }
     }
+
+    //创建多主键数据表
+    public void createTableWithMultiPrimaryKey(String createTableState) throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            statement.execute(createTableState);
+        }
+    }
+
+    //往多主键1表插入数据
+    public int insertTable1WithMultiPrimaryKey(String insertState) throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            int effectRows = statement.executeUpdate(insertState);
+            return effectRows;
+        }
+    }
+
 }

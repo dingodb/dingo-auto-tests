@@ -880,4 +880,26 @@ public class YamlDataHelper{
         return files;
     }
 
+    @DataProvider
+    public Object[][] createTableMethod(Method method) {
+        List<Map<String, String>> yamlCreateTableList = null;
+        switch (method.getName()) {
+            case "test08TableCreateWithMultiPrimaryKey": {
+                yamlCreateTableList = getYamlList(iniReader.getValue("createTableYaml", "mpkey_state"));
+                break;
+            }
+
+            case "test09InsertValuesWithMultiPrimaryKey": {
+                yamlCreateTableList = getYamlList(iniReader.getValue("createTableYaml", "mpkey_insert_value"));
+                break;
+            }
+
+        }
+        Object[][] files = new Object[yamlCreateTableList.size()][];
+        for (int i = 0; i < yamlCreateTableList.size(); i++) {
+            files[i] = new Object[]{yamlCreateTableList.get(i)};
+        }
+        return files;
+    }
+
 }
