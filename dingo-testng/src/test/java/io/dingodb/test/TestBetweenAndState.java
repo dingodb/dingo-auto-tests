@@ -45,56 +45,82 @@ public class TestBetweenAndState extends YamlDataHelper {
     }
 
     public void initBetweenTable2() throws SQLException {
-        String between_meta1_path = "src/test/resources/testdata/tablemeta/between_and_meta1.txt";
+        String between_meta2_path = "src/test/resources/testdata/tablemeta/between_and_meta1.txt";
         String between_value2_path = "src/test/resources/testdata/tableInsertValues/between_and_value2.txt";
-        String between_meta1 = FileReaderUtil.readFile(between_meta1_path);
+        String between_meta2 = FileReaderUtil.readFile(between_meta2_path);
         String between_value2 = FileReaderUtil.readFile(between_value2_path);
-        betweenObj.betweenTable2Create(between_meta1);
+        betweenObj.betweenTable2Create(between_meta2);
         betweenObj.insertTable2Values(between_value2);
     }
 
     public void initBetweenTable3() throws SQLException {
-        String between_meta1_path = "src/test/resources/testdata/tablemeta/between_and_meta1.txt";
+        String between_meta3_path = "src/test/resources/testdata/tablemeta/between_and_meta1.txt";
         String between_value3_path = "src/test/resources/testdata/tableInsertValues/between_and_value3.txt";
-        String between_meta1 = FileReaderUtil.readFile(between_meta1_path);
+        String between_meta3 = FileReaderUtil.readFile(between_meta3_path);
         String between_value3 = FileReaderUtil.readFile(between_value3_path);
-        betweenObj.betweenTable3Create(between_meta1);
+        betweenObj.betweenTable3Create(between_meta3);
         betweenObj.insertTable3Values(between_value3);
     }
 
     public void initBetweenTable4() throws SQLException {
-        String between_meta1_path = "src/test/resources/testdata/tablemeta/between_and_meta1.txt";
+        String between_meta4_path = "src/test/resources/testdata/tablemeta/between_and_meta1.txt";
         String between_value4_path = "src/test/resources/testdata/tableInsertValues/between_and_value4.txt";
-        String between_meta1 = FileReaderUtil.readFile(between_meta1_path);
+        String between_meta4 = FileReaderUtil.readFile(between_meta4_path);
         String between_value4 = FileReaderUtil.readFile(between_value4_path);
-        betweenObj.betweenTable4Create(between_meta1);
+        betweenObj.betweenTable4Create(between_meta4);
         betweenObj.insertTable4Values(between_value4);
     }
 
     public void initBetweenTable5() throws SQLException {
-        String between_meta1_path = "src/test/resources/testdata/tablemeta/between_and_meta1.txt";
-        String between_value1_path = "src/test/resources/testdata/tableInsertValues/between_and_value1.txt";
-        String between_meta1 = FileReaderUtil.readFile(between_meta1_path);
-        String between_value1 = FileReaderUtil.readFile(between_value1_path);
-        betweenObj.betweenTable5Create(between_meta1);
-        betweenObj.insertTable5Values(between_value1);
+        String between_meta5_path = "src/test/resources/testdata/tablemeta/between_and_meta1.txt";
+        String between_value5_path = "src/test/resources/testdata/tableInsertValues/between_and_value1.txt";
+        String between_meta5 = FileReaderUtil.readFile(between_meta5_path);
+        String between_value5 = FileReaderUtil.readFile(between_value5_path);
+        betweenObj.betweenTable5Create(between_meta5);
+        betweenObj.insertTable5Values(between_value5);
     }
 
     public void initBetweenTable6And7() throws SQLException {
-        String between_meta2_path = "src/test/resources/testdata/tablemeta/between_and_meta2.txt";
+        String between_meta6_path = "src/test/resources/testdata/tablemeta/between_and_meta2.txt";
         String between_value6_path = "src/test/resources/testdata/tableInsertValues/between_and_value5.txt";
-        String between_meta2 = FileReaderUtil.readFile(between_meta2_path);
+        String between_meta6 = FileReaderUtil.readFile(between_meta6_path);
         String between_value6 = FileReaderUtil.readFile(between_value6_path);
-        betweenObj.betweenTable6Create(between_meta2);
+        betweenObj.betweenTable6Create(between_meta6);
         betweenObj.insertTable6Values(between_value6);
 
-        String between_meta3_path = "src/test/resources/testdata/tablemeta/job_grades_meta.txt";
+        String between_meta7_path = "src/test/resources/testdata/tablemeta/job_grades_meta.txt";
         String between_value7_path = "src/test/resources/testdata/tableInsertValues/between_and_value6.txt";
-        String between_meta3 = FileReaderUtil.readFile(between_meta3_path);
+        String between_meta7 = FileReaderUtil.readFile(between_meta7_path);
         String between_value7 = FileReaderUtil.readFile(between_value7_path);
-        betweenObj.betweenTable7Create(between_meta3);
+        betweenObj.betweenTable7Create(between_meta7);
         betweenObj.insertTable7Values(between_value7);
+    }
 
+    public void initBetweenTable8() throws SQLException {
+        String between_meta8_path = "src/test/resources/testdata/tablemeta/between_and_meta3.txt";
+        String between_value8_path = "src/test/resources/testdata/tableInsertValues/between_and_value7.txt";
+        String between_meta8 = FileReaderUtil.readFile(between_meta8_path);
+        String between_value8 = FileReaderUtil.readFile(between_value8_path);
+        betweenObj.betweenTable8Create(between_meta8);
+        betweenObj.insertTable8Values(between_value8);
+    }
+
+    public void initBetweenTable9() throws SQLException {
+        String between_meta9_path = "src/test/resources/testdata/tablemeta/between_and_meta4.txt";
+        String between_value9_path = "src/test/resources/testdata/tableInsertValues/between_and_value8.txt";
+        String between_meta9 = FileReaderUtil.readFile(between_meta9_path);
+        String between_value9 = FileReaderUtil.readFile(between_value9_path);
+        betweenObj.betweenTable9Create(between_meta9);
+        betweenObj.insertTable9Values(between_value9);
+    }
+
+    public void initBetweenTable10() throws SQLException {
+        String between_meta10_path = "src/test/resources/testdata/tablemeta/between_and_meta5.txt";
+        String between_value10_path = "src/test/resources/testdata/tableInsertValues/between_and_value9.txt";
+        String between_meta10 = FileReaderUtil.readFile(between_meta10_path);
+        String between_value10 = FileReaderUtil.readFile(between_value10_path);
+        betweenObj.betweenTable10Create(between_meta10);
+        betweenObj.insertTable10Values(between_value10);
     }
 
     public static List<List> expectedTest01List() {
@@ -974,6 +1000,78 @@ public class TestBetweenAndState extends YamlDataHelper {
         return notBetweenList;
     }
 
+    public static List<List> expectedTest66List() {
+        String[][] dataArray = {
+                {"13834781245","zhangsan","18","23.5","2022-04-08 18:05:07"},
+                {"13840980021","lisi","25","895.0","2000-02-29 00:00:00"},
+                {"13901278905","HAHA","57","9.0762556","2020-11-11","05:59:59","2021-05-04 12:00:00"}
+        };
+        List<List> betweenList = new ArrayList<List>();
+        for(int i=0; i<dataArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<dataArray[i].length; j++) {
+                columnList.add(dataArray[i][j]);
+            }
+            betweenList.add(columnList);
+        }
+        return betweenList;
+    }
+
+    public static List<List> expectedTest67List() {
+        String[][] dataArray = {
+                {"13587642399","Steven","20","2000.0"," beijing haidian ","1995-12-15","16:35:38","2008-08-08 08:00:00","true"},
+                {"13790912302","awJDs","1","1453.9999","pingYang1","2010-10-01","19:00:00","2010-10-01 02:02:02","false"},
+                {"15900902305","Gogo","86","23.45","Shanghai","2022-03-13","12:00:00","2022-12-01 10:10:10","false"},
+                {"15804857822","123","544","0.0","543","1987-07-16","01:02:03","1952-12-31 12:12:12","false"}
+        };
+        List<List> notBetweenList = new ArrayList<List>();
+        for(int i=0; i<dataArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<dataArray[i].length; j++) {
+                columnList.add(dataArray[i][j]);
+            }
+            notBetweenList.add(columnList);
+        }
+        return notBetweenList;
+    }
+
+    public static List<List> expectedTest68List() {
+        String[][] dataArray = {
+                {"300", "Cindy", "39", "4.6"},
+                {"400", "Doris", "25", "5.2"},
+                {"500", "Emily", "24", "5.8"}
+        };
+        List<List> betweenList = new ArrayList<List>();
+        for(int i=0; i<dataArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<dataArray[i].length; j++) {
+                columnList.add(dataArray[i][j]);
+            }
+            betweenList.add(columnList);
+        }
+        return betweenList;
+    }
+
+    public static List<List> expectedTest69List() {
+        String[][] dataArray = {
+                {"100", "Alice", "18", "3.5"},
+                {"200", "Betty", "22", "4.1"},
+                {"600", "Alice", "32", "6.1"},
+                {"700", "Betty", "18", "6.9"},
+                {"800", "Alice", "22", "7.3"},
+                {"900", "Cindy", "25", "3.5"}
+        };
+        List<List> notBetweenList = new ArrayList<List>();
+        for(int i=0; i<dataArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<dataArray[i].length; j++) {
+                columnList.add(dataArray[i][j]);
+            }
+            notBetweenList.add(columnList);
+        }
+        return notBetweenList;
+    }
+
 
     @BeforeClass(alwaysRun = true, description = "测试前连接数据库")
     public static void setupAll() {
@@ -1008,6 +1106,21 @@ public class TestBetweenAndState extends YamlDataHelper {
     @Test(enabled = true, description = "创建测试表6和7")
     public void test00CreateBetweenTable67() throws SQLException {
         initBetweenTable6And7();
+    }
+
+    @Test(enabled = true, description = "创建测试表8")
+    public void test00CreateBetweenTable8() throws SQLException {
+        initBetweenTable8();
+    }
+
+    @Test(enabled = true, description = "创建测试表9")
+    public void test00CreateBetweenTable9() throws SQLException {
+        initBetweenTable9();
+    }
+
+    @Test(enabled = true, description = "创建测试表10")
+    public void test00CreateBetweenTable10() throws SQLException {
+        initBetweenTable10();
     }
 
     @Test(priority = 0, enabled = true, dependsOnMethods = {"test00CreateBetweenTable1"},
@@ -1816,6 +1929,68 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertTrue(expectedBetweenList.containsAll(actualBetweenList));
     }
 
+    @Test(priority = 65, enabled = true, dependsOnMethods = {"test00CreateBetweenTable8"},
+            description = "验证3主键beteen and范围查询")
+    public void test66BetweenIn3PrimaryKeyTable() throws SQLException {
+        List<List> expectedBetweenList = expectedTest66List();
+        System.out.println("Expected: " + expectedBetweenList);
+        List<List> actualBetweenList = betweenObj.betweenAndIn3PrimaryKey();
+        System.out.println("Actual: " + actualBetweenList);
+
+        Assert.assertTrue(actualBetweenList.containsAll(expectedBetweenList));
+        Assert.assertTrue(expectedBetweenList.containsAll(actualBetweenList));
+    }
+
+    @Test(priority = 66, enabled = true, dependsOnMethods = {"test00CreateBetweenTable8"},
+            description = "验证3主键not beteen and范围查询")
+    public void test67NotBetweenIn3PrimaryKeyTable() throws SQLException {
+        List<List> expectedBetweenList = expectedTest67List();
+        System.out.println("Expected: " + expectedBetweenList);
+        List<List> actualBetweenList = betweenObj.notBetweenAndIn3PrimaryKey();
+        System.out.println("Actual: " + actualBetweenList);
+
+        Assert.assertTrue(actualBetweenList.containsAll(expectedBetweenList));
+        Assert.assertTrue(expectedBetweenList.containsAll(actualBetweenList));
+    }
+
+    @Test(priority = 67, enabled = true, dependsOnMethods = {"test00CreateBetweenTable9"},
+            description = "验证2主键beteen and范围查询")
+    public void test68BetweenIn2PrimaryKeyTable() throws SQLException {
+        List<List> expectedBetweenList = expectedTest68List();
+        System.out.println("Expected: " + expectedBetweenList);
+        List<List> actualBetweenList = betweenObj.betweenAndIn2PrimaryKey();
+        System.out.println("Actual: " + actualBetweenList);
+
+        Assert.assertTrue(actualBetweenList.containsAll(expectedBetweenList));
+        Assert.assertTrue(expectedBetweenList.containsAll(actualBetweenList));
+    }
+
+    @Test(priority = 68, enabled = true, dependsOnMethods = {"test00CreateBetweenTable9"},
+            description = "验证2主键not beteen and范围查询")
+    public void test69NotBetweenIn3PrimaryKeyTable() throws SQLException {
+        List<List> expectedBetweenList = expectedTest69List();
+        System.out.println("Expected: " + expectedBetweenList);
+        List<List> actualBetweenList = betweenObj.notBetweenAndIn2PrimaryKey();
+        System.out.println("Actual: " + actualBetweenList);
+
+        Assert.assertTrue(actualBetweenList.containsAll(expectedBetweenList));
+        Assert.assertTrue(expectedBetweenList.containsAll(actualBetweenList));
+    }
+
+    @Test(priority = 69, enabled = true, dataProvider = "yamlBetweenMethod",dependsOnMethods = {"test00CreateBetweenTable10"},
+            description = "验证通过字符型主键进行范围查询")
+    public void test70QueryUsingVarcharPrimaryKey(Map<String, String> param) throws SQLException {
+        StrTo2DList strTo2DList = new StrTo2DList();
+        List<List> expectedList = strTo2DList.construct2DList(param.get("outData"), ";", "&");
+        System.out.println("Expected: " + expectedList);
+        List<List> actualList = betweenObj.betweenAndUsingVarcharPrimaryKey(
+                param.get("tableName"), param.get("queryKey"), param.get("startChar"), param.get("endChar"));
+        System.out.println("Actual: " + actualList);
+
+        Assert.assertTrue(actualList.containsAll(expectedList));
+        Assert.assertTrue(expectedList.containsAll(actualList));
+    }
+
 
     @AfterClass(alwaysRun = true, description = "测试完成后删除数据和表格并关闭连接")
     public void tearDownAll() throws SQLException {
@@ -1832,6 +2007,12 @@ public class TestBetweenAndState extends YamlDataHelper {
             tearDownStatement.execute("drop table betweenTest4");
             tearDownStatement.execute("delete from betweenTest5");
             tearDownStatement.execute("drop table betweenTest5");
+            tearDownStatement.execute("delete from betweenTest8");
+            tearDownStatement.execute("drop table betweenTest8");
+            tearDownStatement.execute("delete from betweenTest9");
+            tearDownStatement.execute("drop table betweenTest9");
+            tearDownStatement.execute("delete from betweenTest10");
+            tearDownStatement.execute("drop table betweenTest10");
             tearDownStatement.execute("delete from between_employees");
             tearDownStatement.execute("drop table between_employees");
             tearDownStatement.execute("delete from between_job_grades");

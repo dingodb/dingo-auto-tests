@@ -622,6 +622,11 @@ public class YamlDataHelper{
                 break;
             }
 
+            case "test70QueryUsingVarcharPrimaryKey": {
+                yamlBetweenList = getYamlList(iniReader.getValue("BetweenAndYaml", "between_varcharPrimaryKey"));
+                break;
+            }
+
         }
         Object[][] files = new Object[yamlBetweenList.size()][];
         for (int i = 0; i < yamlBetweenList.size(); i++) {

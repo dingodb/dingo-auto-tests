@@ -1,0 +1,48 @@
+testID1002250-01:
+  tableName: "betweenTest10"
+  queryKey: "between"
+  startChar: "B"
+  endChar: "q"
+  outData: "Baidu&8&2002-12-31;Fujitec&89&1993-04-15;Hell&39&1999-08-17;Illakilm&24&2011-02-01;Zo&35&1995-08-17;amount&40&2005-08-17;nike&22&1911-09-09;palaba&39&1999-08-17"
+testID1002250-02:
+  tableName: "betweenTest10"
+  queryKey: "between"
+  startChar: "Baidu"
+  endChar: "palaba"
+  outData: "Baidu&8&2002-12-31;Fujitec&89&1993-04-15;Hell&39&1999-08-17;Illakilm&24&2011-02-01;Zo&35&1995-08-17;amount&40&2005-08-17;nike&22&1911-09-09;palaba&39&1999-08-17"
+testID1002250-03:
+  tableName: "betweenTest10"
+  queryKey: "between"
+  startChar: "Hell"
+  endChar: "amount"
+  outData: "Hell&39&1999-08-17;Illakilm&24&2011-02-01;Zo&35&1995-08-17;amount&40&2005-08-17"
+testID1002250-04:
+  tableName: "betweenTest10"
+  queryKey: "between"
+  startChar: "Adidas"
+  endChar: "nik "
+  outData: "Adidas&53&1987-04-30;Baidu&8&2002-12-31;Fujitec&89&1993-04-15;Hell&39&1999-08-17;Illakilm&24&2011-02-01;Zo&35&1995-08-17;amount&40&2005-08-17"
+testID1002258-01:
+  tableName: "betweenTest10"
+  queryKey: "not between"
+  startChar: "B"
+  endChar: "q"
+  outData: "wiv&43&2001-01-23;Adidas&53&1987-04-30;zala&9&1997-10-11"
+testID1002258-02:
+  tableName: "betweenTest10"
+  queryKey: "not between"
+  startChar: "Baidu"
+  endChar: "palaba"
+  outData: "wiv&43&2001-01-23;Adidas&53&1987-04-30;zala&9&1997-10-11"
+testID1002258-03:
+  tableName: "betweenTest10"
+  queryKey: "not between"
+  startChar: "Hell"
+  endChar: "amount"
+  outData: "Adidas&53&1987-04-30;Baidu&8&2002-12-31;Fujitec&89&1993-04-15;nike&22&1911-09-09;palaba&39&1999-08-17;wiv&43&2001-01-23;zala&9&1997-10-11"
+testID1002258-04:
+  tableName: "betweenTest10"
+  queryKey: "not between"
+  startChar: "Adidas"
+  endChar: "nik "
+  outData: "nike&22&1911-09-09;palaba&39&1999-08-17;wiv&43&2001-01-23;zala&9&1997-10-11"

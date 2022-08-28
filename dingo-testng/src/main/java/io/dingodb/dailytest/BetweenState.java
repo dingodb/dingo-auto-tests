@@ -148,6 +148,54 @@ public class BetweenState {
         }
     }
 
+    //创建between and语句测试表8 - 三主键
+    public void betweenTable8Create(String between_and_Meta) throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String createTableSQL = "create table betweenTest8 " + between_and_Meta;
+            statement.execute(createTableSQL);
+        }
+    }
+
+    //表8插入数据
+    public void insertTable8Values(String between_and_Values) throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String insertValuesSQL = "insert into betweenTest8 values " + between_and_Values;
+            statement.execute(insertValuesSQL);
+        }
+    }
+
+    //创建between and语句测试表9 - 两主键
+    public void betweenTable9Create(String between_and_Meta) throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String createTableSQL = "create table betweenTest9 " + between_and_Meta;
+            statement.execute(createTableSQL);
+        }
+    }
+
+    //表9插入数据
+    public void insertTable9Values(String between_and_Values) throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String insertValuesSQL = "insert into betweenTest9 values " + between_and_Values;
+            statement.execute(insertValuesSQL);
+        }
+    }
+
+    //创建between and语句测试表10 - 字符型主键
+    public void betweenTable10Create(String between_and_Meta) throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String createTableSQL = "create table betweenTest10 " + between_and_Meta;
+            statement.execute(createTableSQL);
+        }
+    }
+
+    //表10插入数据
+    public void insertTable10Values(String between_and_Values) throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String insertValuesSQL = "insert into betweenTest10 values " + between_and_Values;
+            statement.execute(insertValuesSQL);
+        }
+    }
+
 
     //betwwen按主键id进行范围查询
     public List<List> betweenQueryByPrimaryKeyRange() throws SQLException {
@@ -1464,6 +1512,113 @@ public class BetweenState {
                 rowList.add(resultSet.getString("salary"));
                 rowList.add(resultSet.getString("grade_level"));
 
+                betweenList.add(rowList);
+            }
+            resultSet.close();
+            statement.close();
+            return betweenList;
+        }
+    }
+
+    //三个主键的表进行between and 范围查询
+    public List<List> betweenAndIn3PrimaryKey() throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String betweenSQL = "select id,name,age,amount,update_time from betweenTest8 " +
+                    "where id between '13834781245' and '13901278905'";
+            ResultSet resultSet = statement.executeQuery(betweenSQL);
+            List<List> betweenList = new ArrayList<List>();
+            while (resultSet.next()) {
+                List rowList = new ArrayList();
+                rowList.add(resultSet.getString(1));
+                rowList.add(resultSet.getString(2));
+                rowList.add(resultSet.getString(3));
+                rowList.add(resultSet.getString(4));
+                rowList.add(resultSet.getString(5));
+                betweenList.add(rowList);
+            }
+            resultSet.close();
+            statement.close();
+            return betweenList;
+        }
+    }
+
+    //三个主键的表进行not between and 范围查询
+    public List<List> notBetweenAndIn3PrimaryKey() throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String betweenSQL = "select * from betweenTest8 " +
+                    "where id not between '13834781245' and '13901278905'";
+            ResultSet resultSet = statement.executeQuery(betweenSQL);
+            List<List> betweenList = new ArrayList<List>();
+            while (resultSet.next()) {
+                List rowList = new ArrayList();
+                rowList.add(resultSet.getString(1));
+                rowList.add(resultSet.getString(2));
+                rowList.add(resultSet.getString(3));
+                rowList.add(resultSet.getString(4));
+                rowList.add(resultSet.getString(5));
+                rowList.add(resultSet.getString(6));
+                rowList.add(resultSet.getString(7));
+                rowList.add(resultSet.getString(8));
+                rowList.add(resultSet.getString(9));
+                betweenList.add(rowList);
+            }
+            resultSet.close();
+            statement.close();
+            return betweenList;
+        }
+    }
+
+    //两个个主键的表进行between and 范围查询
+    public List<List> betweenAndIn2PrimaryKey() throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String betweenSQL = "select * from betweenTest9 where id between '300' and '500'";
+            ResultSet resultSet = statement.executeQuery(betweenSQL);
+            List<List> betweenList = new ArrayList<List>();
+            while (resultSet.next()) {
+                List rowList = new ArrayList();
+                rowList.add(resultSet.getString(1));
+                rowList.add(resultSet.getString(2));
+                rowList.add(resultSet.getString(3));
+                rowList.add(resultSet.getString(4));
+                betweenList.add(rowList);
+            }
+            resultSet.close();
+            statement.close();
+            return betweenList;
+        }
+    }
+
+    //两个个主键的表进行not between and 范围查询
+    public List<List> notBetweenAndIn2PrimaryKey() throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String betweenSQL = "select * from betweenTest9 where id not between '300' and '500'";
+            ResultSet resultSet = statement.executeQuery(betweenSQL);
+            List<List> betweenList = new ArrayList<List>();
+            while (resultSet.next()) {
+                List rowList = new ArrayList();
+                rowList.add(resultSet.getString(1));
+                rowList.add(resultSet.getString(2));
+                rowList.add(resultSet.getString(3));
+                rowList.add(resultSet.getString(4));
+                betweenList.add(rowList);
+            }
+            resultSet.close();
+            statement.close();
+            return betweenList;
+        }
+    }
+
+    //字符型主键范围查询
+    public List<List> betweenAndUsingVarcharPrimaryKey(String tableName, String queryKey, String startChar, String endChar) throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String betweenSQL = "select * from " + tableName + " where name "+ queryKey + " '" + startChar + "' and '" + endChar + "'";
+            ResultSet resultSet = statement.executeQuery(betweenSQL);
+            List<List> betweenList = new ArrayList<List>();
+            while (resultSet.next()) {
+                List rowList = new ArrayList();
+                rowList.add(resultSet.getString(1));
+                rowList.add(resultSet.getString(2));
+                rowList.add(resultSet.getString(3));
                 betweenList.add(rowList);
             }
             resultSet.close();
