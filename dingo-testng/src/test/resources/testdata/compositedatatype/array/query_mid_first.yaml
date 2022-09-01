@@ -1,0 +1,10 @@
+testID1002081:
+  tableName: "arraymid"
+  queryFields: "name,age,class_no,amount,id"
+  queryLogic: ""
+  outData: "zhangsan&20&[1001, 1002, 1003]&345.891&1;lisi&1024&[2001]&0.0&2;wangwu&-55&[-3001, -3002]&-20.66&3"
+testID1002082:
+  tableName: "arrayfirst"
+  queryFields: "*"
+  queryLogic: ""
+  outData: "[male, beijing, 1234.56]&99.99&1&zhangsan&55;[female]&0.01&2&lisi&0;[male, shanghai]&1234.5678&3&wangwu&100;[female, Jinan, 78909.23]&-12.34&4&Tomy-1&88"

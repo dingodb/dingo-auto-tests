@@ -1,0 +1,218 @@
+testID1001926-01:
+  tableName: "intArray"
+  arrayValues: "(192611, 'zhangsan', array[3.6]),(192612, 'lisi', array[2.00,15.67])"
+  queryLogic: "id in (192611,192612)"
+  outData: "192611&zhangsan&[3];192612&lisi&[2, 15]"
+testID1001926-02:
+  tableName: "intArray"
+  arrayValues: "(192621, 'zhangsan', array['12']),(192622,'lisi', array['10000','0','-256'])"
+  queryLogic: "id in (192621,192622)"
+  outData: "192621&zhangsan&[12];192622&lisi&[10000, 0, -256]"
+testID1001926-03:
+  tableName: "intArray"
+  arrayValues: "(192631, 'zhangsan', array[true]),(192632, 'lisi', array[true,false])"
+  queryLogic: "id in (192631,192632)"
+  outData: "192631&zhangsan&[1];192632&lisi&[1, 0]"
+testID1001927-01:
+  tableName: "doubleArray"
+  arrayValues: "(192711, 'zhangsan', array[6]),(192712, 'lisi', array[0,1567])"
+  queryLogic: "id in (192711,192712)"
+  outData: "192711&zhangsan&[6.0];192712&lisi&[0.0, 1567.0]"
+testID1001927-02:
+  tableName: "doubleArray"
+  arrayValues: "(192721, 'zhangsan', array['12.6']),(192722,'lisi', array['11','0','2.4','-3456.78'])"
+  queryLogic: "id in (192721,192722)"
+  outData: "192721&zhangsan&[12.6];192722&lisi&[11.0, 0.0, 2.4, -3456.78]"
+testID1001927-03:
+  tableName: "doubleArray"
+  arrayValues: "(192731, 'zhangsan', array[true]),(192732, 'lisi', array[true,false])"
+  queryLogic: "id in (192731,192732)"
+  outData: "192731&zhangsan&[1.0];192732&lisi&[1.0, 0.0]"
+testID1001928-01:
+  tableName: "boolArray"
+  arrayValues: "(192811, 'zhangsan', array[1]),(192812, 'lisi', array[512,-128,0,2])"
+  queryLogic: "id in (192811,192812)"
+  outData: "192811&zhangsan&[true];192812&lisi&[true, true, false, true]"
+testID1001913-01:
+  tableName: "varcharArray"
+  arrayValues: "(191311, 'zhangsan', array[18]),(191312, 'lisi', array[999,9999])"
+  queryLogic: "id in (191311,191312)"
+  outData: "191311&zhangsan&[18];191312&lisi&[999, 9999]"
+testID1001913-02:
+  tableName: "varcharArray"
+  arrayValues: "(191321, 'zhangsan', array[12.55]),(191322,'lisi', array[2.0,0.01])"
+  queryLogic: "id in (191321,191322)"
+  outData: "191321&zhangsan&[12.55];191322&lisi&[2.0, 0.01]"
+testID1001913-03:
+  tableName: "varcharArray"
+  arrayValues: "(191331, 'zhangsan', array[true]),(191332, 'lisi', array[true,false])"
+  queryLogic: "id in (191331,191332)"
+  outData: "191331&zhangsan&[true];191332&lisi&[true, false]"
+testID1001913-04:
+  tableName: "varcharArray"
+  arrayValues: "(191341, 'zhangsan', array['2022-08-18']),(191342, 'lisi', array['1999-12-31','2018-02-03'])"
+  queryLogic: "id in (191341,191342)"
+  outData: "191341&zhangsan&[2022-08-18];191342&lisi&[1999-12-31, 2018-02-03]"
+testID1001913-05:
+  tableName: "varcharArray"
+  arrayValues: "(191351, 'zhangsan', array['04:55:30']),(191352, 'lisi', array['10:08:09','19:00:00'])"
+  queryLogic: "id in (191351,191352)"
+  outData: "191351&zhangsan&[04:55:30];191352&lisi&[10:08:09, 19:00:00]"
+testID1001913-06:
+  tableName: "varcharArray"
+  arrayValues: "(191361, 'zhangsan', array['2021-08-24 09:57:29']),(191362, 'lisi', array['1989-11-11 11:11:11', '1999-10-10 10:10:10'])"
+  queryLogic: "id in (191361,191362)"
+  outData: "191361&zhangsan&[2021-08-24 09:57:29];191362&lisi&[1989-11-11 11:11:11, 1999-10-10 10:10:10]"
+testID1001916-01:
+  tableName: "dateArray"
+  arrayValues: "(19161, 'zhangsan', array['2022/08/19'])"
+  queryLogic: "id = 19161"
+  outData: "19161&zhangsan&[2022-08-19];"
+testID1001916-02:
+  tableName: "dateArray"
+  arrayValues: "(19162, 'zhangsan', array['1949.10.08'])"
+  queryLogic: "id = 19162"
+  outData: "19162&zhangsan&[1949-10-08];"
+testID1001916-03:
+  tableName: "dateArray"
+  arrayValues: "(19163, 'zhangsan', array['20000131'])"
+  queryLogic: "id = 19163"
+  outData: "19163&zhangsan&[2000-01-31];"
+testID1001916-04:
+  tableName: "dateArray"
+  arrayValues: "(19164, 'zhangsan', array['2022/8/9','1997.1.1','2022-2-3'])"
+  queryLogic: "id = 19164"
+  outData: "19164&zhangsan&[2022-08-09, 1997-01-01, 2022-02-03];"
+testID1001916-05:
+  tableName: "dateArray"
+  arrayValues: "(19165, 'zhangsan', array['1917-03-15','1972/12/09','20061031','2022.08.18'])"
+  queryLogic: "id = 19165"
+  outData: "19165&zhangsan&[1917-03-15, 1972-12-09, 2006-10-31, 2022-08-18];"
+testID1001920-01:
+  tableName: "timeArray"
+  arrayValues: "(19201, 'zhangsan', array['203059'])"
+  queryLogic: "id = 19201"
+  outData: "19201&zhangsan&[20:30:59];"
+testID1001920-02:
+  tableName: "timeArray"
+  arrayValues: "(19202, 'zhangsan', array['14:40:27', '000000', '105801'])"
+  queryLogic: "id = 19202"
+  outData: "19202&zhangsan&[14:40:27, 00:00:00, 10:58:01];"
+testID1001920-03:
+  tableName: "timeArray"
+  arrayValues: "(19203, 'zhangsan', array['13:4:5','1:1:1'])"
+  queryLogic: "id = 19203"
+  outData: "19203&zhangsan&[13:04:05, 01:01:01];"
+testID1001923-01:
+  tableName: "timestampArray"
+  arrayValues: "(19231, 'zhangsan', array['2022/10/15 10:59:59'])"
+  queryLogic: "id = 19231"
+  outData: "19231&zhangsan&[2022-10-15 10:59:59];"
+testID1001923-02:
+  tableName: "timestampArray"
+  arrayValues: "(19232, 'zhangsan', array['1990.08.11 13:08:06'])"
+  queryLogic: "id = 19232"
+  outData: "19232&zhangsan&[1990-08-11 13:08:06];"
+testID1001923-03:
+  tableName: "timestampArray"
+  arrayValues: "(19233, 'zhangsan', array['20101231235959'])"
+  queryLogic: "id = 19233"
+  outData: "19233&zhangsan&[2010-12-31 23:59:59];"
+testID1001923-04:
+  tableName: "timestampArray"
+  arrayValues: "(19234, 'zhangsan', array['2001-10-07 20:08:12','2008-8-8 08:08:08','2014/11/25 12:28:45','1997/1/1 00:00:00','2021.09.30 18:40:02','1945.7.7 12:00:00','20351212030405'])"
+  queryLogic: "id = 19234"
+  outData: "19234&zhangsan&[2001-10-07 20:08:12, 2008-08-08 08:08:08, 2014-11-25 12:28:45, 1997-01-01 00:00:00, 2021-09-30 18:40:02, 1945-07-07 12:00:00, 2035-12-12 03:04:05];"
+testID1001923-05:
+  tableName: "timestampArray"
+  arrayValues: "(19235, 'zhangsan', array['2010-12-31 8:8:1'])"
+  queryLogic: "id = 19235"
+  outData: "19235&zhangsan&[2010-12-31 08:08:01];"
+testID1001931-01:
+  tableName: "timestampArray"
+  arrayValues: "(19311, 'zhangsan', array[1])"
+  queryLogic: "id=19311"
+  outData: "19311&zhangsan&[1970-01-01 08:00:01];"
+testID1001931-02:
+  tableName: "timestampArray"
+  arrayValues: "(19312, 'zhangsan', array[1660898273])"
+  queryLogic: "id=19312"
+  outData: "19312&zhangsan&[2022-08-19 16:37:53];"
+testID1001935-01:
+  tableName: "varcharArray"
+  arrayValues: "(19351, 'zhangsan', array[''])"
+  queryLogic: "id=19351"
+  outData: "19351&zhangsan&[];"
+#testID1001935-02:
+#  tableName: "dateArray"
+#  arrayValues: "(19352, 'zhangsan', array[''])"
+#  queryLogic: "id=19352"
+#  outData: "19352&zhangsan&[null];"
+#testID1001935-03:
+#  tableName: "timeArray"
+#  arrayValues: "(19353, 'zhangsan', array[''])"
+#  queryLogic: "id=19353"
+#  outData: "19353&zhangsan&[null];"
+#testID1001935-04:
+#  tableName: "timestampArray"
+#  arrayValues: "(19354, 'zhangsan', array[''])"
+#  queryLogic: "id=19354"
+#  outData: "19354&zhangsan&[null];"
+testID1001936-01:
+  tableName: "intArray"
+  arrayValues: "(19361, 'zhangsan', array[101,101,101])"
+  queryLogic: "id=19361"
+  outData: "19361&zhangsan&[101, 101, 101];"
+testID1001936-02:
+  tableName: "doubleArray"
+  arrayValues: "(19362, 'zhangsan', array[2.5,2.5])"
+  queryLogic: "id=19362"
+  outData: "19362&zhangsan&[2.5, 2.5];"
+testID1001936-03:
+  tableName: "varcharArray"
+  arrayValues: "(19363, 'zhangsan', array['test1','test1'])"
+  queryLogic: "id=19363"
+  outData: "19363&zhangsan&[test1, test1];"
+testID1001936-04:
+  tableName: "boolArray"
+  arrayValues: "(19364, 'zhangsan', array[true, true, true])"
+  queryLogic: "id=19364"
+  outData: "19364&zhangsan&[true, true, true];"
+testID1001936-05:
+  tableName: "dateArray"
+  arrayValues: "(19365, 'zhangsan', array['2022-08-31','2022-08-31'])"
+  queryLogic: "id=19365"
+  outData: "19365&zhangsan&[2022-08-31, 2022-08-31];"
+testID1001936-06:
+  tableName: "timeArray"
+  arrayValues: "(19366, 'zhangsan', array['19:00:00','19:00:00'])"
+  queryLogic: "id=19366"
+  outData: "19366&zhangsan&[19:00:00, 19:00:00];"
+testID1001936-07:
+  tableName: "timestampArray"
+  arrayValues: "(19367, 'zhangsan', array['2022-08-31 15:17:35','2022-08-31 15:17:35'])"
+  queryLogic: "id=19367"
+  outData: "19367&zhangsan&[2022-08-31 15:17:35, 2022-08-31 15:17:35];"
+testID1002009-07:
+  tableName: "intArray"
+  arrayValues: "(20097, 'zhangsan', array[2147483647, -2147483648])"
+  queryLogic: "id=20097"
+  outData: "20097&zhangsan&[2147483647, -2147483648];"
+testID1002009-08:
+  tableName: "bigintArray"
+  arrayValues: "(20098, 'zhangsan', array[9223372036854775807, -9223372036854775808])"
+  queryLogic: "id=20098"
+  outData: "20098&zhangsan&[9223372036854775807, -9223372036854775808];"
+testID1001946-01:
+  tableName: "intArray"
+  arrayValues: "(19461, 'zhangsan', array[1,2,3,4,5,6,7,8,9,0,-1,-2,-3,-4,-5,-6,-7,-8,-9,10,11,12,13,14,15,16,17,18,19,20,1,2,3,4,5,6,7,8,9,0,-1,-2,-3,-4,-5,-6,-7,-8,-9,10,11,12,13,14,15,16,17,18,19,20,1,2,3,4,5,6,7,8,9,0,-1,-2,-3,-4,-5,-6,-7,-8,-9,10,11,12,13,14,15,16,17,18,19,20,1,2,3,4,5,6,7,8,9,0,-1,-2,-3,-4,-5,-6,-7,-8,-9,10,11,12,13,14,15,16,17,18,19,20,1,2,3,4,5,6,7,8,9,0,-1,-2,-3,-4,-5,-6,-7,-8,-9,10,11,12,13,14,15,16,17,18,19,20,1,2,3,4,5,6,7,8,9,0,-1,-2,-3,-4,-5,-6,-7,-8,-9,10,11,12,13,14,15,16,17,18,19,20,1,2,3,4,5,6,7,8,9,0,-1,-2,-3,-4,-5,-6,-7,-8,-9,10,11,12,13,14,15,16,17,18,19,20,1,2,3,4,5,6,7,8,9,0,-1,-2,-3,-4,-5,-6,-7,-8,-9,10,11,12,13,14,15,16,17,18,19,20,1,2,3,4,5,6,7,8,9,0,-1,-2,-3,-4,-5,-6,-7,-8,-9,10,11,12,13,14,15,16,17,18,19,20])"
+  queryLogic: "id=19461"
+  outData: "19461&zhangsan&[1, 2, 3, 4, 5, 6, 7, 8, 9, 0, -1, -2, -3, -4, -5, -6, -7, -8, -9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, -1, -2, -3, -4, -5, -6, -7, -8, -9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, -1, -2, -3, -4, -5, -6, -7, -8, -9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, -1, -2, -3, -4, -5, -6, -7, -8, -9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, -1, -2, -3, -4, -5, -6, -7, -8, -9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, -1, -2, -3, -4, -5, -6, -7, -8, -9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, -1, -2, -3, -4, -5, -6, -7, -8, -9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, -1, -2, -3, -4, -5, -6, -7, -8, -9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, -1, -2, -3, -4, -5, -6, -7, -8, -9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];"
+testID1001947-01:
+  tableName: "varcharArray"
+  arrayValues: "(19471, 'zhangsan', array['long','str','test','start','`','1','2','3','4','5','6','7','8','9','0','-','=','q','w','e','r','t','y','u','i','o','p','[',']','a','s','d','f','g','h','j','k','l','z','x','c','v','b','n','m','~','!','@','#','$','%','^','*','(',')','_','+','Q','W','E','R','T','Y','U','I','O','P','{','}','|','A','S','D','F','G','H','J','K','L',':','Z','X','C','V','B','N','M','<','>','?','`','1','2','3','4','5','6','7','8','9','0','-','=','q','w','e','r','t','y','u','i','o','p','[',']','a','s','d','f','g','h','j','k','l','z','x','c','v','b','n','m','~','!','@','#','$','%','^','*','(',')','_','+','Q','W','E','R','T','Y','U','I','O','P','{','}','|','A','S','D','F','G','H','J','K','L',':',' ','Z','X','C','V','B','N','M','<','>','?','test1','test2','test3','1.23','0.00','Z','X','C','V','B','N','M','<','>','?','test1','test2','test3','1.23','0.00','Z','X','C','V','B','N','M','<','>','?','test1','test2','test3','1.23','0.00','Z','X','C','V','B','N','M','<','>','?','test1','test2','test3','1.23','0.00','Z','X','C','V','B','N','M','<','>','?','test1','test2','test3','1.23','0.00','Z','X','C','V','B','N','M','<','>','?','test1','test2','test3','1.23','0.00'])"
+  queryLogic: "id=19471"
+  outData: "19471&zhangsan&[long, str, test, start, `, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, -, =, q, w, e, r, t, y, u, i, o, p, [, ], a, s, d, f, g, h, j, k, l, z, x, c, v, b, n, m, ~, !, @, #, $, %, ^, *, (, ), _, +, Q, W, E, R, T, Y, U, I, O, P, {, }, |, A, S, D, F, G, H, J, K, L, :, Z, X, C, V, B, N, M, <, >, ?, `, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, -, =, q, w, e, r, t, y, u, i, o, p, [, ], a, s, d, f, g, h, j, k, l, z, x, c, v, b, n, m, ~, !, @, #, $, %, ^, *, (, ), _, +, Q, W, E, R, T, Y, U, I, O, P, {, }, |, A, S, D, F, G, H, J, K, L, :,  , Z, X, C, V, B, N, M, <, >, ?, test1, test2, test3, 1.23, 0.00, Z, X, C, V, B, N, M, <, >, ?, test1, test2, test3, 1.23, 0.00, Z, X, C, V, B, N, M, <, >, ?, test1, test2, test3, 1.23, 0.00, Z, X, C, V, B, N, M, <, >, ?, test1, test2, test3, 1.23, 0.00, Z, X, C, V, B, N, M, <, >, ?, test1, test2, test3, 1.23, 0.00, Z, X, C, V, B, N, M, <, >, ?, test1, test2, test3, 1.23, 0.00];"
+
+
+

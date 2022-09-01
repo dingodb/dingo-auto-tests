@@ -877,6 +877,41 @@ public class YamlDataHelper{
                 break;
             }
 
+            case "test05QueryWithArrayColNull": {
+                yamlArrayList = getYamlList(iniReader.getValue("ArrayFieldYaml", "arrayfield_null"));
+                break;
+            }
+
+            case "test06InsertMixedAndIllegalElement": {
+                yamlArrayList = getYamlList(iniReader.getValue("ArrayFieldYaml", "array_exception"));
+                break;
+            }
+
+            case "test07InsertSingleElementTypeSuccess": {
+                yamlArrayList = getYamlList(iniReader.getValue("ArrayFieldYaml", "insertSingleElemType"));
+                break;
+            }
+
+            case "test17QueryInMidAndFirst": {
+                yamlArrayList = getYamlList(iniReader.getValue("ArrayFieldYaml", "query_mid_first"));
+                break;
+            }
+
+            case "test21RangeQuery": {
+                yamlArrayList = getYamlList(iniReader.getValue("ArrayFieldYaml", "query_inrange"));
+                break;
+            }
+
+            case "test22DeleteRecordsWithArrayNull": {
+                yamlArrayList = getYamlList(iniReader.getValue("ArrayFieldYaml", "array_delete"));
+                break;
+            }
+
+            case "test25UpdateArrayAndQuery": {
+                yamlArrayList = getYamlList(iniReader.getValue("ArrayFieldYaml", "array_update"));
+                break;
+            }
+
         }
         Object[][] files = new Object[yamlArrayList.size()][];
         for (int i = 0; i < yamlArrayList.size(); i++) {

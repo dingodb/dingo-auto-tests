@@ -1,0 +1,2 @@
+(2, 'lisi', 25, array[99999999], array['female'], array[0.0], array['2022-01-01'], array['03:02:01'], array['2028-10-31 15:38:02'], array[false]),
+(3, 'lisi', 25, array[99999999], array['female'], array[0.0], array['2022-01-01'], array['03:02:01'], array['2028-10-31 15:38:02'], array[false])

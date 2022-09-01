@@ -1,0 +1,312 @@
+testID1001912-01:
+  tableName: "intArray"
+  arrayValues: "(19121, 'zhangsan', array[3001,23.0])"
+testID1001912-02:
+  tableName: "intArray"
+  arrayValues: "(19122, 'zhangsan', array[3002,'a'])"
+testID1001912-03:
+  tableName: "intArray"
+  arrayValues: "(19123, 'zhangsan', array[3003,'2022-08-30'])"
+testID1001912-04:
+  tableName: "intArray"
+  arrayValues: "(19124, 'zhangsan', array[3004,'10:33:32'])"
+testID1001912-05:
+  tableName: "intArray"
+  arrayValues: "(19125, 'zhangsan', array[3005,'2021-08-31 10:33:32'])"
+testID1001912-06:
+  tableName: "intArray"
+  arrayValues: "(19126, 'zhangsan', array[3006,true])"
+testID1001914-01:
+  tableName: "dateArray"
+  arrayValues: "(19141, 'zhangsan', array['2022-08-18',20220818])"
+testID1001914-02:
+  tableName: "dateArray"
+  arrayValues: "(19142, 'zhangsan', array['2022-08-18',11.17])"
+testID1001914-03:
+  tableName: "dateArray"
+  arrayValues: "(19143, 'zhangsan', array['2022-08-18',true])"
+testID1001918-01:
+  tableName: "timeArray"
+  arrayValues: "(19181, 'zhangsan', array['11:20:30',22])"
+testID1001918-02:
+  tableName: "timeArray"
+  arrayValues: "(19182, 'zhangsan', array['11:20:30',180910])"
+testID1001918-03:
+  tableName: "timeArray"
+  arrayValues: "(19183, 'zhangsan', array['11:20:30',11.17])"
+testID1001918-04:
+  tableName: "timeArray"
+  arrayValues: "(19184, 'zhangsan', array['11:20:30',true])"
+testID1001921-01:
+  tableName: "timestampArray"
+  arrayValues: "(19211, 'zhangsan', array['2022-08-18 11:20:30',2022])"
+testID1001921-02:
+  tableName: "timestampArray"
+  arrayValues: "(19212, 'zhangsan', array['2022-08-18 11:20:30',19970101101015])"
+testID1001921-03:
+  tableName: "timestampArray"
+  arrayValues: "(19213, 'zhangsan', array['2022-08-18 11:20:30',11.17])"
+testID1001921-04:
+  tableName: "timestampArray"
+  arrayValues: "(19214, 'zhangsan', array['2022-08-18 11:20:30',true])"
+testID1001917-01:
+  tableName: "varcharArray"
+  arrayValues: "(19171, 'zhangsan', array['male','BJ',18])"
+testID1001917-02:
+  tableName: "varcharArray"
+  arrayValues: "(19172, 'zhangsan', array['male','BJ',23.45])"
+testID1001917-03:
+  tableName: "varcharArray"
+  arrayValues: "(19173, 'zhangsan', array['male','BJ',false])"
+testID1001925-01:
+  tableName: "doubleArray"
+  arrayValues: "(19251, 'zhangsan', array[2.51,10])"
+testID1001925-02:
+  tableName: "doubleArray"
+  arrayValues: "(19252, 'zhangsan', array[30.02,'a'])"
+testID1001925-03:
+  tableName: "doubleArray"
+  arrayValues: "(19253, 'zhangsan', array[30.03,'2022-08-30'])"
+testID1001925-04:
+  tableName: "doubleArray"
+  arrayValues: "(19254, 'zhangsan', array[30.04,'10:33:32'])"
+testID1001925-05:
+  tableName: "doubleArray"
+  arrayValues: "(19255, 'zhangsan', array[30.05,'2021-08-31 10:33:32'])"
+testID1001925-06:
+  tableName: "doubleArray"
+  arrayValues: "(19256, 'zhangsan', array[30.06,true])"
+testID1001924-01:
+  tableName: "boolArray"
+  arrayValues: "(19241, 'zhangsan', array[true,1])"
+testID1001924-02:
+  tableName: "boolArray"
+  arrayValues: "(19242, 'zhangsan', array[false,'a'])"
+testID1001924-03:
+  tableName: "boolArray"
+  arrayValues: "(19243, 'zhangsan', array[true,'2022-08-30'])"
+testID1001924-04:
+  tableName: "boolArray"
+  arrayValues: "(19244, 'zhangsan', array[false,'10:33:32'])"
+testID1001924-05:
+  tableName: "boolArray"
+  arrayValues: "(19245, 'zhangsan', array[true,'2021-08-31 10:33:32'])"
+testID1001924-06:
+  tableName: "boolArray"
+  arrayValues: "(19246, 'zhangsan', array[false,2.5])"
+testID1001924-07:
+  tableName: "boolArray"
+  arrayValues: "(19247, 'zhangsan', array[false,0])"
+testID1001915-01:
+  tableName: "dateArray"
+  arrayValues: "(19151, 'zhangsan', array['2022'])"
+testID1001915-02:
+  tableName: "dateArray"
+  arrayValues: "(19152, 'zhangsan', array['2022-08'])"
+testID1001915-03:
+  tableName: "dateArray"
+  arrayValues: "(19153, 'zhangsan', array['2022year'])"
+testID1001915-04:
+  tableName: "dateArray"
+  arrayValues: "(19154, 'zhangsan', array['20:08:22'])"
+testID1001915-05:
+  tableName: "dateArray"
+  arrayValues: "(19155, 'zhangsan', array['2019-12-11 10:10:10'])"
+testID1001915-06:
+  tableName: "dateArray"
+  arrayValues: "(19156, 'zhangsan', array['20191211101010'])"
+testID1002003-01:
+  tableName: "dateArray"
+  arrayValues: "(20031, 'zhangsan', array['1969-13-01'])"
+testID1002003-02:
+  tableName: "dateArray"
+  arrayValues: "(20032, 'zhangsan', array['2022-04-31'])"
+testID1002003-03:
+  tableName: "dateArray"
+  arrayValues: "(20033, 'zhangsan', array['2022-02-29'])"
+testID1001919-01:
+  tableName: "timeArray"
+  arrayValues: "(19191, 'zhangsan', array['20'])"
+testID1001919-02:
+  tableName: "timeArray"
+  arrayValues: "(19192, 'zhangsan', array['14:40'])"
+testID1001919-03:
+  tableName: "timeArray"
+  arrayValues: "(19193, 'zhangsan', array['2022-08-18'])"
+testID1001919-04:
+  tableName: "timeArray"
+  arrayValues: "(19194, 'zhangsan', array['20.08.22'])"
+testID1001919-05:
+  tableName: "timeArray"
+  arrayValues: "(19195, 'zhangsan', array['2019-12-11 10:10:10'])"
+testID1001919-06:
+  tableName: "timeArray"
+  arrayValues: "(19196, 'zhangsan', array['PM 19:00:00'])"
+testID1002004-01:
+  tableName: "timeArray"
+  arrayValues: "(20041, 'zhangsan', array['24:00:00'])"
+testID1002004-02:
+  tableName: "timeArray"
+  arrayValues: "(20042, 'zhangsan', array['14:40:60'])"
+testID1002004-03:
+  tableName: "timeArray"
+  arrayValues: "(20043, 'zhangsan', array['01:60:01'])"
+testID1001922-01:
+  tableName: "timestampArray"
+  arrayValues: "(19221, 'zhangsan', array['2022'])"
+testID1001922-02:
+  tableName: "timestampArray"
+  arrayValues: "(19222, 'zhangsan', array['2022-08-18'])"
+testID1001922-03:
+  tableName: "timestampArray"
+  arrayValues: "(19223, 'zhangsan', array['202year'])"
+testID1001922-04:
+  tableName: "timestampArray"
+  arrayValues: "(19224, 'zhangsan', array['20:08:22'])"
+testID1001922-05:
+  tableName: "timestampArray"
+  arrayValues: "(19225, 'zhangsan', array['2019.12.11 10.10.10'])"
+testID1001922-06:
+  tableName: "timestampArray"
+  arrayValues: "(19226, 'zhangsan', array['2019-12-11 101010'])"
+testID1001922-07:
+  tableName: "timestampArray"
+  arrayValues: "(19227, 'zhangsan', array['2019-12-11T10:10:10'])"
+testID1001922-08:
+  tableName: "timestampArray"
+  arrayValues: "(19228, 'zhangsan', array['22-03-11 14:20:33'])"
+testID1002005-01:
+  tableName: "timestampArray"
+  arrayValues: "(20051, 'zhangsan', array['2021-13-01 01:02:03'])"
+testID1002005-02:
+  tableName: "timestampArray"
+  arrayValues: "(20052, 'zhangsan', array['2022-08-32 10:10:10'])"
+testID1002005-03:
+  tableName: "timestampArray"
+  arrayValues: "(20053, 'zhangsan', array['1997-07-12 24:00:00'])"
+testID1002005-04:
+  tableName: "timestampArray"
+  arrayValues: "(20054, 'zhangsan', array['2011-11-11 11:60:30'])"
+testID1002005-05:
+  tableName: "timestampArray"
+  arrayValues: "(20055, 'zhangsan', array['2019-12-11 10:10:60'])"
+testID1001926-04:
+  tableName: "intArray"
+  arrayValues: "(192641, 'zhangsan', array['a'])"
+testID1001926-05:
+  tableName: "intArray"
+  arrayValues: "(192651, 'zhangsan', array['2022-08-18'])"
+testID1001926-06:
+  tableName: "intArray"
+  arrayValues: "(192661, 'zhangsan', array['04:55:30'])"
+testID1001926-07:
+  tableName: "intArray"
+  arrayValues: "(192671, 'zhangsan', array['2021-08-24 09:57:29'])"
+testID1001927-04:
+  tableName: "doubleArray"
+  arrayValues: "(192741, 'zhangsan', array['a'])"
+testID1001927-05:
+  tableName: "doubleArray"
+  arrayValues: "(192751, 'zhangsan', array['2022-08-18'])"
+testID1001927-06:
+  tableName: "doubleArray"
+  arrayValues: "(192761, 'zhangsan', array['04:55:30'])"
+testID1001927-07:
+  tableName: "doubleArray"
+  arrayValues: "(192771, 'zhangsan', array['2021-08-24 09:57:29'])"
+testID1001928-02:
+  tableName: "boolArray"
+  arrayValues: "(192821, 'zhangsan', array[1.0])"
+testID1001928-03:
+  tableName: "boolArray"
+  arrayValues: "(192831, 'lisi', array[2.5])"
+testID1001928-04:
+  tableName: "boolArray"
+  arrayValues: "(192841, 'zhangsan', array['1'])"
+testID1001928-05:
+  tableName: "boolArray"
+  arrayValues: "(192851, 'lisi', array['0'])"
+testID1001928-06:
+  tableName: "boolArray"
+  arrayValues: "(192861, 'zhangsan', array['a'])"
+testID1001928-07:
+  tableName: "boolArray"
+  arrayValues: "(192871, 'lisi', array['2022-08-18'])"
+testID1001928-08:
+  tableName: "boolArray"
+  arrayValues: "(192881, 'zhangsan', array['04:55:30'])"
+testID1001928-09:
+  tableName: "boolArray"
+  arrayValues: "(192891, 'lisi', array['2021-08-24 09:57:29'])"
+testID1001929-01:
+  tableName: "dateArray"
+  arrayValues: "(19291, 'lisi', array[19980920])"
+testID1001929-02:
+  tableName: "dateArray"
+  arrayValues: "(19292, 'zhangsan', array[123.5])"
+testID1001929-03:
+  tableName: "dateArray"
+  arrayValues: "(19293, 'lisi', array[true])"
+testID1001930-01:
+  tableName: "timeArray"
+  arrayValues: "(19301, 'lisi', array[101010])"
+testID1001930-02:
+  tableName: "timeArray"
+  arrayValues: "(19302, 'zhangsan', array[123.5])"
+testID1001930-03:
+  tableName: "timeArray"
+  arrayValues: "(19303, 'lisi', array[true])"
+testID1001931-03:
+  tableName: "timestampArray"
+  arrayValues: "(19313, 'zhangsan', array[123.5])"
+testID1001931-04:
+  tableName: "timestampArray"
+  arrayValues: "(19314, 'lisi', array[true])"
+testID1001934-01:
+  tableName: "intArray"
+  arrayValues: "(19341, 'zhangsan', array[])"
+testID1001934-02:
+  tableName: "doubleArray"
+  arrayValues: "(19342, 'zhangsan', array[])"
+testID1001934-03:
+  tableName: "varcharArray"
+  arrayValues: "(19343, 'zhangsan', array[])"
+testID1001934-04:
+  tableName: "boolArray"
+  arrayValues: "(19344, 'zhangsan', array[])"
+testID1001934-05:
+  tableName: "dateArray"
+  arrayValues: "(19345, 'zhangsan', array[])"
+testID1001934-06:
+  tableName: "timeArray"
+  arrayValues: "(19346, 'zhangsan', array[])"
+testID1001934-07:
+  tableName: "timestampArray"
+  arrayValues: "(19347, 'zhangsan', array[])"
+testID1001935-05:
+  tableName: "intArray"
+  arrayValues: "(19355, 'zhangsan', array[''])"
+testID1001935-06:
+  tableName: "doubleArray"
+  arrayValues: "(19356, 'zhangsan', array[''])"
+testID1001935-07:
+  tableName: "boolArray"
+  arrayValues: "(19357, 'zhangsan', array[''])"
+testID1002009-01:
+  tableName: "intArray"
+  arrayValues: "(20091, 'zhangsan', array[2147483648])"
+testID1002009-02:
+  tableName: "intArray"
+  arrayValues: "(20092, 'zhangsan', array[2147483649])"
+testID1002009-03:
+  tableName: "intArray"
+  arrayValues: "(20093, 'zhangsan', array[13897654321])"
+testID1002009-04:
+  tableName: "intArray"
+  arrayValues: "(20094, 'zhangsan', array[9223372036854775807])"
+testID1002009-05:
+  tableName: "bigintArray"
+  arrayValues: "(20095, 'zhangsan', array[9223372036854775808])"
+testID1002009-06:
+  tableName: "bigintArray"
+  arrayValues: "(20096, 'zhangsan', array[-9223372036854775809])"

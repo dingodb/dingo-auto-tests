@@ -1,0 +1,1 @@
+(array['male','beijing','1234.56'], 99.99, 1, 'zhangsan', 55)

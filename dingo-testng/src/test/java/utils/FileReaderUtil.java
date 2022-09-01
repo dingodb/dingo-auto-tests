@@ -20,6 +20,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.LineNumberReader;
 
 public class FileReaderUtil {
 
@@ -48,5 +49,22 @@ public class FileReaderUtil {
             }
         }
     return stringBuilder.toString();
+    }
+
+    public static int getFileLines(File file) {
+        if (file.exists()) {
+            try {
+                FileReader fileReader = new FileReader(file);
+                LineNumberReader lineNumberReader = new LineNumberReader(fileReader);
+                lineNumberReader.skip(Long.MAX_VALUE);
+                int lines = lineNumberReader.getLineNumber() + 1;
+                fileReader.close();
+                lineNumberReader.close();
+                return lines;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return 0;
     }
 }

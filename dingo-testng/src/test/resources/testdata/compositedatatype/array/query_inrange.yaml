@@ -1,0 +1,10 @@
+testID1002158-01:
+  tableName: "arrayrangetest"
+  queryFields: "amount,user_info"
+  queryLogic: " where id>1 and age<30"
+  outData: "-1230.44&[male, shanghai];99.9&[female, Jinan, 78909.23]"
+testID1002158-02:
+  tableName: "arrayrangetest"
+  queryFields: "id,name,age,amount,user_info"
+  queryLogic: " where id<3 or amount>50"
+  outData: "1&zhangsan&11&23.45&[male, beijing, 1234.56];2&lisi&35&0.99&[female];4&Tomy-1&-22&99.9&[female, Jinan, 78909.23]"
