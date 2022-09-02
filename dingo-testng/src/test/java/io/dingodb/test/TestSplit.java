@@ -74,8 +74,7 @@ public class TestSplit {
             for(int i=1; i<=insertNum; i++) {
                 String nameStr = GetRandomValue.getRandStr(6);
                 int ageNum = GetRandomValue.getRandInt(100);
-//                double amountNum = Double.parseDouble(GetRandomValue.formateRate(String.valueOf(GetRandomValue.getRandDouble(0, 10000)),2));
-                double amountNum = GetRandomValue.getRandDouble(0, 10000);
+                double amountNum = GetRandomValue.formatDoubleDecimal1(GetRandomValue.getRandDouble(0, 10000),2);
                 String insertSql = "insert into " + tableName + " values (" + i + ",'" +
                         nameStr + "'," + ageNum + "," + amountNum + ")";
                 statement.executeUpdate(insertSql);
@@ -92,8 +91,7 @@ public class TestSplit {
             for(int i=1; i<=insertNum; i++) {
                 String nameStr = GetRandomValue.getRandStr(6);
                 int ageNum = GetRandomValue.getRandInt(100);
-//                double amountNum = Double.parseDouble(GetRandomValue.formateRate(String.valueOf(GetRandomValue.getRandDouble(0, 10000)),2));
-                double amountNum = GetRandomValue.getRandDouble(0, 10000);
+                double amountNum = GetRandomValue.formatDoubleDecimal1(GetRandomValue.getRandDouble(0, 10000),2);
                 ps.setInt(1, i);
                 ps.setString(2, nameStr);
                 ps.setInt(3, ageNum);

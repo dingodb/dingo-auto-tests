@@ -19,6 +19,11 @@ package utils;
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.lang.StringUtils;
 
+import java.math.BigDecimal;
+import java.sql.Date;
+import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Random;
 
 public class GetRandomValue {
@@ -39,7 +44,27 @@ public class GetRandomValue {
         return RandomStringUtils.randomAlphanumeric(strLeng);
     }
 
-    //格式化浮点数值字符串,保留指定位数
+    //格式化浮点数,保留指定位数,方法一
+    public static double formatDoubleDecimal1(double formatNum, int decimalNum) {
+        BigDecimal bg = new BigDecimal(formatNum);
+        double f1 = bg.setScale(decimalNum, BigDecimal.ROUND_HALF_UP).doubleValue();
+        return  f1;
+    }
+
+    //格式化浮点数,保留指定位数,方法二
+    public static double formatDoubleDecimal2(double formatNum) {
+        DecimalFormat df = new DecimalFormat("#0.00");
+        double f2 = Double.parseDouble(df.format(formatNum));
+        return f2;
+    }
+
+    //格式化浮点数,保留指定位数,方法三
+    public static double formatDoubleDecimal3(double formatNum) {
+        double f3 = Double.parseDouble(String.format("%.2f", formatNum));
+        return f3;
+    }
+
+    //格式化字符串为小数数值,保留指定位数,方法四
     public static String formateRate(String rateStr, int decimalNum) {
         if (rateStr.indexOf(".") != -1) {
             //获取小数点位置
@@ -53,6 +78,27 @@ public class GetRandomValue {
         } else {
             return rateStr + "." + StringUtils.repeat("0", decimalNum);
         }
+    }
+
+    /**
+     *
+     * @param patternFormat, e.g. "yyyy-MM-dd"
+     * @param startDateStr, e.g. "1990-01-01 00:00:00"
+     * @param endDateStr, e.g. "2022-09-01 23:59:59"
+     * @return Date
+     * @throws ParseException
+     */
+    public static Date getRandomDate(String patternFormat, String startDateStr, String endDateStr) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat(patternFormat);
+        long start = sdf.parse(startDateStr).getTime();
+        long end = sdf.parse(endDateStr).getTime();
+        long randomDate = nextLong(start, end);
+        return Date.valueOf(sdf.format(randomDate));
+    }
+
+    public static long nextLong(long start, long end) {
+        Random random = new Random();
+        return start + (long) (random.nextDouble() * (end - start + 1));
     }
 
 }
