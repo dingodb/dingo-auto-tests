@@ -40,19 +40,22 @@ public class TestBVT {
     }
 
     public List<String> getTableList() throws SQLException, ClassNotFoundException {
-        List<String> tableList = new ArrayList<String>();
         DatabaseMetaData dmd = DailyBVT.connection.getMetaData();
         ResultSet resultSetSchema = dmd.getSchemas();
         List<String> schemaList = new ArrayList<>();
         while (resultSetSchema.next()) {
             schemaList.add(resultSetSchema.getString(1));
         }
-        System.out.println(schemaList.get(0));
-        ResultSet rst = dmd.getTables(null, schemaList.get(0), "%", null);
-//        ResultSet rst = dmd.getTables(null, "DINGO", "%", null);
+//        System.out.println(schemaList.get(0));
+
+        List<String> tableList = new ArrayList<String>();
+//        ResultSet rst = dmd.getTables(null, schemaList.get(0), "%", null);
+        ResultSet rst = dmd.getTables(null, "DINGO", "%", null);
         while (rst.next()) {
             tableList.add(rst.getString("TABLE_NAME").toUpperCase());
         }
+        rst.close();
+        resultSetSchema.close();
         return tableList;
     }
 
@@ -63,6 +66,7 @@ public class TestBVT {
         List<String> afterCreateTableList = getTableList();
         Assert.assertTrue(afterCreateTableList.contains(expectedTableName));
     }
+
 
     @Test(priority = 1, groups = {"BVT"},dependsOnMethods = {"test01TableCreate"}, description = "验证插入数据成功")
     public void test02TableInsert() throws Exception {
@@ -88,8 +92,9 @@ public class TestBVT {
     @Test(priority = 4, groups = {"BVT"}, dependsOnMethods = {"test03StringUpdate"},description = "验证查询数据成功")
     public void test05TableQuery() throws Exception {
         String expectedQueryName = bvtObj.newName;
-        System.out.println("----" + expectedQueryName + "-----");
+        System.out.println("Expected: " + expectedQueryName);
         String actualQueryName = bvtObj.queryTable();
+        System.out.println("Actual: " + actualQueryName);
         Assert.assertEquals(actualQueryName, expectedQueryName);
     }
 
@@ -107,6 +112,7 @@ public class TestBVT {
         List<String> afterDropTableList = getTableList();
         Assert.assertFalse(afterDropTableList.contains(expectedTableName));
     }
+
 
     @AfterClass(description = "测试类完成后，关闭数据库连接")
     public void tearDownAll() throws SQLException, ClassNotFoundException {

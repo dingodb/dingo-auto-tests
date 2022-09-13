@@ -366,3 +366,31 @@ testID1001257-01:
   inputDate: "2022-05-17 00:00:00"
   inputFormat: ""
   outputDate: ""
+testID1002287-01:
+  inputDate: "2022-09-09 15:45:36.234"
+  inputFormat: "%f"
+  outputDate: "234"
+testID1002287-02:
+  inputDate: "2022-09-09 15:45:36.111"
+  inputFormat: "%H*3600000+%i*60000+%S*1000+%f*1"
+  outputDate: "15*3600000+45*60000+36*1000+111*1"
+testID1002287-03:
+  inputDate: "2022-09-09 15:45:36"
+  inputFormat: "%Y/%m/%d %H%i%S%f"
+  outputDate: "2022/09/09 154536000"
+testID1002287-04:
+  inputDate: "2022-09-09 15:45:36.5"
+  inputFormat: "%Y/%m/%d %H:%i:%S.%f"
+  outputDate: "2022/09/09 15:45:36.500"
+testID1002287-05:
+  inputDate: "2022-09-09 15:45:36.58"
+  inputFormat: "%Y/%m/%d %H:%i:%S.%f"
+  outputDate: "2022/09/09 15:45:36.580"
+testID1002287-06:
+  inputDate: "2022-09-09 15:45:36.581"
+  inputFormat: "mills:%f"
+  outputDate: "mills:581"
+testID1002287-07:
+  inputDate: "2022-09-09 15:45:36.025"
+  inputFormat: "%f-%s-%H-%d-%m-%Y"
+  outputDate: "025-36-15-09-09-2022"

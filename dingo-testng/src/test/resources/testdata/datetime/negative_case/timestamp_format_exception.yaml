@@ -16,3 +16,6 @@ testID1000786-03:
 testID1000812:
   inputTimestamp: "14:49:59"
   inputFormat: "%Y-%m-%d"
+testID1002289-01:
+  inputTimestamp: "2022-09-09 15:45:36.2340"
+  inputFormat: "%f"

@@ -49,11 +49,13 @@ public class TestDateTime extends YamlDataHelper{
         while (resultSetSchema.next()) {
             schemaList.add(resultSetSchema.getString(1));
         }
-        System.out.println(schemaList.get(0));
-        ResultSet rst = dmd.getTables(null, schemaList.get(0), "%", null);
+//        System.out.println(schemaList.get(0));
+        ResultSet rst = dmd.getTables(null, "DINGO", "%", null);
         while (rst.next()) {
             tableList.add(rst.getString("TABLE_NAME").toUpperCase());
         }
+        rst.close();
+        resultSetSchema.close();
         return tableList;
     }
 

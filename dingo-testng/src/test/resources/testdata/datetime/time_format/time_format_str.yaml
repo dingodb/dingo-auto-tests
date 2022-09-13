@@ -81,7 +81,7 @@ testID1001261-04:
 testID1000805-01:
   inputTime: "10:11:12"
   inputFormat: "%K %r %f"
-  outputTime: "K r f"
+  outputTime: "K r 000"
 testID1000805-02:
   inputTime: "10:11:12"
   inputFormat: "%h:%I:%s"
@@ -126,3 +126,27 @@ testID1000806-02:
 #  inputTime: "123"
 #  inputFormat: "%H:%i:%S"
 #  outputTime: "00:01:23"
+testID1002286-01:
+  inputTime: "10:11:23.999"
+  inputFormat: "%H-%i-%s-%f"
+  outputTime: "10-11-23-999"
+testID1002286-02:
+  inputTime: "23:59:59.59"
+  inputFormat: "%H%i%s%f"
+  outputTime: "235959590"
+testID1002286-03:
+  inputTime: "00:00:00.1"
+  inputFormat: "%H%i%s%f"
+  outputTime: "000000100"
+testID1002286-04:
+  inputTime: "08:10:23"
+  inputFormat: "%H%i%s%f"
+  outputTime: "081023000"
+testID1002286-05:
+  inputTime: "10:11:23.999"
+  inputFormat: "%f%S%i%H"
+  outputTime: "999231110"
+testID1002286-06:
+  inputTime: "10:11:23.001"
+  inputFormat: "%f mills"
+  outputTime: "001 mills"

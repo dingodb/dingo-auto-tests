@@ -73,3 +73,6 @@ testID1000800-08:
 testID1000800-09:
   inputTime: "123"
   inputFormat: "%H:%i:%S"
+testID1002288-01:
+  inputTime: "10:11:23.1234"
+  inputFormat: "%H%i%s%f"
