@@ -106,10 +106,10 @@
         </classes>
     </test>
 
-    <test name="SplitTest">
-        <classes>
-            <class name="io.dingodb.test.TestSplit"></class>
-        </classes>
-    </test>
+<!--    <test name="SplitTest">-->
+<!--        <classes>-->
+<!--            <class name="io.dingodb.test.TestSplit"></class>-->
+<!--        </classes>-->
+<!--    </test>-->
 
 </suite>
