@@ -32,9 +32,10 @@ public class JDBCUtils {
 
     //获取数据库连接
     public static Connection getConnection() throws ClassNotFoundException, SQLException {
+//        final String defaultConnectIP = "172.20.3.27";
         String defaultConnectIP = CommonArgs.getDefaultDingoClusterIP();
         String JDBC_DRIVER = "io.dingodb.driver.client.DingoDriverClient";
-        String connectUrl = "jdbc:dingo:thin:url=" + defaultConnectIP + ":8765/db?timeout=36000";
+        String connectUrl = "jdbc:dingo:thin:url=" + defaultConnectIP + ":8765/db?timeout=3600";
 
         //加载驱动
         Class.forName(JDBC_DRIVER);
