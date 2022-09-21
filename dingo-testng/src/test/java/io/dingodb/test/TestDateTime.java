@@ -28,8 +28,6 @@ import utils.GetDateDiff;
 import utils.JDK8DateTime;
 import utils.YamlDataHelper;
 
-import java.sql.DatabaseMetaData;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
@@ -41,24 +39,6 @@ import java.util.Map;
 public class TestDateTime extends YamlDataHelper{
     public static DateTimeFuncs dateTimeObj = new DateTimeFuncs();
 
-    public static List<String> getTableList() throws SQLException, ClassNotFoundException {
-        List<String> tableList = new ArrayList<String>();
-        DatabaseMetaData dmd = DateTimeFuncs.connection.getMetaData();
-        ResultSet resultSetSchema = dmd.getSchemas();
-        List<String> schemaList = new ArrayList<>();
-        while (resultSetSchema.next()) {
-            schemaList.add(resultSetSchema.getString(1));
-        }
-//        System.out.println(schemaList.get(0));
-        ResultSet rst = dmd.getTables(null, "DINGO", "%", null);
-        while (rst.next()) {
-            tableList.add(rst.getString("TABLE_NAME").toUpperCase());
-        }
-        rst.close();
-        resultSetSchema.close();
-        return tableList;
-    }
-
     @BeforeClass(alwaysRun = true, description = "测试数据库连接")
     public static void setUpAll() throws ClassNotFoundException, SQLException {
         Assert.assertNotNull(DateTimeFuncs.connection);
@@ -68,7 +48,7 @@ public class TestDateTime extends YamlDataHelper{
     public void test01TableWithDateTimeFieldsCreate() throws Exception {
         dateTimeObj.createTable();
         String expectedTableName = dateTimeObj.getDateTimeTableName().toUpperCase();
-        List<String> afterCreateTableList = getTableList();
+        List<String> afterCreateTableList = JDBCUtils.getTableList();
         Assert.assertTrue(afterCreateTableList.contains(expectedTableName));
     }
 
@@ -76,7 +56,7 @@ public class TestDateTime extends YamlDataHelper{
     public void test01TableWithDateFieldCreate() throws Exception {
         dateTimeObj.createDateTable();
         String expectedDateTableName = dateTimeObj.getDateTableName().toUpperCase();
-        List<String> afterCreateTableList = getTableList();
+        List<String> afterCreateTableList = JDBCUtils.getTableList();
         Assert.assertTrue(afterCreateTableList.contains(expectedDateTableName));
     }
 
@@ -84,7 +64,7 @@ public class TestDateTime extends YamlDataHelper{
     public void test01TableWithTimeFieldCreate() throws Exception {
         dateTimeObj.createTimeTable();
         String expectedTimeTableName = dateTimeObj.getTimeTableName().toUpperCase();
-        List<String> afterCreateTableList = getTableList();
+        List<String> afterCreateTableList = JDBCUtils.getTableList();
         Assert.assertTrue(afterCreateTableList.contains(expectedTimeTableName));
     }
 
@@ -92,7 +72,7 @@ public class TestDateTime extends YamlDataHelper{
     public void test01TableWithTimestampFieldCreate() throws Exception {
         dateTimeObj.createTimestampTable();
         String expectedTimestampTableName = dateTimeObj.getTimestampTableName().toUpperCase();
-        List<String> afterCreateTableList = getTableList();
+        List<String> afterCreateTableList = JDBCUtils.getTableList();
         Assert.assertTrue(afterCreateTableList.contains(expectedTimestampTableName));
     }
 
@@ -913,38 +893,43 @@ public class TestDateTime extends YamlDataHelper{
 
 
     @AfterClass(alwaysRun = true, description = "测试完成后删除数据和表格并关闭连接")
-    public void tearDownAll() throws SQLException {
-        String dateTimeTableName = DateTimeFuncs.getDateTimeTableName();
-        String dateTableName = DateTimeFuncs.getDateTableName();
-        String timeTableName = DateTimeFuncs.getTimeTableName();
-        String timestampTableName = DateTimeFuncs.getTimestampTableName();
+    public void tearDownAll() throws SQLException, ClassNotFoundException {
+//        String dateTimeTableName = DateTimeFuncs.getDateTimeTableName();
+//        String dateTableName = DateTimeFuncs.getDateTableName();
+//        String timeTableName = DateTimeFuncs.getTimeTableName();
+//        String timestampTableName = DateTimeFuncs.getTimestampTableName();
         Statement tearDownStatement = null;
+        List<String> tableList = JDBCUtils.getTableList();
         try {
             tearDownStatement = DateTimeFuncs.connection.createStatement();
-            tearDownStatement.execute("delete from " + dateTimeTableName);
-            tearDownStatement.execute("delete from " + dateTableName);
-            tearDownStatement.execute("delete from " + timeTableName);
-            tearDownStatement.execute("delete from " + timestampTableName);
-            tearDownStatement.execute("drop table " + dateTimeTableName);
-            tearDownStatement.execute("drop table " + dateTableName);
-            tearDownStatement.execute("drop table " + timeTableName);
-            tearDownStatement.execute("drop table " + timestampTableName);
-            tearDownStatement.execute("drop table Orders705");
-            tearDownStatement.execute("drop table Orders673");
-            tearDownStatement.execute("drop table Orders6841");
-            tearDownStatement.execute("drop table Orders6842");
-            tearDownStatement.execute("drop table Orders690");
-            tearDownStatement.execute("drop table Orders6961");
-            tearDownStatement.execute("drop table Orders6962");
-            tearDownStatement.execute("drop table Orders7041");
-            tearDownStatement.execute("drop table Orders7042");
-            tearDownStatement.execute("drop table Orders752");
+            if (tableList.size() > 0) {
+                for(int i = 0; i < tableList.size(); i++) {
+                    try {
+                        tearDownStatement.execute("drop table " + tableList.get(i));
+                    }catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+//            tearDownStatement.execute("drop table " + dateTimeTableName);
+//            tearDownStatement.execute("drop table " + dateTableName);
+//            tearDownStatement.execute("drop table " + timeTableName);
+//            tearDownStatement.execute("drop table " + timestampTableName);
+//            tearDownStatement.execute("drop table Orders705");
+//            tearDownStatement.execute("drop table Orders673");
+//            tearDownStatement.execute("drop table Orders6841");
+//            tearDownStatement.execute("drop table Orders6842");
+//            tearDownStatement.execute("drop table Orders690");
+//            tearDownStatement.execute("drop table Orders6961");
+//            tearDownStatement.execute("drop table Orders6962");
+//            tearDownStatement.execute("drop table Orders7041");
+//            tearDownStatement.execute("drop table Orders7042");
+//            tearDownStatement.execute("drop table Orders752");
 //        tearDownStatement.execute("drop table Orders7522");
-            tearDownStatement.execute("delete from uptesttable");
-            tearDownStatement.execute("drop table uptesttable");
-            tearDownStatement.execute("drop table case1434");
-            tearDownStatement.execute("drop table case1435");
-            tearDownStatement.execute("drop table case1436");
+//            tearDownStatement.execute("drop table uptesttable");
+//            tearDownStatement.execute("drop table case1434");
+//            tearDownStatement.execute("drop table case1435");
+//            tearDownStatement.execute("drop table case1436");
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

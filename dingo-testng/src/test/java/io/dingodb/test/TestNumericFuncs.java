@@ -609,12 +609,21 @@ public class TestNumericFuncs extends YamlDataHelper {
     }
 
     @AfterClass(alwaysRun = true, description = "测试完成后删除数据和表格并关闭连接")
-    public void tearDownAll() throws SQLException {
+    public void tearDownAll() throws SQLException, ClassNotFoundException {
         Statement tearDownStatement = null;
+        List<String> tableList = JDBCUtils.getTableList();
         try{
             tearDownStatement = numericObj.connection.createStatement();
-            tearDownStatement.execute("delete from numtest");
-            tearDownStatement.execute("drop table numtest");
+            if (tableList.size() > 0) {
+                for(int i = 0; i < tableList.size(); i++) {
+                    try {
+                        tearDownStatement.execute("drop table " + tableList.get(i));
+                    }catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+//            tearDownStatement.execute("drop table numtest");
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {

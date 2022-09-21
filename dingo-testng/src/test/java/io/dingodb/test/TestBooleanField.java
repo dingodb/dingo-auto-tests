@@ -24,8 +24,6 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import utils.YamlDataHelper;
 
-import java.sql.DatabaseMetaData;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -34,24 +32,6 @@ import java.util.Map;
 
 public class TestBooleanField extends YamlDataHelper {
     public static BooleanField booleanObj = new BooleanField();
-
-    public static List<String> getTableList() throws SQLException, ClassNotFoundException {
-        List<String> tableList = new ArrayList<String>();
-        DatabaseMetaData dmd = BooleanField.connection.getMetaData();
-        ResultSet resultSetSchema = dmd.getSchemas();
-        List<String> schemaList = new ArrayList<>();
-        while (resultSetSchema.next()) {
-            schemaList.add(resultSetSchema.getString(1));
-        }
-//        System.out.println(schemaList.get(0));
-        ResultSet rst = dmd.getTables(null, "DINGO", "%", null);
-        while (rst.next()) {
-            tableList.add(rst.getString("TABLE_NAME").toUpperCase());
-        }
-        rst.close();
-        resultSetSchema.close();
-        return tableList;
-    }
 
     @BeforeClass(alwaysRun = true, description = "测试数据库连接")
     public static void setUpAll() throws ClassNotFoundException, SQLException {
@@ -67,7 +47,7 @@ public class TestBooleanField extends YamlDataHelper {
             description = "验证带有布尔类型字段的表的创建")
     public void test01BooleanFieldTableCreate() throws SQLException, ClassNotFoundException {
         String expectedTableName = booleanObj.getBooleanTableName().toUpperCase();
-        List<String> actualTableList = getTableList();
+        List<String> actualTableList = JDBCUtils.getTableList();
         Assert.assertTrue(actualTableList.contains(expectedTableName));
     }
 
@@ -277,13 +257,22 @@ public class TestBooleanField extends YamlDataHelper {
 
 
     @AfterClass (alwaysRun = true, description = "执行测试后删除数据，删除表")
-    public void teardownAll() {
-        String booleanTable = BooleanField.getBooleanTableName();
+    public void teardownAll() throws SQLException, ClassNotFoundException {
+//        String booleanTable = BooleanField.getBooleanTableName();
         Statement tearDownStatement = null;
+        List<String> tableList = JDBCUtils.getTableList();
         try {
             tearDownStatement = BooleanField.connection.createStatement();
-            tearDownStatement.execute("delete from " + booleanTable);
-            tearDownStatement.execute("drop table " + booleanTable);
+            if (tableList.size() > 0) {
+                for(int i = 0; i < tableList.size(); i++) {
+                    try {
+                        tearDownStatement.execute("drop table " + tableList.get(i));
+                    }catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+//            tearDownStatement.execute("drop table " + booleanTable);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

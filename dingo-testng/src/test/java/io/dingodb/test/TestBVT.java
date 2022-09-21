@@ -16,6 +16,7 @@
 
 package io.dingodb.test;
 
+import io.dingodb.common.utils.JDBCUtils;
 import io.dingodb.dailytest.DailyBVT;
 import listener.EmailableReporterListener;
 import org.testng.Assert;
@@ -24,10 +25,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-import java.sql.DatabaseMetaData;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 @Listeners(EmailableReporterListener.class)
@@ -39,34 +37,13 @@ public class TestBVT {
         Assert.assertNotNull(DailyBVT.connection);
     }
 
-    public List<String> getTableList() throws SQLException, ClassNotFoundException {
-        DatabaseMetaData dmd = DailyBVT.connection.getMetaData();
-        ResultSet resultSetSchema = dmd.getSchemas();
-        List<String> schemaList = new ArrayList<>();
-        while (resultSetSchema.next()) {
-            schemaList.add(resultSetSchema.getString(1));
-        }
-//        System.out.println(schemaList.get(0));
-
-        List<String> tableList = new ArrayList<String>();
-//        ResultSet rst = dmd.getTables(null, schemaList.get(0), "%", null);
-        ResultSet rst = dmd.getTables(null, "DINGO", "%", null);
-        while (rst.next()) {
-            tableList.add(rst.getString("TABLE_NAME").toUpperCase());
-        }
-        rst.close();
-        resultSetSchema.close();
-        return tableList;
-    }
-
     @Test(priority = 0, groups = {"BVT"}, description = "验证创建表成功后，获取表名成功")
     public void test01TableCreate() throws Exception {
         bvtObj.createTable();
         String expectedTableName = bvtObj.getTableName().toUpperCase();
-        List<String> afterCreateTableList = getTableList();
+        List<String> afterCreateTableList = JDBCUtils.getTableList();
         Assert.assertTrue(afterCreateTableList.contains(expectedTableName));
     }
-
 
     @Test(priority = 1, groups = {"BVT"},dependsOnMethods = {"test01TableCreate"}, description = "验证插入数据成功")
     public void test02TableInsert() throws Exception {
@@ -109,10 +86,9 @@ public class TestBVT {
     public void test07TableDrop() throws Exception {
         bvtObj.dropTable();
         String expectedTableName = bvtObj.getTableName();
-        List<String> afterDropTableList = getTableList();
+        List<String> afterDropTableList = JDBCUtils.getTableList();
         Assert.assertFalse(afterDropTableList.contains(expectedTableName));
     }
-
 
     @AfterClass(description = "测试类完成后，关闭数据库连接")
     public void tearDownAll() throws SQLException, ClassNotFoundException {

@@ -2216,31 +2216,37 @@ public class TestSQLFuncs extends YamlDataHelper {
 
 
     @AfterClass(description = "测试完成后删除数据和表格并关闭连接")
-    public void tearDownAll() throws SQLException {
+    public void tearDownAll() throws SQLException, ClassNotFoundException {
         String tableName = funcObj.getFuncTableName();
         Statement tearDownStatement = null;
+        List<String> tableList = JDBCUtils.getTableList();
+
         try {
             tearDownStatement = SQLFuncs.connection.createStatement();
-            tearDownStatement.execute("delete from " + tableName);
-            tearDownStatement.execute("drop table " + tableName);
-            tearDownStatement.execute("delete from emptest065");
-            tearDownStatement.execute("drop table emptest065");
-            tearDownStatement.execute("delete from test302");
-            tearDownStatement.execute("drop table test302");
-            tearDownStatement.execute("drop table case330");
+            if (tableList.size() > 0) {
+                for(int i = 0; i < tableList.size(); i++) {
+                    try {
+                        tearDownStatement.execute("drop table " + tableList.get(i));
+                    }catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+//            tearDownStatement.execute("drop table " + tableName);
+//            tearDownStatement.execute("drop table emptest065");
+//            tearDownStatement.execute("drop table test302");
+//            tearDownStatement.execute("drop table case330");
 //        //tearDownStatement.execute("drop table case341");
-            tearDownStatement.execute("drop table case342");
-            tearDownStatement.execute("drop table case343");
-            tearDownStatement.execute("drop table case344");
-            tearDownStatement.execute("drop table case624");
-            tearDownStatement.execute("drop table case1049");
-            tearDownStatement.execute("drop table case1119");
-            tearDownStatement.execute("delete from case1443");
-            tearDownStatement.execute("drop table case1443");
-            tearDownStatement.execute("delete from case1483");
-            tearDownStatement.execute("drop table case1483");
-            tearDownStatement.execute("delete from querytest1");
-            tearDownStatement.execute("drop table querytest1");
+//            tearDownStatement.execute("drop table case342");
+//            tearDownStatement.execute("drop table case343");
+//            tearDownStatement.execute("drop table case344");
+//            tearDownStatement.execute("drop table case624");
+//            tearDownStatement.execute("drop table case1049");
+//            tearDownStatement.execute("drop table case1119");
+//            tearDownStatement.execute("drop table case1443");
+//            tearDownStatement.execute("drop table case1483");
+//            tearDownStatement.execute("drop table querytest1");
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

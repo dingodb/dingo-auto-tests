@@ -254,11 +254,21 @@ public class TestSplit {
     }
 
     @AfterClass(alwaysRun = true, description = "测试完成后删除数据和表格并关闭连接")
-    public void tearDownAll() throws SQLException {
+    public void tearDownAll() throws SQLException, ClassNotFoundException {
         Statement tearDownStatement = null;
+        List<String> tableList = JDBCUtils.getTableList();
         try{
             tearDownStatement = connection.createStatement();
-            tearDownStatement.execute("drop table " + tableName);
+            if (tableList.size() > 0) {
+                for(int i = 0; i < tableList.size(); i++) {
+                    try {
+                        tearDownStatement.execute("drop table " + tableList.get(i));
+                    }catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+//            tearDownStatement.execute("drop table " + tableName);
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {

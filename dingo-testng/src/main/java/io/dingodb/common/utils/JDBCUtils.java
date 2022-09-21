@@ -19,10 +19,13 @@ package io.dingodb.common.utils;
 import io.dingodb.dailytest.CommonArgs;
 
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 操作数据库的工具类
@@ -43,6 +46,28 @@ public class JDBCUtils {
         Connection conn = DriverManager.getConnection(connectUrl);
         return conn;
     }
+
+    //获取所有数据表
+    public static List<String> getTableList() throws SQLException, ClassNotFoundException {
+        Connection connection = getConnection();
+        DatabaseMetaData dmd = connection.getMetaData();
+        ResultSet resultSetSchema = dmd.getSchemas();
+        List<String> schemaList = new ArrayList<>();
+        while (resultSetSchema.next()) {
+            schemaList.add(resultSetSchema.getString(1));
+        }
+
+        List<String> tableList = new ArrayList<String>();
+//        ResultSet rst = dmd.getTables(null, schemaList.get(0), "%", null);
+        ResultSet rst = dmd.getTables(null, "DINGO", "%", null);
+        while (rst.next()) {
+            tableList.add(rst.getString("TABLE_NAME").toUpperCase());
+        }
+        rst.close();
+        resultSetSchema.close();
+        return tableList;
+    }
+
 
     //关闭资源: 连接和statement
     public static void closeResource(Connection conn, Statement ps) {

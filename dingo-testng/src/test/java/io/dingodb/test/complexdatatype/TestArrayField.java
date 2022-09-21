@@ -314,51 +314,44 @@ public class TestArrayField extends YamlDataHelper {
 
 
     @AfterClass(alwaysRun = true, description = "测试完成后删除数据和表格并关闭连接")
-    public void tearDownAll() throws SQLException {
+    public void tearDownAll() throws SQLException, ClassNotFoundException {
         Statement tearDownStatement = null;
+        List<String> tableList = JDBCUtils.getTableList();
         try{
             tearDownStatement = arrayObj.connection.createStatement();
-            tearDownStatement.execute("delete from intArray");
-            tearDownStatement.execute("drop table intArray");
-            tearDownStatement.execute("delete from bigintArray");
-            tearDownStatement.execute("drop table bigintArray");
-            tearDownStatement.execute("delete from varcharArray");
-            tearDownStatement.execute("drop table varcharArray");
-            tearDownStatement.execute("delete from charArray");
-            tearDownStatement.execute("drop table charArray");
-            tearDownStatement.execute("delete from doubleArray");
-            tearDownStatement.execute("drop table doubleArray");
-            tearDownStatement.execute("delete from floatArray");
-            tearDownStatement.execute("drop table floatArray");
-            tearDownStatement.execute("delete from dateArray");
-            tearDownStatement.execute("drop table dateArray");
-            tearDownStatement.execute("delete from timeArray");
-            tearDownStatement.execute("drop table timeArray");
-            tearDownStatement.execute("delete from timestampArray");
-            tearDownStatement.execute("drop table timestampArray");
-            tearDownStatement.execute("delete from boolArray");
-            tearDownStatement.execute("drop table boolArray");
-            tearDownStatement.execute("delete from intArrayDefault");
-            tearDownStatement.execute("drop table intArrayDefault");
-            tearDownStatement.execute("delete from varcharArrayDefault");
-            tearDownStatement.execute("drop table varcharArrayDefault");
-            tearDownStatement.execute("delete from doubleArrayDefault");
-            tearDownStatement.execute("drop table doubleArrayDefault");
-            tearDownStatement.execute("delete from dateArrayDefault");
-            tearDownStatement.execute("drop table dateArrayDefault");
-            tearDownStatement.execute("delete from timeArrayDefault");
-            tearDownStatement.execute("drop table timeArrayDefault");
-            tearDownStatement.execute("delete from timestampArrayDefault");
-            tearDownStatement.execute("drop table timestampArrayDefault");
-            tearDownStatement.execute("delete from boolArrayDefault");
-            tearDownStatement.execute("drop table boolArrayDefault");
-            tearDownStatement.execute("drop table atest1903");
-            tearDownStatement.execute("drop table mixarray1");
-            tearDownStatement.execute("drop table arraymid");
-            tearDownStatement.execute("drop table arrayfirst");
-            tearDownStatement.execute("drop table arrayNu");
-            tearDownStatement.execute("drop table arrayNotNu");
-            tearDownStatement.execute("drop table arrayrangetest");
+            if (tableList.size() > 0) {
+                for(int i = 0; i < tableList.size(); i++) {
+                    try {
+                        tearDownStatement.execute("drop table " + tableList.get(i));
+                    }catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+//            tearDownStatement.execute("drop table intArray");
+//            tearDownStatement.execute("drop table bigintArray");
+//            tearDownStatement.execute("drop table varcharArray");
+//            tearDownStatement.execute("drop table charArray");
+//            tearDownStatement.execute("drop table doubleArray");
+//            tearDownStatement.execute("drop table floatArray");
+//            tearDownStatement.execute("drop table dateArray");
+//            tearDownStatement.execute("drop table timeArray");
+//            tearDownStatement.execute("drop table timestampArray");
+//            tearDownStatement.execute("drop table boolArray");
+//            tearDownStatement.execute("drop table intArrayDefault");
+//            tearDownStatement.execute("drop table varcharArrayDefault");
+//            tearDownStatement.execute("drop table doubleArrayDefault");
+//            tearDownStatement.execute("drop table dateArrayDefault");
+//            tearDownStatement.execute("drop table timeArrayDefault");
+//            tearDownStatement.execute("drop table timestampArrayDefault");
+//            tearDownStatement.execute("drop table boolArrayDefault");
+//            tearDownStatement.execute("drop table atest1903");
+//            tearDownStatement.execute("drop table mixarray1");
+//            tearDownStatement.execute("drop table arraymid");
+//            tearDownStatement.execute("drop table arrayfirst");
+//            tearDownStatement.execute("drop table arrayNu");
+//            tearDownStatement.execute("drop table arrayNotNu");
+//            tearDownStatement.execute("drop table arrayrangetest");
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {

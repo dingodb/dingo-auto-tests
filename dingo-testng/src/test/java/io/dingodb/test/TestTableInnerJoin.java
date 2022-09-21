@@ -690,42 +690,36 @@ public class TestTableInnerJoin {
     }
 
     @AfterClass(alwaysRun = true, description = "测试完成后删除数据和表格并关闭连接")
-    public void tearDownAll() throws SQLException {
+    public void tearDownAll() throws SQLException, ClassNotFoundException {
         Statement tearDownStatement = null;
+        List<String> tableList = JDBCUtils.getTableList();
         try {
             tearDownStatement = TableInnerJoin.connection.createStatement();
-            tearDownStatement.execute("delete from beauty");
-            tearDownStatement.execute("drop table beauty");
-            tearDownStatement.execute("delete from boys");
-            tearDownStatement.execute("drop table boys");
-            tearDownStatement.execute("delete from mytest");
-            tearDownStatement.execute("drop table mytest");
-            tearDownStatement.execute("delete from departments");
-            tearDownStatement.execute("drop table departments");
-            tearDownStatement.execute("delete from employees");
-            tearDownStatement.execute("drop table employees");
-            tearDownStatement.execute("delete from table1054_1");
-            tearDownStatement.execute("drop table table1054_1");
-            tearDownStatement.execute("delete from table1054_2");
-            tearDownStatement.execute("drop table table1054_2");
-            tearDownStatement.execute("delete from table1069_1");
-            tearDownStatement.execute("drop table table1069_1");
-            tearDownStatement.execute("delete from table1069_2");
-            tearDownStatement.execute("drop table table1069_2");
-            tearDownStatement.execute("delete from table1174_1");
-            tearDownStatement.execute("drop table table1174_1");
-            tearDownStatement.execute("delete from table1174_2");
-            tearDownStatement.execute("drop table table1174_2");
-            tearDownStatement.execute("delete from job_grades");
-            tearDownStatement.execute("drop table job_grades");
-            tearDownStatement.execute("delete from table1059_1");
-            tearDownStatement.execute("drop table table1059_1");
-            tearDownStatement.execute("delete from table1059_2");
-            tearDownStatement.execute("drop table table1059_2");
-            tearDownStatement.execute("delete from table1059_3");
-            tearDownStatement.execute("drop table table1059_3");
-            tearDownStatement.execute("delete from table1059_4");
-            tearDownStatement.execute("drop table table1059_4");
+            if (tableList.size() > 0) {
+                for(int i = 0; i < tableList.size(); i++) {
+                    try {
+                        tearDownStatement.execute("drop table " + tableList.get(i));
+                    }catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+//            tearDownStatement.execute("drop table beauty");
+//            tearDownStatement.execute("drop table boys");
+//            tearDownStatement.execute("drop table mytest");
+//            tearDownStatement.execute("drop table departments");
+//            tearDownStatement.execute("drop table employees");
+//            tearDownStatement.execute("drop table table1054_1");
+//            tearDownStatement.execute("drop table table1054_2");
+//            tearDownStatement.execute("drop table table1069_1");
+//            tearDownStatement.execute("drop table table1069_2");
+//            tearDownStatement.execute("drop table table1174_1");
+//            tearDownStatement.execute("drop table table1174_2");
+//            tearDownStatement.execute("drop table job_grades");
+//            tearDownStatement.execute("drop table table1059_1");
+//            tearDownStatement.execute("drop table table1059_2");
+//            tearDownStatement.execute("drop table table1059_3");
+//            tearDownStatement.execute("drop table table1059_4");
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

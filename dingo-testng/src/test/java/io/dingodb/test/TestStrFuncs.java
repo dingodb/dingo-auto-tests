@@ -1182,21 +1182,26 @@ public class TestStrFuncs extends YamlDataHelper {
 
 
     @AfterClass(alwaysRun = true, description = "测试完成后删除数据和表格并关闭连接")
-    public void tearDownAll() throws SQLException {
+    public void tearDownAll() throws SQLException, ClassNotFoundException {
         String tableName = strObj.getStrTableName();
         Statement tearDownStatement = null;
+        List<String> tableList = JDBCUtils.getTableList();
         try {
             tearDownStatement = StrFuncs.connection.createStatement();
-            tearDownStatement.execute("delete from " + tableName);
-            tearDownStatement.execute("drop table " + tableName);
-            tearDownStatement.execute("delete from tableStrCase113");
-            tearDownStatement.execute("drop table tableStrCase113");
-            tearDownStatement.execute("delete from tableReplaceCase177");
-            tearDownStatement.execute("drop table tableReplaceCase177");
-            tearDownStatement.execute("delete from tableTrimCase198");
-            tearDownStatement.execute("drop table tableTrimCase198");
-            tearDownStatement.execute("delete from tableConcatCase081");
-            tearDownStatement.execute("drop table tableConcatCase081");
+            if (tableList.size() > 0) {
+                for(int i = 0; i < tableList.size(); i++) {
+                    try {
+                        tearDownStatement.execute("drop table " + tableList.get(i));
+                    }catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+//            tearDownStatement.execute("drop table " + tableName);
+//            tearDownStatement.execute("drop table tableStrCase113");
+//            tearDownStatement.execute("drop table tableReplaceCase177");
+//            tearDownStatement.execute("drop table tableTrimCase198");
+//            tearDownStatement.execute("drop table tableConcatCase081");
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

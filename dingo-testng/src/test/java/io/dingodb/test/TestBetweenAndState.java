@@ -1993,30 +1993,30 @@ public class TestBetweenAndState extends YamlDataHelper {
 
 
     @AfterClass(alwaysRun = true, description = "测试完成后删除数据和表格并关闭连接")
-    public void tearDownAll() throws SQLException {
+    public void tearDownAll() throws SQLException, ClassNotFoundException {
         Statement tearDownStatement = null;
+        List<String> tableList = JDBCUtils.getTableList();
         try {
             tearDownStatement = BetweenState.connection.createStatement();
-            tearDownStatement.execute("delete from betweenTest");
-            tearDownStatement.execute("drop table betweenTest");
-            tearDownStatement.execute("delete from betweenTest2");
-            tearDownStatement.execute("drop table betweenTest2");
-            tearDownStatement.execute("delete from betweenTest3");
-            tearDownStatement.execute("drop table betweenTest3");
-            tearDownStatement.execute("delete from betweenTest4");
-            tearDownStatement.execute("drop table betweenTest4");
-            tearDownStatement.execute("delete from betweenTest5");
-            tearDownStatement.execute("drop table betweenTest5");
-            tearDownStatement.execute("delete from betweenTest8");
-            tearDownStatement.execute("drop table betweenTest8");
-            tearDownStatement.execute("delete from betweenTest9");
-            tearDownStatement.execute("drop table betweenTest9");
-            tearDownStatement.execute("delete from betweenTest10");
-            tearDownStatement.execute("drop table betweenTest10");
-            tearDownStatement.execute("delete from between_employees");
-            tearDownStatement.execute("drop table between_employees");
-            tearDownStatement.execute("delete from between_job_grades");
-            tearDownStatement.execute("drop table between_job_grades");
+            if (tableList.size() > 0) {
+                for(int i = 0; i < tableList.size(); i++) {
+                    try {
+                        tearDownStatement.execute("drop table " + tableList.get(i));
+                    }catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+//            tearDownStatement.execute("drop table betweenTest");
+//            tearDownStatement.execute("drop table betweenTest2");
+//            tearDownStatement.execute("drop table betweenTest3");
+//            tearDownStatement.execute("drop table betweenTest4");
+//            tearDownStatement.execute("drop table betweenTest5");
+//            tearDownStatement.execute("drop table betweenTest8");
+//            tearDownStatement.execute("drop table betweenTest9");
+//            tearDownStatement.execute("drop table betweenTest10");
+//            tearDownStatement.execute("drop table between_employees");
+//            tearDownStatement.execute("drop table between_job_grades");
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

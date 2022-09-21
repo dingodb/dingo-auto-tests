@@ -354,28 +354,29 @@ public class TestTableCreate extends YamlDataHelper {
 
 
     @AfterClass(alwaysRun = true, description = "测试完成后删除数据和表格并关闭连接")
-    public void tearDownAll() throws SQLException {
+    public void tearDownAll() throws SQLException, ClassNotFoundException {
         Statement tearDownStatement = null;
+        List<String> tableList = JDBCUtils.getTableList();
         try{
             tearDownStatement = tableCreateObj.connection.createStatement();
-            tearDownStatement.execute("delete from ctest001");
-            tearDownStatement.execute("drop table ctest001");
-            tearDownStatement.execute("delete from ctest002");
-            tearDownStatement.execute("drop table ctest002");
-            tearDownStatement.execute("delete from ctest003");
-            tearDownStatement.execute("drop table ctest003");
-            tearDownStatement.execute("delete from ctest004");
-            tearDownStatement.execute("drop table ctest004");
-            tearDownStatement.execute("delete from ctest005");
-            tearDownStatement.execute("drop table ctest005");
-            tearDownStatement.execute("delete from ctest006");
-            tearDownStatement.execute("drop table ctest006");
-            tearDownStatement.execute("delete from ctest007");
-            tearDownStatement.execute("drop table ctest007");
-            tearDownStatement.execute("delete from mpkey_tbl1");
-            tearDownStatement.execute("drop table mpkey_tbl1");
-            tearDownStatement.execute("delete from mpkey_tbl2");
-            tearDownStatement.execute("drop table mpkey_tbl2");
+            if (tableList.size() > 0) {
+                for(int i = 0; i < tableList.size(); i++) {
+                    try {
+                        tearDownStatement.execute("drop table " + tableList.get(i));
+                    }catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+//            tearDownStatement.execute("drop table ctest001");
+//            tearDownStatement.execute("drop table ctest002");
+//            tearDownStatement.execute("drop table ctest003");
+//            tearDownStatement.execute("drop table ctest004");
+//            tearDownStatement.execute("drop table ctest005");
+//            tearDownStatement.execute("drop table ctest006");
+//            tearDownStatement.execute("drop table ctest007");
+//            tearDownStatement.execute("drop table mpkey_tbl1");
+//            tearDownStatement.execute("drop table mpkey_tbl2");
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
