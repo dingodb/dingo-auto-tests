@@ -22,7 +22,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AggregateFuncVARandSTDEV {
+public class VarAndStdev {
     public static Connection connection = null;
 
     static {

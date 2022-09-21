@@ -16,6 +16,21 @@
 
 package listener;
 
+import io.dingodb.dailytest.CommonArgs;
+import jakarta.mail.MessagingException;
+import org.testng.IReporter;
+import org.testng.ISuite;
+import org.testng.ISuiteResult;
+import org.testng.ITestContext;
+import org.testng.ITestResult;
+import org.testng.Reporter;
+import org.testng.collections.Lists;
+import org.testng.internal.Utils;
+import org.testng.log4testng.Logger;
+import org.testng.xml.XmlSuite;
+import org.testng.xml.XmlSuite.ParallelMode;
+import utils.SendEmailClient;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -26,23 +41,8 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import java.util.Set;
-
-import io.dingodb.dailytest.CommonArgs;
-import utils.SendEmailClient;
-import jakarta.mail.MessagingException;
-import org.testng.collections.Lists;
-import org.testng.internal.Utils;
-import org.testng.log4testng.Logger;
-import org.testng.IReporter;
-import org.testng.ISuite;
-import org.testng.ISuiteResult;
-import org.testng.ITestContext;
-import org.testng.ITestResult;
-import org.testng.Reporter;
-import org.testng.xml.XmlSuite;
-import org.testng.xml.XmlSuite.ParallelMode;
+import java.util.stream.Collectors;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static java.nio.file.Files.newBufferedWriter;
@@ -59,8 +59,6 @@ public class EmailableReporterListener implements IReporter{
     private final StringBuilder buffer = new StringBuilder();
 
     private String fileName = "DingoDB-test-report.html";
-//    private String hostIP = "172.20.3.26";
-//    private String hostIP = System.getenv("ConnectIP");
     private String hostIP = CommonArgs.getDefaultDingoClusterIP();
 
     public void setFileName(String fileName) {
@@ -357,12 +355,12 @@ public class EmailableReporterListener implements IReporter{
                         testResult.getRetriedTestResults(),
                         "retried",
                         scenarioIndex);
-                scenarioIndex +=
-                    writeScenarioSummary(
-                        testName + " &#8212; passed",
-                        testResult.getPassedTestResults(),
-                        "passed",
-                        scenarioIndex);
+//                scenarioIndex +=
+//                    writeScenarioSummary(
+//                        testName + " &#8212; passed",
+//                        testResult.getPassedTestResults(),
+//                        "passed",
+//                        scenarioIndex);
 
                 if (scenarioIndex == startIndex) {
                     writer.print("<tr><th colspan=\"4\" class=\"invisible\"/></tr>");
@@ -484,7 +482,7 @@ public class EmailableReporterListener implements IReporter{
                     writeScenarioDetails(testResult.getSkippedConfigurationResults(), scenarioIndex);
                 scenarioIndex += writeScenarioDetails(testResult.getSkippedTestResults(), scenarioIndex);
                 scenarioIndex += writeScenarioDetails(testResult.getRetriedTestResults(), scenarioIndex);
-                scenarioIndex += writeScenarioDetails(testResult.getPassedTestResults(), scenarioIndex);
+//                scenarioIndex += writeScenarioDetails(testResult.getPassedTestResults(), scenarioIndex);
             }
         }
     }

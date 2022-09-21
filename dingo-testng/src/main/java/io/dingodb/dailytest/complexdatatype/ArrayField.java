@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.dingodb.dailytest.compositedatatype;
+package io.dingodb.dailytest.complexdatatype;
 
 import io.dingodb.common.utils.JDBCUtils;
 

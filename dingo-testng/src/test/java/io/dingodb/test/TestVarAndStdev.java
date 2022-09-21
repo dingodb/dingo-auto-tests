@@ -17,7 +17,7 @@
 package io.dingodb.test;
 
 import io.dingodb.common.utils.JDBCUtils;
-import io.dingodb.dailytest.AggregateFuncVARandSTDEV;
+import io.dingodb.dailytest.VarAndStdev;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -31,7 +31,7 @@ import java.util.List;
 
 public class TestVarAndStdev {
 
-    public static AggregateFuncVARandSTDEV varstdevObj = new AggregateFuncVARandSTDEV();
+    public static VarAndStdev varstdevObj = new VarAndStdev();
 
     @BeforeClass(alwaysRun = true, description = "测试前连接数据库，创建表格和插入数据")
     public static void setUpAll() throws SQLException {
@@ -371,7 +371,7 @@ public class TestVarAndStdev {
     public void tearDownAll() throws SQLException {
         Statement teardownStatement = null;
         try {
-            teardownStatement = AggregateFuncVARandSTDEV.connection.createStatement();
+            teardownStatement = VarAndStdev.connection.createStatement();
             teardownStatement.execute("delete from vartest1");
             teardownStatement.execute("drop table vartest1");
             teardownStatement.execute("delete from vartest2");
@@ -391,7 +391,7 @@ public class TestVarAndStdev {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            JDBCUtils.closeResource(AggregateFuncVARandSTDEV.connection, teardownStatement);
+            JDBCUtils.closeResource(VarAndStdev.connection, teardownStatement);
         }
     }
 }

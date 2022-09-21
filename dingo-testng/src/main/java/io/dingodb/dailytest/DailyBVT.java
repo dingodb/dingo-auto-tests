@@ -16,19 +16,18 @@
 
 package io.dingodb.dailytest;
 
+import io.dingodb.common.utils.JDBCUtils;
+
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Random;
 
 public class DailyBVT {
-//    private static final String defaultConnectIP = "172.20.3.27";
-//    private static final String defaultConnectIP = "172.20.61.1";
-    private static String defaultConnectIP = CommonArgs.getDefaultDingoClusterIP();
-    private static final String JDBC_DRIVER = "io.dingodb.driver.client.DingoDriverClient";
-    private static final String connectUrl = "jdbc:dingo:thin:url=" + defaultConnectIP + ":8765";
+//    private static String defaultConnectIP = CommonArgs.getDefaultDingoClusterIP();
+//    private static final String JDBC_DRIVER = "io.dingodb.driver.client.DingoDriverClient";
+//    private static final String connectUrl = "jdbc:dingo:thin:url=" + defaultConnectIP + ":8765";
     public static Connection connection = null;
 
     public String inName = "tomy";
@@ -36,16 +35,24 @@ public class DailyBVT {
 
     static {
         try {
-            Class.forName(JDBC_DRIVER);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        try {
-            connection = DriverManager.getConnection(connectUrl);
-        } catch (SQLException e) {
+            connection = JDBCUtils.getConnection();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+//    static {
+//        try {
+//            Class.forName(JDBC_DRIVER);
+//        } catch (ClassNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//        try {
+//            connection = DriverManager.getConnection(connectUrl);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     //获取数据库连接
 //    public static Connection connectDingo() throws ClassNotFoundException, SQLException, IOException {
