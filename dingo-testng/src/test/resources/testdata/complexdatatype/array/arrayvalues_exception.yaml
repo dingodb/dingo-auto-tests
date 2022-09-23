@@ -310,3 +310,6 @@ testID1002009-05:
 testID1002009-06:
   tableName: "bigintArray"
   arrayValues: "(20096, 'zhangsan', array[-9223372036854775809])"
+testID1002009-09:
+  tableName: "intArray"
+  arrayValues: "(20099, 'zhangsan', array[-2147483649])"

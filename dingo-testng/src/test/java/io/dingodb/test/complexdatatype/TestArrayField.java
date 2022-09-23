@@ -64,7 +64,6 @@ public class TestArrayField extends YamlDataHelper {
         Assert.assertEquals(actualList, expectedList);
     }
 
-
     @Test(priority = 4, enabled = true, dataProvider = "arrayFieldMethod",
             description = "创建含有不同数据类型的array字段的数据表,指定默认值")
     public void test03TableCreateWithArrayFieldDefaultValue(Map<String, String> param) throws SQLException {
@@ -205,7 +204,6 @@ public class TestArrayField extends YamlDataHelper {
         int actualRows2 = arrayObj.insertValuesToMixArrayTable(tableName, arrayfirst_value2);
         Assert.assertEquals(actualRows2, 3);
     }
-
 
     @Test(priority = 18, enabled = true, dataProvider = "arrayFieldMethod", description = "查询array字段在中间和开头的表数据")
     public void test17QueryInMidAndFirst(Map<String, String> param) throws SQLException {
