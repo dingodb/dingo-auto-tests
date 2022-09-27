@@ -10,6 +10,9 @@ testID1001888-03:
 testID1001888-04:
   tableName: "bigintArray"
   arrayValues: "(2,'lisi',array[0]),(3,'wangwu',array[-9223372036854775808,9223372036854775807]),(4,'LiuJi',array[-10000000000])"
+testID1001912-01:
+  tableName: "intArray"
+  arrayValues: "(19121, 'zhangsan', array[3001,23.0,12.58,0.99])"
 testID1001889-01:
   tableName: "varcharArray"
   arrayValues: "(1, 'zhangsan', array['male','beijing','1234'])"
@@ -28,6 +31,9 @@ testID1001894-01:
 testID1001894-02:
   tableName: "doubleArray"
   arrayValues: "(2, 'lisi', array[0.0]),(3, 'wangwu', array[18.3,0.0003567]),(4, 'Tomy-1', array[3721.00,66.66,78909.23])"
+testID1001925-01:
+  tableName: "doubleArray"
+  arrayValues: "(19251, 'zhangsan', array[2.51,10])"
 testID1001894-03:
   tableName: "floatArray"
   arrayValues: "(1, 'zhangsan', array[0.5,1234.567809,999.00])"

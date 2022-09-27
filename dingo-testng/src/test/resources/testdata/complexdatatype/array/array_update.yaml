@@ -7,9 +7,9 @@ testID1001937-01:
 testID1001937-02:
   tableName: "intarray"
   updateState: "update intarray set class_no = array[-100,-1000,-10000]"
-  affectRows: "14"
+  affectRows: "15"
   queryState: "select * from intarray"
-  outData: "1&zhangsan&[-100, -1000, -10000];2&lisi&[-100, -1000, -10000];3&wangwu&[-100, -1000, -10000];4&LiuJi&[-100, -1000, -10000];5&Kemi&[-100, -1000, -10000];19361&zhangsan&[-100, -1000, -10000];19461&zhangsan&[-100, -1000, -10000];20097&zhangsan&[-100, -1000, -10000];192611&zhangsan&[-100, -1000, -10000];192612&lisi&[-100, -1000, -10000];192621&zhangsan&[-100, -1000, -10000];192622&lisi&[-100, -1000, -10000];192631&zhangsan&[-100, -1000, -10000];192632&lisi&[-100, -1000, -10000]"
+  outData: "1&zhangsan&[-100, -1000, -10000];2&lisi&[-100, -1000, -10000];3&wangwu&[-100, -1000, -10000];4&LiuJi&[-100, -1000, -10000];5&Kemi&[-100, -1000, -10000];19121&zhangsan&[-100, -1000, -10000];19361&zhangsan&[-100, -1000, -10000];19461&zhangsan&[-100, -1000, -10000];20097&zhangsan&[-100, -1000, -10000];192611&zhangsan&[-100, -1000, -10000];192612&lisi&[-100, -1000, -10000];192621&zhangsan&[-100, -1000, -10000];192622&lisi&[-100, -1000, -10000];192631&zhangsan&[-100, -1000, -10000];192632&lisi&[-100, -1000, -10000]"
 testID1001938-01:
   tableName: "varchararray"
   updateState: "update varchararray set user_info=array['male','lolo','172.3'] where id=2"

@@ -1004,7 +1004,7 @@ public class TestBetweenAndState extends YamlDataHelper {
         String[][] dataArray = {
                 {"13834781245","zhangsan","18","23.5","2022-04-08 18:05:07"},
                 {"13840980021","lisi","25","895.0","2000-02-29 00:00:00"},
-                {"13901278905","HAHA","57","9.0762556","2020-11-11","05:59:59","2021-05-04 12:00:00"}
+                {"13901278905","HAHA","57","9.0762556","2021-05-04 12:00:00"}
         };
         List<List> betweenList = new ArrayList<List>();
         for(int i=0; i<dataArray.length; i++) {

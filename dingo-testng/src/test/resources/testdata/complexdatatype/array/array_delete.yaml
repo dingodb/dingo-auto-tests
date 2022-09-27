@@ -2,8 +2,8 @@ testID1002176-01:
   tableName: "atest1903"
   deleteLogic: " where id=1903"
   recordDel: "1"
-testID1002176-02:
-  tableName: "atest1903"
-  deleteLogic: " where id=1904"
-  recordDel: "1"
+#testID1002176-02:
+#  tableName: "atest1903"
+#  deleteLogic: " where id=1904"
+#  recordDel: "1"
 

@@ -58,7 +58,7 @@ public class ArrayField {
     //查询插入后的数据
     public List<List> queryTableData(String tableName) throws SQLException {
         try(Statement statement = connection.createStatement()) {
-            String sql = "select * from " + tableName + " where id<=5";
+            String sql = "select * from " + tableName + " where id<=5 or id=19121 or id=19251";
             ResultSet resultSet = statement.executeQuery(sql);
             List<List> queryList = new ArrayList<List>();
             while (resultSet.next()) {

@@ -83,7 +83,7 @@ public class TestArrayField extends YamlDataHelper {
     }
 
     @Test(priority = 6, enabled = true, dataProvider = "arrayFieldMethod",
-            description = "插入Array类型字段Null值")
+            description = "插入Array类型字段Null值,并查询")
     public void test05QueryWithArrayColNull(Map<String, String> param) throws SQLException {
         StrTo2DList strTo2DList = new StrTo2DList();
         List<List> expectedList = strTo2DList.construct2DList(param.get("outData"), ";", "&");
@@ -95,6 +95,12 @@ public class TestArrayField extends YamlDataHelper {
         System.out.println("Actual: " + actualList);
 
         Assert.assertEquals(actualList, expectedList);
+    }
+
+    @Test(priority = 6, enabled = true, dataProvider = "arrayFieldMethod", expectedExceptions = SQLException.class,
+            description = "插入Array类型数组元素Null值")
+    public void test05InsertWithArrayElemNull(Map<String, String> param) throws SQLException {
+        arrayObj.insertArrayValues(param.get("tableName"), param.get("arrayValues"));
     }
 
     @Test(priority = 7, enabled = true, dataProvider = "arrayFieldMethod", expectedExceptions = SQLException.class,

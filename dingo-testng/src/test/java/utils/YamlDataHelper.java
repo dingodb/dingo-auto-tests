@@ -882,6 +882,11 @@ public class YamlDataHelper{
                 break;
             }
 
+            case "test05InsertWithArrayElemNull": {
+                yamlArrayList = getYamlList(iniReader.getValue("ArrayFieldYaml", "arrayelem_null"));
+                break;
+            }
+
             case "test06InsertMixedAndIllegalElement": {
                 yamlArrayList = getYamlList(iniReader.getValue("ArrayFieldYaml", "array_exception"));
                 break;

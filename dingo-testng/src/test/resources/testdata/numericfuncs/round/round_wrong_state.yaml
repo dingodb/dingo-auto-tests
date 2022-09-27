@@ -4,3 +4,5 @@ testID1001617-02:
   roundState: "select round(, 2)"
 testID1001619-01:
   roundState: "select round(3.456,1,0)"
+testID1001619-02:
+  roundState: "select round()"

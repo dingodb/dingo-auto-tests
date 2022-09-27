@@ -1,0 +1,5 @@
+testID1001904:
+  tableName: "atest1903"
+  arrayValues: "(1904,'zhangsan',array['test1','test2',null])"
+#  queryLogic: "id=1904"
+#  outData: "1&zhangsan&[test1, test2, null];"

@@ -1,6 +1,6 @@
-testID1001912-01:
-  tableName: "intArray"
-  arrayValues: "(19121, 'zhangsan', array[3001,23.0])"
+#testID1001912-01:
+#  tableName: "intArray"
+#  arrayValues: "(19121, 'zhangsan', array[3001,23.0])"
 testID1001912-02:
   tableName: "intArray"
   arrayValues: "(19122, 'zhangsan', array[3002,'a'])"
@@ -58,9 +58,9 @@ testID1001917-02:
 testID1001917-03:
   tableName: "varcharArray"
   arrayValues: "(19173, 'zhangsan', array['male','BJ',false])"
-testID1001925-01:
-  tableName: "doubleArray"
-  arrayValues: "(19251, 'zhangsan', array[2.51,10])"
+#testID1001925-01:
+#  tableName: "doubleArray"
+#  arrayValues: "(19251, 'zhangsan', array[2.51,10])"
 testID1001925-02:
   tableName: "doubleArray"
   arrayValues: "(19252, 'zhangsan', array[30.02,'a'])"
