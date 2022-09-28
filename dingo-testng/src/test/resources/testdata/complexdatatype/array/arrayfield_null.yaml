@@ -2,7 +2,7 @@ testID1001903:
   tableName: "atest1903"
   arrayValues: "(1903,'zhangsan',null)"
   queryLogic: "id=1903"
-  outData: "1&zhangsan&null;"
+  outData: "1903&zhangsan&null;"
 #testID1001904:
 #  tableName: "atest1903"
 #  arrayValues: "(1904,'zhangsan',array['test1','test2',null])"

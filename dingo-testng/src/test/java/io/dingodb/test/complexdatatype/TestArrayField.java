@@ -85,13 +85,24 @@ public class TestArrayField extends YamlDataHelper {
     @Test(priority = 6, enabled = true, dataProvider = "arrayFieldMethod",
             description = "插入Array类型字段Null值,并查询")
     public void test05QueryWithArrayColNull(Map<String, String> param) throws SQLException {
-        StrTo2DList strTo2DList = new StrTo2DList();
-        List<List> expectedList = strTo2DList.construct2DList(param.get("outData"), ";", "&");
+        String[][] dataArray = {
+                {"1903","zhangsan",null}
+        };
+        List<List> expectedList = new ArrayList<List>();
+        for(int i=0; i<dataArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<dataArray[i].length; j++) {
+                columnList.add(dataArray[i][j]);
+            }
+            expectedList.add(columnList);
+        }
+//        StrTo2DList strTo2DList = new StrTo2DList();
+//        List<List> expectedList = strTo2DList.construct2DList(param.get("outData"), ";", "&");
         System.out.println("Expected: " + expectedList);
 
         arrayObj.insertArrayValues(param.get("tableName"), param.get("arrayValues"));
 
-        List<List> actualList = arrayObj.queryDataWithCondition(param.get("tableName"), param.get("queryLogic"));
+        List<List> actualList = arrayObj.queryDataNull(param.get("tableName"), param.get("queryLogic"));
         System.out.println("Actual: " + actualList);
 
         Assert.assertEquals(actualList, expectedList);
@@ -229,9 +240,20 @@ public class TestArrayField extends YamlDataHelper {
 
     @Test(priority = 19, enabled = true, description = "array字段允许为null,插入数据不指定该字段")
     public void test18InsertToTableWithoutArrayNull() throws SQLException {
-        StrTo2DList strTo2DList = new StrTo2DList();
-        String parseStr = "1&zhangsan&55&23.45&null;";
-        List<List> expectedList = strTo2DList.construct2DList(parseStr, ";", "&");
+        String[][] dataArray = {
+                {"1","zhangsan","55","23.45",null}
+        };
+        List<List> expectedList = new ArrayList<List>();
+        for(int i=0; i<dataArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j=0; j<dataArray[i].length; j++) {
+                columnList.add(dataArray[i][j]);
+            }
+            expectedList.add(columnList);
+        }
+//        StrTo2DList strTo2DList = new StrTo2DList();
+//        String parseStr = "1&zhangsan&55&23.45&null;";
+//        List<List> expectedList = strTo2DList.construct2DList(parseStr, ";", "&");
         System.out.println("Expected: " + expectedList);
         List<List> actualList = arrayObj.insertToTableWithoutArrayColAllowNull();
         System.out.println("Actual: " + actualList);

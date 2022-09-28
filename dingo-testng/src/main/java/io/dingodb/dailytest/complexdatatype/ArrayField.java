@@ -126,6 +126,26 @@ public class ArrayField {
         }
     }
 
+    //查询插入的array字段值为null
+    public List<List> queryDataNull(String tableName, String queryLogic) throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String sql = "select * from " + tableName + " where " + queryLogic;
+            ResultSet resultSet = statement.executeQuery(sql);
+            List<List> queryList = new ArrayList<List>();
+            while (resultSet.next()) {
+                List rowList = new ArrayList();
+                rowList.add(resultSet.getString(1));
+                rowList.add(resultSet.getString(2));
+                rowList.add(resultSet.getString(3));
+
+                queryList.add(rowList);
+            }
+            resultSet.close();
+            statement.close();
+            return queryList;
+        }
+    }
+
     //创建含有多种array类型字段的表
     public void tableCreateWithMixArrayColumn(String tableName, String tableMeta) throws SQLException {
         try(Statement statement = connection.createStatement()) {
