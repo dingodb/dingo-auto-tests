@@ -1115,7 +1115,7 @@ public class DateTimeFuncs {
             List queryList = new ArrayList();
             while(resultSet.next()) {
                 queryList.add(resultSet.getInt(1));
-                queryList.add(resultSet.getTimestamp(2));
+                queryList.add(resultSet.getString(2));
             }
             resultSet.close();
             statement.close();

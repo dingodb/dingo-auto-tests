@@ -1,0 +1,3 @@
+(1, 'zhangsan', map['address','beijing','class_no','1024'], 20, 34.56),
+(2, 'wangwu', map['address','dalian','sex','male'], 8, 0.0),
+(3,'liuyi', map['address','wuhan','sex','female','class_no','1001'], -56, -1834.29)

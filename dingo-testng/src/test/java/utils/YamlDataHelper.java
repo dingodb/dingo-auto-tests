@@ -926,6 +926,27 @@ public class YamlDataHelper{
     }
 
     @DataProvider
+    public Object[][] mapFieldMethod(Method method) {
+        List<Map<String, String>> yamlMapList = null;
+        switch (method.getName()) {
+            case "test07InsertVarcharAndNumKV": {
+                yamlMapList = getYamlList(iniReader.getValue("MapFieldYaml", "map1_exception"));
+                break;
+            }
+
+            case "test17VerifyIntValueRangeNotSupport": {
+                yamlMapList = getYamlList(iniReader.getValue("MapFieldYaml", "map2_exception"));
+                break;
+            }
+        }
+        Object[][] files = new Object[yamlMapList.size()][];
+        for (int i = 0; i < yamlMapList.size(); i++) {
+            files[i] = new Object[]{yamlMapList.get(i)};
+        }
+        return files;
+    }
+
+    @DataProvider
     public Object[][] createTableMethod(Method method) {
         List<Map<String, String>> yamlCreateTableList = null;
         switch (method.getName()) {

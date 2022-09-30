@@ -1,0 +1,15 @@
+testID1002169-01:
+  tableName: "maptest1"
+  mapValues: "(21691, 'zhangsan', 20, 34.56, map['address','beijing','class_no',1024])"
+testID1002169-02:
+  tableName: "maptest1"
+  mapValues: "(21692, 'lisi', 35, 0.96, map['address','tianjin','price',10.08])"
+testID1002171-01:
+  tableName: "maptest1"
+  mapValues: "(21711, 'zhangsan', 20, 34.56, map['in_use',true,'is_delete',0])"
+testID1002173-01:
+  tableName: "maptest1"
+  mapValues: "(21731, 'lisi', 35, 0.96, map['address',null,'price',null])"
+testID1002188-01:
+  tableName: "maptest1"
+  mapValues: "(21881, 'LaLa', 27, 132.50, map[])"

@@ -51,7 +51,7 @@ testID1001941-01:
   updateState: "update timearray set test_time=array['18:18:18'] where id = 3"
   affectRows: "1"
   queryState: "select id,name,test_time from timearray where id=3"
-  outData: "1&zhangsan&[18:18:18];"
+  outData: "3&wangwu&[18:18:18];"
 testID1001941-02:
   tableName: "timearray"
   updateState: "update timearray set test_time=array['00:00:00','08:59:59','12:30:30','22:01:02']"

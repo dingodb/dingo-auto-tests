@@ -90,6 +90,7 @@
     <test name="v0.4.0 complexDataTypeTest">
         <classes>
             <class name="io.dingodb.test.complexdatatype.TestArrayField"></class>
+            <class name="io.dingodb.test.complexdatatype.TestMapField"></class>
         </classes>
     </test>
 
