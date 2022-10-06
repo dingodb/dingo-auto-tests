@@ -1,0 +1,7 @@
+(
+id int,
+name varchar(20),
+age int,
+user_info varchar multiset not null,
+primary key(id)
+)

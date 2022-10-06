@@ -1,0 +1,319 @@
+testID1002026-01:
+  tableName: "intset"
+  tableValue: "(20261,'zhangsan',multiset[101,102,null])"
+testID1002026-02:
+  tableName: "varcharset"
+  tableValue: "(20262,'lisi,multiset['test1',null])"
+testID1002034-02:
+  tableName: "intset"
+  tableValue: "(20342,'aaa',multiset[4002,'a'])"
+testID1002034-03:
+  tableName: "intset"
+  tableValue: "(20343,'bbb',multiset[4003,'2022-08-30'])"
+testID1002034-04:
+  tableName: "intset"
+  tableValue: "(20344,'ccc',multiset[4004,'10:33:32'])"
+testID1002034-05:
+  tableName: "intset"
+  tableValue: "(20345,'ddd',multiset[4005,'2021-08-31 10:33:32'])"
+testID1002034-06:
+  tableName: "intset"
+  tableValue: "(20346,'eee',multiset[4006,true])"
+testID1002035-02:
+  tableName: "doubleset"
+  tableValue: "(20352,'aaa',multiset[4002.22,'a'])"
+testID1002035-03:
+  tableName: "doubleset"
+  tableValue: "(20353,'bbb',multiset[4003.33,'2022-08-30'])"
+testID1002035-04:
+  tableName: "doubleset"
+  tableValue: "(20354,'ccc',multiset[4004.44,'10:33:32'])"
+testID1002035-05:
+  tableName: "doubleset"
+  tableValue: "(20355,'ddd',multiset[4005.55,'2021-08-31 10:33:32'])"
+testID1002035-06:
+  tableName: "doubleset"
+  tableValue: "(20356,'eee',multiset[4006.66,true])"
+testID1002036-02:
+  tableName: "varcharset"
+  tableValue: "(20362,'aaa',multiset['male','BJ',18])"
+testID1002036-03:
+  tableName: "varcharset"
+  tableValue: "(20363,'bbb',multiset['beijing',1234.5])"
+testID1002036-04:
+  tableName: "varcarset"
+  tableValue: "(20364,'ccc',multiset['male',true])"
+testID1002037-01:
+  tableName: "dateset"
+  tableValue: "(20371,'aaa',multiset['2022-08-18',2022])"
+testID1002037-02:
+  tableName: "dateset"
+  tableValue: "(20372,'bbb',multiset['2022-08-18',1234.5])"
+testID1002037-03:
+  tableName: "dateset"
+  tableValue: "(20373,'ccc',multiset['2022-08-18',true])"
+testID1002038-01:
+  tableName: "dateset"
+  tableValue: "(20381,'ddd',multiset['2022'])"
+testID1002038-02:
+  tableName: "dateset"
+  tableValue: "(20382,'eee',multiset['2022-08'])"
+testID1002038-03:
+  tableName: "dateset"
+  tableValue: "(20383,'fff',multiset['2022year'])"
+testID1002038-04:
+  tableName: "dateset"
+  tableValue: "(20384,'ggg',multiset['20:08:12'])"
+testID1002038-05:
+  tableName: "dateset"
+  tableValue: "(20385,'hhh',multiset['2019-12-11 10:10:10'])"
+testID1002038-06:
+  tableName: "dateset"
+  tableValue: "(20386,'iii',multiset['20191211101010'])"
+testID1002040-01:
+  tableName: "dateset"
+  tableValue: "(20401,'jjj',multiset['1969-13-01'])"
+testID1002040-02:
+  tableName: "dateset"
+  tableValue: "(20402,'kkk',multiset['2022-04-31'])"
+testID1002040-03:
+  tableName: "dateset"
+  tableValue: "(20403,'lll',multiset['2022-02-29'])"
+testID1002041-01:
+  tableName: "timeset"
+  tableValue: "(20411,'aaa',multiset['15:39:38',18])"
+testID1002041-02:
+  tableName: "timeset"
+  tableValue: "(20412,'bbb',multiset['15:39:38',180910])"
+testID1002041-03:
+  tableName: "timeset"
+  tableValue: "(20413,'ccc',multiset['15:39:38',1234.56])"
+testID1002041-04:
+  tableName: "timeset"
+  tableValue: "(20414,'ddd',multiset['15:39:38',true])"
+testID1002042-01:
+  tableName: "timeset"
+  tableValue: "(20421,'eee',multiset['20'])"
+testID1002042-02:
+  tableName: "timeset"
+  tableValue: "(20422,'fff',multiset['14:40'])"
+testID1002042-03:
+  tableName: "timeset"
+  tableValue: "(20423,'ggg',multiset['2022-08-18'])"
+testID1002042-04:
+  tableName: "timeset"
+  tableValue: "(20424,'hhh',multiset['20.08.12'])"
+testID1002042-05:
+  tableName: "timeset"
+  tableValue: "(20425,'iii',multiset['2019-12-11 10:10:10'])"
+testID1002042-06:
+  tableName: "timeset"
+  tableValue: "(20426,'jjj',multiset['PM 19:00:00'])"
+testID1002044-01:
+  tableName: "timeset"
+  tableValue: "(20441,'kkk',multiset['24:00:00'])"
+testID1002044-02:
+  tableName: "timeset"
+  tableValue: "(20442,'lll',multiset['14:40:60'])"
+testID1002044-03:
+  tableName: "timeset"
+  tableValue: "(20443,'mmm',multiset['01:60:01'])"
+testID1002045-01:
+  tableName: "timestampset"
+  tableValue: "(20451,'aaa',multiset['2022-08-18 15:39:38',22])"
+testID1002045-02:
+  tableName: "timestampset"
+  tableValue: "(20452,'bbb',multiset['2022-08-18 15:39:38',19970101101015])"
+testID1002045-03:
+  tableName: "timestampset"
+  tableValue: "(20453,'ccc',multiset['2022-08-18 15:39:38',234.56])"
+testID1002045-04:
+  tableName: "timestampset"
+  tableValue: "(20454,'ddd',multiset['2022-08-18 15:39:38',true])"
+testID1002046-01:
+  tableName: "timestampset"
+  tableValue: "(20461,'eee',multiset['2022'])"
+testID1002046-02:
+  tableName: "timestampset"
+  tableValue: "(20462,'fff',multiset['2022-08-18'])"
+testID1002046-03:
+  tableName: "timestampset"
+  tableValue: "(20463,'ggg',multiset['2022year'])"
+testID1002046-04:
+  tableName: "timestampset"
+  tableValue: "(20464,'hhh',multiset['20:08:12'])"
+testID1002046-05:
+  tableName: "timestampset"
+  tableValue: "(20465,'iii',multiset['2019.12.11 10.10.10'])"
+testID1002046-06:
+  tableName: "timestampset"
+  tableValue: "(20466,'jjj',multiset['2019-12-11 101010'])"
+testID1002046-07:
+  tableName: "timestampset"
+  tableValue: "(20467,'kkk',multiset['2019-12-11T12:15:10'])"
+testID1002046-08:
+  tableName: "timestampset"
+  tableValue: "(20468,'lll',multiset['22-03-11 14:20:33'])"
+testID1002048-01:
+  tableName: "timestampset"
+  tableValue: "(20481,'mmm',multiset['2021-13-01 01:02:03'])"
+testID1002048-02:
+  tableName: "timestampset"
+  tableValue: "(20482,'nnn',multiset['2022-08-32 10:10:10'])"
+testID1002048-03:
+  tableName: "timestampset"
+  tableValue: "(20483,'ooo',multiset['1997-07-12 24:00:00'])"
+testID1002048-04:
+  tableName: "timestampset"
+  tableValue: "(20484,'ppp',multiset['2011-11-11 11:60:30'])"
+testID1002048-05:
+  tableName: "timestampset"
+  tableValue: "(20485,'qqq',multiset['2019-12-11 10:10:60'])"
+testID1002049-01:
+  tableName: "boolset"
+  tableValue: "(20491,'aaa',multiset[true,1])"
+testID1002049-02:
+  tableName: "boolset"
+  tableValue: "(20492,'bbb',multiset[false,0])"
+testID1002049-03:
+  tableName: "boolset"
+  tableValue: "(20493,'ccc',multiset[true,12.56])"
+testID1002049-04:
+  tableName: "boolset"
+  tableValue: "(20494,'ddd',multiset[false,'a'])"
+testID1002049-05:
+  tableName: "boolset"
+  tableValue: "(20495,'eee',multiset[true,'2022-10-05'])"
+testID1002049-06:
+  tableName: "boolset"
+  tableValue: "(20496,'fff',multiset[false,'00:03:30'])"
+testID1002049-07:
+  tableName: "boolset"
+  tableValue: "(20497,'ggg',multiset[true,'2022-10-05 10:03:30'])"
+testID1002050-03:
+  tableName: "intset"
+  tableValue: "(205031,'ee',multiset['a'])"
+testID1002050-05:
+  tableName: "intset"
+  tableValue: "(205051,'hh',multiset['2022-10-11'])"
+testID1002050-06:
+  tableName: "intset"
+  tableValue: "(205061,'ii',multiset['12:12:00'])"
+testID1002050-07:
+  tableName: "intset"
+  tableValue: "(205071,'jj',multiset['2021-08-24 09:57:29'])"
+testID1002052-03:
+  tableName: "doubleset"
+  tableValue: "(205231,'ee',multiset['a'])"
+testID1002052-05:
+  tableName: "doubleset"
+  tableValue: "(205251,'hh',multiset['2022-08-18'])"
+testID1002052-06:
+  tableName: "doubleset"
+  tableValue: "(205261,'ii',multiset['04:55:30'])"
+testID1002052-07:
+  tableName: "doubleset"
+  tableValue: "(205271,'jj',multiset['2021-08-24 09:57:29'])"
+testID1002053-01:
+  tableName: "dateset"
+  tableValue: "(20531,'aa',multiset[1])"
+testID1002053-02:
+  tableName: "dateset"
+  tableValue: "(20532,'bb',multiset[1.5])"
+testID1002053-03:
+  tableName: "dateset"
+  tableValue: "(20533,'cc',multiset[true])"
+testID1002054-01:
+  tableName: "timeset"
+  tableValue: "(20541,'aa',multiset[1])"
+testID1002054-02:
+  tableName: "timeset"
+  tableValue: "(20542,'bb',multiset[1.5])"
+testID1002054-03:
+  tableName: "timeset"
+  tableValue: "(20543,'cc',multiset[true])"
+testID1002055-03:
+  tableName: "timestampset"
+  tableValue: "(20553,'bb',multiset[1.5])"
+testID1002055-04:
+  tableName: "timestampset"
+  tableValue: "(20554,'cc',multiset[true])"
+testID1002056-02:
+  tableName: "boolset"
+  tableValue: "(20562,'cc',multiset[1.0])"
+testID1002056-03:
+  tableName: "boolset"
+  tableValue: "(20563,'dd',multiset[2.5])"
+testID1002056-04:
+  tableName: "boolset"
+  tableValue: "(20564,'ee',multiset['1'])"
+testID1002056-05:
+  tableName: "boolset"
+  tableValue: "(20565,'ff',multiset['0'])"
+testID1002056-06:
+  tableName: "boolset"
+  tableValue: "(20566,'gg',multiset['a'])"
+testID1002056-07:
+  tableName: "boolset"
+  tableValue: "(20567,'hh',multiset['2022-08-18'])"
+testID1002056-08:
+  tableName: "boolset"
+  tableValue: "(20568,'ii',multiset['04:55:30'])"
+testID1002056-09:
+  tableName: "boolset"
+  tableValue: "(20569,'jj',multiset['2021-08-24 09:57:29'])"
+testID1002057-01:
+  tableName: "intset"
+  tableValue: "(20571,'aaaa',multiset[])"
+testID1002057-02:
+  tableName: "doubleset"
+  tableValue: "(20572,'aaaa',multiset[])"
+testID1002057-03:
+  tableName: "varcharset"
+  tableValue: "(20573,'aaaa',multiset[])"
+testID1002057-04:
+  tableName: "dateset"
+  tableValue: "(20574,'aaaa',multiset[])"
+testID1002057-05:
+  tableName: "timeset"
+  tableValue: "(20575,'aaaa',multiset[])"
+testID1002057-06:
+  tableName: "timestampset"
+  tableValue: "(20576,'aaaa',multiset[])"
+testID1002057-07:
+  tableName: "boolset"
+  tableValue: "(20577,'aaaa',multiset[])"
+testID1002058-02:
+  tableName: "intset"
+  tableValue: "(20582,'test58',multiset[''])"
+testID1002058-03:
+  tableName: "doubleset"
+  tableValue: "(20583,'test58',multiset[''])"
+testID1002058-04:
+  tableName: "dateset"
+  tableValue: "(20584,'test58',multiset[''])"
+testID1002058-05:
+  tableName: "timeset"
+  tableValue: "(20585,'test58',multiset[''])"
+testID1002058-06:
+  tableName: "timestampset"
+  tableValue: "(20586,'test58',multiset[''])"
+testID1002058-07:
+  tableName: "boolset"
+  tableValue: "(20587,'test58',multiset[''])"
+testID1002065-01:
+  tableName: "intset"
+  tableValue: "(20651,'test65',multiset[2147483648])"
+testID1002065-02:
+  tableName: "intset"
+  tableValue: "(20652,'test65',multiset[-2147483649])"
+testID1002065-03:
+  tableName: "intset"
+  tableValue: "(20653,'test65',multiset[2147483649, 13897654321, 9223372036854775807])"
+testID1002065-04:
+  tableName: "bigintset"
+  tableValue: "(20654,'test65',multiset[9223372036854775808)"
+testID1002065-05:
+  tableName: "bigintset"
+  tableValue: "(20655,'test65',multiset[-9223372036854775809])"
+

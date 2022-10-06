@@ -1,0 +1,13 @@
+(
+id int,
+name varchar(20),
+age int,
+class_no int multiset,
+user_info varchar multiset,
+price double multiset,
+run_inter date multiset,
+test_time time multiset,
+send_time timestamp multiset,
+in_use boolean multiset,
+primary key(id)
+)

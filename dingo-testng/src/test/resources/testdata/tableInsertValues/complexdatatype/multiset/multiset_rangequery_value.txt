@@ -1,0 +1,5 @@
+(1, 'zhangsan', 11, 23.45, multiset['male000','beijing','1234.56']),
+(2, 'lisi', 35, 0.99, multiset['female']),
+(3, 'wangwu', 8, -1230.44, multiset['male1234','shanghai']),
+(4, 'Tomy-1', -22, 99.9, multiset['female','Jinan3','789.23']),
+(5,'WWW', 35, 0.99, multiset['shanghai','192987210','male_tbl','class-01'])

@@ -926,6 +926,55 @@ public class YamlDataHelper{
     }
 
     @DataProvider
+    public Object[][] multisetFieldMethod(Method method) {
+        List<Map<String, String>> yamlMultisetList = null;
+        switch (method.getName()) {
+            case "test01TableCreateWithMultisetField": {
+                yamlMultisetList = getYamlList(iniReader.getValue("MultisetFieldYaml", "multisetfield"));
+                break;
+            }
+
+            case "test02InsertMultisetValues": {
+                yamlMultisetList = getYamlList(iniReader.getValue("MultisetFieldYaml", "multisetfield"));
+                break;
+            }
+
+            case "test03QueryMultisetData": {
+                yamlMultisetList = getYamlList(iniReader.getValue("MultisetFieldYaml", "multisetfield"));
+                break;
+            }
+
+            case "test04InsertMultisetColumnNull": {
+                yamlMultisetList = getYamlList(iniReader.getValue("MultisetFieldYaml", "multisetfield_null"));
+                break;
+            }
+
+            case "test05MultisetValueNotSupport": {
+                yamlMultisetList = getYamlList(iniReader.getValue("MultisetFieldYaml", "multisetvalue_exception"));
+                break;
+            }
+
+            case "test06MixValuesSupport": {
+                yamlMultisetList = getYamlList(iniReader.getValue("MultisetFieldYaml", "multisetmixvalues"));
+                break;
+            }
+
+            case "test10UpdateMultisetAndQuery": {
+                yamlMultisetList = getYamlList(iniReader.getValue("MultisetFieldYaml", "multiset_update"));
+                break;
+            }
+
+        }
+        Object[][] files = new Object[yamlMultisetList.size()][];
+        for (int i = 0; i < yamlMultisetList.size(); i++) {
+            files[i] = new Object[]{yamlMultisetList.get(i)};
+        }
+        return files;
+    }
+
+
+
+    @DataProvider
     public Object[][] mapFieldMethod(Method method) {
         List<Map<String, String>> yamlMapList = null;
         switch (method.getName()) {

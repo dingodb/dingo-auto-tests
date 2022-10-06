@@ -1,0 +1,12 @@
+testID1002025-01:
+  tableName: "intset"
+  tableValue: "(20251,'zhangsan',null)"
+  queryFields: "*"
+  queryLogic: " where id = 20251"
+  fieldsCnt: "3"
+testID1002025-02:
+  tableName: "varcharset"
+  tableValue: "(20252,'lisi',null)"
+  queryFields: "*"
+  queryLogic: " where id = 20252"
+  fieldsCnt: "3"

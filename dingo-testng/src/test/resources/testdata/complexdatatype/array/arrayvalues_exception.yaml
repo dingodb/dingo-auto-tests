@@ -283,6 +283,15 @@ testID1001934-06:
 testID1001934-07:
   tableName: "timestampArray"
   arrayValues: "(19347, 'zhangsan', array[])"
+testID1001935-02:
+  tableName: "dateArray"
+  arrayValues: "(19352, 'zhangsan', array[''])"
+testID1001935-03:
+  tableName: "timeArray"
+  arrayValues: "(19353, 'zhangsan', array[''])"
+testID1001935-04:
+  tableName: "timestampArray"
+  arrayValues: "(19354, 'zhangsan', array[''])"
 testID1001935-05:
   tableName: "intArray"
   arrayValues: "(19355, 'zhangsan', array[''])"
