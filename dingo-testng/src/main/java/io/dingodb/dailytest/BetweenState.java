@@ -36,166 +36,21 @@ public class BetweenState {
         }
     }
 
-    //创建between and语句测试表1
-    public void betweenTable1Create(String between_and_Meta) throws SQLException {
+    //创建between and语句测试表
+    public void betweenTableCreate(String tableName, String tableMeta) throws SQLException {
         try(Statement statement = connection.createStatement()) {
-            String createTableSQL = "create table betweenTest " + between_and_Meta;
+            String createTableSQL = "create table " + tableName + tableMeta;
             statement.execute(createTableSQL);
         }
     }
 
-    //表1插入数据
-    public void insertTable1Values(String between_and_Values) throws SQLException {
+    //表插入数据
+    public void insertTableValues(String tableName, String tableValue) throws SQLException {
         try(Statement statement = connection.createStatement()) {
-            String insertValuesSQL = "insert into betweenTest values " + between_and_Values;
+            String insertValuesSQL = "insert into " + tableName + " values " + tableValue;
             statement.execute(insertValuesSQL);
         }
     }
-
-    //创建between and语句测试表2
-    public void betweenTable2Create(String between_and_Meta) throws SQLException {
-        try(Statement statement = connection.createStatement()) {
-            String createTableSQL = "create table betweenTest2 " + between_and_Meta;
-            statement.execute(createTableSQL);
-        }
-    }
-
-    //表2插入数据
-    public void insertTable2Values(String between_and_Values) throws SQLException {
-        try(Statement statement = connection.createStatement()) {
-            String insertValuesSQL = "insert into betweenTest2 values " + between_and_Values;
-            statement.execute(insertValuesSQL);
-        }
-    }
-
-    //创建between and语句测试表3
-    public void betweenTable3Create(String between_and_Meta) throws SQLException {
-        try(Statement statement = connection.createStatement()) {
-            String createTableSQL = "create table betweenTest3 " + between_and_Meta;
-            statement.execute(createTableSQL);
-        }
-    }
-
-    //表3插入数据
-    public void insertTable3Values(String between_and_Values) throws SQLException {
-        try(Statement statement = connection.createStatement()) {
-            String insertValuesSQL = "insert into betweenTest3 values " + between_and_Values;
-            statement.execute(insertValuesSQL);
-        }
-    }
-
-    //创建between and语句测试表4
-    public void betweenTable4Create(String between_and_Meta) throws SQLException {
-        try(Statement statement = connection.createStatement()) {
-            String createTableSQL = "create table betweenTest4 " + between_and_Meta;
-            statement.execute(createTableSQL);
-        }
-    }
-
-    //表4插入数据
-    public void insertTable4Values(String between_and_Values) throws SQLException {
-        try(Statement statement = connection.createStatement()) {
-            String insertValuesSQL = "insert into betweenTest4 values " + between_and_Values;
-            statement.execute(insertValuesSQL);
-        }
-    }
-
-    //创建between and语句测试表5
-    public void betweenTable5Create(String between_and_Meta) throws SQLException {
-        try(Statement statement = connection.createStatement()) {
-            String createTableSQL = "create table betweenTest5 " + between_and_Meta;
-            statement.execute(createTableSQL);
-        }
-    }
-
-    //表5插入数据
-    public void insertTable5Values(String between_and_Values) throws SQLException {
-        try(Statement statement = connection.createStatement()) {
-            String insertValuesSQL = "insert into betweenTest5 values " + between_and_Values;
-            statement.execute(insertValuesSQL);
-        }
-    }
-
-    //创建between and语句测试表6
-    public void betweenTable6Create(String between_and_Meta) throws SQLException {
-        try(Statement statement = connection.createStatement()) {
-            String createTableSQL = "create table between_employees " + between_and_Meta;
-            statement.execute(createTableSQL);
-        }
-    }
-
-    //表6插入数据
-    public void insertTable6Values(String between_and_Values) throws SQLException {
-        try(Statement statement = connection.createStatement()) {
-            String insertValuesSQL = "insert into between_employees values " + between_and_Values;
-            statement.execute(insertValuesSQL);
-        }
-    }
-
-    //创建between and语句测试表7
-    public void betweenTable7Create(String between_and_Meta) throws SQLException {
-        try(Statement statement = connection.createStatement()) {
-            String createTableSQL = "create table between_job_grades " + between_and_Meta;
-            statement.execute(createTableSQL);
-        }
-    }
-
-    //表7插入数据
-    public void insertTable7Values(String between_and_Values) throws SQLException {
-        try(Statement statement = connection.createStatement()) {
-            String insertValuesSQL = "insert into between_job_grades values " + between_and_Values;
-            statement.execute(insertValuesSQL);
-        }
-    }
-
-    //创建between and语句测试表8 - 三主键
-    public void betweenTable8Create(String between_and_Meta) throws SQLException {
-        try(Statement statement = connection.createStatement()) {
-            String createTableSQL = "create table betweenTest8 " + between_and_Meta;
-            statement.execute(createTableSQL);
-        }
-    }
-
-    //表8插入数据
-    public void insertTable8Values(String between_and_Values) throws SQLException {
-        try(Statement statement = connection.createStatement()) {
-            String insertValuesSQL = "insert into betweenTest8 values " + between_and_Values;
-            statement.execute(insertValuesSQL);
-        }
-    }
-
-    //创建between and语句测试表9 - 两主键
-    public void betweenTable9Create(String between_and_Meta) throws SQLException {
-        try(Statement statement = connection.createStatement()) {
-            String createTableSQL = "create table betweenTest9 " + between_and_Meta;
-            statement.execute(createTableSQL);
-        }
-    }
-
-    //表9插入数据
-    public void insertTable9Values(String between_and_Values) throws SQLException {
-        try(Statement statement = connection.createStatement()) {
-            String insertValuesSQL = "insert into betweenTest9 values " + between_and_Values;
-            statement.execute(insertValuesSQL);
-        }
-    }
-
-    //创建between and语句测试表10 - 字符型主键
-    public void betweenTable10Create(String between_and_Meta) throws SQLException {
-        try(Statement statement = connection.createStatement()) {
-            String createTableSQL = "create table betweenTest10 " + between_and_Meta;
-            statement.execute(createTableSQL);
-        }
-    }
-
-    //表10插入数据
-    public void insertTable10Values(String between_and_Values) throws SQLException {
-        try(Statement statement = connection.createStatement()) {
-            String insertValuesSQL = "insert into betweenTest10 values " + between_and_Values;
-            statement.execute(insertValuesSQL);
-        }
-    }
-
 
     //betwwen按主键id进行范围查询
     public List<List> betweenQueryByPrimaryKeyRange() throws SQLException {

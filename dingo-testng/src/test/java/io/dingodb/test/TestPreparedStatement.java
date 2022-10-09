@@ -130,10 +130,10 @@ public class TestPreparedStatement {
 
     public static List<List> expectedTest05List() {
         String[][] dataArray = {
-                {"true", "2010-10-01", "19:00:00", "2010-10-01 02:02:02"},
+//                {"true", "2010-10-01", "19:00:00", "2010-10-01 02:02:02"},
                 {"true", "2018-05-31", "21:00:00", "2000-01-01 00:00:00"},
-                {"false", "2014-10-13", "01:00:00", "1999-12-31 23:59:59"},
-                {"false", "2010-10-01", "19:00:00", "2010-10-01 02:02:02"}
+                {"false", "2014-10-13", "01:00:00", "1999-12-31 23:59:59"}
+//                {"false", "2010-10-01", "19:00:00", "2010-10-01 02:02:02"}
         };
         List<List> psList = new ArrayList<List>();
         for(int i=0; i<dataArray.length; i++) {
@@ -283,11 +283,16 @@ public class TestPreparedStatement {
                 " where birthday>? and create_time in(?, ?, ?) and update_time < ?";
         List<List> queryList = new ArrayList<List>();
         try (PreparedStatement ps = connection.prepareStatement(querysql)) {
-            ps.setString(1, "2005-01-01");
-            ps.setString(2, "01:00:00");
-            ps.setString(3, "19:00:00");
-            ps.setString(4, "21:00:00");
-            ps.setString(5,"2010-10-01 00:00:00");
+            LocalDate localDate1 = LocalDate.of(2005, 1, 1);
+            LocalTime localTime1 = LocalTime.of(1, 0, 0);
+            LocalTime localTime2 = LocalTime.of(19, 0, 0);
+            LocalTime localTime3 = LocalTime.of(21, 0, 0);
+            LocalDateTime localDateTime1 = LocalDateTime.of(2010, 10, 1, 0, 0, 0);
+            ps.setDate(1, Date.valueOf(localDate1));
+            ps.setTime(2, Time.valueOf(localTime1));
+            ps.setTime(3, Time.valueOf(localTime2));
+            ps.setTime(4, Time.valueOf(localTime3));
+            ps.setTimestamp(5,Timestamp.valueOf(localDateTime1));
             ResultSet resultSet = ps.executeQuery();
             while (resultSet.next()) {
                 List rowList = new ArrayList();
@@ -356,28 +361,44 @@ public class TestPreparedStatement {
 
     @Test(priority = 9, enabled = true, description = "插入语句中使用preparedStatement")
     public void test09PSInInsert() throws SQLException {
-        String insertsql = "insert into " + tableName + " values(?,?,?,?,?,?,?,?,?)";
-        int affectRows = 0;
-        try (PreparedStatement ps = connection.prepareStatement(insertsql)) {
+
+        LocalDate localDate = LocalDate.of(2022, 5, 1);
+        LocalTime localTime = LocalTime.of(11, 46, 25);
+        LocalDateTime localDateTime = LocalDateTime.of(2022, 10, 1, 14, 15, 10);
+        String insertSql = "insert into " + tableName + " values(?,?,?,?,?,?,?,?,?)";
+        try (PreparedStatement ps1 = connection.prepareStatement(insertSql)) {
             for(int i = 100; i <= 110; i++) {
-                ps.setInt(1, i);
-                ps.setString(2, "Java");
-                ps.setInt(3, 33);
-                ps.setDouble(4, 2345.6789);
-                ps.setString(5, "Beijing Zhongguancun");
+                ps1.setInt(1, i);
+                ps1.setString(2, "Java");
+                ps1.setInt(3, 33);
+                ps1.setDouble(4, 2345.6789);
+                ps1.setString(5, "Beijing Zhongguancun");
+                ps1.setDate(6, Date.valueOf(localDate));
+//                ps.setDate(6, new Date(1234567));
+                ps1.setTime(7, Time.valueOf(localTime));
+//                ps.setTime(7, new Time(1234567));
+                ps1.setTimestamp(8, Timestamp.valueOf(localDateTime));
+//                ps.setTimestamp(8, new Timestamp(1234567));
+                ps1.setBoolean(9, true);
 
-                LocalDate localDate = LocalDate.of(2022, 5, 1);
-                ps.setDate(6, Date.valueOf(localDate));
-
-                LocalTime localTime = LocalTime.of(11, 46, 25);
-                ps.setTime(7, Time.valueOf(localTime));
-
-                LocalDateTime localDateTime = LocalDateTime.of(2022, 10, 1, 14, 15, 10);
-                ps.setTimestamp(8, Timestamp.valueOf(localDateTime));
-                ps.setBoolean(9, true);
-                ps.execute();
-                System.out.println("插入第" + i + "条完成。");
+                ps1.execute();
+                System.out.println("插入id " + i + "完成。");
             }
+        }
+
+        String querySql = "select count(*) from " + tableName + " where birthday = ? and create_time=? and update_time=? and is_delete = ?";
+        try(PreparedStatement ps2 = connection.prepareStatement(querySql)){
+            ps2.setDate(1, Date.valueOf(localDate));
+            ps2.setTime(2, Time.valueOf(localTime));
+            ps2.setTimestamp(3, Timestamp.valueOf(localDateTime));
+            ps2.setBoolean(4, true);
+            ResultSet resultSet = ps2.executeQuery();
+            int getRows = 0;
+            while (resultSet.next()) {
+                getRows = resultSet.getInt(1);
+            }
+            System.out.println("Actual cnt: " + getRows);
+            Assert.assertEquals(getRows, 11);
         }
     }
 

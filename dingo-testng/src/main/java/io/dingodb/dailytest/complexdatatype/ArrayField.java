@@ -314,8 +314,4 @@ public class ArrayField {
             return queryList;
         }
     }
-
-
-
-
 }
