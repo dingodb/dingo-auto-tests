@@ -39,6 +39,26 @@ import java.util.Map;
 public class TestDateTime extends YamlDataHelper{
     public static DateTimeFuncs dateTimeObj = new DateTimeFuncs();
 
+    public static List<List> expectedOutData(String[][] dataArray) {
+        List<List> expectedList = new ArrayList<List>();
+        for(int i = 0; i < dataArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j = 0; j < dataArray[i].length; j++) {
+                columnList.add(dataArray[i][j]);
+            }
+            expectedList.add(columnList);
+        }
+        return expectedList;
+    }
+
+    public static List expectedOutData(Object[] dataArray) {
+        List expectedList = new ArrayList();
+        for (int i=0; i < dataArray.length; i++){
+            expectedList.add(dataArray[i]);
+        }
+        return expectedList;
+    }
+
     @BeforeClass(alwaysRun = true, description = "测试数据库连接")
     public static void setUpAll() throws ClassNotFoundException, SQLException {
         Assert.assertNotNull(DateTimeFuncs.connection);
@@ -345,15 +365,12 @@ public class TestDateTime extends YamlDataHelper{
     @Test(priority = 12, enabled = true, expectedExceptions = SQLException.class, dependsOnMethods = {"test02DateTimeInsert"},
             description = "验证函数unix_TimeStamp在表格中Date字段使用，预期异常")
     public void test13Unix_TimeStampInTableDate() throws SQLException {
-        List<String> expectedQueryUTSBList = new ArrayList<>();
         // unix_timestamp接收日期不考虑夏令时，1987-07-16日按标准时间返回时间戳
         //String[] ustbArray = new String[]{"891792000","570988800","1646323200","1605024000","1285862400","553363200","-662716800"};
 
         // unix_timestamp接收日期考虑夏令时，1987-07-16日为中国历史上的DST规则的DST offset=1的区间内，因此时间戳会减少一小时
-        String[] ustbArray = new String[]{"891792000","570988800","1646323200","1605024000","1285862400","553359600","-662716800"};
-        for (int i=0; i < ustbArray.length; i++){
-            expectedQueryUTSBList.add(ustbArray[i]);
-        }
+        String[] dataArray = new String[]{"891792000","570988800","1646323200","1605024000","1285862400","553359600","-662716800"};
+        List<String> expectedQueryUTSBList = expectedOutData(dataArray);
         System.out.println("期望查询到的列表为：" + expectedQueryUTSBList);
 
         List<String> actualQueryUTSBList = dateTimeObj.queryUnix_timestampDateInTable();
@@ -364,11 +381,8 @@ public class TestDateTime extends YamlDataHelper{
     @Test(priority = 12, enabled = true, dependsOnMethods = {"test02DateTimeInsert"},
             description = "验证函数unix_TimeStamp在表格中使用时的返回结果正常")
     public void test13Unix_TimeStampInTableTimestamp() throws SQLException {
-        List<String> expectedQueryUTSCList = new ArrayList<>();
-        String[] ustcArray = new String[]{"1649412307","951753600","920217599","1620100800","1285869722","-536528868","1669827723"};
-        for (int i=0; i < ustcArray.length; i++){
-            expectedQueryUTSCList.add(ustcArray[i]);
-        }
+        String[] dataArray = new String[]{"1649412307","951753600","920217599","1620100800","1285869722","-536528868","1669827723"};
+        List<String> expectedQueryUTSCList = expectedOutData(dataArray);
         System.out.println("期望查询到的列表为：" + expectedQueryUTSCList);
 
         List<String> actualQueryUTSCList = dateTimeObj.queryUnix_timestampTimeStampInTable();
@@ -424,12 +438,9 @@ public class TestDateTime extends YamlDataHelper{
 
     @Test(priority = 13, enabled = true, dependsOnMethods = {"test02DateTimeInsert"}, description = "验证函数date_format在表格中使用时的返回结果正常")
     public void test14Date_FormatTableDate() throws SQLException {
-        List<String> expectedQueryDFBList = new ArrayList<>();
-        String[] dfbArray = new String[]{"1998 year 04 month 06 day","1988 year 02 month 05 day","2022 year 03 month 04 day",
+        String[] dataArray = new String[]{"1998 year 04 month 06 day","1988 year 02 month 05 day","2022 year 03 month 04 day",
                 "2020 year 11 month 11 day","2010 year 10 month 01 day","1987 year 07 month 16 day","1949 year 01 month 01 day"};
-        for (int i=0; i < dfbArray.length; i++){
-            expectedQueryDFBList.add(dfbArray[i]);
-        }
+        List<String> expectedQueryDFBList = expectedOutData(dataArray);
         System.out.println("期望查询到的列表为：" + expectedQueryDFBList);
 
         List<String> actualQueryDFBList = dateTimeObj.queryDate_FormatDateInTable();
@@ -710,12 +721,9 @@ public class TestDateTime extends YamlDataHelper{
     @Test(priority = 21, enabled = true, dependsOnMethods = {"test02TimeInsert"},
             description = "验证函数time_format在表格中使用时的返回结果正常")
     public void test22Time_FormatTableTime() throws SQLException {
-        List<String> expectedQueryList = new ArrayList<>();
-        String[] formatOutArray = new String[]{"08:10:10","06:15:08","07:03:15","05:59:59","19:00:00","23:59:59",
+        String[] dataArray = new String[]{"08:10:10","06:15:08","07:03:15","05:59:59","19:00:00","23:59:59",
                 "01:02:03","00:30:08","02:02:00","00:00:00"};
-        for (int i=0; i < formatOutArray.length; i++){
-            expectedQueryList.add(formatOutArray[i]);
-        }
+        List<String> expectedQueryList = expectedOutData(dataArray);
         System.out.println("期望查询到的列表为：" + expectedQueryList);
 
         List<String> actualQueryList = dateTimeObj.queryTime_FormatTimeInTable();
@@ -723,41 +731,13 @@ public class TestDateTime extends YamlDataHelper{
         Assert.assertTrue(actualQueryList.equals(expectedQueryList));
     }
 
-    public List<List> expectedUpdateSingleRow() {
-        String[][] dataArray = {{"7","new","33","1111.111","new Addr","2022-05-19","18:33:00","1949-07-01 23:59:59","true"}};
-        List<List> expectedList = new ArrayList<List>();
-        for(int i=0; i<dataArray.length; i++) {
-            List columnList = new ArrayList();
-            for (int j=0; j<dataArray[i].length; j++) {
-                columnList.add(dataArray[i][j]);
-            }
-            expectedList.add(columnList);
-        }
-        return expectedList;
-    }
-
-    public List<List> expectedUpdateAllRow() {
-        String[][] dataArray = {{"1","zhangsan","100","22.22","BJ","1998-04-06","08:10:10","2022-10-01 10:08:06","false"},
-                {"2","lisi","100","22.22","BJ","1988-02-05","06:15:08","2022-10-01 10:08:06","false"},
-                {"3","l3","100","22.22","BJ","2022-03-04","07:03:15","2022-10-01 10:08:06","false"},
-                {"4","HAHA","100","22.22","BJ","2020-11-11","05:59:59","2022-10-01 10:08:06","false"},
-                {"5","awJDs","100","22.22","BJ","2010-10-01","19:00:00","2022-10-01 10:08:06","false"},
-                {"6","123","100","22.22","BJ","1987-07-16","01:02:03","2022-10-01 10:08:06","false"},
-                {"7","new","100","22.22","BJ","2022-05-19","18:33:00","2022-10-01 10:08:06","false"}};
-        List<List> expectedList = new ArrayList<List>();
-        for(int i=0; i<dataArray.length; i++) {
-            List columnList = new ArrayList();
-            for (int j=0; j<dataArray[i].length; j++) {
-                columnList.add(dataArray[i][j]);
-            }
-            expectedList.add(columnList);
-        }
-        return expectedList;
-    }
-
     @Test(priority = 22, enabled = true, description = "验证更新单行多字段")
     public void test23UpdateSingleRowMultiCol() throws Exception {
-        List<List> expectedList = expectedUpdateSingleRow();
+        String[][] dataArray = {
+                {"7","new","33","1111.111","new Addr","2022-05-19","18:33:00","1949-07-01 23:59:59","true"}
+        };
+
+        List<List> expectedList = expectedOutData(dataArray);
         System.out.println("Expected: " + expectedList);
         List<List> actualUpdateList = dateTimeObj.updateSingleRow();
         System.out.println("Actual: " + actualUpdateList);
@@ -769,7 +749,15 @@ public class TestDateTime extends YamlDataHelper{
     @Test(priority = 22, enabled = true, dependsOnMethods = {"test23UpdateSingleRowMultiCol"},
             description = "验证更新全部行多字段")
     public void test23UpdateAllRows() throws Exception {
-        List<List> expectedList = expectedUpdateAllRow();
+        String[][] dataArray = {{"1","zhangsan","100","22.22","BJ","1998-04-06","08:10:10","2022-10-01 10:08:06","false"},
+                {"2","lisi","100","22.22","BJ","1988-02-05","06:15:08","2022-10-01 10:08:06","false"},
+                {"3","l3","100","22.22","BJ","2022-03-04","07:03:15","2022-10-01 10:08:06","false"},
+                {"4","HAHA","100","22.22","BJ","2020-11-11","05:59:59","2022-10-01 10:08:06","false"},
+                {"5","awJDs","100","22.22","BJ","2010-10-01","19:00:00","2022-10-01 10:08:06","false"},
+                {"6","123","100","22.22","BJ","1987-07-16","01:02:03","2022-10-01 10:08:06","false"},
+                {"7","new","100","22.22","BJ","2022-05-19","18:33:00","2022-10-01 10:08:06","false"}
+        };
+        List<List> expectedList = expectedOutData(dataArray);
         System.out.println("Expected: " + expectedList);
         List<List> actualUpdateList = dateTimeObj.updateAllRow();
         System.out.println("Actual: " + actualUpdateList);
@@ -842,12 +830,9 @@ public class TestDateTime extends YamlDataHelper{
     @Test(priority = 26, enabled = true, dependsOnMethods = {"test02DateTimeInsert"},
             description = "验证函数timestamp_format在表格中对timestamp类型字段使用时的返回结果正常")
     public void test27Timestamp_FormatTableTimestamp() throws SQLException {
-        List<String> expectedQueryList = new ArrayList<>();
-        String[] tsfArray = new String[]{"2022/04/08 18.05.07","2000/02/29 00.00.00","1999/02/28 23.59.59",
+        String[] dataArray = new String[]{"2022/04/08 18.05.07","2000/02/29 00.00.00","1999/02/28 23.59.59",
                 "2021/05/04 12.00.00","2010/10/01 02.02.02","1952/12/31 12.12.12","2022/12/01 01.02.03"};
-        for (int i=0; i < tsfArray.length; i++){
-            expectedQueryList.add(tsfArray[i]);
-        }
+        List<String> expectedQueryList = expectedOutData(dataArray);
         System.out.println("期望查询到的列表为：" + expectedQueryList);
 
         List<String> actualQueryList = dateTimeObj.queryTimestamp_FormatTimestampInTable();

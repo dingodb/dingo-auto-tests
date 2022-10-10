@@ -2371,17 +2371,17 @@ public class SQLFuncs {
      */
 
     //创建查询测试表1
-    public void queryTable1Create(String queryTable_Meta) throws SQLException {
+    public void queryTable1Create(String tableName, String tableMeta) throws SQLException {
         try(Statement statement = connection.createStatement()) {
-            String createTableSQL = "create table querytest1 " + queryTable_Meta;
+            String createTableSQL = "create table " + tableName + tableMeta;
             statement.execute(createTableSQL);
         }
     }
 
     //查询测试表1插入数据
-    public void queryTable1InsertValues(String queryTable_Values) throws SQLException {
+    public void queryTable1InsertValues(String tableName, String tableValue) throws SQLException {
         try(Statement statement = connection.createStatement()) {
-            String insertValuesSQL = "insert into querytest1 values " + queryTable_Values;
+            String insertValuesSQL = "insert into " + tableName + " values " + tableValue;
             statement.execute(insertValuesSQL);
         }
     }

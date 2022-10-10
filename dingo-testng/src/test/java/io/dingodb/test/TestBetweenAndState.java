@@ -54,23 +54,12 @@ public class TestBetweenAndState extends YamlDataHelper {
         return expectedList;
     }
 
-    public static List expectedTest46List() {
-        List betweenList = new ArrayList();
-        betweenList.add("68");
-        betweenList.add("117773.7299");
-        betweenList.add("1949-10-01");
-
-        return betweenList;
-    }
-
-    public static List expectedTest47List() {
-        List notBetweenList = new ArrayList();
-        notBetweenList.add("2201.22");
-        notBetweenList.add("33018.24");
-        notBetweenList.add("17:30:15");
-        notBetweenList.add("1952-12-31 12:12:12");
-
-        return notBetweenList;
+    public static List expectedOutData(Object[] dataArray) {
+        List expectedList = new ArrayList();
+        for (int i=0; i < dataArray.length; i++){
+            expectedList.add(dataArray[i]);
+        }
+        return expectedList;
     }
 
 
@@ -900,7 +889,8 @@ public class TestBetweenAndState extends YamlDataHelper {
     @Test(priority = 45, enabled = true, dependsOnMethods = {"test00CreateBetweenTable1"},
             description = "验证between查询使用聚合函数")
     public void test46BetweenQueryWithAggrFunc() throws SQLException {
-        List expectedBetweenList = expectedTest46List();
+        String[] dataArray = new String[] {"68", "117773.7299", "1949-10-01"};
+        List expectedBetweenList = expectedOutData(dataArray);
         System.out.println("Expected: " + expectedBetweenList);
         List actualBetweenList = betweenObj.betweenQueryWithAggrFunc();
         System.out.println("Actual: " + actualBetweenList);
@@ -911,7 +901,8 @@ public class TestBetweenAndState extends YamlDataHelper {
     @Test(priority = 46, enabled = true, dependsOnMethods = {"test00CreateBetweenTable1"},
             description = "验证not between查询使用聚合函数")
     public void test47NotBetweenQueryWithAggrFunc() throws SQLException {
-        List expectedBetweenList = expectedTest47List();
+        String[] dataArray = new String[] {"2201.22", "33018.24", "17:30:15", "1952-12-31 12:12:12"};
+        List expectedBetweenList = expectedOutData(dataArray);
         System.out.println("Expected: " + expectedBetweenList);
         List actualBetweenList = betweenObj.notBetweenQueryWithAggrFunc();
         System.out.println("Actual: " + actualBetweenList);

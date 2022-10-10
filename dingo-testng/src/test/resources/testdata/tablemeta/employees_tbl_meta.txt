@@ -10,4 +10,5 @@
   manager_id int DEFAULT NULL,
   department_id int DEFAULT NULL,
   hiredate timestamp DEFAULT NULL,
-  PRIMARY KEY (employee_id))
+  PRIMARY KEY (employee_id)
+  )

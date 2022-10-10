@@ -37,17 +37,17 @@ public class NumericFuncs {
     }
 
     //创建数值函数测试表
-    public void numericTableCreate(String numtest_Meta) throws SQLException {
+    public void numericTableCreate(String tableName, String tableMeta) throws SQLException {
         try(Statement statement = connection.createStatement()) {
-            String createTableSQL = "create table numtest " + numtest_Meta;
+            String createTableSQL = "create table " + tableName + tableMeta;
             statement.execute(createTableSQL);
         }
     }
 
     //数值函数测试表插入数据
-    public void insertTableValues(String numtest_values) throws SQLException {
+    public void insertTableValues(String tableName, String tableValues) throws SQLException {
         try(Statement statement = connection.createStatement()) {
-            String insertValuesSQL = "insert into numtest values " + numtest_values;
+            String insertValuesSQL = "insert into " + tableName + " values " + tableValues;
             statement.execute(insertValuesSQL);
         }
     }

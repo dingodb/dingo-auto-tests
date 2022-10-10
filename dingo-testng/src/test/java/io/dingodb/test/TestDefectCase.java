@@ -31,6 +31,26 @@ import java.util.List;
 public class TestDefectCase {
     public static DefectCase defectObj = new DefectCase();
 
+    public static List<List> expectedOutData(String[][] dataArray) {
+        List<List> expectedList = new ArrayList<List>();
+        for(int i = 0; i < dataArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j = 0; j < dataArray[i].length; j++) {
+                columnList.add(dataArray[i][j]);
+            }
+            expectedList.add(columnList);
+        }
+        return expectedList;
+    }
+
+    public static List expectedOutData(Object[] dataArray) {
+        List expectedList = new ArrayList();
+        for (int i=0; i < dataArray.length; i++){
+            expectedList.add(dataArray[i]);
+        }
+        return expectedList;
+    }
+
     @BeforeClass(alwaysRun = true, description = "测试前连接数据库，创建表格和插入数据")
     public static void setUpAll() throws SQLException {
         Assert.assertNotNull(DefectCase.connection);
@@ -64,19 +84,14 @@ public class TestDefectCase {
 
     @Test(priority = 3, enabled = true, description = "验证算术运算")
     public void testDefect0046() throws SQLException {
-        List<Integer> expectedList = new ArrayList<Integer>();
-        expectedList.add(2);
-        expectedList.add(-3087);
-        expectedList.add(156);
-        expectedList.add(205);
-        expectedList.add(204);
+        Integer[] dataArray = new Integer[] {2, -3087, 156, 205, 204};
+        List<Integer> expectedList = expectedOutData(dataArray);
 
         System.out.println("Expected: " + expectedList);
         List<Integer> actualList = defectObj.defect0046();
         System.out.println("Actual: " + actualList);
         Assert.assertEquals(actualList, expectedList);
     }
-
 
     @Test(priority = 4, enabled = true, expectedExceptions = SQLException.class, description = "验证字段重复，创建表失败")
     public void testDefect0136() throws SQLException {
@@ -85,18 +100,8 @@ public class TestDefectCase {
 
     @Test(priority = 5, enabled = true, dependsOnMethods = {"testDefect0033_1"},description = "验证有日期时间字段的插入")
     public void testDefect0154() throws SQLException {
-        List expectedList = new ArrayList();
-        expectedList.add(1);
-        expectedList.add("154");
-        expectedList.add("zhangsan");
-        expectedList.add("18");
-        expectedList.add(null);
-        expectedList.add(null);
-        expectedList.add(null);
-        expectedList.add(null);
-        expectedList.add(null);
-        expectedList.add(null);
-
+        String[] dataArray = new String[] {"1", "154", "zhangsan", "18", null, null, null, null, null, null};
+        List expectedList = expectedOutData(dataArray);
         System.out.println("Expected: " + expectedList);
         List actualList = defectObj.defect0154();
         System.out.println("Actual: " + actualList);
@@ -105,13 +110,8 @@ public class TestDefectCase {
 
     @Test(priority = 6, enabled = true, dependsOnMethods = {"testDefect0154"}, description = "验证对时间日期类型字段求最大最小值")
     public void testDefect0178_MaxMin() throws SQLException {
-        List expectedList = new ArrayList();
-        expectedList.add("2022-03-13");
-        expectedList.add("19:00:00");
-        expectedList.add("2022-12-01 10:10:10");
-        expectedList.add("1949-01-01");
-        expectedList.add("00:30:08");
-        expectedList.add("1952-12-31 12:12:12");
+        String[] dataArray = new String[] {"2022-03-13", "19:00:00", "2022-12-01 10:10:10", "1949-01-01", "00:30:08", "1952-12-31 12:12:12"};
+        List expectedList = expectedOutData(dataArray);
 
         System.out.println("Expected: " + expectedList);
         List actualList = defectObj.defect0178_max_min();
@@ -121,16 +121,11 @@ public class TestDefectCase {
 
     @Test(priority = 7, enabled = true, dependsOnMethods = {"testDefect0178_MaxMin"}, description = "验证按日期字段排序")
     public void testDefect0178_OrderByDate() throws SQLException {
-        String[][] orderArray = {{"7","1949-01-01"},{"6","1987-07-16"},{"2","1988-02-05"},{"1","1998-04-06"},
-                {"5","2010-10-01"},{"4","2020-11-11"},{"3","2022-03-04"},{"8","2022-03-13"},{"154",null}};
-        List<List> expectedList = new ArrayList<List>();
-        for(int i=0; i<orderArray.length; i++) {
-            List columnList = new ArrayList();
-            for (int j=0; j<orderArray[i].length; j++) {
-                columnList.add(orderArray[i][j]);
-            }
-            expectedList.add(columnList);
-        }
+        String[][] dataArray = {
+                {"7","1949-01-01"},{"6","1987-07-16"},{"2","1988-02-05"},{"1","1998-04-06"},
+                {"5","2010-10-01"},{"4","2020-11-11"},{"3","2022-03-04"},{"8","2022-03-13"},{"154",null}
+        };
+        List<List> expectedList = expectedOutData(dataArray);
 
         System.out.println("Expected: " + expectedList);
         List actualList = defectObj.defect0178_orderByDate();
@@ -140,16 +135,11 @@ public class TestDefectCase {
 
     @Test(priority = 8, enabled = true, dependsOnMethods = {"testDefect0178_MaxMin"}, description = "验证按时间字段排序")
     public void testDefect0178_OrderByTime() throws SQLException {
-        String[][] orderArray = {{"154",null},{"5","19:00:00"},{"8","12:00:00"},{"1","08:10:10"},
-                {"3","07:03:15"},{"2","06:15:08"},{"4","05:59:59"},{"6","01:02:03"},{"7","00:30:08"}};
-        List<List> expectedList = new ArrayList<List>();
-        for(int i=0; i<orderArray.length; i++) {
-            List columnList = new ArrayList();
-            for (int j=0; j<orderArray[i].length; j++) {
-                columnList.add(orderArray[i][j]);
-            }
-            expectedList.add(columnList);
-        }
+        String[][] dataArray = {
+                {"154",null},{"5","19:00:00"},{"8","12:00:00"},{"1","08:10:10"},
+                {"3","07:03:15"},{"2","06:15:08"},{"4","05:59:59"},{"6","01:02:03"},{"7","00:30:08"}
+        };
+        List<List> expectedList = expectedOutData(dataArray);
 
         System.out.println("Expected: " + expectedList);
         List actualList = defectObj.defect0178_orderByTime();
@@ -159,17 +149,12 @@ public class TestDefectCase {
 
     @Test(priority = 9, enabled = true, dependsOnMethods = {"testDefect0178_MaxMin"}, description = "验证按timestamp字段排序")
     public void testDefect0178_OrderByTimeStamp() throws SQLException {
-        String[][] orderArray = {{"8","2022-12-01 10:10:10"},{"7","2022-12-01 01:02:03"},{"1","2022-04-08 18:05:07"},
+        String[][] dataArray = {
+                {"8","2022-12-01 10:10:10"},{"7","2022-12-01 01:02:03"},{"1","2022-04-08 18:05:07"},
                 {"4","2021-05-04 12:00:00"}, {"5","2010-10-01 02:02:02"},{"2","2000-02-29 00:00:00"},
-                {"3","1999-02-28 23:59:59"},{"6","1952-12-31 12:12:12"}};
-        List<List> expectedList = new ArrayList<List>();
-        for(int i=0; i<orderArray.length; i++) {
-            List columnList = new ArrayList();
-            for (int j=0; j<orderArray[i].length; j++) {
-                columnList.add(orderArray[i][j]);
-            }
-            expectedList.add(columnList);
-        }
+                {"3","1999-02-28 23:59:59"},{"6","1952-12-31 12:12:12"}
+        };
+        List<List> expectedList = expectedOutData(dataArray);
 
         System.out.println("Expected: " + expectedList);
         List actualList = defectObj.defect0178_orderByTimeStamp();

@@ -36,6 +36,26 @@ import java.util.Map;
 public class TestStrFuncs extends YamlDataHelper {
     public static StrFuncs strObj = new StrFuncs();
 
+    public static List<List> expectedOutData(Object[][] dataArray) {
+        List<List> expectedList = new ArrayList<List>();
+        for(int i = 0; i < dataArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j = 0; j < dataArray[i].length; j++) {
+                columnList.add(dataArray[i][j]);
+            }
+            expectedList.add(columnList);
+        }
+        return expectedList;
+    }
+
+    public static List expectedOutData(Object[] dataArray) {
+        List expectedList = new ArrayList();
+        for (int i=0; i < dataArray.length; i++){
+            expectedList.add(dataArray[i]);
+        }
+        return expectedList;
+    }
+
     @BeforeClass(alwaysRun = true, description = "测试开始前，获取数据库连接创建数据表并插入数据")
     public static void ConnectCreateInsert() throws ClassNotFoundException, SQLException {
         Assert.assertNotNull(StrFuncs.connection);
@@ -73,12 +93,9 @@ public class TestStrFuncs extends YamlDataHelper {
 
     @Test(enabled = true, description = "验证格式化数值")
     public void test02FormatStr() throws SQLException, ClassNotFoundException {
-        List<String> expectedFormatList = new ArrayList<>();
-        String[] formatArray = new String[]{"23.50","895.00","123.12","9.08","1454.00","0.00","2.30","12.30",
+        String[] dataArray = new String[]{"23.50","895.00","123.12","9.08","1454.00","0.00","2.30","12.30",
                 "109.33","1234.46","100.00","2345.00","9.08","32.00","0.12"};
-        for (int i=0; i < formatArray.length; i++){
-            expectedFormatList.add(formatArray[i]);
-        }
+        List<String> expectedFormatList = expectedOutData(dataArray);
         System.out.println("期望格式化后的列表为：" + expectedFormatList);
 
         List<String> actualFormatList = strObj.formatFunc();
@@ -88,11 +105,8 @@ public class TestStrFuncs extends YamlDataHelper {
 
     @Test(enabled = true, description = "验证查找字符串位置")
     public void test03LocateStr() throws SQLException, ClassNotFoundException {
-        List<String> expectedLocateList = new ArrayList<>();
-        String[] locateArray = new String[]{"3","0","0","0","1","0","2","3","0","0","3","2","0","7","0"};
-        for (int i=0; i < locateArray.length; i++){
-            expectedLocateList.add(locateArray[i]);
-        }
+        String[] dataArray = new String[]{"3","0","0","0","1","0","2","3","0","0","3","2","0","7","0"};
+        List<String> expectedLocateList = expectedOutData(dataArray);
         System.out.println("期望查找的位置列表为：" + expectedLocateList);
 
         List<String> actualLocateList = strObj.locateFunc();
@@ -102,12 +116,9 @@ public class TestStrFuncs extends YamlDataHelper {
 
     @Test(enabled = true, description = "验证字母转为小写")
     public void test04LowerAndLcase() throws SQLException, ClassNotFoundException {
-        List<String> expectedLowerList = new ArrayList<>();
-        String[] lowerArray = new String[]{"zhangsan","lisi","l3","haha","awjds","123","yamaha","zhangsan",
+        String[] dataArray = new String[]{"zhangsan","lisi","l3","haha","awjds","123","yamaha","zhangsan",
                 "op ","lisi","  ab c  de "," abcdef","haha","zhngsna","1.5","http://www.baidu.com"};
-        for (int i=0; i < lowerArray.length; i++){
-            expectedLowerList.add(lowerArray[i]);
-        }
+        List<String> expectedLowerList = expectedOutData(dataArray);
         System.out.println("期望输出列表为：" + expectedLowerList);
 
         List<String> actualLowerList = strObj.lowerFunc();
@@ -117,12 +128,9 @@ public class TestStrFuncs extends YamlDataHelper {
 
     @Test(enabled = true, description = "验证字母转为大写")
     public void test05UpperAndUcase() throws SQLException, ClassNotFoundException {
-        List<String> expectedUpperList = new ArrayList<>();
-        String[] upperArray = new String[]{"ZHANGSAN", "LISI", "L3", "HAHA", "AWJDS", "123", "YAMAHA", "ZHANGSAN",
+        String[] dataArray = new String[]{"ZHANGSAN", "LISI", "L3", "HAHA", "AWJDS", "123", "YAMAHA", "ZHANGSAN",
                 "OP ", "LISI", "  AB C  DE ", " ABCDEF", "HAHA", "ZHNGSNA", "1.5", "WUHAN NO.1 STREET"};
-        for (int i=0; i < upperArray.length; i++){
-            expectedUpperList.add(upperArray[i]);
-        }
+        List<String> expectedUpperList = expectedOutData(dataArray);
         System.out.println("期望输出列表为：" + expectedUpperList);
 
         List<String> actualUpperList = strObj.upperFunc();
@@ -132,12 +140,9 @@ public class TestStrFuncs extends YamlDataHelper {
 
     @Test(enabled = true, description = "验证从左边截取字符串")
     public void test06LeftStr() throws SQLException, ClassNotFoundException {
-        List<String> expectedLeftList = new ArrayList<>();
-        String[] leftArray = new String[]{"zha","lis","l3","HAH","awJ","123","yam","zha","op ","lis","  a",
+        String[] dataArray = new String[]{"zha","lis","l3","HAH","awJ","123","yam","zha","op ","lis","  a",
                 " ab","HAH","zhn","1.5"};
-        for (int i=0; i < leftArray.length; i++){
-            expectedLeftList.add(leftArray[i]);
-        }
+        List<String> expectedLeftList = expectedOutData(dataArray);
         System.out.println("期望输出列表为：" + expectedLeftList);
 
         List<String> actualLeftList = strObj.leftFunc();
@@ -147,12 +152,9 @@ public class TestStrFuncs extends YamlDataHelper {
 
     @Test(enabled = true, description = "验证从右边截取字符串")
     public void test07RightStr() throws SQLException, ClassNotFoundException {
-        List<String> expectedRightList = new ArrayList<>();
-        String[] rightArray = new String[]{"3.5", "5.0", "123", "556", "999", "0.0", "2.3", "2.3", "325", "456",
+        String[] dataArray = new String[]{"3.5", "5.0", "123", "556", "999", "0.0", "2.3", "2.3", "325", "456",
                 "999", "5.0", "556", "2.0", "235","l3"};
-        for (int i=0; i < rightArray.length; i++){
-            expectedRightList.add(rightArray[i]);
-        }
+        List<String> expectedRightList = expectedOutData(dataArray);
         System.out.println("期望输出列表为：" + expectedRightList);
 
         List<String> actualRightList = strObj.rightFunc();
@@ -162,12 +164,9 @@ public class TestStrFuncs extends YamlDataHelper {
 
     @Test(enabled = true, description = "验证复制字符串")
     public void test08RepeatStr() throws SQLException, ClassNotFoundException {
-        List<String> expectedRepeatList = new ArrayList<>();
-        String[] repeatArray = new String[]{"123123123","CHANGpingCHANGpingCHANGping","chong qing chong qing chong qing ",
+        String[] dataArray = new String[]{"123123123","CHANGpingCHANGpingCHANGping","chong qing chong qing chong qing ",
                 "http://WWW.baidu.comhttp://WWW.baidu.comhttp://WWW.baidu.com","555555"};
-        for (int i=0; i < repeatArray.length; i++){
-            expectedRepeatList.add(repeatArray[i]);
-        }
+        List<String> expectedRepeatList = expectedOutData(dataArray);
         System.out.println("期望输出列表为：" + expectedRepeatList);
 
         List<String> actualRepeatList = strObj.repeatFunc();
@@ -177,11 +176,8 @@ public class TestStrFuncs extends YamlDataHelper {
 
     @Test(enabled = true, description = "验证字符串替换")
     public void test09ReplaceStr() throws SQLException, ClassNotFoundException {
-        List<String> expectedReplaceList = new ArrayList<>();
-        String[] replaceArray = new String[]{"BJ"," BJ haidian ","wuhan NO.1 Street","CHANGping","pingYang1","543"};
-        for (int i=0; i < replaceArray.length; i++){
-            expectedReplaceList.add(replaceArray[i]);
-        }
+        String[] dataArray = new String[]{"BJ"," BJ haidian ","wuhan NO.1 Street","CHANGping","pingYang1","543"};
+        List<String> expectedReplaceList = expectedOutData(dataArray);
         System.out.println("期望输出列表为：" + expectedReplaceList);
 
         List<String> actualReplaceList = strObj.replaceFunc();
@@ -191,11 +187,8 @@ public class TestStrFuncs extends YamlDataHelper {
 
     @Test(enabled = true, description = "验证去除字符串两边空格")
     public void test10TrimStr() throws SQLException, ClassNotFoundException {
-        List<String> expectedTrimList = new ArrayList<>();
-        String[] trimArray = new String[]{"op","lisi","aB c  dE","abcdef","HAHA","zhngsna","1.5"};
-        for (int i=0; i < trimArray.length; i++){
-            expectedTrimList.add(trimArray[i]);
-        }
+        String[] dataArray = new String[]{"op","lisi","aB c  dE","abcdef","HAHA","zhngsna","1.5"};
+        List<String> expectedTrimList = expectedOutData(dataArray);
         System.out.println("期望输出列表为：" + expectedTrimList);
 
         List<String> actualTrimList = strObj.trimFunc();
@@ -205,11 +198,8 @@ public class TestStrFuncs extends YamlDataHelper {
 
     @Test(enabled = true, description = "验证去除字符串左边空格")
     public void test11LtrimStr() throws SQLException, ClassNotFoundException {
-        List<String> expectedLtrimList = new ArrayList<>();
-        String[] ltrimArray = new String[]{"op ","lisi","aB c  dE ","abcdef","HAHA","zhngsna","1.5"};
-        for (int i=0; i < ltrimArray.length; i++){
-            expectedLtrimList.add(ltrimArray[i]);
-        }
+        String[] dataArray = new String[]{"op ","lisi","aB c  dE ","abcdef","HAHA","zhngsna","1.5"};
+        List<String> expectedLtrimList = expectedOutData(dataArray);
         System.out.println("期望输出列表为：" + expectedLtrimList);
 
         List<String> actualLtrimList = strObj.ltrimFunc();
@@ -219,11 +209,8 @@ public class TestStrFuncs extends YamlDataHelper {
 
     @Test(enabled = true, description = "验证去除字符串右边空格")
     public void test12RtrimStr() throws SQLException, ClassNotFoundException {
-        List<String> expectedRtrimList = new ArrayList<>();
-        String[] rtrimArray = new String[]{"op","lisi","  aB c  dE"," abcdef","HAHA","zhngsna","1.5"};
-        for (int i=0; i < rtrimArray.length; i++){
-            expectedRtrimList.add(rtrimArray[i]);
-        }
+        String[] dataArray = new String[]{"op","lisi","  aB c  dE"," abcdef","HAHA","zhngsna","1.5"};
+        List<String> expectedRtrimList = expectedOutData(dataArray);
         System.out.println("期望输出列表为：" + expectedRtrimList);
 
         List<String> actualRtrimList = strObj.rtrimFunc();
@@ -233,11 +220,8 @@ public class TestStrFuncs extends YamlDataHelper {
 
     @Test(enabled = true, description = "验证mid截取指定长度字符串")
     public void test13MidStr() throws SQLException, ClassNotFoundException {
-        List<String> expectedMidList = new ArrayList<>();
-        String[] midArray = new String[]{"han","isi","3","AHA","wJD","23","ama","han","p ","isi"," aB","abc","AHA","hng",".5"};
-        for (int i=0; i < midArray.length; i++){
-            expectedMidList.add(midArray[i]);
-        }
+        String[] dataArray = new String[]{"han","isi","3","AHA","wJD","23","ama","han","p ","isi"," aB","abc","AHA","hng",".5"};
+        List<String> expectedMidList = expectedOutData(dataArray);
         System.out.println("期望输出列表为：" + expectedMidList);
 
         List<String> actualMidList = strObj.midFunc();
@@ -247,11 +231,8 @@ public class TestStrFuncs extends YamlDataHelper {
 
     @Test(enabled = true, description = "验证mid截取字符串，无指定长度")
     public void test13MidStrWithoutLengthArg() throws SQLException, ClassNotFoundException {
-        List<String> expectedMidWithoutLengthList = new ArrayList<>();
-        String[] midWithoutLengthArray = new String[]{"hangsan","isi","3","AHA","wJDs","23","amaha","hangsan","p ","isi"," aB c  dE ","abcdef","AHA","hngsna",".5"};
-        for (int i=0; i < midWithoutLengthArray.length; i++){
-            expectedMidWithoutLengthList.add(midWithoutLengthArray[i]);
-        }
+        String[] dataArray = new String[]{"hangsan","isi","3","AHA","wJDs","23","amaha","hangsan","p ","isi"," aB c  dE ","abcdef","AHA","hngsna",".5"};
+        List<String> expectedMidWithoutLengthList = expectedOutData(dataArray);
         System.out.println("期望输出列表为：" + expectedMidWithoutLengthList);
 
         List<String> actualMidWithoutLengthList = strObj.midWithoutLengthArgFunc();
@@ -262,12 +243,9 @@ public class TestStrFuncs extends YamlDataHelper {
 
     @Test(enabled = true, description = "验证subString截取指定长度字符串")
     public void test14SubStringStr() throws SQLException, ClassNotFoundException {
-        List<String> expectedSubStringList = new ArrayList<>();
-        String[] subStringArray = new String[]{"beijing"," beijing ha","wuhan NO.1 ","CHANGping","pingYang1","543",
+        String[] dataArray = new String[]{"beijing"," beijing ha","wuhan NO.1 ","CHANGping","pingYang1","543",
                 "beijing cha","shanghai","wuhan","nanjing","beijing cha","123","CHANGping","chong qing ","http://WWW."};
-        for (int i=0; i < subStringArray.length; i++){
-            expectedSubStringList.add(subStringArray[i]);
-        }
+        List<String> expectedSubStringList = expectedOutData(dataArray);
         System.out.println("期望输出列表为：" + expectedSubStringList);
 
         List<String> actualSubStringList = strObj.subStringFunc();
@@ -277,18 +255,9 @@ public class TestStrFuncs extends YamlDataHelper {
 
     @Test(enabled = true, description = "验证字符串反转")
     public void test15ReverseStr() throws SQLException, ClassNotFoundException {
-        List<List> expectedReverseList = new ArrayList<List>();
-        String[][] reverseArray = {{"321","2"},{"gnipGNAHC","75"},{" gniq gnohc","99"},{"moc.udiab.WWW//:ptth","81"}};
-
-        for(int i=0; i<reverseArray.length; i++) {
-            List columnList = new ArrayList();
-            for (int j=0; j<reverseArray[i].length; j++) {
-                columnList.add(reverseArray[i][j]);
-            }
-            expectedReverseList.add(columnList);
-        }
+        String[][] dataArray = {{"321","2"},{"gnipGNAHC","75"},{" gniq gnohc","99"},{"moc.udiab.WWW//:ptth","81"}};
+        List<List> expectedReverseList = expectedOutData(dataArray);
         System.out.println("Expected: " + expectedReverseList);
-
         List<List> actualReverseList = strObj.reverseFunc();
         System.out.println("实际输出列表为：" + actualReverseList);
         Assert.assertTrue(actualReverseList.containsAll(expectedReverseList));
@@ -330,16 +299,9 @@ public class TestStrFuncs extends YamlDataHelper {
 
     @Test(enabled = true, description = "验证char_length函数在表格中使用")
     public void test20Char_lengthInTable() throws SQLException, ClassNotFoundException {
-        Integer[][] charLengthArray = {{8,7,2,4},{4,17,2,5}, {2,17,2,7},{4,9,2,9},{5,9,1,9},{3,3,3,3},{6,17,2,3},
+        Integer[][] dataArray = {{8,7,2,4},{4,17,2,5}, {2,17,2,7},{4,9,2,9},{5,9,1,9},{3,3,3,3},{6,17,2,3},
                 {8,8,2,4},{3,5,2,7},{4,7,3,8},{11,16,2,7},{7,3,1,6},{4,9,2,9},{7,11,2,4},{3,20,2,6}};
-        List<List<Integer>> expectedChar_LengthList = new ArrayList<List<Integer>>();
-        for(int i=0; i<charLengthArray.length; i++) {
-            List<Integer> columnList = new ArrayList<>();
-            for (int j=0; j<charLengthArray[i].length; j++) {
-                columnList.add(charLengthArray[i][j]);
-            }
-            expectedChar_LengthList.add(columnList);
-        }
+        List<List> expectedChar_LengthList = expectedOutData(dataArray);
         System.out.println("Expected: " + expectedChar_LengthList);
         List<List<Integer>> actualChar_LengthList = strObj.charlengthInTable();
         System.out.println("Actual: " + actualChar_LengthList);
@@ -350,14 +312,10 @@ public class TestStrFuncs extends YamlDataHelper {
 
     @Test(enabled = true, description = "验证char_length在其他字符串函数中使用")
     public void test21Char_lengthInStrFunc() throws SQLException, ClassNotFoundException {
-        List<String> expectedChar_lengthList = new ArrayList<String>();
-        String[] char_lengthArray = new String[]{"ijing","eijing haidian ","han NO.1 Street","ANGping","ngYang1","3",
+        String[] dataArray = new String[]{"ijing","eijing haidian ","han NO.1 Street","ANGping","ngYang1","3",
                 "ijing changyang","anghai","han","njing","ijing chaoyang","3","ANGping","ong qing ","tp://WWW.baidu.com"};
-        for (int i=0; i < char_lengthArray.length; i++){
-            expectedChar_lengthList.add(char_lengthArray[i]);
-        }
+        List<String> expectedChar_lengthList = expectedOutData(dataArray);
         System.out.println("期望输出列表：" + expectedChar_lengthList);
-
         List<String> actualChar_lengthInFuncList = strObj.charlengthInStrFunc();
         System.out.println("实际输出列表：" + actualChar_lengthInFuncList);
 
@@ -381,18 +339,12 @@ public class TestStrFuncs extends YamlDataHelper {
 
     @Test(enabled = true, dependsOnMethods = {"testConcatCase081"}, description = "验证concat表格里使用")
     public void testConcatCase077() throws SQLException, ClassNotFoundException {
-        String[][] concatArray = {{"1Haha10023.45BJ","10023.45","BJ23.45"},{null,"5018.9","SH18.9"},
-                {null,"00.0",null},{null,"00.01",null},{null,null,null},};
-        List<List> expectedList = new ArrayList<List>();
-        for(int i=0; i<concatArray.length; i++) {
-            List columnList = new ArrayList();
-            for (int j=0; j<concatArray[i].length; j++) {
-                columnList.add(concatArray[i][j]);
-            }
-            expectedList.add(columnList);
-        }
+        String[][] dataArray = {
+                {"1Haha10023.45BJ","10023.45","BJ23.45"},{null,"5018.9","SH18.9"},
+                {null,"00.0",null},{null,"00.01",null},{null,null,null}
+        };
+        List<List> expectedList = expectedOutData(dataArray);
         System.out.println("Expected: " + expectedList);
-
         List<List> actualConcatList = strObj.concatCase077();
         System.out.println("Actual: "+ actualConcatList);
         Assert.assertTrue(actualConcatList.containsAll(expectedList));
@@ -401,11 +353,8 @@ public class TestStrFuncs extends YamlDataHelper {
 
     @Test(enabled = true, description = "验证concat拼接按条件查询结果")
     public void testConcatCase083() throws SQLException, ClassNotFoundException {
-        List expectedList = new ArrayList();
-        expectedList.add("1235440.0");
-        expectedList.add("yamaha762.3");
-        expectedList.add("  aB c  dE 6199.9999");
-        expectedList.add("zhngsna9932.0");
+        String[] dataArray = new String[] {"1235440.0", "yamaha762.3", "  aB c  dE 6199.9999", "zhngsna9932.0"};
+        List expectedList = expectedOutData(dataArray);
         System.out.println("期望输出列表：" + expectedList);
 
         List actualConcatList = strObj.concatCase083();
@@ -415,14 +364,8 @@ public class TestStrFuncs extends YamlDataHelper {
 
     @Test(enabled = true, description = "验证concat直接连接字符串")
     public void testConcatCase084() throws SQLException, ClassNotFoundException {
-        List expectedList = new ArrayList();
-        expectedList.add("Hello World123");
-        expectedList.add("");
-        expectedList.add("01");
-        expectedList.add("http://www.baidu.com");
-        expectedList.add("http\\n.baidu\\t.com");
-        expectedList.add("abc~!@#$%^&*()_+=-|][}{;:/.,?><");
-        expectedList.add(null);
+        String[] dataArray = new String[] {"Hello World123", "", "01", "http://www.baidu.com", "http\\n.baidu\\t.com", "abc~!@#$%^&*()_+=-|][}{;:/.,?><", null};
+        List expectedList = expectedOutData(dataArray);
         System.out.println("期望输出列表：" + expectedList);
 
         List actualConcatList = strObj.concatCase084();
@@ -437,9 +380,8 @@ public class TestStrFuncs extends YamlDataHelper {
 
     @Test(enabled = true, description = "验证使用concat拼接")
     public void testConcatFuncUsingConcat() throws SQLException, ClassNotFoundException {
-        List expectedList = new ArrayList();
-        expectedList.add("Hello World");
-        expectedList.add("http://www.baidu.com");
+        String[] dataArray = new String[] {"Hello World", "http://www.baidu.com"};
+        List expectedList = expectedOutData(dataArray);
         System.out.println("期望输出列表：" + expectedList);
 
         List actualConcatList = strObj.concatFuncUsingConcat();
@@ -449,12 +391,9 @@ public class TestStrFuncs extends YamlDataHelper {
 
     @Test(enabled = true, description = "验证format函数对整型字段保留大于0位小数")
     public void testFormatCase087() throws SQLException, ClassNotFoundException {
-        List expectedFormatList = new ArrayList();
-        String[] formatArray = new String[]{"18.00","25.00","55.00","57.00","1.00","544.00","76.00","18.00",
+        String[] dataArray = new String[]{"18.00","25.00","55.00","57.00","1.00","544.00","76.00","18.00",
                 "76.00","256.00","61.00","2.00","57.00","99.00","18.00"};
-        for (int i=0; i < formatArray.length; i++){
-            expectedFormatList.add(formatArray[i]);
-        }
+        List expectedFormatList = expectedOutData(dataArray);
         System.out.println("期望输出列表：" + expectedFormatList);
 
         List actualFormatList = strObj.formatCase087();
@@ -465,13 +404,9 @@ public class TestStrFuncs extends YamlDataHelper {
 
     @Test(enabled = true, description = "验证format函数对整型字段保留0位小数")
     public void testFormatCase088() throws SQLException, ClassNotFoundException {
-        List expectedFormatList = new ArrayList();
-        String[] formatArray = new String[]{"18","25","55","57","1","544","76","18","76","256","61","2","57","99","18"};
-        for (int i=0; i < formatArray.length; i++){
-            expectedFormatList.add(formatArray[i]);
-        }
+        String[] dataArray = new String[]{"18","25","55","57","1","544","76","18","76","256","61","2","57","99","18"};
+        List expectedFormatList = expectedOutData(dataArray);
         System.out.println("期望输出列表：" + expectedFormatList);
-
         List actualFormatList = strObj.formatCase088();
         System.out.println("实际输出列表：" + actualFormatList);
 
@@ -490,11 +425,8 @@ public class TestStrFuncs extends YamlDataHelper {
 
     @Test(enabled = true, description = "验证format函数对浮点型字段保留0位小数")
     public void testFormatCase091() throws SQLException, ClassNotFoundException {
-        List expectedFormatList = new ArrayList();
-        String[] formatArray = new String[]{"24","895","123","9","1454","0","2","12","109","1234","100","2345","9","32","0"};
-        for (int i=0; i < formatArray.length; i++){
-            expectedFormatList.add(formatArray[i]);
-        }
+        String[] dataArray = new String[]{"24","895","123","9","1454","0","2","12","109","1234","100","2345","9","32","0"};
+        List expectedFormatList = expectedOutData(dataArray);
         System.out.println("期望输出列表：" + expectedFormatList);
         List actualFormatList = strObj.formatCase091();
         System.out.println("实际输出列表：" + actualFormatList);
@@ -560,12 +492,9 @@ public class TestStrFuncs extends YamlDataHelper {
     @Test(enabled = true, dependsOnMethods = {"test00CreateStrTable1"},
             description = "验证locate函数在条件语句中使用")
     public void testLocateCase113() throws SQLException, ClassNotFoundException {
-        List expectedLocateList = new ArrayList();
-        String[] formatArray = new String[]{"1beijing","2shanghai","3beijing","4shanghai","5beijing",
+        String[] dataArray = new String[]{"1beijing","2shanghai","3beijing","4shanghai","5beijing",
                 "6shanghai","7shanghai","8shanghai","9shanghai","10shanghai","11shanghai"};
-        for (int i=0; i < formatArray.length; i++){
-            expectedLocateList.add(formatArray[i]);
-        }
+        List expectedLocateList = expectedOutData(dataArray);
         System.out.println("期望输出列表：" + expectedLocateList);
         List actualLocateList = strObj.locateCase113();
         System.out.println("实际输出列表：" + actualLocateList);
@@ -641,19 +570,14 @@ public class TestStrFuncs extends YamlDataHelper {
 
     @Test(enabled = true, description = "验证left函数在表格中使用")
     public void testLeftCase135() throws SQLException, ClassNotFoundException {
-        String[][] leftArray = {{"zha","beijing","1","23.5"},{"lis","nanjing","2","1234"},{"1.5","http://WWW","1","0.12"}};
-        List<List> expectedList = new ArrayList<List>();
-        for(int i=0; i<leftArray.length; i++) {
-            List columnList = new ArrayList();
-            for (int j=0; j<leftArray[i].length; j++) {
-                columnList.add(leftArray[i][j]);
-            }
-            expectedList.add(columnList);
-        }
+        String[][] dataArray = {
+                {"zha","beijing","1","23.5"},{"lis","nanjing","2","1234"},{"1.5","http://WWW","1","0.12"}
+        };
+        List<List> expectedList = expectedOutData(dataArray);
         System.out.println("Expected: " + expectedList);
-
         List<List> actualLeftList = strObj.leftCase135();
         System.out.println("Actual: "+ actualLeftList);
+
         Assert.assertTrue(actualLeftList.containsAll(expectedList));
         Assert.assertTrue(expectedList.containsAll(actualLeftList));
     }
@@ -695,17 +619,11 @@ public class TestStrFuncs extends YamlDataHelper {
 
     @Test(enabled = true, description = "验证right函数在表格中使用")
     public void testRightCase146() throws SQLException, ClassNotFoundException {
-        String[][] rightArray = {{"beijing","23.5","18"},{"g haidian ","95.0","25"},{".baidu.com","1235","18"}};
-        List<List> expectedList = new ArrayList<List>();
-        for(int i=0; i<rightArray.length; i++) {
-            List columnList = new ArrayList();
-            for (int j=0; j<rightArray[i].length; j++) {
-                columnList.add(rightArray[i][j]);
-            }
-            expectedList.add(columnList);
-        }
+        String[][] dataArray = {
+                {"beijing","23.5","18"},{"g haidian ","95.0","25"},{".baidu.com","1235","18"}
+        };
+        List<List> expectedList = expectedOutData(dataArray);
         System.out.println("Expected: " + expectedList);
-
         List<List> actualRightList = strObj.rightCase146();
         System.out.println("Actual: "+ actualRightList);
         Assert.assertTrue(actualRightList.containsAll(expectedList));
@@ -714,11 +632,8 @@ public class TestStrFuncs extends YamlDataHelper {
 
     @Test(enabled = true, description = "验证left，right函数和拼接函数一起使用")
     public void testLeftRightCase149() throws SQLException, ClassNotFoundException {
-        List expectedList = new ArrayList();
-        expectedList.add("Hello World");
-        expectedList.add("test Dingo");
-        expectedList.add("Hello+World");
-        expectedList.add("test-go");
+        String[] dataArray = new String[] {"Hello World", "test Dingo", "Hello+World", "test-go"};
+        List expectedList = expectedOutData(dataArray);
         System.out.println("Expected: " + expectedList);
         List<List> actualList = strObj.leftRightCase149();
         System.out.println("Actual: "+ actualList);
@@ -755,10 +670,8 @@ public class TestStrFuncs extends YamlDataHelper {
 
     @Test(enabled = true, description = "验证多个repeat使用")
     public void testRepeatCase160() throws SQLException, ClassNotFoundException {
-        List expectedList = new ArrayList();
-        expectedList.add("abcabcabc");
-        expectedList.add("123123");
-        expectedList.add("1.10");
+        String[] dataArray = new String[] {"abcabcabc", "123123", "1.10"};
+        List expectedList = expectedOutData(dataArray);
         System.out.println("Expected: " + expectedList);
         List<List> actualList = strObj.repeatCase160();
         System.out.println("Actual: "+ actualList);
@@ -869,11 +782,8 @@ public class TestStrFuncs extends YamlDataHelper {
     @Test(enabled = true, dependsOnMethods = {"testReplaceCase177"},
             description = "验证replace在update语句中使用，替换浮点型字段值为整型字段值")
     public void testReplaceCase178() throws SQLException, ClassNotFoundException {
-        List expectedReplaceList = new ArrayList();
-        String[] replaceArray = new String[]{"1-18.0","3-35.0","5-18.0","7-99.0","9-28.0"};
-        for (int i=0; i < replaceArray.length; i++){
-            expectedReplaceList.add(replaceArray[i]);
-        }
+        String[] dataArray = new String[]{"1-18.0","3-35.0","5-18.0","7-99.0","9-28.0"};
+        List expectedReplaceList = expectedOutData(dataArray);
         System.out.println("期望输出列表：" + expectedReplaceList);
         List actualReplaceList = strObj.replaceCase178();
         System.out.println("实际输出列表：" + actualReplaceList);
@@ -1016,11 +926,8 @@ public class TestStrFuncs extends YamlDataHelper {
     @Test(enabled = true, dependsOnMethods = {"test00CreateStrTable3"},
             description = "验证trim在表中使用")
     public void testTrimCase198() throws SQLException, ClassNotFoundException {
-        List expectedTrimList = new ArrayList();
-        String[] trimArray = new String[]{"TAT","TATtt","18",".","aabcaa "," aabcaa","aabcaa"};
-        for (int i=0; i < trimArray.length; i++){
-            expectedTrimList.add(trimArray[i]);
-        }
+        String[] dataArray = new String[]{"TAT","TATtt","18",".","aabcaa "," aabcaa","aabcaa"};
+        List expectedTrimList = expectedOutData(dataArray);
         System.out.println("期望输出列表：" + expectedTrimList);
         List actualTrimList = strObj.trimCase198();
         System.out.println("实际输出列表：" + actualTrimList);
@@ -1133,15 +1040,10 @@ public class TestStrFuncs extends YamlDataHelper {
 
     @Test(enabled = true, description = "验证mid,Substring函数在表格中使用")
     public void testSubStringCase246() throws SQLException, ClassNotFoundException {
-        String[][] subArray = {{"lisi"," beijing","25"},{"lisi","nanjing","56"},{"1.5","http://W","18"}};
-        List<List> expectedList = new ArrayList<List>();
-        for(int i=0; i<subArray.length; i++) {
-            List columnList = new ArrayList();
-            for (int j=0; j<subArray[i].length; j++) {
-                columnList.add(subArray[i][j]);
-            }
-            expectedList.add(columnList);
-        }
+        String[][] dataArray = {
+                {"lisi"," beijing","25"},{"lisi","nanjing","56"},{"1.5","http://W","18"}
+        };
+        List<List> expectedList = expectedOutData(dataArray);
         System.out.println("Expected: " + expectedList);
 
         List<List> actualSubList = strObj.subStringCase246();
@@ -1208,5 +1110,4 @@ public class TestStrFuncs extends YamlDataHelper {
             JDBCUtils.closeResource(StrFuncs.connection, tearDownStatement);
         }
     }
-
 }

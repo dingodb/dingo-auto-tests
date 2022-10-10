@@ -33,6 +33,14 @@ import java.util.Map;
 public class TestBooleanField extends YamlDataHelper {
     public static BooleanField booleanObj = new BooleanField();
 
+    public static List expectedOutData(Object[] dataArray) {
+        List expectedList = new ArrayList();
+        for (int i=0; i < dataArray.length; i++){
+            expectedList.add(dataArray[i]);
+        }
+        return expectedList;
+    }
+
     @BeforeClass(alwaysRun = true, description = "测试数据库连接")
     public static void setUpAll() throws ClassNotFoundException, SQLException {
         Assert.assertNotNull(BooleanField.connection);
@@ -56,12 +64,9 @@ public class TestBooleanField extends YamlDataHelper {
     public void test02trueValuesInsertAndQuery() throws SQLException {
         int actualInsertRows = booleanObj.insertTrueValues();
         Assert.assertEquals(actualInsertRows, 4);
+        Boolean[] dataArray = new Boolean[] {true,true,true,true};
+        List<Boolean> expectedTrueList = expectedOutData(dataArray);
 
-        List<Boolean> expectedTrueList = new ArrayList<Boolean>();
-        Boolean[] trueArray = new Boolean[] {true,true,true,true};
-        for (int i=0; i < trueArray.length; i++){
-            expectedTrueList.add(trueArray[i]);
-        }
         System.out.println("Expected List: " + expectedTrueList);
         List<Boolean> actualTrueList = booleanObj.getTrueValues();
         System.out.println("Actual List: " + actualTrueList);
@@ -74,13 +79,10 @@ public class TestBooleanField extends YamlDataHelper {
     public void test03falseValuesInsertAndQuery() throws SQLException {
         int actualInsertRows = booleanObj.insertFalseValues();
         Assert.assertEquals(actualInsertRows, 4);
-
-        List<Boolean> expectedFalseList = new ArrayList<Boolean>();
-        Boolean[] falseArray = new Boolean[] {false,false,false,false};
-        for (int i=0; i < falseArray.length; i++){
-            expectedFalseList.add(falseArray[i]);
-        }
+        Boolean[] dataArray = new Boolean[] {false,false,false,false};
+        List<Boolean> expectedFalseList = expectedOutData(dataArray);
         System.out.println("Expected List: " + expectedFalseList);
+
         List<Boolean> actualFalseList = booleanObj.getFalseValues();
         System.out.println("Actual List: " + actualFalseList);
 
@@ -92,12 +94,9 @@ public class TestBooleanField extends YamlDataHelper {
     public void test04trueAndfalseValuesInsertAndQuery() throws SQLException {
         int actualInsertRows = booleanObj.insertTrueAndFalseValues();
         Assert.assertEquals(actualInsertRows, 7);
+        Boolean[] dataArray = new Boolean[] {true,false,true,false,false,true,true};
+        List<Boolean> expectedtrueAndfalseList = expectedOutData(dataArray);
 
-        List<Boolean> expectedtrueAndfalseList = new ArrayList<Boolean>();
-        Boolean[] trueAndfalseArray = new Boolean[] {true,false,true,false,false,true,true};
-        for (int i=0; i < trueAndfalseArray.length; i++){
-            expectedtrueAndfalseList.add(trueAndfalseArray[i]);
-        }
         System.out.println("Expected List: " + expectedtrueAndfalseList);
         List<Boolean> actualtrueAndfalseList = booleanObj.getTrueAndFalseValues();
         System.out.println("Actual List: " + actualtrueAndfalseList);
@@ -108,11 +107,8 @@ public class TestBooleanField extends YamlDataHelper {
     @Test(priority = 4, enabled = true, dependsOnMethods = {"test04trueAndfalseValuesInsertAndQuery"},
             description = "验证按true值查询")
     public void test05TrueValueQuery() throws SQLException {
-        List<String> expectedTrueValueConditionList = new ArrayList<String>();
-        String[] expectedNameArray = new String[] {"zhangsan","lisi","lisi3","HAHA","oppo"," ab c d ","YH","yamaha"};
-        for (int i=0; i < expectedNameArray.length; i++){
-            expectedTrueValueConditionList.add(expectedNameArray[i]);
-        }
+        String[] dataArray = new String[] {"zhangsan","lisi","lisi3","HAHA","oppo"," ab c d ","YH","yamaha"};
+        List<String> expectedTrueValueConditionList = expectedOutData(dataArray);
         System.out.println("Expected List: " + expectedTrueValueConditionList);
         List<String> actualtrueValueConditionList = booleanObj.queryTrueValue();
         System.out.println("Actual List: " + actualtrueValueConditionList);
@@ -123,11 +119,8 @@ public class TestBooleanField extends YamlDataHelper {
     @Test(priority = 4, enabled = true, dependsOnMethods = {"test04trueAndfalseValuesInsertAndQuery"},
             description = "验证按is true查询")
     public void test05QueryIsTrue() throws SQLException {
-        List<String> expectedIsTrueConditionList = new ArrayList<String>();
-        String[] expectedNameArray = new String[] {"zhangsan","lisi","lisi3","HAHA","oppo"," ab c d ","YH","yamaha"};
-        for (int i=0; i < expectedNameArray.length; i++){
-            expectedIsTrueConditionList.add(expectedNameArray[i]);
-        }
+        String[] dataArray = new String[] {"zhangsan","lisi","lisi3","HAHA","oppo"," ab c d ","YH","yamaha"};
+        List<String> expectedIsTrueConditionList = expectedOutData(dataArray);
         System.out.println("Expected List: " + expectedIsTrueConditionList);
         List<String> actualIsTrueConditionList = booleanObj.queryIsTrue();
         System.out.println("Actual List: " + actualIsTrueConditionList);
@@ -139,11 +132,8 @@ public class TestBooleanField extends YamlDataHelper {
     @Test(priority = 5, enabled = true, dependsOnMethods = {"test04trueAndfalseValuesInsertAndQuery"},
             description = "验证按false值查询")
     public void test06FalseValueQuery() throws SQLException {
-        List<Integer> expectedFalseValueConditionList = new ArrayList<Integer>();
-        Integer[] expectedIDArray = new Integer[] {5, 6, 7, 8, 10, 12, 13};
-        for (int i=0; i < expectedIDArray.length; i++){
-            expectedFalseValueConditionList.add(expectedIDArray[i]);
-        }
+        Integer[] dataArray = new Integer[] {5, 6, 7, 8, 10, 12, 13};
+        List<Integer> expectedFalseValueConditionList = expectedOutData(dataArray);
         System.out.println("Expected List: " + expectedFalseValueConditionList);
         List<Integer> actualfalseValueConditionList = booleanObj.queryFalseValue();
         System.out.println("Actual List: " + actualfalseValueConditionList);
@@ -154,11 +144,8 @@ public class TestBooleanField extends YamlDataHelper {
     @Test(priority = 5, enabled = true, dependsOnMethods = {"test04trueAndfalseValuesInsertAndQuery"},
             description = "验证按Is false查询")
     public void test06QueryIsFalse() throws SQLException {
-        List<Integer> expectedIsFalseConditionList = new ArrayList<Integer>();
-        Integer[] expectedIDArray = new Integer[] {5, 6, 7, 8, 10, 12, 13};
-        for (int i=0; i < expectedIDArray.length; i++){
-            expectedIsFalseConditionList.add(expectedIDArray[i]);
-        }
+        Integer[] dataArray = new Integer[] {5, 6, 7, 8, 10, 12, 13};
+        List<Integer> expectedIsFalseConditionList = expectedOutData(dataArray);
         System.out.println("Expected List: " + expectedIsFalseConditionList);
         List<Integer> actualIsFalseConditionList = booleanObj.queryIsFalse();
         System.out.println("Actual List: " + actualIsFalseConditionList);
@@ -169,11 +156,8 @@ public class TestBooleanField extends YamlDataHelper {
     @Test(priority = 6, enabled = true, dependsOnMethods = {"test04trueAndfalseValuesInsertAndQuery"},
             description = "验证按字段为真查询")
     public void test07FieldAsConditionQuery() throws SQLException {
-        List<Boolean> expectedFieldList = new ArrayList<Boolean>();
-        Boolean[] expectedFieldArray = new Boolean[] {true,true,true,true,true,true,true,true};
-        for (int i=0; i < expectedFieldArray.length; i++){
-            expectedFieldList.add(expectedFieldArray[i]);
-        }
+        Boolean[] dataArray = new Boolean[] {true,true,true,true,true,true,true,true};
+        List<Boolean> expectedFieldList = expectedOutData(dataArray);
         System.out.println("Expected List: " + expectedFieldList);
         List<Boolean> actualFieldList = booleanObj.fieldAsConditionValue();
         System.out.println("Actual List: " + actualFieldList);
@@ -184,11 +168,8 @@ public class TestBooleanField extends YamlDataHelper {
     @Test(priority = 7, enabled = true, dependsOnMethods = {"test04trueAndfalseValuesInsertAndQuery"},
             description = "验证按字段为假查询")
     public void test08NotFieldAsConditionQuery() throws SQLException {
-        List<Boolean> expectedNotFieldList = new ArrayList<Boolean>();
-        Boolean[] expectedNotFieldArray = new Boolean[] {false,false,false,false,false,false,false};
-        for (int i=0; i < expectedNotFieldArray.length; i++){
-            expectedNotFieldList.add(expectedNotFieldArray[i]);
-        }
+        Boolean[] dataArray = new Boolean[] {false,false,false,false,false,false,false};
+        List<Boolean> expectedNotFieldList = expectedOutData(dataArray);
         System.out.println("Expected List: " + expectedNotFieldList);
         List<Boolean> actualNotFieldList = booleanObj.notFieldAsConditionValue();
         System.out.println("Actual List: " + actualNotFieldList);

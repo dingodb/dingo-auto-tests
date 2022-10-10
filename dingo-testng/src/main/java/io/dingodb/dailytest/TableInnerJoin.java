@@ -33,95 +33,19 @@ public class TableInnerJoin {
         }
     }
 
-    public void createInnerTables(String beautyMeta, String boysMeta) throws SQLException {
-        String innerTable1 = "beauty";
-        String innerTable2 = "boys";
+    //创建测试表
+    public void createTableWithMeta(String tableName, String tableMeta) throws SQLException {
         try(Statement statement = connection.createStatement()) {
-            String createSQL1 = "create table " + innerTable1 + beautyMeta;
-            String createSQL2 = "create table " + innerTable2 + boysMeta;
-            statement.execute(createSQL1);
-            statement.execute(createSQL2);
-        }
-    }
-
-    public void insertDataToInnerTables(String beautyValue, String boysValue) throws SQLException {
-        try(Statement statement = connection.createStatement()) {
-//            String table1Values = "(1,'LiuYan','female','1988-02-03 00:00:00','18209876577',8),\n" +
-//                    "(2,'TeacherLi','female','1987-12-30 00:00:00','18219876577',9),\n" +
-//                    "(3,'Angelay','female','1989-02-03 00:00:00','18209876567',3),\n" +
-//                    "(4,'ReBa','female','1993-02-03 00:00:00','18209876579',2),\n" +
-//                    "(5,'DuLala','female','1992-02-03 00:00:00','18209179577',9),\n" +
-//                    "(6,'zhiRuo','female','1988-02-03 00:00:00','18209876577',1),\n" +
-//                    "(7,'LingShan','female','1987-12-30 00:00:00','18219876577',9),\n" +
-//                    "(8,'Xiao Zhao','female','1989-02-03 00:00:00','18209876567',1),\n" +
-//                    "(9,'Shuange','female','1993-02-03 00:00:00','18209876579',9),\n" +
-//                    "(10,'Wang Yuyan','female','1992-02-03 00:00:00','18209179577',4),\n" +
-//                    "(11,'Xia Xue','female','1993-02-03 00:00:00','18209876579',9),\n" +
-//                    "(12,'Zhao Min','female','1992-02-03 00:00:00','18209179577',1)";
-//
-//            String table2Values = "(1,'Zhang Wuji',100),(2,'Han Han',800),(3,'Xiao Ming',50),(4,'DuanYU',300)";
-
-            String insertSQL1 = "insert into beauty values " + beautyValue;
-            String insertSQL2 = "insert into boys values " + boysValue;
-            statement.execute(insertSQL1);
-            statement.execute(insertSQL2);
-        }
-    }
-
-    public void createEmployeesTables() throws SQLException {
-        String departmentTable = "departments";
-        String employeeTable = "employees";
-        try(Statement statement = connection.createStatement()) {
-            String createDepartmentSQL = "CREATE TABLE " + departmentTable +
-                    "  (department_id int NOT NULL,\n" +
-                    "  department_name varchar(10) DEFAULT NULL,\n" +
-                    "  manager_id int DEFAULT NULL,\n" +
-                    "  location_id int DEFAULT NULL,\n" +
-                    "  PRIMARY KEY (department_id))";
-
-            String createEmployeeSQL = "CREATE TABLE " + employeeTable +
-                    "  (employee_id int NOT NULL,\n" +
-                    "  first_name varchar(20) DEFAULT NULL,\n" +
-                    "  last_name varchar(25) DEFAULT NULL,\n" +
-                    "  email varchar(25) DEFAULT NULL,\n" +
-                    "  phone_number varchar(20) DEFAULT NULL,\n" +
-                    "  job_id varchar(10) DEFAULT NULL,\n" +
-                    "  salary double DEFAULT NULL,\n" +
-                    "  commission_pct double DEFAULT NULL,\n" +
-                    "  manager_id int DEFAULT NULL,\n" +
-                    "  department_id int DEFAULT NULL,\n" +
-                    "  hiredate timestamp DEFAULT NULL,\n" +
-                    "  PRIMARY KEY (employee_id))";
-            statement.execute(createDepartmentSQL);
-            statement.execute(createEmployeeSQL);
-        }
-    }
-
-    public void insertValuesToEmployeeTables(String departmentValues, String employeeValues) throws SQLException {
-        try(Statement statement = connection.createStatement()) {
-            String insertdeptTableSQL = "insert  into departments(department_id,department_name,manager_id,location_id)" +
-                    " values " + departmentValues;
-            String insertempTableSQL = "insert into employees(employee_id,first_name,last_name,email,phone_number," +
-                    "job_id,salary,commission_pct,manager_id,department_id,hiredate) values " + employeeValues;
-
-            statement.execute(insertdeptTableSQL);
-            statement.execute(insertempTableSQL);
-        }
-    }
-
-    //创建job_grades表
-    public void createJobGradesTable(String job_grades_Meta) throws SQLException {
-        try(Statement statement = connection.createStatement()) {
-            String createTableSQL = "create table job_grades" + job_grades_Meta;
+            String createTableSQL = "create table " + tableName +  tableMeta;
             statement.execute(createTableSQL);
         }
     }
 
-    //向job_grades表插入数据
-    public void insertValuesToJobGrades(String job_grades_Values) throws SQLException {
+    //表数据插入
+    public void insertTableValues(String tableName, String insertFields, String tableValue) throws SQLException {
         try(Statement statement = connection.createStatement()) {
-            String insertValuesSQL = "insert into job_grades values " + job_grades_Values;
-            statement.executeUpdate(insertValuesSQL);
+            String insertValuesSQL = "insert into " + tableName + insertFields + " values " + tableValue;
+            statement.execute(insertValuesSQL);
         }
     }
 
@@ -299,20 +223,6 @@ public class TableInnerJoin {
         }
     }
 
-    public void createSelfJoinTable() throws SQLException {
-        try(Statement createSelfJoinstatement = connection.createStatement()) {
-            String createSelfJoinsql = "create table mytest (id int, name varchar(20), manager_id int, primary key(id))";
-            createSelfJoinstatement.execute(createSelfJoinsql);
-        }
-    }
-
-    public void insertValuesToSelftJoinTable(String selfValues) throws SQLException {
-        try(Statement insertSelfJoinstatement = connection.createStatement()) {
-            String insertSelfJoinsql = "insert into mytest values " + selfValues;
-            insertSelfJoinstatement.execute(insertSelfJoinsql);
-        }
-    }
-
     public List<List<String>> selfJoin() throws SQLException {
         try(Statement statement = connection.createStatement()) {
             String selfJoinsql = "select a.name,b.name from mytest a inner join mytest b on a.manager_id=b.id";
@@ -328,38 +238,6 @@ public class TableInnerJoin {
             selfJoinRst.close();
             statement.close();
             return selfJoinList;
-        }
-    }
-
-    //创建table1054_1表
-    public void createTable1054_1(String table10541Meta) throws SQLException {
-        try(Statement statement = connection.createStatement()) {
-            String createTableSQL = "create table table1054_1" + table10541Meta;
-            statement.execute(createTableSQL);
-        }
-    }
-
-    //向table1054_1表插入数据
-    public void insertValuesToTable1054_1(String table10541Values) throws SQLException {
-        try(Statement statement = connection.createStatement()) {
-            String insertValuesSQL = "insert into table1054_1 values " + table10541Values;
-            statement.executeUpdate(insertValuesSQL);
-        }
-    }
-
-    //创建table1054_2表
-    public void createTable1054_2(String table10542Meta) throws SQLException {
-        try(Statement statement = connection.createStatement()) {
-            String createTableSQL = "create table table1054_2" + table10542Meta;
-            statement.execute(createTableSQL);
-        }
-    }
-
-    //向table1054_2表插入数据
-    public void insertValuesToTable1054_2(String table10542Values) throws SQLException {
-        try(Statement statement = connection.createStatement()) {
-            String insertValuesSQL = "insert into table1054_2 values " + table10542Values;
-            statement.executeUpdate(insertValuesSQL);
         }
     }
 

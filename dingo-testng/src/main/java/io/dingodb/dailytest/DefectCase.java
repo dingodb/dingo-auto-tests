@@ -132,7 +132,7 @@ public class DefectCase {
             String querySQL = "select * from defect0033 where id=154";
             ResultSet resultSet = statement.executeQuery(querySQL);
             List actualList = new ArrayList();
-            actualList.add(effectRows);
+            actualList.add(String.valueOf(effectRows));
             while(resultSet.next()) {
                 actualList.add(resultSet.getString(1));
                 actualList.add(resultSet.getString(2));

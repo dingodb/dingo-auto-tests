@@ -33,193 +33,34 @@ import java.util.Map;
 
 public class TestTableCreate extends YamlDataHelper {
     public static TableCreate tableCreateObj = new TableCreate();
+    public static String tableName1 = "ctest001";
+    public static String tableName2 = "ctest002";
+    public static String tableName3 = "ctest003";
+    public static String tableName4 = "ctest004";
+    public static String tableName5 = "ctest005";
+    public static String tableName6 = "ctest006";
+    public static String tableName7 = "ctest007";
 
-    public void initTable1() throws SQLException {
-        String table1_meta_path = "src/test/resources/testdata/createTableTest/meta/createtable1_meta.txt";
-        String table1_value_path = "src/test/resources/testdata/createTableTest/values/createtable1_values.txt";
-        String table1_meta = FileReaderUtil.readFile(table1_meta_path);
-        String table1_value = FileReaderUtil.readFile(table1_value_path);
-        tableCreateObj.createTableWithDefaultValue(table1_meta);
-        tableCreateObj.insertTable1Values(table1_value);
+    public void initTable(String tableName, String tableMetaPath) throws SQLException {
+        String tableMeta = FileReaderUtil.readFile(tableMetaPath);
+        tableCreateObj.createTableWithMeta(tableName, tableMeta);
     }
 
-    public void initTable2() throws SQLException {
-        String table2_meta_path = "src/test/resources/testdata/createTableTest/meta/createtable2_meta.txt";
-        String table2_value_path = "src/test/resources/testdata/createTableTest/values/createtable2_values.txt";
-        String table2_meta = FileReaderUtil.readFile(table2_meta_path);
-        String table2_value = FileReaderUtil.readFile(table2_value_path);
-        tableCreateObj.createTablePrimaryKeyVarchar(table2_meta);
-        tableCreateObj.insertTable2Values(table2_value);
+    public void insertValues(String tableName, String insertField, String tableValuePath) throws SQLException {
+        String tableValue = FileReaderUtil.readFile(tableValuePath);
+        tableCreateObj.insertTableValues(tableName, insertField, tableValue);
     }
 
-    public void initTable3() throws SQLException {
-        String table3_meta_path = "src/test/resources/testdata/createTableTest/meta/createtable3_meta.txt";
-        String table3_value_path = "src/test/resources/testdata/createTableTest/values/createtable3_values.txt";
-        String table3_meta = FileReaderUtil.readFile(table3_meta_path);
-        String table3_value = FileReaderUtil.readFile(table3_value_path);
-        tableCreateObj.createTablePrimaryKeyDouble(table3_meta);
-        tableCreateObj.insertTable3Values(table3_value);
-    }
-
-    public void initTable4() throws SQLException {
-        String table4_meta_path = "src/test/resources/testdata/createTableTest/meta/createtable4_meta.txt";
-        String table4_value_path = "src/test/resources/testdata/createTableTest/values/createtable4_values.txt";
-        String table4_meta = FileReaderUtil.readFile(table4_meta_path);
-        String table4_value = FileReaderUtil.readFile(table4_value_path);
-        tableCreateObj.createTablePrimaryKeyDate(table4_meta);
-        tableCreateObj.insertTable4Values(table4_value);
-    }
-
-    public void initTable5() throws SQLException {
-        String table5_meta_path = "src/test/resources/testdata/createTableTest/meta/createtable5_meta.txt";
-        String table5_value_path = "src/test/resources/testdata/createTableTest/values/createtable5_values.txt";
-        String table5_meta = FileReaderUtil.readFile(table5_meta_path);
-        String table5_value = FileReaderUtil.readFile(table5_value_path);
-        tableCreateObj.createTablePrimaryKeyTime(table5_meta);
-        tableCreateObj.insertTable5Values(table5_value);
-    }
-
-    public void initTable6() throws SQLException {
-        String table6_meta_path = "src/test/resources/testdata/createTableTest/meta/createtable6_meta.txt";
-        String table6_value_path = "src/test/resources/testdata/createTableTest/values/createtable6_values.txt";
-        String table6_meta = FileReaderUtil.readFile(table6_meta_path);
-        String table6_value = FileReaderUtil.readFile(table6_value_path);
-        tableCreateObj.createTablePrimaryKeyTimestamp(table6_meta);
-        tableCreateObj.insertTable6Values(table6_value);
-    }
-
-    public void initTable7() throws SQLException {
-        String table7_meta_path = "src/test/resources/testdata/createTableTest/meta/createtable7_meta.txt";
-        String table7_value_path = "src/test/resources/testdata/createTableTest/values/createtable7_values.txt";
-        String table7_meta = FileReaderUtil.readFile(table7_meta_path);
-        String table7_value = FileReaderUtil.readFile(table7_value_path);
-        tableCreateObj.createTablePrimaryKeyBoolean(table7_meta);
-        tableCreateObj.insertTable7Values(table7_value);
-    }
-
-
-    //表1预期数据
-    public static List<List> expectedTable1List() {
-        String[][] dataArray = {
-                {"1","zhangsan","18","BJ Road.1","1234.5678","1991-06-18","23:59:59","2022-08-12 14:00:00","false"},
-                {"2","zhangsan","18","BJ Road.1","1234.5678","1991-06-18","23:59:59","2022-08-12 14:00:00","false"}
-        };
-        List<List> tableList = new ArrayList<List>();
-        for(int i=0; i<dataArray.length; i++) {
+    public static List<List> expectedOutData(String[][] dataArray) {
+        List<List> expectedList = new ArrayList<List>();
+        for(int i = 0; i < dataArray.length; i++) {
             List columnList = new ArrayList();
-            for (int j=0; j<dataArray[i].length; j++) {
+            for (int j = 0; j < dataArray[i].length; j++) {
                 columnList.add(dataArray[i][j]);
             }
-            tableList.add(columnList);
+            expectedList.add(columnList);
         }
-        return tableList;
-    }
-
-    //表2预期数据
-    public static List<List> expectedTable2List() {
-        String[][] dataArray = {
-                {"1","zhangsan","18","shanghai","23.5","1998-04-06","08:10:10","2022-04-08 18:05:07","true"},
-                {"1","lisi","25","shanghai","895.0","1988-02-05","06:15:08","2000-02-29 00:00:00","false"},
-                {"1","lisi2","55","beijing","123.123","2022-03-04","07:03:15","1999-02-28 23:59:59","true"}
-        };
-        List<List> tableList = new ArrayList<List>();
-        for(int i=0; i<dataArray.length; i++) {
-            List columnList = new ArrayList();
-            for (int j=0; j<dataArray[i].length; j++) {
-                columnList.add(dataArray[i][j]);
-            }
-            tableList.add(columnList);
-        }
-        return tableList;
-    }
-
-    //表3预期数据
-    public static List<List> expectedTable3List() {
-        String[][] dataArray = {
-                {"2","zhangsan","18","shanghai","23.5","1998-04-06","08:10:10","2022-04-08 18:05:07","false"},
-                {"1","lisi","55","beijing","123.124","2022-03-04","07:03:15","1999-02-28 23:59:59","true"},
-                {"1","lisi","55","beijing","123.123","2022-03-04","07:03:15","1999-02-28 23:59:59","true"}
-        };
-        List<List> tableList = new ArrayList<List>();
-        for(int i=0; i<dataArray.length; i++) {
-            List columnList = new ArrayList();
-            for (int j=0; j<dataArray[i].length; j++) {
-                columnList.add(dataArray[i][j]);
-            }
-            tableList.add(columnList);
-        }
-        return tableList;
-    }
-
-    //表4预期数据
-    public static List<List> expectedTable4List() {
-        String[][] dataArray = {
-                {"2","zhangsan","18","shanghai","23.5","1998-04-06","08:10:10","2022-04-08 18:05:07","false"},
-                {"1","lisi","55","beijing","123.124","2022-03-04","07:03:15","1999-02-28 23:59:59","true"},
-                {"1","lisi","55","beijing","123.124","2022-03-05","07:03:15","1999-02-28 23:59:59","true"}
-        };
-        List<List> tableList = new ArrayList<List>();
-        for(int i=0; i<dataArray.length; i++) {
-            List columnList = new ArrayList();
-            for (int j=0; j<dataArray[i].length; j++) {
-                columnList.add(dataArray[i][j]);
-            }
-            tableList.add(columnList);
-        }
-        return tableList;
-    }
-
-    //表5预期数据
-    public static List<List> expectedTable5List() {
-        String[][] dataArray = {
-                {"2","zhangsan","18","shanghai","23.5","1998-04-06","08:10:10","2022-04-08 18:05:07","false"},
-                {"1","lisi","55","beijing","123.124","2022-03-05","17:03:15","1999-02-28 23:59:59","true"},
-                {"1","lisi","55","beijing","123.124","2022-03-05","07:03:15","1999-02-28 23:59:59","true"}
-        };
-        List<List> tableList = new ArrayList<List>();
-        for(int i=0; i<dataArray.length; i++) {
-            List columnList = new ArrayList();
-            for (int j=0; j<dataArray[i].length; j++) {
-                columnList.add(dataArray[i][j]);
-            }
-            tableList.add(columnList);
-        }
-        return tableList;
-    }
-
-    //表6预期数据
-    public static List<List> expectedTable6List() {
-        String[][] dataArray = {
-                {"2","zhangsan","18","shanghai","23.5","1998-04-06","08:10:10","2022-04-08 18:05:07","false"},
-                {"1","lisi","55","beijing","123.124","2022-03-05","07:03:15","2000-02-28 23:59:59","true"},
-                {"1","lisi","55","beijing","123.124","2022-03-05","07:03:15","1999-02-28 23:59:59","true"}
-        };
-        List<List> tableList = new ArrayList<List>();
-        for(int i=0; i<dataArray.length; i++) {
-            List columnList = new ArrayList();
-            for (int j=0; j<dataArray[i].length; j++) {
-                columnList.add(dataArray[i][j]);
-            }
-            tableList.add(columnList);
-        }
-        return tableList;
-    }
-
-    //表7预期数据
-    public static List<List> expectedTable7List() {
-        String[][] dataArray = {
-                {"1","lisi","55","beijing","123.124","2022-03-05","07:03:15","1999-02-28 23:59:59","false"},
-                {"2","zhangsan","18","shanghai","23.5","1998-04-06","08:10:10","2022-04-08 18:05:07","true"}
-        };
-        List<List> tableList = new ArrayList<List>();
-        for(int i=0; i<dataArray.length; i++) {
-            List columnList = new ArrayList();
-            for (int j=0; j<dataArray[i].length; j++) {
-                columnList.add(dataArray[i][j]);
-            }
-            tableList.add(columnList);
-        }
-        return tableList;
+        return expectedList;
     }
 
 
@@ -230,29 +71,45 @@ public class TestTableCreate extends YamlDataHelper {
 
     @Test(enabled = true, description = "创建测试表1,所有字段均不允许为null，所有字段均有默认值，只插入主键")
     public void test01AssignDefaultValue() throws SQLException {
-        initTable1();
+        String insertFields = "(id)";
+        String table1_meta_path = "src/test/resources/testdata/createTableTest/meta/createtable1_meta.txt";
+        String table1_value_path = "src/test/resources/testdata/createTableTest/values/createtable1_values.txt";
+        initTable(tableName1, table1_meta_path);
+        insertValues(tableName1, insertFields, table1_value_path);
     }
     @Test(enabled = true, dependsOnMethods = {"test01AssignDefaultValue"}, description = "验证table1表数据,验证默认值")
     public void test01CheckDefaultValue() throws SQLException {
-        List<List> expectedRecords = expectedTable1List();
+        String[][] dataArray = {
+                {"1","zhangsan","18","BJ Road.1","1234.5678","1991-06-18","23:59:59","2022-08-12 14:00:00","false"},
+                {"2","zhangsan","18","BJ Road.1","1234.5678","1991-06-18","23:59:59","2022-08-12 14:00:00","false"}
+        };
+        List<List> expectedRecords = expectedOutData(dataArray);
         System.out.println("Expected: " + expectedRecords);
 
-        List<List> actualRecords = tableCreateObj.queryTable1Data();
+        List<List> actualRecords = tableCreateObj.queryTableData(tableName1,"*","",9);
         System.out.println("Actual: " + actualRecords);
         Assert.assertEquals(actualRecords, expectedRecords);
     }
 
     @Test(enabled = true, description = "创建测试表2,varchar类型字段为主键,插入数据有相同主键")
     public void test02CreateTable2PrimaryKeyVarchar() throws SQLException {
-        initTable2();
+        String table2_meta_path = "src/test/resources/testdata/createTableTest/meta/createtable2_meta.txt";
+        String table2_value_path = "src/test/resources/testdata/createTableTest/values/createtable2_values.txt";
+        initTable(tableName2, table2_meta_path);
+        insertValues(tableName2, "", table2_value_path);
     }
 
     @Test(enabled = true, dependsOnMethods = {"test02CreateTable2PrimaryKeyVarchar"}, description = "验证table2表数据")
     public void test02Table2Records() throws SQLException {
-        List<List> expectedRecords = expectedTable2List();
+        String[][] dataArray = {
+                {"1","zhangsan","18","shanghai","23.5","1998-04-06","08:10:10","2022-04-08 18:05:07","true"},
+                {"1","lisi","25","shanghai","895.0","1988-02-05","06:15:08","2000-02-29 00:00:00","false"},
+                {"1","lisi2","55","beijing","123.123","2022-03-04","07:03:15","1999-02-28 23:59:59","true"}
+        };
+        List<List> expectedRecords = expectedOutData(dataArray);
         System.out.println("Expected: " + expectedRecords);
 
-        List<List> actualRecords = tableCreateObj.queryTable2Data();
+        List<List> actualRecords = tableCreateObj.queryTableData(tableName2,"*","",9);
         System.out.println("Actual: " + actualRecords);
         Assert.assertTrue(actualRecords.containsAll(expectedRecords));
         Assert.assertTrue(expectedRecords.containsAll(actualRecords));
@@ -260,15 +117,23 @@ public class TestTableCreate extends YamlDataHelper {
 
     @Test(enabled = true, description = "创建测试表3,double类型字段为主键,插入数据有相同主键")
     public void test03CreateTable3PrimaryKeyDouble() throws SQLException {
-        initTable3();
+        String table3_meta_path = "src/test/resources/testdata/createTableTest/meta/createtable3_meta.txt";
+        String table3_value_path = "src/test/resources/testdata/createTableTest/values/createtable3_values.txt";
+        initTable(tableName3, table3_meta_path);
+        insertValues(tableName3,"", table3_value_path);
     }
 
     @Test(enabled = true, dependsOnMethods = {"test03CreateTable3PrimaryKeyDouble"}, description = "验证table3表数据")
     public void test03Table3Records() throws SQLException {
-        List<List> expectedRecords = expectedTable3List();
+        String[][] dataArray = {
+                {"2","zhangsan","18","shanghai","23.5","1998-04-06","08:10:10","2022-04-08 18:05:07","false"},
+                {"1","lisi","55","beijing","123.124","2022-03-04","07:03:15","1999-02-28 23:59:59","true"},
+                {"1","lisi","55","beijing","123.123","2022-03-04","07:03:15","1999-02-28 23:59:59","true"}
+        };
+        List<List> expectedRecords = expectedOutData(dataArray);
         System.out.println("Expected: " + expectedRecords);
 
-        List<List> actualRecords = tableCreateObj.queryTable3Data();
+        List<List> actualRecords = tableCreateObj.queryTableData(tableName3,"*","",9);
         System.out.println("Actual: " + actualRecords);
         Assert.assertTrue(actualRecords.containsAll(expectedRecords));
         Assert.assertTrue(expectedRecords.containsAll(actualRecords));
@@ -276,15 +141,22 @@ public class TestTableCreate extends YamlDataHelper {
 
     @Test(enabled = true, description = "创建测试表4,date类型字段为主键,插入数据有相同主键")
     public void test04CreateTable4PrimaryKeyDate() throws SQLException {
-        initTable4();
+        String table4_meta_path = "src/test/resources/testdata/createTableTest/meta/createtable4_meta.txt";
+        String table4_value_path = "src/test/resources/testdata/createTableTest/values/createtable4_values.txt";
+        initTable(tableName4, table4_meta_path);
+        insertValues(tableName4,"", table4_value_path);
     }
 
     @Test(enabled = true, dependsOnMethods = {"test04CreateTable4PrimaryKeyDate"}, description = "验证table4表数据")
     public void test04Table4Records() throws SQLException {
-        List<List> expectedRecords = expectedTable4List();
+        String[][] dataArray = {
+                {"2","zhangsan","18","shanghai","23.5","1998-04-06","08:10:10","2022-04-08 18:05:07","false"},
+                {"1","lisi","55","beijing","123.124","2022-03-04","07:03:15","1999-02-28 23:59:59","true"},
+                {"1","lisi","55","beijing","123.124","2022-03-05","07:03:15","1999-02-28 23:59:59","true"}
+        };
+        List<List> expectedRecords = expectedOutData(dataArray);
         System.out.println("Expected: " + expectedRecords);
-
-        List<List> actualRecords = tableCreateObj.queryTable4Data();
+        List<List> actualRecords = tableCreateObj.queryTableData(tableName4,"*","",9);
         System.out.println("Actual: " + actualRecords);
         Assert.assertTrue(actualRecords.containsAll(expectedRecords));
         Assert.assertTrue(expectedRecords.containsAll(actualRecords));
@@ -292,15 +164,23 @@ public class TestTableCreate extends YamlDataHelper {
 
     @Test(enabled = true, description = "创建测试表5,time类型字段为主键,插入数据有相同主键")
     public void test05CreateTable5PrimaryKeyTime() throws SQLException {
-        initTable5();
+        String table5_meta_path = "src/test/resources/testdata/createTableTest/meta/createtable5_meta.txt";
+        String table5_value_path = "src/test/resources/testdata/createTableTest/values/createtable5_values.txt";
+        initTable(tableName5, table5_meta_path);
+        insertValues(tableName5,"", table5_value_path);
     }
 
     @Test(enabled = true, dependsOnMethods = {"test05CreateTable5PrimaryKeyTime"}, description = "验证table5表数据")
     public void test05Table5Records() throws SQLException {
-        List<List> expectedRecords = expectedTable5List();
+        String[][] dataArray = {
+                {"2","zhangsan","18","shanghai","23.5","1998-04-06","08:10:10","2022-04-08 18:05:07","false"},
+                {"1","lisi","55","beijing","123.124","2022-03-05","17:03:15","1999-02-28 23:59:59","true"},
+                {"1","lisi","55","beijing","123.124","2022-03-05","07:03:15","1999-02-28 23:59:59","true"}
+        };
+        List<List> expectedRecords = expectedOutData(dataArray);
         System.out.println("Expected: " + expectedRecords);
 
-        List<List> actualRecords = tableCreateObj.queryTable5Data();
+        List<List> actualRecords = tableCreateObj.queryTableData(tableName5,"*","",9);
         System.out.println("Actual: " + actualRecords);
         Assert.assertTrue(actualRecords.containsAll(expectedRecords));
         Assert.assertTrue(expectedRecords.containsAll(actualRecords));
@@ -308,15 +188,23 @@ public class TestTableCreate extends YamlDataHelper {
 
     @Test(enabled = true, description = "创建测试表6,timestamp类型字段为主键,插入数据有相同主键")
     public void test06CreateTable6PrimaryKeyTimestamp() throws SQLException {
-        initTable6();
+        String table6_meta_path = "src/test/resources/testdata/createTableTest/meta/createtable6_meta.txt";
+        String table6_value_path = "src/test/resources/testdata/createTableTest/values/createtable6_values.txt";
+        initTable(tableName6, table6_meta_path);
+        insertValues(tableName6,"", table6_value_path);
     }
 
     @Test(enabled = true, dependsOnMethods = {"test06CreateTable6PrimaryKeyTimestamp"}, description = "验证table6表数据")
     public void test06Table6Records() throws SQLException {
-        List<List> expectedRecords = expectedTable6List();
+        String[][] dataArray = {
+                {"2","zhangsan","18","shanghai","23.5","1998-04-06","08:10:10","2022-04-08 18:05:07","false"},
+                {"1","lisi","55","beijing","123.124","2022-03-05","07:03:15","2000-02-28 23:59:59","true"},
+                {"1","lisi","55","beijing","123.124","2022-03-05","07:03:15","1999-02-28 23:59:59","true"}
+        };
+        List<List> expectedRecords = expectedOutData(dataArray);
         System.out.println("Expected: " + expectedRecords);
 
-        List<List> actualRecords = tableCreateObj.queryTable6Data();
+        List<List> actualRecords = tableCreateObj.queryTableData(tableName6,"*","",9);
         System.out.println("Actual: " + actualRecords);
         Assert.assertTrue(actualRecords.containsAll(expectedRecords));
         Assert.assertTrue(expectedRecords.containsAll(actualRecords));
@@ -324,15 +212,22 @@ public class TestTableCreate extends YamlDataHelper {
 
     @Test(enabled = true, description = "创建测试表7,布尔类型字段为主键,插入数据有相同主键")
     public void test07CreateTable7PrimaryKeyBoolean() throws SQLException {
-        initTable7();
+        String table7_meta_path = "src/test/resources/testdata/createTableTest/meta/createtable7_meta.txt";
+        String table7_value_path = "src/test/resources/testdata/createTableTest/values/createtable7_values.txt";
+        initTable(tableName7, table7_meta_path);
+        insertValues(tableName7,"", table7_value_path);
     }
 
     @Test(enabled = true, dependsOnMethods = {"test07CreateTable7PrimaryKeyBoolean"}, description = "验证table7表数据")
     public void test07Table7Records() throws SQLException {
-        List<List> expectedRecords = expectedTable7List();
+        String[][] dataArray = {
+                {"1","lisi","55","beijing","123.124","2022-03-05","07:03:15","1999-02-28 23:59:59","false"},
+                {"2","zhangsan","18","shanghai","23.5","1998-04-06","08:10:10","2022-04-08 18:05:07","true"}
+        };
+        List<List> expectedRecords = expectedOutData(dataArray);
         System.out.println("Expected: " + expectedRecords);
 
-        List<List> actualRecords = tableCreateObj.queryTable7Data();
+        List<List> actualRecords = tableCreateObj.queryTableData(tableName7,"*","",9);
         System.out.println("Actual: " + actualRecords);
         Assert.assertTrue(actualRecords.containsAll(expectedRecords));
         Assert.assertTrue(expectedRecords.containsAll(actualRecords));
