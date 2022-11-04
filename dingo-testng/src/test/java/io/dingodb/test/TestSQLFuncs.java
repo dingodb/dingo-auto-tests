@@ -38,7 +38,7 @@ import java.util.Map;
 public class TestSQLFuncs extends YamlDataHelper {
     public static SQLFuncs funcObj = new SQLFuncs();
 
-    public void initQueryTable1(String tableName, String tableMetaPath, String tableValuePath) throws SQLException {
+    public void initTable(String tableName, String tableMetaPath, String tableValuePath) throws SQLException {
         String queryTable1_meta = FileReaderUtil.readFile(tableMetaPath);
         String queryTable1_value = FileReaderUtil.readFile(tableValuePath);
         funcObj.queryTable1Create(tableName, queryTable1_meta);
@@ -105,7 +105,15 @@ public class TestSQLFuncs extends YamlDataHelper {
         String tableName = "querytest1";
         String queryTable1_meta_path = "src/test/resources/testdata/tablemeta/between_and_meta1.txt";
         String queryTable1_value_path = "src/test/resources/testdata/tableInsertValues/SQLFunc_Query1.txt";
-        initQueryTable1(tableName, queryTable1_meta_path, queryTable1_value_path);
+        initTable(tableName, queryTable1_meta_path, queryTable1_value_path);
+    }
+
+    @Test(enabled = true, description = "创建查询测试表2")
+    public void test00CreateGroupTable1() throws SQLException {
+        String tableName = "grouptest1";
+        String group1_meta_path = "src/test/resources/testdata/tablemeta/group_tbl1_meta.txt";
+        String group1_value_path = "src/test/resources/testdata/tableInsertValues/group_tbl1_value.txt";
+        initTable(tableName, group1_meta_path, group1_value_path);
     }
 
     @Test(groups = {"preFuncs"}, dependsOnMethods = {"test00CreateFuncTable1"},
@@ -724,6 +732,21 @@ public class TestSQLFuncs extends YamlDataHelper {
         Assert.assertTrue(actualGroupList.containsAll(expectedGroupList));
         Assert.assertTrue(expectedGroupList.containsAll(actualGroupList));
     }
+
+    @Test(enabled = true, dependsOnMethods = {"test00CreateGroupTable1"}, description = "分组使用having过滤")
+    public void testGroupWithHaving() throws SQLException, ClassNotFoundException {
+        String[][] dataArray = {
+                {"zala","189"},{"liuliu","179"},{"zhangsan","178"}
+        };
+        List<List> expectedQueryList = expectedOutData(dataArray);
+        System.out.println("Expected: " + expectedQueryList);
+
+        List<List> actualQueryList = funcObj.groupWithHaving();
+        System.out.println("Actual: " + actualQueryList);
+        Assert.assertTrue(actualQueryList.containsAll(expectedQueryList));
+        Assert.assertTrue(expectedQueryList.containsAll(actualQueryList));
+    }
+
 
     @Test(enabled = true, groups = {"multi"}, dependsOnMethods = {"test00InsertMultiTable2"}, description = "limit超过数据条数")
     public void testCase286() throws SQLException, ClassNotFoundException {
@@ -1726,6 +1749,10 @@ public class TestSQLFuncs extends YamlDataHelper {
         System.out.println("Actual: " + actualRows);
         Assert.assertEquals(actualRows, expectedRows);
     }
+
+
+
+
 
 
     @AfterClass(description = "测试完成后删除数据和表格并关闭连接")

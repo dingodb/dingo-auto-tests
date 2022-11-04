@@ -1037,6 +1037,25 @@ public class SQLFuncs {
         }
     }
 
+    //分组使用Having过滤
+    public List<List> groupWithHaving() throws SQLException, ClassNotFoundException {
+        try(Statement statement = connection.createStatement()) {
+            String querySQL = "select name,sum(score) ss from grouptest1 group by name having ss>175";
+            ResultSet resultSet = statement.executeQuery(querySQL);
+            List<List> queryList = new ArrayList<List>();
+
+            while(resultSet.next()) {
+                List rowList = new ArrayList ();
+                rowList.add(resultSet.getString(1));
+                rowList.add(resultSet.getString(2));
+                queryList.add(rowList);
+            }
+            resultSet.close();
+            statement.close();
+            return queryList;
+        }
+    }
+
     public int case286() throws SQLException, ClassNotFoundException {
         try(Statement statement = connection.createStatement()) {
             String querySQL = "select * from emptest065 limit 20";

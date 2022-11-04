@@ -22,23 +22,26 @@ import java.util.List;
 
 public class StrTo2DList {
     /**
-     * @param construcStr e.g. 5,awJDs,2010-10-01;19,Adidas,2010-10-01
+     * @param constructStr e.g. 5,awJDs,2010-10-01;19,Adidas,2010-10-01
      * @return List<List>
      */
-    public List<List> construct2DList(String construcStr, String listSplit, String strSplit){
+    public List<List> construct2DList(String constructStr, String listSplit, String strSplit){
         List<List> constructList = new ArrayList<List>();
-        String[] originArray = construcStr.split(listSplit);
+//        String[] originArray = constructStr.split(listSplit,-1);
+        String[] originArray = constructStr.split(listSplit);
 
         for(int i=0; i < originArray.length; i++) {
+//            constructList.add(new ArrayList(Arrays.asList(originArray[i].split(strSplit,-1))));
             constructList.add(new ArrayList(Arrays.asList(originArray[i].split(strSplit))));
         }
 
         return constructList;
     }
 
-    public List<List> construct1DList(String construcStr, String splitCha){
+    public List construct1DList(String constructStr, String splitCha){
         List constructList = new ArrayList();
-        String[] originArray = construcStr.split(splitCha);
+//        String[] originArray = constructStr.split(splitCha,-1);
+        String[] originArray = constructStr.split(splitCha);
         constructList = Arrays.asList(originArray);
 
         return constructList;

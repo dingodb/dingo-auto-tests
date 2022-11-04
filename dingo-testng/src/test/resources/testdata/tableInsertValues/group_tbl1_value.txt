@@ -1,0 +1,12 @@
+(1,'zhangsan','math',90),
+(2,'zhangsan','english',88),
+(3,'lisi','math',95),
+(4,'lisi','english',77),
+(5,'wangwu','math',91),
+(6,'wangwu','english',83),
+(7,'liuliu','math',100),
+(8,'liuliu','english',79),
+(9,'sim','math',89),
+(10,'sim','english',60),
+(11,'zala','math',90),
+(12,'zala','english',99)

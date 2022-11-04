@@ -1,0 +1,7 @@
+(
+stu_no int,
+name varchar(20),
+course varchar(20),
+score int,
+primary key(stu_no)
+)
