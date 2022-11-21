@@ -24,6 +24,12 @@ testID1001247-01:
   inputDate: "-20220412"
 testID1001247-02:
   inputDate: "-20220412172830"
+testID1001247-03:
+  inputDate: "20220412172830.1234"
+testID1001247-04:
+  inputDate: "20220412172830.12345"
+testID1001247-05:
+  inputDate: "20220412172830.123456"
 testID1000730:
   inputDate: "2022-04-12"
 #  outputTimestamp: "1649692800"

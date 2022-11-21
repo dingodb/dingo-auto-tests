@@ -198,6 +198,14 @@ testID1001751-02:
   inputNum: "-9223372036854775808"
   decimalLen: "2"
   outResult: "-9223372036854775808"
+testID1001751-03:
+  inputNum: "-2147483649"
+  decimalLen: "0"
+  outResult: "-2147483649"
+testID1001751-04:
+  inputNum: "2147483649"
+  decimalLen: "0"
+  outResult: "2147483649"
 testID1001752-01:
   inputNum: "9223372036854775808.345"
   decimalLen: "2"

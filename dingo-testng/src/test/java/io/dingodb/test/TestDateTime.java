@@ -290,7 +290,7 @@ public class TestDateTime extends YamlDataHelper{
 //        System.out.println(param.get("outputStr"));
         String expectedUnix_TimeStamp = param.get("outputTimestamp");
         System.out.println("Expected: " + expectedUnix_TimeStamp);
-        String actualUnix_TimeStamp = dateTimeObj.unix_TimeStampFunc(param.get("inputDate"));
+        String actualUnix_TimeStamp = dateTimeObj.unix_TimeStampFunc(param.get("inputDate")); //2022-11-21变更：若参数含有小数，四舍五入处理
         System.out.println("Actual: " + actualUnix_TimeStamp);
         Assert.assertEquals(actualUnix_TimeStamp, expectedUnix_TimeStamp);
     }
@@ -352,6 +352,12 @@ public class TestDateTime extends YamlDataHelper{
 
     }
 
+
+    /**
+     * 2022-11-16: 需求变更后，unix_timestamp支持小数，将本用例带有小数的参数的用例转移到正向用例里
+     * @param param
+     * @throws SQLException
+     */
     @Test(priority = 12, enabled = true, dataProvider = "yamlNegativeDateTimeMethod", expectedExceptions = SQLException.class,
             description = "验证函数unix_TimeStamp输入带有小数的数字或curdate函数，预期异常")
     public void test13Unix_TimeStampNegativeNum(Map<String, String> param) throws SQLException {

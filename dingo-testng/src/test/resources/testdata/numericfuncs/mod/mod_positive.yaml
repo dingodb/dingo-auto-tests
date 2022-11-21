@@ -26,6 +26,14 @@ testID1001644-07:
   num1: "2480"
   num2: "10"
   outNum: "0"
+testID1001644-08:
+  num1: "2147483649"
+  num2: "2"
+  outNum: "1"
+testID1001644-09:
+  num1: "9223372036854775807"
+  num2: "2"
+  outNum: "1"
 testID1001645-01:
   num1: "34"
   num2: "-3"
@@ -58,6 +66,14 @@ testID1001646-04:
   num1: "-2480"
   num2: "1241"
   outNum: "-1239"
+testID1001646-05:
+  num1: "-2147483649"
+  num2: "2"
+  outNum: "-1"
+testID1001646-06:
+  num1: "-9223372036854775808"
+  num2: "2"
+  outNum: "0"
 testID1001647-01:
   num1: "-34"
   num2: "-3"
@@ -241,4 +257,16 @@ testID1001654-08:
 testID1001654-09:
   num1: "2.50"
   num2: "-2.5"
+  outNum: "0.00"
+testID1001655-01:
+  num1: "'29'"
+  num2: "9"
+  outNum: "2"
+testID1001655-03:
+  num1: "20"
+  num2: "'5'"
+  outNum: "0"
+testID1001655-05:
+  num1: "'2.5'"
+  num2: "'1.25'"
   outNum: "0.00"

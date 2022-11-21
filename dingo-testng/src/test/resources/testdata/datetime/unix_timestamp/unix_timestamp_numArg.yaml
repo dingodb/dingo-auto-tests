@@ -10,3 +10,22 @@ testID1001248:
 testID1001249:
   inputDate: "20220412"
   outputTimestamp: "20220412"
+
+testID1000740-01:
+  inputDate: "20220412172630.5"
+  outputTimestamp: "20220412172631"
+testID1000740-02:
+  inputDate: "20220412172630.49"
+  outputTimestamp: "20220412172630"
+testID1000740-03:
+  inputDate: "20220412172630.012"
+  outputTimestamp: "20220412172630"
+testID1000740-04:
+  inputDate: "20220412172630.3245"
+  outputTimestamp: "20220412172630"
+testID1000740-05:
+  inputDate: "20220412172630.87921"
+  outputTimestamp: "20220412172631"
+testID1000740-06:
+  inputDate: "20220412172630.99999"
+  outputTimestamp: "20220412172631"
