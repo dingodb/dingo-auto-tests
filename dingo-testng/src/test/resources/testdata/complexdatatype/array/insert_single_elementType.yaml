@@ -2,7 +2,7 @@ testID1001926-01:
   tableName: "intArray"
   arrayValues: "(192611, 'zhangsan', array[3.6]),(192612, 'lisi', array[2.00,15.67])"
   queryLogic: "id in (192611,192612)"
-  outData: "192611&zhangsan&[3];192612&lisi&[2, 15]"
+  outData: "192611&zhangsan&[4];192612&lisi&[2, 16]"
 testID1001926-02:
   tableName: "intArray"
   arrayValues: "(192621, 'zhangsan', array['12']),(192622,'lisi', array['10000','0','-256'])"

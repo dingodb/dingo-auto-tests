@@ -27,11 +27,9 @@ public class StrTo2DList {
      */
     public List<List> construct2DList(String constructStr, String listSplit, String strSplit){
         List<List> constructList = new ArrayList<List>();
-//        String[] originArray = constructStr.split(listSplit,-1);
         String[] originArray = constructStr.split(listSplit);
 
         for(int i=0; i < originArray.length; i++) {
-//            constructList.add(new ArrayList(Arrays.asList(originArray[i].split(strSplit,-1))));
             constructList.add(new ArrayList(Arrays.asList(originArray[i].split(strSplit))));
         }
 
@@ -40,8 +38,26 @@ public class StrTo2DList {
 
     public List construct1DList(String constructStr, String splitCha){
         List constructList = new ArrayList();
-//        String[] originArray = constructStr.split(splitCha,-1);
         String[] originArray = constructStr.split(splitCha);
+        constructList = Arrays.asList(originArray);
+
+        return constructList;
+    }
+
+    public List<List> construct2DListIncludeBlank(String constructStr, String listSplit, String strSplit){
+        List<List> constructList = new ArrayList<List>();
+        String[] originArray = constructStr.split(listSplit,-1);
+
+        for(int i=0; i < originArray.length; i++) {
+            constructList.add(new ArrayList(Arrays.asList(originArray[i].split(strSplit,-1))));
+        }
+
+        return constructList;
+    }
+
+    public List construct1DListIncludeBlank(String constructStr, String splitCha){
+        List constructList = new ArrayList();
+        String[] originArray = constructStr.split(splitCha,-1);
         constructList = Arrays.asList(originArray);
 
         return constructList;

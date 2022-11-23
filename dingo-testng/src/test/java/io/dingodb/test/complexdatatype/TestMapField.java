@@ -79,10 +79,10 @@ public class TestMapField extends YamlDataHelper {
         String map1_value1_path = "src/test/resources/testdata/tableInsertValues/complexdatatype/map/map_tbl1_value1.txt";
         insertKVToTbl(tableName1,"", map1_value1_path);
         String[][] dataArray = {
-                {"1", "zhangsan", "20", "34.56", "{class_no=1024, address=beijing}"},
+                {"1", "zhangsan", "20", "34.56", "{address=beijing, class_no=1024}"},
                 {"2", "lisi", "35", "0.96", "{address=tianjin}"},
                 {"3", "wangwu", "8", "0.0", "{address=dalian, sex=male}"},
-                {"4", "liuyi", "-56", "-1834.29", "{class_no=1001, address=wuhan, sex=female}"}
+                {"4", "liuyi", "-56", "-1834.29", "{address=wuhan, class_no=1001, sex=female}"}
         };
         List<List> expectedList = expectedMapOutput(dataArray);
         System.out.println("Expected: " + expectedList);
@@ -301,9 +301,9 @@ public class TestMapField extends YamlDataHelper {
         String map2_value1_path = "src/test/resources/testdata/tableInsertValues/complexdatatype/map/map_tbl2_value1.txt";
         insertKVToTbl(tableName2,"", map2_value1_path);
         String[][] dataArray = {
-                {"1", "LaLa", "27", "132.5", "{birthday1=1998-12-11, birthday2=2010-09-15, sex=female}", "{tno=1476821, sno=3001, score=98}", "{avg_sale=1234.5678, price=23.58}"},
-                {"2", "zhangsan", "39", "100.0", "{birthday1=1949-07-26, birthday2=2013-03-13, sex=female}", "{tno=2290832, sno=3002, score=90}", "{avg_sale=10000.00, price=67.33}"},
-                {"3", "Huha", "56", "-78.6", "{birthday1=1970-01-01, birthday2=2000-10-10, sex=male}", "{tno=1809000, sno=3003, score=78}", "{avg_sale=39287.23, price=111.5}"}
+                {"1", "LaLa", "27", "132.5", "{birthday1=1998-12-11, birthday2=2010-09-15, sex=female}", "{score=98, sno=3001, tno=1476821}", "{avg_sale=1234.5678, price=23.58}"},
+                {"2", "zhangsan", "39", "100.0", "{birthday1=1949-07-26, birthday2=2013-03-13, sex=female}", "{score=90, sno=3002, tno=2290832}", "{avg_sale=10000.0, price=67.33}"},
+                {"3", "Huha", "56", "-78.6", "{birthday1=1970-01-01, birthday2=2000-10-10, sex=male}", "{score=78, sno=3003, tno=1809000}", "{avg_sale=39287.23, price=111.5}"}
         };
         List<List> expectedList = expectedMapOutput(dataArray);
         System.out.println("Expected: " + expectedList);
@@ -344,8 +344,8 @@ public class TestMapField extends YamlDataHelper {
         Assert.assertEquals(deleteRows, 1);
 
         String[][] dataArray = {
-                {"1", "LaLa", "27", "132.5", "{birthday1=1998-12-11, birthday2=2010-09-15, sex=female}", "{tno=1476821, sno=3001, score=98}", "{avg_sale=1234.5678, price=23.58}"},
-                {"3", "Huha", "56", "-78.6", "{birthday1=1970-01-01, birthday2=2000-10-10, sex=male}", "{tno=1809000, sno=3003, score=78}", "{avg_sale=39287.23, price=111.5}"},
+                {"1", "LaLa", "27", "132.5", "{birthday1=1998-12-11, birthday2=2010-09-15, sex=female}", "{score=98, sno=3001, tno=1476821}", "{avg_sale=1234.5678, price=23.58}"},
+                {"3", "Huha", "56", "-78.6", "{birthday1=1970-01-01, birthday2=2000-10-10, sex=male}", "{score=78, sno=3003, tno=1809000}", "{avg_sale=39287.23, price=111.5}"},
                 {"4", "kili", "17", "13.22", "{birthday1=2147483648, birthday2=-9223372036854775808}", "{score=2147483649, sno=13897654321, tno=9223372036854775807}", "{avg_sale=-2147483648, price=2147483647}"}
         };
         List<List> expectedList = expectedMapOutput(dataArray);
@@ -391,9 +391,9 @@ public class TestMapField extends YamlDataHelper {
         String map5_value1_path = "src/test/resources/testdata/tableInsertValues/complexdatatype/map/map_tbl5_value1.txt";
         insertKVToTbl(tableName5,"", map5_value1_path);
         String[][] dataArray = {
-                {"1", "zhangsan", "{class_no=1024, address=beijing}", "20", "34.56"},
+                {"1", "zhangsan", "{address=beijing, class_no=1024}", "20", "34.56"},
                 {"2", "wangwu", "{address=dalian, sex=male}", "8", "0.0"},
-                {"3", "liuyi", "{class_no=1001, address=wuhan, sex=female}", "-56", "-1834.29"}
+                {"3", "liuyi", "{address=wuhan, class_no=1001, sex=female}", "-56", "-1834.29"}
         };
         List<List> expectedList = expectedMapOutput(dataArray);
         System.out.println("Expected: " + expectedList);
@@ -416,9 +416,9 @@ public class TestMapField extends YamlDataHelper {
         String map6_value1_path = "src/test/resources/testdata/tableInsertValues/complexdatatype/map/map_tbl6_value1.txt";
         insertKVToTbl(tableName6,"", map6_value1_path);
         String[][] dataArray = {
-                {"{class_no=1024, address=beijing}","1998-04-06","08:10:10","2022-04-08 18:05:07","true","zhangsan","20","34.56","5001"},
+                {"{address=beijing, class_no=1024}","1998-04-06","08:10:10","2022-04-08 18:05:07","true","zhangsan","20","34.56","5001"},
                 {"{address=dalian, sex=male}","1949-01-01","00:30:08","2022-12-01 01:02:03","false","wangwu","8","0.0","5002"},
-                {"{class_no=1001, address=wuhan, sex=female}","2022-03-04","07:03:15","1999-02-28 23:59:59","false","liuyi","-56","-1834.29","5003"}
+                {"{address=wuhan, class_no=1001, sex=female}","2022-03-04","07:03:15","1999-02-28 23:59:59","false","liuyi","-56","-1834.29","5003"}
         };
         List<List> expectedList = expectedMapOutput(dataArray);
         System.out.println("Expected: " + expectedList);
@@ -445,8 +445,8 @@ public class TestMapField extends YamlDataHelper {
         String map3_value2_path = "src/test/resources/testdata/tableInsertValues/complexdatatype/map/map_tbl3_value2.txt";
         insertKVToTbl(tableName3,"", map3_value2_path);
         String[][] dataArray = {
-                {"-1230.44", "{birthday=1962-06-20, sex=male, address=shanghai}"},
-                {"99.9", "{birthday=1987-02-28, sex=female, address=wuhan}"}
+                {"-1230.44", "{address=shanghai, birthday=1962-06-20, sex=male}"},
+                {"99.9", "{address=wuhan, birthday=1987-02-28, sex=female}"}
         };
         List<List> expectedList = expectedMapOutput(dataArray);
         System.out.println("Expected: " + expectedList);
@@ -461,9 +461,9 @@ public class TestMapField extends YamlDataHelper {
     @Test(priority = 26, enabled = true, description = "范围查询2")
     public void test26QueryByRange2() throws SQLException {
         String[][] dataArray = {
-                {"1", "zhangsan", "{birthday=2022-01-10, sex=male, address=beijing}"},
-                {"2", "lisi", "{birthday=2000-11-23, sex=female, address=beijing}"},
-                {"3", "wangwu", "{birthday=1962-06-20, sex=male, address=shanghai}"}
+                {"1", "zhangsan", "{address=beijing, birthday=2022-01-10, sex=male}"},
+                {"2", "lisi", "{address=beijing, birthday=2000-11-23, sex=female}"},
+                {"3", "wangwu", "{address=shanghai, birthday=1962-06-20, sex=male}"}
         };
         List<List> expectedList = expectedMapOutput(dataArray);
         System.out.println("Expected: " + expectedList);

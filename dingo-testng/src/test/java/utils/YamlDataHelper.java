@@ -996,6 +996,33 @@ public class YamlDataHelper{
     }
 
     @DataProvider
+    public Object[][] likeStateMethod(Method method) {
+        List<Map<String, String>> yamlList = null;
+        switch (method.getName()) {
+            case "test00TableCreate": {
+                yamlList = getYamlList(iniReader.getValue("likeStateYaml", "tableCreate"));
+                break;
+            }
+
+            case "test01LikeQueryData": {
+                yamlList = getYamlList(iniReader.getValue("likeStateYaml", "likeQueryData1"));
+                break;
+            }
+
+            case "test02LikeQueryRows": {
+                yamlList = getYamlList(iniReader.getValue("likeStateYaml", "likeQueryRowCnt1"));
+                break;
+            }
+
+        }
+        Object[][] files = new Object[yamlList.size()][];
+        for (int i = 0; i < yamlList.size(); i++) {
+            files[i] = new Object[]{yamlList.get(i)};
+        }
+        return files;
+    }
+
+    @DataProvider
     public Object[][] createTableMethod(Method method) {
         List<Map<String, String>> yamlCreateTableList = null;
         switch (method.getName()) {

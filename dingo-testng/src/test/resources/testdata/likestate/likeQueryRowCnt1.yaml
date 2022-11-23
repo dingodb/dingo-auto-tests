@@ -1,0 +1,15 @@
+testID1002391:
+  tableName: "lktest1"
+  queryFields: "*"
+  queryState: "where name like '%'"
+  queryRst: "30"
+testID1002429-01:
+  tableName: "lktest1"
+  queryFields: "*"
+  queryState: "where name like '%_'"
+  queryRst: "29"
+testID1002429-02:
+  tableName: "lktest1"
+  queryFields: "*"
+  queryState: "where name like '____%'"
+  queryRst: "24"

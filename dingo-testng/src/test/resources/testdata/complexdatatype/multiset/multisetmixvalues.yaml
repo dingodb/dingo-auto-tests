@@ -4,7 +4,7 @@ testID1002034-01:
   tableValue: "(20341, 'zzz', multiset[1001,23.0,0.99,1212.4567])"
   queryFields: "*"
   queryLogic: " where id = 20341"
-  outData: "20341&zzz&[1001, 23, 0, 1212]"
+  outData: "20341&zzz&[1001, 23, 1, 1212]"
   fieldsCnt: "3"
 testID1002035-01:
   tableName: "doubleset"
@@ -132,7 +132,7 @@ testID1002050-01:
   tableValue: "(205011, 'aa', multiset[3.6]),(205012, 'bb', multiset[2.00,15.67])"
   queryFields: "*"
   queryLogic: " where id in (205011,205012)"
-  outData: "205011&aa&[3];205012&bb&[2, 15]"
+  outData: "205011&aa&[4];205012&bb&[2, 16]"
   fieldsCnt: "3"
 testID1002050-02:
   tableName: "intset"

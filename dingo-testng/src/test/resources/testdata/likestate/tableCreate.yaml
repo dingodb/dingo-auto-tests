@@ -1,0 +1,15 @@
+table01:
+  tableName: "lktest1"
+  metaPath: "src/test/resources/tabledata/meta/likeState/liketest1_meta.txt"
+  insertFields: ""
+  valuePath: "src/test/resources/tabledata/value/likeState/liketest1_values.txt"
+table02:
+  tableName: "lktest2"
+  metaPath: "src/test/resources/tabledata/meta/likeState/liketest2_meta.txt"
+  insertFields: ""
+  valuePath: "src/test/resources/tabledata/value/likeState/liketest2_values.txt"
+table03:
+  tableName: "lktest3"
+  metaPath: "src/test/resources/tabledata/meta/likeState/liketest3_meta.txt"
+  insertFields: ""
+  valuePath: "src/test/resources/tabledata/value/likeState/liketest3_values.txt"

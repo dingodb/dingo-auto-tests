@@ -101,6 +101,12 @@
         </classes>
     </test>
 
+    <test name="v0.5.0 likeStateTest">
+        <classes>
+            <class name="io.dingodb.test.TestLikeState"></class>
+        </classes>
+    </test>
+
 
     <test name="TableCreateTest">
         <classes>
