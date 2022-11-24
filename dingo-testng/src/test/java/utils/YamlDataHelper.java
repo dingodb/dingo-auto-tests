@@ -1014,6 +1014,11 @@ public class YamlDataHelper{
                 break;
             }
 
+            case "test03LikeQueryFail": {
+                yamlList = getYamlList(iniReader.getValue("likeStateYaml", "likeQueryFail"));
+                break;
+            }
+
         }
         Object[][] files = new Object[yamlList.size()][];
         for (int i = 0; i < yamlList.size(); i++) {

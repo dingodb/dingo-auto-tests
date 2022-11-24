@@ -13,3 +13,29 @@ testID1002429-02:
   queryFields: "*"
   queryState: "where name like '____%'"
   queryRst: "24"
+testID1002458:
+  tableName: "lktest3"
+  queryFields: "*"
+  queryState: "where address like '[ T]inger'"
+  queryRst: "0"
+testID1002483:
+  tableName: "lktest3"
+  queryFields: "*"
+  queryState: "where address like 'Beijing[^ ]'"
+  queryRst: "0"
+testID1002504:
+  tableName: "lktest1"
+  queryFields: "*"
+  queryState: "where name not like '%'"
+  queryRst: "0"
+testID1002545:
+  tableName: "lktest3"
+  queryFields: "*"
+  queryState: "where (id>1 and id <=4) and name not like '[3MH]M'"
+  queryRst: "0"
+testID1002582:
+  tableName: "lktest3"
+  queryFields: "*"
+  queryState: "where name like binary '_m'"
+  queryRst: "0"
+

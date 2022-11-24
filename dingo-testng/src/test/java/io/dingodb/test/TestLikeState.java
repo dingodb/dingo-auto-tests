@@ -34,7 +34,7 @@ import java.util.Map;
 
 public class TestLikeState extends YamlDataHelper {
     public static LikeState likeObj = new LikeState();
-    public static String tableName1 = "lktest1";
+    public static String tableName4 = "lktest4";
 
     public void initTable(String tableName, String tableMetaPath) throws SQLException {
         String tableMeta = FileReaderUtil.readFile(tableMetaPath);
@@ -71,13 +71,13 @@ public class TestLikeState extends YamlDataHelper {
         insertTableValue(param.get("tableName"), param.get("insertFields"), tableValuePath);
     }
 
-    @Test(priority = 1, enabled = true, dependsOnMethods = {"test00TableCreate"}, dataProvider = "likeStateMethod",
+    @Test(priority = 1, enabled = true, dataProvider = "likeStateMethod",
             description = "验证like查询%，_和[]，返回数据")
     public void test01LikeQueryData(Map<String, String> param) throws SQLException {
         StrTo2DList strTo2DList = new StrTo2DList();
-        List<List> expectedList = strTo2DList.construct2DList(param.get("queryRst"),";",",");
+        List<List> expectedList = strTo2DList.construct2DListIncludeBlank(param.get("queryRst"),";",",");
         System.out.println("Expected: " + expectedList);
-        List<List> actualList = likeObj.likeQueryList(param.get("tableName"), param.get("queryFields"), param.get("queryState"),9, param.get("outFields"));
+        List<List> actualList = likeObj.likeQueryByOutFields(param.get("tableName"), param.get("queryFields"), param.get("queryState"),9, param.get("outFields"));
         System.out.println("Actual: " + actualList);
 
         Assert.assertTrue(actualList.containsAll(expectedList));
@@ -93,6 +93,31 @@ public class TestLikeState extends YamlDataHelper {
 
         Assert.assertEquals(actualRows, expectedRows);
     }
+
+    @Test(priority = 3, enabled = true, dataProvider = "likeStateMethod", expectedExceptions = SQLException.class,
+            description = "验证like查询预期失败场景")
+    public void test03LikeQueryFail(Map<String, String> param) throws SQLException {
+        likeObj.likeQueryFail(param.get("tableName"), param.get("queryFields"), param.get("queryState"));
+    }
+
+    @Test(priority = 4, enabled = true, description = "like语句模糊匹配字段不在查询字段里")
+    public void test04LikeFieldNotInQuery() throws SQLException {
+        String[][] dataArray = {
+                {"2", "45", "25.46", "1999-04-06"},{"5", "90", "138.05", "2010-10-31"},
+                {"11", "100", null, "2008-10-30"}, {"19", "88", "20010.1234", "1942-01-01"},
+                {"21", "88", "797.0", "1942-01-01"},{"22", "59", "20015.1234", "2011-12-31"}
+        };
+        List<List> expectedList = expectedOutput(dataArray);
+        System.out.println("Expected: " + expectedList);
+        String queryFields = "id,age,amount,birthday";
+        String queryState = "where name like 'li%'";
+        List<List> actualList = likeObj.likeQueryByQueryFields(tableName4, queryFields, queryState, 9);
+        System.out.println("Actual: " + actualList);
+
+        Assert.assertTrue(actualList.containsAll(expectedList));
+        Assert.assertTrue(expectedList.containsAll(actualList));
+    }
+
 
 
     @AfterClass(alwaysRun = true, description = "测试完成后删除数据和表格并关闭连接")

@@ -1,0 +1,17 @@
+testID1002466:
+  tableName: "lktest3"
+  queryFields: "*"
+  queryState: "where name like '[]A'"
+testID1002490:
+  tableName: "lktest3"
+  queryFields: "*"
+  queryState: "where name like '[^]M'"
+testID1002549:
+  tableName: "lktest3"
+  queryFields: "*"
+  queryState: "where name not like '[]A'"
+testID1002566:
+  tableName: "lktest3"
+  queryFields: "*"
+  queryState: "where name not like '[^]M'"
+

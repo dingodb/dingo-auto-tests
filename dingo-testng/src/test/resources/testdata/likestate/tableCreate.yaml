@@ -1,15 +1,30 @@
 table01:
   tableName: "lktest1"
-  metaPath: "src/test/resources/tabledata/meta/likeState/liketest1_meta.txt"
+  metaPath: "src/test/resources/tabledata/meta/likeState/liketest_meta1.txt"
   insertFields: ""
   valuePath: "src/test/resources/tabledata/value/likeState/liketest1_values.txt"
 table02:
   tableName: "lktest2"
-  metaPath: "src/test/resources/tabledata/meta/likeState/liketest2_meta.txt"
+  metaPath: "src/test/resources/tabledata/meta/likeState/liketest_meta1.txt"
   insertFields: ""
   valuePath: "src/test/resources/tabledata/value/likeState/liketest2_values.txt"
 table03:
   tableName: "lktest3"
-  metaPath: "src/test/resources/tabledata/meta/likeState/liketest3_meta.txt"
+  metaPath: "src/test/resources/tabledata/meta/likeState/liketest_meta1.txt"
   insertFields: ""
   valuePath: "src/test/resources/tabledata/value/likeState/liketest3_values.txt"
+table04:
+  tableName: "lktest4"
+  metaPath: "src/test/resources/tabledata/meta/likeState/liketest_meta1.txt"
+  insertFields: ""
+  valuePath: "src/test/resources/tabledata/value/likeState/liketest4_values.txt"
+tableBeauty:
+  tableName: "lkbeauty"
+  metaPath: "src/test/resources/tabledata/meta/common/beauty_meta.txt"
+  insertFields: ""
+  valuePath: "src/test/resources/tabledata/value/common/beauty_value1.txt"
+tableBoys:
+  tableName: "lkboys"
+  metaPath: "src/test/resources/tabledata/meta/common/boys_meta.txt"
+  insertFields: "(id,boyName,userCP)"
+  valuePath: "src/test/resources/tabledata/value/common/boys_value1.txt"

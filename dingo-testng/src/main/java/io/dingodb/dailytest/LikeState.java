@@ -53,8 +53,8 @@ public class LikeState {
         }
     }
 
-    //查询数据,返回数据列表
-    public List<List> likeQueryList(String tableName, String queryFields, String queryState, int fieldsCnt, String outFields) throws SQLException {
+    //按需要获取的字段信息返回数据
+    public List<List> likeQueryByOutFields(String tableName, String queryFields, String queryState, int fieldsCnt, String outFields) throws SQLException {
         try(Statement statement = connection.createStatement()) {
             String sql = "select " + queryFields + " from " + tableName + " " + queryState;
             ResultSet resultSet = statement.executeQuery(sql);
@@ -66,16 +66,32 @@ public class LikeState {
                 for (int i = 0;i<testFieldsList.size(); i++) {
                     rowList.add(resultSet.getString(testFieldsList.get(i)));
                 }
+                queryList.add(rowList);
+            }
+            resultSet.close();
+            statement.close();
+            return queryList;
+        }
+    }
 
-//                if(queryFields.equals("*")) {
-//                    for(int i = 1; i <= fieldsCnt; i++){
-//                        rowList.add(resultSet.getString(i));
-//                    }
-//                } else {
-//                    for (int j=1; j <= queryColNum; j++) {
-//                        rowList.add(resultSet.getString(j));
-//                    }
-//                }
+    //按查询字段返回全部数据
+    public List<List> likeQueryByQueryFields(String tableName, String queryFields, String queryState, int fieldsCnt) throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String sql = "select " + queryFields + " from " + tableName + " " + queryState;
+            ResultSet resultSet = statement.executeQuery(sql);
+            List<List> queryList = new ArrayList<List>();
+            int queryColNum = new ArrayList(Arrays.asList(queryFields.split(","))).size();
+            while (resultSet.next()) {
+                List rowList = new ArrayList();
+                if(queryFields.equals("*")) {
+                    for(int i = 1; i <= fieldsCnt; i++){
+                        rowList.add(resultSet.getString(i));
+                    }
+                } else {
+                    for (int j=1; j <= queryColNum; j++) {
+                        rowList.add(resultSet.getString(j));
+                    }
+                }
                 queryList.add(rowList);
             }
             resultSet.close();
@@ -96,6 +112,15 @@ public class LikeState {
             resultSet.close();
             statement.close();
             return rowCount;
+        }
+    }
+
+    //执行失败查询语句
+    public void likeQueryFail(String tableName, String queryFields, String queryState) throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String sql = "select " + queryFields + " from " + tableName + " " + queryState;
+            ResultSet resultSet = statement.executeQuery(sql);
+            resultSet.close();
         }
     }
 
