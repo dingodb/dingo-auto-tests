@@ -172,12 +172,18 @@ testID1002455-01:
   queryState: "where name like ' MM[Q ]'"
   outFields: "id,name"
   queryRst: "18, MM ;19, MMQ"
-testID1002455-01:
+testID1002455-02:
   tableName: "lktest3"
   queryFields: "*"
   queryState: "where name like ' [ AB]'"
   outFields: "id,name"
   queryRst: "6, A;7, B"
+testID1002456:
+  tableName: "lktest3"
+  queryFields: "*"
+  queryState: "where address like '[M-Z]inger'"
+  outFields: "id,name,address"
+  queryRst: "13,Carsen,Ringer;14,Carson,Minger;15,Karsen,Zinger"
 
 
 
