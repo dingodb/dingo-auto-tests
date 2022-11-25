@@ -14,4 +14,16 @@ testID1002566:
   tableName: "lktest3"
   queryFields: "*"
   queryState: "where name not like '[^]M'"
+testID1002655:
+  tableName: "lktest2"
+  queryFields: "*"
+  queryState: "where age not like '[3-1]%'"
+testID1002656-01:
+  tableName: "lktest2"
+  queryFields: "*"
+  queryState: "where name like '[m-a]%'"
+testID1002656-02:
+  tableName: "lktest2"
+  queryFields: "*"
+  queryState: "where address like binary '[M-A]%'"
 

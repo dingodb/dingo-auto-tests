@@ -18,6 +18,11 @@ table04:
   metaPath: "src/test/resources/tabledata/meta/likeState/liketest_meta1.txt"
   insertFields: ""
   valuePath: "src/test/resources/tabledata/value/likeState/liketest4_values.txt"
+table05:
+  tableName: "lkdelete"
+  metaPath: "src/test/resources/tabledata/meta/likeState/liketest_meta1.txt"
+  insertFields: ""
+  valuePath: "src/test/resources/tabledata/value/likeState/liketest2_values.txt"
 tableBeauty:
   tableName: "lkbeauty"
   metaPath: "src/test/resources/tabledata/meta/common/beauty_meta.txt"
@@ -28,3 +33,24 @@ tableBoys:
   metaPath: "src/test/resources/tabledata/meta/common/boys_meta.txt"
   insertFields: "(id,boyName,userCP)"
   valuePath: "src/test/resources/tabledata/value/common/boys_value1.txt"
+tableEmployees:
+  tableName: "lkemployees"
+  metaPath: "src/test/resources/tabledata/meta/common/employees_meta.txt"
+  insertFields: "(employee_id,first_name,last_name,email,phone_number,job_id,salary,commission_pct,manager_id,department_id,hiredate)"
+  valuePath: "src/test/resources/tabledata/value/common/employees_value1.txt"
+tableJobGrades:
+  tableName: "lk_job_grades"
+  metaPath: "src/test/resources/tabledata/meta/common/job_grades_meta.txt"
+  insertFields: ""
+  valuePath: "src/test/resources/tabledata/value/common/job_grades_value1.txt"
+table06:
+  tableName: "lktest6"
+  metaPath: "src/test/resources/tabledata/meta/likeState/liketest_partition1_meta.txt"
+  insertFields: ""
+  valuePath: "src/test/resources/tabledata/value/likeState/liketest_partition1_values.txt"
+table07:
+  tableName: "lktest7"
+  metaPath: "src/test/resources/tabledata/meta/likeState/liketest_partition2_meta.txt"
+  insertFields: ""
+  valuePath: "src/test/resources/tabledata/value/likeState/liketest_partition2_values.txt"
+

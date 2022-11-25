@@ -1,0 +1,30 @@
+testID1002645:
+  deleteSql: "delete from lktest1 where address like binary '[A-Z1-9]___%'"
+  tableName: "lktest1"
+  queryFields: "*"
+  queryState: ""
+  outFields: "id"
+  queryRst: "17;1;2;3;5;6;7;8;9;14;15;19;26;29;30"
+testID1002646:
+  deleteSql: "delete from lktest3 where address not like '[M-Z]inger' and name not like '___.com' and address not like binary '%[lj]ing%'"
+  tableName: "lktest3"
+  queryFields: "*"
+  queryState: ""
+  outFields: "id"
+  queryRst: "8;1;2;3;8;10;12;13;14;15;16;19;20"
+testID1002649:
+  deleteSql: "delete from lktest2 where address not like '\\%%' and is_delete is true"
+  tableName: "lktest2"
+  queryFields: "*"
+  queryState: ""
+  outFields: "id"
+  queryRst: "4;2;3;6;8"
+testID10026450:
+  deleteSql: "delete from lkdelete where address like '%\\_%\\%%'"
+  tableName: "lkdelete"
+  queryFields: "*"
+  queryState: ""
+  outFields: "id"
+  queryRst: "1;1;2;3;4;5;6;7"
+
+

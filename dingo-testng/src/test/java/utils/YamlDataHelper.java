@@ -1019,6 +1019,16 @@ public class YamlDataHelper{
                 break;
             }
 
+            case "test06LikeInUpdateState": {
+                yamlList = getYamlList(iniReader.getValue("likeStateYaml", "likeInUpdate"));
+                break;
+            }
+
+            case "test07LikeInDeleteState": {
+                yamlList = getYamlList(iniReader.getValue("likeStateYaml", "likeInDelete"));
+                break;
+            }
+
         }
         Object[][] files = new Object[yamlList.size()][];
         for (int i = 0; i < yamlList.size(); i++) {

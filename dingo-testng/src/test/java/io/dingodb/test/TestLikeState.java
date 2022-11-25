@@ -64,10 +64,11 @@ public class TestLikeState extends YamlDataHelper {
     }
 
     @Test(priority = 0, enabled = true, dataProvider = "likeStateMethod", description = "创建表并插入数据")
-    public void test00TableCreate(Map<String, String> param) throws SQLException {
+    public void test00TableCreate(Map<String, String> param) throws SQLException, InterruptedException {
         String tableMetaPath = param.get("metaPath");
         String tableValuePath = param.get("valuePath");
         initTable(param.get("tableName"), tableMetaPath);
+        Thread.sleep(5000);
         insertTableValue(param.get("tableName"), param.get("insertFields"), tableValuePath);
     }
 
@@ -77,7 +78,7 @@ public class TestLikeState extends YamlDataHelper {
         StrTo2DList strTo2DList = new StrTo2DList();
         List<List> expectedList = strTo2DList.construct2DListIncludeBlank(param.get("queryRst"),";",",");
         System.out.println("Expected: " + expectedList);
-        List<List> actualList = likeObj.likeQueryByOutFields(param.get("tableName"), param.get("queryFields"), param.get("queryState"),9, param.get("outFields"));
+        List<List> actualList = likeObj.likeQueryByOutFields(param.get("tableName"), param.get("queryFields"), param.get("queryState"), param.get("outFields"));
         System.out.println("Actual: " + actualList);
 
         Assert.assertTrue(actualList.containsAll(expectedList));
@@ -118,6 +119,46 @@ public class TestLikeState extends YamlDataHelper {
         Assert.assertTrue(expectedList.containsAll(actualList));
     }
 
+    @Test(priority = 5, enabled = true, description = "like语句在全连接中使用")
+    public void test05LikeInFullJoin() throws SQLException {
+        String[][] dataArray = {
+                {"3", "3"},{"5", null}, {"9", null}, {"6", "1"}, {"8", "1"},{"4", "2"}
+        };
+        List<List> expectedList = expectedOutput(dataArray);
+        System.out.println("Expected: " + expectedList);
+        String queryFields = "lkbeauty.id,lkboys.id";
+        String tableName = "lkbeauty full outer join lkboys on lkbeauty.boyfriend_id=lkboys.id";
+        String queryState = "where lkbeauty.name not like '%li%' and lkbeauty.id<10";
+        List<List> actualList = likeObj.likeQueryByQueryFields(tableName, queryFields, queryState, 9);
+        System.out.println("Actual: " + actualList);
+
+        Assert.assertTrue(actualList.containsAll(expectedList));
+        Assert.assertTrue(expectedList.containsAll(actualList));
+    }
+
+    @Test(priority = 6, enabled = true, dataProvider = "likeStateMethod", description = "验证更新语句中使用Like子句")
+    public void test06LikeInUpdateState(Map<String, String> param) throws SQLException {
+        StrTo2DList strTo2DList = new StrTo2DList();
+        List<List> expectedList = strTo2DList.construct2DListIncludeBlank(param.get("queryRst"),";",",");
+        System.out.println("Expected: " + expectedList);
+        List<List> actualList = likeObj.likeInUpdateState(param.get("updateSql"), param.get("tableName"), param.get("queryFields"), param.get("queryState"), param.get("outFields"));
+        System.out.println("Actual: " + actualList);
+
+        Assert.assertTrue(actualList.containsAll(expectedList));
+        Assert.assertTrue(expectedList.containsAll(actualList));
+    }
+
+    @Test(priority = 7, enabled = true, dataProvider = "likeStateMethod", description = "验证删除语句中使用Like子句")
+    public void test07LikeInDeleteState(Map<String, String> param) throws SQLException {
+        StrTo2DList strTo2DList = new StrTo2DList();
+        List<List> expectedList = strTo2DList.construct2DListIncludeBlank(param.get("queryRst"),";",",");
+        System.out.println("Expected: " + expectedList);
+        List<List> actualList = likeObj.likeInDeleteState(param.get("deleteSql"), param.get("tableName"), param.get("queryFields"), param.get("queryState"), param.get("outFields"));
+        System.out.println("Actual: " + actualList);
+
+        Assert.assertTrue(actualList.containsAll(expectedList));
+        Assert.assertTrue(expectedList.containsAll(actualList));
+    }
 
 
     @AfterClass(alwaysRun = true, description = "测试完成后删除数据和表格并关闭连接")

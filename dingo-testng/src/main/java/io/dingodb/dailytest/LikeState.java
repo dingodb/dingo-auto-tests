@@ -54,12 +54,11 @@ public class LikeState {
     }
 
     //按需要获取的字段信息返回数据
-    public List<List> likeQueryByOutFields(String tableName, String queryFields, String queryState, int fieldsCnt, String outFields) throws SQLException {
+    public List<List> likeQueryByOutFields(String tableName, String queryFields, String queryState, String outFields) throws SQLException {
         try(Statement statement = connection.createStatement()) {
             String sql = "select " + queryFields + " from " + tableName + " " + queryState;
             ResultSet resultSet = statement.executeQuery(sql);
             List<List> queryList = new ArrayList<List>();
-            int queryColNum = new ArrayList(Arrays.asList(queryFields.split(","))).size();
             List<String> testFieldsList = new ArrayList(Arrays.asList(outFields.split(",")));
             while (resultSet.next()) {
                 List rowList = new ArrayList();
@@ -121,6 +120,54 @@ public class LikeState {
             String sql = "select " + queryFields + " from " + tableName + " " + queryState;
             ResultSet resultSet = statement.executeQuery(sql);
             resultSet.close();
+        }
+    }
+
+    //更新语句使用Like子句
+    public List<List> likeInUpdateState(String updateSql, String tableName, String queryFields, String queryState, String outFields) throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            int effectRow = statement.executeUpdate(updateSql);
+            List effectls = new ArrayList();
+            effectls.add(String.valueOf(effectRow));
+            String sql = "select " + queryFields + " from " + tableName + " " + queryState;
+            ResultSet resultSet = statement.executeQuery(sql);
+            List<List> queryList = new ArrayList<List>();
+            queryList.add(effectls);
+            List<String> testFieldsList = new ArrayList(Arrays.asList(outFields.split(",")));
+            while (resultSet.next()) {
+                List rowList = new ArrayList();
+                for (int i = 0;i<testFieldsList.size(); i++) {
+                    rowList.add(resultSet.getString(testFieldsList.get(i)));
+                }
+                queryList.add(rowList);
+            }
+            resultSet.close();
+            statement.close();
+            return queryList;
+        }
+    }
+
+    //删除语句使用Like子句
+    public List<List> likeInDeleteState(String deleteSql, String tableName, String queryFields, String queryState, String outFields) throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            int effectRow = statement.executeUpdate(deleteSql);
+            List effectls = new ArrayList();
+            effectls.add(String.valueOf(effectRow));
+            String sql = "select " + queryFields + " from " + tableName + queryState;
+            ResultSet resultSet = statement.executeQuery(sql);
+            List<List> queryList = new ArrayList<List>();
+            queryList.add(effectls);
+            List<String> testFieldsList = new ArrayList(Arrays.asList(outFields.split(",")));
+            while (resultSet.next()) {
+                List rowList = new ArrayList();
+                for (int i = 0;i<testFieldsList.size(); i++) {
+                    rowList.add(resultSet.getString(testFieldsList.get(i)));
+                }
+                queryList.add(rowList);
+            }
+            resultSet.close();
+            statement.close();
+            return queryList;
         }
     }
 

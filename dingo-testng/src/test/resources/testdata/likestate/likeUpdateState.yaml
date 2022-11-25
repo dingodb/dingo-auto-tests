@@ -1,0 +1,52 @@
+testID1002636:
+  updateSql: "update lktest4 set address='beijing' where id<10 and name like 'zhang%'"
+  tableName: "lktest4"
+  queryFields: "*"
+  queryState: "where id<10"
+  outFields: "id,address"
+  queryRst: "2;1,beijing;2,beijing;3,shanghai;4,beijing;5,JiNan;6,beijing;7,shanghai;8,beijing haidian;9,beijing chaoyang"
+testID1002638:
+  updateSql: "update lktest4 set birthday='2022-11-17' where id<10 and name like binary '%z%'"
+  tableName: "lktest4"
+  queryFields: "*"
+  queryState: "where id<10"
+  outFields: "id,birthday"
+  queryRst: "2;1,2022-11-17;2,1999-04-06;3,2000-05-06;4,2022-11-17;5,2010-10-31;6,2010-12-31;7,1910-12-31;8,2020-11-10;9,2020-11-10"
+testID1002642:
+  updateSql: "update lktest1 set create_time='18:30:00' where id>=20 and name not like '%li%li' and name not like '_a_a'"
+  tableName: "lktest1"
+  queryFields: "*"
+  queryState: "where id>=20"
+  outFields: "id,create_time"
+  queryRst: "7;7;20,11:11:00;21,00:00:00;22,18:30:00;23,06:15:47;24,16:15:47;25,18:30:00;26,18:30:00;27,06:15:47;28,18:30:00;29,18:30:00;30,18:30:00;31,18:30:00"
+testID1002643:
+  updateSql: "update lktest1 set update_time = '2022-11-17 22:42:30' where address not like '[LH1-8]___' and age-50>=0"
+  tableName: "lktest1"
+  queryFields: "id,update_time"
+  queryState: "where address not like '[LH1-8]___' and age-50>=0"
+  outFields: "id,update_time"
+  queryRst: "13;3,2022-11-17 22:42:30;4,2022-11-17 22:42:30;6,2022-11-17 22:42:30;7,2022-11-17 22:42:30;13,2022-11-17 22:42:30;16,2022-11-17 22:42:30;17,2022-11-17 22:42:30;20,2022-11-17 22:42:30;21,2022-11-17 22:42:30;22,2022-11-17 22:42:30;27,2022-11-17 22:42:30;28,2022-11-17 22:42:30;29,2022-11-17 22:42:30"
+testID1002644:
+  updateSql: "update lktest1 set name='rocks',age=60 where address not like binary 'Beijing_%' and age not like '[1-57-9]_'"
+  tableName: "lktest1"
+  queryFields: "id,name,age"
+  queryState: "where name ='rocks'"
+  outFields: "id,name,age"
+  queryRst: "8;5,rocks,60;6,rocks,60;13,rocks,60;17,rocks,60;19,rocks,60;20,rocks,60;27,rocks,60;30,rocks,60"
+testID1002647:
+  updateSql: "update lktest2 set amount=9999.99 where address like '%\\%%'"
+  tableName: "lktest2"
+  queryFields: "*"
+  queryState: "where amount=9999.99"
+  outFields: "id,amount"
+  queryRst: "3;2,9999.99;6,9999.99;8,9999.99"
+testID1002648:
+  updateSql: "update lktest2 set birthday='2000-01-01' where address not like '_____\\_%' and is_delete is null"
+  tableName: "lktest2"
+  queryFields: "*"
+  queryState: "where address not like '_____\_%' and is_delete is null and birthday='2000-01-01'"
+  outFields: "id,birthday"
+  queryRst: "1;8,2000-01-01"
+
+
+
