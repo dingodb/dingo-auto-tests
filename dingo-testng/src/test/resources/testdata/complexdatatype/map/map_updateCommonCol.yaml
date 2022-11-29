@@ -1,0 +1,24 @@
+testID1002671-1:
+  tableName: "map2671"
+  insertFields: ""
+  valuePath: "src/test/resources/tabledata/value/complexdatatype/map/map2671_value1.txt"
+  updateState: "update map2671 set age = 20"
+  updateRows: "1"
+  queryFields: "*"
+  queryState: ""
+  outData: "1&zhangsan&20&23.45&BJ&2000-01-01&10:57:30&2022-11-29 18:00:00&true&[Haidian, Building B, NO.18]&[abcd, 18.8, Coco]&{phone=13898763546, sex=male}"
+testID1002671-2:
+  tableName: "map2671"
+  insertFields: ""
+  valuePath: "src/test/resources/tabledata/value/complexdatatype/map/map2671_value2.txt"
+  updateState: "update map2671 set name = 'dingo'"
+  updateRows: "2"
+  queryFields: "id,name"
+  queryState: ""
+  outData: "1&dingo;2&dingo"
+
+
+
+
+
+

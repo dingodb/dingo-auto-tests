@@ -142,10 +142,10 @@ public class TestTableOuterJoin {
 
     @Test(description = "创建用于全外连接的测试表student表和class表")
     public void test00createOuterTableAndInsertValues1() throws SQLException {
-        String student_tbl_meta_path = "src/test/resources/testdata/tablemeta/student_tbl_meta.txt";
-        String student_tbl_value_path = "src/test/resources/testdata/tableInsertValues/student_tbl.txt";
-        String class_tbl_meta_path = "src/test/resources/testdata/tablemeta/class_tbl_meta.txt";
-        String class_tbl_value_path = "src/test/resources/testdata/tableInsertValues/class_tbl.txt";
+        String student_tbl_meta_path = "src/test/resources/tabledata/meta/tableJoin/student_tbl_meta.txt";
+        String student_tbl_value_path = "src/test/resources/tabledata/value/tableJoin/student_tbl_value.txt";
+        String class_tbl_meta_path = "src/test/resources/tabledata/meta/tableJoin/class_tbl_meta.txt";
+        String class_tbl_value_path = "src/test/resources/tabledata/value/tableJoin/class_tbl_value.txt";
         initTable(tableName6, student_tbl_meta_path);
         initTable(tableName7, student_tbl_meta_path);
         initTable(tableName8, class_tbl_meta_path);
@@ -156,10 +156,10 @@ public class TestTableOuterJoin {
 
     @Test(description = "创建用于全外连接的测试表，两表无相同数据")
     public void test00createOuterTableAndInsertValues2() throws SQLException {
-        String product1_meta_path = "src/test/resources/testdata/tablemeta/product1_meta.txt";
-        String product1_value_path = "src/test/resources/testdata/tableInsertValues/product1.txt";
-        String product2_meta_path = "src/test/resources/testdata/tablemeta/product2_meta.txt";
-        String product2_value_path = "src/test/resources/testdata/tableInsertValues/product2.txt";
+        String product1_meta_path = "src/test/resources/tabledata/meta/tableJoin/product1_meta.txt";
+        String product1_value_path = "src/test/resources/tabledata/value/tableJoin/product1_value.txt";
+        String product2_meta_path = "src/test/resources/tabledata/meta/tableJoin/product2_meta.txt";
+        String product2_value_path = "src/test/resources/tabledata/value/tableJoin/product2_value.txt";
         initTable(tableName10, product1_meta_path);
         initTable(tableName11, product2_meta_path);
         initTable(tableName12, product2_meta_path);
@@ -169,22 +169,22 @@ public class TestTableOuterJoin {
 
     @Test(description = "创建用于全外连接的测试表，可使用using(key)语句的表")
     public void test00createOuterTableAndInsertValues3() throws SQLException {
-        String test_meta_path = "src/test/resources/testdata/tablemeta/test_meta.txt";
-        String test1_value_path = "src/test/resources/testdata/tableInsertValues/test1.txt";
-        String test2_value_path = "src/test/resources/testdata/tableInsertValues/test2.txt";
-        initTable(tableName13, test_meta_path);
-        initTable(tableName14, test_meta_path);
-        insertValues(tableName13,"", test1_value_path);
-        insertValues(tableName14,"", test2_value_path);
+        String fulljoin_meta_path = "src/test/resources/tabledata/meta/tableJoin/fulljoin_meta.txt";
+        String fulljoin_value1_path = "src/test/resources/tabledata/value/tableJoin/fulljoin_value1.txt";
+        String fulljoin_value2_path = "src/test/resources/tabledata/value/tableJoin/fulljoin_value2.txt";
+        initTable(tableName13, fulljoin_meta_path);
+        initTable(tableName14, fulljoin_meta_path);
+        insertValues(tableName13,"", fulljoin_value1_path);
+        insertValues(tableName14,"", fulljoin_value2_path);
     }
 
     @Test(description = "创建用于左，右外连接的测试表beauty_tbl和boys_tbl")
     public void test00createOuterTableAndInsertValues4() throws SQLException {
-        String beauty_tbl_meta_path = "src/test/resources/testdata/tablemeta/beauty_tbl_meta.txt";
-        String beauty_tbl_value_path = "src/test/resources/testdata/tableInsertValues/beauty_tbl.txt";
-        String boys_tbl_meta_path = "src/test/resources/testdata/tablemeta/boys_tbl_meta.txt";
-        String boys_tbl_value_path = "src/test/resources/testdata/tableInsertValues/boys_tbl.txt";
-        String boys_right_value_path = "src/test/resources/testdata/tableInsertValues/boys_right.txt";
+        String beauty_tbl_meta_path = "src/test/resources/tabledata/meta/common/beauty_meta.txt";
+        String beauty_tbl_value_path = "src/test/resources/tabledata/value/common/beauty_value1.txt";
+        String boys_tbl_meta_path = "src/test/resources/tabledata/meta/common/boys_meta.txt";
+        String boys_tbl_value_path = "src/test/resources/tabledata/value/common/boys_value2.txt";
+        String boys_right_value_path = "src/test/resources/tabledata/value/common/boys_value1.txt";
         initTable(tableName1, beauty_tbl_meta_path);
         initTable(tableName2, boys_tbl_meta_path);
         initTable(tableName3, boys_tbl_meta_path);
@@ -196,10 +196,10 @@ public class TestTableOuterJoin {
 
     @Test(description = "创建用于左，右外连接的测试表department_tbl和employees_tbl表")
     public void test00createOuterTableAndInsertValues5() throws SQLException {
-        String departments_tbl_meta_path = "src/test/resources/testdata/tablemeta/departments_tbl_meta.txt";
-        String departments_tbl_value_path = "src/test/resources/testdata/tableInsertValues/departments.txt";
-        String employees_tbl_meta_path = "src/test/resources/testdata/tablemeta/employees_tbl_meta.txt";
-        String employeess_tbl_value_path = "src/test/resources/testdata/tableInsertValues/employees.txt";
+        String departments_tbl_meta_path = "src/test/resources/tabledata/meta/common/departments_meta.txt";
+        String departments_tbl_value_path = "src/test/resources/tabledata/value/common/departments_value1.txt";
+        String employees_tbl_meta_path = "src/test/resources/tabledata/meta/common/employees_meta.txt";
+        String employeess_tbl_value_path = "src/test/resources/tabledata/value/common/employees_value1.txt";
         initTable(tableName4, departments_tbl_meta_path);
         initTable(tableName5, employees_tbl_meta_path);
         insertValues(tableName4,"", departments_tbl_value_path);
@@ -208,10 +208,10 @@ public class TestTableOuterJoin {
 
     @Test(description = "创建用于左，右外连接的测试表w3c表")
     public void test00createOuterTableAndInsertValues6() throws SQLException {
-        String w3c_meta_path = "src/test/resources/testdata/tablemeta/w3cschool_tbl_meta.txt";
-        String w3c_value_path = "src/test/resources/testdata/tableInsertValues/w3cschool_tbl.txt";
-        String tcount_meta_path = "src/test/resources/testdata/tablemeta/tcount_tbl_meta.txt";
-        String tcount_value_path = "src/test/resources/testdata/tableInsertValues/tcount_tbl.txt";
+        String w3c_meta_path = "src/test/resources/tabledata/meta/tableJoin/w3cschool_tbl_meta.txt";
+        String w3c_value_path = "src/test/resources/tabledata/value/tableJoin/w3cschool_tbl_value.txt";
+        String tcount_meta_path = "src/test/resources/tabledata/meta/tableJoin/tcount_tbl_meta.txt";
+        String tcount_value_path = "src/test/resources/tabledata/value/tableJoin/tcount_tbl_value.txt";
         initTable(tableName15, w3c_meta_path);
         initTable(tableName16, tcount_meta_path);
         insertValues(tableName15,"",w3c_value_path);
@@ -681,7 +681,7 @@ public class TestTableOuterJoin {
             description = "验证右连接仅查询在右表的数据")
     public void test38RightJoinOnlyInRightTable() throws SQLException {
         String[][] dataArray = {
-                {null,"5","Zhang Fei"}, {null,"6","Panan"}
+                {null,"5","Zhang Fei"}, {null,"6","Panda"}
         };
         List<List> expectedList = expectedOutData(dataArray);
         System.out.println("Expected: " + expectedList);
@@ -766,7 +766,7 @@ public class TestTableOuterJoin {
     @Test(priority = 44, enabled = true, dependsOnMethods = {"test00createOuterTableAndInsertValues4"},
             description = "验证添加where条件")
     public void test45RightJoinWhereState1() throws SQLException {
-        String expectedStr = "Panan";
+        String expectedStr = "Panda";
         System.out.println("Expected: " + expectedStr);
         String actualRightStr = outerJoinObj.rightOuterJoinWhereState1();
         System.out.println("Actual: " + actualRightStr);

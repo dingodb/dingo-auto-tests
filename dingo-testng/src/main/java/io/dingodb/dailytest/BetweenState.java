@@ -36,19 +36,19 @@ public class BetweenState {
         }
     }
 
-    //创建between and语句测试表
-    public void betweenTableCreate(String tableName, String tableMeta) throws SQLException {
+    //创建表
+    public void tableCreate(String tableName, String tableMeta) throws SQLException {
         try(Statement statement = connection.createStatement()) {
-            String createTableSQL = "create table " + tableName + tableMeta;
-            statement.execute(createTableSQL);
+            String sql = "create table " + tableName + tableMeta;
+            statement.execute(sql);
         }
     }
 
-    //表插入数据
-    public void insertTableValues(String tableName, String tableValue) throws SQLException {
+    //向表中插入数据
+    public void insertTableValues(String tableName, String insertFields, String tableValues) throws SQLException {
         try(Statement statement = connection.createStatement()) {
-            String insertValuesSQL = "insert into " + tableName + " values " + tableValue;
-            statement.execute(insertValuesSQL);
+            String sql = "insert into " + tableName + insertFields + " values " + tableValues;
+            statement.execute(sql);
         }
     }
 

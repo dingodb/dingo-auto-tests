@@ -144,16 +144,16 @@ public class TestMultisetField extends YamlDataHelper {
 
     @Test(priority = 7, enabled = true, description = "创建含有多个Multiset类型字段的数据表，不指定默认值")
     public void test07TableCreateWithMultiMultisetFields() throws SQLException {
-        String multiset_mix_meta_path = "src/test/resources/testdata/tablemeta/complexdatatype/multiset/multiset_mix_meta.txt";
+        String multiset_mix_meta_path = "src/test/resources/tabledata/meta/complexdatatype/multiset/multiset_mix_meta.txt";
         initMultisetTable(mixTableName, multiset_mix_meta_path);
     }
 
     @Test(priority = 8, enabled = true, description = "向含有多个Multiset类型字段的表中插入数据")
     public void test08InsertValuesToMultiMapFields() throws SQLException {
-        String multiset_mix_value1_path = "src/test/resources/testdata/tableInsertValues/complexdatatype/multiset/multiset_mix_value1.txt";
+        String multiset_mix_value1_path = "src/test/resources/tabledata/value/complexdatatype/multiset/multiset_mix_value1.txt";
         insertValueToTable(mixTableName,"", multiset_mix_value1_path);
 
-        String multiset_mix_value2_path = "src/test/resources/testdata/tableInsertValues/complexdatatype/multiset/multiset_mix_value2.txt";
+        String multiset_mix_value2_path = "src/test/resources/tabledata/value/complexdatatype/multiset/multiset_mix_value2.txt";
         insertValueToTable(mixTableName,"", multiset_mix_value2_path);
 
         String[][] dataArray = {
@@ -223,8 +223,8 @@ public class TestMultisetField extends YamlDataHelper {
 
     @Test(priority = 13, enabled = true, description = "multiset字段允许为Null, 不指定multiset字段插入")
     public void test13InsertWithoutFieldsSpecified() throws SQLException {
-        String multiset_allownull_meta_path = "src/test/resources/testdata/tablemeta/complexdatatype/multiset/multiset_allownull_meta.txt";
-        String multiset_allownull_value_path = "src/test/resources/testdata/tableInsertValues/complexdatatype/multiset/multiset_allownull_value.txt";
+        String multiset_allownull_meta_path = "src/test/resources/tabledata/meta/complexdatatype/multiset/multiset_allownull_meta.txt";
+        String multiset_allownull_value_path = "src/test/resources/tabledata/value/complexdatatype/multiset/multiset_allownull_value.txt";
         initMultisetTable(tableName1, multiset_allownull_meta_path);
         String insertFields = "(id,name,age)";
         insertValueToTable(tableName1, insertFields, multiset_allownull_value_path);
@@ -242,17 +242,17 @@ public class TestMultisetField extends YamlDataHelper {
     @Test(priority = 14, enabled = true, expectedExceptions = SQLException.class,
             description = "创建表，multiset类型不允许为null，插入数据不指定multiset字段，预期失败")
     public void test14TableCreateMultisetNotNull() throws SQLException {
-        String multiset_notallownull_meta_path = "src/test/resources/testdata/tablemeta/complexdatatype/multiset/multiset_notallownull_meta.txt";
+        String multiset_notallownull_meta_path = "src/test/resources/tabledata/meta/complexdatatype/multiset/multiset_notallownull_meta.txt";
         initMultisetTable(tableName2, multiset_notallownull_meta_path);
-        String multiset_notallownull_value_path = "src/test/resources/testdata/tableInsertValues/complexdatatype/multiset/multiset_notallownull_value.txt";
+        String multiset_notallownull_value_path = "src/test/resources/tabledata/value/complexdatatype/multiset/multiset_notallownull_value.txt";
         String insertFields = "(id,name,age)";
         insertValueToTable(tableName2, insertFields, multiset_notallownull_value_path);
     }
 
     @Test(priority = 15, enabled = true, description = "multiset字段表范围查询1")
     public void test15RangeQuery1() throws SQLException {
-        String multiset_rangequery_meta_path = "src/test/resources/testdata/tablemeta/complexdatatype/multiset/multiset_rangequery_meta.txt";
-        String multiset_rangequery_value_path = "src/test/resources/testdata/tableInsertValues/complexdatatype/multiset/multiset_rangequery_value.txt";
+        String multiset_rangequery_meta_path = "src/test/resources/tabledata/meta/complexdatatype/multiset/multiset_rangequery_meta.txt";
+        String multiset_rangequery_value_path = "src/test/resources/tabledata/value/complexdatatype/multiset/multiset_rangequery_value.txt";
         initMultisetTable(tableName3, multiset_rangequery_meta_path);
         insertValueToTable(tableName3, "", multiset_rangequery_value_path);
         String[][] dataArray = {
@@ -316,7 +316,7 @@ public class TestMultisetField extends YamlDataHelper {
 
     @Test(priority = 147, enabled = true, description = "指定multiset字段插入")
     public void test17InsertWithFieldsSpecified() throws SQLException {
-        String multiset_fieldinsert_value_path = "src/test/resources/testdata/tableInsertValues/complexdatatype/multiset/multiset_fieldinsert_value.txt";
+        String multiset_fieldinsert_value_path = "src/test/resources/tabledata/value/complexdatatype/multiset/multiset_fieldinsert_value.txt";
         String insertFields = "(id,user_info)";
         insertValueToTable(tableName3, insertFields, multiset_fieldinsert_value_path);
         String[][] dataArray = {

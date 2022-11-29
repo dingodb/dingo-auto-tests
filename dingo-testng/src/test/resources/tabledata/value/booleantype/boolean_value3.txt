@@ -1,0 +1,7 @@
+(9,'oppo',76,109.325,'wuhan', True),
+(10,'lisi',256,1234.456,'nanjing', False),
+(11,' ab c d ',61,99.9999,'beijing chaoyang', true),
+(12,' abcdef',2,2345.000,'123', false),
+(13,'HX K', 99, 22.22, 'Haidian Distinct', False),
+(14,'YH', 76, 1.01, 'TJ Street No.1', True),
+(15, 'yamaha',76,2.30,'beijing changyang', TRUE)

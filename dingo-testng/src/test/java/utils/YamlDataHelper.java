@@ -542,6 +542,11 @@ public class YamlDataHelper{
     public Object[][] yamlBetweenMethod(Method method) {
         List<Map<String, String>> yamlBetweenList = null;
         switch (method.getName()) {
+            case "test00TableCreate": {
+                yamlBetweenList = getYamlList(iniReader.getValue("BetweenAndYaml", "between_tableCreate"));
+                break;
+            }
+
             case "test08BetweenStartGTEnd": {
                 yamlBetweenList = getYamlList(iniReader.getValue("BetweenAndYaml", "between_StartGTEnd"));
                 break;
@@ -978,6 +983,11 @@ public class YamlDataHelper{
     public Object[][] mapFieldMethod(Method method) {
         List<Map<String, String>> yamlMapList = null;
         switch (method.getName()) {
+            case "test01TableCreateWithMapField": {
+                yamlMapList = getYamlList(iniReader.getValue("MapFieldYaml", "map_tableCreate"));
+                break;
+            }
+
             case "test07InsertVarcharAndNumKV": {
                 yamlMapList = getYamlList(iniReader.getValue("MapFieldYaml", "map1_exception"));
                 break;
@@ -985,6 +995,16 @@ public class YamlDataHelper{
 
             case "test17VerifyIntValueRangeNotSupport": {
                 yamlMapList = getYamlList(iniReader.getValue("MapFieldYaml", "map2_exception"));
+                break;
+            }
+
+            case "test27DifferentKeyTypePos": {
+                yamlMapList = getYamlList(iniReader.getValue("MapFieldYaml", "map_differentKeyTypePos"));
+                break;
+            }
+
+            case "test28UpdateCommonCol": {
+                yamlMapList = getYamlList(iniReader.getValue("MapFieldYaml", "map_updateCommonCol"));
                 break;
             }
         }
@@ -1026,6 +1046,23 @@ public class YamlDataHelper{
 
             case "test07LikeInDeleteState": {
                 yamlList = getYamlList(iniReader.getValue("likeStateYaml", "likeInDelete"));
+                break;
+            }
+
+        }
+        Object[][] files = new Object[yamlList.size()][];
+        for (int i = 0; i < yamlList.size(); i++) {
+            files[i] = new Object[]{yamlList.get(i)};
+        }
+        return files;
+    }
+
+    @DataProvider
+    public Object[][] ttlParamMethod(Method method) {
+        List<Map<String, String>> yamlList = null;
+        switch (method.getName()) {
+            case "test00TTLTableCreate": {
+                yamlList = getYamlList(iniReader.getValue("ttlParam", "tableCreate_positive"));
                 break;
             }
 

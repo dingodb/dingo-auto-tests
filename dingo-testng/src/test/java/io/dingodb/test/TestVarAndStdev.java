@@ -40,7 +40,7 @@ public class TestVarAndStdev {
 
     @Test(priority = 0, enabled = true, description = "验证输出age字段样本方差值正确")
     public void test01VarCal() throws SQLException {
-        String varTable1path = "src/test/resources/testdata/tableInsertValues/vartable1.txt";
+        String varTable1path = "src/test/resources/tabledata/value/varAndstdev/vartable1_value.txt";
         String varTable1Values = FileReaderUtil.readFile(varTable1path);
         varstdevObj.varTable1Create();
         varstdevObj.varTable1Insert(varTable1Values);
@@ -73,7 +73,7 @@ public class TestVarAndStdev {
 
     @Test(priority = 3, enabled = true, expectedExceptions = SQLException.class, description = "验证不支持日期类型字段计算方差")
     public void test04VarDateCal() throws SQLException {
-        String varTable5path = "src/test/resources/testdata/tableInsertValues/vartable5.txt";
+        String varTable5path = "src/test/resources/tabledata/value/varAndstdev/vartable5_value.txt";
         String varTable5Values = FileReaderUtil.readFile(varTable5path);
         varstdevObj.varTable5Create();
         varstdevObj.varTable5Insert(varTable5Values);
@@ -110,7 +110,7 @@ public class TestVarAndStdev {
 
     @Test(priority = 7, enabled = true, description = "验证统计样本方差跳过Null值")
     public void test08VarCalSkipNull() throws SQLException {
-        String varTable2path = "src/test/resources/testdata/tableInsertValues/vartable2.txt";
+        String varTable2path = "src/test/resources/tabledata/value/varAndstdev/vartable2_value.txt";
         String varTable2Values = FileReaderUtil.readFile(varTable2path);
         varstdevObj.varTable2Create();
         varstdevObj.varTable2Insert(varTable2Values);
@@ -124,7 +124,7 @@ public class TestVarAndStdev {
 
     @Test(priority = 8, enabled = true, description = "验证字段值均相同，样本方差为0")
     public void test09VarColumnSameValue() throws SQLException {
-        String varTable3path = "src/test/resources/testdata/tableInsertValues/vartable3.txt";
+        String varTable3path = "src/test/resources/tabledata/value/varAndstdev/vartable3_value.txt";
         String varTable3Values = FileReaderUtil.readFile(varTable3path);
         varstdevObj.varTable3Create();
         varstdevObj.varTable3Insert(varTable3Values);
@@ -136,7 +136,7 @@ public class TestVarAndStdev {
 
     @Test(priority = 9, enabled = true, description = "验证字段值均为0，样本方差为0")
     public void test10VarColumnZero() throws SQLException {
-        String varTable4path = "src/test/resources/testdata/tableInsertValues/vartable4.txt";
+        String varTable4path = "src/test/resources/tabledata/value/varAndstdev/vartable4_value.txt";
         String varTable4Values = FileReaderUtil.readFile(varTable4path);
         varstdevObj.varTable4Create();
         varstdevObj.varTable4Insert(varTable4Values);
@@ -330,7 +330,7 @@ public class TestVarAndStdev {
 
     @Test(priority = 28, enabled = true, expectedExceptions = SQLException.class, description = "验证不支持布尔型字段计算方差")
     public void test29VarBooleanCal() throws SQLException {
-        String varTable7path = "src/test/resources/testdata/tableInsertValues/vartable7.txt";
+        String varTable7path = "src/test/resources/tabledata/value/varAndstdev/vartable7_value.txt";
         String varTable7Values = FileReaderUtil.readFile(varTable7path);
         varstdevObj.varTable7Create();
         varstdevObj.varTable7Insert(varTable7Values);
@@ -351,7 +351,7 @@ public class TestVarAndStdev {
 
     @Test(priority = 30, enabled = true, description = "字段值均为null，返回null")
     public void test31VarAllNull() throws SQLException {
-        String varTable8path = "src/test/resources/testdata/tableInsertValues/vartable8.txt";
+        String varTable8path = "src/test/resources/tabledata/value/varAndstdev/vartable8_value.txt";
         String varTable8Values = FileReaderUtil.readFile(varTable8path);
         varstdevObj.varTable8Create();
         varstdevObj.varTable8Insert(varTable8Values);

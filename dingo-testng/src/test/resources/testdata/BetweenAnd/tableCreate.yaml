@@ -1,0 +1,50 @@
+table01:
+  tableName: "betweenTest"
+  metaPath: "src/test/resources/tabledata/meta/betweenState/between_and_meta1.txt"
+  insertFields: ""
+  valuePath: "src/test/resources/tabledata/value/betweenState/between_and_value1.txt"
+table02:
+  tableName: "betweenTest2"
+  metaPath: "src/test/resources/tabledata/meta/betweenState/between_and_meta1.txt"
+  insertFields: ""
+  valuePath: "src/test/resources/tabledata/value/betweenState/between_and_value2.txt"
+table03:
+  tableName: "betweenTest3"
+  metaPath: "src/test/resources/tabledata/meta/betweenState/between_and_meta1.txt"
+  insertFields: ""
+  valuePath: "src/test/resources/tabledata/value/betweenState/between_and_value3.txt"
+table04:
+  tableName: "betweenTest4"
+  metaPath: "src/test/resources/tabledata/meta/betweenState/between_and_meta1.txt"
+  insertFields: ""
+  valuePath: "src/test/resources/tabledata/value/betweenState/between_and_value4.txt"
+table05:
+  tableName: "betweenTest5"
+  metaPath: "src/test/resources/tabledata/meta/betweenState/between_and_meta1.txt"
+  insertFields: ""
+  valuePath: "src/test/resources/tabledata/value/betweenState/between_and_value1.txt"
+table06:
+  tableName: "between_employees"
+  metaPath: "src/test/resources/tabledata/meta/betweenState/between_and_meta2.txt"
+  insertFields: ""
+  valuePath: "src/test/resources/tabledata/value/betweenState/between_and_value5.txt"
+table07:
+  tableName: "between_job_grades"
+  metaPath: "src/test/resources/tabledata/meta/common/job_grades_meta.txt"
+  insertFields: ""
+  valuePath: "src/test/resources/tabledata/value/betweenState/between_and_value6.txt"
+table08:
+  tableName: "betweenTest8"
+  metaPath: "src/test/resources/tabledata/meta/betweenState/between_and_meta3.txt"
+  insertFields: ""
+  valuePath: "src/test/resources/tabledata/value/betweenState/between_and_value7.txt"
+table09:
+  tableName: "betweenTest9"
+  metaPath: "src/test/resources/tabledata/meta/betweenState/between_and_meta4.txt"
+  insertFields: ""
+  valuePath: "src/test/resources/tabledata/value/betweenState/between_and_value8.txt"
+table10:
+  tableName: "betweenTest10"
+  metaPath: "src/test/resources/tabledata/meta/betweenState/between_and_meta5.txt"
+  insertFields: ""
+  valuePath: "src/test/resources/tabledata/value/betweenState/between_and_value9.txt"

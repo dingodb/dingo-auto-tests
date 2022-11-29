@@ -1,0 +1,39 @@
+testID1002663:
+  tableName: "map2663"
+  insertFields: ""
+  valuePath: "src/test/resources/tabledata/value/complexdatatype/map/map2663_value.txt"
+  queryFields: "*"
+  queryState: " where id = 1"
+  outData: "1&zhangsan&33&56.78&{100=234, 101=235, 102=0}"
+testID1002664:
+  tableName: "map2663"
+  insertFields: ""
+  valuePath: "src/test/resources/tabledata/value/complexdatatype/map/map2664_value.txt"
+  queryFields: "*"
+  queryState: " where id = 2"
+  outData: "2&lisi&44&0.0&{200=male, 201=2022-11-22, 202=163.com}"
+testID1002666:
+  tableName: "map2663"
+  insertFields: ""
+  valuePath: "src/test/resources/tabledata/value/complexdatatype/map/map2666_value.txt"
+  queryFields: "*"
+  queryState: " where id between 4 and 7"
+  outData: "4&wangwu&100&1000.0&{400=138, 401=139};5&HaHa&60&-1234.5&{501=dingo, 502=test};6&Tony&9&-50.0&{birthday=2000-11-11, sex=male};7&Zookeeper&99&1876.54&{age=0, sno=221306}"
+testID1002667:
+  tableName: "map2663"
+  insertFields: ""
+  valuePath: "src/test/resources/tabledata/value/complexdatatype/map/map2667_value.txt"
+  queryFields: "*"
+  queryState: " where id between 8 and 10"
+  outData: "8&Adidas&25&100.0&{false=0, true=1};9&Hive&18&-1.0&{false=false, true=true};10&Dota&71&999.99&{false=can_del, true=true}"
+testID1002673:
+  tableName: "map2663"
+  insertFields: ""
+  valuePath: "src/test/resources/tabledata/value/complexdatatype/map/map2673_value.txt"
+  queryFields: "*"
+  queryState: " where id in(26731,26732)"
+  outData: "26731&lala&29&50.0&{101=1, 102=2};26732&hehe&16&9.9&{false=0, true=1}"
+
+
+
+

@@ -58,8 +58,8 @@ public class TestNumericFuncs extends YamlDataHelper {
     @Test(enabled = true, description = "创建数值函数测试表")
     public void test00NumericFuncTableCreate() throws SQLException {
         String tableName = "numtest";
-        String numtest_meta_path = "src/test/resources/testdata/tablemeta/numtest_meta.txt";
-        String numtest_value_path = "src/test/resources/testdata/tableInsertValues/numtest_value.txt";
+        String numtest_meta_path = "src/test/resources/tabledata/meta/numericfuncs/numtest_meta.txt";
+        String numtest_value_path = "src/test/resources/tabledata/value/numericfuncs/numtest_value.txt";
         initNumtestTalbe(tableName, numtest_meta_path, numtest_value_path);
     }
 

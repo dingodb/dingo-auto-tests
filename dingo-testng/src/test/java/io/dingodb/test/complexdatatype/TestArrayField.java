@@ -138,7 +138,7 @@ public class TestArrayField extends YamlDataHelper {
 
     @Test(priority = 9, enabled = true, description = "创建含有多种Array类型字段的表")
     public void test08TableCreateWithMixArrayColumn() throws SQLException {
-        String mixarray_meta1_path = "src/test/resources/testdata/tablemeta/complexdatatype/array/array_tbl1_meta.txt";
+        String mixarray_meta1_path = "src/test/resources/tabledata/meta/complexdatatype/array/array_tbl1_meta.txt";
         String mixarray_meta1 = FileReaderUtil.readFile(mixarray_meta1_path);
         String tableName = "mixarray1";
         arrayObj.tableCreateWithMixArrayColumn(tableName, mixarray_meta1);
@@ -146,13 +146,13 @@ public class TestArrayField extends YamlDataHelper {
 
     @Test(priority = 10, enabled = true, description = "向含有多种Array类型字段的表插入数据")
     public void test09InsertValuesToTableWithMixArrayColumn() throws SQLException {
-        String mixarray_value1_path = "src/test/resources/testdata/tableInsertValues/complexdatatype/array/array_tbl1_value1.txt";
+        String mixarray_value1_path = "src/test/resources/tabledata/value/complexdatatype/array/array_tbl1_value1.txt";
         String mixarray_value1 = FileReaderUtil.readFile(mixarray_value1_path);
         String tableName = "mixarray1";
         int actualRows1 = arrayObj.insertValuesToMixArrayTable(tableName, mixarray_value1);
         Assert.assertEquals(actualRows1, 1);
 
-        String mixarray_value2_path = "src/test/resources/testdata/tableInsertValues/complexdatatype/array/array_tbl1_value2.txt";
+        String mixarray_value2_path = "src/test/resources/tabledata/value/complexdatatype/array/array_tbl1_value2.txt";
         String mixarray_value2 = FileReaderUtil.readFile(mixarray_value2_path);
         int actualRows2 = arrayObj.insertValuesToMixArrayTable(tableName, mixarray_value2);
         Assert.assertEquals(actualRows2, 2);
@@ -180,7 +180,7 @@ public class TestArrayField extends YamlDataHelper {
 
     @Test(priority = 14, enabled = true, description = "创建表，数组类型列位于表中间列，主键在最后列")
     public void test13TableCreateArrayColumnInMid() throws SQLException {
-        String arraymid_meta_path = "src/test/resources/testdata/tablemeta/complexdatatype/array/array_tbl2_meta.txt";
+        String arraymid_meta_path = "src/test/resources/tabledata/meta/complexdatatype/array/array_tbl2_meta.txt";
         String arraymid_meta = FileReaderUtil.readFile(arraymid_meta_path);
         String tableName = "arraymid";
         arrayObj.tableCreateWithMixArrayColumn(tableName, arraymid_meta);
@@ -188,13 +188,13 @@ public class TestArrayField extends YamlDataHelper {
 
     @Test(priority = 15, enabled = true, description = "向array列在中间列的表中插入数据")
     public void test14InsertValuesToTableWithArrayColumnMid() throws SQLException {
-        String arraymid_value1_path = "src/test/resources/testdata/tableInsertValues/complexdatatype/array/array_tbl2_value1.txt";
+        String arraymid_value1_path = "src/test/resources/tabledata/value/complexdatatype/array/array_tbl2_value1.txt";
         String arraymid_value1 = FileReaderUtil.readFile(arraymid_value1_path);
         String tableName = "arraymid";
         int actualRows1 = arrayObj.insertValuesToMixArrayTable(tableName, arraymid_value1);
         Assert.assertEquals(actualRows1, 1);
 
-        String arraymid_value2_path = "src/test/resources/testdata/tableInsertValues/complexdatatype/array/array_tbl2_value2.txt";
+        String arraymid_value2_path = "src/test/resources/tabledata/value/complexdatatype/array/array_tbl2_value2.txt";
         String arraymid_value2 = FileReaderUtil.readFile(arraymid_value2_path);
         int actualRows2 = arrayObj.insertValuesToMixArrayTable(tableName, arraymid_value2);
         Assert.assertEquals(actualRows2, 2);
@@ -202,7 +202,7 @@ public class TestArrayField extends YamlDataHelper {
 
     @Test(priority = 16, enabled = true, description = "创建表，数组类型列位于表首列，主键在中间列")
     public void test15TableCreateArrayColumnFirst() throws SQLException {
-        String arrayfirst_meta_path = "src/test/resources/testdata/tablemeta/complexdatatype/array/array_tbl3_meta.txt";
+        String arrayfirst_meta_path = "src/test/resources/tabledata/meta/complexdatatype/array/array_tbl3_meta.txt";
         String arrayfirst_meta = FileReaderUtil.readFile(arrayfirst_meta_path);
         String tableName = "arrayfirst";
         arrayObj.tableCreateWithMixArrayColumn(tableName, arrayfirst_meta);
@@ -210,13 +210,13 @@ public class TestArrayField extends YamlDataHelper {
 
     @Test(priority = 17, enabled = true, description = "向array列在首列的表中插入数据")
     public void test16InsertValuesToTableWithArrayColumnFirst() throws SQLException {
-        String arrayfirst_value1_path = "src/test/resources/testdata/tableInsertValues/complexdatatype/array/array_tbl3_value1.txt";
+        String arrayfirst_value1_path = "src/test/resources/tabledata/value/complexdatatype/array/array_tbl3_value1.txt";
         String arrayfirst_value1 = FileReaderUtil.readFile(arrayfirst_value1_path);
         String tableName = "arrayfirst";
         int actualRows1 = arrayObj.insertValuesToMixArrayTable(tableName, arrayfirst_value1);
         Assert.assertEquals(actualRows1, 1);
 
-        String arrayfirst_value2_path = "src/test/resources/testdata/tableInsertValues/complexdatatype/array/array_tbl3_value2.txt";
+        String arrayfirst_value2_path = "src/test/resources/tabledata/value/complexdatatype/array/array_tbl3_value2.txt";
         String arrayfirst_value2 = FileReaderUtil.readFile(arrayfirst_value2_path);
         int actualRows2 = arrayObj.insertValuesToMixArrayTable(tableName, arrayfirst_value2);
         Assert.assertEquals(actualRows2, 3);
@@ -228,7 +228,7 @@ public class TestArrayField extends YamlDataHelper {
         List<List> expectedList = strTo2DList.construct2DList(param.get("outData"), ";", "&");
         System.out.println("Expected: " + expectedList);
 
-        File file = new File("src/test/resources/testdata/tablemeta/complexdatatype/array/array_tbl3_meta.txt");
+        File file = new File("src/test/resources/tabledata/meta/complexdatatype/array/array_tbl3_meta.txt");
         int ArrayFirstFieldNum = FileReaderUtil.getFileLines(file) - 3;
         System.out.println(ArrayFirstFieldNum);
         List<List> actualList = arrayObj.queryDataInMidFirstArrayTbl(param.get("queryFields"),param.get("tableName"),param.get("queryLogic"), ArrayFirstFieldNum);
@@ -267,16 +267,15 @@ public class TestArrayField extends YamlDataHelper {
 
     @Test(priority = 21, enabled = true, description = "用于范围查询的表创建和插入")
     public void test20RangeQuery() throws SQLException {
-        String array_meta4_path = "src/test/resources/testdata/tablemeta/complexdatatype/array/array_tbl4_meta.txt";
+        String array_meta4_path = "src/test/resources/tabledata/meta/complexdatatype/array/array_tbl4_meta.txt";
         String array_meta4 = FileReaderUtil.readFile(array_meta4_path);
         String tableName = "arrayrangetest";
         arrayObj.tableCreateWithMixArrayColumn(tableName, array_meta4);
 
-        String array_value4_path = "src/test/resources/testdata/tableInsertValues/complexdatatype/array/array_tbl4_value1.txt";
+        String array_value4_path = "src/test/resources/tabledata/value/complexdatatype/array/array_tbl4_value1.txt";
         String array_value4 = FileReaderUtil.readFile(array_value4_path);
         int actualRows = arrayObj.insertValuesToMixArrayTable(tableName, array_value4);
         Assert.assertEquals(actualRows, 5);
-
     }
 
     @Test(priority = 22, enabled = true, dataProvider = "arrayFieldMethod", description = "范围查询")
@@ -284,7 +283,7 @@ public class TestArrayField extends YamlDataHelper {
         StrTo2DList strTo2DList = new StrTo2DList();
         List<List> expectedList = strTo2DList.construct2DList(param.get("outData"), ";", "&");
         System.out.println("Expected: " + expectedList);
-        File file = new File("src/test/resources/testdata/tablemeta/complexdatatype/array/array_tbl4_meta.txt");
+        File file = new File("src/test/resources/tabledata/meta/complexdatatype/array/array_tbl4_meta.txt");
         int ArrayTableFieldNum = FileReaderUtil.getFileLines(file) - 3;
         List<List> actualList = arrayObj.queryDataInMidFirstArrayTbl(param.get("queryFields"),param.get("tableName"),param.get("queryLogic"), ArrayTableFieldNum);
         System.out.println("Actual: " + actualList);

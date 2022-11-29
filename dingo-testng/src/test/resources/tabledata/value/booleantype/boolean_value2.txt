@@ -1,0 +1,4 @@
+(5,'wJDs',1,1453.9999,'pingYang1', FALSE),
+(6,'123',544,0,'543', false),
+(7,'yamaha',76,2.30,'beijing changyang', False),
+(8,'zhangsan',18,12.3,'shanghai', false)

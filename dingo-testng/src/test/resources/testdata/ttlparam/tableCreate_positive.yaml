@@ -1,0 +1,3 @@
+testID1002311:
+  tableName: "ttltest1"
+  metaPath: "src/test/resources/tabledata/meta/ttlparam/ttl_positive_meta1.txt"

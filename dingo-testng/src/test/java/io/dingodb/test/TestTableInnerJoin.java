@@ -81,10 +81,10 @@ public class TestTableInnerJoin {
 
     @Test(description = "创建内连接测试用表beauty和boys，并插入数据")
     public void test00createInnerTableAndInsertValues1() throws SQLException {
-        String beauty_meta_path = "src/test/resources/testdata/tablemeta/beauty_tbl_meta.txt";
-        String boys_meta_path = "src/test/resources/testdata/tablemeta/boys_tbl_meta.txt";
-        String beauty_value_path = "src/test/resources/testdata/tableInsertValues/beauty_tbl.txt";
-        String boys_value_path = "src/test/resources/testdata/tableInsertValues/boys_tbl.txt";
+        String beauty_meta_path = "src/test/resources/tabledata/meta/common/beauty_meta.txt";
+        String boys_meta_path = "src/test/resources/tabledata/meta/common/boys_meta.txt";
+        String beauty_value_path = "src/test/resources/tabledata/value/common/beauty_value1.txt";
+        String boys_value_path = "src/test/resources/tabledata/value/common/boys_value2.txt";
         initTable(tableName1, beauty_meta_path);
         initTable(tableName2, boys_meta_path);
         insertValues(tableName1, "", beauty_value_path);
@@ -95,10 +95,10 @@ public class TestTableInnerJoin {
     public void test00createInnerTableAndInsertValues2() throws SQLException {
         String insertFields1 = "(department_id,department_name,manager_id,location_id)";
         String insertFields2 = "(employee_id,first_name,last_name,email,phone_number,job_id,salary,commission_pct,manager_id,department_id,hiredate)";
-        String departments_meta_path = "src/test/resources/testdata/tablemeta/departments_tbl_meta.txt";
-        String employees_meta_path = "src/test/resources/testdata/tablemeta/employees_tbl_meta.txt";
-        String departments_value_path = "src/test/resources/testdata/tableInsertValues/departments.txt";
-        String employees_value_path = "src/test/resources/testdata/tableInsertValues/employees.txt";
+        String departments_meta_path = "src/test/resources/tabledata/meta/common/departments_meta.txt";
+        String employees_meta_path = "src/test/resources/tabledata/meta/common/employees_meta.txt";
+        String departments_value_path = "src/test/resources/tabledata/value/common/departments_value1.txt";
+        String employees_value_path = "src/test/resources/tabledata/value/common/employees_value1.txt";
         initTable(tableName3, departments_meta_path);
         initTable(tableName4, employees_meta_path);
         insertValues(tableName3, insertFields1, departments_value_path);
@@ -107,28 +107,28 @@ public class TestTableInnerJoin {
 
     @Test(description = "创建job_grades表，并插入数据")
     public void test00createInnerTableAndInsertValues3() throws SQLException {
-        String job_grades_meta_path = "src/test/resources/testdata/tablemeta/job_grades_meta.txt";
-        String job_grades_value_path = "src/test/resources/testdata/tableInsertValues/job_grades.txt";
+        String job_grades_meta_path = "src/test/resources/tabledata/meta/common/job_grades_meta.txt";
+        String job_grades_value_path = "src/test/resources/tabledata/value/common/job_grades_value1.txt";
         initTable(tableName5, job_grades_meta_path);
         insertValues(tableName5,"", job_grades_value_path);
     }
 
     @Test(description = "创建用于自连接测试的表，并插入数据")
     public void test00createInnerTableAndInsertValues4() throws SQLException {
-        String selfJoin_meta_path = "src/test/resources/testdata/tablemeta/selfjoin_meta.txt";
-        String selfJoin_value_path = "src/test/resources/testdata/tableInsertValues/selfjoin.txt";
+        String selfJoin_meta_path = "src/test/resources/tabledata/meta/tableJoin/selfjoin_meta.txt";
+        String selfJoin_value_path = "src/test/resources/tabledata/value/tableJoin/selfjoin_value1.txt";
         initTable(tableName6, selfJoin_meta_path);
         insertValues(tableName6,"", selfJoin_value_path);
     }
 
     @Test(description = "创建用于内等-自然连接测试的表，并插入数据")
     public void test00createInnerTableAndInsertValues5() throws SQLException {
-        String table1054_1_meta_path = "src/test/resources/testdata/tablemeta/table1054_1_meta.txt";
-        String table1054_1_value_path = "src/test/resources/testdata/tableInsertValues/table1054_1.txt";
+        String table1054_1_meta_path = "src/test/resources/tabledata/meta/tableJoin/table1054_1_meta.txt";
+        String table1054_1_value_path = "src/test/resources/tabledata/value/tableJoin/table1054_1_value.txt";
         initTable(tableName7, table1054_1_meta_path);
         insertValues(tableName7,"", table1054_1_value_path);
-        String table1054_2_meta_path = "src/test/resources/testdata/tablemeta/table1054_2_meta.txt";
-        String table1054_2_value_path = "src/test/resources/testdata/tableInsertValues/table1054_2.txt";
+        String table1054_2_meta_path = "src/test/resources/tabledata/meta/tableJoin/table1054_2_meta.txt";
+        String table1054_2_value_path = "src/test/resources/tabledata/value/tableJoin/table1054_2_value.txt";
         initTable(tableName8, table1054_2_meta_path);
         insertValues(tableName8,"", table1054_2_value_path);
     }

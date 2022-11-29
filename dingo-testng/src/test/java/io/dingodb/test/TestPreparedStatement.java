@@ -50,8 +50,8 @@ public class TestPreparedStatement {
     }
 
     public void createPSTable() throws SQLException {
-        String ps_meta1_path = "src/test/resources/testdata/tablemeta/between_and_meta1.txt";
-        String ps_value1_path = "src/test/resources/testdata/tableInsertValues/between_and_value1.txt";
+        String ps_meta1_path = "src/test/resources/tabledata/meta/common/common_meta1.txt";
+        String ps_value1_path = "src/test/resources/tabledata/value/betweenState/between_and_value1.txt";
         String ps_meta1 = FileReaderUtil.readFile(ps_meta1_path);
         String ps_value1 = FileReaderUtil.readFile(ps_value1_path);
 

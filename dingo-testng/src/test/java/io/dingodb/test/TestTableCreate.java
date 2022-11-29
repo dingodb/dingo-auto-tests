@@ -72,8 +72,8 @@ public class TestTableCreate extends YamlDataHelper {
     @Test(enabled = true, description = "创建测试表1,所有字段均不允许为null，所有字段均有默认值，只插入主键")
     public void test01AssignDefaultValue() throws SQLException {
         String insertFields = "(id)";
-        String table1_meta_path = "src/test/resources/testdata/createTableTest/meta/createtable1_meta.txt";
-        String table1_value_path = "src/test/resources/testdata/createTableTest/values/createtable1_values.txt";
+        String table1_meta_path = "src/test/resources/tabledata/meta/createTableTest/createtable1_meta.txt";
+        String table1_value_path = "src/test/resources/tabledata/value/createTableTest/createtable1_values.txt";
         initTable(tableName1, table1_meta_path);
         insertValues(tableName1, insertFields, table1_value_path);
     }
@@ -93,8 +93,8 @@ public class TestTableCreate extends YamlDataHelper {
 
     @Test(enabled = true, description = "创建测试表2,varchar类型字段为主键,插入数据有相同主键")
     public void test02CreateTable2PrimaryKeyVarchar() throws SQLException {
-        String table2_meta_path = "src/test/resources/testdata/createTableTest/meta/createtable2_meta.txt";
-        String table2_value_path = "src/test/resources/testdata/createTableTest/values/createtable2_values.txt";
+        String table2_meta_path = "src/test/resources/tabledata/meta/createTableTest/createtable2_meta.txt";
+        String table2_value_path = "src/test/resources/tabledata/value/createTableTest/createtable2_values.txt";
         initTable(tableName2, table2_meta_path);
         insertValues(tableName2, "", table2_value_path);
     }
@@ -117,8 +117,8 @@ public class TestTableCreate extends YamlDataHelper {
 
     @Test(enabled = true, description = "创建测试表3,double类型字段为主键,插入数据有相同主键")
     public void test03CreateTable3PrimaryKeyDouble() throws SQLException {
-        String table3_meta_path = "src/test/resources/testdata/createTableTest/meta/createtable3_meta.txt";
-        String table3_value_path = "src/test/resources/testdata/createTableTest/values/createtable3_values.txt";
+        String table3_meta_path = "src/test/resources/tabledata/meta/createTableTest/createtable3_meta.txt";
+        String table3_value_path = "src/test/resources/tabledata/value/createTableTest/createtable3_values.txt";
         initTable(tableName3, table3_meta_path);
         insertValues(tableName3,"", table3_value_path);
     }
@@ -141,8 +141,8 @@ public class TestTableCreate extends YamlDataHelper {
 
     @Test(enabled = true, description = "创建测试表4,date类型字段为主键,插入数据有相同主键")
     public void test04CreateTable4PrimaryKeyDate() throws SQLException {
-        String table4_meta_path = "src/test/resources/testdata/createTableTest/meta/createtable4_meta.txt";
-        String table4_value_path = "src/test/resources/testdata/createTableTest/values/createtable4_values.txt";
+        String table4_meta_path = "src/test/resources/tabledata/meta/createTableTest/createtable4_meta.txt";
+        String table4_value_path = "src/test/resources/tabledata/value/createTableTest/createtable4_values.txt";
         initTable(tableName4, table4_meta_path);
         insertValues(tableName4,"", table4_value_path);
     }
@@ -164,8 +164,8 @@ public class TestTableCreate extends YamlDataHelper {
 
     @Test(enabled = true, description = "创建测试表5,time类型字段为主键,插入数据有相同主键")
     public void test05CreateTable5PrimaryKeyTime() throws SQLException {
-        String table5_meta_path = "src/test/resources/testdata/createTableTest/meta/createtable5_meta.txt";
-        String table5_value_path = "src/test/resources/testdata/createTableTest/values/createtable5_values.txt";
+        String table5_meta_path = "src/test/resources/tabledata/meta/createTableTest/createtable5_meta.txt";
+        String table5_value_path = "src/test/resources/tabledata/value/createTableTest/createtable5_values.txt";
         initTable(tableName5, table5_meta_path);
         insertValues(tableName5,"", table5_value_path);
     }
@@ -188,8 +188,8 @@ public class TestTableCreate extends YamlDataHelper {
 
     @Test(enabled = true, description = "创建测试表6,timestamp类型字段为主键,插入数据有相同主键")
     public void test06CreateTable6PrimaryKeyTimestamp() throws SQLException {
-        String table6_meta_path = "src/test/resources/testdata/createTableTest/meta/createtable6_meta.txt";
-        String table6_value_path = "src/test/resources/testdata/createTableTest/values/createtable6_values.txt";
+        String table6_meta_path = "src/test/resources/tabledata/meta/createTableTest/createtable6_meta.txt";
+        String table6_value_path = "src/test/resources/tabledata/value/createTableTest/createtable6_values.txt";
         initTable(tableName6, table6_meta_path);
         insertValues(tableName6,"", table6_value_path);
     }
@@ -212,8 +212,8 @@ public class TestTableCreate extends YamlDataHelper {
 
     @Test(enabled = true, description = "创建测试表7,布尔类型字段为主键,插入数据有相同主键")
     public void test07CreateTable7PrimaryKeyBoolean() throws SQLException {
-        String table7_meta_path = "src/test/resources/testdata/createTableTest/meta/createtable7_meta.txt";
-        String table7_value_path = "src/test/resources/testdata/createTableTest/values/createtable7_values.txt";
+        String table7_meta_path = "src/test/resources/tabledata/meta/createTableTest/createtable7_meta.txt";
+        String table7_value_path = "src/test/resources/tabledata/value/createTableTest/createtable7_values.txt";
         initTable(tableName7, table7_meta_path);
         insertValues(tableName7,"", table7_value_path);
     }

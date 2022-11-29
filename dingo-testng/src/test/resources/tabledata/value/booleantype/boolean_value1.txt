@@ -1,0 +1,4 @@
+(1,'zhangsan',18,23.50,'beijing', true),
+(2,'lisi',25,89,' beijinghaidian ', true),
+(3,'lisi3',55,123.123,'wuhan NO.1 Street', TRUE),
+(4,'HAHA',57,9.0762556,'CHANGping', True)

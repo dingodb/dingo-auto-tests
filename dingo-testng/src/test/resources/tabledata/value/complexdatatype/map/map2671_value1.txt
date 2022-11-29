@@ -1,0 +1,1 @@
+(1,'zhangsan',18,23.45,'BJ','2000-01-01','10:57:30','2022-11-29 18:00:00',true, array['Haidian','Building B','NO.18'],multiset['abcd', '18.8','Coco'],map['sex','male','phone','13898763546'])

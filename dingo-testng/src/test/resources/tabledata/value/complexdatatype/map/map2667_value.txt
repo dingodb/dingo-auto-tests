@@ -1,0 +1,3 @@
+(8,'Adidas',25,100,map[true,1,false,0]),
+(9,'Hive',18,-1.0,map[false,false,true,true]),
+(10,'Dota',71,999.99,map[true,'true',false,'can_del'])

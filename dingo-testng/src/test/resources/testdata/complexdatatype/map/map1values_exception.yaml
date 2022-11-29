@@ -13,3 +13,9 @@ testID1002173-01:
 testID1002188-01:
   tableName: "maptest1"
   mapValues: "(21881, 'LaLa', 27, 132.50, map[])"
+testID1002665-01:
+  tableName: "maptest1"
+  mapValues: "(26651, 'wangwu', 100, 1000.0, map[300,'dingo',301,'baidu.com','create_time','19:00:00'])"
+testID1002668-01:
+  tableName: "maptest1"
+  mapValues: "(26681, 'Nike', 30, 1.1, map[true,1,'false',0])"

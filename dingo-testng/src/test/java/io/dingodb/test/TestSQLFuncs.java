@@ -103,16 +103,16 @@ public class TestSQLFuncs extends YamlDataHelper {
     @Test(enabled = true, description = "创建查询测试表1")
     public void test00CreateQueryTable1() throws SQLException {
         String tableName = "querytest1";
-        String queryTable1_meta_path = "src/test/resources/testdata/tablemeta/between_and_meta1.txt";
-        String queryTable1_value_path = "src/test/resources/testdata/tableInsertValues/SQLFunc_Query1.txt";
+        String queryTable1_meta_path = "src/test/resources/tabledata/meta/common/common_meta1.txt";
+        String queryTable1_value_path = "src/test/resources/tabledata/value/sqlOperation/querytest1_value.txt";
         initTable(tableName, queryTable1_meta_path, queryTable1_value_path);
     }
 
     @Test(enabled = true, description = "创建查询测试表2")
     public void test00CreateGroupTable1() throws SQLException {
         String tableName = "grouptest1";
-        String group1_meta_path = "src/test/resources/testdata/tablemeta/group_tbl1_meta.txt";
-        String group1_value_path = "src/test/resources/testdata/tableInsertValues/group_tbl1_value.txt";
+        String group1_meta_path = "src/test/resources/tabledata/meta/sqlOperation/group_tbl1_meta.txt";
+        String group1_value_path = "src/test/resources/tabledata/value/sqlOperation/group_tbl1_value.txt";
         initTable(tableName, group1_meta_path, group1_value_path);
     }
 
@@ -1575,8 +1575,8 @@ public class TestSQLFuncs extends YamlDataHelper {
 
     @Test(enabled = true, description = "验证宽表创建和数据插入成功")
     public void testcase1483_widthTableCreate() throws SQLException, ClassNotFoundException {
-        String width_meta_path = "src/test/resources/testdata/tablemeta/width_table_meta.txt";
-        String width_value_path = "src/test/resources/testdata/tableInsertValues/width_table.txt";
+        String width_meta_path = "src/test/resources/tabledata/meta/sqlOperation/width_table_meta.txt";
+        String width_value_path = "src/test/resources/tabledata/value/sqlOperation/width_table_value.txt";
         String width_meta = FileReaderUtil.readFile(width_meta_path);
         String width_value = FileReaderUtil.readFile(width_value_path);
         funcObj.createWidthTable(width_meta);
@@ -1749,11 +1749,6 @@ public class TestSQLFuncs extends YamlDataHelper {
         System.out.println("Actual: " + actualRows);
         Assert.assertEquals(actualRows, expectedRows);
     }
-
-
-
-
-
 
     @AfterClass(description = "测试完成后删除数据和表格并关闭连接")
     public void tearDownAll() throws SQLException, ClassNotFoundException {

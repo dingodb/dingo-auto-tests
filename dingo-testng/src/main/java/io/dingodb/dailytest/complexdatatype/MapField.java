@@ -88,6 +88,14 @@ public class MapField {
         }
     }
 
+    //更新表数据
+    public int mapTableUpdateCommonCol(String updateState) throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            int affectRows = statement.executeUpdate(updateState);
+            return affectRows;
+        }
+    }
+
     //删除数据
     public int deleteTableData(String tableName, String queryState) throws SQLException {
         try(Statement statement = connection.createStatement()) {

@@ -1,6 +1,6 @@
 testID1002200-01:
   tableName: "maptest2"
-  valueFilePath: "src/test/resources/testdata/tableInsertValues/complexdatatype/map/map_tbl2_value3.txt"
+  valueFilePath: "src/test/resources/tabledata/value/complexdatatype/map/map_tbl2_value3.txt"
 testID1002200-02:
   tableName: "maptest2"
-  valueFilePath: "src/test/resources/testdata/tableInsertValues/complexdatatype/map/map_tbl2_value4.txt"
+  valueFilePath: "src/test/resources/tabledata/value/complexdatatype/map/map_tbl2_value4.txt"

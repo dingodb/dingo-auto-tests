@@ -107,6 +107,12 @@
         </classes>
     </test>
 
+    <test name="v0.5.0 TTLParamTest">
+        <classes>
+            <class name="io.dingodb.test.TestTTLParam"></class>
+        </classes>
+    </test>
+
 
     <test name="TableCreateTest">
         <classes>

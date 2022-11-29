@@ -1,1 +1,0 @@
-(name varchar(20), age int, birthday date, primary key(name))

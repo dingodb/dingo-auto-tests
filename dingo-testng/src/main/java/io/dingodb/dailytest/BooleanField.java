@@ -33,140 +33,48 @@ public class BooleanField {
         }
     }
 
-    //生成的测试表格名称并返回
-    public static String getBooleanTableName() {
-        final String booleanTablePrefix = "booleanFieldTest";
-        String booleanTableName = booleanTablePrefix + CommonArgs.getCurDateStr();
-        return booleanTableName;
-    }
 
-    //创建表格
-    public void createBooleanTable() throws SQLException, ClassNotFoundException {
-        String strBooleanTableName = getBooleanTableName();
-        try(Statement statement = connection.createStatement();) {
-            String createBLTableSQL = "create table " + strBooleanTableName + "("
-                    + "id int,"
-                    + "name varchar(32) not null,"
-                    + "age int,"
-                    + "amount double,"
-                    + "address varchar(255),"
-                    + "is_delete boolean,"
-                    + "primary key(id)"
-                    + ")";
-            statement.execute(createBLTableSQL);
+    //创建表
+    public void tableCreate(String tableName, String tableMeta) throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String sql = "create table " + tableName + tableMeta;
+            statement.execute(sql);
         }
     }
 
-    //插入true数据
-    public int insertTrueValues() throws SQLException {
-        String booleanTableName = getBooleanTableName();
+    //插入数据返回行数
+    public int insertTableValues(String tableName,String insertFields, String tableValues) throws SQLException {
         try(Statement statement = connection.createStatement()) {
-            String insertTrueSql = "insert into " + booleanTableName + " values "
-                    + "(1,'zhangsan',18,23.50,'beijing', true),\n"
-                    + "(2,'lisi',25,89,' beijinghaidian ', true),\n"
-                    + "(3,'lisi3',55,123.123,'wuhan NO.1 Street', TRUE),\n"
-                    + "(4,'HAHA',57,9.0762556,'CHANGping', True)";
-
-            int insertTrueRows = statement.executeUpdate(insertTrueSql);
+            String insertSql = "insert into " + tableName + insertFields + " values " + tableValues;
+            int insertRows = statement.executeUpdate(insertSql);
             statement.close();
-            return insertTrueRows;
+            return insertRows;
         }
     }
 
-    // 查看true数据
-    public List<Boolean> getTrueValues() throws SQLException {
-        String booleanTableName = getBooleanTableName();
+    // 查看布尔数据
+    public List<Boolean> getBoolValues(String tableName, String queryFields, String queryState) throws SQLException {
         try(Statement statement = connection.createStatement()) {
-            String queryTrueSql = "select * from " + booleanTableName + " where id < 5";
-            ResultSet queryTrueRst = statement.executeQuery(queryTrueSql);
-            List<Boolean> trueList = new ArrayList<Boolean>();
-            while (queryTrueRst.next()) {
-                trueList.add(queryTrueRst.getBoolean("is_delete"));
+            String querySql = "select " + queryFields + " from " + tableName + queryState;
+            ResultSet queryRst = statement.executeQuery(querySql);
+            List<Boolean> queryList = new ArrayList<Boolean>();
+            while (queryRst.next()) {
+                queryList.add(queryRst.getBoolean("is_delete"));
             }
-            queryTrueRst.close();
+            queryRst.close();
             statement.close();
-            return trueList;
+            return queryList;
         }
     }
 
-    //插入false数据
-    public int insertFalseValues() throws SQLException {
-        String booleanTableName = getBooleanTableName();
+    // 查看条件查询数据
+    public List queryValue(String tableName, String queryFields, String queryState, String queryColumn) throws SQLException {
         try(Statement statement = connection.createStatement()) {
-            String insertFalseSql = "insert into " + booleanTableName + " values "
-                    + "(5,'wJDs',1,1453.9999,'pingYang1', FALSE),\n"
-                    + "(6,'123',544,0,'543', false),\n"
-                    + "(7,'yamaha',76,2.30,'beijing changyang', False),\n"
-                    + "(8,'zhangsan',18,12.3,'shanghai', false)";
-
-            int insertFalseRows = statement.executeUpdate(insertFalseSql);
-            statement.close();
-            return insertFalseRows;
-        }
-    }
-
-    // 查看false数据
-    public List<Boolean> getFalseValues() throws SQLException {
-        String booleanTableName = getBooleanTableName();
-        try(Statement statement = connection.createStatement()) {
-            String queryFalseSql = "select * from " + booleanTableName + " where id >4 and id < 9";
-            ResultSet queryFalseRst = statement.executeQuery(queryFalseSql);
-            List<Boolean> falseList = new ArrayList<Boolean>();
-            while (queryFalseRst.next()) {
-                falseList.add(queryFalseRst.getBoolean("is_delete"));
-            }
-
-            queryFalseRst.close();
-            statement.close();
-            return falseList;
-        }
-    }
-
-    //插入true和false数据
-    public int insertTrueAndFalseValues() throws SQLException {
-        String booleanTableName = getBooleanTableName();
-        try(Statement statement = connection.createStatement()) {
-            String insertTrueAndFalseSql = "insert into " + booleanTableName + " values "
-                    + "(9,'oppo',76,109.325,'wuhan', True),\n"
-                    + "(10,'lisi',256,1234.456,'nanjing', False),\n"
-                    + "(11,' ab c d ',61,99.9999,'beijing chaoyang', true),\n"
-                    + "(12,' abcdef',2,2345.000,'123', false),\n"
-                    + "(13,'HX K', 99, 22.22, 'Haidian Distinct', False),\n"
-                    + "(14,'YH', 76, 1.01, 'TJ Street No.1', True),\n"
-                    + "(15, 'yamaha',76,2.30,'beijing changyang', TRUE)";
-
-            int insertTrueAndFalseRows = statement.executeUpdate(insertTrueAndFalseSql);
-            statement.close();
-            return insertTrueAndFalseRows;
-        }
-    }
-
-    // 查看true和false数据
-    public List<Boolean> getTrueAndFalseValues() throws SQLException {
-        String booleanTableName = getBooleanTableName();
-        try(Statement statement = connection.createStatement()) {
-            String queryTrueAndFalseSql = "select * from " + booleanTableName + " where id > 8 and id < 16";
-            ResultSet queryTrueAndFalseRst = statement.executeQuery(queryTrueAndFalseSql);
-            List<Boolean> trueAndfalseList = new ArrayList<Boolean>();
-            while (queryTrueAndFalseRst.next()) {
-                trueAndfalseList.add(queryTrueAndFalseRst.getBoolean("is_delete"));
-            }
-
-            queryTrueAndFalseRst.close();
-            statement.close();
-            return trueAndfalseList;
-        }
-    }
-
-    // 查看按true值条件查询数据
-    public List<String> queryTrueValue() throws SQLException {
-        String booleanTableName = getBooleanTableName();
-        try(Statement statement = connection.createStatement()) {
-            String queryTrueValueSql = "select * from " + booleanTableName + " where is_delete = true";
+            String queryTrueValueSql = "select " + queryFields + " from " + tableName + queryState;
             ResultSet queryTrueValueRst = statement.executeQuery(queryTrueValueSql);
-            List<String> queryTrueValueList = new ArrayList<String>();
+            List queryTrueValueList = new ArrayList();
             while (queryTrueValueRst.next()) {
-                queryTrueValueList.add(queryTrueValueRst.getString("NAME"));
+                queryTrueValueList.add(queryTrueValueRst.getString(queryColumn));
             }
 
             queryTrueValueRst.close();
@@ -175,109 +83,10 @@ public class BooleanField {
         }
     }
 
-    // 查看按false值条件查询数据
-    public List<Integer> queryFalseValue() throws SQLException {
-        String booleanTableName = getBooleanTableName();
-        try(Statement statement = connection.createStatement()) {
-            String queryFalseValueSql = "select * from " + booleanTableName + " where is_delete = false";
-            ResultSet queryFalseValueRst = statement.executeQuery(queryFalseValueSql);
-            List<Integer> queryFalseValueList = new ArrayList<Integer>();
-            while (queryFalseValueRst.next()) {
-                queryFalseValueList.add(queryFalseValueRst.getInt(1));
-            }
-
-            queryFalseValueRst.close();
-            statement.close();
-            return queryFalseValueList;
-        }
-    }
-
-    // 字段为真条件查询数据
-    public List<Boolean> fieldAsConditionValue() throws SQLException {
-        String booleanTableName = getBooleanTableName();
-        try(Statement statement = connection.createStatement()) {
-            String fieldAsConditionSql = "select * from " + booleanTableName + " where is_delete";
-            ResultSet fieldAsConditionRst = statement.executeQuery(fieldAsConditionSql);
-            List<Boolean> fieldConditionList = new ArrayList<Boolean>();
-            while (fieldAsConditionRst.next()) {
-                fieldConditionList.add(fieldAsConditionRst.getBoolean("is_delete"));
-            }
-
-            fieldAsConditionRst.close();
-            statement.close();
-            return fieldConditionList;
-        }
-    }
-
-    // not字段为假条件查询数据
-    public List<Boolean> notFieldAsConditionValue() throws SQLException {
-        String booleanTableName = getBooleanTableName();
-        try(Statement statement = connection.createStatement()) {
-            String notFieldAsConditionSql = "select * from " + booleanTableName + " where not is_delete";
-            ResultSet notFieldAsConditionRst = statement.executeQuery(notFieldAsConditionSql);
-            List<Boolean> notFieldConditionList = new ArrayList<Boolean>();
-            while (notFieldAsConditionRst.next()) {
-                notFieldConditionList.add(notFieldAsConditionRst.getBoolean("is_delete"));
-            }
-
-            notFieldAsConditionRst.close();
-            statement.close();
-            return notFieldConditionList;
-        }
-    }
-
-    // is true 查询
-    public List<String> queryIsTrue() throws SQLException {
-        String booleanTableName = getBooleanTableName();
-        try(Statement statement = connection.createStatement()) {
-            String querySql = "select * from " + booleanTableName + " where is_delete is true";
-            ResultSet queryRst = statement.executeQuery(querySql);
-            List<String> queryIsTrueList = new ArrayList<String>();
-            while (queryRst.next()) {
-                queryIsTrueList.add(queryRst.getString("NAME"));
-            }
-
-            queryRst.close();
-            statement.close();
-            return queryIsTrueList;
-        }
-    }
-
-    // is false 查询
-    public List<Integer> queryIsFalse() throws SQLException {
-        String booleanTableName = getBooleanTableName();
-        try(Statement statement = connection.createStatement()) {
-            String querySql = "select * from " + booleanTableName + " where is_delete is false";
-            ResultSet queryRst = statement.executeQuery(querySql);
-            List<Integer> queryIsFalseList = new ArrayList<Integer>();
-            while (queryRst.next()) {
-                queryIsFalseList.add(queryRst.getInt(1));
-            }
-
-            queryRst.close();
-            statement.close();
-            return queryIsFalseList;
-        }
-    }
-
-    //插入0转换为false
-    public int insertZeroValues() throws SQLException {
-        String booleanTableName = getBooleanTableName();
-        try(Statement statement = connection.createStatement()) {
-            String insertZeroSql = "insert into " + booleanTableName + " values "
-                    + "(35,'oppo',20,1.2,'wuhan', 0)";
-
-            int insertZeroRows = statement.executeUpdate(insertZeroSql);
-            statement.close();
-            return insertZeroRows;
-        }
-    }
-
     // 查看0转换后数据
-    public Boolean getZeroValues() throws SQLException {
-        String booleanTableName = getBooleanTableName();
+    public Boolean getZeroValues(String tableName) throws SQLException {
         try(Statement statement = connection.createStatement()) {
-            String queryZeroSql = "select * from " + booleanTableName + " where id=35";
+            String queryZeroSql = "select * from " + tableName + " where id=35";
             ResultSet queryZeroRst = statement.executeQuery(queryZeroSql);
             Boolean zeroOut = null;
             while (queryZeroRst.next()) {
@@ -291,10 +100,9 @@ public class BooleanField {
     }
 
     //插入正整数转换为true
-    public int insertPosIntegerValues(String insertID, String insertIntegerValue) throws SQLException {
-        String booleanTableName = getBooleanTableName();
+    public int insertPosIntegerValues(String tableName, String insertID, String insertIntegerValue) throws SQLException {
         try(Statement statement = connection.createStatement()) {
-            String insertPosIntegerSql = "insert into " + booleanTableName + " values "
+            String insertPosIntegerSql = "insert into " + tableName + " values "
                     + "(" + insertID + ",'oppo',20,1.2,'wuhan'," + insertIntegerValue + ")";
 
             int insertIntegerRows = statement.executeUpdate(insertPosIntegerSql);
@@ -304,10 +112,9 @@ public class BooleanField {
     }
 
     // 查看正整数转换后数据
-    public Boolean getIntegerValues(String insertID) throws SQLException {
-        String booleanTableName = getBooleanTableName();
+    public Boolean getIntegerValues(String tableName, String insertID) throws SQLException {
         try(Statement statement = connection.createStatement()){
-            String queryIntegerSql = "select * from " + booleanTableName + " where id = " + insertID;
+            String queryIntegerSql = "select * from " + tableName + " where id = " + insertID;
             ResultSet queryIntegerRst = statement.executeQuery(queryIntegerSql);
             Boolean integerOut = null;
             while (queryIntegerRst.next()) {
@@ -321,12 +128,11 @@ public class BooleanField {
     }
 
     //布尔字段插入null值
-    public String insertNull() throws SQLException {
-        String booleanTableName = getBooleanTableName();
+    public String insertNull(String tableName) throws SQLException {
         try(Statement statement = connection.createStatement()){
-            String insertSql = "insert into " + booleanTableName + " values(10001, 'kelay',76,2.30,'shanghai', null)";
+            String insertSql = "insert into " + tableName + " values(10001, 'kelay',76,2.30,'shanghai', null)";
             int insertNum = statement.executeUpdate(insertSql);
-            String querySql = "select * from " + booleanTableName + " where id=10001";
+            String querySql = "select * from " + tableName + " where id=10001";
             ResultSet resultSet = statement.executeQuery(querySql);
             String integerOut = null;
             while (resultSet.next()) {
@@ -339,20 +145,4 @@ public class BooleanField {
         }
     }
 
-    //创建表格不支持类型写成bool
-    public void createBoolTable() throws SQLException, ClassNotFoundException {
-        String strBooleanTableName = getBooleanTableName();
-        try(Statement statement = connection.createStatement()) {
-            String createBLTableSQL = "create table booltest" + "("
-                    + "id int,"
-                    + "name varchar(32) not null,"
-                    + "age int,"
-                    + "amount double,"
-                    + "address varchar(255),"
-                    + "is_delete bool,"
-                    + "primary key(id)"
-                    + ")";
-            statement.execute(createBLTableSQL);
-        }
-    }
 }

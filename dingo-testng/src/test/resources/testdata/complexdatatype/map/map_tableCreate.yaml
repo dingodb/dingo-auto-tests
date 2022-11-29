@@ -1,0 +1,24 @@
+table01:
+  tableName: "maptest1"
+  metaPath: "src/test/resources/tabledata/meta/complexdatatype/map/map_tbl1_meta.txt"
+table02:
+  tableName: "maptest2"
+  metaPath: "src/test/resources/tabledata/meta/complexdatatype/map/map_tbl2_meta.txt"
+table03:
+  tableName: "maptest3"
+  metaPath: "src/test/resources/tabledata/meta/complexdatatype/map/map_tbl3_meta.txt"
+table04:
+  tableName: "maptestdefault"
+  metaPath: "src/test/resources/tabledata/meta/complexdatatype/map/map_tbl4_meta.txt"
+table05:
+  tableName: "mapmid"
+  metaPath: "src/test/resources/tabledata/meta/complexdatatype/map/map_tbl5_meta.txt"
+table06:
+  tableName: "mapfirst"
+  metaPath: "src/test/resources/tabledata/meta/complexdatatype/map/map_tbl6_meta.txt"
+table07:
+  tableName: "map2663"
+  metaPath: "src/test/resources/tabledata/meta/complexdatatype/map/map_tbl1_meta.txt"
+table08:
+  tableName: "map2671"
+  metaPath: "src/test/resources/tabledata/meta/complexdatatype/map/map_2671_meta.txt"
