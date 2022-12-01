@@ -1061,8 +1061,35 @@ public class YamlDataHelper{
     public Object[][] ttlParamMethod(Method method) {
         List<Map<String, String>> yamlList = null;
         switch (method.getName()) {
-            case "test00TTLTableCreate": {
+            case "test01TTLTableCreatePos": {
                 yamlList = getYamlList(iniReader.getValue("ttlParam", "tableCreate_positive"));
+                break;
+            }
+
+            case "test02TTLTableCreateNeg": {
+                yamlList = getYamlList(iniReader.getValue("ttlParam", "tableCreate_negative"));
+                break;
+            }
+
+        }
+        Object[][] files = new Object[yamlList.size()][];
+        for (int i = 0; i < yamlList.size(); i++) {
+            files[i] = new Object[]{yamlList.get(i)};
+        }
+        return files;
+    }
+
+    @DataProvider
+    public Object[][] partitionParamMethod(Method method) {
+        List<Map<String, String>> yamlList = null;
+        switch (method.getName()) {
+            case "test01PartitionTableCreatePos": {
+                yamlList = getYamlList(iniReader.getValue("partitionParam", "tableCreate_positive"));
+                break;
+            }
+
+            case "test02PartitionTableCreateNeg": {
+                yamlList = getYamlList(iniReader.getValue("partitionParam", "tableCreate_negative"));
                 break;
             }
 

@@ -49,7 +49,13 @@ public class TestTTLParam extends YamlDataHelper {
     }
 
     @Test(priority = 0, enabled = true, dataProvider = "ttlParamMethod", description = "验证带有TTL参数，创建表成功")
-    public void test00TTLTableCreate(Map<String, String> param) throws SQLException {
+    public void test01TTLTableCreatePos(Map<String, String> param) throws SQLException {
+        String tableMetaPath = param.get("metaPath");
+        initTable(param.get("tableName"), tableMetaPath);
+    }
+
+    @Test(priority = 1, enabled = true, dataProvider = "ttlParamMethod", expectedExceptions = SQLException.class, description = "验证带有TTL参数，创建表失败")
+    public void test02TTLTableCreateNeg(Map<String, String> param) throws SQLException {
         String tableMetaPath = param.get("metaPath");
         initTable(param.get("tableName"), tableMetaPath);
     }

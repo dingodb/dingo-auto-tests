@@ -1,0 +1,8 @@
+(
+id int,
+name varchar(32) not null,
+age int,
+amount double,
+birthday date,
+primary key(amount)
+) partition by range values (2000.0) with (propKey=propValue)

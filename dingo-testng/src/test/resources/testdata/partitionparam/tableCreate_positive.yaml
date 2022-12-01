@@ -1,0 +1,51 @@
+testID1002315:
+  tableName: "parttest2315"
+  metaPath: "src/test/resources/tabledata/meta/partitionparam/positive/partition_singleKey_meta1.txt"
+testID1002317:
+  tableName: "parttest2317"
+  metaPath: "src/test/resources/tabledata/meta/partitionparam/positive/partition_singleKey_meta2.txt"
+testID1002322-01:
+  tableName: "parttest2322_1"
+  metaPath: "src/test/resources/tabledata/meta/partitionparam/positive/partition_singleKey_meta3.txt"
+testID1002322-02:
+  tableName: "parttest2322_2"
+  metaPath: "src/test/resources/tabledata/meta/partitionparam/positive/partition_singleKey_meta4.txt"
+testID1002324:
+  tableName: "parttest2324"
+  metaPath: "src/test/resources/tabledata/meta/partitionparam/positive/partition_singleKey_meta5.txt"
+testID1002326:
+  tableName: "parttest2326"
+  metaPath: "src/test/resources/tabledata/meta/partitionparam/positive/partition_singleKey_meta6.txt"
+testID1002327:
+  tableName: "parttest2327"
+  metaPath: "src/test/resources/tabledata/meta/partitionparam/positive/partition_singleKey_meta7.txt"
+testID1002328:
+  tableName: "parttest2328"
+  metaPath: "src/test/resources/tabledata/meta/partitionparam/positive/partition_singleKey_meta8.txt"
+testID1002329:
+  tableName: "parttest2329"
+  metaPath: "src/test/resources/tabledata/meta/partitionparam/positive/partition_singleKey_meta9.txt"
+testID1002330:
+  tableName: "parttest2330"
+  metaPath: "src/test/resources/tabledata/meta/partitionparam/positive/partition_singleKey_meta10.txt"
+testID1002331:
+  tableName: "parttest2331"
+  metaPath: "src/test/resources/tabledata/meta/partitionparam/positive/partition_singleKey_meta11.txt"
+testID1002332:
+  tableName: "parttest2332"
+  metaPath: "src/test/resources/tabledata/meta/partitionparam/positive/partition_singleKey_meta12.txt"
+testID1002333:
+  tableName: "parttest2333"
+  metaPath: "src/test/resources/tabledata/meta/partitionparam/positive/partition_singleKey_meta13.txt"
+testID1002334:
+  tableName: "parttest2334"
+  metaPath: "src/test/resources/tabledata/meta/partitionparam/positive/partition_singleKey_meta14.txt"
+testID1002335:
+  tableName: "parttest2335"
+  metaPath: "src/test/resources/tabledata/meta/partitionparam/positive/partition_singleKey_meta15.txt"
+testID1002336:
+  tableName: "parttest2336"
+  metaPath: "src/test/resources/tabledata/meta/partitionparam/positive/partition_singleKey_meta16.txt"
+testID1002337:
+  tableName: "parttest2337"
+  metaPath: "src/test/resources/tabledata/meta/partitionparam/positive/partition_singleKey_meta17.txt"

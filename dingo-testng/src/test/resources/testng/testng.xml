@@ -113,6 +113,12 @@
         </classes>
     </test>
 
+    <test name="v0.5.0 PartitionParamTest">
+        <classes>
+            <class name="io.dingodb.test.TestPartitionParam"></class>
+        </classes>
+    </test>
+
 
     <test name="TableCreateTest">
         <classes>

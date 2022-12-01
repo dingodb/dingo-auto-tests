@@ -1,0 +1,6 @@
+testID1002321:
+  tableName: "parttest2321"
+  metaPath: "src/test/resources/tabledata/meta/partitionparam/negative/partition_negative_meta1.txt"
+testID1002325:
+  tableName: "parttest2325"
+  metaPath: "src/test/resources/tabledata/meta/partitionparam/negative/partition_negative_meta2.txt"

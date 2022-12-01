@@ -4,4 +4,4 @@ name varchar(32) not null,
 age int,
 amount double,
 primary key(id)
-) with(ttl=300)
+) ttl=300

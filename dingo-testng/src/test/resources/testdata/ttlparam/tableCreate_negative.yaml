@@ -1,0 +1,12 @@
+testID1002313-01:
+  tableName: "ttltest23131"
+  metaPath: "src/test/resources/tabledata/meta/ttlparam/ttl_negative_meta1.txt"
+testID1002313-02:
+  tableName: "ttltest23132"
+  metaPath: "src/test/resources/tabledata/meta/ttlparam/ttl_negative_meta2.txt"
+testID1002313-03:
+  tableName: "ttltest23133"
+  metaPath: "src/test/resources/tabledata/meta/ttlparam/ttl_negative_meta3.txt"
+testID1002314:
+  tableName: "ttltest23133"
+  metaPath: "src/test/resources/tabledata/meta/ttlparam/ttl_negative_meta4.txt"
