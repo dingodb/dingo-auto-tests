@@ -504,7 +504,7 @@ public class TestMapField extends YamlDataHelper {
         StrTo2DList strTo2DList = new StrTo2DList();
         List<List> expectedList = strTo2DList.construct2DList(param.get("outData"),";","&");
         System.out.println("Expected: " + expectedList);
-        List<List> actualList = mapObj.queryTableData(param.get("tableName"), param.get("queryFields"), param.get("queryState"),5);
+        List<List> actualList = mapObj.queryTableData(param.get("tableName"), param.get("queryFields"), param.get("queryState"),12);
         System.out.println("Actual: " + actualList);
         Assert.assertTrue(actualList.containsAll(expectedList));
         Assert.assertTrue(expectedList.containsAll(actualList));

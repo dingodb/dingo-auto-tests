@@ -49,3 +49,102 @@ testID1002336:
 testID1002337:
   tableName: "parttest2337"
   metaPath: "src/test/resources/tabledata/meta/partitionparam/positive/partition_singleKey_meta17.txt"
+
+testID1002338:
+  tableName: "parttest2338"
+  metaPath: "src/test/resources/tabledata/meta/partitionparam/positive/partition_multiKey_meta1.txt"
+testID1002339:
+  tableName: "parttest2339"
+  metaPath: "src/test/resources/tabledata/meta/partitionparam/positive/partition_multiKey_meta2.txt"
+testID1002340:
+  tableName: "parttest2340"
+  metaPath: "src/test/resources/tabledata/meta/partitionparam/positive/partition_multiKey_meta3.txt"
+testID1002341:
+  tableName: "parttest2341"
+  metaPath: "src/test/resources/tabledata/meta/partitionparam/positive/partition_multiKey_meta4.txt"
+testID1002346-01:
+  tableName: "parttest2346_1"
+  metaPath: "src/test/resources/tabledata/meta/partitionparam/positive/partition_multiKey_meta5.txt"
+testID1002346-02:
+  tableName: "parttest2346_2"
+  metaPath: "src/test/resources/tabledata/meta/partitionparam/positive/partition_multiKey_meta6.txt"
+testID1002347:
+  tableName: "parttest2347"
+  metaPath: "src/test/resources/tabledata/meta/partitionparam/positive/partition_multiKey_meta7.txt"
+testID1002348:
+  tableName: "parttest2348"
+  metaPath: "src/test/resources/tabledata/meta/partitionparam/positive/partition_multiKey_meta8.txt"
+testID1002349:
+  tableName: "parttest2349"
+  metaPath: "src/test/resources/tabledata/meta/partitionparam/positive/partition_multiKey_meta9.txt"
+testID1002350:
+  tableName: "parttest2350"
+  metaPath: "src/test/resources/tabledata/meta/partitionparam/positive/partition_multiKey_meta10.txt"
+testID1002351:
+  tableName: "parttest2351"
+  metaPath: "src/test/resources/tabledata/meta/partitionparam/positive/partition_multiKey_meta11.txt"
+testID1002352:
+  tableName: "parttest2352"
+  metaPath: "src/test/resources/tabledata/meta/partitionparam/positive/partition_multiKey_meta12.txt"
+testID1002353:
+  tableName: "parttest2353"
+  metaPath: "src/test/resources/tabledata/meta/partitionparam/positive/partition_multiKey_meta13.txt"
+testID1002354:
+  tableName: "parttest2354"
+  metaPath: "src/test/resources/tabledata/meta/partitionparam/positive/partition_multiKey_meta14.txt"
+testID1002674:
+  tableName: "parttest2674"
+  metaPath: "src/test/resources/tabledata/meta/partitionparam/positive/partition_multiKey_meta15.txt"
+testID1002675:
+  tableName: "parttest2675"
+  metaPath: "src/test/resources/tabledata/meta/partitionparam/positive/partition_multiKey_meta16.txt"
+testID1002676:
+  tableName: "parttest2676"
+  metaPath: "src/test/resources/tabledata/meta/partitionparam/positive/partition_multiKey_meta17.txt"
+testID1002677:
+  tableName: "parttest2677"
+  metaPath: "src/test/resources/tabledata/meta/partitionparam/positive/partition_multiKey_meta18.txt"
+testID1002678:
+  tableName: "parttest2678"
+  metaPath: "src/test/resources/tabledata/meta/partitionparam/positive/partition_multiKey_meta19.txt"
+testID1002679:
+  tableName: "parttest2679"
+  metaPath: "src/test/resources/tabledata/meta/partitionparam/positive/partition_multiKey_meta20.txt"
+testID1002680:
+  tableName: "parttest2680"
+  metaPath: "src/test/resources/tabledata/meta/partitionparam/positive/partition_multiKey_meta21.txt"
+testID1002681:
+  tableName: "parttest2681"
+  metaPath: "src/test/resources/tabledata/meta/partitionparam/positive/partition_multiKey_meta22.txt"
+testID1002682:
+  tableName: "parttest2682"
+  metaPath: "src/test/resources/tabledata/meta/partitionparam/positive/partition_multiKey_meta23.txt"
+testID1002683:
+  tableName: "parttest2683"
+  metaPath: "src/test/resources/tabledata/meta/partitionparam/positive/partition_multiKey_meta24.txt"
+testID1002684:
+  tableName: "parttest2684"
+  metaPath: "src/test/resources/tabledata/meta/partitionparam/positive/partition_multiKey_meta25.txt"
+testID1002685:
+  tableName: "parttest2685"
+  metaPath: "src/test/resources/tabledata/meta/partitionparam/positive/partition_multiKey_meta26.txt"
+testID1002686:
+  tableName: "parttest2686"
+  metaPath: "src/test/resources/tabledata/meta/partitionparam/positive/partition_multiKey_meta27.txt"
+testID1002687:
+  tableName: "parttest2687"
+  metaPath: "src/test/resources/tabledata/meta/partitionparam/positive/partition_multiKey_meta28.txt"
+testID1002688:
+  tableName: "parttest2688"
+  metaPath: "src/test/resources/tabledata/meta/partitionparam/positive/partition_multiKey_meta29.txt"
+testID1002690:
+  tableName: "parttest2690"
+  metaPath: "src/test/resources/tabledata/meta/partitionparam/positive/partition_multiKey_meta30.txt"
+testID1002694:
+  tableName: "parttest2694"
+  metaPath: "src/test/resources/tabledata/meta/partitionparam/positive/partition_multiKey_meta31.txt"
+testID1002695:
+  tableName: "ttl_part_test2695"
+  metaPath: "src/test/resources/tabledata/meta/partitionparam/positive/partition_multiKey_meta32.txt"
+
+
