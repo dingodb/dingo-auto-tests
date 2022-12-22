@@ -35,7 +35,7 @@ import java.util.List;
 
 public class TestSplit {
 
-    private static String tableName = "jdbctest20";
+    private static String tableName = "splittest20";
     private static Connection connection = null;
 
     static {
@@ -150,7 +150,7 @@ public class TestSplit {
         }
     }
 
-    @Test(priority = 2, enabled = false, dependsOnMethods = {"test01StateSingleInsert"},
+    @Test(priority = 2, enabled = false, dependsOnMethods = {"test01PSBatchInsert"},
             description = "使用preparedStatement查询数据")
     public void test02QueryUsingPreState() throws SQLException {
         String querysql = "select * from " + tableName + " where id=?";
@@ -172,7 +172,7 @@ public class TestSplit {
         }
     }
 
-    @Test(priority = 3, enabled = true, dependsOnMethods = {"test01StateSingleInsert"}, description = "统计插入总条数是否正确")
+    @Test(priority = 3, enabled = false, dependsOnMethods = {"test01PSBatchInsert"}, description = "统计插入总条数是否正确")
     public void test03CountAll() throws SQLException, InterruptedException {
         Thread.sleep(300000);
         try(Statement statement = connection.createStatement()) {
@@ -190,7 +190,7 @@ public class TestSplit {
         }
     }
 
-    @Test(priority = 4, enabled = true, dependsOnMethods = {"test03CountAll"}, description = "统计条件区间条数是否正确")
+    @Test(priority = 4, enabled = false, dependsOnMethods = {"test03CountAll"}, description = "统计条件区间条数是否正确")
     public void test04CountRange() throws SQLException, InterruptedException {
 //        Thread.sleep(1200000);
         try(Statement statement = connection.createStatement()) {
@@ -208,7 +208,7 @@ public class TestSplit {
         }
     }
 
-    @Test(priority = 5, enabled = true, dependsOnMethods = {"test04CountRange"}, description = "验证区间更新")
+    @Test(priority = 5, enabled = false, dependsOnMethods = {"test04CountRange"}, description = "验证区间更新")
     public void test05UpdateRange() throws SQLException, InterruptedException {
 //        Thread.sleep(1200000);
         try(Statement statement = connection.createStatement()) {
@@ -230,7 +230,7 @@ public class TestSplit {
         }
     }
 
-    @Test(priority = 6, enabled = true, dependsOnMethods = {"test05UpdateRange"}, description = "验证全表删除")
+    @Test(priority = 6, enabled = false, dependsOnMethods = {"test05UpdateRange"}, description = "验证全表删除")
     public void test06DeleteAll() throws SQLException, InterruptedException {
 //        Thread.sleep(1200000);
         try(Statement statement = connection.createStatement()) {
@@ -268,7 +268,7 @@ public class TestSplit {
                     }
                 }
             }
-//            tearDownStatement.execute("drop table " + tableName);
+            tearDownStatement.execute("drop table " + tableName);
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
