@@ -33,8 +33,8 @@ import java.util.List;
 
 public class JDBCUtils {
     static final String JDBC_DRIVER = "io.dingodb.driver.client.DingoDriverClient";
-    static final String USER = "root";
-    static final String PASS = "123123";
+    static final String USER = "xxx";
+    static final String PASS = "xxx";
 
     //获取数据库连接
     public static Connection getConnection() throws ClassNotFoundException, SQLException {
