@@ -27,6 +27,21 @@ public class CommonArgs {
         }
         return  "172.20.3.27";
     }
+
+    public static String getDefaultConnectUser() {
+        if (System.getenv().containsKey("ConnectUser")) {
+            return System.getenv("ConnectUser");
+        }
+        return  null;
+    }
+
+    public static String getDefaultConnectPass() {
+        if (System.getenv().containsKey("ConnectPass")) {
+            return System.getenv("ConnectPass");
+        }
+        return  null;
+    }
+
     public static String getCurDateStr() {
         Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");

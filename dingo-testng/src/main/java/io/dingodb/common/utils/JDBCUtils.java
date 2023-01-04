@@ -33,15 +33,15 @@ import java.util.List;
 
 public class JDBCUtils {
     static final String JDBC_DRIVER = "io.dingodb.driver.client.DingoDriverClient";
-    static final String USER = "root";
-    static final String PASS = "123123";
+    static final String USER = CommonArgs.getDefaultConnectUser();
+    static final String PASS = CommonArgs.getDefaultConnectPass();
 
     //获取数据库连接
     public static Connection getConnection() throws ClassNotFoundException, SQLException {
 //        String defaultConnectIP = "172.20.3.27";
         String defaultConnectIP = CommonArgs.getDefaultDingoClusterIP();
 //        String JDBC_DRIVER = "io.dingodb.driver.client.DingoDriverClient";
-        String connectUrl = "jdbc:dingo:thin:url=" + defaultConnectIP + ":8765/db?timeout=36000";
+        String connectUrl = "jdbc:dingo:thin:url=" + defaultConnectIP + ":8765/db?timeout=1800";
 
         //加载驱动
         Class.forName(JDBC_DRIVER);
