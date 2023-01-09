@@ -1,0 +1,12 @@
+test01:
+  tableName: "bvttest2"
+  truncateSql: "truncate table bvttest2"
+  queryFields: "*"
+  queryState: ""
+  outCount: "0"
+test02:
+  tableName: "bvttest3"
+  truncateSql: "truncate BVTTEST3"
+  queryFields: "*"
+  queryState: ""
+  outCount: "0"

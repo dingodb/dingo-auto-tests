@@ -31,6 +31,7 @@
             <class name="io.dingodb.test.TestBVT"></class>
         </classes>
     </test>
+
     <test name="v0.2.0+ funcTest">
 <!--        <groups>-->
 <!--            <run>-->
@@ -44,12 +45,13 @@
             <class name="io.dingodb.test.TestSQLFuncs"></class>
         </classes>
     </test>
+
     <test name="v0.3.0 strFuncTest">
         <classes>
             <class name="io.dingodb.test.TestStrFuncs"></class>
         </classes>
-
     </test>
+
     <test name="v0.3.0 dateTimeTest">
         <classes>
             <class name="io.dingodb.test.TestDateTime"></class>
@@ -63,6 +65,7 @@
         </classes>
 
     </test>
+
     <test name="v0.3.0 tableInnerJoinTest">
         <classes>
             <class name="io.dingodb.test.TestTableInnerJoin"></class>
@@ -118,7 +121,6 @@
             <class name="io.dingodb.test.TestPartitionParam"></class>
         </classes>
     </test>
-
 
     <test name="TableCreateTest">
         <classes>

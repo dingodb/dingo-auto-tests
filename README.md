@@ -19,6 +19,11 @@ prerequisite:
 
     . name: EMAILPASS    value: [your send email password]
 
+    . name: ConnectUser  value: [user name for database connection]
+ 
+    . name: ConnectPass  value: [password for database connection]
+
+
 steps:
 1. Clone this repository of dev branch to your windows machine. 
 2. Open this project using InteliJ IDEA.

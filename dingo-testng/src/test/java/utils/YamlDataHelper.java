@@ -74,6 +74,29 @@ public class YamlDataHelper{
     }
 
     @DataProvider
+    public Object[][] yamlBVTMethod(Method method) {
+        List<Map<String, String>> yamlBVTList = null;
+        switch (method.getName()) {
+            case "test08TableCreate2": {
+                yamlBVTList = getYamlList(iniReader.getValue("BVTYaml", "bvt_tableInit"));
+                break;
+            }
+
+            case "test09TableTruncate": {
+                yamlBVTList = getYamlList(iniReader.getValue("BVTYaml", "bvt_tableTruncate"));
+                break;
+            }
+
+        }
+        Object[][] files = new Object[yamlBVTList.size()][];
+        for (int i = 0; i < yamlBVTList.size(); i++) {
+            files[i] = new Object[]{yamlBVTList.get(i)};
+        }
+        return files;
+    }
+
+
+    @DataProvider
     public Object[][] yamlDataMethod(Method method) {
         List<Map<String, String>> yamlList = null;
         switch (method.getName()) {

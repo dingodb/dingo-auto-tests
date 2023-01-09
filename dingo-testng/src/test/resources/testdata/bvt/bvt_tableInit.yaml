@@ -1,0 +1,16 @@
+test-01:
+  tableName: "bvttest2"
+  metaPath: "src/test/resources/tabledata/meta/bvt/bvt_meta2.txt"
+  insertFields: ""
+  valuePath: "src/test/resources/tabledata/value/bvt/bvt_value2.txt"
+  queryFields: "*"
+  queryState: ""
+  outCount: "8"
+test-02:
+  tableName: "bvttest3"
+  metaPath: "src/test/resources/tabledata/meta/bvt/bvt_meta3.txt"
+  insertFields: ""
+  valuePath: "src/test/resources/tabledata/value/bvt/bvt_value3.txt"
+  queryFields: "*"
+  queryState: ""
+  outCount: "30"

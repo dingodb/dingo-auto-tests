@@ -74,7 +74,6 @@ public class DailyBVT {
 
     //创建表
     public void createTable() throws Exception {
-//        connection = connectDingo();
         String tableName = getTableName();
         try(Statement statement = connection.createStatement()) {
             String sql = "create table " + tableName + "("
@@ -84,6 +83,22 @@ public class DailyBVT {
                     + "amount double,"
                     + "primary key(id)"
                     + ")";
+            statement.execute(sql);
+        }
+    }
+
+    //创建表
+    public void tableCreate(String tableName, String tableMeta) throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String sql = "create table " + tableName + tableMeta;
+            statement.execute(sql);
+        }
+    }
+
+    //向表中插入数据
+    public void insertTableValues(String tableName, String insertFields, String tableValues) throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String sql = "insert into " + tableName + insertFields + " values " + tableValues;
             statement.execute(sql);
         }
     }
@@ -153,6 +168,13 @@ public class DailyBVT {
         }
     }
 
+    //truncate表
+    public void truncateTable(String truncateSql) throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            statement.execute(truncateSql);
+        }
+    }
+
     //删除表
     public void dropTable() throws Exception {
         String tableName = getTableName();
@@ -161,4 +183,20 @@ public class DailyBVT {
             statement.execute(sql);
         }
     }
+
+    //查询数据,返回数据总行数
+    public int queryTableRowCount(String tableName, String queryFields, String queryState) throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String sql = "select " + queryFields + " from " + tableName + " " + queryState;
+            ResultSet resultSet = statement.executeQuery(sql);
+            int rowCount = 0;
+            while (resultSet.next()) {
+                rowCount ++;
+            }
+            resultSet.close();
+            statement.close();
+            return rowCount;
+        }
+    }
+
 }

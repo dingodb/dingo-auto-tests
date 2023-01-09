@@ -24,21 +24,35 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+import utils.FileReaderUtil;
+import utils.YamlDataHelper;
 
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
+import java.util.Map;
 
 @Listeners(EmailableReporterListener.class)
-public class TestBVT {
+public class TestBVT extends YamlDataHelper {
     public static DailyBVT bvtObj = new DailyBVT();
 
-    @BeforeClass(alwaysRun = true, groups = {"BVT"}, description = "连接数据库")
+    public void initTable(String tableName, String tableMetaPath) throws SQLException {
+        String tableMeta = FileReaderUtil.readFile(tableMetaPath);
+        bvtObj.tableCreate(tableName, tableMeta);
+    }
+
+    public void insertTableValue(String tableName, String insertFields, String tableValuePath) throws SQLException {
+        String tableValues = FileReaderUtil.readFile(tableValuePath);
+        bvtObj.insertTableValues(tableName, insertFields, tableValues);
+    }
+
+    @BeforeClass(alwaysRun = true, groups = {"BVT"}, description = "测试开始前，连接数据库")
     public static void setUpAll() throws ClassNotFoundException, SQLException {
         Assert.assertNotNull(DailyBVT.connection);
     }
 
     @Test(priority = 0, groups = {"BVT"}, description = "验证创建表成功后，获取表名成功")
-    public void test01TableCreate() throws Exception {
+    public void test01TableCreate1() throws Exception {
         bvtObj.createTable();
         String expectedTableName = bvtObj.getTableName().toUpperCase();
         List<String> afterCreateTableList = JDBCUtils.getTableList();
@@ -46,7 +60,7 @@ public class TestBVT {
         Assert.assertTrue(afterCreateTableList.contains(expectedTableName));
     }
 
-    @Test(priority = 1, groups = {"BVT"},dependsOnMethods = {"test01TableCreate"}, description = "验证插入数据成功")
+    @Test(priority = 1, groups = {"BVT"},dependsOnMethods = {"test01TableCreate1"}, description = "验证插入数据成功")
     public void test02TableInsert() throws Exception {
         int expectedInsertCount = 1;
         int actualInsertCount = bvtObj.insertTableValues();
@@ -91,10 +105,48 @@ public class TestBVT {
         Assert.assertFalse(afterDropTableList.contains(expectedTableName));
     }
 
-    @AfterClass(description = "测试类完成后，关闭数据库连接")
+    @Test(priority = 7, enabled = true, groups = {"BVT"}, dataProvider = "yamlBVTMethod", description = "创建测试表，并插入多条数据")
+    public void test08TableCreate2(Map<String, String> param) throws SQLException, InterruptedException {
+        String tableMetaPath = param.get("metaPath");
+        String tableValuePath = param.get("valuePath");
+        initTable(param.get("tableName"), tableMetaPath);
+        Thread.sleep(5000);
+        insertTableValue(param.get("tableName"), param.get("insertFields"), tableValuePath);
+        int tableRowCount = bvtObj.queryTableRowCount(param.get("tableName"), param.get("queryFields"), param.get("queryState"));
+        System.out.println("表数据行数：" + tableRowCount);
+        Assert.assertEquals(tableRowCount, Integer.parseInt(param.get("outCount")));
+    }
+
+    @Test(priority = 8, enabled = true, groups = {"BVT"}, dependsOnMethods = {"test08TableCreate2"}, dataProvider = "yamlBVTMethod", description = "truncate清空表")
+    public void test09TableTruncate(Map<String, String> param) throws SQLException, InterruptedException {
+        bvtObj.truncateTable(param.get("truncateSql"));
+        Thread.sleep(10000);
+        int tableRowCount = bvtObj.queryTableRowCount(param.get("tableName"), param.get("queryFields"), param.get("queryState"));
+        System.out.println("表数据行数：" + tableRowCount);
+        Assert.assertEquals(tableRowCount, 0);
+    }
+
+    @AfterClass(alwaysRun = true, description = "测试类完成后，关闭数据库连接")
     public void tearDownAll() throws SQLException, ClassNotFoundException {
-        if(DailyBVT.connection !=null) {
-            DailyBVT.connection.close();
+        Statement tearDownStatement = null;
+        List<String> tableList = JDBCUtils.getTableList();
+        System.out.println(tableList);
+        try{
+            tearDownStatement = DailyBVT.connection.createStatement();
+            if (tableList.size() > 0) {
+                for(int i = 0; i < tableList.size(); i++) {
+                    try {
+                        tearDownStatement.execute("drop table " + tableList.get(i));
+                    }catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            JDBCUtils.closeResource(DailyBVT.connection, tearDownStatement);
         }
     }
+
 }
