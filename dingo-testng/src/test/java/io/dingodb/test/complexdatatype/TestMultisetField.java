@@ -29,6 +29,7 @@ import utils.YamlDataHelper;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -334,7 +335,13 @@ public class TestMultisetField extends YamlDataHelper {
     @AfterClass(alwaysRun = true, description = "测试完成后删除数据和表格并关闭连接")
     public void tearDownAll() throws SQLException, ClassNotFoundException {
         Statement tearDownStatement = null;
-        List<String> tableList = JDBCUtils.getTableList();
+        List<String> tableList = Arrays.asList(
+                "intset", "bigintset", "varcharset", "charset", "doubleset",
+                "floatset", "dateset", "timeset", "timestampset", "boolset",
+                "intsetdefault", "varcharsetdefault", "doublesetdefault", "datesetdefault", "timesetdefault",
+                "timestampsetdefault", "boolsetdefault", "setmid", "setfirst", "mixset1",
+                "settest1", "settest2", "settest3"
+        );
         try{
             tearDownStatement = multisetObj.connection.createStatement();
             if (tableList.size() > 0) {

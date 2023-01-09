@@ -27,6 +27,7 @@ import utils.FileReaderUtil;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class TestVarAndStdev {
@@ -369,29 +370,24 @@ public class TestVarAndStdev {
 
     @AfterClass(alwaysRun = true, description = "测试完成后删除数据和表格并关闭连接")
     public void tearDownAll() throws SQLException {
-        Statement teardownStatement = null;
+        Statement tearDownStatement = null;
+        List<String> tableList = Arrays.asList("vartest1", "vartest2", "vartest3", "vartest4",
+                "vartest5", "vartest7", "vartest8", "product");
         try {
-            teardownStatement = VarAndStdev.connection.createStatement();
-            teardownStatement.execute("delete from vartest1");
-            teardownStatement.execute("drop table vartest1");
-            teardownStatement.execute("delete from vartest2");
-            teardownStatement.execute("drop table vartest2");
-            teardownStatement.execute("delete from vartest3");
-            teardownStatement.execute("drop table vartest3");
-            teardownStatement.execute("delete from vartest4");
-            teardownStatement.execute("drop table vartest4");
-            teardownStatement.execute("delete from vartest5");
-            teardownStatement.execute("drop table vartest5");
-            teardownStatement.execute("delete from vartest7");
-            teardownStatement.execute("drop table vartest7");
-            teardownStatement.execute("delete from vartest8");
-            teardownStatement.execute("drop table vartest8");
-            teardownStatement.execute("delete from product");
-            teardownStatement.execute("drop table product");
+            tearDownStatement = VarAndStdev.connection.createStatement();
+            if (tableList.size() > 0) {
+                for(int i = 0; i < tableList.size(); i++) {
+                    try {
+                        tearDownStatement.execute("drop table " + tableList.get(i));
+                    }catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            JDBCUtils.closeResource(VarAndStdev.connection, teardownStatement);
+            JDBCUtils.closeResource(VarAndStdev.connection, tearDownStatement);
         }
     }
 }

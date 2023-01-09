@@ -27,6 +27,7 @@ import utils.YamlDataHelper;
 
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -63,7 +64,18 @@ public class TestPartitionParam extends YamlDataHelper {
     @AfterClass(alwaysRun = true, description = "测试完成后删除数据和表格并关闭连接")
     public void tearDownAll() throws SQLException, ClassNotFoundException {
         Statement tearDownStatement = null;
-        List<String> tableList = JDBCUtils.getTableList();
+        List<String> tableList = Arrays.asList(
+                "parttest2315", "parttest2317", "parttest2322_1", "parttest2322_2", "parttest2324",
+                "parttest2326", "parttest2327", "parttest2328", "parttest2329", "parttest2330",
+                "parttest2331", "parttest2332", "parttest2333", "parttest2334", "parttest2335",
+                "parttest2336", "parttest2337", "parttest2338", "parttest2339", "parttest2340",
+                "parttest2341", "parttest2346_1", "parttest2346_2", "parttest2347", "parttest2348",
+                "parttest2349", "parttest2350", "parttest2351", "parttest2352", "parttest2353",
+                "parttest2354", "parttest2674", "parttest2675", "parttest2676", "parttest2677",
+                "parttest2678", "parttest2679", "parttest2680", "parttest2681", "parttest2682",
+                "parttest2683", "parttest2684", "parttest2685", "parttest2686", "parttest2687",
+                "parttest2688", "parttest2690", "parttest2694", "ttl_part_test2695"
+        );
         try{
             tearDownStatement = partitionObj.connection.createStatement();
             if (tableList.size() > 0) {

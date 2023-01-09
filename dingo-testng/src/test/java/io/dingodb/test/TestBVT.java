@@ -29,6 +29,7 @@ import utils.YamlDataHelper;
 
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -129,7 +130,8 @@ public class TestBVT extends YamlDataHelper {
     @AfterClass(alwaysRun = true, description = "测试类完成后，关闭数据库连接")
     public void tearDownAll() throws SQLException, ClassNotFoundException {
         Statement tearDownStatement = null;
-        List<String> tableList = JDBCUtils.getTableList();
+//        List<String> tableList = JDBCUtils.getTableList();
+        List<String> tableList = Arrays.asList("bvttest2","bvttest3");
         System.out.println(tableList);
         try{
             tearDownStatement = DailyBVT.connection.createStatement();

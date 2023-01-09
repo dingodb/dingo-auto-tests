@@ -18,6 +18,8 @@ package io.dingodb.common.utils;
 
 import io.dingodb.dailytest.CommonArgs;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
@@ -26,6 +28,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 /**
  * 操作数据库的工具类
@@ -37,11 +40,15 @@ public class JDBCUtils {
     static final String PASS = CommonArgs.getDefaultConnectPass();
 
     //获取数据库连接
-    public static Connection getConnection() throws ClassNotFoundException, SQLException {
+    public static Connection getConnection() throws ClassNotFoundException, SQLException, IOException {
+        InputStream inputStream = JDBCUtils.class.getClassLoader().getResourceAsStream("jdbc.properties");
+        Properties pros = new Properties();
+        pros.load(inputStream);
+        String timeout = pros.getProperty("timeout");
+
 //        String defaultConnectIP = "172.20.3.27";
         String defaultConnectIP = CommonArgs.getDefaultDingoClusterIP();
-//        String JDBC_DRIVER = "io.dingodb.driver.client.DingoDriverClient";
-        String connectUrl = "jdbc:dingo:thin:url=" + defaultConnectIP + ":8765/db?timeout=1800";
+        String connectUrl = "jdbc:dingo:thin:url=" + defaultConnectIP + ":8765/db?timeout=" + timeout;
 
         //加载驱动
         Class.forName(JDBC_DRIVER);
@@ -52,7 +59,7 @@ public class JDBCUtils {
     }
 
     //获取所有数据表
-    public static List<String> getTableList() throws SQLException, ClassNotFoundException {
+    public static List<String> getTableList() throws SQLException, ClassNotFoundException, IOException {
         Connection connection = getConnection();
         DatabaseMetaData dmd = connection.getMetaData();
         ResultSet resultSetSchema = dmd.getSchemas();

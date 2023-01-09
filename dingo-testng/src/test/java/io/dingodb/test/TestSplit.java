@@ -31,6 +31,7 @@ import java.sql.Statement;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class TestSplit {
@@ -279,20 +280,20 @@ public class TestSplit {
     @AfterClass(alwaysRun = true, description = "测试完成后删除数据和表格并关闭连接")
     public void tearDownAll() throws SQLException, ClassNotFoundException {
         Statement tearDownStatement = null;
-        List<String> tableList = JDBCUtils.getTableList();
+        List<String> tableList = Arrays.asList(tableName1, tableName2);
         try{
             tearDownStatement = connection.createStatement();
-//            if (tableList.size() > 0) {
-//                for(int i = 0; i < tableList.size(); i++) {
-//                    try {
-//                        tearDownStatement.execute("drop table " + tableList.get(i));
-//                    }catch (SQLException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
-            tearDownStatement.execute("drop table " + tableName1);
-            tearDownStatement.execute("drop table " + tableName2);
+            if (tableList.size() > 0) {
+                for(int i = 0; i < tableList.size(); i++) {
+                    try {
+                        tearDownStatement.execute("drop table " + tableList.get(i));
+                    }catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+//            tearDownStatement.execute("drop table " + tableName1);
+//            tearDownStatement.execute("drop table " + tableName2);
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {

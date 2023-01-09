@@ -27,6 +27,7 @@ import utils.FileReaderUtil;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -545,7 +546,11 @@ public class TestTableInnerJoin {
     @AfterClass(alwaysRun = true, description = "测试完成后删除数据和表格并关闭连接")
     public void tearDownAll() throws SQLException, ClassNotFoundException {
         Statement tearDownStatement = null;
-        List<String> tableList = JDBCUtils.getTableList();
+        List<String> tableList = Arrays.asList(
+                "beauty", "boys", "mytest", "departments", "employees", "table1054_1",
+                "table1054_2", "table1069_1", "table1069_2", "table1174_1", "table1174_2",
+                "job_grades", "table1059_1", "table1059_2", "table1059_3", "table1059_4"
+        );
         try {
             tearDownStatement = TableInnerJoin.connection.createStatement();
             if (tableList.size() > 0) {

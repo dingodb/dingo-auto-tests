@@ -32,6 +32,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -885,12 +886,16 @@ public class TestDateTime extends YamlDataHelper{
 
     @AfterClass(alwaysRun = true, description = "测试完成后删除数据和表格并关闭连接")
     public void tearDownAll() throws SQLException, ClassNotFoundException {
-//        String dateTimeTableName = DateTimeFuncs.getDateTimeTableName();
-//        String dateTableName = DateTimeFuncs.getDateTableName();
-//        String timeTableName = DateTimeFuncs.getTimeTableName();
-//        String timestampTableName = DateTimeFuncs.getTimestampTableName();
+        String dateTimeTableName = DateTimeFuncs.getDateTimeTableName();
+        String dateTableName = DateTimeFuncs.getDateTableName();
+        String timeTableName = DateTimeFuncs.getTimeTableName();
+        String timestampTableName = DateTimeFuncs.getTimestampTableName();
         Statement tearDownStatement = null;
-        List<String> tableList = JDBCUtils.getTableList();
+        List<String> tableList = Arrays.asList(
+                dateTimeTableName, dateTableName,timeTableName,timestampTableName,
+                "Orders705","Orders673","Orders6841","Orders6842",
+                "Orders690","Orders6961","Orders6962","Orders7041",
+                "Orders7042","Orders752","uptesttable","case1434","case1435","case1436");
         try {
             tearDownStatement = DateTimeFuncs.connection.createStatement();
             if (tableList.size() > 0) {

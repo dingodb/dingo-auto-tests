@@ -29,6 +29,7 @@ import utils.YamlDataHelper;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -1252,7 +1253,10 @@ public class TestBetweenAndState extends YamlDataHelper {
     @AfterClass(alwaysRun = true, description = "测试完成后删除数据和表格并关闭连接")
     public void tearDownAll() throws SQLException, ClassNotFoundException {
         Statement tearDownStatement = null;
-        List<String> tableList = JDBCUtils.getTableList();
+//        List<String> tableList = JDBCUtils.getTableList();
+        List<String> tableList = Arrays.asList(
+                "betweenTest", "betweenTest2", "betweenTest3", "betweenTest4", "betweenTest5",
+                "betweenTest8", "betweenTest9", "betweenTest10", "between_employees", "between_job_grades");
         try {
             tearDownStatement = BetweenState.connection.createStatement();
             if (tableList.size() > 0) {

@@ -29,6 +29,7 @@ import utils.YamlDataHelper;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -1087,7 +1088,10 @@ public class TestStrFuncs extends YamlDataHelper {
     public void tearDownAll() throws SQLException, ClassNotFoundException {
         String tableName = strObj.getStrTableName();
         Statement tearDownStatement = null;
-        List<String> tableList = JDBCUtils.getTableList();
+        List<String> tableList = Arrays.asList(
+                tableName, "tableStrCase113", "tableReplaceCase177",
+                "tableTrimCase198", "tableConcatCase081"
+                );
         try {
             tearDownStatement = StrFuncs.connection.createStatement();
             if (tableList.size() > 0) {

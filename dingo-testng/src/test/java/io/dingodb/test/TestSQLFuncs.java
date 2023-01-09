@@ -31,6 +31,7 @@ import utils.YamlDataHelper;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -1754,7 +1755,10 @@ public class TestSQLFuncs extends YamlDataHelper {
     public void tearDownAll() throws SQLException, ClassNotFoundException {
         String tableName = funcObj.getFuncTableName();
         Statement tearDownStatement = null;
-        List<String> tableList = JDBCUtils.getTableList();
+        List<String> tableList = Arrays.asList(tableName,
+                "emptest065", "test302", "case330", "case342", "case343", "case344",
+                "case624", "case1049", "case1119", "case1443", "case1483", "querytest1", "grouptest1"
+                );
 
         try {
             tearDownStatement = SQLFuncs.connection.createStatement();

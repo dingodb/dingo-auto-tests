@@ -28,6 +28,7 @@ import utils.YamlDataHelper;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -509,7 +510,7 @@ public class TestNumericFuncs extends YamlDataHelper {
     @AfterClass(alwaysRun = true, description = "测试完成后删除数据和表格并关闭连接")
     public void tearDownAll() throws SQLException, ClassNotFoundException {
         Statement tearDownStatement = null;
-        List<String> tableList = JDBCUtils.getTableList();
+        List<String> tableList = Arrays.asList("numtest");
         try{
             tearDownStatement = numericObj.connection.createStatement();
             if (tableList.size() > 0) {
