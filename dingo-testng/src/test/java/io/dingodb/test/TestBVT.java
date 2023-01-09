@@ -42,6 +42,7 @@ public class TestBVT {
         bvtObj.createTable();
         String expectedTableName = bvtObj.getTableName().toUpperCase();
         List<String> afterCreateTableList = JDBCUtils.getTableList();
+        System.out.println(afterCreateTableList);
         Assert.assertTrue(afterCreateTableList.contains(expectedTableName));
     }
 

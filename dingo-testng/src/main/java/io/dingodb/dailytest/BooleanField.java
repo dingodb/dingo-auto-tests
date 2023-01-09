@@ -20,6 +20,7 @@ import io.dingodb.common.utils.JDBCUtils;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class BooleanField {
@@ -80,6 +81,26 @@ public class BooleanField {
             queryTrueValueRst.close();
             statement.close();
             return queryTrueValueList;
+        }
+    }
+
+    //按需要获取的字段信息返回数据
+    public List<List> queryByOutFields(String tableName, String queryFields, String queryState, String outFields) throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String sql = "select " + queryFields + " from " + tableName + " " + queryState;
+            ResultSet resultSet = statement.executeQuery(sql);
+            List<List> queryList = new ArrayList<List>();
+            List<String> testFieldsList = new ArrayList(Arrays.asList(outFields.split(",")));
+            while (resultSet.next()) {
+                List rowList = new ArrayList();
+                for (int i = 0;i<testFieldsList.size(); i++) {
+                    rowList.add(resultSet.getString(testFieldsList.get(i)));
+                }
+                queryList.add(rowList);
+            }
+            resultSet.close();
+            statement.close();
+            return queryList;
         }
     }
 

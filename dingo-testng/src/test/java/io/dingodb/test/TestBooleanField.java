@@ -54,6 +54,18 @@ public class TestBooleanField extends YamlDataHelper {
         return expectedList;
     }
 
+    public static List<List> expectedOutData(String[][] dataArray) {
+        List<List> expectedList = new ArrayList<List>();
+        for(int i = 0; i < dataArray.length; i++) {
+            List columnList = new ArrayList();
+            for (int j = 0; j < dataArray[i].length; j++) {
+                columnList.add(dataArray[i][j]);
+            }
+            expectedList.add(columnList);
+        }
+        return expectedList;
+    }
+
     @BeforeClass(alwaysRun = true, description = "测试数据库连接")
     public static void setUpAll() throws ClassNotFoundException, SQLException {
         Assert.assertNotNull(BooleanField.connection);
@@ -193,10 +205,36 @@ public class TestBooleanField extends YamlDataHelper {
         Assert.assertEquals(actualNotFieldList, expectedNotFieldList);
     }
 
+    @Test(priority = 8, enabled = true, dependsOnMethods = {"test04trueAndfalseValuesInsertAndQuery"},
+            description = "验证where 1 = 1 为true查询")
+    public void test09TrueCondition() throws SQLException {
+        String[][] dataArray = {
+                {"1", "zhangsan"},{"2", "lisi"}, {"3", "lisi3"}, {"4", "HAHA"},
+                {"5", "wJDs"},{"6", "123"},{"7", "yamaha"},{"8", "zhangsan"},
+                {"9", "oppo"},{"10", "lisi"},{"11", " ab c d "},{"12", " abcdef"},
+                {"13", "HX K"},{"14", "YH"},{"15", "yamaha"}
+        };
+        List<List> expectedList = expectedOutData(dataArray);
+        System.out.println("Expected List: " + expectedList);
+        List<List> actualList = booleanObj.queryByOutFields(tableName1,"*","where 1 = 1", "id,name");
+        System.out.println("Actual List: " + actualList);
 
-    @Test(priority = 8, enabled = true, expectedExceptions = SQLException.class, dataProvider = "yamlBooleanMethod",
-            dependsOnMethods = {"test08NotFieldAsConditionQuery"}, description = "预期插入失败")
-    public void test09InsertStrValue(Map<String, String> param) throws SQLException {
+        Assert.assertEquals(actualList, expectedList);
+    }
+
+    @Test(priority = 9, enabled = true, dependsOnMethods = {"test04trueAndfalseValuesInsertAndQuery"},
+            description = "验证where 1 <> 1 为false查询")
+    public void test10FalseCondition() throws SQLException {
+        List<List> actualList = booleanObj.queryByOutFields(tableName1,"*","where 1 <> 1", "id,name");
+        System.out.println("Actual List: " + actualList);
+
+        Assert.assertEquals(actualList.size(), 0);
+    }
+
+
+    @Test(priority = 10, enabled = true, expectedExceptions = SQLException.class, dataProvider = "yamlBooleanMethod",
+            dependsOnMethods = {"test10FalseCondition"}, description = "预期插入失败")
+    public void test11InsertStrValue(Map<String, String> param) throws SQLException {
         try(Statement statement = BooleanField.connection.createStatement()) {
             String insertSql = "insert into " + tableName1 + " values (" + param.get("ID") +
                     ",'vivo',20,456.7,'shanghai','" + param.get("booleanValue") + "')";
@@ -204,9 +242,9 @@ public class TestBooleanField extends YamlDataHelper {
         }
     }
 
-    @Test(priority = 9, enabled = true, expectedExceptions = SQLException.class, dataProvider = "yamlBooleanMethod",
-            dependsOnMethods = {"test09InsertStrValue"}, description = "预期插入失败")
-    public void test10InsertWrongValue(Map<String, String> param) throws SQLException {
+    @Test(priority = 11, enabled = true, expectedExceptions = SQLException.class, dataProvider = "yamlBooleanMethod",
+            dependsOnMethods = {"test11InsertStrValue"}, description = "预期插入失败")
+    public void test12InsertWrongValue(Map<String, String> param) throws SQLException {
         try(Statement statement = BooleanField.connection.createStatement()) {
             String insertSql = "insert into " + tableName1 + " values (" + param.get("ID") +
                     ",'vivo',20,456.7,'shanghai'," + param.get("booleanValue") + ")";
@@ -214,9 +252,9 @@ public class TestBooleanField extends YamlDataHelper {
         }
     }
 
-    @Test(priority = 10, enabled = true, dependsOnMethods = {"test04trueAndfalseValuesInsertAndQuery"},
+    @Test(priority = 12, enabled = true, dependsOnMethods = {"test04trueAndfalseValuesInsertAndQuery"},
             description = "验证插入0，转换为False")
-    public void test11ZeroValueQuery() throws SQLException {
+    public void test13ZeroValueQuery() throws SQLException {
         String table_value4_path = "src/test/resources/tabledata/value/booleantype/boolean_value4.txt";
         int actualInsertRows = insertTableValue(tableName1,"", table_value4_path);
         Assert.assertEquals(actualInsertRows, 1);
@@ -226,9 +264,9 @@ public class TestBooleanField extends YamlDataHelper {
         Assert.assertFalse(actualZeroValue);
     }
 
-    @Test(priority = 11, enabled = true, dependsOnMethods = {"test04trueAndfalseValuesInsertAndQuery"},
+    @Test(priority = 13, enabled = true, dependsOnMethods = {"test04trueAndfalseValuesInsertAndQuery"},
             dataProvider = "yamlBooleanMethod", description = "验证插入正整数，转换为True")
-    public void test12IntegerValueQuery(Map<String, String> param) throws SQLException {
+    public void test14IntegerValueQuery(Map<String, String> param) throws SQLException {
         int actualInsertRows = booleanObj.insertPosIntegerValues(tableName1, param.get("ID"), param.get("booleanValue"));
         Assert.assertEquals(actualInsertRows, 1);
         Boolean actualIntegerValue = booleanObj.getIntegerValues(tableName1, param.get("ID"));
@@ -237,15 +275,15 @@ public class TestBooleanField extends YamlDataHelper {
         Assert.assertTrue(actualIntegerValue);
     }
 
-    @Test(priority = 12, enabled = true, expectedExceptions = SQLException.class,
+    @Test(priority = 14, enabled = true, expectedExceptions = SQLException.class,
             description = "验证字段类型为bool，创建失败")
-    public void test13CreateTableUsingBoolFailed() throws SQLException, ClassNotFoundException {
+    public void test15CreateTableUsingBoolFailed() throws SQLException, ClassNotFoundException {
         String table_meta2_path = "src/test/resources/tabledata/meta/booleantype/boolean_meta2.txt";
         initTable("booltest", table_meta2_path);
     }
 
-    @Test(priority = 13, enabled = true, dependsOnMethods = {"test12IntegerValueQuery"}, description = "验证布尔类型字段插入null值")
-    public void test14InsertNull() throws SQLException {
+    @Test(priority = 15, enabled = true, dependsOnMethods = {"test14IntegerValueQuery"}, description = "验证布尔类型字段插入null值")
+    public void test16InsertNull() throws SQLException {
         String actualQuery = booleanObj.insertNull(tableName1);
         System.out.println("Actual: " + actualQuery);
         Assert.assertNull(actualQuery);

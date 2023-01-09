@@ -279,15 +279,15 @@ public class YamlDataHelper{
     public Object[][] yamlBooleanMethod(Method method) {
         List<Map<String, String>> yamlBooleanList = null;
         switch (method.getName()) {
-            case "test09InsertStrValue": {
+            case "test11InsertStrValue": {
                 yamlBooleanList = getYamlList(iniReader.getValue("BooleanField", "strValue"));
                 break;
             }
-            case "test10InsertWrongValue": {
+            case "test12InsertWrongValue": {
                 yamlBooleanList = getYamlList(iniReader.getValue("BooleanField", "wrongValue"));
                 break;
             }
-            case "test12IntegerValueQuery": {
+            case "test14IntegerValueQuery": {
                 yamlBooleanList = getYamlList(iniReader.getValue("BooleanField", "intValue"));
                 break;
             }

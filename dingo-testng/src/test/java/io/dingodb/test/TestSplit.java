@@ -35,7 +35,8 @@ import java.util.List;
 
 public class TestSplit {
 
-    private static String tableName = "splittest20";
+    private static String tableName1 = "splittest20";
+    private static String tableName2 = "statetest2";
     private static Connection connection = null;
 
     static {
@@ -48,13 +49,26 @@ public class TestSplit {
 
     public void createSplitTable() throws SQLException {
         try(Statement statement = connection.createStatement()) {
-            String sql = "create table " + tableName + "("
+            String sql = "create table " + tableName1 + "("
                     + "id int,"
                     + "name varchar(32) not null,"
                     + "age int,"
                     + "amount double,"
                     + "primary key(id)"
-                    + ")";
+                    + ") partition by range values(50001),(100001),(150001) with (propKey = propValue)";
+            statement.execute(sql);
+        }
+    }
+
+    public void createStateTable() throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String sql = "create table " + tableName2 + "("
+                    + "id int,"
+                    + "name varchar(32) not null,"
+                    + "age int,"
+                    + "amount double,"
+                    + "primary key(id)"
+                    + ") partition by range values(10000) with (propKey = propValue)";
             statement.execute(sql);
         }
     }
@@ -64,47 +78,53 @@ public class TestSplit {
         Assert.assertNotNull(connection);
     }
 
-    @Test(priority = 0, enabled = true, description = "创建表格")
+    @Test(priority = 0, enabled = true, description = "创建表1")
     public void test00CreateSplitTable() throws SQLException {
         TestSplit testSplit = new TestSplit();
         testSplit.createSplitTable();
     }
 
-    @Test(priority = 1, enabled = false, dependsOnMethods = {"test00CreateSplitTable"},
+    @Test(priority = 0, enabled = true, description = "创建表2")
+    public void test00CreateStateTable() throws SQLException {
+        TestSplit testSplit = new TestSplit();
+        testSplit.createStateTable();
+    }
+
+    @Test(priority = 1, enabled = true, dependsOnMethods = {"test00CreateStateTable"},
             description = "使用statement插入指定条数的数据量")
     public void test01StateSingleInsert() throws SQLException {
-        int insertNum = 200000;
+        int insertNum = 20000;
         try(Statement statement = connection.createStatement()) {
             GetRandomValue getRandomValue = new GetRandomValue();
-//            Instant start = Instant.now();
-            for(int i=1; i<=insertNum; i++) {
+            Instant start = Instant.now();
+            for(int i = 1; i <= insertNum; i++) {
                 String nameStr = getRandomValue.getRandStr(6);
                 int ageNum = getRandomValue.getRandInt(100);
 //                double amountNum = GetRandomValue.formatDoubleDecimal1(GetRandomValue.getRandDouble(0, 10000),2);
                 double amountNum = getRandomValue.getRandDouble(0, 10000);
-                String insertSql = "insert into " + tableName + " values (" + i + ",'" +
+                String insertSql = "insert into " + tableName2 + " values (" + i + ",'" +
                         nameStr + "'," + ageNum + "," + amountNum + ")";
                 statement.executeUpdate(insertSql);
             }
-//            statement.close();
-//            Instant finish = Instant.now();
-//            long timeElapsed = Duration.between(start, finish).toMillis();
-//            System.out.println("use time: " + timeElapsed);
+            statement.close();
+            Instant finish = Instant.now();
+            long timeElapsed = Duration.between(start, finish).toMillis();
+            System.out.println("use time: " + timeElapsed);
         }
     }
 
-    @Test(priority = 1, enabled = false, dependsOnMethods = {"test00CreateSplitTable"},
+    @Test(priority = 1, enabled = true, dependsOnMethods = {"test00CreateStateTable"},
             description = "使用preparedStatement单行插入数据")
     public void test01PSSingleInsert() throws SQLException {
-        int insertNum = 200000;
-        String insertsql = "insert into " + tableName + " values (?, ?, ?, ?)";
+        int baseNum = 20000;
+        int insertNum = 10000;
+        String insertsql = "insert into " + tableName2 + " values (?, ?, ?, ?)";
         try(PreparedStatement ps = connection.prepareStatement(insertsql)) {
             GetRandomValue getRandomValue = new GetRandomValue();
             Instant start = Instant.now();
-            for(int i=1; i<=insertNum; i++) {
+            for(int i = baseNum + 1; i <= baseNum + insertNum; i++) {
                 String nameStr = getRandomValue.getRandStr(6);
                 int ageNum = getRandomValue.getRandInt(100);
-//                double amountNum = GetRandomValue.formatDoubleDecimal1(GetRandomValue.getRandDouble(0, 10000),2);
                 double amountNum = getRandomValue.getRandDouble(0, 10000);
                 ps.setInt(1, i);
                 ps.setString(2, nameStr);
@@ -123,13 +143,13 @@ public class TestSplit {
             description = "使用preparedStatement批量插入数据")
     public void test01PSBatchInsert() throws SQLException {
         int insertNum = 200000;
-        String insertsql = "insert into " + tableName + " values (?, ?, ?, ?)";
+        String insertsql = "insert into " + tableName1 + " values (?, ?, ?, ?)";
         try(PreparedStatement ps = connection.prepareStatement(insertsql)) {
             GetRandomValue getRandomValue = new GetRandomValue();
+            Instant start = Instant.now();
             for(int i=1; i<=insertNum; i++) {
                 String nameStr = getRandomValue.getRandStr(6);
                 int ageNum = getRandomValue.getRandInt(100);
-//                double amountNum = GetRandomValue.formatDoubleDecimal1(GetRandomValue.getRandDouble(0, 10000),2);
                 double amountNum = getRandomValue.getRandDouble(0, 10000);
                 ps.setInt(1, i);
                 ps.setString(2, nameStr);
@@ -147,13 +167,16 @@ public class TestSplit {
                     ps.clearBatch();
                 }
             }
+            Instant finish = Instant.now();
+            long timeElapsed = Duration.between(start, finish).toMillis();
+            System.out.println("use time: " + timeElapsed);
         }
     }
 
     @Test(priority = 2, enabled = false, dependsOnMethods = {"test01PSBatchInsert"},
             description = "使用preparedStatement查询数据")
     public void test02QueryUsingPreState() throws SQLException {
-        String querysql = "select * from " + tableName + " where id=?";
+        String querysql = "select * from " + tableName1 + " where id=?";
         try(PreparedStatement ps = connection.prepareStatement(querysql)) {
             ps.setInt(1,1);
             ResultSet resultSet = ps.executeQuery();
@@ -176,7 +199,7 @@ public class TestSplit {
     public void test03CountAll() throws SQLException, InterruptedException {
         Thread.sleep(30000);
         try(Statement statement = connection.createStatement()) {
-            String querySql = "select count(*) from " + tableName;
+            String querySql = "select count(*) from " + tableName1;
             ResultSet resultSet = statement.executeQuery(querySql);
             int countNum = 0;
             while (resultSet.next()) {
@@ -192,9 +215,9 @@ public class TestSplit {
 
     @Test(priority = 4, enabled = true, dependsOnMethods = {"test03CountAll"}, description = "统计条件区间条数是否正确")
     public void test04CountRange() throws SQLException, InterruptedException {
-//        Thread.sleep(1200000);
+        Thread.sleep(300000);
         try(Statement statement = connection.createStatement()) {
-            String querySql = "select count(*) from " + tableName + " where id>40000 and id<=200000";
+            String querySql = "select count(*) from " + tableName1 + " where id>40000 and id<=200000";
             ResultSet resultSet = statement.executeQuery(querySql);
             int countNum = 0;
             while (resultSet.next()) {
@@ -212,12 +235,12 @@ public class TestSplit {
     public void test05UpdateRange() throws SQLException, InterruptedException {
 //        Thread.sleep(1200000);
         try(Statement statement = connection.createStatement()) {
-            String updateSql = "update " + tableName + " set name='BJ' where id>40000 and id<=200000";
+            String updateSql = "update " + tableName1 + " set name='BJ' where id>40000 and id<=200000";
             int updateNum = statement.executeUpdate(updateSql);
             Thread.sleep(60000);
             System.out.println("实际更新条数： " + updateNum);
             Assert.assertEquals(updateNum, 160000);
-            String querySql = "select count(*) from " + tableName + " where name='BJ'";
+            String querySql = "select count(*) from " + tableName1 + " where name='BJ'";
             ResultSet resultSet = statement.executeQuery(querySql);
             int countNum = 0;
             while (resultSet.next()) {
@@ -234,12 +257,12 @@ public class TestSplit {
     public void test06DeleteAll() throws SQLException, InterruptedException {
 //        Thread.sleep(1200000);
         try(Statement statement = connection.createStatement()) {
-            String deleteSql = "delete from " + tableName;
+            String deleteSql = "delete from " + tableName1;
             int deleteNum = statement.executeUpdate(deleteSql);
             Thread.sleep(60000);
             System.out.println("实际删除条数： " + deleteNum);
             Assert.assertEquals(deleteNum, 200000);
-            String querySql = "select count(*) from " + tableName;
+            String querySql = "select count(*) from " + tableName1;
             ResultSet resultSet = statement.executeQuery(querySql);
             int countNum = 0;
             while (resultSet.next()) {
@@ -268,7 +291,8 @@ public class TestSplit {
 //                    }
 //                }
 //            }
-            tearDownStatement.execute("drop table " + tableName);
+            tearDownStatement.execute("drop table " + tableName1);
+            tearDownStatement.execute("drop table " + tableName2);
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
