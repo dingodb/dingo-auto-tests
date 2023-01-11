@@ -22,15 +22,29 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import utils.FileReaderUtil;
+import utils.StrTo2DList;
+import utils.YamlDataHelper;
 
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
-public class TestDefectCase {
+public class TestDefectCase extends YamlDataHelper {
     public static DefectCase defectObj = new DefectCase();
+
+    public void initTable(String tableName, String tableMetaPath) throws SQLException {
+        String tableMeta = FileReaderUtil.readFile(tableMetaPath);
+        defectObj.tableCreate(tableName, tableMeta);
+    }
+
+    public void insertTableValue(String tableName, String insertFields, String tableValuePath) throws SQLException {
+        String tableValues = FileReaderUtil.readFile(tableValuePath);
+        defectObj.insertTableValues(tableName, insertFields, tableValues);
+    }
 
     public static List<List> expectedOutData(String[][] dataArray) {
         List<List> expectedList = new ArrayList<List>();
@@ -52,7 +66,7 @@ public class TestDefectCase {
         return expectedList;
     }
 
-    @BeforeClass(alwaysRun = true, description = "测试前连接数据库，创建表格和插入数据")
+    @BeforeClass(alwaysRun = true, description = "测试前连接数据库")
     public static void setUpAll() throws SQLException {
         Assert.assertNotNull(DefectCase.connection);
     }
@@ -60,6 +74,15 @@ public class TestDefectCase {
     @Test(description = "创建测试表")
     public void test00CreateDefectTable1() throws SQLException {
         defectObj.createTable0033();
+    }
+
+    @Test(priority = 0, enabled = true, dataProvider = "yamlDefectCaseMethod", description = "创建表并插入数据")
+    public void test00TableCreate(Map<String, String> param) throws SQLException, InterruptedException {
+        String tableMetaPath = param.get("metaPath");
+        String tableValuePath = param.get("valuePath");
+        initTable(param.get("tableName"), tableMetaPath);
+        Thread.sleep(5000);
+        insertTableValue(param.get("tableName"), param.get("insertFields"), tableValuePath);
     }
 
     @Test(priority = 0, enabled = true, dependsOnMethods = {"test00CreateDefectTable1"},
@@ -182,11 +205,27 @@ public class TestDefectCase {
         Assert.assertEquals(actualRows, 3);
     }
 
+    @Test(priority = 13, enabled = true, dataProvider = "yamlDefectCaseMethod", description = "验证通过in范围过滤对表进行写操作，范围元素超过19个")
+    public void testDefect0563(Map<String, String> param) throws SQLException {
+        int expectedRows = Integer.parseInt(param.get("effectRows"));
+        System.out.println("Expected effectedRows: " + expectedRows);
+        int actualRows = defectObj.writeOpRows(param.get("tableName"), param.get("execSql"));
+        Assert.assertEquals(actualRows, expectedRows);
+
+        StrTo2DList strTo2DList = new StrTo2DList();
+        List<List> expectedList = strTo2DList.construct2DListIncludeBlank(param.get("outData"),";",",");
+        System.out.println("Expected Query: " + expectedList);
+        List<List> actualList = defectObj.queryByOutFields(param.get("tableName"), param.get("queryFields"), param.get("queryState"), param.get("outFields"));
+        System.out.println("Actual Query: " + actualList);
+        Assert.assertTrue(actualList.containsAll(expectedList));
+        Assert.assertTrue(expectedList.containsAll(actualList));
+    }
+
 
     @AfterClass(alwaysRun = true, description = "测试完成后删除数据和表格并关闭连接")
     public void tearDownAll() throws SQLException, ClassNotFoundException {
         Statement tearDownStatement = null;
-        List<String> tableList = Arrays.asList("defect0033");
+        List<String> tableList = Arrays.asList("defect0033", "de50563");
         try {
             tearDownStatement = DefectCase.connection.createStatement();
             if (tableList.size() > 0) {

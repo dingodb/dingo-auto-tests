@@ -1,0 +1,5 @@
+table01:
+  tableName: "de50563"
+  metaPath: "src/test/resources/tabledata/meta/defectCase/defect_meta1.txt"
+  insertFields: ""
+  valuePath: "src/test/resources/tabledata/value/defectCase/defect_value1.txt"

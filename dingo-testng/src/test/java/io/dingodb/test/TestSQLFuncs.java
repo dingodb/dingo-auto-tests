@@ -18,11 +18,9 @@ package io.dingodb.test;
 
 import io.dingodb.common.utils.JDBCUtils;
 import io.dingodb.dailytest.SQLFuncs;
-import listener.EmailableReporterListener;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import utils.FileReaderUtil;
 import utils.StrTo2DList;
@@ -35,7 +33,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-@Listeners(EmailableReporterListener.class)
+
 public class TestSQLFuncs extends YamlDataHelper {
     public static SQLFuncs funcObj = new SQLFuncs();
 

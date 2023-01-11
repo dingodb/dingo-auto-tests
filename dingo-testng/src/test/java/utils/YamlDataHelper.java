@@ -1146,4 +1146,26 @@ public class YamlDataHelper{
         return files;
     }
 
+    @DataProvider
+    public Object[][] yamlDefectCaseMethod(Method method) {
+        List<Map<String, String>> yamlDefectCaseList = null;
+        switch (method.getName()) {
+            case "test00TableCreate": {
+                yamlDefectCaseList = getYamlList(iniReader.getValue("defectCase", "tableCreate"));
+                break;
+            }
+
+            case "testDefect0563": {
+                yamlDefectCaseList = getYamlList(iniReader.getValue("defectCase", "writeOp"));
+                break;
+            }
+
+        }
+        Object[][] files = new Object[yamlDefectCaseList.size()][];
+        for (int i = 0; i < yamlDefectCaseList.size(); i++) {
+            files[i] = new Object[]{yamlDefectCaseList.get(i)};
+        }
+        return files;
+    }
+
 }

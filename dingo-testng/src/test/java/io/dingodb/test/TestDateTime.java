@@ -18,11 +18,9 @@ package io.dingodb.test;
 
 import io.dingodb.common.utils.JDBCUtils;
 import io.dingodb.dailytest.DateTimeFuncs;
-import listener.EmailableReporterListener;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import utils.GetDateDiff;
 import utils.JDK8DateTime;
@@ -36,7 +34,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-@Listeners(EmailableReporterListener.class)
+
 public class TestDateTime extends YamlDataHelper{
     public static DateTimeFuncs dateTimeObj = new DateTimeFuncs();
 

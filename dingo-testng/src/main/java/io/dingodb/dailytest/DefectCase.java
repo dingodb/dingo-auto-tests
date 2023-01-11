@@ -23,6 +23,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class DefectCase {
@@ -36,6 +37,49 @@ public class DefectCase {
         }
     }
 
+    //创建表通用方法
+    public void tableCreate(String tableName, String tableMeta) throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String sql = "create table " + tableName + tableMeta;
+            statement.execute(sql);
+        }
+    }
+
+    //向表中插入数据通用方法
+    public void insertTableValues(String tableName, String insertFields, String tableValues) throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String sql = "insert into " + tableName + insertFields + " values " + tableValues;
+            statement.execute(sql);
+        }
+    }
+
+    //执行写操作语句，返回影响行数
+    public int writeOpRows(String tableName, String execSql) throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            int effectRows = statement.executeUpdate(execSql);
+            return effectRows;
+        }
+    }
+
+    //按需要获取的字段信息返回数据
+    public List<List> queryByOutFields(String tableName, String queryFields, String queryState, String outFields) throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            String sql = "select " + queryFields + " from " + tableName + " " + queryState;
+            ResultSet resultSet = statement.executeQuery(sql);
+            List<List> queryList = new ArrayList<>();
+            List<String> testFieldsList = new ArrayList(Arrays.asList(outFields.split(",")));
+            while (resultSet.next()) {
+                List rowList = new ArrayList();
+                for (int i = 0;i<testFieldsList.size(); i++) {
+                    rowList.add(resultSet.getString(testFieldsList.get(i)));
+                }
+                queryList.add(rowList);
+            }
+            resultSet.close();
+            statement.close();
+            return queryList;
+        }
+    }
 
     public void createTable0033() throws SQLException {
         try(Statement statement = connection.createStatement()) {
