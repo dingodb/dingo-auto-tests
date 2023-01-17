@@ -1,0 +1,8 @@
+(
+uuid varchar(64),
+phone varchar(11),
+status int,
+reg_time timestamp,
+total_gmt double,
+primary key(uuid,phone)
+)

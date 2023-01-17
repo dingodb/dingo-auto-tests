@@ -93,4 +93,12 @@ public class TableCreate {
             return effectRows;
         }
     }
+
+    //执行写操作语句，返回影响行数
+    public int writeOpRows(String tableName, String execSql) throws SQLException {
+        try(Statement statement = connection.createStatement()) {
+            int effectRows = statement.executeUpdate(execSql);
+            return effectRows;
+        }
+    }
 }

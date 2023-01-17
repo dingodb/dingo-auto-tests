@@ -41,6 +41,7 @@ public class TestTableCreate extends YamlDataHelper {
     public static String tableName5 = "ctest005";
     public static String tableName6 = "ctest006";
     public static String tableName7 = "ctest007";
+    public static String tableName8 = "risk_record8";
 
     public void initTable(String tableName, String tableMetaPath) throws SQLException {
         String tableMeta = FileReaderUtil.readFile(tableMetaPath);
@@ -248,12 +249,190 @@ public class TestTableCreate extends YamlDataHelper {
         Assert.assertEquals(actualEffect, expectedEffect);
     }
 
+    @Test(enabled = true, description = "创建测试表8,多个varchar类型字段为主键")
+    public void test10CreateTable8PrimaryKeyVarchar() throws SQLException {
+        String table8_meta_path = "src/test/resources/tabledata/meta/createTableTest/createtable8_meta.txt";
+        String table8_value_path = "src/test/resources/tabledata/value/createTableTest/createtable8_values.txt";
+        initTable(tableName8, table8_meta_path);
+        insertValues(tableName8, "", table8_value_path);
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"test10CreateTable8PrimaryKeyVarchar"}, description = "验证table8表数据")
+    public void test11Table8Records() throws SQLException {
+        String[][] dataArray = {
+                {"9GAZ01rR-Guem-d3zx-w0gu-fMhOorDXAZyn","15021093678","2"},
+                {"IaEG012Y-UBA1-zCG3-zuYc-lzy9YtoX4h2B","15313467582","0"},
+                {"jOHtV0qo-IiXa-WnG9-vSwC-sB5MUZNparHl","13898723516","0"},
+                {"3Flr9LHz-BJNu-HpJk-nDBk-JoDyTgMY1wIA","13875423819","0"},
+                {"uw8lhzI2-BZEl-poiz-GyaF-n2grtyVe1sUw","15963095421","1"},
+                {"Ohlfy9j2-wz5D-uh1Z-8hkt-FyYSjTkCrPp3","13891208456","2"},
+                {"jDkglHwp-Ri97-bX2I-xb8N-2IxLHBtJ0w31","15930576819","1"},
+                {"p7Fnxs4c-oOm4-f3MW-pbFU-tgsRT6hPfBnO","15109632451","2"},
+                {"NuyEpXxS-w8Tc-9voZ-syu7-rzbKxfoTJSn9","15378964201","2"},
+                {"l5IgaUdX-M6VN-5dcF-iHuV-1fUdWeSosvTr","15143756192","0"},
+                {"VpYR7eCr-1vIA-bR58-SMNT-JX2uliA64gKQ","13127469183","1"},
+                {"tcjZ7nzV-G5as-fINl-Pheb-idvrAHWNREj4","15127819340","0"},
+                {"wfceDP8m-hB4I-z1dF-IJMX-VyruUwKmjZv8","15090571843","2"},
+                {"aAIMU4hY-KBbW-XeUK-LmUY-qHOxZyd5Mam3","15305379461","2"},
+                {"g8RJAl2c-oJpn-1wUW-Y4pw-vqVONHPsFwmM","13976593104","0"},
+                {"ztqRfs0M-aiKp-FmUW-wrgi-o2jhdN7ygbtC","13829137460","1"},
+                {"QdXzPYOp-f81J-Ed8t-SkcI-t13UOpIXWgEe","15003614859","1"},
+                {"VhMOLgPt-bWXs-crsB-ysdL-k85rReQnZFaq","13153692417","0"},
+                {"1jbNLQuZ-UBeZ-7kcL-XME4-DYaeQVksA0zo","15316049823","2"},
+                {"24oLAvZl-s9rE-Sqk2-7QZN-aN0Pu9kwEQJO","13984396251","0"},
+                {"7uaeMKqU-ixQ7-xzi2-H6rc-HzMGnEtKw1le","15986213795","0"},
+                {"fyHp49b0-Vojs-cy0j-roDH-h0AaI4TqKYx3","15082043651","1"},
+                {"Ut5a2zTp-WQuo-XheC-Qnh0-KSqnoR2gzQZa","15986723409","2"},
+                {"1mUV58ky-KD1u-MIBV-3C2X-x3c48Z0qpCNF","15981639027","2"},
+                {"OBHNtTS9-rAPz-G0Ns-03Ro-LJkNepB1IyqV","15917928356","2"},
+                {"OBHNtTS9-rAPz-G0Ns-03Ro-LJkNepB1IyqV","15917928355","2"}
+        };
+        List<List> expectedRecords = expectedOutData(dataArray);
+        System.out.println("Expected: " + expectedRecords);
+
+        String queryFields = "uuid,phone,status";
+        String filterState = " where uuid in (" +
+                "'9GAZ01rR-Guem-d3zx-w0gu-fMhOorDXAZyn'," +
+                "'IaEG012Y-UBA1-zCG3-zuYc-lzy9YtoX4h2B'," +
+                "'jOHtV0qo-IiXa-WnG9-vSwC-sB5MUZNparHl'," +
+                "'3Flr9LHz-BJNu-HpJk-nDBk-JoDyTgMY1wIA'," +
+                "'uw8lhzI2-BZEl-poiz-GyaF-n2grtyVe1sUw'," +
+                "'Ohlfy9j2-wz5D-uh1Z-8hkt-FyYSjTkCrPp3'," +
+                "'jDkglHwp-Ri97-bX2I-xb8N-2IxLHBtJ0w31'," +
+                "'p7Fnxs4c-oOm4-f3MW-pbFU-tgsRT6hPfBnO'," +
+                "'NuyEpXxS-w8Tc-9voZ-syu7-rzbKxfoTJSn9'," +
+                "'l5IgaUdX-M6VN-5dcF-iHuV-1fUdWeSosvTr'," +
+                "'VpYR7eCr-1vIA-bR58-SMNT-JX2uliA64gKQ'," +
+                "'tcjZ7nzV-G5as-fINl-Pheb-idvrAHWNREj4'," +
+                "'wfceDP8m-hB4I-z1dF-IJMX-VyruUwKmjZv8'," +
+                "'aAIMU4hY-KBbW-XeUK-LmUY-qHOxZyd5Mam3'," +
+                "'g8RJAl2c-oJpn-1wUW-Y4pw-vqVONHPsFwmM'," +
+                "'ztqRfs0M-aiKp-FmUW-wrgi-o2jhdN7ygbtC'," +
+                "'QdXzPYOp-f81J-Ed8t-SkcI-t13UOpIXWgEe'," +
+                "'VhMOLgPt-bWXs-crsB-ysdL-k85rReQnZFaq'," +
+                "'1jbNLQuZ-UBeZ-7kcL-XME4-DYaeQVksA0zo'," +
+                "'24oLAvZl-s9rE-Sqk2-7QZN-aN0Pu9kwEQJO'," +
+                "'7uaeMKqU-ixQ7-xzi2-H6rc-HzMGnEtKw1le'," +
+                "'fyHp49b0-Vojs-cy0j-roDH-h0AaI4TqKYx3'," +
+                "'Ut5a2zTp-WQuo-XheC-Qnh0-KSqnoR2gzQZa'," +
+                "'1mUV58ky-KD1u-MIBV-3C2X-x3c48Z0qpCNF'," +
+                "'OBHNtTS9-rAPz-G0Ns-03Ro-LJkNepB1IyqV'" +
+                ")";
+
+        List<List> actualRecords = tableCreateObj.queryTableData(tableName8, queryFields, filterState,5);
+        System.out.println("Actual: " + actualRecords);
+        Assert.assertTrue(actualRecords.containsAll(expectedRecords));
+        Assert.assertTrue(expectedRecords.containsAll(actualRecords));
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"test11Table8Records"}, description = "验证通过in范围过滤对表进行更新操作")
+    public void test12Table8Update() throws SQLException {
+        String filterState = " where uuid in (" +
+                "'9GAZ01rR-Guem-d3zx-w0gu-fMhOorDXAZyn'," +
+                "'IaEG012Y-UBA1-zCG3-zuYc-lzy9YtoX4h2B'," +
+                "'jOHtV0qo-IiXa-WnG9-vSwC-sB5MUZNparHl'," +
+                "'3Flr9LHz-BJNu-HpJk-nDBk-JoDyTgMY1wIA'," +
+                "'uw8lhzI2-BZEl-poiz-GyaF-n2grtyVe1sUw'," +
+                "'Ohlfy9j2-wz5D-uh1Z-8hkt-FyYSjTkCrPp3'," +
+                "'jDkglHwp-Ri97-bX2I-xb8N-2IxLHBtJ0w31'," +
+                "'p7Fnxs4c-oOm4-f3MW-pbFU-tgsRT6hPfBnO'," +
+                "'NuyEpXxS-w8Tc-9voZ-syu7-rzbKxfoTJSn9'," +
+                "'l5IgaUdX-M6VN-5dcF-iHuV-1fUdWeSosvTr'," +
+                "'VpYR7eCr-1vIA-bR58-SMNT-JX2uliA64gKQ'," +
+                "'tcjZ7nzV-G5as-fINl-Pheb-idvrAHWNREj4'," +
+                "'wfceDP8m-hB4I-z1dF-IJMX-VyruUwKmjZv8'," +
+                "'aAIMU4hY-KBbW-XeUK-LmUY-qHOxZyd5Mam3'," +
+                "'g8RJAl2c-oJpn-1wUW-Y4pw-vqVONHPsFwmM'," +
+                "'ztqRfs0M-aiKp-FmUW-wrgi-o2jhdN7ygbtC'," +
+                "'QdXzPYOp-f81J-Ed8t-SkcI-t13UOpIXWgEe'," +
+                "'VhMOLgPt-bWXs-crsB-ysdL-k85rReQnZFaq'," +
+                "'1jbNLQuZ-UBeZ-7kcL-XME4-DYaeQVksA0zo'," +
+                "'24oLAvZl-s9rE-Sqk2-7QZN-aN0Pu9kwEQJO'," +
+                "'7uaeMKqU-ixQ7-xzi2-H6rc-HzMGnEtKw1le'," +
+                "'fyHp49b0-Vojs-cy0j-roDH-h0AaI4TqKYx3'," +
+                "'Ut5a2zTp-WQuo-XheC-Qnh0-KSqnoR2gzQZa'," +
+                "'1mUV58ky-KD1u-MIBV-3C2X-x3c48Z0qpCNF'," +
+                "'OBHNtTS9-rAPz-G0Ns-03Ro-LJkNepB1IyqV'" +
+                ")";
+        String execSql = "update " + tableName8 + " set status = 0" + filterState;
+        int actualRows = tableCreateObj.writeOpRows(tableName8, execSql);
+        Assert.assertEquals(actualRows, 17);
+    }
+
+    @Test(enabled = true, dependsOnMethods = {"test12Table8Update"}, description = "验证table8表更新后数据")
+    public void test13Table8RecordsAfterUpdate() throws SQLException {
+        String[][] dataArray = {
+                {"9GAZ01rR-Guem-d3zx-w0gu-fMhOorDXAZyn","15021093678","0"},
+                {"IaEG012Y-UBA1-zCG3-zuYc-lzy9YtoX4h2B","15313467582","0"},
+                {"jOHtV0qo-IiXa-WnG9-vSwC-sB5MUZNparHl","13898723516","0"},
+                {"3Flr9LHz-BJNu-HpJk-nDBk-JoDyTgMY1wIA","13875423819","0"},
+                {"uw8lhzI2-BZEl-poiz-GyaF-n2grtyVe1sUw","15963095421","0"},
+                {"Ohlfy9j2-wz5D-uh1Z-8hkt-FyYSjTkCrPp3","13891208456","0"},
+                {"jDkglHwp-Ri97-bX2I-xb8N-2IxLHBtJ0w31","15930576819","0"},
+                {"p7Fnxs4c-oOm4-f3MW-pbFU-tgsRT6hPfBnO","15109632451","0"},
+                {"NuyEpXxS-w8Tc-9voZ-syu7-rzbKxfoTJSn9","15378964201","0"},
+                {"l5IgaUdX-M6VN-5dcF-iHuV-1fUdWeSosvTr","15143756192","0"},
+                {"VpYR7eCr-1vIA-bR58-SMNT-JX2uliA64gKQ","13127469183","0"},
+                {"tcjZ7nzV-G5as-fINl-Pheb-idvrAHWNREj4","15127819340","0"},
+                {"wfceDP8m-hB4I-z1dF-IJMX-VyruUwKmjZv8","15090571843","0"},
+                {"aAIMU4hY-KBbW-XeUK-LmUY-qHOxZyd5Mam3","15305379461","0"},
+                {"g8RJAl2c-oJpn-1wUW-Y4pw-vqVONHPsFwmM","13976593104","0"},
+                {"ztqRfs0M-aiKp-FmUW-wrgi-o2jhdN7ygbtC","13829137460","0"},
+                {"QdXzPYOp-f81J-Ed8t-SkcI-t13UOpIXWgEe","15003614859","0"},
+                {"VhMOLgPt-bWXs-crsB-ysdL-k85rReQnZFaq","13153692417","0"},
+                {"1jbNLQuZ-UBeZ-7kcL-XME4-DYaeQVksA0zo","15316049823","0"},
+                {"24oLAvZl-s9rE-Sqk2-7QZN-aN0Pu9kwEQJO","13984396251","0"},
+                {"7uaeMKqU-ixQ7-xzi2-H6rc-HzMGnEtKw1le","15986213795","0"},
+                {"fyHp49b0-Vojs-cy0j-roDH-h0AaI4TqKYx3","15082043651","0"},
+                {"Ut5a2zTp-WQuo-XheC-Qnh0-KSqnoR2gzQZa","15986723409","0"},
+                {"1mUV58ky-KD1u-MIBV-3C2X-x3c48Z0qpCNF","15981639027","0"},
+                {"OBHNtTS9-rAPz-G0Ns-03Ro-LJkNepB1IyqV","15917928356","0"},
+                {"OBHNtTS9-rAPz-G0Ns-03Ro-LJkNepB1IyqV","15917928355","0"}
+        };
+        List<List> expectedRecords = expectedOutData(dataArray);
+        System.out.println("Expected: " + expectedRecords);
+
+        String queryFields = "uuid,phone,status";
+        String filterState = " where uuid in (" +
+                "'9GAZ01rR-Guem-d3zx-w0gu-fMhOorDXAZyn'," +
+                "'IaEG012Y-UBA1-zCG3-zuYc-lzy9YtoX4h2B'," +
+                "'jOHtV0qo-IiXa-WnG9-vSwC-sB5MUZNparHl'," +
+                "'3Flr9LHz-BJNu-HpJk-nDBk-JoDyTgMY1wIA'," +
+                "'uw8lhzI2-BZEl-poiz-GyaF-n2grtyVe1sUw'," +
+                "'Ohlfy9j2-wz5D-uh1Z-8hkt-FyYSjTkCrPp3'," +
+                "'jDkglHwp-Ri97-bX2I-xb8N-2IxLHBtJ0w31'," +
+                "'p7Fnxs4c-oOm4-f3MW-pbFU-tgsRT6hPfBnO'," +
+                "'NuyEpXxS-w8Tc-9voZ-syu7-rzbKxfoTJSn9'," +
+                "'l5IgaUdX-M6VN-5dcF-iHuV-1fUdWeSosvTr'," +
+                "'VpYR7eCr-1vIA-bR58-SMNT-JX2uliA64gKQ'," +
+                "'tcjZ7nzV-G5as-fINl-Pheb-idvrAHWNREj4'," +
+                "'wfceDP8m-hB4I-z1dF-IJMX-VyruUwKmjZv8'," +
+                "'aAIMU4hY-KBbW-XeUK-LmUY-qHOxZyd5Mam3'," +
+                "'g8RJAl2c-oJpn-1wUW-Y4pw-vqVONHPsFwmM'," +
+                "'ztqRfs0M-aiKp-FmUW-wrgi-o2jhdN7ygbtC'," +
+                "'QdXzPYOp-f81J-Ed8t-SkcI-t13UOpIXWgEe'," +
+                "'VhMOLgPt-bWXs-crsB-ysdL-k85rReQnZFaq'," +
+                "'1jbNLQuZ-UBeZ-7kcL-XME4-DYaeQVksA0zo'," +
+                "'24oLAvZl-s9rE-Sqk2-7QZN-aN0Pu9kwEQJO'," +
+                "'7uaeMKqU-ixQ7-xzi2-H6rc-HzMGnEtKw1le'," +
+                "'fyHp49b0-Vojs-cy0j-roDH-h0AaI4TqKYx3'," +
+                "'Ut5a2zTp-WQuo-XheC-Qnh0-KSqnoR2gzQZa'," +
+                "'1mUV58ky-KD1u-MIBV-3C2X-x3c48Z0qpCNF'," +
+                "'OBHNtTS9-rAPz-G0Ns-03Ro-LJkNepB1IyqV'" +
+                ")";
+
+        List<List> actualRecords = tableCreateObj.queryTableData(tableName8, queryFields, filterState,5);
+        System.out.println("Actual: " + actualRecords);
+        Assert.assertTrue(actualRecords.containsAll(expectedRecords));
+        Assert.assertTrue(expectedRecords.containsAll(actualRecords));
+    }
+
 
     @AfterClass(alwaysRun = true, description = "测试完成后删除数据和表格并关闭连接")
     public void tearDownAll() throws SQLException, ClassNotFoundException {
         Statement tearDownStatement = null;
         List<String> tableList = Arrays.asList("ctest001", "ctest002", "ctest003", "ctest004",
-                "ctest005", "ctest006", "ctest007", "mpkey_tbl1", "mpkey_tbl2"
+                "ctest005", "ctest006", "ctest007", "mpkey_tbl1", "mpkey_tbl2", "risk_record8"
                 );
         try{
             tearDownStatement = tableCreateObj.connection.createStatement();
