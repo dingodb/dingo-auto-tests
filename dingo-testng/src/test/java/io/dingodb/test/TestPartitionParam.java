@@ -74,7 +74,8 @@ public class TestPartitionParam extends YamlDataHelper {
                 "parttest2354", "parttest2674", "parttest2675", "parttest2676", "parttest2677",
                 "parttest2678", "parttest2679", "parttest2680", "parttest2681", "parttest2682",
                 "parttest2683", "parttest2684", "parttest2685", "parttest2686", "parttest2687",
-                "parttest2688", "parttest2690", "parttest2694", "ttl_part_test2695"
+                "parttest2688", "parttest2690", "parttest2694", "ttl_part_test2695",
+                "parttest2321", "parttest2325", "parttest2344", "parttest2345"
         );
         try{
             tearDownStatement = partitionObj.connection.createStatement();
