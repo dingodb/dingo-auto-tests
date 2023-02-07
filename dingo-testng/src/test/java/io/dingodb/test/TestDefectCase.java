@@ -225,7 +225,7 @@ public class TestDefectCase extends YamlDataHelper {
     @AfterClass(alwaysRun = true, description = "测试完成后删除数据和表格并关闭连接")
     public void tearDownAll() throws SQLException, ClassNotFoundException {
         Statement tearDownStatement = null;
-        List<String> tableList = Arrays.asList("defect0033", "de50563");
+        List<String> tableList = Arrays.asList("defect0033", "de50563", "de50603");
         try {
             tearDownStatement = DefectCase.connection.createStatement();
             if (tableList.size() > 0) {

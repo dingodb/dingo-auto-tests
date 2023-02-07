@@ -216,7 +216,7 @@ public class TestSplit {
 
     @Test(priority = 4, enabled = true, dependsOnMethods = {"test03CountAll"}, description = "统计条件区间条数是否正确")
     public void test04CountRange() throws SQLException, InterruptedException {
-        Thread.sleep(300000);
+        Thread.sleep(60000);
         try(Statement statement = connection.createStatement()) {
             String querySql = "select count(*) from " + tableName1 + " where id>40000 and id<=200000";
             ResultSet resultSet = statement.executeQuery(querySql);

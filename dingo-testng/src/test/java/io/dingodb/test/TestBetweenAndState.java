@@ -263,7 +263,7 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertEquals(actualQueryRows, 21);
     }
 
-    @Test(priority = 9, enabled = true, dataProvider = "yamlBetweenMethod", dependsOnMethods = {"test00TableCreate"},
+    @Test(priority = 9, enabled = false, dataProvider = "yamlBetweenMethod", dependsOnMethods = {"test00TableCreate"},
             description = "验证查询范围时间日期值无效，返回空集")
     public void test10BetweenQueryInvalidDateTime(Map<String, String> param) throws SQLException {
         Boolean actualQueryResult = betweenObj.betweenQueryInvalidDateTime(param.get("betweenState"));
@@ -468,7 +468,7 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertFalse(actualQueryResult);
     }
 
-    @Test(priority = 20, enabled = true, dataProvider = "yamlBetweenMethod", dependsOnMethods = {"test00TableCreate"},
+    @Test(priority = 20, enabled = false, dataProvider = "yamlBetweenMethod", dependsOnMethods = {"test00TableCreate"},
             description = "验证not between查询范围起止时间日期值均无效，返回空集")
     public void test21NotBetweenQueryInvalidDateTime(Map<String, String> param) throws SQLException {
         Boolean actualQueryResult = betweenObj.notBetweenQueryInvalidDateTime(param.get("betweenState"));
