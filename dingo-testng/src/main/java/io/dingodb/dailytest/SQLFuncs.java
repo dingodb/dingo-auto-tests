@@ -426,7 +426,7 @@ public class SQLFuncs {
     }
 
     //表为空时，求平均
-    public String case259() throws SQLException, ClassNotFoundException {
+    public String case259_1() throws SQLException, ClassNotFoundException {
         try(Statement statement = connection.createStatement()) {
             String querySQL = "select avg(age) from emptest065";
             ResultSet resultSet = statement.executeQuery(querySQL);
@@ -437,6 +437,24 @@ public class SQLFuncs {
             resultSet.close();
             statement.close();
             return avgAge;
+        }
+    }
+
+    //表为空时，求平均
+    public List<String> case259_2() throws SQLException, ClassNotFoundException {
+        try(Statement statement = connection.createStatement()) {
+            String querySQL = "select max(age), min(amount), avg(age),sum(amount) from emptest065";
+            ResultSet resultSet = statement.executeQuery(querySQL);
+            List<String> resList = new ArrayList<>();
+            while(resultSet.next()) {
+                resList.add(resultSet.getString(1));
+                resList.add(resultSet.getString(2));
+                resList.add(resultSet.getString(3));
+                resList.add(resultSet.getString(4));
+            }
+            resultSet.close();
+            statement.close();
+            return resList;
         }
     }
 

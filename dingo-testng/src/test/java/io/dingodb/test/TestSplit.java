@@ -85,15 +85,15 @@ public class TestSplit {
         testSplit.createSplitTable();
     }
 
-    @Test(priority = 0, enabled = true, description = "创建表2")
-    public void test00CreateStateTable() throws SQLException {
+    @Test(priority = 1, enabled = true, description = "创建表2")
+    public void test01CreateStateTable() throws SQLException {
         TestSplit testSplit = new TestSplit();
         testSplit.createStateTable();
     }
 
-    @Test(priority = 1, enabled = true, dependsOnMethods = {"test00CreateStateTable"},
+    @Test(priority = 2, enabled = true, dependsOnMethods = {"test01CreateStateTable"},
             description = "使用statement插入指定条数的数据量")
-    public void test01StateSingleInsert() throws SQLException {
+    public void test02StateSingleInsert() throws SQLException {
         int insertNum = 20000;
         try(Statement statement = connection.createStatement()) {
             GetRandomValue getRandomValue = new GetRandomValue();
@@ -114,9 +114,9 @@ public class TestSplit {
         }
     }
 
-    @Test(priority = 1, enabled = true, dependsOnMethods = {"test00CreateStateTable"},
+    @Test(priority = 3, enabled = true, dependsOnMethods = {"test01CreateStateTable"},
             description = "使用preparedStatement单行插入数据")
-    public void test01PSSingleInsert() throws SQLException {
+    public void test03PSSingleInsert() throws SQLException {
         int baseNum = 20000;
         int insertNum = 10000;
         String insertsql = "insert into " + tableName2 + " values (?, ?, ?, ?)";
@@ -140,9 +140,9 @@ public class TestSplit {
         }
     }
 
-    @Test(priority = 1, enabled = true, dependsOnMethods = {"test00CreateSplitTable"},
+    @Test(priority = 4, enabled = true, dependsOnMethods = {"test00CreateSplitTable"},
             description = "使用preparedStatement批量插入数据")
-    public void test01PSBatchInsert() throws SQLException {
+    public void test04PSBatchInsert() throws SQLException {
         int insertNum = 200000;
         String insertsql = "insert into " + tableName1 + " values (?, ?, ?, ?)";
         try(PreparedStatement ps = connection.prepareStatement(insertsql)) {
@@ -174,9 +174,9 @@ public class TestSplit {
         }
     }
 
-    @Test(priority = 2, enabled = false, dependsOnMethods = {"test01PSBatchInsert"},
+    @Test(priority = 5, enabled = false, dependsOnMethods = {"test04PSBatchInsert"},
             description = "使用preparedStatement查询数据")
-    public void test02QueryUsingPreState() throws SQLException {
+    public void test05QueryUsingPreState() throws SQLException {
         String querysql = "select * from " + tableName1 + " where id=?";
         try(PreparedStatement ps = connection.prepareStatement(querysql)) {
             ps.setInt(1,1);
@@ -196,8 +196,8 @@ public class TestSplit {
         }
     }
 
-    @Test(priority = 3, enabled = true, dependsOnMethods = {"test01PSBatchInsert"}, description = "统计插入总条数是否正确")
-    public void test03CountAll() throws SQLException, InterruptedException {
+    @Test(priority = 6, enabled = true, dependsOnMethods = {"test04PSBatchInsert"}, description = "统计插入总条数是否正确")
+    public void test06CountAll() throws SQLException, InterruptedException {
         Thread.sleep(30000);
         try(Statement statement = connection.createStatement()) {
             String querySql = "select count(*) from " + tableName1;
@@ -214,8 +214,8 @@ public class TestSplit {
         }
     }
 
-    @Test(priority = 4, enabled = true, dependsOnMethods = {"test03CountAll"}, description = "统计条件区间条数是否正确")
-    public void test04CountRange() throws SQLException, InterruptedException {
+    @Test(priority = 7, enabled = true, dependsOnMethods = {"test06CountAll"}, description = "统计条件区间条数是否正确")
+    public void test07CountRange() throws SQLException, InterruptedException {
         Thread.sleep(60000);
         try(Statement statement = connection.createStatement()) {
             String querySql = "select count(*) from " + tableName1 + " where id>40000 and id<=200000";
@@ -232,8 +232,8 @@ public class TestSplit {
         }
     }
 
-    @Test(priority = 5, enabled = true, dependsOnMethods = {"test04CountRange"}, description = "验证区间更新")
-    public void test05UpdateRange() throws SQLException, InterruptedException {
+    @Test(priority = 8, enabled = true, dependsOnMethods = {"test07CountRange"}, description = "验证区间更新")
+    public void test08UpdateRange() throws SQLException, InterruptedException {
 //        Thread.sleep(1200000);
         try(Statement statement = connection.createStatement()) {
             String updateSql = "update " + tableName1 + " set name='BJ' where id>40000 and id<=200000";
@@ -254,8 +254,8 @@ public class TestSplit {
         }
     }
 
-    @Test(priority = 6, enabled = true, dependsOnMethods = {"test05UpdateRange"}, description = "验证全表删除")
-    public void test06DeleteAll() throws SQLException, InterruptedException {
+    @Test(priority = 9, enabled = true, dependsOnMethods = {"test08UpdateRange"}, description = "验证全表删除")
+    public void test09DeleteAll() throws SQLException, InterruptedException {
 //        Thread.sleep(1200000);
         try(Statement statement = connection.createStatement()) {
             String deleteSql = "delete from " + tableName1;

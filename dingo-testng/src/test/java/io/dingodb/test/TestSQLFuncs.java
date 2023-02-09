@@ -318,9 +318,19 @@ public class TestSQLFuncs extends YamlDataHelper {
 
     @Test(enabled = true, groups = {"emp"}, dependsOnMethods = {"test00CreateFuncTable2"},
             description = "验证表为空时，取age字段求平均，返回Null")
-    public void testCase259() throws SQLException, ClassNotFoundException {
-        String actualAvg = funcObj.case259();
+    public void testCase259_1() throws SQLException, ClassNotFoundException {
+        String actualAvg = funcObj.case259_1();
         Assert.assertNull(actualAvg);
+    }
+
+    @Test(enabled = true, groups = {"emp"}, dependsOnMethods = {"test00CreateFuncTable2"},
+            description = "验证表为空时，max,min,avg和sum同时查询，返回Null")
+    public void testCase259_2() throws SQLException, ClassNotFoundException {
+        String[] dataArray = new String[]{null, null, null, null};
+        List<String> expectedList = expectedOutData(dataArray);
+        System.out.println("Expected: " + expectedList);
+        List<String> actualList = funcObj.case259_2();
+        Assert.assertEquals(actualList, expectedList);
     }
 
     @Test(enabled = true, groups = {"emp"}, dependsOnMethods = {"test00CreateFuncTable2"},
