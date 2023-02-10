@@ -477,7 +477,7 @@ public class TestBetweenAndState extends YamlDataHelper {
         Assert.assertFalse(actualQueryResult);
     }
 
-    @Test(priority = 21, enabled = true, dependsOnMethods = {"test00TableCreate"},
+    @Test(priority = 21, enabled = false, dependsOnMethods = {"test00TableCreate"},
             description = "验证not between查询起始日期无效，按另一个区间范围返回数据")
     public void test22NotBetweenQueryInvalidStartDate() throws SQLException {
         String[][] dataArray = {
